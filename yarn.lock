@@ -4612,6 +4612,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rn-primitives/portal@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@rn-primitives/portal@npm:1.1.0"
+  dependencies:
+    zustand: "npm:^4.4.7"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+    react-native-web: "*"
+  peerDependenciesMeta:
+    react-native:
+      optional: true
+    react-native-web:
+      optional: true
+  checksum: 10c0/956426f2969a835192dc6adc9ddba03e2a2d9f2c14fa12278e42b9ecd2ea4ade09f8b8003dea5713e3a7a7ec77dd24ad80e85c5475b6f6607460468cfb168c56
+  languageName: node
+  linkType: hard
+
 "@rn-primitives/progress@npm:^1.1.0":
   version: 1.1.0
   resolution: "@rn-primitives/progress@npm:1.1.0"
@@ -4875,7 +4893,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/babel__core@npm:^7.1.14":
+"@types/babel__core@npm:^7, @types/babel__core@npm:^7.1.14":
   version: 7.20.5
   resolution: "@types/babel__core@npm:7.20.5"
   dependencies:
@@ -5157,11 +5175,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@usmds/ui@workspace:packages/ui"
   dependencies:
+    "@babel/core": "npm:^7.26.7"
     "@rn-primitives/accordion": "npm:~1.1.0"
     "@rn-primitives/avatar": "npm:~1.1.0"
     "@rn-primitives/checkbox": "npm:~1.1.0"
     "@rn-primitives/dropdown-menu": "npm:~1.1.0"
     "@rn-primitives/label": "npm:^1.1.0"
+    "@rn-primitives/portal": "npm:^1.1.0"
     "@rn-primitives/progress": "npm:^1.1.0"
     "@rn-primitives/radio-group": "npm:^1.1.0"
     "@rn-primitives/separator": "npm:^1.1.0"
@@ -5171,6 +5191,7 @@ __metadata:
     "@rn-primitives/toggle": "npm:^1.1.0"
     "@rn-primitives/types": "npm:^1.1.0"
     "@tsconfig/recommended": "npm:^1.0.1"
+    "@types/babel__core": "npm:^7"
     "@types/react": "npm:~18.2.79"
     class-variance-authority: "npm:^0.7.0"
     clsx: "npm:^2.0.0"
@@ -5182,6 +5203,7 @@ __metadata:
     react-native-reanimated: "npm:~3.10.1"
     react-native-svg: "npm:^15.3.0"
     tailwind-merge: "npm:^2.1.0"
+    tailwindcss: "npm:3.4.17"
     tailwindcss-animate: "npm:^1.0.7"
   peerDependencies:
     react: "*"
@@ -6560,6 +6582,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"config@npm:^3.2.0":
+  version: 3.3.12
+  resolution: "config@npm:3.3.12"
+  dependencies:
+    json5: "npm:^2.2.3"
+  checksum: 10c0/496b3ef740754527cbc59d11df234f5be5b5f44511d14ca7fa6117fda0959ccd4cc6d8da2d94cb0dfcdf77d9d7aaaa34558d6dcce0a7860a3a8cf8a54c77b237
+  languageName: node
+  linkType: hard
+
 "connect@npm:^3.6.5, connect@npm:^3.7.0":
   version: 3.7.0
   resolution: "connect@npm:3.7.0"
@@ -7447,9 +7478,10 @@ __metadata:
     "@usmds/ui": "npm:*"
     babel-preset-expo: "npm:^12.0.6"
     class-variance-authority: "npm:^0.7.1"
-    expo: "npm:~52.0.30"
+    expo: "npm:^52.0.0"
     expo-blur: "npm:~14.0.3"
-    expo-constants: "npm:~17.0.5"
+    expo-config: "npm:^1.0.0"
+    expo-constants: "npm:^17.0.5"
     expo-font: "npm:~13.0.3"
     expo-haptics: "npm:~14.0.1"
     expo-linking: "npm:~7.0.5"
@@ -7469,12 +7501,12 @@ __metadata:
     react-native-reanimated: "npm:~3.16.1"
     react-native-safe-area-context: "npm:4.12.0"
     react-native-screens: "npm:~4.4.0"
-    react-native-svg: "npm:^15.11.1"
+    react-native-svg: "npm:15.8.0"
     react-native-web: "npm:~0.19.13"
     react-native-webview: "npm:13.12.5"
     react-test-renderer: "npm:18.3.1"
     tailwind-merge: "npm:^3.0.1"
-    tailwindcss: "npm:^3.4.17"
+    tailwindcss: "npm:3.4.17"
     typescript: "npm:^5.3.3"
   languageName: unknown
   linkType: soft
@@ -7582,7 +7614,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-constants@npm:~17.0.5":
+"expo-config@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "expo-config@npm:1.0.0"
+  dependencies:
+    config: "npm:^3.2.0"
+  bin:
+    expo-config: ./cli.js
+  checksum: 10c0/e24dcb4aa47340e55310074ebeb129db1f519eb2cd9acb80058022e3e5c24f301d7d227eef1a17bf8797fd460aa927882afde5d581917ac6c65f719c44091cbc
+  languageName: node
+  linkType: hard
+
+"expo-constants@npm:^17.0.5, expo-constants@npm:~17.0.5":
   version: 17.0.5
   resolution: "expo-constants@npm:17.0.5"
   dependencies:
@@ -7773,7 +7816,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo@npm:~52.0.30":
+"expo@npm:^52.0.0":
   version: 52.0.30
   resolution: "expo@npm:52.0.30"
   dependencies:
@@ -12336,7 +12379,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-svg@npm:^15.11.1, react-native-svg@npm:^15.3.0":
+"react-native-svg@npm:15.8.0":
+  version: 15.8.0
+  resolution: "react-native-svg@npm:15.8.0"
+  dependencies:
+    css-select: "npm:^5.1.0"
+    css-tree: "npm:^1.1.3"
+    warn-once: "npm:0.1.1"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/03d2cb19c799da6ba41dea0dc414338d01a55549ea4e4a370315c8ec34e1c6de430a62b538f099423060edc8bea6df134f765bde862770059404617c3c296af8
+  languageName: node
+  linkType: hard
+
+"react-native-svg@npm:^15.3.0":
   version: 15.11.1
   resolution: "react-native-svg@npm:15.11.1"
   dependencies:
@@ -13930,7 +13987,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:^3.4.17":
+"tailwindcss@npm:3.4.17":
   version: 3.4.17
   resolution: "tailwindcss@npm:3.4.17"
   dependencies:
@@ -13960,13 +14017,6 @@ __metadata:
     tailwind: lib/cli.js
     tailwindcss: lib/cli.js
   checksum: 10c0/cc42c6e7fdf88a5507a0d7fea37f1b4122bec158977f8c017b2ae6828741f9e6f8cb90282c6bf2bd5951fd1220a53e0a50ca58f5c1c00eb7f5d9f8b80dc4523c
-  languageName: node
-  linkType: hard
-
-"tailwindcss@npm:^4.0.3":
-  version: 4.0.3
-  resolution: "tailwindcss@npm:4.0.3"
-  checksum: 10c0/afab90685af6cecbdce61fec5e3a9ddd10696fd2e60e7ad7d5e2eceb5eaaa458a752f1ceb4176843377e8ded44ff5da52f42258a3e74b538920214986cfa9811
   languageName: node
   linkType: hard
 
@@ -14050,21 +14100,6 @@ __metadata:
   checksum: 10c0/ff0dc79b0a0da821e7f5bf7a047eab6d04e70e88b62339a0f1d71117db3310e255f5c00738fa3b391f56c3571f800a00047720261ba04ced0241c1f9922199f4
   languageName: node
   linkType: hard
-
-"test-cli@workspace:apps/test-cli":
-  version: 0.0.0-use.local
-  resolution: "test-cli@workspace:apps/test-cli"
-  dependencies:
-    "@react-native-aria/utils": "npm:^0.2.11"
-    "@types/react-native": "npm:^0.73.0"
-    "@usmds/cli": "workspace:*"
-    class-variance-authority: "npm:^0.7.1"
-    nativewind: "npm:^4.1.0"
-    react-native-svg: "npm:^15.11.1"
-    tailwind-merge: "npm:^3.0.1"
-    tailwindcss: "npm:^4.0.3"
-  languageName: unknown
-  linkType: soft
 
 "test-exclude@npm:^6.0.0":
   version: 6.0.0
@@ -15164,5 +15199,25 @@ __metadata:
   version: 3.24.1
   resolution: "zod@npm:3.24.1"
   checksum: 10c0/0223d21dbaa15d8928fe0da3b54696391d8e3e1e2d0283a1a070b5980a1dbba945ce631c2d1eccc088fdbad0f2dfa40155590bf83732d3ac4fcca2cc9237591b
+  languageName: node
+  linkType: hard
+
+"zustand@npm:^4.4.7":
+  version: 4.5.6
+  resolution: "zustand@npm:4.5.6"
+  dependencies:
+    use-sync-external-store: "npm:^1.2.2"
+  peerDependencies:
+    "@types/react": ">=16.8"
+    immer: ">=9.0.6"
+    react: ">=16.8"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    immer:
+      optional: true
+    react:
+      optional: true
+  checksum: 10c0/5b39aff2ef57e5a8ada647261ec1115697d397be311c51461d9ea81b5b63c6d2c498b960477ad2db72dc21db6aa229a92bdf644f6a8ecf7b1d71df5b4a5e95d3
   languageName: node
   linkType: hard
