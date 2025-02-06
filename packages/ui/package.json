@@ -1,0 +1,50 @@
+{
+  "name": "@usmds/ui",
+  "version": "0.1.0",
+  "main": "index.ts",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@rn-primitives/accordion": "~1.1.0",
+    "@rn-primitives/avatar": "~1.1.0",
+    "@rn-primitives/checkbox": "~1.1.0",
+    "@rn-primitives/dropdown-menu": "~1.1.0",
+    "@rn-primitives/label": "^1.1.0",
+    "@rn-primitives/progress": "^1.1.0",
+    "@rn-primitives/radio-group": "^1.1.0",
+    "@rn-primitives/separator": "^1.1.0",
+    "@rn-primitives/slot": "^1.1.0",
+    "@rn-primitives/switch": "^1.1.0",
+    "@rn-primitives/tabs": "^1.1.0",
+    "@rn-primitives/toggle": "^1.1.0",
+    "@rn-primitives/types": "^1.1.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "lucide-react-native": "^0.400.0",
+    "nativewind": "^4.0.36",
+    "react-native-reanimated": "~3.10.1",
+    "react-native-svg": "^15.3.0",
+    "tailwind-merge": "^2.1.0",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.1",
+    "@types/react": "~18.2.79",
+    "prettier": "^3.2.5",
+    "react": "18.2.0",
+    "react-native": "0.74.2"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*",
+    "react-native-web": "*"
+  },
+  "peerDependenciesMeta": {
+    "react-native": {
+      "optional": true
+    },
+    "react-native-web": {
+      "optional": true
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "@usmds/cli",
+  "version": "0.1.0",
+  "description": "CLI for adding USMDS components to React Native apps",
+  "type": "module",
+  "exports": "./dist/index.js",
+  "bin": {
+    "usmds": "./dist/index.js"
+  },
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup && chmod +x dist/index.js",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@antfu/ni": "^0.21.8",
+    "chalk": "^5.3.0",
+    "commander": "^11.0.0",
+    "execa": "^8.0.1",
+    "ora": "^7.0.1",
+    "prompts": "^2.4.2",
+    "zod": "^3.22.2"
+  },
+  "devDependencies": {
+    "@types/prompts": "^2.4.5",
+    "tsup": "^7.2.0"
+  }
+}
