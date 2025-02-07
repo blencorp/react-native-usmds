@@ -3,14 +3,17 @@ const { hairlineWidth } = require('nativewind/theme');
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: 'class',
-  content: [
-    './app/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-  ],
+  content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}', '../../packages/ui/src/**/*.{ts,tsx}'],
   presets: [require('nativewind/preset')],
   theme: {
     extend: {
       colors: {
+        primary: {
+          DEFAULT: '#005EA2', // primary
+          dark: '#1A4480', // primary-dark
+          darker: '#162E51', // primary-darker
+          focus: '#2491FF' // focus state
+        },
         // Base Colors
         base: {
           50: '#f7f8f9',
@@ -31,9 +34,9 @@ module.exports = {
           200: '#99d9e5',
           300: '#66c5d8',
           400: '#33b2cb',
-          500: '#005ea2',  // Primary default
-          600: '#1a4480',  // Primary hover
-          700: '#162e51',  // Primary active
+          500: '#005ea2', // Primary default
+          600: '#1a4480', // Primary hover
+          700: '#162e51', // Primary active
           800: '#0d1f34',
           900: '#040f17'
         },
@@ -44,9 +47,9 @@ module.exports = {
           200: '#e59999',
           300: '#d86666',
           400: '#cb3333',
-          500: '#d83933',  // Secondary default
-          600: '#8b1e1a',  // Secondary hover
-          700: '#5c1412',  // Secondary active
+          500: '#d83933', // Secondary default
+          600: '#8b1e1a', // Secondary hover
+          700: '#5c1412', // Secondary active
           800: '#2e0a09',
           900: '#170505'
         },
@@ -77,9 +80,9 @@ module.exports = {
         }
       },
       borderWidth: {
-        hairline: hairlineWidth(),
-      },
-    },
+        hairline: hairlineWidth()
+      }
+    }
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [require('tailwindcss-animate')]
 };

@@ -1,25 +1,27 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
-import { Pressable } from 'react-native';
+import { ComponentPropsWithoutRef, ElementRef, forwardRef, createContext, useContext } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { TextClassContext } from './Text';
-import { cn } from '@/lib/utils';
+import { Pressable } from 'react-native';
+import { cn } from '../lib/utils';
+
+// Create TextClassContext
+export const TextClassContext = createContext<string | undefined>(undefined);
 
 const buttonVariants = cva(
-  'group flex items-center justify-center rounded-md web:ring-offset-background web:transition-colors web:focus-visible:outline-none web:focus-visible:ring-1 web:focus-visible:ring-ring web:focus-visible:ring-offset-0',
+  'group flex items-center justify-center rounded-md web:ring-offset-background web:transition-colors web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2',
   {
     variants: {
       variant: {
-        default: 'bg-primary-500 web:hover:opacity-90 active:opacity-90',
-        secondary: 'bg-secondary-500 web:hover:opacity-90 active:opacity-90',
-        destructive: 'bg-error-DEFAULT web:hover:opacity-90 active:opacity-90',
-        outline: 'border border-base-500 bg-background web:hover:bg-accent web:hover:text-accent-foreground active:bg-accent',
-        ghost: 'web:hover:bg-accent web:hover:text-accent-foreground active:bg-accent',
-        link: 'web:underline-offset-4 web:hover:underline web:focus:underline'
+        default: 'bg-primary-500 web:hover:bg-primary-600 active:bg-primary-700',
+        secondary: 'bg-secondary-500 web:hover:bg-secondary-600 active:bg-secondary-700',
+        outline: 'border-2 border-primary-500 bg-transparent web:hover:bg-primary-50 active:bg-primary-100',
+        destructive: 'bg-error-DEFAULT web:hover:bg-error-dark active:opacity-90',
+        ghost: 'hover:bg-base-100 active:bg-base-200',
+        link: 'web:underline-offset-4 web:hover:underline web:focus:underline p-0 height-auto'
       },
       size: {
         default: 'h-10 px-4 py-2 native:h-12 native:px-5 native:py-3',
-        sm: 'h-9 rounded-md px-3',
-        lg: 'h-11 rounded-md px-8 native:h-14',
+        sm: 'h-9 px-3 py-1 text-sm',
+        lg: 'h-12 px-6 py-3 text-lg',
         icon: 'h-10 w-10'
       }
     },
@@ -30,20 +32,21 @@ const buttonVariants = cva(
   }
 );
 
-const buttonTextVariants = cva('web:whitespace-nowrap text-sm native:text-base font-medium text-foreground web:transition-colors', {
+// Add buttonTextVariants
+const buttonTextVariants = cva('web:whitespace-nowrap text-sm native:text-base font-medium web:transition-colors', {
   variants: {
     variant: {
-      default: 'text-primary-foreground',
-      secondary: 'text-secondary-foreground group-active:text-secondary-foreground',
-      destructive: 'text-destructive-foreground',
-      outline: 'group-active:text-accent-foreground',
-      ghost: 'group-active:text-accent-foreground',
-      link: 'text-primary group-active:underline'
+      default: 'text-white',
+      secondary: 'text-white',
+      destructive: 'text-white',
+      outline: 'text-primary-500',
+      ghost: 'text-primary-500',
+      link: 'text-primary-500'
     },
     size: {
       default: '',
-      sm: '',
-      lg: 'native:text-lg',
+      sm: 'text-sm',
+      lg: 'text-base native:text-lg',
       icon: ''
     }
   },
@@ -53,37 +56,30 @@ const buttonTextVariants = cva('web:whitespace-nowrap text-sm native:text-base f
   }
 });
 
-type ButtonProps = ComponentPropsWithoutRef<typeof Pressable> &
-  VariantProps<typeof buttonVariants>;
+type ButtonProps = ComponentPropsWithoutRef<typeof Pressable> & VariantProps<typeof buttonVariants>;
 
-const Button = forwardRef<ElementRef<typeof Pressable>, ButtonProps>(
-  ({ className, variant, size, children, ...props }, ref) => {
-    return (
-      <TextClassContext.Provider
-        value={buttonTextVariants({
-          variant,
-          size,
-          className: 'web:pointer-events-none'
-        })}
+const Button = forwardRef<ElementRef<typeof Pressable>, ButtonProps>(({ className, variant, size, children, ...props }, ref) => {
+  return (
+    <TextClassContext.Provider
+      value={buttonTextVariants({
+        variant,
+        size,
+        className: 'web:pointer-events-none'
+      })}
+    >
+      <Pressable
+        className={cn(props.disabled && 'opacity-50 pointer-events-none', buttonVariants({ variant, size, className }))}
+        ref={ref}
+        role='button'
+        {...props}
       >
-        <Pressable
-          ref={ref}
-          role="button"
-          accessibilityRole="button"
-          className={cn(
-            props.disabled && 'opacity-50 web:pointer-events-none',
-            buttonVariants({ variant, size, className })
-          )}
-          {...props}
-        >
-          {children}
-        </Pressable>
-      </TextClassContext.Provider>
-    );
-  }
-);
+        {children}
+      </Pressable>
+    </TextClassContext.Provider>
+  );
+});
 
 Button.displayName = 'Button';
 
-export { Button, buttonTextVariants, buttonVariants };
+export { Button, buttonVariants, buttonTextVariants };
 export type { ButtonProps };
