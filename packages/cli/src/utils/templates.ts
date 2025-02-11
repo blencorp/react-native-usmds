@@ -11,69 +11,34 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Base Colors
-        base: {
-          50: '#f7f8f9',
-          100: '#e6e9ec',
-          200: '#d5d9de',
-          300: '#c4c8cd',
-          400: '#a3a7ad',
-          500: '#71767a',
-          600: '#565c65',
-          700: '#3d4551',
-          800: '#1b1b1b',
-          900: '#000000'
-        },
-        // Primary Colors
+        border: 'hsl(var(--border))',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        
+        // USWDS Colors
         primary: {
-          50: '#e7f6f8',
-          100: '#ccecf2',
-          200: '#99d9e5',
-          300: '#66c5d8',
-          400: '#33b2cb',
-          500: '#005ea2',  // Primary default
-          600: '#1a4480',  // Primary hover
-          700: '#162e51',  // Primary active
-          800: '#0d1f34',
-          900: '#040f17'
+          DEFAULT: 'hsl(var(--primary))',  // #005EA2
+          hover: 'hsl(var(--primary-hover))',  // #1A4480
+          active: 'hsl(var(--primary-active))', // #162E51
+          foreground: 'hsl(var(--primary-foreground))'
         },
-        // Secondary Colors
         secondary: {
-          50: '#f8e7e7',
-          100: '#f2cccc',
-          200: '#e59999',
-          300: '#d86666',
-          400: '#cb3333',
-          500: '#d83933',  // Secondary default
-          600: '#8b1e1a',  // Secondary hover
-          700: '#5c1412',  // Secondary active
-          800: '#2e0a09',
-          900: '#170505'
+          DEFAULT: 'hsl(var(--secondary))', // #D83933
+          hover: 'hsl(var(--secondary-hover))', // #B50909
+          active: 'hsl(var(--secondary-active))', // #8B0A03
+          foreground: 'hsl(var(--secondary-foreground))'
         },
-        // State Colors
-        info: {
-          DEFAULT: '#00bde3',
-          dark: '#009ec1'
-        },
-        error: {
-          DEFAULT: '#d54309',
-          dark: '#b51d09'
-        },
-        warning: {
-          DEFAULT: '#ffbe2e',
-          dark: '#e5a000'
-        },
-        success: {
-          DEFAULT: '#00a91c',
-          dark: '#008817'
-        },
-        disabled: {
-          DEFAULT: '#c9c9c9',
-          dark: '#8f8f8f'
-        },
-        emergency: {
-          DEFAULT: '#9c3d10',
-          dark: '#63240a'
+        accent: {
+          cool: {
+            DEFAULT: 'hsl(var(--accent-cool))', // #00BDE3
+            hover: 'hsl(var(--accent-cool-hover))', // #28A0CB
+            active: 'hsl(var(--accent-cool-active))' // #07648D
+          },
+          warm: {
+            DEFAULT: 'hsl(var(--accent-warm))', // #FA9441
+            hover: 'hsl(var(--accent-warm-hover))', // #C05600
+            active: 'hsl(var(--accent-warm-active))' // #775540
+          }
         }
       },
       borderWidth: {
@@ -120,23 +85,47 @@ export const GLOBAL_STYLES = `@tailwind base;
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --background: 0 0% 100%;
-    --primary: 201 100% 32%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 217 47% 30%;
-    --secondary-foreground: 0 0% 100%;
-    --border: 220 13% 46%;
-  }
+    :root {
+        --background: 0 0% 100%;
+        --foreground: 240 10% 3.9%;
+        
+        --primary: 201 100% 32%;  /* #005EA2 */
+        --primary-hover: 213 64% 30%;  /* #1A4480 */
+        --primary-active: 213 57% 20%;  /* #162E51 */
+        
+        --secondary: 2 61% 52%;  /* #D83933 */
+        --secondary-hover: 2 89% 35%;  /* #B50909 */
+        --secondary-active: 2 96% 27%;  /* #8B0A03 */
+        
+        --accent-cool: 190 100% 44%;  /* #00BDE3 */
+        --accent-cool-hover: 190 67% 48%;  /* #28A0CB */
+        --accent-cool-active: 197 91% 29%;  /* #07648D */
+        
+        --accent-warm: 28 94% 62%;  /* #FA9441 */
+        --accent-warm-hover: 28 100% 38%;  /* #C05600 */
+        --accent-warm-active: 20 19% 36%;  /* #775540 */
+    }
 
-  .dark {
-    --background: 224 71% 4%;
-    --primary: 201 100% 32%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 217 47% 30%;
-    --secondary-foreground: 0 0% 100%;
-    --border: 215 20% 65%;
-  }
+    .dark:root {
+        --background: 240 10% 3.9%;
+        --foreground: 0 0% 98%;
+        
+        --primary: 203 54% 68%;  /* #73B3E7 */
+        --primary-hover: 203 54% 68%;  /* #4F97D1 */
+        --primary-active: 204 69% 45%;  /* #2378C3 */
+        
+        --secondary: 4 75% 64%;  /* #E9695D */
+        --secondary-hover: 6 77% 55%;  /* #E34732 */
+        --secondary-active: 5 81% 38%;  /* #B21D12 */
+        
+        --accent-cool: 196 67% 48%;  /* #28A0CB */
+        --accent-cool-hover: 197 91% 29%;  /* #07648D */
+        --accent-cool-active: 197 91% 22%;  /* #044E6C */
+        
+        --accent-warm: 25 100% 38%;  /* #C05600 */
+        --accent-warm-hover: 19 19% 36%;  /* #775540 */
+        --accent-warm-active: 12 20% 19%;  /* #3D2925 */
+    }
 }`;
 
 export const NATIVEWIND_ENV = `/// <reference types="nativewind/types" />`;

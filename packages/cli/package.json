@@ -1,15 +1,13 @@
 {
-  "name": "@usmds/cli",
+  "name": "@blen/react-native-usmds-cli-internal",
   "version": "0.1.0",
   "description": "CLI for adding USMDS components to React Native apps",
   "type": "module",
   "exports": "./dist/index.js",
-  "bin": {
-    "usmds": "./dist/index.js"
-  },
+  "bin": "./dist/index.js",
   "scripts": {
     "dev": "tsup --watch",
-    "build": "tsup && chmod +x dist/index.js",
+    "build": "tsup --config tsup.config.ts && chmod +x dist/index.js",
     "start": "node dist/index.js"
   },
   "dependencies": {

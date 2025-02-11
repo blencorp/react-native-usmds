@@ -2,15 +2,15 @@ import { defineConfig } from 'tsup';
 
 export default defineConfig({
   entry: ['src/index.ts'],
-  format: ['esm'],
-  target: 'node18',
-  outDir: 'dist',
+  splitting: false,
+  sourcemap: true,
   clean: true,
-  bundle: true,
-  minify: true,
+  target: 'esnext',
+  outDir: 'dist',
+  format: ['esm'],
   esbuildOptions: (options) => {
     options.banner = {
-      js: '#!/usr/bin/env node'
+      js: '#!/usr/bin/env node',
     };
-  }
+  },
 });

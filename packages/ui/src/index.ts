@@ -1,4 +1,3 @@
-export * from './Button';
+export * from './button';
 export * from './ButtonGroup';
-export * from './Input';
 export * from './Text';

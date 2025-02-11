@@ -10,9 +10,21 @@ import { handleError } from '../utils/handle-error';
 import { logger } from '../utils/logger';
 import * as templates from '../utils/templates';
 
-const DEPENDENCIES = ['nativewind@^4.1.0', 'class-variance-authority', 'tailwind-merge', '@react-native-aria/utils', 'react-native-svg'];
+const DEPENDENCIES = [
+  'class-variance-authority',
+  'clsx',
+  'nativewind@^4.1.23',
+  'tailwindcss-animate',
+  'tailwind-merge',
+  'lucide-react-native',
+  'react-native-reanimated',
+  'react-native-svg',
+  '@rn-primitives/types',
+  '@rn-primitives/slot',
+  '@rn-primitives/portal'
+];
 
-const DEV_DEPENDENCIES = ['tailwindcss', '@types/react-native'];
+const DEV_DEPENDENCIES = ['tailwindcss'];
 
 const initOptionsSchema = z.object({
   cwd: z.string(),
@@ -21,9 +33,9 @@ const initOptionsSchema = z.object({
 
 export const init = new Command()
   .name('init')
-  .description('Initialize your project with USMDS setup')
-  .option('-y, --yes', 'Skip confirmation prompt', false)
-  .option('-c, --cwd <cwd>', 'The working directory (defaults to current)', process.cwd())
+  .description('initialize your project and install dependencies')
+  .option('-y, --yes', 'skip confirmation prompt.', false)
+  .option('-c, --cwd <cwd>', 'the working directory. defaults to the current directory.', process.cwd())
   .action(async (opts) => {
     try {
       const options = initOptionsSchema.parse(opts);
@@ -38,31 +50,40 @@ export const init = new Command()
   });
 
 export async function runInit(cwd: string) {
+  // First create all necessary files
   const spinner = ora(`Initializing project...`)?.start();
 
-  // Create config files
-  await fs.writeFile(path.join(cwd, 'tailwind.config.js'), templates.TAILWIND_CONFIG, 'utf8');
+  try {
+    // Create config files
+    await fs.writeFile(path.join(cwd, 'tailwind.config.js'), templates.TAILWIND_CONFIG, 'utf8');
+    await fs.writeFile(path.join(cwd, 'nativewind-env.d.ts'), templates.NATIVEWIND_ENV, 'utf8');
+    await fs.writeFile(path.join(cwd, 'babel.config.js'), templates.BABEL_CONFIG, 'utf8');
+    await fs.writeFile(path.join(cwd, 'global.css'), templates.GLOBAL_STYLES, 'utf8');
+    await fs.writeFile(path.join(cwd, 'metro.config.js'), templates.METRO_CONFIG, 'utf8');
 
-  await fs.writeFile(path.join(cwd, 'nativewind-env.d.ts'), templates.NATIVEWIND_ENV, 'utf8');
+    // Create directories and utils
+    const libDir = path.join(cwd, 'lib');
+    if (!existsSync(libDir)) {
+      await fs.mkdir(libDir, { recursive: true });
+    }
+    await fs.writeFile(path.join(libDir, 'utils.ts'), templates.UTILS, 'utf8');
 
-  await fs.writeFile(path.join(cwd, 'metro.config.js'), templates.METRO_CONFIG, 'utf8');
+    spinner.succeed();
 
-  await fs.writeFile(path.join(cwd, 'global.css'), templates.GLOBAL_STYLES, 'utf8');
+    // Then install all dependencies at once
+    const dependenciesSpinner = ora(`Installing dependencies...`)?.start();
+    const packageManager = await getPackageManager(cwd);
+    const packageCommand = packageManager === 'npm' ? 'install' : 'add';
 
-  // Create lib directory and utils.ts
-  const libDir = path.join(cwd, 'lib');
-  await fs.mkdir(libDir, { recursive: true });
-  await fs.writeFile(path.join(libDir, 'utils.ts'), templates.UTILS_TS, 'utf8');
+    // Install all dependencies in one command
+    await execa(packageManager, [packageCommand, ...DEPENDENCIES], { cwd });
 
-  spinner.succeed();
+    // Install dev dependencies
+    await execa(packageManager, [packageCommand, ...DEV_DEPENDENCIES, packageManager === 'npm' ? '--save-dev' : '--dev'], { cwd });
 
-  // Install dependencies
-  const dependenciesSpinner = ora(`Installing dependencies...`)?.start();
-  const packageManager = await getPackageManager(cwd);
-  const installCmd = packageManager === 'npm' ? 'install' : 'add';
-
-  await execa(packageManager, [installCmd, ...DEPENDENCIES], { cwd });
-  await execa(packageManager, [installCmd, ...DEV_DEPENDENCIES, packageManager === 'npm' ? '--save-dev' : '--dev'], { cwd });
-
-  dependenciesSpinner?.succeed();
+    dependenciesSpinner?.succeed();
+  } catch (error) {
+    spinner?.fail();
+    throw error;
+  }
 }

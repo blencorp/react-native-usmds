@@ -1,14 +1,30 @@
 {
-  "name": "react-native-usmds",
-  "version": "0.1.0",
+  "name": "usmds",
+  "version": "0.1.6",
   "description": "React Native UI components based on US Mobile Design System",
+  "main": "./packages/ui/src/index.ts",
+  "bin": "packages/cli/dist/index.js",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "build": "turbo build",
     "build:docs": "turbo run build --filter=docs",
     "build:examples": "turbo run build --filter=examples",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "prepublishOnly": "turbo build"
+  },
+  "dependencies": {
+    "@antfu/ni": "^0.21.8",
+    "chalk": "^5.3.0",
+    "commander": "^11.0.0",
+    "execa": "^8.0.1",
+    "ora": "^7.0.1",
+    "prompts": "^2.4.2",
+    "zod": "^3.22.2"
   },
   "devDependencies": {
     "prettier": "^3.2.5",
@@ -16,7 +32,7 @@
     "typescript": "^5.4.5"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=18"
   },
   "packageManager": "yarn@4.3.1",
   "workspaces": [
