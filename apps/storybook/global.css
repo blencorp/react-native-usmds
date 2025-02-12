@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 0 0% 100%;
+        --foreground: 240 10% 3.9%;
+        
+        --primary: 201 100% 32%;  /* #005EA2 */
+        --primary-hover: 213 64% 30%;  /* #1A4480 */
+        --primary-active: 213 57% 20%;  /* #162E51 */
+        
+        --secondary: 2 61% 52%;  /* #D83933 */
+        --secondary-hover: 2 89% 35%;  /* #B50909 */
+        --secondary-active: 2 96% 27%;  /* #8B0A03 */
+        
+        --accent-cool: 190 100% 44%;  /* #00BDE3 */
+        --accent-cool-hover: 190 67% 48%;  /* #28A0CB */
+        --accent-cool-active: 197 91% 29%;  /* #07648D */
+        
+        --accent-warm: 28 94% 62%;  /* #FA9441 */
+        --accent-warm-hover: 28 100% 38%;  /* #C05600 */
+        --accent-warm-active: 20 19% 36%;  /* #775540 */
+    }
+
+    .dark:root {
+        --background: 240 10% 3.9%;
+        --foreground: 0 0% 98%;
+        
+        --primary: 203 54% 68%;  /* #73B3E7 */
+        --primary-hover: 203 54% 68%;  /* #4F97D1 */
+        --primary-active: 204 69% 45%;  /* #2378C3 */
+        
+        --secondary: 4 75% 64%;  /* #E9695D */
+        --secondary-hover: 6 77% 55%;  /* #E34732 */
+        --secondary-active: 5 81% 38%;  /* #B21D12 */
+        
+        --accent-cool: 196 67% 48%;  /* #28A0CB */
+        --accent-cool-hover: 197 91% 29%;  /* #07648D */
+        --accent-cool-active: 197 91% 22%;  /* #044E6C */
+        
+        --accent-warm: 25 100% 38%;  /* #C05600 */
+        --accent-warm-hover: 19 19% 36%;  /* #775540 */
+        --accent-warm-active: 12 20% 19%;  /* #3D2925 */
+    }
+}

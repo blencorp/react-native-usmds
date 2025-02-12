@@ -24,7 +24,7 @@ const DEPENDENCIES = [
   '@rn-primitives/portal'
 ];
 
-const DEV_DEPENDENCIES = ['tailwindcss'];
+const DEV_DEPENDENCIES = ['tailwindcss@^3.3.2'];
 
 const initOptionsSchema = z.object({
   cwd: z.string(),
