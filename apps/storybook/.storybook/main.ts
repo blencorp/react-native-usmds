@@ -4,7 +4,6 @@ const main: StorybookConfig = {
   stories: [
     "../components/**/*.stories.mdx",
     "../components/**/*.stories.@(js|jsx|ts|tsx)",
-    "../../packages/ui/src/**/*.stories.?(ts|tsx|js|jsx)"
   ],
 
   addons: [
@@ -21,7 +20,7 @@ const main: StorybookConfig = {
   docs: {},
 
   typescript: {
-    reactDocgen: false,
+    reactDocgen: "react-docgen",
   },
 };
 

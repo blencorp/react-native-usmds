@@ -3,45 +3,62 @@
 @tailwind utilities;
 
 @layer base {
-    :root {
-        --background: 0 0% 100%;
-        --foreground: 240 10% 3.9%;
-        
-        --primary: 201 100% 32%;  /* #005EA2 */
-        --primary-hover: 213 64% 30%;  /* #1A4480 */
-        --primary-active: 213 57% 20%;  /* #162E51 */
-        
-        --secondary: 2 61% 52%;  /* #D83933 */
-        --secondary-hover: 2 89% 35%;  /* #B50909 */
-        --secondary-active: 2 96% 27%;  /* #8B0A03 */
-        
-        --accent-cool: 190 100% 44%;  /* #00BDE3 */
-        --accent-cool-hover: 190 67% 48%;  /* #28A0CB */
-        --accent-cool-active: 197 91% 29%;  /* #07648D */
-        
-        --accent-warm: 28 94% 62%;  /* #FA9441 */
-        --accent-warm-hover: 28 100% 38%;  /* #C05600 */
-        --accent-warm-active: 20 19% 36%;  /* #775540 */
-    }
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 11%; /* #1B1B1B */
 
-    .dark:root {
-        --background: 240 10% 3.9%;
-        --foreground: 0 0% 98%;
-        
-        --primary: 203 54% 68%;  /* #73B3E7 */
-        --primary-hover: 203 54% 68%;  /* #4F97D1 */
-        --primary-active: 204 69% 45%;  /* #2378C3 */
-        
-        --secondary: 4 75% 64%;  /* #E9695D */
-        --secondary-hover: 6 77% 55%;  /* #E34732 */
-        --secondary-active: 5 81% 38%;  /* #B21D12 */
-        
-        --accent-cool: 196 67% 48%;  /* #28A0CB */
-        --accent-cool-hover: 197 91% 29%;  /* #07648D */
-        --accent-cool-active: 197 91% 22%;  /* #044E6C */
-        
-        --accent-warm: 25 100% 38%;  /* #C05600 */
-        --accent-warm-hover: 19 19% 36%;  /* #775540 */
-        --accent-warm-active: 12 20% 19%;  /* #3D2925 */
-    }
+    /* Primary Colors */
+    --primary: 204 100% 32%; /* #005EA2 */
+    --primary-hover: 217 100% 25%; /* #1A4480 */
+    --primary-active: 215 57% 20%; /* #162E51 */
+
+    /* Secondary Colors */
+    --secondary: 3 61% 53%; /* #D83933 */
+    --secondary-hover: 2 89% 35%; /* #B50909 */
+    --secondary-active: 4 96% 27%; /* #8B0A03 */
+
+    /* Accent Cool */
+    --accent-cool: 190 100% 44%; /* #00BDE3 */
+    --accent-cool-hover: 196 67% 48%; /* #28A0CB */
+    --accent-cool-active: 198 85% 29%; /* #07648D */
+
+    /* Accent Warm */
+    --accent-warm: 28 95% 62%; /* #FA9441 */
+    --accent-warm-hover: 24 100% 38%; /* #C05600 */
+    --accent-warm-active: 17 27% 36%; /* #775540 */
+
+    /* Base Colors */
+    --base: 0 0% 46%; /* #757575 */
+    --base-hover: 0 0% 36%; /* #5C5C5C */
+    --base-active: 0 0% 18%; /* #2E2E2E */
+
+    /* Focus Ring */
+    --focus-ring: 208 100% 57%; /* #2491FF */
+
+    /* Inverse Colors */
+    --inverse-border: 0 0% 90%; /* #E6E6E6 */
+    --inverse-border-hover: 0 0% 94%; /* #F0F0F0 */
+    --inverse-border-active: 0 0% 100%; /* #FFFFFF */
+  }
+
+  .dark:root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --primary: 203 54% 68%; /* #73B3E7 */
+    --primary-hover: 203 54% 68%; /* #4F97D1 */
+    --primary-active: 204 69% 45%; /* #2378C3 */
+
+    --secondary: 4 75% 64%; /* #E9695D */
+    --secondary-hover: 6 77% 55%; /* #E34732 */
+    --secondary-active: 5 81% 38%; /* #B21D12 */
+
+    --accent-cool: 196 67% 48%; /* #28A0CB */
+    --accent-cool-hover: 197 91% 29%; /* #07648D */
+    --accent-cool-active: 197 91% 22%; /* #044E6C */
+
+    --accent-warm: 25 100% 38%; /* #C05600 */
+    --accent-warm-hover: 19 19% 36%; /* #775540 */
+    --accent-warm-active: 12 20% 19%; /* #3D2925 */
+  }
 }

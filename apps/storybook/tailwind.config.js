@@ -3,7 +3,7 @@ const { hairlineWidth } = require('nativewind/theme');
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: 'class',
-  content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}', '../../packages/ui/src/**/*.{ts,tsx}'],
+  content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}', './.rnstorybook/**/*.{ts,tsx}', '../../packages/ui/src/**/*.{ts,tsx}'],
   presets: [require('nativewind/preset')],
   theme: {
     extend: {
@@ -12,29 +12,41 @@ module.exports = {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
 
-        // USWDS Colors
         primary: {
-          DEFAULT: 'hsl(var(--primary))', // #005EA2
-          hover: 'hsl(var(--primary-hover))', // #1A4480
-          active: 'hsl(var(--primary-active))', // #162E51
-          foreground: 'hsl(var(--primary-foreground))'
+          DEFAULT: 'hsl(var(--primary))',
+          hover: 'hsl(var(--primary-hover))',
+          active: 'hsl(var(--primary-active))'
         },
         secondary: {
-          DEFAULT: 'hsl(var(--secondary))', // #D83933
-          hover: 'hsl(var(--secondary-hover))', // #B50909
-          active: 'hsl(var(--secondary-active))', // #8B0A03
-          foreground: 'hsl(var(--secondary-foreground))'
+          DEFAULT: 'hsl(var(--secondary))',
+          hover: 'hsl(var(--secondary-hover))',
+          active: 'hsl(var(--secondary-active))'
         },
         accent: {
           cool: {
-            DEFAULT: 'hsl(var(--accent-cool))', // #00BDE3
-            hover: 'hsl(var(--accent-cool-hover))', // #28A0CB
-            active: 'hsl(var(--accent-cool-active))' // #07648D
+            DEFAULT: 'hsl(var(--accent-cool))',
+            hover: 'hsl(var(--accent-cool-hover))',
+            active: 'hsl(var(--accent-cool-active))'
           },
           warm: {
-            DEFAULT: 'hsl(var(--accent-warm))', // #FA9441
-            hover: 'hsl(var(--accent-warm-hover))', // #C05600
-            active: 'hsl(var(--accent-warm-active))' // #775540
+            DEFAULT: 'hsl(var(--accent-warm))',
+            hover: 'hsl(var(--accent-warm-hover))',
+            active: 'hsl(var(--accent-warm-active))'
+          }
+        },
+        base: {
+          DEFAULT: 'hsl(var(--base))',
+          hover: 'hsl(var(--base-hover))',
+          active: 'hsl(var(--base-active))'
+        },
+        focus: {
+          ring: 'hsl(var(--focus-ring))'
+        },
+        inverse: {
+          border: {
+            DEFAULT: 'hsl(var(--inverse-border))',
+            hover: 'hsl(var(--inverse-border-hover))',
+            active: 'hsl(var(--inverse-border-active))'
           }
         }
       },

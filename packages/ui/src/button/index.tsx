@@ -5,7 +5,7 @@ import { TextClassContext } from '../Text';
 import { cn } from '../../lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 rounded-[4px] [&_svg]:size-5 [&_svg]:shrink-0 web:transition-colors web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-primary web:focus-visible:ring-offset-2',
+  'inline-flex items-center justify-center gap-2 rounded-[4px] [&_svg]:size-5 [&_svg]:shrink-0 web:transition-colors web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-focus-ring web:focus-visible:ring-offset-2',
   {
     variants: {
       variant: {
@@ -26,7 +26,7 @@ const buttonVariants = cva(
           'bg-accent-warm dark:bg-accent-warm web:hover:bg-accent-warm-hover dark:web:hover:bg-accent-warm-hover active:bg-accent-warm-active dark:active:bg-accent-warm-active',
 
         // Base
-        base: 'bg-base-500 dark:bg-base-400 web:hover:bg-base-600 dark:web:hover:bg-base-500 active:bg-base-700 dark:active:bg-base-600',
+        base: 'bg-base dark:bg-base web:hover:bg-base-hover dark:web:hover:bg-base-hover active:bg-base-active dark:active:bg-base-active',
 
         // Outline
         outline:
@@ -34,7 +34,7 @@ const buttonVariants = cva(
 
         // Inverse
         inverse:
-          'border-2 border-base-100 dark:border-base-800 bg-transparent web:hover:border-base-50 dark:web:hover:border-base-700 active:border-white dark:active:border-black'
+          'border-2 border-inverse-border dark:border-inverse-border bg-transparent web:hover:border-inverse-border-hover dark:web:hover:border-inverse-border-hover active:border-inverse-border-active dark:active:border-inverse-border-active'
       },
       size: {
         default: 'h-[44px] px-[20px] py-[12px] min-w-[329px]',
@@ -63,11 +63,11 @@ const buttonTextVariants = cva('text-center font-[700] text-[16px] leading-[20px
     variant: {
       default: 'text-white dark:text-base-800',
       secondary: 'text-white dark:text-base-800',
-      'accent-cool': 'text-base-800 dark:text-white active:text-white',
-      'accent-warm': 'text-base-800 dark:text-white hover:text-white active:text-white',
+      'accent-cool': 'text-foreground dark:text-white active:text-white',
+      'accent-warm': 'text-foreground dark:text-white hover:text-white active:text-white',
       base: 'text-white dark:text-base-800',
-      outline: 'text-primary dark:text-primary',
-      inverse: 'text-base-100 dark:text-base-800'
+      outline: 'text-primary dark:text-primary hover:text-primary-hover active:text-primary-active',
+      inverse: 'text-inverse-border dark:text-inverse-border hover:text-inverse-border-hover active:text-inverse-border-active'
     },
     size: {
       default: '',

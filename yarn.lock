@@ -1771,6 +1771,7 @@ __metadata:
     react-test-renderer: "npm:18.3.1"
     tailwind-merge: "npm:^2.1.0"
     tailwindcss: "npm:^3.3.2"
+    typescript: "npm:^5.7.3"
   peerDependencies:
     react: "*"
     react-native: "*"
@@ -2711,7 +2712,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/prebuild-config@npm:^8.0.26":
+"@expo/prebuild-config@npm:^8.0.25, @expo/prebuild-config@npm:^8.0.26":
   version: 8.0.26
   resolution: "@expo/prebuild-config@npm:8.0.26"
   dependencies:
@@ -5230,7 +5231,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/core@npm:8.5.4, @storybook/core@npm:^8.5.1, @storybook/core@npm:^8.5.3":
+"@storybook/components@npm:8.5.5":
+  version: 8.5.5
+  resolution: "@storybook/components@npm:8.5.5"
+  peerDependencies:
+    storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
+  checksum: 10c0/35657d1e54f9ac74b77c5acfb226690ec68158f54afe55231e74369145b702e872e1898dbcd70cd0ef8b471880d36bd95fdc6559f2950ebac841893440b8bd35
+  languageName: node
+  linkType: hard
+
+"@storybook/core@npm:8.5.4, @storybook/core@npm:^8.5.1":
   version: 8.5.4
   resolution: "@storybook/core@npm:8.5.4"
   dependencies:
@@ -5251,6 +5261,30 @@ __metadata:
     prettier:
       optional: true
   checksum: 10c0/53690a2f97f6097bb71cbd1a78142b73c13ee8367b3f82ad3c0093bfc026e9a76cf594ee8643d081628c153681fddbf60914998ea8a94dad179cff2ba0192345
+  languageName: node
+  linkType: hard
+
+"@storybook/core@npm:^8.5.4":
+  version: 8.5.5
+  resolution: "@storybook/core@npm:8.5.5"
+  dependencies:
+    "@storybook/csf": "npm:0.1.12"
+    better-opn: "npm:^3.0.2"
+    browser-assert: "npm:^1.2.1"
+    esbuild: "npm:^0.18.0 || ^0.19.0 || ^0.20.0 || ^0.21.0 || ^0.22.0 || ^0.23.0 || ^0.24.0"
+    esbuild-register: "npm:^3.5.0"
+    jsdoc-type-pratt-parser: "npm:^4.0.0"
+    process: "npm:^0.11.10"
+    recast: "npm:^0.23.5"
+    semver: "npm:^7.6.2"
+    util: "npm:^0.12.5"
+    ws: "npm:^8.2.3"
+  peerDependencies:
+    prettier: ^2 || ^3
+  peerDependenciesMeta:
+    prettier:
+      optional: true
+  checksum: 10c0/081aae316ad135328376de3d6e007a5b1238731a5242b8d4c035d53ba5399a04998639a9647e27febdf8cc93438d343784d17b02a36af31dd834146f07329d23
   languageName: node
   linkType: hard
 
@@ -5321,12 +5355,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/manager-api@npm:8.5.5":
+  version: 8.5.5
+  resolution: "@storybook/manager-api@npm:8.5.5"
+  peerDependencies:
+    storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
+  checksum: 10c0/601b97f7545233b38ddc815b594f09052136f662a970697ba4aa7ae437d7750f740b40dc241929a73b419bae41975e087a3afb5b92f2251d12d58cc31e67ff0f
+  languageName: node
+  linkType: hard
+
 "@storybook/preview-api@npm:8.5.4":
   version: 8.5.4
   resolution: "@storybook/preview-api@npm:8.5.4"
   peerDependencies:
     storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
   checksum: 10c0/3f2671ab87ce8c8ea64ea8e679c6769c3186289eda965096bf9ccc97692e1c9564698c882bf797e9152f448a42c30146c5cecf8850740bc065f13c2cd9cb3959
+  languageName: node
+  linkType: hard
+
+"@storybook/preview-api@npm:8.5.5":
+  version: 8.5.5
+  resolution: "@storybook/preview-api@npm:8.5.5"
+  peerDependencies:
+    storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
+  checksum: 10c0/b5b5595ecd58f0ae179766340b13d6b9644c2bf7f277f77a394f12a437af0bb54ce6c4922e62b45bc469a27f46d9c8557a615388711a63851031fb2b750058e7
   languageName: node
   linkType: hard
 
@@ -5338,6 +5390,17 @@ __metadata:
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
     storybook: ^8.5.4
   checksum: 10c0/2e3ad7d69497c103bb09337d8a6cf7babd7250f7052279ae92ee4fed05dddbe1e82289258be6cd61a327fc3b5f8623ef4d91eb067bc672cf549dea4fb229c9cd
+  languageName: node
+  linkType: hard
+
+"@storybook/react-dom-shim@npm:8.5.5":
+  version: 8.5.5
+  resolution: "@storybook/react-dom-shim@npm:8.5.5"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
+    storybook: ^8.5.5
+  checksum: 10c0/233405272262694c2b525aa9fca469928a131a7cc00c3cc4a5f0310c8d596b5dbbbb688498e3e7b297395c1d2bbd00efbdfe59c6f9c90417ce55f1511de21730
   languageName: node
   linkType: hard
 
@@ -5460,7 +5523,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react@npm:8.5.4, @storybook/react@npm:^8.5.1, @storybook/react@npm:^8.5.3":
+"@storybook/react@npm:8.5.4, @storybook/react@npm:^8.5.1":
   version: 8.5.4
   resolution: "@storybook/react@npm:8.5.4"
   dependencies:
@@ -5482,6 +5545,31 @@ __metadata:
     typescript:
       optional: true
   checksum: 10c0/14e0305dfd01ba1ebba4441387f1f5dcd4b53da6ec7c5a79a2420ac8ba77f1ec24a15a4f0a0cbf5eea557fb53f7467b81e7dbf7a27bf772dfa6520c3b2077f1b
+  languageName: node
+  linkType: hard
+
+"@storybook/react@npm:^8.5.4":
+  version: 8.5.5
+  resolution: "@storybook/react@npm:8.5.5"
+  dependencies:
+    "@storybook/components": "npm:8.5.5"
+    "@storybook/global": "npm:^5.0.0"
+    "@storybook/manager-api": "npm:8.5.5"
+    "@storybook/preview-api": "npm:8.5.5"
+    "@storybook/react-dom-shim": "npm:8.5.5"
+    "@storybook/theming": "npm:8.5.5"
+  peerDependencies:
+    "@storybook/test": 8.5.5
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
+    storybook: ^8.5.5
+    typescript: ">= 4.2.x"
+  peerDependenciesMeta:
+    "@storybook/test":
+      optional: true
+    typescript:
+      optional: true
+  checksum: 10c0/2ee9bf9cada7201ec4e2124c9f2132529c51022f63227d3507bdf526933bad72b2b70bb25760290f61f8718e9ca6219c15a8f673ed800f6ddbe4be62d42d31bf
   languageName: node
   linkType: hard
 
@@ -5509,6 +5597,15 @@ __metadata:
   peerDependencies:
     storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
   checksum: 10c0/d86145ba8103daefe50dfb7023ed13b88ad1776a7f46813d9c30d72d9db3dfbfcbc9ff47583c4d9d877ebda2341068fb9b3fc331957d15912fe152247e0f34a5
+  languageName: node
+  linkType: hard
+
+"@storybook/theming@npm:8.5.5":
+  version: 8.5.5
+  resolution: "@storybook/theming@npm:8.5.5"
+  peerDependencies:
+    storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
+  checksum: 10c0/3cbe2923be52085c2204b463a53f321e253cc815d1f1434636113640f510fa3501fd7e648243f51a524c308c0d05089af9090b38d51aa6033e1e45f345499731
   languageName: node
   linkType: hard
 
@@ -8791,6 +8888,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-font@npm:^13.0.3, expo-font@npm:~13.0.3":
+  version: 13.0.3
+  resolution: "expo-font@npm:13.0.3"
+  dependencies:
+    fontfaceobserver: "npm:^2.1.0"
+  peerDependencies:
+    expo: "*"
+    react: "*"
+  checksum: 10c0/4a86693a9ec2e5bc8a94f6abc007f188083b2c56e6b40f12e1c83a95cb619d7c6ce1028f683d00c238c530aa1a677a801ad19575f791fe7360c8dd308dc9cb40
+  languageName: node
+  linkType: hard
+
 "expo-font@npm:~11.10.3":
   version: 11.10.3
   resolution: "expo-font@npm:11.10.3"
@@ -8802,15 +8911,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-font@npm:~13.0.3":
-  version: 13.0.3
-  resolution: "expo-font@npm:13.0.3"
-  dependencies:
-    fontfaceobserver: "npm:^2.1.0"
+"expo-image@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "expo-image@npm:2.0.5"
   peerDependencies:
     expo: "*"
     react: "*"
-  checksum: 10c0/4a86693a9ec2e5bc8a94f6abc007f188083b2c56e6b40f12e1c83a95cb619d7c6ce1028f683d00c238c530aa1a677a801ad19575f791fe7360c8dd308dc9cb40
+    react-native: "*"
+    react-native-web: "*"
+  peerDependenciesMeta:
+    react-native-web:
+      optional: true
+  checksum: 10c0/87731e48d923bd240dd4574e1d2f2ea03ae5f668b8b37d3fb3b8a46781dff66e217fc5c5d6cd5702905afcd7fdff16f5bbac2d358645a591220f434448b9d1d2
   languageName: node
   linkType: hard
 
@@ -8882,6 +8994,17 @@ __metadata:
   dependencies:
     invariant: "npm:^2.2.4"
   checksum: 10c0/d37569280883609b18e567f8d47cd656b3a5cfdb705cf9316ce49e760aacc92475b32c5bda8841c1a13b31f2cb87fdef166262f92df0d23918d715c239686611
+  languageName: node
+  linkType: hard
+
+"expo-splash-screen@npm:^0.29.21":
+  version: 0.29.21
+  resolution: "expo-splash-screen@npm:0.29.21"
+  dependencies:
+    "@expo/prebuild-config": "npm:^8.0.25"
+  peerDependencies:
+    expo: "*"
+  checksum: 10c0/f3d7f05379118d541ea2978f90f2dfd2b5bed53913e3184dfb6571c83ed94e8679688d726bc2ea0dc9bd1bac4db6dc20d36127336e68acc943a688e68cefebd8
   languageName: node
   linkType: hard
 
@@ -15177,8 +15300,8 @@ __metadata:
     "@storybook/addon-ondevice-backgrounds": "npm:^8.5.4"
     "@storybook/addon-ondevice-controls": "npm:^8.5.4"
     "@storybook/addon-ondevice-notes": "npm:^8.5.4"
-    "@storybook/core": "npm:^8.5.3"
-    "@storybook/react": "npm:^8.5.3"
+    "@storybook/core": "npm:^8.5.4"
+    "@storybook/react": "npm:^8.5.4"
     "@storybook/react-native": "npm:^8.5.4"
     "@storybook/react-native-web-vite": "npm:^8.5.3"
     "@storybook/test": "npm:^8.5.3"
@@ -15190,6 +15313,9 @@ __metadata:
     cross-env: "npm:^7.0.3"
     expo: "npm:~52.0.31"
     expo-constants: "npm:~17.0.5"
+    expo-font: "npm:^13.0.3"
+    expo-image: "npm:^2.0.5"
+    expo-splash-screen: "npm:^0.29.21"
     expo-status-bar: "npm:~2.0.1"
     lucide-react-native: "npm:^0.475.0"
     nativewind: "npm:^4.1.23"
@@ -15580,6 +15706,13 @@ __metadata:
     tailwind: lib/cli.js
     tailwindcss: lib/cli.js
   checksum: 10c0/cc42c6e7fdf88a5507a0d7fea37f1b4122bec158977f8c017b2ae6828741f9e6f8cb90282c6bf2bd5951fd1220a53e0a50ca58f5c1c00eb7f5d9f8b80dc4523c
+  languageName: node
+  linkType: hard
+
+"tailwindcss@npm:^4.0.6":
+  version: 4.0.6
+  resolution: "tailwindcss@npm:4.0.6"
+  checksum: 10c0/e1d40616c2aa69844a065c74d022960efc820d974c86415faec6d485f841c0112776a52d9a150e8f3375c4e04d22b0b4c33c07086c35b9725487b314dc7a7f71
   languageName: node
   linkType: hard
 
@@ -16127,7 +16260,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.4.5":
+"typescript@npm:^5.4.5, typescript@npm:^5.7.3":
   version: 5.7.3
   resolution: "typescript@npm:5.7.3"
   bin:
@@ -16147,7 +16280,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A^5.4.5#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A^5.4.5#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.7.3#optional!builtin<compat/typescript>":
   version: 5.7.3
   resolution: "typescript@patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=379a07"
   bin:
@@ -16433,12 +16566,24 @@ __metadata:
   resolution: "usmds@workspace:."
   dependencies:
     "@antfu/ni": "npm:^0.21.8"
+    "@rn-primitives/portal": "npm:^1.1.0"
+    "@rn-primitives/slot": "npm:^1.1.0"
+    "@rn-primitives/types": "npm:^1.1.0"
     chalk: "npm:^5.3.0"
+    class-variance-authority: "npm:^0.7.1"
+    clsx: "npm:^2.1.1"
     commander: "npm:^11.0.0"
     execa: "npm:^8.0.1"
+    lucide-react-native: "npm:^0.475.0"
+    nativewind: "npm:^4.1.23"
     ora: "npm:^7.0.1"
     prettier: "npm:^3.2.5"
     prompts: "npm:^2.4.2"
+    react-native-reanimated: "npm:^3.16.7"
+    react-native-svg: "npm:^15.11.1"
+    tailwind-merge: "npm:^3.0.1"
+    tailwindcss: "npm:^4.0.6"
+    tailwindcss-animate: "npm:^1.0.7"
     turbo: "npm:^2.1.3"
     typescript: "npm:^5.4.5"
     zod: "npm:^3.22.2"
