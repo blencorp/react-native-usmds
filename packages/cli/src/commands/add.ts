@@ -5,18 +5,17 @@ import path from 'path';
 import prompts from 'prompts';
 import * as z from 'zod';
 import { logger } from '../utils/logger';
-import { ALL_COMPONENTS, COMPONENT_METADATA, getComponentTemplate } from '../utils/registry';
+import { COMPONENT_TEMPLATES, COMPONENT_METADATA, ICON_PATHS } from '../utils/registry';
 
 // Available components from our registry
-const AVAILABLE_COMPONENTS = ALL_COMPONENTS.map((name) => name.toLowerCase());
+const AVAILABLE_COMPONENTS = Object.keys(COMPONENT_METADATA).map((name) => name.toLowerCase());
 
 const addOptionsSchema = z.object({
   components: z.array(z.string()).optional(),
   yes: z.boolean(),
   overwrite: z.boolean(),
   cwd: z.string(),
-  all: z.boolean(),
-  path: z.string().optional()
+  all: z.boolean()
 });
 
 export const add = new Command()
@@ -27,7 +26,6 @@ export const add = new Command()
   .option('-o, --overwrite', 'Overwrite existing files', false)
   .option('-a, --all', 'Add all available components', false)
   .option('-c, --cwd <cwd>', 'Working directory (defaults to current)', process.cwd())
-  .option('-p, --path <path>', 'Components directory (defaults to components)', 'components')
   .action(async (components, opts) => {
     const options = addOptionsSchema.parse({
       components,
@@ -46,18 +44,15 @@ export const add = new Command()
 
     // If no components specified, show selection prompt
     if (!selectedComponents?.length && !options.all) {
-      const response = await prompts([
-        {
-          type: 'multiselect',
-          name: 'components',
-          message: 'Select components to add:',
-          choices: AVAILABLE_COMPONENTS.map((component) => ({
-            title: component,
-            value: component,
-            description: `Add ${component} component to your project`
-          }))
-        }
-      ]);
+      const response = await prompts({
+        type: 'multiselect',
+        name: 'components',
+        message: 'Select components to add:',
+        choices: AVAILABLE_COMPONENTS.map((component) => ({
+          title: component,
+          value: component
+        }))
+      });
 
       selectedComponents = response.components;
     }
@@ -70,15 +65,13 @@ export const add = new Command()
     const spinner = ora('Installing components...').start();
 
     try {
-      // Create components directory if it doesn't exist
-      const componentDir = path.join(cwd, options.path || 'components');
-      await fs.mkdir(componentDir, { recursive: true });
-
       for (const component of selectedComponents) {
         spinner.text = `Adding ${component}...`;
 
-        const componentName = component.charAt(0).toUpperCase() + component.slice(1);
-        const targetPath = path.join(componentDir, `${componentName}.tsx`);
+        const componentDir = path.join(cwd, 'components');
+        await fs.mkdir(componentDir, { recursive: true });
+
+        const targetPath = path.join(componentDir, `${component.charAt(0).toUpperCase() + component.slice(1)}.tsx`);
 
         // Check if component already exists
         if (existsSync(targetPath) && !options.overwrite) {
@@ -87,33 +80,42 @@ export const add = new Command()
         }
 
         // Get component template and write file
-        try {
-          const template = await getComponentTemplate(component);
-          await fs.writeFile(targetPath, template);
-
-          // Log dependencies if any
-          const metadata = COMPONENT_METADATA[componentName];
-          if (metadata?.dependencies?.length) {
-            spinner.info(`${componentName} requires: ${metadata.dependencies.join(', ')}`);
-          }
-        } catch (error) {
-          spinner.warn(`Failed to add ${component}: ${error instanceof Error ? error.message : 'Unknown error'}`);
-          continue;
-        }
+        const template = await getComponentTemplate(component, cwd, { overwrite: options.overwrite });
+        await fs.writeFile(targetPath, template);
       }
 
       spinner.succeed('Components installed successfully!');
-
-      // Log next steps
-      logger.info('\nNext steps:');
-      logger.info('1. Install the required dependencies (check above for component-specific dependencies)');
-      logger.info('2. Import your components from your components directory');
-      logger.info('3. Use them in your app!');
     } catch (error) {
       spinner.fail('Failed to install components');
-      if (error instanceof Error) {
-        logger.error(error.message);
-      }
+      logger.error(error as Error);
       process.exit(1);
     }
   });
+
+async function getComponentTemplate(name: string, cwd: string, options: { overwrite: boolean }): Promise<string> {
+  const componentName = name.charAt(0).toUpperCase() + name.slice(1);
+  const template = COMPONENT_TEMPLATES[componentName];
+
+  if (!template) {
+    throw new Error(`Template not found for component: ${componentName}`);
+  }
+
+  // If it's the Icon component, ensure registry file exists
+  if (componentName === 'Icon') {
+    const utilsDir = path.join(cwd, 'utils');
+    const registryPath = path.join(utilsDir, 'registry.ts');
+
+    // Create utils directory if it doesn't exist
+    if (!existsSync(utilsDir)) {
+      await fs.mkdir(utilsDir, { recursive: true });
+    }
+
+    // Create registry file if it doesn't exist
+    if (!existsSync(registryPath) || options.overwrite) {
+      const registryContent = `export const ICON_PATHS = ${JSON.stringify(ICON_PATHS, null, 2)};`;
+      await fs.writeFile(registryPath, registryContent, 'utf8');
+    }
+  }
+
+  return template;
+}
