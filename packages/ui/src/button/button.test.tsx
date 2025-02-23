@@ -1,6 +1,6 @@
 import { render, fireEvent } from '@testing-library/react-native';
 import { Button } from './';
-import { Text } from '../Text';
+import { Text } from '../text';
 
 describe('Button', () => {
   it('renders correctly', () => {

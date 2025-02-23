@@ -1,7 +1,21 @@
 /** @type {import('jest').Config} */
 
-const config = {
-  presets: [['babel-preset-expo', { jsxImportSource: 'nativewind' }], 'nativewind/babel']
-};
+module.exports = function (api) {
+  api.cache(true);
 
-module.exports = config;
+  return {
+    presets: [['@react-native/babel-preset'], ['@babel/preset-react', { runtime: 'automatic' }], '@babel/preset-typescript'],
+    plugins: [
+      [
+        'module-resolver',
+        {
+          root: ['./src'],
+          extensions: ['.ios.js', '.android.js', '.js', '.ts', '.tsx', '.json'],
+          alias: {
+            '@': './src'
+          }
+        }
+      ]
+    ]
+  };
+};

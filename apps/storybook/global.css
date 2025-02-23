@@ -62,3 +62,73 @@
     --accent-warm-active: 12 20% 19%; /* #3D2925 */
   }
 }
+
+@layer components {
+  /* Headings */
+  .usa-prose-h1 {
+    @apply text-2xl font-normal;
+    margin-top: 1em;
+  }
+
+  .usa-prose-h2 {
+    @apply text-xl font-normal;
+    margin-top: 105px;
+  }
+
+  .usa-prose-h3 {
+    @apply text-lg font-normal;
+    margin-top: 1em;
+  }
+
+  .usa-prose-h4 {
+    @apply text-sm font-normal;
+    line-height: theme('lineHeight.heading-2');
+    margin-top: 105px;
+    measure: 6;
+  }
+
+  .usa-prose-h5 {
+    @apply text-xs font-normal;
+    line-height: theme('lineHeight.heading-2');
+    margin-top: 105px;
+    measure: 6;
+  }
+
+  .usa-prose-h6 {
+    @apply text-3xs font-normal uppercase;
+    line-height: theme('lineHeight.heading-2');
+    margin-top: 105px;
+    measure: 6;
+    letter-spacing: 1px;
+  }
+
+  /* Body text */
+  .usa-prose-body {
+    @apply text-sm font-normal;
+    line-height: theme('lineHeight.body-5');
+    measure: 6;
+  }
+
+  /* Intro text */
+  .usa-prose-intro {
+    @apply text-xl font-normal;
+    line-height: theme('lineHeight.alt-5');
+    margin-top: 1em;
+    measure: 6;
+  }
+
+  /* Lists */
+  .usa-prose-ol {
+    @apply list-decimal pl-4;
+    margin-top: 1em;
+  }
+
+  .usa-prose-ul {
+    @apply list-disc pl-4;
+    margin-top: 1em;
+  }
+
+  .usa-prose-li {
+    margin-top: 0.5em;
+  }
+}
