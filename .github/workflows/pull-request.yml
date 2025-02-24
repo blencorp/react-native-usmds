@@ -1,16 +1,15 @@
-name: Release
+name: Pull Request
+
 on:
-  push:
+  pull_request:
     branches:
       - main
 
 jobs:
-  release:
-    name: Release
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -29,14 +28,3 @@ jobs:
 
       - name: Run tests in UI package
         run: yarn workspace @blen/react-native-usmds-ui-internal test
-
-      - name: Build packages
-        run: |
-          yarn workspace @blen/react-native-usmds-cli-internal build
-          yarn build
-
-      - name: Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release
