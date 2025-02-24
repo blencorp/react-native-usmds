@@ -1,0 +1,21 @@
+## 1.0.0 (2025-02-24)
+
+### Features
+
+* add additional components, tests and various cli refactors ([5e8f1c6](https://github.com/blencorp/react-native-usmds/commit/5e8f1c68b09489102e69e2ccc8d21f64d956d0db))
+* add CI/CD pipeline for semantic release and test ([d327895](https://github.com/blencorp/react-native-usmds/commit/d327895ac496f69eb152a1bcfee76c29950eecf2))
+* add CI/CD pipeline for semantic release and test ([9e383e0](https://github.com/blencorp/react-native-usmds/commit/9e383e0b709d1440c693936ea183ce13a208efff))
+* add CI/CD pipeline for semantic release and test ([7fc26d0](https://github.com/blencorp/react-native-usmds/commit/7fc26d0d94edbe1facaaff7517b6ed22aa22ac3d))
+* add CI/CD pipeline for semantic release and test ([3182333](https://github.com/blencorp/react-native-usmds/commit/318233362699a6dcbaf53aed2a42b582491f0e1a))
+* **cli:** add cli components ([27cdf5e](https://github.com/blencorp/react-native-usmds/commit/27cdf5e3880243bfb35615b6c2bbecd64637cc0d))
+* publish 0.1.12 ([2c3c33e](https://github.com/blencorp/react-native-usmds/commit/2c3c33ec5f671f5faaf7139a919c28c162700e5d))
+* **storybook:** initialize storybook ([fc5419f](https://github.com/blencorp/react-native-usmds/commit/fc5419f0341f123e1cee53b491e9f48dbaef3a0b))
+* **storybook:** initialize storybook ([feaf1fb](https://github.com/blencorp/react-native-usmds/commit/feaf1fb640522ebcd2d4c40f47143dca4493dd6c))
+* **ui:** button ui components and text ([8b6b330](https://github.com/blencorp/react-native-usmds/commit/8b6b330f15eca5bdeca3bed8548421cabb72d765))
+* **unit-testing:** add unit testing to ui package ([ac6e965](https://github.com/blencorp/react-native-usmds/commit/ac6e96541dcc866d4ac4bb3b16b3a54aea6cff02))
+* **unit-testing:** add unit testing to ui package ([ddeeded](https://github.com/blencorp/react-native-usmds/commit/ddeeded477b92540bb6c7bfb858c6e4f1d3f3692))
+
+### Bug Fixes
+
+* **packages:** tailwind version depedencies ([ef71d29](https://github.com/blencorp/react-native-usmds/commit/ef71d29eee6e905e0efa1340242ed8f884c2902b))
+* remove examples submodule and add as regular directory ([58488a0](https://github.com/blencorp/react-native-usmds/commit/58488a07b51a1cb7b122cbca882fbd07329e6c96))
