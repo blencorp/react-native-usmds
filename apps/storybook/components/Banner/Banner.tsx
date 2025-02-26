@@ -19,8 +19,8 @@ const bannerVariants = cva('flex flex-row items-center', {
 const bannerTextVariants = cva('whitespace-nowrap', {
   variants: {
     variant: {
-      'standard-app': 'text-base-darker text-[12px] leading-[14px] font-public',
-      welcome: 'text-foreground text-[22px] leading-[28px] font-bold w-[273px] font-source-sans-pro'
+      'standard-app': 'text-base-darker text-[12px] leading-[14px]',
+      welcome: 'text-foreground text-[22px] leading-[28px] font-bold w-[273px]'
     }
   },
   defaultVariants: {
@@ -80,7 +80,7 @@ const Banner = forwardRef<ElementRef<typeof View>, BannerProps>(({ className, va
         </Text>
         {isStandardApp && link && (
           <Pressable accessibilityRole='link' accessibilityLabel={link}>
-            <Text className='text-primary text-[12px] leading-[14px] font-bold underline whitespace-nowrap font-public' numberOfLines={1}>
+            <Text className='text-primary text-[12px] leading-[14px] font-bold underline whitespace-nowrap' numberOfLines={1}>
               {link}
             </Text>
           </Pressable>

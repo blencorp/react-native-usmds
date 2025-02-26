@@ -37,7 +37,7 @@ const Snackbar = forwardRef<ElementRef<typeof View>, SnackbarProps & { isVisible
         <View ref={ref} testID='snackbar-container' className={cn(snackbarVariants({ layout }), className)}>
           <View className='flex flex-row gap-2 mb-3'>
             <View className='flex items-center justify-center h-6'>
-              <Icon color='#F0F0F0' size={24} />
+              <Icon className='text-base-lightest' size={24} />
             </View>
             <Text className='text-base-lightest text-base leading-6 flex-1 flex-wrap'>{message}</Text>
           </View>
@@ -62,7 +62,7 @@ const Snackbar = forwardRef<ElementRef<typeof View>, SnackbarProps & { isVisible
       <View ref={ref} testID='snackbar-container' className={cn(snackbarVariants({ layout }), className)}>
         <View className='flex flex-row items-center gap-2 flex-shrink min-w-0 max-w-[171px]'>
           <View className='flex items-center justify-center h-6 flex-shrink-0'>
-            <Icon color='#F0F0F0' size={24} />
+            <Icon className='text-base-lightest' size={24} />
           </View>
           <Text numberOfLines={1} className='text-base-lightest text-base leading-6 flex-shrink'>
             {message}

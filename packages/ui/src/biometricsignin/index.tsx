@@ -34,20 +34,20 @@ const BiometricSignIn = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Bi
     const getBiometricIcon = () => {
       switch (biometricType) {
         case 'faceId':
-          return <ScanFace size={20} color='#1B1B1B' />;
+          return <ScanFace size={20} className='text-base-ink fill-base-ink' />;
         case 'touchId':
-          return <Fingerprint size={20} color='#1B1B1B' />;
+          return <Fingerprint size={20} className='text-base-ink' />;
         case 'biometric':
-          return <Scan size={20} color='#1B1B1B' />;
+          return <Scan size={20} className='text-base-ink fill-base-ink' />;
         default:
-          return <ScanFace size={20} color='#1B1B1B' />;
+          return <ScanFace size={20} className='text-base-ink fill-base-ink' />;
       }
     };
 
     return (
       <Pressable onPress={handlePress} testID='biometric-pressable'>
         <View className={cn('flex-row items-center px-[15px] py-3 gap-3 w-[318.88px] h-[50px]', 'border border-base-ink rounded', className)}>
-          <View className='flex-row items-start gap-2 flex-1'>
+          <View className='flex-row items-center gap-2 flex-1'>
             <CheckboxPrimitive.Root
               ref={ref}
               testID='biometric-checkbox'
@@ -57,32 +57,21 @@ const BiometricSignIn = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Bi
               checked={checked}
               onCheckedChange={onCheckedChange}
               {...props}
-              style={{
-                width: 20,
-                height: 20,
-                borderWidth: 2,
-                borderRadius: 2,
-                backgroundColor: checked
+              className={cn(
+                'w-6 h-6 border-2 rounded items-center justify-center flex-shrink-0',
+                checked
                   ? disabled
-                    ? 'rgb(117, 117, 117)' // disabled
-                    : 'rgb(0, 94, 162)' // primary
-                  : 'transparent',
-                borderColor: disabled
-                  ? 'rgb(117, 117, 117)' // disabled
-                  : checked
-                    ? 'rgb(0, 94, 162)' // primary
-                    : 'rgb(27, 27, 27)', // base-ink
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0
-              }}
+                    ? 'bg-disabled border-disabled' // disabled state
+                    : 'bg-primary border-primary' // checked state
+                  : 'bg-transparent border-base-ink' // unchecked state
+              )}
             >
               <CheckboxPrimitive.Indicator>
-                <Check size={12} color='white' strokeWidth={3} />
+                <Check size={12} className='text-white' strokeWidth={3} />
               </CheckboxPrimitive.Indicator>
             </CheckboxPrimitive.Root>
 
-            <Text className='flex-1 text-base leading-5 font-source-sans-pro text-base-ink'>Enable {getBiometricText()} for sign in</Text>
+            <Text className='flex-1 text-base leading-5 text-base-ink'>Enable {getBiometricText()} for sign in</Text>
           </View>
 
           {getBiometricIcon()}
