@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import { Command } from 'commander';
-import { existsSync, promises as fs } from 'fs';
+import { existsSync, promises as fs, mkdir, writeFile } from 'fs';
 import ora from 'ora';
 import path from 'path';
 import { execa } from 'execa';
@@ -68,6 +68,16 @@ export async function runInit(cwd: string) {
     }
     await fs.writeFile(path.join(libDir, 'utils.ts'), templates.UTILS, 'utf8');
 
+    // Create components directory if it doesn't exist
+    const componentsDir = path.join(cwd, 'components');
+    await fs.mkdir(componentsDir, { recursive: true });
+
+    // Create nativewind-remap.ts in components directory
+    await fs.writeFile(
+      path.join(componentsDir, 'nativewind-remap.ts'),
+      templates.NATIVEWIND_REMAP,
+      'utf8'
+    );
     spinner.succeed();
 
     // Then install all dependencies at once
