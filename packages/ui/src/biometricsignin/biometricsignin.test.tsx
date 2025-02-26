@@ -45,6 +45,6 @@ describe('BiometricSignIn', () => {
 
     const checkbox = getByTestId('biometric-checkbox');
     expect(checkbox.props.accessibilityState.checked).toBe(true);
-    expect(checkbox.props.style.backgroundColor).toBe('rgb(0, 94, 162)'); // primary color
+    expect(checkbox.props.className).toContain('bg-primary');
   });
 });
