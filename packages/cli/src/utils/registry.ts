@@ -205,24 +205,27 @@ export const COMPONENT_METADATA: Record<string, ComponentMetadata> = {
 };
 
 export const COMPONENT_TEMPLATES: Record<string, string> = {
-  Alert: `import { ComponentPropsWithoutRef, forwardRef } from 'react';
+  Alert: `import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
 import { View, Text } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { Info } from 'lucide-react-native';
 import { cn } from '@/lib/utils';
-import { AlertCircle, AlertTriangle, CheckCircle2, Info } from 'lucide-react-native';
 
 const alertVariants = cva('flex flex-row items-start p-4 w-[329px]', {
   variants: {
     variant: {
       info: 'bg-info-lighter',
-      warning: 'bg-warning-lighter',
       error: 'bg-error-lighter',
-      success: 'bg-success-lighter'
+      warning: 'bg-warning-lighter',
+      success: 'bg-success-lighter',
+      emergency: 'bg-red-warm-vivid-60'
     },
     alertStyle: {
-      default: 'gap-[15px] min-h-[204px]',
+      default: 'gap-[15px]',
       'no-header': 'gap-[15px]',
-      list: 'gap-[15px] min-h-[204px]'
+      list: 'gap-[15px]',
+      slim: 'gap-3',
+      'no-icon': 'gap-[10px]'
     }
   },
   defaultVariants: {
@@ -231,71 +234,111 @@ const alertVariants = cva('flex flex-row items-start p-4 w-[329px]', {
   }
 });
 
-const alertTextVariants = cva('font-sans text-[22px] leading-[28px] font-bold text-base-ink mb-4', {
+const alertTextVariants = cva('font-sans text-[22px] leading-[28px] font-bold text-base-ink mb-2', {
   variants: {
     variant: {
-      info: 'text-info-dark',
-      warning: 'text-warning-dark',
-      error: 'text-error-dark',
-      success: 'text-success-dark'
+      info: 'text-base-ink',
+      error: 'text-base-ink',
+      warning: 'text-base-ink',
+      success: 'text-base-ink',
+      emergency: 'text-white'
+    },
+    alertStyle: {
+      default: '',
+      'no-header': '',
+      list: '',
+      slim: '',
+      'no-icon': ''
     }
-  },
-  defaultVariants: {
-    variant: 'info'
   }
 });
 
-interface AlertMessage {
-  text: string;
-  link?: string;
-  suffix?: string;
-}
-
-interface AlertContent {
-  title?: string;
-  messages: AlertMessage[];
-}
-
 interface AlertProps extends ComponentPropsWithoutRef<typeof View>, VariantProps<typeof alertVariants> {
-  content: AlertContent;
+  title?: string;
+  description: {
+    title?: string;
+    body?: string;
+    link?: string;
+    messages?: Array<{
+      text: string;
+      link?: string;
+      suffix?: string;
+    }>;
+  };
+  showIcon?: boolean;
   className?: string;
+  variant?: 'info' | 'error' | 'warning' | 'success' | 'emergency';
+  alertStyle?: 'default' | 'no-header' | 'list' | 'slim' | 'no-icon';
 }
 
-const Alert = forwardRef<View, AlertProps>(({ content, variant, alertStyle, className, ...props }, ref) => {
-  const Icon = {
-    info: Info,
-    warning: AlertTriangle,
-    error: AlertCircle,
-    success: CheckCircle2
-  }[variant ?? 'info'];
+const Alert = forwardRef<ElementRef<typeof View>, AlertProps>(
+  ({ className, variant, alertStyle, title, description, showIcon = true, style, ...props }, ref) => {
+    const isNoIcon = alertStyle === 'no-icon';
+    const shouldShowIcon = showIcon && !isNoIcon;
 
-  return (
-    <View ref={ref} className={cn(alertVariants({ variant, alertStyle }), className)} {...props}>
-      <Icon size={32} color="#1B1B1B" />
-      <View className="flex-1">
-        {content.title && (
-          <Text className={alertTextVariants({ variant })}>{content.title}</Text>
+    const renderDescription = () => {
+      if (alertStyle === 'list' && description.messages) {
+        return (
+          <View className='space-y-4'>
+            {description.messages.map((message, index) => (
+              <View key={index} className='flex flex-row items-start'>
+                <Text className={cn('text-base leading-[24px] mr-2', variant === 'emergency' ? 'text-white' : 'text-base-ink')}>•</Text>
+                <Text className={cn('text-base leading-[24px] flex-1', variant === 'emergency' ? 'text-white' : 'text-base-ink')}>
+                  {message.text}
+                  {message.link && <Text className={cn('underline', variant === 'emergency' ? 'text-white' : 'text-primary')}>{message.link}</Text>}
+                  {message.suffix}
+                </Text>
+              </View>
+            ))}
+          </View>
+        );
+      }
+
+      return (
+        <Text className={cn('text-base leading-5', variant === 'emergency' ? 'text-white' : 'text-base-ink')}>
+          {description.title && <Text className='font-bold'>{description.title} </Text>}
+          {description.body}
+          {description.link && <Text className={cn('underline', variant === 'emergency' ? 'text-white' : 'text-primary')}>{description.link}</Text>}
+        </Text>
+      );
+    };
+
+    return (
+      <View
+        ref={ref}
+        testID='alert'
+        accessibilityRole='alert'
+        style={style}
+        className={cn(alertVariants({ variant, alertStyle }), className)}
+        {...props}
+      >
+        {shouldShowIcon && (
+          <View
+            className={cn(
+              'flex-shrink-0 rounded-full flex items-center justify-center',
+              alertStyle === 'slim' ? 'w-6 h-6' : 'w-8 h-8',
+              variant === 'emergency' ? 'bg-transparent' : 'bg-base-ink'
+            )}
+          >
+            <Info
+              className={cn(variant === 'emergency' ? 'text-emergency fill-white' : 'text-white fill-base-ink')}
+              size={alertStyle === 'slim' ? 24 : 32}
+            />
+          </View>
         )}
-        <View className="flex flex-col gap-4">
-          {content.messages.map((message, index) => (
-            <Text key={index} className="font-sans text-base leading-[150%] text-base-ink">
-              {message.text}
-              {message.link && (
-                <Text className="text-primary underline">{message.link}</Text>
-              )}
-              {message.suffix}
-            </Text>
-          ))}
+
+        <View className={cn('flex flex-col', alertStyle === 'no-icon' ? 'w-[297px]' : 'w-[250px]')}>
+          {title && <Text className={alertTextVariants({ alertStyle, variant })}>{title}</Text>}
+          {renderDescription()}
         </View>
       </View>
-    </View>
-  );
-});
+    );
+  }
+);
 
 Alert.displayName = 'Alert';
 
-export { Alert, alertVariants, alertTextVariants };
-export type { AlertProps, AlertContent, AlertMessage };`,
+export { Alert, type AlertProps };`,
 
   Banner: `import { ComponentPropsWithoutRef, ElementRef, forwardRef, ReactNode } from 'react';
 import { View, Text, Pressable } from 'react-native';
@@ -399,57 +442,91 @@ Banner.displayName = 'Banner';
 
 export { Banner, type BannerProps };`,
 
-  BiometricSignIn: `import { useState } from 'react';
-import ReactNativeBiometrics, { BiometryTypes } from 'react-native-biometrics';
-import { Button } from '@/components/Button';
-import { Text } from '@/components/Text';
+  BiometricSignIn: `import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
+import { View, Text, Pressable } from 'react-native';
+import * as CheckboxPrimitive from '@rn-primitives/checkbox';
+import { cn } from '@/lib/utils';
+import { Fingerprint, Scan, ScanFace, Check } from 'lucide-react-native';
 
-interface BiometricSignInProps {
-  onSuccess?: () => void;
-  onError?: (error: Error) => void;
-  buttonText?: string;
+interface BiometricSignInProps extends ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> {
+  biometricType?: 'faceId' | 'touchId' | 'biometric';
+  className?: string;
 }
 
-export function BiometricSignIn({ onSuccess, onError, buttonText = 'Sign in with Biometrics' }: BiometricSignInProps) {
-  const [isLoading, setIsLoading] = useState(false);
-  const rnBiometrics = new ReactNativeBiometrics();
-
-  const handleBiometricAuth = async () => {
-    try {
-      setIsLoading(true);
-      
-      const { available, biometryType } = await rnBiometrics.isSensorAvailable();
-      
-      if (!available) {
-        throw new Error('Biometric authentication is not available');
+const BiometricSignIn = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, BiometricSignInProps>(
+  ({ biometricType = 'faceId', className, disabled, checked, onCheckedChange, ...props }, ref) => {
+    const handlePress = () => {
+      if (!disabled && onCheckedChange) {
+        onCheckedChange(!checked);
       }
+    };
 
-      const { success } = await rnBiometrics.simplePrompt({
-        promptMessage: 'Authenticate to continue',
-        cancelButtonText: 'Cancel'
-      });
-
-      if (success) {
-        onSuccess?.();
+    const getBiometricText = () => {
+      switch (biometricType) {
+        case 'faceId':
+          return 'Face ID';
+        case 'touchId':
+          return 'Touch ID';
+        case 'biometric':
+          return 'Biometric';
+        default:
+          return 'Face ID';
       }
-    } catch (error) {
-      onError?.(error instanceof Error ? error : new Error('Authentication failed'));
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    };
 
-  return (
-    <Button 
-      onPress={handleBiometricAuth}
-      disabled={isLoading}
-      variant="secondary"
-      size="default"
-    >
-      <Text>{buttonText}</Text>
-    </Button>
-  );
-}`,
+    const getBiometricIcon = () => {
+      switch (biometricType) {
+        case 'faceId':
+          return <ScanFace size={20} className="text-base-ink" />;
+        case 'touchId':
+          return <Fingerprint size={20} className="text-base-ink" />;
+        case 'biometric':
+          return <Scan size={20} className="text-base-ink" />;
+        default:
+          return <ScanFace size={20} className="text-base-ink" />;
+      }
+    };
+
+    return (
+      <Pressable onPress={handlePress} testID='biometric-pressable'>
+        <View className={cn('flex-row items-center px-[15px] py-3 gap-3 w-[318.88px] h-[50px]', 'border border-base-ink rounded', className)}>
+          <View className='flex-row items-center gap-2 flex-1'>
+            <CheckboxPrimitive.Root
+              ref={ref}
+              testID='biometric-checkbox'
+              accessibilityRole='checkbox'
+              accessibilityState={{ checked, disabled }}
+              disabled={disabled}
+              checked={checked}
+              onCheckedChange={onCheckedChange}
+              {...props}
+              className={cn(
+                'w-6 h-6 border-2 rounded items-center justify-center flex-shrink-0',
+                checked
+                  ? disabled
+                    ? 'bg-disabled border-disabled' // disabled state
+                    : 'bg-primary border-primary' // checked state
+                  : 'bg-transparent border-base-ink' // unchecked state
+              )}
+            >
+              <CheckboxPrimitive.Indicator>
+                <Check size={12} className='text-white' strokeWidth={3} />
+              </CheckboxPrimitive.Indicator>
+            </CheckboxPrimitive.Root>
+
+            <Text className='flex-1 text-base leading-5 text-base-ink'>Enable {getBiometricText()} for sign in</Text>
+          </View>
+
+          {getBiometricIcon()}
+        </View>
+      </Pressable>
+    );
+  }
+);
+
+BiometricSignIn.displayName = 'BiometricSignIn';
+
+export { BiometricSignIn };`,
 
   Button: `import { ComponentPropsWithoutRef, ElementRef, forwardRef, ReactNode } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -567,43 +644,6 @@ Button.displayName = 'Button';
 export { Button, buttonVariants, buttonTextVariants };
 export type { ButtonProps };`,
 
-  Input: `import React from 'react';
-import { TextInput, type TextInputProps } from 'react-native';
-import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '@/lib/utils';
-
-const inputVariants = cva(
-  'flex-1 h-10 px-3 py-2 rounded-md border-2 border-usa-gray bg-white',
-  {
-    variants: {
-      state: {
-        default: 'border-usa-gray',
-        error: 'border-usa-red',
-        success: 'border-green-500',
-      },
-    },
-    defaultVariants: {
-      state: 'default',
-    },
-  }
-);
-
-export interface InputProps
-  extends TextInputProps,
-    VariantProps<typeof inputVariants> {
-  className?: string;
-}
-
-export function Input({ state, className, ...props }: InputProps) {
-  return (
-    <TextInput
-      className={cn(inputVariants({ state }), className)}
-      placeholderTextColor="#71767A"
-      {...props}
-    />
-  );
-}`,
-
   Checkbox: `import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import * as CheckboxPrimitive from '@rn-primitives/checkbox';
@@ -631,25 +671,14 @@ const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, CheckboxP
             checked={checked}
             onCheckedChange={onCheckedChange}
             {...props}
-            style={{
-              width: 20,
-              height: 20,
-              borderWidth: 2,
-              borderRadius: 2,
-              backgroundColor: checked
+            className={cn(
+              'w-6 h-6 border-2 rounded-sm items-center justify-center flex-shrink-0',
+              checked
                 ? disabled
-                  ? 'rgb(117, 117, 117)' // disabled
-                  : 'rgb(0, 94, 162)' // primary
-                : 'transparent',
-              borderColor: disabled
-                ? 'rgb(117, 117, 117)' // disabled
-                : checked
-                  ? 'rgb(0, 94, 162)' // primary
-                  : 'rgb(27, 27, 27)', // base-ink
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexShrink: 0
-            }}
+                  ? 'bg-disabled border-disabled' // disabled state
+                  : 'bg-primary border-primary'   // checked state
+                : 'bg-transparent border-base-ink' // unchecked state
+            )}
           >
             <CheckboxPrimitive.Indicator>
               <Check size={12} color='white' strokeWidth={3} />
@@ -712,44 +741,33 @@ const CheckboxTile = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Check
     return (
       <Pressable onPress={handlePress} disabled={disabled}>
         <View className={cn(checkboxTileVariants({ variant, state }), 'p-[13px_16px_13px_9px]', className)}>
-          <View className='flex flex-row items-start gap-2'>
-            <CheckboxPrimitive.Root
-              ref={ref}
-              disabled={disabled}
-              checked={checked}
-              onCheckedChange={onCheckedChange}
-              {...props}
-              style={{
-                width: 20,
-                height: 20,
-                borderWidth: 2,
-                borderRadius: 2,
-                backgroundColor: checked
-                  ? disabled
-                    ? 'rgb(117, 117, 117)' // disabled
-                    : 'rgb(0, 94, 162)' // primary
-                  : 'transparent',
-                borderColor: disabled
-                  ? 'rgb(117, 117, 117)' // disabled
-                  : checked
-                    ? 'rgb(0, 94, 162)' // primary
-                    : 'rgb(27, 27, 27)', // base-ink
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0
-              }}
-            >
-              <CheckboxPrimitive.Indicator>
-                <Check size={12} color='white' strokeWidth={3} />
-              </CheckboxPrimitive.Indicator>
-            </CheckboxPrimitive.Root>
+          <View className='flex flex-row gap-2'>
+            <View className='w-5'>
+              <CheckboxPrimitive.Root
+                ref={ref}
+                disabled={disabled}
+                checked={checked}
+                onCheckedChange={onCheckedChange}
+                {...props}
+                className={cn(
+                  'w-5 h-5 border-2 rounded items-center justify-center flex-shrink-0',
+                  checked ? (disabled ? 'bg-disabled border-disabled' : 'bg-primary border-primary') : 'bg-transparent border-base-ink'
+                )}
+              >
+                <CheckboxPrimitive.Indicator>
+                  <Check size={12} className='text-white' strokeWidth={3} />
+                </CheckboxPrimitive.Indicator>
+              </CheckboxPrimitive.Root>
+            </View>
 
-            <Text className={cn('flex-1 text-base leading-5 font-source-sans-pro', disabled ? 'text-disabled' : 'text-base-ink')}>{label}</Text>
+            <View className='flex-1 flex-col gap-1.5'>
+              <Text className={cn('text-base leading-5 font-source-sans-pro', disabled ? 'text-disabled' : 'text-base-ink')}>{label}</Text>
+
+              {description && (
+                <Text className={cn('text-base leading-5 font-source-sans-pro', disabled ? 'text-disabled' : 'text-base-ink')}>{description}</Text>
+              )}
+            </View>
           </View>
-
-          {description && (
-            <Text className={cn('pl-7 text-base leading-5 font-source-sans-pro', disabled ? 'text-disabled' : 'text-base-ink')}>{description}</Text>
-          )}
         </View>
       </Pressable>
     );
@@ -798,8 +816,8 @@ export type { ButtonGroupProps };`,
 import { View, Image } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/Button';
-import { Text } from '@/components/Text';
+import { Button } from '../Button/Button';
+import { Text } from '../Text/Text';
 
 const cardVariants = cva(
   'flex flex-col justify-between items-start bg-white border border-base-lighter rounded-[4px] w-[329px] min-h-[471px] mx-auto',
@@ -824,6 +842,7 @@ interface CardProps extends ComponentPropsWithoutRef<typeof View>, VariantProps<
   mediaUrl?: string;
   showMedia?: boolean;
   className?: string;
+  variant?: 'default' | 'media-first' | 'inset';
 }
 
 const Card = forwardRef<View, CardProps>(({ title, description, buttonText, mediaUrl, showMedia = false, variant, className, ...props }, ref) => {
@@ -882,8 +901,7 @@ const Card = forwardRef<View, CardProps>(({ title, description, buttonText, medi
 
 Card.displayName = 'Card';
 
-export { Card };
-export type { CardProps };`,
+export { Card };`,
 
   Icon: `import { View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
@@ -915,22 +933,22 @@ export const Icon = ({ name, size = 24, color = '#000000' }: IconProps) => {
   Link: `import { ComponentPropsWithoutRef, forwardRef, useState } from 'react';
 import { Text, Pressable, View } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '@/lib/utils';
+import { cn } from '../../lib/utils';
 import { ExternalLink } from 'lucide-react-native';
 
 const linkVariants = cva('font-source-sans-pro text-base leading-[162%] underline', {
   variants: {
     variant: {
       default: 'text-primary',
-      visited: 'text-[#54278F]', // violet-vivid-70v
-      'dark-background': 'text-[#73B3E7]' // primary-light
+      visited: 'text-violet-vivid-70',
+      'dark-background': 'text-primary-light'
     },
     external: {
       true: 'flex-row items-center gap-0.5',
       false: ''
     },
     focus: {
-      true: 'outline-none ring-4 ring-[#2491FF] rounded',
+      true: 'outline-none ring-4 ring-focus-ring rounded',
       false: ''
     }
   },
@@ -946,6 +964,9 @@ interface LinkProps extends ComponentPropsWithoutRef<typeof Pressable>, VariantP
   label: string;
   className?: string;
   visited?: boolean;
+  variant?: 'default' | 'visited' | 'dark-background';
+  external?: boolean;
+  focus?: boolean;
 }
 
 const Link = forwardRef<View, LinkProps>(({ href, label, className, external, visited, focus, ...props }, ref) => {
@@ -963,7 +984,12 @@ const Link = forwardRef<View, LinkProps>(({ href, label, className, external, vi
       {({ pressed }) => (
         <View className={cn(linkVariants({ variant, external, focus: pressed || isPressed || focus }))}>
           <Text className={linkVariants({ variant, external, focus: pressed || isPressed || focus })}>{label}</Text>
-          {external && <ExternalLink size={10} color={variant === 'dark-background' ? '#73B3E7' : visited ? '#54278F' : '#005EA2'} />}
+          {external && (
+            <ExternalLink
+              size={10}
+              className={cn(variant === 'dark-background' ? 'text-primary-light' : visited ? 'text-violet-vivid-70' : 'text-primary')}
+            />
+          )}
         </View>
       )}
     </Pressable>
@@ -1058,55 +1084,76 @@ Pagination.displayName = 'Pagination';
 
 export { Pagination };`,
 
-  RadioButton: `import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
-import { View, Text, Pressable } from 'react-native';
+  RadioButton: `import { ComponentPropsWithoutRef, ElementRef, forwardRef, useContext, createContext } from 'react';
+import { View, Text, Pressable, GestureResponderEvent } from 'react-native';
 import * as RadioGroupPrimitive from '@rn-primitives/radio-group';
 import { cn } from '@/lib/utils';
 
+const RadioContext = createContext<{ value?: string }>({});
+
 interface RadioButtonProps extends ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item> {
   label: string;
+  className?: string;
 }
 
-const RadioButton = forwardRef<ElementRef<typeof RadioGroupPrimitive.Item>, RadioButtonProps>(
-  ({ label, disabled, value, ...props }, ref) => {
+const RadioGroup = forwardRef<ElementRef<typeof RadioGroupPrimitive.Root>, ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>>(
+  ({ ...props }, ref) => {
     return (
-      <RadioGroupPrimitive.Item
-        ref={ref}
-        value={value}
-        disabled={disabled}
-        className='flex flex-row items-start gap-2 w-[329px] h-5'
-        {...props}
-      >
-        <View
-          className={cn(
-            'w-5 h-5 rounded-full border-2',
-            disabled
-              ? 'border-disabled bg-white'
-              : props.checked
-              ? 'border-primary bg-white'
-              : 'border-base-ink bg-white'
-          )}
-        >
-          {props.checked && (
-            <View
-              className={cn(
-                'w-3 h-3 rounded-full m-[2px]',
-                disabled ? 'bg-disabled' : 'bg-primary'
-              )}
-            />
-          )}
-        </View>
-        <Text className={cn('flex-1 text-base leading-5', disabled ? 'text-disabled' : 'text-base-ink')}>
-          {label}
-        </Text>
-      </RadioGroupPrimitive.Item>
+      <RadioContext.Provider value={{ value: props.value }}>
+        <RadioGroupPrimitive.Root ref={ref} {...props}>
+          <View className='flex flex-col gap-3'>{props.children}</View>
+        </RadioGroupPrimitive.Root>
+      </RadioContext.Provider>
     );
   }
 );
 
-RadioButton.displayName = 'RadioButton';
+const RadioButton = forwardRef<ElementRef<typeof RadioGroupPrimitive.Item>, RadioButtonProps>(({ label, className, ...props }, ref) => {
+  const labelId = \`\${props.value}-label\`;
+  const { value } = useContext(RadioContext);
+  const isSelected = value === props.value;
 
-export { RadioButton };`,
+  const handlePress = (event: GestureResponderEvent) => {
+    if (!props.disabled && props.onPress) {
+      props.onPress(event);
+    }
+  };
+
+  return (
+    <Pressable
+      accessibilityRole='radio'
+      accessibilityState={{ checked: isSelected, disabled: props.disabled || false }}
+      onPress={handlePress}
+      className='flex flex-row items-center gap-2 min-h-[44px] w-[329px] px-4'
+    >
+      <View className='relative w-5 h-5'>
+        <RadioGroupPrimitive.Item
+          ref={ref}
+          aria-labelledby={labelId}
+          testID={\`radio-\${props.value}\`}
+          className={cn(
+            'absolute left-0 top-0 w-5 h-5 rounded-full border-2 flex items-center justify-center bg-white',
+            props.disabled ? 'border-disabled' : isSelected ? 'border-primary' : 'border-base-ink'
+          )}
+          {...props}
+        >
+          <RadioGroupPrimitive.Indicator forceMount className='w-full h-full flex items-center justify-center'>
+            <View className={cn('w-3.5 h-3.5 rounded-full', isSelected ? (props.disabled ? 'bg-disabled' : 'bg-primary') : 'bg-transparent')} />
+          </RadioGroupPrimitive.Indicator>
+        </RadioGroupPrimitive.Item>
+      </View>
+
+      <Text nativeID={labelId} className={cn('flex-1 text-base leading-5', props.disabled ? 'text-disabled' : 'text-base-ink')}>
+        {label}
+      </Text>
+    </Pressable>
+  );
+});
+
+RadioButton.displayName = 'RadioButton';
+RadioGroup.displayName = 'RadioGroup';
+
+export { RadioGroup, RadioButton };`,
 
   RadioTile: `import { ComponentPropsWithoutRef, ElementRef, forwardRef, useContext, createContext } from 'react';
 import { View, Text, Pressable, GestureResponderEvent } from 'react-native';
@@ -1257,7 +1304,7 @@ const Snackbar = forwardRef<ElementRef<typeof View>, SnackbarProps & { isVisible
         <View ref={ref} testID='snackbar-container' className={cn(snackbarVariants({ layout }), className)}>
           <View className='flex flex-row gap-2 mb-3'>
             <View className='flex items-center justify-center h-6'>
-              <Icon color='#F0F0F0' size={24} />
+              <Icon className='text-base-lightest' size={24} />
             </View>
             <Text className='text-base-lightest text-base leading-6 flex-1 flex-wrap'>{message}</Text>
           </View>
@@ -1282,7 +1329,7 @@ const Snackbar = forwardRef<ElementRef<typeof View>, SnackbarProps & { isVisible
       <View ref={ref} testID='snackbar-container' className={cn(snackbarVariants({ layout }), className)}>
         <View className='flex flex-row items-center gap-2 flex-shrink min-w-0 max-w-[171px]'>
           <View className='flex items-center justify-center h-6 flex-shrink-0'>
-            <Icon color='#F0F0F0' size={24} />
+            <Icon className='text-base-lightest' size={24} />
           </View>
           <Text numberOfLines={1} className='text-base-lightest text-base leading-6 flex-shrink'>
             {message}
@@ -1412,6 +1459,7 @@ const tagTextVariants = cva('text-white font-normal text-center', {
 interface TagProps extends ComponentPropsWithoutRef<typeof View>, VariantProps<typeof tagVariants> {
   label: string;
   className?: string;
+  size?: 'default' | 'big';
 }
 
 const Tag = forwardRef<View, TagProps>(({ label, size, className, ...props }, ref) => {
@@ -1439,135 +1487,177 @@ const Text = forwardRef<TextRef, SlottableTextProps>(({ className, asChild = fal
   const Component = asChild ? Slot.Text : RNText;
   return <Component className={cn('text-base text-foreground web:select-text', textClass, className)} ref={ref} {...props} />;
 });
-
 Text.displayName = 'Text';
 
 export { Text, TextClassContext };`,
 
   Textarea: `import { ComponentPropsWithoutRef, forwardRef } from 'react';
-import { TextInput, View, Text } from 'react-native';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { View, TextInput, Text } from 'react-native';
 import { cn } from '@/lib/utils';
 
-const textareaVariants = cva(
-  'flex flex-col w-[329px] rounded-[2px] border-2 bg-white px-4 py-2 text-base leading-[162%] text-base-ink placeholder:text-base-ink/50',
-  {
-    variants: {
-      state: {
-        default: 'border-base-ink',
-        error: 'border-error',
-        success: 'border-success',
-        disabled: 'border-disabled bg-disabled-light'
-      }
-    },
-    defaultVariants: {
-      state: 'default'
-    }
-  }
-);
-
-interface TextareaProps extends ComponentPropsWithoutRef<typeof TextInput>, VariantProps<typeof textareaVariants> {
+type TextAreaProps = ComponentPropsWithoutRef<typeof TextInput> & {
   label?: string;
-  error?: string;
-  hint?: string;
+  helperText?: string;
+  error?: boolean;
   className?: string;
-  characterCount?: boolean;
-}
+  maxLength?: number;
+  value?: string;
+  disabled?: boolean;
+};
 
-const Textarea = forwardRef<TextInput, TextareaProps>(
-  ({ label, error, hint, className, state = 'default', characterCount, maxLength, value, ...props }, ref) => {
-    const currentLength = value?.toString().length || 0;
+const TextArea = forwardRef<ElementRef<typeof TextInput>, TextAreaProps>(
+  ({ className, label, helperText, error, maxLength, value = '', disabled, ...props }, ref) => {
+    const characterCount = value.toString().length;
 
     return (
-      <View className='flex flex-col gap-1'>
-        {label && (
-          <Text className='text-base leading-5 text-base-ink font-source-sans-pro'>{label}</Text>
-        )}
-        {hint && (
-          <Text className='text-base leading-5 text-base-ink font-source-sans-pro'>{hint}</Text>
-        )}
+      <View className='flex flex-col gap-2 w-[329px]'>
+        {label && <Text className='text-base-ink text-base leading-5'>{label}</Text>}
+
+        {helperText && <Text className={cn('text-base leading-5', error ? 'text-error-dark' : 'text-gray-50')}>{helperText}</Text>}
+
         <TextInput
           ref={ref}
-          multiline
-          maxLength={maxLength}
-          value={value}
           className={cn(
-            textareaVariants({ state }),
-            props.disabled && 'text-disabled border-disabled bg-disabled-light',
+            'min-h-[160px] w-full rounded-md border border-base-ink bg-white px-3 py-2',
+            'text-base leading-6 text-base-ink',
+            'placeholder:text-gray-50',
+            error && 'border-error-dark',
+            disabled && 'opacity-50 bg-disabled-lighter',
             className
           )}
+          multiline={true}
+          numberOfLines={4}
+          textAlignVertical='top'
+          placeholderTextColor='#757575'
+          editable={!disabled}
+          value={value}
+          maxLength={maxLength}
           {...props}
         />
-        <View className='flex flex-row justify-between'>
-          {error && (
-            <Text className='text-base leading-5 text-error font-source-sans-pro'>{error}</Text>
-          )}
-          {characterCount && maxLength && (
-            <Text className='text-base leading-5 text-base-ink font-source-sans-pro'>
-              {currentLength}/{maxLength}
-            </Text>
-          )}
-        </View>
+
+        {maxLength && (
+          <Text className='text-gray-50 text-base leading-5 text-right'>
+            {characterCount}/{maxLength}
+          </Text>
+        )}
       </View>
     );
   }
 );
 
-Textarea.displayName = 'Textarea';
+TextArea.displayName = 'TextArea';
+
+export { TextArea, type TextAreaProps };
+';
 
 export { Textarea };`,
 
-  TextInput: `import { ComponentPropsWithoutRef, forwardRef } from 'react';
-import { TextInput as RNTextInput, View, Text } from 'react-native';
+  TextInput: `import { ComponentPropsWithoutRef, ElementRef, forwardRef, useState } from 'react';
+import { View, TextInput as RNTextInput, Text } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
-const textInputVariants = cva(
-  'flex flex-col w-[329px] rounded-[2px] border-2 bg-white px-4 py-2 text-base leading-[162%] text-base-ink placeholder:text-base-ink/50',
-  {
-    variants: {
-      state: {
-        default: 'border-base-ink',
-        error: 'border-error',
-        success: 'border-success',
-        disabled: 'border-disabled bg-disabled-light'
-      }
+const inputVariants = cva(['flex h-10 w-[329px] rounded-none bg-white', 'font-source-sans-pro text-base', 'text-base-ink placeholder:text-gray-50'], {
+  variants: {
+    variant: {
+      default: 'px-[9px]',
+      prefix: 'pl-[41px] pr-[9px]',
+      suffix: 'pl-[9px] pr-[45px]'
     },
-    defaultVariants: {
-      state: 'default'
+    state: {
+      default: 'border border-base-ink',
+      focus: 'border-4 border-focus-ring',
+      error: 'border-4 border-error-dark',
+      success: 'border-4 border-success',
+      disabled: 'bg-disabled-lighter border border-base-dark opacity-50'
     }
+  },
+  defaultVariants: {
+    variant: 'default',
+    state: 'default'
   }
-);
+});
 
-interface TextInputProps extends ComponentPropsWithoutRef<typeof RNTextInput>, VariantProps<typeof textInputVariants> {
-  label?: string;
-  error?: string;
-  hint?: string;
-  className?: string;
-}
+type TextInputProps = ComponentPropsWithoutRef<typeof RNTextInput> &
+  VariantProps<typeof inputVariants> & {
+    label?: string;
+    helperText?: string;
+    errorMessage?: string;
+    required?: boolean;
+    className?: string;
+    suffix?: string;
+    prefix?: React.ReactNode;
+  };
 
-const TextInput = forwardRef<RNTextInput, TextInputProps>(
-  ({ label, error, hint, className, state = 'default', ...props }, ref) => {
+const TextInput = forwardRef<ElementRef<typeof RNTextInput>, TextInputProps>(
+  (
+    { className, label, helperText = 'Helper text', errorMessage, required = true, variant = 'default', state = 'default', suffix, prefix, ...props },
+    ref
+  ) => {
+    const [isFocused, setIsFocused] = useState(false);
+    const showError = state === 'error';
+    const isDisabled = state === 'disabled';
+    const currentState = isFocused ? 'focus' : state;
+
     return (
-      <View className='flex flex-col gap-1'>
-        {label && (
-          <Text className='text-base leading-5 text-base-ink font-source-sans-pro'>{label}</Text>
-        )}
-        {hint && (
-          <Text className='text-base leading-5 text-base-ink font-source-sans-pro'>{hint}</Text>
-        )}
-        <RNTextInput
-          ref={ref}
-          className={cn(
-            textInputVariants({ state }),
-            props.disabled && 'text-disabled border-disabled bg-disabled-light',
-            className
-          )}
-          {...props}
-        />
-        {error && (
-          <Text className='text-base leading-5 text-error font-source-sans-pro'>{error}</Text>
-        )}
+      <View className='relative flex flex-row'>
+        {showError && <View className='absolute left-0 top-0 h-full w-[4px] bg-error-dark' />}
+
+        <View className='flex flex-col gap-2 ml-5 flex-1'>
+          <View className='flex flex-row gap-1'>
+            <Text className='text-base-ink text-base leading-5 font-source-sans-pro'>{label}</Text>
+            {required && <Text className='text-error-dark text-base leading-5 font-source-sans-pro'>*</Text>}
+          </View>
+
+          {helperText && <Text className='text-gray-50 text-base leading-5 font-source-sans-pro'>{helperText}</Text>}
+
+          {showError && errorMessage && <Text className='text-error-dark text-base leading-5 font-source-sans-pro font-bold'>{errorMessage}</Text>}
+
+          <View className='relative flex flex-row items-center'>
+            {variant === 'prefix' && prefix && (
+              <View className='absolute left-[9px] top-[8px] bottom-[8px] flex items-center justify-center z-10'>{prefix}</View>
+            )}
+
+            <RNTextInput
+              ref={ref}
+              testID='textbox'
+              accessibilityRole='text'
+              accessibilityLabel={label}
+              accessibilityState={{ disabled: isDisabled }}
+              className={cn(inputVariants({ variant, state: currentState }), 'text-base-ink font-sans', className)}
+              placeholderTextColor='#757575'
+              style={{
+                height: 40,
+                paddingTop: 0,
+                paddingBottom: 0,
+                paddingRight: variant === 'suffix' ? 45 : 9,
+                textAlignVertical: 'center',
+                includeFontPadding: false,
+                fontSize: 16
+              }}
+              editable={!isDisabled}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+              {...props}
+            />
+
+            {variant === 'suffix' && suffix && (
+              <View className='absolute right-10 top-0 bottom-0 flex items-center justify-center'>
+                <Text
+                  className='text-gray-50'
+                  style={{
+                    fontSize: 16,
+                    lineHeight: 24,
+                    textAlignVertical: 'center',
+                    includeFontPadding: false
+                  }}
+                >
+                  {suffix}
+                </Text>
+              </View>
+            )}
+          </View>
+        </View>
       </View>
     );
   }
@@ -1575,74 +1665,80 @@ const TextInput = forwardRef<RNTextInput, TextInputProps>(
 
 TextInput.displayName = 'TextInput';
 
-export { TextInput };`,
+export { TextInput, type TextInputProps };`,
 
   Toggle: `import { ComponentPropsWithoutRef, forwardRef } from 'react';
-import { Pressable, View, Text } from 'react-native';
+import { View } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
+import * as TogglePrimitive from '@rn-primitives/toggle';
 
-const toggleVariants = cva('flex flex-row items-center', {
+const toggleVariants = cva('relative flex items-center justify-center', {
   variants: {
     size: {
-      default: 'gap-2',
-      large: 'gap-3'
+      default: 'w-[51px] h-[31px]'
+    },
+    state: {
+      on: 'bg-primary',
+      off: 'bg-gray-cool-20',
+      disabled: 'bg-gray-cool-20 opacity-50'
     }
   },
   defaultVariants: {
-    size: 'default'
+    size: 'default',
+    state: 'off'
   }
 });
 
-interface ToggleProps extends Omit<ComponentPropsWithoutRef<typeof Pressable>, 'onPress'>, VariantProps<typeof toggleVariants> {
-  checked: boolean;
-  onCheckedChange: (checked: boolean) => void;
-  label?: string;
-  disabled?: boolean;
-  className?: string;
-}
+const knobVariants = cva('absolute w-[27px] h-[27px] bg-white rounded-full', {
+  variants: {
+    state: {
+      on: 'left-[22px] top-[2px]',
+      off: 'left-[2px] top-[2px]',
+      disabled: 'left-[2px] top-[2px]'
+    }
+  },
+  defaultVariants: {
+    state: 'off'
+  }
+});
 
-const Toggle = forwardRef<View, ToggleProps>(
-  ({ checked, onCheckedChange, label, disabled, size, className, ...props }, ref) => {
+type ToggleProps = Omit<ComponentPropsWithoutRef<typeof TogglePrimitive.Root>, 'asChild'> &
+  VariantProps<typeof toggleVariants> & {
+    className?: string;
+  };
+
+const Toggle = forwardRef<ElementRef<typeof TogglePrimitive.Root>, ToggleProps>(
+  ({ className, size, disabled, pressed, onPressedChange, ...props }, ref) => {
+    const state = disabled ? 'disabled' : pressed ? 'on' : 'off';
+
     return (
-      <Pressable
-        ref={ref}
-        onPress={() => !disabled && onCheckedChange(!checked)}
-        className={cn(toggleVariants({ size }), className)}
-        {...props}
-      >
-        <View
-          className={cn(
-            'w-[51px] h-8 rounded-full p-1',
-            checked ? 'bg-primary' : 'bg-disabled',
-            disabled && 'opacity-50'
-          )}
+      <View testID='toggle-container' className={cn(toggleVariants({ size, state }), 'rounded-full', className)}>
+        <TogglePrimitive.Root
+          ref={ref}
+          pressed={pressed}
+          onPressedChange={onPressedChange}
+          disabled={disabled}
+          accessibilityRole='switch'
+          accessibilityState={{ checked: pressed, disabled }}
+          testID='toggle'
+          style={{
+            width: 51,
+            height: 31,
+            borderRadius: 9999
+          }}
+          {...props}
         >
-          <View
-            className={cn(
-              'w-6 h-6 rounded-full bg-white transition-all',
-              checked ? 'translate-x-[19px]' : 'translate-x-0'
-            )}
-          />
-        </View>
-        {label && (
-          <Text
-            className={cn(
-              'text-base leading-5 font-source-sans-pro',
-              disabled ? 'text-disabled' : 'text-base-ink'
-            )}
-          >
-            {label}
-          </Text>
-        )}
-      </Pressable>
+          <View className={cn(knobVariants({ state }))} />
+        </TogglePrimitive.Root>
+      </View>
     );
   }
 );
 
 Toggle.displayName = 'Toggle';
 
-export { Toggle };`
+export { Toggle, type ToggleProps };`
 };
 
 export async function getComponentTemplate(name: string): Promise<string> {

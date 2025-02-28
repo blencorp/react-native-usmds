@@ -1,0 +1,161 @@
+---
+title: Icon
+description: Icons are visual symbols used to represent ideas, objects, or actions.
+---
+
+## Installation
+
+```bash
+npx usmds add icon
+```
+
+## Usage
+
+```tsx
+import { Icon } from '@components/Icon';
+
+<Icon name="accessibility-new" size={24} color="#000000" />
+```
+
+## Props
+
+### Icon
+
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>name</td>
+      <td>`IconName` (see available icons below)</td>
+      <td>-</td>
+      <td>The name of the icon to display.</td>
+    </tr>
+    <tr>
+      <td>size</td>
+      <td>`number`</td>
+      <td>`24`</td>
+      <td>The width and height of the icon in pixels.</td>
+    </tr>
+    <tr>
+      <td>color</td>
+      <td>`string`</td>
+      <td>`'#000000'`</td>
+      <td>The color of the icon.</td>
+    </tr>
+  </tbody>
+</table>
+
+## Examples
+
+### Basic Usage
+
+```tsx
+<Icon name="accessibility-new" />
+```
+
+### Custom Size
+
+```tsx
+<Icon name="accessibility-new" size={32} />
+```
+
+### Custom Color
+
+```tsx
+<Icon name="accessibility-new" color="#FF0000" />
+```
+
+### Different Sizes
+
+```tsx
+<View style={{ flexDirection: 'row', gap: 20, alignItems: 'center' }}>
+  <Icon name="accessibility-new" size={16} />
+  <Icon name="accessibility-new" size={24} />
+  <Icon name="accessibility-new" size={32} />
+  <Icon name="accessibility-new" size={48} />
+</View>
+```
+
+### Different Colors
+
+```tsx
+<View style={{ flexDirection: 'row', gap: 20, alignItems: 'center' }}>
+  <Icon name="accessibility-new" color="#000000" />
+  <Icon name="accessibility-new" color="#FF0000" />
+  <Icon name="accessibility-new" color="#00FF00" />
+  <Icon name="accessibility-new" color="#0000FF" />
+</View>
+```
+
+## Available Icons
+
+The following icons are available:
+
+- accessibility-new
+- autorenew
+- attach_money
+- attach_file
+- assessment
+- arrow_upward
+- arrow_forward
+- arrow_drop_up
+- arrow_drop_down
+- arrow_downward
+- arrow_back
+- api
+- announcement
+- alternate_email
+- alarm
+- remove_circle
+- add
+- add_circle
+- add_circle_outline
+- account_circle
+- account_box
+- account_balance
+- accessible_forward
+- content_copy
+- contact_page
+- construction_worker
+- construction
+- connect_without_contact
+- comment
+- code
+- cloud
+- clothes
+- closed_caption
+- close
+- clean_hands
+- checkroom
+- check
+- check_circle
+- check_circle_outline
+- check_box_outline_blank
+- chat
+- cancel
+- camping
+- campaign
+- calendar_today
+- backpack
+- bathtub
+- build
+- bedding
+- bookmark
+- bug_report
+
+More will be added soon.
+
+## Accessibility
+
+The Icon component:
+- Uses SVG for crisp rendering at any size
+- Supports color customization for proper contrast
+- Should be accompanied by descriptive text or labels when used in interactive elements
+- Maintains consistent sizing for visual harmony

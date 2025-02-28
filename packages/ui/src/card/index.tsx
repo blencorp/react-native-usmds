@@ -28,6 +28,7 @@ interface CardProps extends ComponentPropsWithoutRef<typeof View>, VariantProps<
   mediaUrl?: string;
   showMedia?: boolean;
   className?: string;
+  variant?: 'default' | 'media-first' | 'inset';
 }
 
 const Card = forwardRef<View, CardProps>(({ title, description, buttonText, mediaUrl, showMedia = false, variant, className, ...props }, ref) => {

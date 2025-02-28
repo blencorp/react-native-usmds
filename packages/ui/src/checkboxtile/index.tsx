@@ -43,44 +43,33 @@ const CheckboxTile = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Check
     return (
       <Pressable onPress={handlePress} disabled={disabled}>
         <View className={cn(checkboxTileVariants({ variant, state }), 'p-[13px_16px_13px_9px]', className)}>
-          <View className='flex flex-row items-start gap-2'>
-            <CheckboxPrimitive.Root
-              ref={ref}
-              disabled={disabled}
-              checked={checked}
-              onCheckedChange={onCheckedChange}
-              {...props}
-              style={{
-                width: 20,
-                height: 20,
-                borderWidth: 2,
-                borderRadius: 2,
-                backgroundColor: checked
-                  ? disabled
-                    ? 'rgb(117, 117, 117)' // disabled
-                    : 'rgb(0, 94, 162)' // primary
-                  : 'transparent',
-                borderColor: disabled
-                  ? 'rgb(117, 117, 117)' // disabled
-                  : checked
-                    ? 'rgb(0, 94, 162)' // primary
-                    : 'rgb(27, 27, 27)', // base-ink
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0
-              }}
-            >
-              <CheckboxPrimitive.Indicator>
-                <Check size={12} color='white' strokeWidth={3} />
-              </CheckboxPrimitive.Indicator>
-            </CheckboxPrimitive.Root>
+          <View className='flex flex-row gap-2'>
+            <View className='w-5'>
+              <CheckboxPrimitive.Root
+                ref={ref}
+                disabled={disabled}
+                checked={checked}
+                onCheckedChange={onCheckedChange}
+                {...props}
+                className={cn(
+                  'w-5 h-5 border-2 rounded items-center justify-center flex-shrink-0',
+                  checked ? (disabled ? 'bg-disabled border-disabled' : 'bg-primary border-primary') : 'bg-transparent border-base-ink'
+                )}
+              >
+                <CheckboxPrimitive.Indicator>
+                  <Check size={12} className='text-white' strokeWidth={3} />
+                </CheckboxPrimitive.Indicator>
+              </CheckboxPrimitive.Root>
+            </View>
 
-            <Text className={cn('flex-1 text-base leading-5 font-source-sans-pro', disabled ? 'text-disabled' : 'text-base-ink')}>{label}</Text>
+            <View className='flex-1 flex-col gap-1.5'>
+              <Text className={cn('text-base leading-5 font-source-sans-pro', disabled ? 'text-disabled' : 'text-base-ink')}>{label}</Text>
+
+              {description && (
+                <Text className={cn('text-base leading-5 font-source-sans-pro', disabled ? 'text-disabled' : 'text-base-ink')}>{description}</Text>
+              )}
+            </View>
           </View>
-
-          {description && (
-            <Text className={cn('pl-7 text-base leading-5 font-source-sans-pro', disabled ? 'text-disabled' : 'text-base-ink')}>{description}</Text>
-          )}
         </View>
       </Pressable>
     );

@@ -1,0 +1,161 @@
+---
+title: Checkbox
+description: Checkboxes allow users to select one or more items from a list of options.
+---
+
+## Installation
+
+```bash
+npx usmds add checkbox
+```
+
+## Usage
+
+```tsx
+import { Checkbox } from '@components/Checkbox';
+import { useState } from 'react';
+
+function App() {
+  const [checked, setChecked] = useState(false);
+
+  return (
+    <Checkbox 
+      label="Checkbox item"
+      checked={checked}
+      onCheckedChange={setChecked}
+    />
+  );
+}
+```
+
+## Props
+
+### Checkbox
+
+Extends `CheckboxPrimitive.Root` props.
+
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>label</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>The text label for the checkbox.</td>
+    </tr>
+    <tr>
+      <td>checked</td>
+      <td>`boolean`</td>
+      <td>`false`</td>
+      <td>The controlled checked state of the checkbox.</td>
+    </tr>
+    <tr>
+      <td>onCheckedChange</td>
+      <td>`(checked: boolean) => void`</td>
+      <td>-</td>
+      <td>Callback that fires when the checked state changes.</td>
+    </tr>
+    <tr>
+      <td>disabled</td>
+      <td>`boolean`</td>
+      <td>`false`</td>
+      <td>When true, prevents the user from interacting with the checkbox.</td>
+    </tr>
+    <tr>
+      <td>className</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>Additional Tailwind classes to apply.</td>
+    </tr>
+  </tbody>
+</table>
+
+## Examples
+
+### Default State
+
+```tsx
+<Checkbox 
+  label="Checkbox item" 
+  checked={false} 
+  onCheckedChange={setChecked} 
+/>
+```
+
+### Checked State
+
+```tsx
+<Checkbox 
+  label="Checkbox item" 
+  checked={true} 
+  onCheckedChange={setChecked} 
+/>
+```
+
+### Disabled States
+
+```tsx
+// Disabled unchecked
+<Checkbox 
+  label="Disabled unchecked" 
+  checked={false} 
+  disabled 
+  onCheckedChange={() => {}} 
+/>
+
+// Disabled checked
+<Checkbox 
+  label="Disabled checked" 
+  checked={true} 
+  disabled 
+  onCheckedChange={() => {}} 
+/>
+```
+
+## Styling
+
+The Checkbox component uses Tailwind CSS classes for styling. Default styling includes:
+
+- Container dimensions: 329px × 20px
+- Checkbox dimensions: 24px × 24px
+- 2px border width
+- Rounded corners (2px)
+- Primary color when checked
+- Disabled state styling
+- 8px gap between checkbox and label
+
+## State Management
+
+The component uses controlled state pattern:
+
+```tsx
+import { useState } from 'react';
+
+function CheckboxExample() {
+  const [checked, setChecked] = useState(false);
+
+  return (
+    <Checkbox
+      label="Controlled checkbox"
+      checked={checked}
+      onCheckedChange={setChecked}
+    />
+  );
+}
+```
+
+## Accessibility
+
+The Checkbox component:
+- Uses `accessibilityRole="checkbox"` for proper semantic structure
+- Supports keyboard navigation
+- Maintains WCAG color contrast requirements
+- Provides appropriate `accessibilityState` for checked and disabled states
+- Includes clear, descriptive text labels

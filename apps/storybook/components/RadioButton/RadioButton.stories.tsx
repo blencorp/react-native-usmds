@@ -16,9 +16,10 @@ type Story = StoryObj<typeof RadioButton>;
 
 export const AllStates: Story = {
   render: () => {
+    const [value, setValue] = useState('2');
     return (
-      <View className='p-5 border border-dashed border-[#7B61FF] rounded'>
-        <RadioGroup value='2' onValueChange={() => {}}>
+      <View className='border border-dashed border-[#7B61FF] rounded'>
+        <RadioGroup value={value} onValueChange={setValue}>
           <RadioButton value='1' label='Unselected' />
           <RadioButton value='2' label='Selected' />
         </RadioGroup>
@@ -36,13 +37,11 @@ export const WithRadioGroup: Story = {
   render: () => {
     const [value, setValue] = useState('2');
     return (
-      <View className='p-5'>
-        <RadioGroup value={value} onValueChange={setValue}>
-          <RadioButton value='1' label='Option 1' />
-          <RadioButton value='2' label='Option 2' />
-          <RadioButton value='3' label='Option 3' />
-        </RadioGroup>
-      </View>
+      <RadioGroup value={value} onValueChange={setValue}>
+        <RadioButton value='1' label='Option 1' />
+        <RadioButton value='2' label='Option 2' />
+        <RadioButton value='3' label='Option 3' />
+      </RadioGroup>
     );
   }
 };

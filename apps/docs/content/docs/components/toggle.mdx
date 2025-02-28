@@ -1,0 +1,133 @@
+---
+title: Toggle
+description: Toggle is a switch that allows users to turn a setting on or off.
+---
+
+## Installation
+
+```bash
+npx usmds add toggle
+```
+
+## Usage
+
+```tsx
+import { Toggle } from '@components/Toggle';
+import { useState } from 'react';
+
+function App() {
+  const [pressed, setPressed] = useState(false);
+  
+  return (
+    <Toggle 
+      pressed={pressed} 
+      onPressedChange={setPressed} 
+    />
+  );
+}
+```
+
+## Props
+
+### Toggle
+
+Extends `TogglePrimitive.Root` props.
+
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>pressed</td>
+      <td>`boolean`</td>
+      <td>`false`</td>
+      <td>The controlled pressed state of the toggle.</td>
+    </tr>
+    <tr>
+      <td>onPressedChange</td>
+      <td>`(pressed: boolean) => void`</td>
+      <td>-</td>
+      <td>Callback when pressed state changes.</td>
+    </tr>
+    <tr>
+      <td>disabled</td>
+      <td>`boolean`</td>
+      <td>`false`</td>
+      <td>When true, prevents user interaction.</td>
+    </tr>
+    <tr>
+      <td>className</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>Additional Tailwind classes to apply.</td>
+    </tr>
+  </tbody>
+</table>
+
+## Examples
+
+### Basic Usage
+
+```tsx
+function ToggleExample() {
+  const [pressed, setPressed] = useState(false);
+  return (
+    <Toggle 
+      pressed={pressed} 
+      onPressedChange={setPressed} 
+    />
+  );
+}
+```
+
+### Disabled State
+
+```tsx
+function DisabledToggle() {
+  const [pressed, setPressed] = useState(false);
+  return (
+    <Toggle 
+      pressed={pressed} 
+      onPressedChange={setPressed} 
+      disabled 
+    />
+  );
+}
+```
+
+## Styling
+
+The Toggle component uses Tailwind CSS classes for styling through class-variance-authority (cva). Default styling includes:
+
+- Container dimensions: 51px × 31px
+- Knob dimensions: 27px × 27px
+- Rounded full corners
+- Primary color when on
+- Cool gray color when off
+- White knob color
+- Consistent knob positioning:
+  - On: 22px from left
+  - Off: 2px from left
+- Disabled state opacity: 50%
+
+## States
+
+The toggle has several visual states:
+- Off: Cool gray background with left-aligned knob
+- On: Primary color background with right-aligned knob
+- Disabled: Reduced opacity with left-aligned knob
+
+## Accessibility
+
+The Toggle component:
+- Uses `accessibilityRole="switch"` for proper semantic structure
+- Provides appropriate `accessibilityState` for checked and disabled states
+- Supports keyboard navigation
+- Maintains WCAG color contrast requirements
+- Uses adequate touch target size (31px height)

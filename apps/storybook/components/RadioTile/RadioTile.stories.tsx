@@ -20,33 +20,37 @@ export const AllStates: Story = {
     const [value2, setValue2] = useState('4');
 
     return (
-      <View className='p-5 border border-dashed border-[#7B61FF] rounded flex flex-col gap-[50px]'>
-        {/* Without Description */}
-        <RadioTileGroup value={value1} onValueChange={setValue1}>
-          <RadioTile value='1' label='Unchecked' />
-          <RadioTile value='2' label='Checked' />
-          <RadioTile value='3' label='Disabled' disabled />
-        </RadioTileGroup>
+      <View className='border border-dashed border-[#7B61FF] rounded flex flex-col gap-[50px] p-5'>
+        <View className='flex flex-col items-center'>
+          {/* Without Description */}
+          <RadioTileGroup value={value1} onValueChange={setValue1}>
+            <RadioTile value='1' label='Unchecked' />
+            <RadioTile value='2' label='Checked' />
+            <RadioTile value='3' label='Disabled' disabled />
+          </RadioTileGroup>
+        </View>
 
-        {/* With Description */}
-        <RadioTileGroup value={value2} onValueChange={setValue2}>
-          <RadioTile
-            value='4'
-            label='Unchecked with description'
-            description='This is optional text that can be used to describe the label in more detail.'
-          />
-          <RadioTile
-            value='5'
-            label='Checked with description'
-            description='This is optional text that can be used to describe the label in more detail.'
-          />
-          <RadioTile
-            value='6'
-            label='Disabled with description'
-            description='This is optional text that can be used to describe the label in more detail.'
-            disabled
-          />
-        </RadioTileGroup>
+        <View className='flex flex-col items-center'>
+          {/* With Description */}
+          <RadioTileGroup value={value2} onValueChange={setValue2}>
+            <RadioTile
+              value='4'
+              label='Unchecked with description'
+              description='This is optional text that can be used to describe the label in more detail.'
+            />
+            <RadioTile
+              value='5'
+              label='Checked with description'
+              description='This is optional text that can be used to describe the label in more detail.'
+            />
+            <RadioTile
+              value='6'
+              label='Disabled with description'
+              description='This is optional text that can be used to describe the label in more detail.'
+              disabled
+            />
+          </RadioTileGroup>
+        </View>
       </View>
     );
   }

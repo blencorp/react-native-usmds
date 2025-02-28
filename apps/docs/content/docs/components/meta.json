@@ -1,0 +1,25 @@
+{
+  "title": "Components",
+  "pages": [
+    "alert",
+    "banner",
+    "biometrics",
+    "button",
+    "button-group",
+    "card",
+    "checkbox",
+    "checkboxtile",
+    "icon",
+    "link",
+    "pagination",
+    "radiobutton",
+    "radiotile",
+    "snackbar",
+    "stepindicator",
+    "tag",
+    "text",
+    "textarea",
+    "textinput",
+    "toggle"
+  ]
+}

@@ -1,0 +1,161 @@
+---
+title: Link
+description: Links allow users to navigate to different pages or external resources.
+---
+
+## Installation
+
+```bash
+npx usmds add link
+```
+
+## Usage
+
+```tsx
+import { Link } from '@components/Link';
+
+<Link href="#" label="Link text" />
+```
+
+## Props
+
+### Link
+
+Extends `Pressable` props.
+
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>href</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>The URL that the link points to.</td>
+    </tr>
+    <tr>
+      <td>label</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>The text content of the link.</td>
+    </tr>
+    <tr>
+      <td>variant</td>
+      <td>`'default' | 'visited' | 'dark-background'`</td>
+      <td>`'default'`</td>
+      <td>The visual style variant of the link.</td>
+    </tr>
+    <tr>
+      <td>external</td>
+      <td>`boolean`</td>
+      <td>`false`</td>
+      <td>When true, displays an external link icon.</td>
+    </tr>
+    <tr>
+      <td>visited</td>
+      <td>`boolean`</td>
+      <td>`false`</td>
+      <td>When true, applies visited link styling.</td>
+    </tr>
+    <tr>
+      <td>focus</td>
+      <td>`boolean`</td>
+      <td>`false`</td>
+      <td>When true, applies focus ring styling.</td>
+    </tr>
+    <tr>
+      <td>className</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>Additional Tailwind classes to apply.</td>
+    </tr>
+  </tbody>
+</table>
+
+## Examples
+
+### Default Link
+
+```tsx
+<Link href="#" label="Link" />
+```
+
+### External Link
+
+```tsx
+<Link 
+  href="https://example.com" 
+  label="External link" 
+  external 
+/>
+```
+
+### Visited Link
+
+```tsx
+<Link 
+  href="#" 
+  label="Visited link" 
+  visited 
+/>
+```
+
+### Dark Background
+
+```tsx
+<View className="bg-base-darker p-4">
+  <Link 
+    href="#" 
+    label="Link on dark background" 
+    variant="dark-background" 
+  />
+</View>
+```
+
+### Focus State
+
+```tsx
+<Link 
+  href="#" 
+  label="Focused link" 
+  focus 
+/>
+```
+
+## Styling
+
+The Link component uses Tailwind CSS classes for styling through class-variance-authority (cva). Default styling includes:
+
+- Font: Source Sans Pro
+- Base text size with 162% line height
+- Underlined text
+- Primary color (default variant)
+- Focus ring when focused
+- External link icon spacing (when external)
+- Visited state color
+- Dark background variant for contrast
+
+## States
+
+Links have several visual states:
+- Default: Primary color
+- Visited: Violet color
+- Focus: Blue focus ring
+- Dark background: Light primary color
+- External: Includes external link icon
+
+## Accessibility
+
+The Link component:
+- Uses semantic link structure
+- Supports keyboard navigation
+- Maintains WCAG color contrast requirements
+- Provides visual feedback for interaction states
+- Includes external link indicators where appropriate
+- Uses proper text spacing for readability

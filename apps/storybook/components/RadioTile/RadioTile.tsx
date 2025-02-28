@@ -28,6 +28,7 @@ interface RadioTileProps extends ComponentPropsWithoutRef<typeof RadioGroupPrimi
   label: string;
   description?: string;
   className?: string;
+  variant?: 'default' | 'withDescription';
 }
 
 const RadioTileGroup = forwardRef<ElementRef<typeof RadioGroupPrimitive.Root>, ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>>(

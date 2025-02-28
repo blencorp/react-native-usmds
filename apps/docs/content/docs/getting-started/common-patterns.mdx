@@ -1,0 +1,225 @@
+---
+title: Common Patterns
+description: Common patterns and best practices when using React Native USMDS
+---
+
+# Common Patterns
+
+This guide covers common patterns and best practices when using React Native USMDS components.
+
+## Component Styling
+
+### Using NativeWind Classes
+
+USMDS components use NativeWind for styling. You can customize components using className props:
+
+Basic usage with default styles:
+```js
+import { Alert } from '@blen/react-native-usmds';
+
+<Alert 
+    variant="info"
+    description={{ body: "Basic alert message" }}
+/>
+```
+
+Custom styling with additional classes:
+
+```js
+<Alert 
+    variant="info"
+    className="my-4 shadow-lg"
+    description={{ body: "Customized alert" }}
+/>
+```
+
+### Variant Patterns
+
+Components often support variants through a consistent API:
+
+Alert variants:
+
+```js
+<Alert variant="info" />
+<Alert variant="warning" />
+<Alert variant="error" />
+<Alert variant="success" />
+<Alert variant="emergency" />
+```
+
+Different alert styles:
+
+```js
+<Alert alertStyle="default" />
+<Alert alertStyle="no-header" />
+<Alert alertStyle="list" />
+<Alert alertStyle="slim" />
+<Alert alertStyle="no-icon" />
+```
+
+## Form Components
+
+### Checkbox Patterns
+
+USMDS provides two checkbox variants: standard and tile-based:
+
+Basic checkbox:
+
+```js   
+<Checkbox 
+    label="Accept terms"
+    checked={checked}
+    onCheckedChange={setChecked}
+/>
+```
+
+Checkbox tile with description:
+
+```js
+<CheckboxTile
+    label="Premium Plan"
+    description="Access to all features"
+    checked={checked}
+    onCheckedChange={setChecked}
+/>
+```
+
+### Radio Button Patterns
+
+Similar to checkboxes, radio buttons come in standard and tile variants:
+
+Standard radio buttons:
+
+```js
+<RadioGroup value={value} onValueChange={setValue}>
+    <RadioButton label="Option 1" value="1" />
+    <RadioButton label="Option 2" value="2" />
+</RadioGroup>
+```
+
+Radio tiles:
+
+```js
+<RadioGroup value={value} onValueChange={setValue}>
+    <RadioTile 
+    label="Premium Plan"
+    description="Access all features"
+    value="premium"
+    />
+    <RadioTile 
+    label="Basic Plan"
+    description="Essential features"
+    value="basic"
+    />
+</RadioGroup>
+```
+
+## Alert and Messaging Patterns
+
+### Alert Variations
+
+Alerts can be configured in multiple ways:
+
+Basic alert:
+
+```js
+<Alert
+    variant="info"
+    description={{ body: "Simple alert message" }}
+/>
+```
+
+Alert with title:
+
+```js
+<Alert
+    variant="warning"
+    title="Important Notice"
+    description={{ body: "Alert with title" }}
+/>
+```
+
+List-style alert:
+
+```js
+<Alert
+    variant="info"
+    alertStyle="list"
+    description={{
+    messages: [
+        { text: "First item" },
+        { text: "Second item", link: "Learn more" }
+    ]
+    }}
+/>
+```
+
+## Accessibility Patterns
+
+USMDS components are built with accessibility in mind:
+
+Screen reader friendly alerts:
+
+```js
+<Alert
+    variant="info"
+    description={{ body: "Important message" }}
+    accessibilityRole="alert"
+/>
+```
+
+Accessible form controls:
+
+```js
+<Checkbox
+    label="Accept terms"
+    accessibilityLabel="Accept terms and conditions"
+    accessibilityHint="Double tap to toggle checkbox"
+/>
+```
+
+## Responsive Design
+
+Components are designed to work across different screen sizes:
+
+```js
+<Alert
+    className="w-full md:w-[329px]"
+    variant="info"
+    description={{ body: "Responsive alert" }}
+/>
+```
+
+## Theme Customization
+
+### Using Theme Variables
+
+USMDS uses CSS variables for theming that can be customized:
+
+```js
+:root {
+    --background: 0 0% 100%;
+    --primary: 201 100% 32%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 217 47% 30%;
+    --secondary-foreground: 0 0% 100%;
+    --border: 220 13% 46%;
+}
+
+.dark {
+    --background: 224 71% 4%;
+    --primary: 201 100% 32%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 217 47% 30%;
+    --secondary-foreground: 0 0% 100%;
+    --border: 215 20% 65%;
+}
+```
+
+## Best Practices
+
+1. **Consistent Variants**: Use consistent variant names across components for better maintainability
+2. **Accessibility First**: Always include proper accessibility props
+3. **Responsive Design**: Use responsive classes for different screen sizes
+4. **Theme Variables**: Utilize theme variables instead of hard-coded colors
+5. **Component Composition**: Combine components to create complex interfaces while maintaining consistency

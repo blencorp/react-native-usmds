@@ -1,0 +1,131 @@
+---
+title: StepIndicator
+description: StepIndicator shows progress through a sequence of steps or stages in a process.
+---
+
+## Installation
+
+```bash
+npx usmds add stepindicator
+```
+
+## Usage
+
+```tsx
+import { StepIndicator } from '@components/StepIndicator';
+
+<StepIndicator
+  steps={6}
+  currentStep={3}
+  title="Current Step Title"
+  size="default"
+/>
+```
+
+## Props
+
+### StepIndicator
+
+Extends `View` props.
+
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>steps</td>
+      <td>`number`</td>
+      <td>-</td>
+      <td>Total number of steps in the sequence.</td>
+    </tr>
+    <tr>
+      <td>currentStep</td>
+      <td>`number`</td>
+      <td>-</td>
+      <td>The current active step number.</td>
+    </tr>
+    <tr>
+      <td>title</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>Title text for the current step.</td>
+    </tr>
+    <tr>
+      <td>size</td>
+      <td>`'default' | 'small'`</td>
+      <td>`'default'`</td>
+      <td>The size variant of the step indicator.</td>
+    </tr>
+    <tr>
+      <td>labels</td>
+      <td>`string[]`</td>
+      <td>-</td>
+      <td>Optional array of labels for each step.</td>
+    </tr>
+  </tbody>
+</table>
+
+## Examples
+
+### Default Size
+
+```tsx
+<StepIndicator
+  steps={6}
+  currentStep={3}
+  title="Current Step"
+  size="default"
+/>
+```
+
+### Small Size
+
+```tsx
+<StepIndicator
+  steps={6}
+  currentStep={3}
+  title="Current Step"
+  size="small"
+/>
+```
+
+## Styling
+
+The StepIndicator component uses Tailwind CSS classes for styling through class-variance-authority (cva). Default styling includes:
+
+- Container dimensions:
+  - Default: 329px × 68px
+  - Small: 329px × 50px
+- Segment heights:
+  - Default: 48px
+  - Small: 32px
+- Circle indicator:
+  - Default: 40px × 40px
+  - Small: 24px × 24px
+- Primary colors for active state
+- Darker primary for completed states
+- Light gray for upcoming states
+- Consistent spacing and gaps
+
+## States
+
+The step segments have three visual states:
+- Complete: Darker primary color (segments before current)
+- Active: Primary color (current segment)
+- Default: Light gray (upcoming segments)
+
+## Accessibility
+
+The StepIndicator component:
+- Uses semantic structure for progress indication
+- Maintains proper text contrast
+- Provides clear visual hierarchy
+- Includes numerical indicators for current progress
+- Uses adequate sizing for touch targets
+- Supports proper color contrast ratios

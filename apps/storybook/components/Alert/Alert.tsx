@@ -60,6 +60,8 @@ interface AlertProps extends ComponentPropsWithoutRef<typeof View>, VariantProps
   };
   showIcon?: boolean;
   className?: string;
+  variant?: 'info' | 'error' | 'warning' | 'success' | 'emergency';
+  alertStyle?: 'default' | 'no-header' | 'list' | 'slim' | 'no-icon';
 }
 
 const Alert = forwardRef<ElementRef<typeof View>, AlertProps>(
@@ -112,8 +114,7 @@ const Alert = forwardRef<ElementRef<typeof View>, AlertProps>(
             )}
           >
             <Info
-              color={variant === 'emergency' ? '#9C3D10' : '#FFFFFF'}
-              fill={variant === 'emergency' ? '#FFFFFF' : 'black'}
+              className={cn(variant === 'emergency' ? 'text-emergency fill-white' : 'text-white fill-base-ink')}
               size={alertStyle === 'slim' ? 24 : 32}
             />
           </View>

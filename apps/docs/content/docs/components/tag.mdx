@@ -1,0 +1,113 @@
+---
+title: Tag
+description: Tags are used to label, categorize, or organize items using keywords.
+---
+
+## Installation
+
+```bash
+npx usmds add tag
+```
+
+## Usage
+
+```tsx
+import { Tag } from '@components/Tag';
+
+<Tag label="TAG" />
+```
+
+## Props
+
+### Tag
+
+Extends `View` props.
+
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>label</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>The text content of the tag.</td>
+    </tr>
+    <tr>
+      <td>size</td>
+      <td>`'default' | 'big'`</td>
+      <td>`'default'`</td>
+      <td>The size variant of the tag.</td>
+    </tr>
+    <tr>
+      <td>className</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>Additional Tailwind classes to apply.</td>
+    </tr>
+  </tbody>
+</table>
+
+## Examples
+
+### Default Size
+
+```tsx
+<Tag label="TAG" />
+```
+
+### Big Size
+
+```tsx
+<Tag label="TAG" size="big" />
+```
+
+### Common Use Cases
+
+```tsx
+<View className="flex-1 items-center justify-center gap-5">
+  <Tag label="new" />
+  <Tag label="beta" size="big" />
+  <Tag label="pro" />
+  <Tag label="sale" size="big" />
+</View>
+```
+
+## Styling
+
+The Tag component uses Tailwind CSS classes for styling through class-variance-authority (cva). Default styling includes:
+
+- Container dimensions:
+  - Default: min-width 43px × height 18px
+  - Big: min-width 43px × height 24px
+- Background color: gray-60
+- Rounded corners (2px)
+- Text styling:
+  - Default: 14px font size, 14px line height
+  - Big: 16px font size, 16px line height
+- White text color
+- Centered content
+- Consistent padding:
+  - Default: 2px vertical, 8px horizontal
+  - Big: 4px vertical, 8px horizontal
+
+## Variants
+
+The tag has two size variants:
+- Default: Compact size for general use
+- Big: Larger size for more prominence
+
+## Accessibility
+
+The Tag component:
+- Uses semantic text structure
+- Maintains proper text contrast on gray background
+- Provides adequate touch target sizes
+- Ensures readable text sizes
+- Uses consistent spacing and padding

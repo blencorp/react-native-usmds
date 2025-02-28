@@ -1,0 +1,160 @@
+---
+title: CheckboxTile
+description: CheckboxTile provides a larger, more prominent checkbox option with optional description text.
+---
+
+## Installation
+
+```bash
+npx usmds add checkboxtile
+```
+
+## Usage
+
+```tsx
+import { CheckboxTile } from '@components/CheckboxTile';
+import { useState } from 'react';
+
+function App() {
+  const [checked, setChecked] = useState(false);
+
+  return (
+    <CheckboxTile 
+      label="Checkbox tile"
+      description="Optional description text"
+      checked={checked}
+      onCheckedChange={setChecked}
+    />
+  );
+}
+```
+
+## Props
+
+### CheckboxTile
+
+Extends `CheckboxPrimitive.Root` props.
+
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>label</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>The text label for the checkbox tile.</td>
+    </tr>
+    <tr>
+      <td>description</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>Optional description text displayed below the label.</td>
+    </tr>
+    <tr>
+      <td>checked</td>
+      <td>`boolean`</td>
+      <td>`false`</td>
+      <td>The controlled checked state of the checkbox.</td>
+    </tr>
+    <tr>
+      <td>onCheckedChange</td>
+      <td>`(checked: boolean) => void`</td>
+      <td>-</td>
+      <td>Callback that fires when the checked state changes.</td>
+    </tr>
+    <tr>
+      <td>disabled</td>
+      <td>`boolean`</td>
+      <td>`false`</td>
+      <td>When true, prevents the user from interacting with the checkbox.</td>
+    </tr>
+    <tr>
+      <td>className</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>Additional Tailwind classes to apply.</td>
+    </tr>
+  </tbody>
+</table>
+
+## Examples
+
+### Basic Usage
+
+```tsx
+<CheckboxTile 
+  label="Basic checkbox tile"
+  checked={checked}
+  onCheckedChange={setChecked}
+/>
+```
+
+### With Description
+
+```tsx
+<CheckboxTile
+  label="Checkbox with description"
+  description="This is optional text that can be used to describe the label in more detail."
+  checked={checked}
+  onCheckedChange={setChecked}
+/>
+```
+
+### Disabled States
+
+```tsx
+// Disabled unchecked
+<CheckboxTile
+  label="Disabled unchecked"
+  description="Optional description text"
+  checked={false}
+  disabled
+  onCheckedChange={() => {}}
+/>
+
+// Disabled checked
+<CheckboxTile
+  label="Disabled checked"
+  description="Optional description text"
+  checked={true}
+  disabled
+  onCheckedChange={() => {}}
+/>
+```
+
+## Styling
+
+The CheckboxTile component uses Tailwind CSS classes for styling. Default styling includes:
+
+- Container width: 329px
+- Rounded corners (2px)
+- 2px border width
+- Consistent padding (13px 16px 13px 9px)
+- Primary colors when checked
+- Light background when checked
+- Disabled state styling
+- Gap spacing between elements
+
+## States
+
+The component has three visual states:
+- Unchecked: White background with light border
+- Checked: Light primary background with primary border
+- Disabled: White background with gray border and text
+
+## Accessibility
+
+The CheckboxTile component:
+- Uses `accessibilityRole="checkbox"` for proper semantic structure
+- Supports keyboard navigation
+- Maintains WCAG color contrast requirements
+- Provides appropriate `accessibilityState` for checked and disabled states
+- Includes clear, descriptive text labels
+- Ensures the entire tile area is clickable

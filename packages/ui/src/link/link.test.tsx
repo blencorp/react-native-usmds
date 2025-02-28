@@ -18,10 +18,13 @@ describe('Link', () => {
   });
 
   it('renders visited state correctly', () => {
-    const { getByText } = render(<Link {...defaultProps} visited />);
+    const { getByText } = render(
+      <Link href='#' label='Click me' visited>
+        Click me
+      </Link>
+    );
     const linkText = getByText('Click me');
-
-    expect(linkText.props.className).toContain('text-[#54278F]');
+    expect(linkText.props.className).toContain('text-violet-vivid-70');
   });
 
   it('renders external link with icon', () => {
@@ -42,10 +45,13 @@ describe('Link', () => {
   });
 
   it('renders dark background variant correctly', () => {
-    const { getByText } = render(<Link {...defaultProps} variant='dark-background' />);
+    const { getByText } = render(
+      <Link href='#' label='Click me' variant='dark-background'>
+        Click me
+      </Link>
+    );
     const linkText = getByText('Click me');
-
-    expect(linkText.props.className).toContain('text-[#73B3E7]');
+    expect(linkText.props.className).toContain('text-primary-light');
   });
 
   it('applies custom className correctly', () => {
@@ -58,18 +64,27 @@ describe('Link', () => {
   });
 
   it('handles focus state correctly', () => {
-    const { getByTestId } = render(<Link {...defaultProps} focus testID='focus-link' />);
+    const { getByTestId } = render(
+      <Link href='#' label='Click me' testID='focus-link' focus={true}>
+        Click me
+      </Link>
+    );
     const link = getByTestId('focus-link');
+    const view = link.children[0];
 
-    expect(link.props.className).toContain('ring-4');
-    expect(link.props.className).toContain('ring-[#2491FF]');
+    expect(view.props.className).toContain('outline-none');
+    expect(view.props.className).toContain('ring-4');
   });
 
   it('combines visited and external states correctly', () => {
-    const { getByTestId } = render(<Link {...defaultProps} visited external testID='visited-external-link' />);
+    const { getByTestId } = render(
+      <Link href='#' label='Click me' visited external testID='visited-external-link'>
+        Click me
+      </Link>
+    );
     const link = getByTestId('visited-external-link');
 
-    expect(link.props.className).toContain('text-[#54278F]');
+    expect(link.props.className).toContain('text-violet-vivid-70');
     expect(link.props.className).toContain('flex-row');
   });
 

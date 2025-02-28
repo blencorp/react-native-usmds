@@ -1,0 +1,142 @@
+---
+title: Pagination
+description: Pagination helps users navigate through multiple pages of content.
+---
+
+## Installation
+
+```bash
+npx usmds add pagination
+```
+
+## Usage
+
+```tsx
+import { Pagination } from '@components/Pagination';
+import { useState } from 'react';
+
+function App() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = 10;
+  const totalItems = 100;
+
+  return (
+    <Pagination
+      currentPage={currentPage}
+      totalPages={totalPages}
+      totalItems={totalItems}
+      onPageChange={setCurrentPage}
+    />
+  );
+}
+```
+
+## Props
+
+### Pagination
+
+Extends `View` props.
+
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>currentPage</td>
+      <td>`number`</td>
+      <td>-</td>
+      <td>The current active page number.</td>
+    </tr>
+    <tr>
+      <td>totalPages</td>
+      <td>`number`</td>
+      <td>-</td>
+      <td>The total number of pages.</td>
+    </tr>
+    <tr>
+      <td>totalItems</td>
+      <td>`number`</td>
+      <td>-</td>
+      <td>The total number of items across all pages.</td>
+    </tr>
+    <tr>
+      <td>onPageChange</td>
+      <td>`(page: number) => void`</td>
+      <td>-</td>
+      <td>Callback fired when the page changes.</td>
+    </tr>
+    <tr>
+      <td>className</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>Additional Tailwind classes to apply.</td>
+    </tr>
+  </tbody>
+</table>
+
+## Examples
+
+### Basic Usage
+
+```tsx
+<Pagination
+  currentPage={1}
+  totalPages={10}
+  totalItems={100}
+  onPageChange={(page) => console.log(`Page changed to ${page}`)}
+/>
+```
+
+### With State Management
+
+```tsx
+function PaginationExample() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = 10;
+  const totalItems = 100;
+
+  return (
+    <Pagination
+      currentPage={currentPage}
+      totalPages={totalPages}
+      totalItems={totalItems}
+      onPageChange={setCurrentPage}
+    />
+  );
+}
+```
+
+## Styling
+
+The Pagination component uses Tailwind CSS classes for styling. Default styling includes:
+
+- Container width: 393px
+- Button dimensions: 50px × 50px
+- Rounded corners
+- Primary color for active buttons
+- Gray color for disabled state
+- Consistent padding and spacing
+- Center-aligned text
+
+## States
+
+The pagination buttons have several states:
+- Active: Primary background color
+- Disabled: Gray background color (when at first/last page)
+- Default: Primary background color
+
+## Accessibility
+
+The Pagination component:
+- Uses `accessibilityRole="button"` for navigation buttons
+- Provides `accessibilityLabel` for screen readers
+- Includes proper `accessibilityState` for disabled buttons
+- Maintains WCAG color contrast requirements
+- Supports keyboard navigation
+- Uses adequate touch target sizes (50x50px)
