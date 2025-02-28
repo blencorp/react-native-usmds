@@ -1,0 +1,189 @@
+---
+title: ButtonGroup
+description: ButtonGroup is used to group related buttons together with consistent spacing.
+---
+
+## Installation
+
+```bash
+npx usmds add buttongroup
+```
+
+## Usage
+
+```tsx
+import { ButtonGroup } from '@components/ButtonGroup';
+import { Button } from '@components/Button';
+import { Text } from '@components/Text';
+
+<ButtonGroup>
+  <Button variant="default">
+    <Text>Primary</Text>
+  </Button>
+  <Button variant="outline">
+    <Text>Secondary</Text>
+  </Button>
+</ButtonGroup>
+```
+
+## Props
+
+### ButtonGroup
+
+Extends `View` props.
+
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>orientation</td>
+      <td>`'horizontal' | 'vertical'`</td>
+      <td>`'vertical'`</td>
+      <td>The layout direction of the button group.</td>
+    </tr>
+    <tr>
+      <td>gap</td>
+      <td>`number`</td>
+      <td>`8`</td>
+      <td>The space between buttons in pixels.</td>
+    </tr>
+    <tr>
+      <td>className</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>Additional Tailwind classes to apply.</td>
+    </tr>
+  </tbody>
+</table>
+
+## Examples
+
+### Vertical Layout (Default)
+
+```tsx
+import { ButtonGroup } from '@components/ButtonGroup';
+import { Button } from '@components/Button';
+import { Text } from '@components/Text';
+
+<ButtonGroup orientation="vertical" gap={8}>
+  <Button variant="base">
+    <Text>Primary Button</Text>
+  </Button>
+  <Button variant="default">
+    <Text>Secondary Button</Text>
+  </Button>
+  <Button variant="outline">
+    <Text>Outline Button</Text>
+  </Button>
+</ButtonGroup>
+```
+
+### Horizontal Layout
+
+```tsx
+<ButtonGroup orientation="horizontal" gap={8}>
+  <Button variant="base">
+    <Text>Primary</Text>
+  </Button>
+  <Button variant="default">
+    <Text>Secondary</Text>
+  </Button>
+  <Button variant="outline">
+    <Text>Outline</Text>
+  </Button>
+</ButtonGroup>
+```
+
+### Custom Gap Spacing
+
+```tsx
+<ButtonGroup orientation="vertical" gap={16}>
+  <Button variant="base">
+    <Text>Primary Button</Text>
+  </Button>
+  <Button variant="default">
+    <Text>Secondary Button</Text>
+  </Button>
+</ButtonGroup>
+```
+
+### Mixed Button Sizes
+
+```tsx
+<ButtonGroup orientation="vertical" gap={8}>
+  <Button variant="base" size="big">
+    <Text>Big Button</Text>
+  </Button>
+  <Button variant="default">
+    <Text>Default Button</Text>
+  </Button>
+  <Button variant="outline" size="sm">
+    <Text>Small Button</Text>
+  </Button>
+</ButtonGroup>
+```
+
+### Custom Button Widths
+
+```tsx
+<ButtonGroup orientation="vertical" gap={8}>
+  <Button variant="base" className="w-[300px]">
+    <Text>Wide Button</Text>
+  </Button>
+  <Button variant="default" className="w-[200px]">
+    <Text>Medium Button</Text>
+  </Button>
+  <Button variant="outline" className="w-[100px]">
+    <Text>Small Button</Text>
+  </Button>
+</ButtonGroup>
+```
+
+### Nested Groups
+
+```tsx
+<ButtonGroup orientation="vertical" gap={8}>
+  <Button variant="base">
+    <Text>Regular Button</Text>
+  </Button>
+  <ButtonGroup orientation="horizontal" gap={8}>
+    <Button variant="default">
+      <Text>Left</Text>
+    </Button>
+    <Button variant="default">
+      <Text>Right</Text>
+    </Button>
+  </ButtonGroup>
+  <Button variant="outline">
+    <Text>Bottom Button</Text>
+  </Button>
+</ButtonGroup>
+```
+
+## Styling
+
+The ButtonGroup component uses Tailwind CSS classes for styling. The layout can be customized using the `className` prop:
+
+```tsx
+<ButtonGroup 
+  orientation="horizontal" 
+  className="justify-center items-center"
+>
+  {/* Buttons */}
+</ButtonGroup>
+```
+
+## Accessibility
+
+The ButtonGroup component:
+- Maintains proper spacing for touch targets
+- Preserves individual button accessibility features
+- Supports keyboard navigation between buttons
+- Groups related actions semantically

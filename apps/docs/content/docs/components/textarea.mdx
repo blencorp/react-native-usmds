@@ -1,0 +1,159 @@
+---
+title: TextArea
+description: TextArea allows users to enter and edit multiline text content.
+---
+
+## Installation
+
+```bash
+npx usmds add textarea
+```
+
+## Usage
+
+```tsx
+import { TextArea } from '@components/TextArea';
+
+<TextArea 
+  label="Text input label"
+  placeholder="Enter your text here"
+/>
+```
+
+## Props
+
+### TextArea
+
+Extends React Native's TextInput props.
+
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>label</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>Label text displayed above the textarea.</td>
+    </tr>
+    <tr>
+      <td>helperText</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>Helper text displayed below the label.</td>
+    </tr>
+    <tr>
+      <td>error</td>
+      <td>`boolean`</td>
+      <td>`false`</td>
+      <td>When true, displays error styling.</td>
+    </tr>
+    <tr>
+      <td>maxLength</td>
+      <td>`number`</td>
+      <td>-</td>
+      <td>Maximum number of characters allowed.</td>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>`string`</td>
+      <td>`''`</td>
+      <td>The current value of the textarea.</td>
+    </tr>
+    <tr>
+      <td>disabled</td>
+      <td>`boolean`</td>
+      <td>`false`</td>
+      <td>When true, prevents user interaction.</td>
+    </tr>
+    <tr>
+      <td>className</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>Additional Tailwind classes to apply.</td>
+    </tr>
+  </tbody>
+</table>
+
+## Examples
+
+### Default TextArea
+
+```tsx
+<TextArea 
+  label="Text input label"
+  placeholder="Enter your text here"
+/>
+```
+
+### With Helper Text
+
+```tsx
+<TextArea 
+  label="Text input label"
+  helperText="Helper text"
+  placeholder="Enter your text here"
+/>
+```
+
+### With Error State
+
+```tsx
+<TextArea 
+  label="Text input label"
+  helperText="Error message"
+  error={true}
+  placeholder="Enter your text here"
+/>
+```
+
+### Disabled State
+
+```tsx
+<TextArea 
+  label="Text input label"
+  placeholder="This field is disabled"
+  disabled={true}
+/>
+```
+
+## Styling
+
+The TextArea component uses Tailwind CSS classes for styling. Default styling includes:
+
+- Container width: 329px
+- Minimum height: 160px
+- Base text size with 24px line height
+- Rounded corners (6px)
+- 2px border width
+- Consistent padding (8px 12px)
+- White background
+- Base ink text color
+- Gray placeholder color
+- Error state styling
+- Disabled state styling with lighter background
+
+## States
+
+The textarea has several visual states:
+- Default: White background with base ink border
+- Focused: Primary color border
+- Error: Error color border
+- Disabled: Light gray background with reduced opacity
+
+## Accessibility
+
+The TextArea component:
+- Uses semantic text input structure
+- Provides clear labeling
+- Supports screen readers
+- Maintains proper text contrast
+- Includes helper text for additional context
+- Shows error states clearly
+- Supports keyboard navigation

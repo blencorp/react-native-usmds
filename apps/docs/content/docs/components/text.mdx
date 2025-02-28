@@ -1,0 +1,121 @@
+---
+title: Text
+description: Text is a foundational component for displaying text content with consistent styling.
+---
+
+## Installation
+
+```bash
+npx usmds add text
+```
+
+## Usage
+
+```tsx
+import { Text } from '@components/Text';
+
+<Text>Sample Text</Text>
+```
+
+## Props
+
+### Text
+
+Extends React Native's Text props.
+
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>className</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>Additional Tailwind classes to apply.</td>
+    </tr>
+    <tr>
+      <td>asChild</td>
+      <td>`boolean`</td>
+      <td>`false`</td>
+      <td>Use Slot component instead of RNText.</td>
+    </tr>
+  </tbody>
+</table>
+
+## Examples
+
+### Default Text
+
+```tsx
+<Text>Default Text</Text>
+```
+
+### Custom Styling
+
+```tsx
+<Text className="text-2xl font-bold text-blue-500">
+  Styled Text
+</Text>
+```
+
+### Text Variants
+
+```tsx
+<View className="space-y-4">
+  <Text className="text-sm">Small Text</Text>
+  <Text className="text-base">Base Text</Text>
+  <Text className="text-lg">Large Text</Text>
+  <Text className="text-xl font-bold">Bold Text</Text>
+  <Text className="italic">Italic Text</Text>
+  <Text className="underline">Underlined Text</Text>
+  <Text className="text-primary">Primary Color Text</Text>
+  <Text className="text-secondary">Secondary Color Text</Text>
+</View>
+```
+
+### With Background Context
+
+```tsx
+<View className="bg-gray-100 p-4 rounded-md">
+  <Text>Text with Context</Text>
+</View>
+```
+
+## Styling
+
+The Text component uses Tailwind CSS classes for styling. Default styling includes:
+
+- Base text size (`text-base`)
+- Default foreground color (`text-foreground`)
+- Selectable text on web (`web:select-text`)
+- Inherits font family from theme
+- Supports all Tailwind typography classes
+
+Common modifiers include:
+- Font sizes: `text-sm`, `text-base`, `text-lg`, `text-xl`
+- Font weights: `font-normal`, `font-bold`
+- Font styles: `italic`, `underline`
+- Colors: `text-primary`, `text-secondary`, etc.
+- Line height adjustments
+- Text alignment
+- Text decoration
+
+## Context
+
+The Text component uses a `TextClassContext` that allows parent components to provide default text styling to all child Text components. This is useful for maintaining consistent typography within specific sections of your app.
+
+## Accessibility
+
+The Text component:
+- Uses semantic text structure
+- Supports screen readers
+- Maintains proper text contrast
+- Ensures readable text sizes
+- Allows text selection on web platforms
+- Inherits accessibility properties from React Native's Text component

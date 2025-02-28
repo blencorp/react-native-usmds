@@ -1,0 +1,140 @@
+---
+title: Banner
+description: Banners communicate important information at the top of a screen.
+---
+
+## Installation
+
+```bash
+npx usmds add banner
+```
+
+## Usage
+
+```tsx
+import { Banner } from '@components/Banner';
+
+// Standard App Banner
+<Banner 
+  variant="standard-app"
+  title="An official app of the United States government"
+  link="Here's how you know"
+/>
+
+// Welcome Banner
+<Banner
+  variant="welcome"
+  title="Good afternoon, Daniel"
+  trailingIcon={<Bell color="#1B1B1B" size={24} />}
+/>
+```
+
+## Props
+
+### Banner
+
+Extends `View` props.
+
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>variant</td>
+      <td>`'standard-app' | 'welcome'`</td>
+      <td>`'standard-app'`</td>
+      <td>Determines the style and layout of the banner.</td>
+    </tr>
+    <tr>
+      <td>title</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>The main text content of the banner.</td>
+    </tr>
+    <tr>
+      <td>link</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>Optional link text (only for standard-app variant).</td>
+    </tr>
+    <tr>
+      <td>trailingIcon</td>
+      <td>`ReactNode`</td>
+      <td>-</td>
+      <td>Optional icon component to display at the end of the banner.</td>
+    </tr>
+    <tr>
+      <td>className</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>Additional CSS classes to apply to the banner.</td>
+    </tr>
+  </tbody>
+</table>
+
+## Variants
+
+### Standard App Banner
+
+The standard app banner is used to identify official U.S. government applications. It includes the U.S. flag icon and optional link text.
+
+```tsx
+<Banner
+  variant="standard-app"
+  title="An official app of the United States government"
+  link="Here's how you know"
+/>
+```
+
+Features:
+- U.S. flag icon
+- Vertical divider
+- Bold "An official app" text
+- Optional link text
+- Height: 88px
+- Maximum width: 393px
+
+### Welcome Banner
+
+The welcome banner is used for personalized greetings and can include a trailing icon.
+
+```tsx
+<Banner
+  variant="welcome"
+  title="Good afternoon, Daniel"
+  trailingIcon={<Bell color="#1B1B1B" size={24} />}
+/>
+```
+
+Features:
+- Larger text size (22px)
+- Optional trailing icon
+- Height: 40px
+- Width: 329px
+- No divider or flag icon
+
+## Styling
+
+The Banner component uses Tailwind CSS classes for styling through class-variance-authority (cva). The styles can be customized using the `className` prop:
+
+```tsx
+<Banner
+  variant="standard-app"
+  title="An official app of the United States government"
+  className="my-custom-class"
+/>
+```
+
+## Accessibility
+
+The Banner component:
+- Uses `accessibilityRole="header"` for proper semantic structure
+- Ensures link text is accessible with `accessibilityRole="link"`
+- Maintains proper color contrast for text content
+- Supports single-line text with `numberOfLines={1}` to prevent overflow

@@ -1,0 +1,190 @@
+---
+title: TextInput
+description: TextInput allows users to enter and edit text content in a single line.
+---
+
+## Installation
+
+```bash
+npx usmds add textinput
+```
+
+## Usage
+
+```tsx
+import { TextInput } from '@components/TextInput';
+
+<TextInput 
+  label="Text input label"
+  placeholder="Enter text"
+/>
+```
+
+## Props
+
+### TextInput
+
+Extends React Native's TextInput props.
+
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>label</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>Label text displayed above the input.</td>
+    </tr>
+    <tr>
+      <td>helperText</td>
+      <td>`string`</td>
+      <td>`'Helper text'`</td>
+      <td>Helper text displayed below the label.</td>
+    </tr>
+    <tr>
+      <td>errorMessage</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>Error message displayed when state is 'error'.</td>
+    </tr>
+    <tr>
+      <td>required</td>
+      <td>`boolean`</td>
+      <td>`true`</td>
+      <td>When true, displays required indicator (*).</td>
+    </tr>
+    <tr>
+      <td>variant</td>
+      <td>`'default' | 'prefix' | 'suffix'`</td>
+      <td>`'default'`</td>
+      <td>The visual variant of the input.</td>
+    </tr>
+    <tr>
+      <td>state</td>
+      <td>`'default' | 'focus' | 'error' | 'success' | 'disabled'`</td>
+      <td>`'default'`</td>
+      <td>The current state of the input.</td>
+    </tr>
+    <tr>
+      <td>prefix</td>
+      <td>`ReactNode`</td>
+      <td>-</td>
+      <td>Element displayed before the input text.</td>
+    </tr>
+    <tr>
+      <td>suffix</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>Text displayed after the input text.</td>
+    </tr>
+  </tbody>
+</table>
+
+## Examples
+
+### Default Input
+
+```tsx
+<TextInput 
+  label="Text input label"
+  placeholder="Enter text"
+/>
+```
+
+### With Prefix Icon
+
+```tsx
+import { User } from 'lucide-react-native';
+
+<TextInput 
+  label="Text input label"
+  variant="prefix"
+  prefix={<User size={24} color="#757575" />}
+  placeholder="Enter text"
+/>
+```
+
+### With Suffix Text
+
+```tsx
+<TextInput 
+  label="Text input label"
+  variant="suffix"
+  suffix="lbs."
+  placeholder="Enter text"
+/>
+```
+
+### Error State
+
+```tsx
+<TextInput 
+  label="Text input label"
+  state="error"
+  errorMessage="Helpful error message"
+  helperText="Helper text"
+  placeholder="Enter text"
+/>
+```
+
+### Success State
+
+```tsx
+<TextInput 
+  label="Text input label"
+  state="success"
+  placeholder="Enter text"
+/>
+```
+
+### Disabled State
+
+```tsx
+<TextInput 
+  label="Text input label"
+  state="disabled"
+  placeholder="Enter text"
+/>
+```
+
+## Styling
+
+The TextInput component uses Tailwind CSS classes for styling through class-variance-authority (cva). Default styling includes:
+
+- Container width: 329px
+- Height: 40px
+- Base text size with 24px line height
+- White background
+- Base ink text color
+- Gray placeholder color
+- Font family: Source Sans Pro
+- Consistent padding based on variant
+- Border styling for different states
+
+## States
+
+The input has several visual states:
+- Default: Base ink border
+- Focus: 4px focus ring border
+- Error: 4px error dark border with left indicator
+- Success: 4px success border
+- Disabled: Light background with reduced opacity
+
+## Accessibility
+
+The TextInput component:
+- Uses semantic text input structure
+- Provides clear labeling
+- Supports screen readers with `accessibilityRole` and `accessibilityLabel`
+- Maintains proper text contrast
+- Includes helper text for additional context
+- Shows error states clearly
+- Supports keyboard navigation
+- Indicates required fields

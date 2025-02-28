@@ -1,0 +1,120 @@
+---
+title: Initial Setup
+description: Set up React Native USMDS in your project
+---
+## Prerequisites
+
+Before you start, make sure you have:
+
+- A React Native project (Expo or bare React Native)
+- Node.js 16 or higher
+- npm, yarn, or pnpm
+
+## Installation
+
+### 1. Initialize your project
+
+Navigate to your React Native project directory and run:
+
+```js
+npx usmds init
+```
+
+This command:
+
+- Sets up NativeWind (Tailwind CSS for React Native)
+- Creates necessary configuration files
+- Installs required dependencies
+
+The following files will be created:
+
+- `tailwind.config.js` - Tailwind CSS configuration
+- `nativewind-env.d.ts` - TypeScript types for NativeWind
+- `babel.config.js` - Updated Babel configuration
+- `global.css` - Global styles with USMDS color tokens
+- `metro.config.js` - Metro bundler configuration
+- `lib/utils.ts` - Utility functions
+- `components/nativewind-remap.ts` - NativeWind component remapping
+
+### 3. Add components
+
+Add specific USMDS components to your project:
+
+```js
+npx usmds add
+```
+
+This will prompt you to select which components you want to add.
+
+Alternatively, you can specify components directly:
+
+```js
+npx usmds add button alert card
+```
+
+Or add all available components:
+
+```js
+npx usmds add --all
+```
+
+## Update your app entry point
+
+In your main app file (usually `App.js`, `App.tsx`, or `app/_layout.tsx` for Expo Router), import the global CSS file and NativeWind remap:
+
+```js
+import './global.css';
+import './components/nativewind-remap';
+
+// Rest of your app component...
+```
+
+## Customizing the theme
+
+The USMDS components use a consistent theme based on the U.S. Web Design System. You can customize the theme by modifying the `tailwind.config.js` file.
+
+### Example: Customizing colors
+
+```js
+module.exports = {
+  content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          DEFAULT: '#005EA2',
+          hover: '#1A4480',
+          active: '#162E51'
+        },
+        // Add more custom colors as needed
+      }
+    }
+  },
+  plugins: []
+};
+```
+
+## Troubleshooting
+
+### Missing styles
+
+If components are not styled correctly, make sure:
+
+1. The `global.css` file is imported at the root of your application
+2. Your Babel configuration includes the NativeWind plugin
+3. The content paths in `tailwind.config.js` correctly target your component files
+
+### TypeScript errors
+
+If you're seeing TypeScript errors:
+
+1. Make sure `nativewind-env.d.ts` is included in your TypeScript configuration
+2. Restart your TypeScript server
+3. Verify that all required dependencies are installed
+
+## Next steps
+
+Now that you have React Native USMDS set up in your project, check out:
+
+- [Common Patterns](/docs/getting-started/common-patterns) - Best practices for using USMDS components
+- [Component Documentation](/docs/components) - Detailed API for each component

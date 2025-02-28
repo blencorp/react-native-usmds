@@ -1,0 +1,179 @@
+---
+title: Snackbar
+description: Snackbars provide brief messages about app processes at the bottom of the screen.
+---
+
+## Installation
+
+```bash
+npx usmds add snackbar
+```
+
+## Usage
+
+```tsx
+import { Snackbar } from '@components/Snackbar';
+import { useState } from 'react';
+
+function App() {
+  const [isVisible, setIsVisible] = useState(true);
+
+  return (
+    <Snackbar
+      isVisible={isVisible}
+      variant="success"
+      message="Message sent successfully"
+      onAction={() => console.log('Action clicked')}
+      onDismiss={() => setIsVisible(false)}
+    />
+  );
+}
+```
+
+## Props
+
+### Snackbar
+
+Extends `View` props.
+
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>isVisible</td>
+      <td>`boolean`</td>
+      <td>-</td>
+      <td>Controls the visibility of the snackbar.</td>
+    </tr>
+    <tr>
+      <td>message</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>The message to display in the snackbar.</td>
+    </tr>
+    <tr>
+      <td>variant</td>
+      <td>`'success' | 'error'`</td>
+      <td>`'success'`</td>
+      <td>The visual style variant of the snackbar.</td>
+    </tr>
+    <tr>
+      <td>layout</td>
+      <td>`'one-line' | 'two-lines'`</td>
+      <td>`'one-line'`</td>
+      <td>The layout style of the snackbar.</td>
+    </tr>
+    <tr>
+      <td>onAction</td>
+      <td>`() => void`</td>
+      <td>-</td>
+      <td>Optional callback when action button is clicked.</td>
+    </tr>
+    <tr>
+      <td>onDismiss</td>
+      <td>`() => void`</td>
+      <td>-</td>
+      <td>Optional callback when dismiss button is clicked.</td>
+    </tr>
+    <tr>
+      <td>actionLabel</td>
+      <td>`string`</td>
+      <td>`'Action'`</td>
+      <td>Text for the action button.</td>
+    </tr>
+  </tbody>
+</table>
+
+## Examples
+
+### Success One Line
+
+```tsx
+<Snackbar
+  isVisible={true}
+  layout="one-line"
+  variant="success"
+  message="Message sent successfully"
+  onAction={() => console.log('Action clicked')}
+  onDismiss={() => console.log('Dismissed')}
+/>
+```
+
+### Error One Line
+
+```tsx
+<Snackbar
+  isVisible={true}
+  layout="one-line"
+  variant="error"
+  message="Failed to send message"
+  onAction={() => console.log('Action clicked')}
+  onDismiss={() => console.log('Dismissed')}
+/>
+```
+
+### Success Two Lines
+
+```tsx
+<Snackbar
+  isVisible={true}
+  layout="two-lines"
+  variant="success"
+  message="Message sent successfully with additional context that wraps to a second line"
+  onAction={() => console.log('Action clicked')}
+  onDismiss={() => console.log('Dismissed')}
+/>
+```
+
+### Error Two Lines
+
+```tsx
+<Snackbar
+  isVisible={true}
+  layout="two-lines"
+  variant="error"
+  message="Failed to send message with additional context that wraps to a second line"
+  onAction={() => console.log('Action clicked')}
+  onDismiss={() => console.log('Dismissed')}
+/>
+```
+
+## Styling
+
+The Snackbar component uses Tailwind CSS classes for styling through class-variance-authority (cva). Default styling includes:
+
+- Container width: 329px
+- One-line height: 48px
+- Two-lines minimum height: 70px
+- Dark background color
+- Rounded corners (4px)
+- Consistent padding
+- Light text color
+- Bold action buttons
+
+## Variants
+
+The snackbar has two main variants:
+- Success: Displays with a checkmark icon
+- Error: Displays with an alert circle icon
+
+And two layout options:
+- One-line: Compact layout for short messages
+- Two-lines: Expanded layout for longer messages
+
+## Accessibility
+
+The Snackbar component:
+- Uses semantic structure for notifications
+- Maintains proper text contrast on dark background
+- Provides adequate touch targets for buttons
+- Supports keyboard navigation
+- Includes clear action labels
+- Times out automatically to prevent screen clutter

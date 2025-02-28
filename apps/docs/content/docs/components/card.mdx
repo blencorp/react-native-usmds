@@ -1,0 +1,165 @@
+---
+title: Card
+description: Cards are used to group related content and actions about a single subject.
+---
+
+## Installation
+
+```bash
+npx usmds add card
+```
+
+## Usage
+
+```tsx
+import { Card } from '@components/Card';
+
+<Card
+  title="Card title"
+  description="Card description text goes here."
+  buttonText="Button"
+  variant="default"
+/>
+```
+
+## Props
+
+### Card
+
+Extends `View` props.
+
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>variant</td>
+      <td>`'default' | 'media-first' | 'inset'`</td>
+      <td>`'default'`</td>
+      <td>The visual style variant of the card.</td>
+    </tr>
+    <tr>
+      <td>title</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>The title text of the card.</td>
+    </tr>
+    <tr>
+      <td>description</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>The description text of the card.</td>
+    </tr>
+    <tr>
+      <td>buttonText</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>The text for the card's action button.</td>
+    </tr>
+    <tr>
+      <td>mediaUrl</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>URL for the card's media content.</td>
+    </tr>
+    <tr>
+      <td>showMedia</td>
+      <td>`boolean`</td>
+      <td>`false`</td>
+      <td>Whether to display the media content.</td>
+    </tr>
+    <tr>
+      <td>className</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>Additional Tailwind classes to apply.</td>
+    </tr>
+  </tbody>
+</table>
+
+## Variants
+
+### Default
+
+Basic card layout without media.
+
+```tsx
+<Card
+  variant="default"
+  title="Card title"
+  description="Card description text goes here."
+  buttonText="Learn More"
+/>
+```
+
+### Media First
+
+Card with media content at the top.
+
+```tsx
+<Card
+  variant="media-first"
+  title="Card title"
+  description="Card description text goes here."
+  buttonText="Learn More"
+  mediaUrl="https://example.com/image.jpg"
+  showMedia
+/>
+```
+
+### Inset
+
+Card with inset media content below the title.
+
+```tsx
+<Card
+  variant="inset"
+  title="Card title"
+  description="Card description text goes here."
+  buttonText="Learn More"
+  mediaUrl="https://example.com/image.jpg"
+  showMedia
+/>
+```
+
+## Styling
+
+The Card component uses Tailwind CSS classes for styling. The appearance can be customized using the `className` prop:
+
+```tsx
+<Card
+  className="shadow-lg"
+  title="Custom Card"
+  description="This card has custom styling."
+  buttonText="Learn More"
+/>
+```
+
+Default styling includes:
+- Width: 329px
+- Minimum height: 471px
+- White background
+- Light border
+- Rounded corners (4px)
+- Consistent padding
+- Flexible content layout
+
+## Media Dimensions
+
+- Media First variant: 327px × 188px (top-rounded corners)
+- Inset variant: 100% width × 162px (no rounded corners)
+
+## Accessibility
+
+The Card component:
+- Uses semantic HTML structure
+- Maintains proper text contrast
+- Provides clear visual hierarchy
+- Ensures interactive elements are accessible
+- Supports keyboard navigation
