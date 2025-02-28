@@ -33,7 +33,7 @@ jobs:
       - name: Build packages
         run: |
           yarn workspace @blen/react-native-usmds-cli-internal build
-          yarn build
+          yarn build '--filter=!docs' '--filter=!storybook'
 
       - name: Release
         env:

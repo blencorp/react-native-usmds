@@ -32,5 +32,5 @@ export const baseOptions: BaseLayoutProps = {
       active: 'nested-url'
     }
   ],
-  githubUrl: 'https://github.com/blencorp/react-native-usmds'
+  githubUrl: 'https://github.com/blencorp/react-native-usmds',
 };
