@@ -1,3 +1,14 @@
+## [1.1.0](https://github.com/blencorp/react-native-usmds/compare/v1.0.0...v1.1.0) (2025-02-28)
+
+### Features
+
+* docs site ([658e55d](https://github.com/blencorp/react-native-usmds/commit/658e55d2da02292facaaf08d31a551b8f4da35c5))
+* docs site ([577fdb4](https://github.com/blencorp/react-native-usmds/commit/577fdb4c9e3277865e5e4bd63a34447a7f7dc5eb))
+* docs site ([c43d447](https://github.com/blencorp/react-native-usmds/commit/c43d44769368ae239be919c61c8bc7453083aa34))
+* refactor components to use className rather than style props ([2f07a5d](https://github.com/blencorp/react-native-usmds/commit/2f07a5db03695feb560ae2abdfaba276933cb4ab))
+* refactor components to use className rather than style props ([ea5a8b7](https://github.com/blencorp/react-native-usmds/commit/ea5a8b7d3a48ed7ec994b013b1896e57be250a6c))
+* refactor components to use className rather than style props ([c9fc95f](https://github.com/blencorp/react-native-usmds/commit/c9fc95f4ee6a71e675803f851375f1f1f8c4a32c))
+
 ## 1.0.0 (2025-02-24)
 
 ### Features
