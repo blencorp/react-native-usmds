@@ -20,7 +20,7 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <View className="w-full max-w-[393px]">
+      <View className='w-full max-w-[393px]'>
         <Story />
       </View>
     )
@@ -57,31 +57,31 @@ type Story = StoryObj<typeof Button>;
 export const Default: Story = {
   render: () => (
     <ScrollView>
-      <View className="space-y-4 p-4">
+      <View className='space-y-4 p-4'>
         <View>
-          <Text className="text-sm mb-2">Default</Text>
-          <Button variant="default">
+          <Text className='text-sm mb-2'>Default</Text>
+          <Button variant='default'>
             <Text>Default</Text>
           </Button>
         </View>
-        
+
         <View>
-          <Text className="text-sm mb-2">Hover</Text>
-          <Button variant="default" className="bg-primary-hover">
+          <Text className='text-sm mb-2'>Hover</Text>
+          <Button variant='default' className='bg-primary-hover'>
             <Text>Default</Text>
           </Button>
         </View>
-        
+
         <View>
-          <Text className="text-sm mb-2">Active</Text>
-          <Button variant="default" className="bg-primary-active">
+          <Text className='text-sm mb-2'>Active</Text>
+          <Button variant='default' className='bg-primary-active'>
             <Text>Default</Text>
           </Button>
         </View>
-        
+
         <View>
-          <Text className="text-sm mb-2">Focus</Text>
-          <Button variant="default" className="ring-2 ring-focus-ring ring-offset-2">
+          <Text className='text-sm mb-2'>Focus</Text>
+          <Button variant='default' className='ring-2 ring-focus-ring ring-offset-2'>
             <Text>Default</Text>
           </Button>
         </View>
@@ -93,31 +93,31 @@ export const Default: Story = {
 export const Secondary: Story = {
   render: () => (
     <ScrollView>
-      <View className="space-y-4 p-4">
+      <View className='space-y-4 p-4'>
         <View>
-          <Text className="text-sm mb-2">Default</Text>
-          <Button variant="secondary">
+          <Text className='text-sm mb-2'>Default</Text>
+          <Button variant='secondary'>
             <Text>Secondary</Text>
           </Button>
         </View>
-        
+
         <View>
-          <Text className="text-sm mb-2">Hover</Text>
-          <Button variant="secondary" className="bg-secondary-hover">
+          <Text className='text-sm mb-2'>Hover</Text>
+          <Button variant='secondary' className='bg-secondary-hover'>
             <Text>Secondary</Text>
           </Button>
         </View>
-        
+
         <View>
-          <Text className="text-sm mb-2">Active</Text>
-          <Button variant="secondary" className="bg-secondary-active">
+          <Text className='text-sm mb-2'>Active</Text>
+          <Button variant='secondary' className='bg-secondary-active'>
             <Text>Secondary</Text>
           </Button>
         </View>
-        
+
         <View>
-          <Text className="text-sm mb-2">Focus</Text>
-          <Button variant="secondary" className="ring-2 ring-focus-ring ring-offset-2">
+          <Text className='text-sm mb-2'>Focus</Text>
+          <Button variant='secondary' className='ring-2 ring-focus-ring ring-offset-2'>
             <Text>Secondary</Text>
           </Button>
         </View>
@@ -129,31 +129,31 @@ export const Secondary: Story = {
 export const AccentCool: Story = {
   render: () => (
     <ScrollView>
-      <View className="space-y-4 p-4">
+      <View className='space-y-4 p-4'>
         <View>
-          <Text className="text-sm mb-2">Default</Text>
-          <Button variant="accent-cool">
+          <Text className='text-sm mb-2'>Default</Text>
+          <Button variant='accent-cool'>
             <Text>Accent Cool</Text>
           </Button>
         </View>
-        
+
         <View>
-          <Text className="text-sm mb-2">Hover</Text>
-          <Button variant="accent-cool" className="bg-accent-cool-hover">
+          <Text className='text-sm mb-2'>Hover</Text>
+          <Button variant='accent-cool' className='bg-accent-cool-hover'>
             <Text>Accent Cool</Text>
           </Button>
         </View>
-        
+
         <View>
-          <Text className="text-sm mb-2">Active</Text>
-          <Button variant="accent-cool" className="bg-accent-cool-active">
+          <Text className='text-sm mb-2'>Active</Text>
+          <Button variant='accent-cool' className='bg-accent-cool-active'>
             <Text>Accent Cool</Text>
           </Button>
         </View>
-        
+
         <View>
-          <Text className="text-sm mb-2">Focus</Text>
-          <Button variant="accent-cool" className="ring-2 ring-focus-ring ring-offset-2">
+          <Text className='text-sm mb-2'>Focus</Text>
+          <Button variant='accent-cool' className='ring-2 ring-focus-ring ring-offset-2'>
             <Text>Accent Cool</Text>
           </Button>
         </View>
@@ -165,31 +165,31 @@ export const AccentCool: Story = {
 export const AccentWarm: Story = {
   render: () => (
     <ScrollView>
-      <View className="space-y-4 p-4">
+      <View className='space-y-4 p-4'>
         <View>
-          <Text className="text-sm mb-2">Default</Text>
-          <Button variant="accent-warm">
+          <Text className='text-sm mb-2'>Default</Text>
+          <Button variant='accent-warm'>
             <Text>Accent Warm</Text>
           </Button>
         </View>
-        
+
         <View>
-          <Text className="text-sm mb-2">Hover</Text>
-          <Button variant="accent-warm" className="bg-accent-warm-hover">
+          <Text className='text-sm mb-2'>Hover</Text>
+          <Button variant='accent-warm' className='bg-accent-warm-hover'>
             <Text>Accent Warm</Text>
           </Button>
         </View>
-        
+
         <View>
-          <Text className="text-sm mb-2">Active</Text>
-          <Button variant="accent-warm" className="bg-accent-warm-active">
+          <Text className='text-sm mb-2'>Active</Text>
+          <Button variant='accent-warm' className='bg-accent-warm-active'>
             <Text>Accent Warm</Text>
           </Button>
         </View>
-        
+
         <View>
-          <Text className="text-sm mb-2">Focus</Text>
-          <Button variant="accent-warm" className="ring-2 ring-focus-ring ring-offset-2">
+          <Text className='text-sm mb-2'>Focus</Text>
+          <Button variant='accent-warm' className='ring-2 ring-focus-ring ring-offset-2'>
             <Text>Accent Warm</Text>
           </Button>
         </View>
@@ -201,31 +201,31 @@ export const AccentWarm: Story = {
 export const Base: Story = {
   render: () => (
     <ScrollView>
-      <View className="space-y-4 p-4">
+      <View className='space-y-4 p-4'>
         <View>
-          <Text className="text-sm mb-2">Default</Text>
-          <Button variant="base">
+          <Text className='text-sm mb-2'>Default</Text>
+          <Button variant='base'>
             <Text>Base</Text>
           </Button>
         </View>
-        
+
         <View>
-          <Text className="text-sm mb-2">Hover</Text>
-          <Button variant="base" className="bg-base-hover">
+          <Text className='text-sm mb-2'>Hover</Text>
+          <Button variant='base' className='bg-base-hover'>
             <Text>Base</Text>
           </Button>
         </View>
-        
+
         <View>
-          <Text className="text-sm mb-2">Active</Text>
-          <Button variant="base" className="bg-base-active">
+          <Text className='text-sm mb-2'>Active</Text>
+          <Button variant='base' className='bg-base-active'>
             <Text>Base</Text>
           </Button>
         </View>
-        
+
         <View>
-          <Text className="text-sm mb-2">Focus</Text>
-          <Button variant="base" className="ring-2 ring-focus-ring ring-offset-2">
+          <Text className='text-sm mb-2'>Focus</Text>
+          <Button variant='base' className='ring-2 ring-focus-ring ring-offset-2'>
             <Text>Base</Text>
           </Button>
         </View>
@@ -237,31 +237,34 @@ export const Base: Story = {
 export const Outline: Story = {
   render: () => (
     <ScrollView>
-      <View className="space-y-4 p-4">
+      <View className='space-y-4 p-4'>
         <View>
-          <Text className="text-sm mb-2">Default</Text>
-          <Button variant="outline">
+          <Text className='text-sm mb-2'>Default</Text>
+          <Button variant='outline'>
             <Text>Outline</Text>
           </Button>
         </View>
-        
+
         <View>
-          <Text className="text-sm mb-2">Hover</Text>
-          <Button variant="outline" className="border-primary-hover text-primary-hover">
+          <Text className='text-sm mb-2'>Hover</Text>
+          <Button variant='outline'>
             <Text>Outline</Text>
           </Button>
         </View>
-        
+
         <View>
-          <Text className="text-sm mb-2">Active</Text>
-          <Button variant="outline" className="border-primary-active text-primary-active">
+          <Text className='text-sm mb-2'>Active</Text>
+          <Button variant='outline'>
             <Text>Outline</Text>
           </Button>
         </View>
-        
+
         <View>
-          <Text className="text-sm mb-2">Focus</Text>
-          <Button variant="outline" className="ring-2 ring-focus-ring ring-offset-2">
+          <Text className='text-sm mb-2'>Focus</Text>
+          <Button
+            variant='outline'
+            className='ring-4 ring-blue-vivid-40v' // #2491FF
+          >
             <Text>Outline</Text>
           </Button>
         </View>
@@ -273,33 +276,33 @@ export const Outline: Story = {
 export const Inverse: Story = {
   render: () => (
     <ScrollView>
-      <View className="space-y-4 p-4">
-        <View className="bg-foreground p-4 rounded-md">
-          <View className="space-y-4">
+      <View className='space-y-4 p-4'>
+        <View className='bg-foreground p-4 rounded-md'>
+          <View className='space-y-4'>
             <View>
-              <Text className="text-sm mb-2 text-white">Default</Text>
-              <Button variant="inverse">
+              <Text className='text-sm mb-2 text-white'>Default</Text>
+              <Button variant='inverse'>
                 <Text>Inverse</Text>
               </Button>
             </View>
-            
+
             <View>
-              <Text className="text-sm mb-2 text-white">Hover</Text>
-              <Button variant="inverse" className="border-inverse-border-hover text-inverse-border-hover">
+              <Text className='text-sm mb-2 text-white'>Hover</Text>
+              <Button variant='inverse'>
                 <Text>Inverse</Text>
               </Button>
             </View>
-            
+
             <View>
-              <Text className="text-sm mb-2 text-white">Active</Text>
-              <Button variant="inverse" className="border-inverse-border-active text-inverse-border-active">
+              <Text className='text-sm mb-2 text-white'>Active</Text>
+              <Button variant='inverse'>
                 <Text>Inverse</Text>
               </Button>
             </View>
-            
+
             <View>
-              <Text className="text-sm mb-2 text-white">Focus</Text>
-              <Button variant="inverse" className="ring-2 ring-focus-ring ring-offset-2">
+              <Text className='text-sm mb-2 text-white'>Focus</Text>
+              <Button variant='inverse' className='ring-4 ring-blue-vivid-40v'>
                 <Text>Inverse</Text>
               </Button>
             </View>
@@ -362,35 +365,35 @@ export const Disabled: Story = {
 export const AllVariants: Story = {
   render: () => (
     <ScrollView>
-      <View className="space-y-12 p-4 w-full max-w-[393px]">
+      <View className='space-y-12 p-4 w-full max-w-[393px]'>
         {/* Primary */}
         <View>
-          <Text className="text-lg font-bold mb-4">Primary</Text>
-          <View className="space-y-4">
+          <Text className='text-lg font-bold mb-4'>Primary</Text>
+          <View className='space-y-4'>
             <View>
-              <Text className="text-sm mb-2">Default</Text>
-              <Button variant="default">
+              <Text className='text-sm mb-2'>Default</Text>
+              <Button variant='default'>
                 <Text>Primary</Text>
               </Button>
             </View>
-            
+
             <View>
-              <Text className="text-sm mb-2">Hover</Text>
-              <Button variant="default" className="bg-primary-hover">
+              <Text className='text-sm mb-2'>Hover</Text>
+              <Button variant='default'>
                 <Text>Primary</Text>
               </Button>
             </View>
-            
+
             <View>
-              <Text className="text-sm mb-2">Active</Text>
-              <Button variant="default" className="bg-primary-active">
+              <Text className='text-sm mb-2'>Active</Text>
+              <Button variant='default'>
                 <Text>Primary</Text>
               </Button>
             </View>
-            
+
             <View>
-              <Text className="text-sm mb-2">Focus</Text>
-              <Button variant="default" className="ring-2 ring-focus-ring ring-offset-2">
+              <Text className='text-sm mb-2'>Focus</Text>
+              <Button variant='default' focus>
                 <Text>Primary</Text>
               </Button>
             </View>
@@ -399,32 +402,32 @@ export const AllVariants: Story = {
 
         {/* Secondary */}
         <View>
-          <Text className="text-lg font-bold mb-4">Secondary</Text>
-          <View className="space-y-4">
+          <Text className='text-lg font-bold mb-4'>Secondary</Text>
+          <View className='space-y-4'>
             <View>
-              <Text className="text-sm mb-2">Default</Text>
-              <Button variant="secondary">
+              <Text className='text-sm mb-2'>Default</Text>
+              <Button variant='secondary'>
                 <Text>Secondary</Text>
               </Button>
             </View>
-            
+
             <View>
-              <Text className="text-sm mb-2">Hover</Text>
-              <Button variant="secondary" className="bg-secondary-hover">
+              <Text className='text-sm mb-2'>Hover</Text>
+              <Button variant='secondary'>
                 <Text>Secondary</Text>
               </Button>
             </View>
-            
+
             <View>
-              <Text className="text-sm mb-2">Active</Text>
-              <Button variant="secondary" className="bg-secondary-active">
+              <Text className='text-sm mb-2'>Active</Text>
+              <Button variant='secondary'>
                 <Text>Secondary</Text>
               </Button>
             </View>
-            
+
             <View>
-              <Text className="text-sm mb-2">Focus</Text>
-              <Button variant="secondary" className="ring-2 ring-focus-ring ring-offset-2">
+              <Text className='text-sm mb-2'>Focus</Text>
+              <Button variant='secondary' focus>
                 <Text>Secondary</Text>
               </Button>
             </View>
@@ -433,32 +436,32 @@ export const AllVariants: Story = {
 
         {/* Accent Cool */}
         <View>
-          <Text className="text-lg font-bold mb-4">Accent Cool</Text>
-          <View className="space-y-4">
+          <Text className='text-lg font-bold mb-4'>Accent Cool</Text>
+          <View className='space-y-4'>
             <View>
-              <Text className="text-sm mb-2">Default</Text>
-              <Button variant="accent-cool">
+              <Text className='text-sm mb-2'>Default</Text>
+              <Button variant='accent-cool'>
                 <Text>Accent Cool</Text>
               </Button>
             </View>
-            
+
             <View>
-              <Text className="text-sm mb-2">Hover</Text>
-              <Button variant="accent-cool" className="bg-accent-cool-hover">
+              <Text className='text-sm mb-2'>Hover</Text>
+              <Button variant='accent-cool'>
                 <Text>Accent Cool</Text>
               </Button>
             </View>
-            
+
             <View>
-              <Text className="text-sm mb-2">Active</Text>
-              <Button variant="accent-cool" className="bg-accent-cool-active">
+              <Text className='text-sm mb-2'>Active</Text>
+              <Button variant='accent-cool'>
                 <Text>Accent Cool</Text>
               </Button>
             </View>
-            
+
             <View>
-              <Text className="text-sm mb-2">Focus</Text>
-              <Button variant="accent-cool" className="ring-2 ring-focus-ring ring-offset-2">
+              <Text className='text-sm mb-2'>Focus</Text>
+              <Button variant='accent-cool' focus>
                 <Text>Accent Cool</Text>
               </Button>
             </View>
@@ -467,32 +470,32 @@ export const AllVariants: Story = {
 
         {/* Accent Warm */}
         <View>
-          <Text className="text-lg font-bold mb-4">Accent Warm</Text>
-          <View className="space-y-4">
+          <Text className='text-lg font-bold mb-4'>Accent Warm</Text>
+          <View className='space-y-4'>
             <View>
-              <Text className="text-sm mb-2">Default</Text>
-              <Button variant="accent-warm">
+              <Text className='text-sm mb-2'>Default</Text>
+              <Button variant='accent-warm'>
                 <Text>Accent Warm</Text>
               </Button>
             </View>
-            
+
             <View>
-              <Text className="text-sm mb-2">Hover</Text>
-              <Button variant="accent-warm" className="bg-accent-warm-hover">
+              <Text className='text-sm mb-2'>Hover</Text>
+              <Button variant='accent-warm' className='bg-accent-warm-hover'>
                 <Text>Accent Warm</Text>
               </Button>
             </View>
-            
+
             <View>
-              <Text className="text-sm mb-2">Active</Text>
-              <Button variant="accent-warm" className="bg-accent-warm-active">
+              <Text className='text-sm mb-2'>Active</Text>
+              <Button variant='accent-warm' className='bg-accent-warm-active'>
                 <Text>Accent Warm</Text>
               </Button>
             </View>
-            
+
             <View>
-              <Text className="text-sm mb-2">Focus</Text>
-              <Button variant="accent-warm" className="ring-2 ring-focus-ring ring-offset-2">
+              <Text className='text-sm mb-2'>Focus</Text>
+              <Button variant='accent-warm' className='ring-2 ring-focus-ring ring-offset-2'>
                 <Text>Accent Warm</Text>
               </Button>
             </View>
@@ -501,32 +504,32 @@ export const AllVariants: Story = {
 
         {/* Base */}
         <View>
-          <Text className="text-lg font-bold mb-4">Base</Text>
-          <View className="space-y-4">
+          <Text className='text-lg font-bold mb-4'>Base</Text>
+          <View className='space-y-4'>
             <View>
-              <Text className="text-sm mb-2">Default</Text>
-              <Button variant="base">
+              <Text className='text-sm mb-2'>Default</Text>
+              <Button variant='base'>
                 <Text>Base</Text>
               </Button>
             </View>
-            
+
             <View>
-              <Text className="text-sm mb-2">Hover</Text>
-              <Button variant="base" className="bg-base-hover">
+              <Text className='text-sm mb-2'>Hover</Text>
+              <Button variant='base'>
                 <Text>Base</Text>
               </Button>
             </View>
-            
+
             <View>
-              <Text className="text-sm mb-2">Active</Text>
-              <Button variant="base" className="bg-base-active">
+              <Text className='text-sm mb-2'>Active</Text>
+              <Button variant='base'>
                 <Text>Base</Text>
               </Button>
             </View>
-            
+
             <View>
-              <Text className="text-sm mb-2">Focus</Text>
-              <Button variant="base" className="ring-2 ring-focus-ring ring-offset-2">
+              <Text className='text-sm mb-2'>Focus</Text>
+              <Button variant='base' focus>
                 <Text>Base</Text>
               </Button>
             </View>
@@ -535,32 +538,32 @@ export const AllVariants: Story = {
 
         {/* Outline */}
         <View>
-          <Text className="text-lg font-bold mb-4">Outline</Text>
-          <View className="space-y-4">
+          <Text className='text-lg font-bold mb-4'>Outline</Text>
+          <View className='space-y-4'>
             <View>
-              <Text className="text-sm mb-2">Default</Text>
-              <Button variant="outline">
+              <Text className='text-sm mb-2'>Default</Text>
+              <Button variant='outline'>
                 <Text>Outline</Text>
               </Button>
             </View>
-            
+
             <View>
-              <Text className="text-sm mb-2">Hover</Text>
-              <Button variant="outline" className="border-primary-hover text-primary-hover">
+              <Text className='text-sm mb-2'>Hover</Text>
+              <Button variant='outline'>
                 <Text>Outline</Text>
               </Button>
             </View>
-            
+
             <View>
-              <Text className="text-sm mb-2">Active</Text>
-              <Button variant="outline" className="border-primary-active text-primary-active">
+              <Text className='text-sm mb-2'>Active</Text>
+              <Button variant='outline'>
                 <Text>Outline</Text>
               </Button>
             </View>
-            
+
             <View>
-              <Text className="text-sm mb-2">Focus</Text>
-              <Button variant="outline" className="ring-2 ring-focus-ring ring-offset-2">
+              <Text className='text-sm mb-2'>Focus</Text>
+              <Button variant='outline' focus>
                 <Text>Outline</Text>
               </Button>
             </View>
@@ -568,34 +571,34 @@ export const AllVariants: Story = {
         </View>
 
         {/* Inverse */}
-        <View className="w-full mb-8">
-          <Text className="text-lg font-bold mb-4">Inverse</Text>
-          <View className="bg-foreground p-4 rounded-md">
-            <View className="space-y-4">
+        <View className='w-full mb-8'>
+          <Text className='text-lg font-bold mb-4'>Inverse</Text>
+          <View className='bg-foreground p-4 rounded-md'>
+            <View className='space-y-4'>
               <View>
-                <Text className="text-sm mb-2 text-white">Default</Text>
-                <Button variant="inverse">
+                <Text className='text-sm mb-2 text-white'>Default</Text>
+                <Button variant='inverse'>
                   <Text>Inverse</Text>
                 </Button>
               </View>
-              
+
               <View>
-                <Text className="text-sm mb-2 text-white">Hover</Text>
-                <Button variant="inverse" className="border-inverse-border-hover text-inverse-border-hover">
+                <Text className='text-sm mb-2 text-white'>Hover</Text>
+                <Button variant='inverse'>
                   <Text>Inverse</Text>
                 </Button>
               </View>
-              
+
               <View>
-                <Text className="text-sm mb-2 text-white">Active</Text>
-                <Button variant="inverse" className="border-inverse-border-active text-inverse-border-active">
+                <Text className='text-sm mb-2 text-white'>Active</Text>
+                <Button variant='inverse'>
                   <Text>Inverse</Text>
                 </Button>
               </View>
-              
+
               <View>
-                <Text className="text-sm mb-2 text-white">Focus</Text>
-                <Button variant="inverse" className="ring-2 ring-focus-ring ring-offset-2">
+                <Text className='text-sm mb-2 text-white'>Focus</Text>
+                <Button variant='inverse' focus>
                   <Text>Inverse</Text>
                 </Button>
               </View>

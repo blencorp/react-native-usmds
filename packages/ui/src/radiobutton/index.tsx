@@ -2,6 +2,11 @@ import { ComponentPropsWithoutRef, ElementRef, forwardRef, useContext, createCon
 import { View, Text, Pressable, GestureResponderEvent } from 'react-native';
 import * as RadioGroupPrimitive from '@rn-primitives/radio-group';
 import { cn } from '@/lib/utils';
+import { cssInterop } from 'nativewind';
+
+cssInterop(RadioGroupPrimitive.Root, { className: 'style' });
+cssInterop(RadioGroupPrimitive.Item, { className: 'style' });
+cssInterop(RadioGroupPrimitive.Indicator, { className: 'style' });
 
 const RadioContext = createContext<{ value?: string }>({});
 interface RadioButtonProps extends ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item> {

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Text } from '@blen/react-native-usmds-ui-internal';
+import { Text, TextClassContext } from './Text';
 import { View } from 'react-native';
+import * as Slot from '@rn-primitives/slot';
 
 const meta = {
   title: 'Components/Text',
@@ -40,44 +41,59 @@ export const Default: Story = {
   }
 };
 
-export const CustomStyle: Story = {
-  args: {
-    children: 'Styled Text',
-    className: 'text-2xl font-bold text-blue-500'
-  }
-};
-
-export const LongText: Story = {
-  args: {
-    children:
-      'This is a longer piece of text that demonstrates how the component handles multiple lines of content. It should wrap naturally and maintain proper spacing.'
-  }
-};
-
 export const WithContext: Story = {
-  decorators: [
-    (Story) => (
-      <View className='bg-gray-100 p-4 rounded-md'>
-        <Story />
-      </View>
-    )
-  ],
-  args: {
-    children: 'Text with Context'
-  }
+  render: () => (
+    <TextClassContext.Provider value='text-primary font-bold'>
+      <Text>This text inherits styles from context</Text>
+      <Text className='text-secondary'>This overrides the context color</Text>
+    </TextClassContext.Provider>
+  )
 };
 
-export const Variants: Story = {
+export const AsChild: Story = {
+  render: () => (
+    <Text asChild>
+      <Slot.Text>This text uses Slot component</Slot.Text>
+    </Text>
+  )
+};
+
+export const TypographyVariants: Story = {
   render: () => (
     <View className='space-y-4'>
-      <Text className='text-sm'>Small Text</Text>
-      <Text className='text-base'>Base Text</Text>
-      <Text className='text-lg'>Large Text</Text>
-      <Text className='text-xl font-bold'>Bold Text</Text>
-      <Text className='italic'>Italic Text</Text>
-      <Text className='underline'>Underlined Text</Text>
-      <Text className='text-primary'>Primary Color Text</Text>
-      <Text className='text-secondary'>Secondary Color Text</Text>
+      <Text className='text-[40px] leading-[48px] font-bold'>Display Large</Text>
+      <Text className='text-[36px] leading-[44px] font-bold'>Display Medium</Text>
+      <Text className='text-[32px] leading-[40px] font-bold'>Display Small</Text>
+      <Text className='text-[22px] leading-[28px]'>Heading Large</Text>
+      <Text className='text-[20px] leading-[24px]'>Heading Medium</Text>
+      <Text className='text-[18px] leading-[22px]'>Heading Small</Text>
+      <Text className='text-[16px] leading-[20px]'>Body Large</Text>
+      <Text className='text-[14px] leading-[18px]'>Body Medium</Text>
+      <Text className='text-[12px] leading-[16px]'>Body Small</Text>
+    </View>
+  )
+};
+
+export const Colors: Story = {
+  render: () => (
+    <View className='space-y-2'>
+      <Text className='text-base-ink'>Base Ink</Text>
+      <Text className='text-primary'>Primary</Text>
+      <Text className='text-secondary'>Secondary</Text>
+      <Text className='text-error'>Error</Text>
+      <Text className='text-success'>Success</Text>
+      <Text className='text-warning'>Warning</Text>
+    </View>
+  )
+};
+
+export const Weights: Story = {
+  render: () => (
+    <View className='space-y-2'>
+      <Text className='font-normal'>Normal (400)</Text>
+      <Text className='font-medium'>Medium (500)</Text>
+      <Text className='font-semibold'>Semibold (600)</Text>
+      <Text className='font-bold'>Bold (700)</Text>
     </View>
   )
 };

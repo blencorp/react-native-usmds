@@ -30,6 +30,7 @@ const tagTextVariants = cva('text-white font-normal text-center', {
 interface TagProps extends ComponentPropsWithoutRef<typeof View>, VariantProps<typeof tagVariants> {
   label: string;
   className?: string;
+  size?: 'default' | 'big';
 }
 
 const Tag = forwardRef<View, TagProps>(({ label, size, className, ...props }, ref) => {

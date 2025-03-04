@@ -24,6 +24,7 @@ export const ALL_COMPONENTS = [
 interface ComponentMetadata {
   name: string;
   dependencies?: string[];
+  internalDependencies?: string[];
 }
 
 export const ICON_PATHS = {
@@ -87,7 +88,8 @@ export const ICON_PATHS = {
     'M178.5 797C179.88 797 181 795.88 181 794.5C181 792.83 178.5 790 178.5 790C178.5 790 176 792.83 176 794.5C176 795.88 177.12 797 178.5 797ZM173.5 798C174.33 798 175 797.33 175 796.5C175 795.66 173.5 794 173.5 794C173.5 794 172 795.66 172 796.5C172 797.33 172.67 798 173.5 798Z',
   checkroom:
     'M280 737C278.34 737 277 738.34 277 740C277 741.66 278.34 743 280 743C281.66 743 283 741.66 283 740C283 738.34 281.66 737 280 737ZM276.5 732C277.33 732 278 731.33 278 730.5C278 729.67 277.33 729 276.5 729C275.67 729 275 729.67 275 730.5C275 731.33 275.67 732 276.5 732Z',
-  check: 'M284.59 743.58L278 750.17L274.41 746.59L273 748L278 753L286 745L284.59 743.58Z',
+  check: 'M8.99991 16.17L4.82991 12L3.40991 13.41L8.99991 19L20.9999 6.99997L19.5899 5.58997L8.99991 16.17Z',
+
   check_circle:
     'M316 738C310.48 738 306 742.48 306 748C306 753.52 310.48 758 316 758C321.52 758 326 753.52 326 748C326 742.48 321.52 738 316 738ZM314 753L309 748L310.41 746.59L314 750.17L321.59 742.58L323 744L314 753Z',
   check_circle_outline:
@@ -106,109 +108,133 @@ export const ICON_PATHS = {
   backpack:
     'M40.5 26C37.89 26.7 34.83 27 32 27C29.17 27 26.11 26.7 23.5 26L23 28C24.86 28.5 27 28.83 29 29V42H31V36H33V42H35V29C37 28.83 39.14 28.5 41 28L40.5 26ZM32 26C33.1 26 34 25.1 34 24C34 22.9 33.1 22 32 22C30.9 22 30 22.9 30 24C30 25.1 30.9 26 32 26Z',
   bathtub:
-    'M17.17 2C18.73 2 20 3.27 20 4.83V13H22V19C22 20.1 21.1 21 20 21C20 21.55 19.55 22 19 22H5C4.45 22 4 21.55 4 21C2.9 21 2 20.1 2 19V13H5V12.25C5 11.01 6 10.01 7.24 10C7.59 10 7.93 10.08 8.24 10.23C8.5 10.35 8.74 10.52 8.93 10.73L10.33 12.28C10.58 12.55 10.85 12.79 11.15 13H18V4.83C18 4.37 17.63 4 17.17 4C16.95 4 16.74 4.09 16.59 4.24L15.34 5.49C15.38 5.66 15.41 5.82 15.41 6C15.41 6.4 15.29 6.77 15.09 7.08L12.33 4.32C12.64 4.12 13.01 4 13.41 4C13.59 4 13.76 4.03 13.92 4.08L15.17 2.83C15.7 2.3 16.42 2 17.17 2ZM7 5C8.10457 5 9 5.89543 9 7C9 8.10457 8.10457 9 7 9C5.89543 9 5 8.10457 5 7C5 5.89543 5.89543 5 7 5Z',
+    'M17.17 2C18.73 2 20 3.27 20 4.83V13H22V19C22 20.1 21.1 21 20 21C20 21.55 19.55 22 19 22H5C4.45 22 4 21.55 4 21C2.9 21 2 20.1 2 19V13H5V12.25C5 11.01 6 10.01 7.24 10C7.59 10 7.93 10.08 8.24 10.23C8.5 10.35 8.74 10.52 8.93 10.73L10.33 12.28C10.58 12.55 10.85 12.79 11.15 13H18V4.83C18 4.37 17.63 4 17.17 4C16.95 4 16.74 4.09 16.59 4.24L15.34 5.49C15.38 5.66 15.41 5.82 15.41 6C15.41 6.4 15.29 6.77 15.09 7.08L12.33 4.32C12.64 4.12 13.01 4 13.41 4C13.59 4 13.76 4.03 13.92 4.08L15.17 2.83C15.7 2.3 16.42 2 17.17 2ZM7 5C8.10457 5 9 5.89543 9 7C9 8.10457 8.10457 9 7 9C5.89543 9 5 8.10457 5 7 5Z',
   build:
     'M215.14 747.94C215.18 747.64 215.2 747.33 215.2 747C215.2 746.68 215.18 746.36 215.13 746.06L217.16 744.48C217.34 744.34 217.39 744.07 217.28 743.87L215.36 740.55C215.24 740.33 214.99 740.26 214.77 740.33L212.38 741.29C211.88 740.91 211.35 740.59 210.76 740.35L210.4 737.81C210.36 737.57 210.16 737.4 209.92 737.4H206.08C205.84 737.4 205.65 737.57 205.61 737.81L205.25 740.35C204.66 740.59 204.12 740.92 203.63 741.29L201.24 740.33C201.02 740.25 200.77 740.33 200.65 740.55L198.74 743.87C198.62 744.08 198.66 744.34 198.86 744.48L200.89 746.06C200.84 746.36 200.8 746.69 200.8 747C200.8 747.31 200.82 747.64 200.87 747.94L198.84 749.52C198.66 749.66 198.61 749.93 198.72 750.13L200.64 753.45C200.76 753.67 201.01 753.74 201.23 753.67L203.62 752.71C204.12 753.09 204.65 753.41 205.24 753.65L205.6 756.19C205.65 756.43 205.84 756.6 206.08 756.6H209.92C210.16 756.6 210.36 756.43 210.39 756.19L210.75 753.65C211.34 753.41 211.88 753.09 212.37 752.71L214.76 753.67C214.98 753.75 215.23 753.67 215.35 753.45L217.27 750.13C217.39 749.91 217.34 749.66 217.15 749.52L215.14 747.94Z',
   bedding:
     'M17 10.75C18.7949 10.75 20.25 12.2051 20.25 14C20.25 15.7949 18.7949 17.25 17 17.25H7C6.30964 17.25 5.75 16.6903 5.75 16C5.75 15.3096 6.30964 14.75 7 14.75H17C17.4142 14.75 17.75 14.4142 17.75 14C17.75 13.5858 17.4142 13.25 17 13.25H7C5.48122 13.25 4.25 14.4812 4.25 16C4.25 17.5188 5.48122 18.75 7 18.75H21C21.6904 18.75 22.25 19.3096 22.25 20C22.25 20.6903 21.6904 21.25 21 21.25H7C4.10051 21.25 1.75 18.8995 1.75 16C1.75 13.1005 4.10051 10.75 7 10.75H17ZM16.3963 1.27759L17.06 1.36998C17.7789 1.48244 18.3657 1.99419 18.5799 2.68036L18.62 2.82998C18.9799 4.29747 19.0076 5.82517 18.7031 7.30192L18.62 7.66998C18.4528 8.39703 17.8776 8.95384 17.1566 9.10409L17 9.12998C13.906 9.59192 10.7641 9.62272 7.66369 9.22237L7 9.12998C6.30139 8.99576 5.73862 8.48771 5.52935 7.81628L5.49 7.66998C5.13934 6.20139 5.11236 4.67564 5.40908 3.19826L5.49 2.82998C5.65574 2.11995 6.20758 1.56972 6.90777 1.40036L7.06 1.36998C10.154 0.908041 13.2959 0.877245 16.3963 1.27759Z',
   bookmark: 'M17 3H7C5.9 3 5.01 3.9 5.01 5L5 21L12 18L19 21V5C19 3.9 18.1 3 17 3Z',
   bug_report:
-    'M20 8H17.19C16.74 7.22 16.12 6.55 15.37 6.04L17 4.41L15.59 3L13.42 5.17C12.96 5.06 12.49 5 12 5C11.51 5 11.04 5.06 10.59 5.17L8.41 3L7 4.41L8.62 6.04C7.88 6.55 7.26 7.22 6.81 8H4V10H6.09C6.04 10.33 6 10.66 6 11V12H4V14H6V15C6 15.34 6.04 15.67 6.09 16H4V18H6.81C7.85 19.79 9.78 21 12 21C14.22 21 16.15 19.79 17.19 18H20V16H17.91C17.96 15.67 18 15.34 18 15V14H20V12H18V11C18 10.66 17.96 10.33 17.91 10H20V8ZM14 16H10V14H14V16ZM14 12H10V10H14V12Z'
+    'M20 8H17.19C16.74 7.22 16.12 6.55 15.37 6.04L17 4.41L15.59 3L13.42 5.17C12.96 5.06 12.49 5 12 5C11.51 5 11.04 5.06 10.59 5.17L8.41 3L7 4.41L8.62 6.04C7.88 6.55 7.26 7.22 6.81 8H4V10H6.09C6.04 10.33 6 10.66 6 11V12H4V14H6V15C6 15.34 6.04 15.67 6.09 16H4V18H6.81C7.85 19.79 9.78 21 12 21C14.22 21 16.15 19.79 17.19 18H20V16H17.91C17.96 15.67 18 15.34 18 15V14H20V12H18V11C18 10.66 17.96 10.33 17.91 10H20V8ZM14 16H10V14H14V16ZM14 12H10V10H14V12Z',
+  error_outline:
+    'M11 15H13V17H11V15ZM11 7H13V13H11V7ZM11.99 2C6.47 2 2 6.48 2 12C2 17.52 6.47 22 11.99 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 11.99 2ZM12 20C7.58 20 4 16.42 4 12C4 7.58 7.58 4 12 4C16.42 4 20 7.58 20 12C20 16.42 16.42 20 12 20Z',
+  info: 'M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V11H13V17ZM13 9H11V7H13V9Z',
+  face_id:
+    'M1.17383 6.66501C1.69141 6.66501 1.96485 6.37204 1.96485 5.86423V3.55954C1.96485 2.54392 2.50196 2.02634 3.47852 2.02634H5.8418C6.35938 2.02634 6.64258 1.74313 6.64258 1.23532C6.64258 0.727509 6.35938 0.454071 5.8418 0.454071H3.45899C1.41797 0.454071 0.392578 1.45993 0.392578 3.47165V5.86423C0.392578 6.37204 0.675781 6.66501 1.17383 6.66501ZM18.7227 6.66501C19.2403 6.66501 19.5137 6.37204 19.5137 5.86423V3.47165C19.5137 1.45993 18.4883 0.454071 16.4473 0.454071H14.0547C13.5469 0.454071 13.2637 0.727509 13.2637 1.23532C13.2637 1.74313 13.5469 2.02634 14.0547 2.02634H16.418C17.3848 2.02634 17.9414 2.54392 17.9414 3.55954V5.86423C17.9414 6.37204 18.2246 6.66501 18.7227 6.66501ZM3.45899 19.5654H5.8418C6.35938 19.5654 6.64258 19.2822 6.64258 18.7841C6.64258 18.2763 6.35938 17.9931 5.8418 17.9931H3.47852C2.50196 17.9931 1.96485 17.4755 1.96485 16.4599V14.1552C1.96485 13.6376 1.68164 13.3544 1.17383 13.3544C0.666016 13.3544 0.392578 13.6376 0.392578 14.1552V16.538C0.392578 18.5595 1.41797 19.5654 3.45899 19.5654ZM14.0547 19.5654H16.4473C18.4883 19.5654 19.5137 18.5497 19.5137 16.538V14.1552C19.5137 13.6376 19.2305 13.3544 18.7227 13.3544C18.2149 13.3544 17.9414 13.6376 17.9414 14.1552V16.4599C17.9414 17.4755 17.3848 17.9931 16.418 17.9931H14.0547C13.5469 17.9931 13.2637 18.2763 13.2637 18.7841C13.2637 19.2822 13.5469 19.5654 14.0547 19.5654ZM6.23242 9.35056C6.69141 9.35056 7.02344 9.02829 7.02344 8.55954V7.23142C7.02344 6.76266 6.69141 6.4404 6.23242 6.4404C5.77344 6.4404 5.45117 6.76266 5.45117 7.23142V8.55954C5.45117 9.02829 5.77344 9.35056 6.23242 9.35056ZM9.17188 11.6552C9.19141 11.6552 9.2207 11.6552 9.25 11.6552C10.2363 11.6552 10.7735 11.1181 10.7735 10.1318V7.05563C10.7735 6.67477 10.5196 6.43063 10.1484 6.43063C9.75781 6.43063 9.50391 6.67477 9.50391 7.05563V10.2197C9.50391 10.3174 9.44531 10.3662 9.35742 10.3662H9.01563C8.66406 10.3662 8.39063 10.6396 8.39063 10.9911C8.39063 11.4111 8.67383 11.6552 9.17188 11.6552ZM13.6446 9.35056C14.0938 9.35056 14.416 9.02829 14.416 8.55954V7.23142C14.416 6.76266 14.0938 6.4404 13.6446 6.4404C13.1758 6.4404 12.8535 6.76266 12.8535 7.23142V8.55954C12.8535 9.02829 13.1758 9.35056 13.6446 9.35056ZM9.89453 14.9365C11.0762 14.9365 12.2676 14.4286 13.1172 13.579C13.2344 13.4716 13.293 13.3056 13.293 13.1103C13.293 12.7392 13.0196 12.4755 12.6582 12.4755C12.4727 12.4755 12.336 12.5439 12.1504 12.7392C11.6133 13.2958 10.7637 13.6767 9.89453 13.6767C9.07422 13.6767 8.21485 13.3154 7.64844 12.7392C7.49219 12.5927 7.36524 12.4755 7.13086 12.4755C6.76953 12.4755 6.4961 12.7392 6.4961 13.1103C6.4961 13.2763 6.55469 13.4325 6.68164 13.5693C7.47266 14.4677 8.71289 14.9365 9.89453 14.9365Z',
+  fingerprint:
+    'M17.8102 4.47C17.7302 4.47 17.6502 4.45 17.5802 4.41C15.6602 3.42 14.0002 3 12.0102 3C10.0302 3 8.15023 3.47 6.44023 4.41C6.20023 4.54 5.90023 4.45 5.76023 4.21C5.63023 3.97 5.72023 3.66 5.96023 3.53C7.82023 2.52 9.86023 2 12.0102 2C14.1402 2 16.0002 2.47 18.0402 3.52C18.2902 3.65 18.3802 3.95 18.2502 4.19C18.1602 4.37 17.9902 4.47 17.8102 4.47ZM3.50023 9.72C3.40023 9.72 3.30023 9.69 3.21023 9.63C2.98023 9.47 2.93023 9.16 3.09023 8.93C4.08023 7.53 5.34023 6.43 6.84023 5.66C9.98023 4.04 14.0002 4.03 17.1502 5.65C18.6502 6.42 19.9102 7.51 20.9002 8.9C21.0602 9.12 21.0102 9.44 20.7802 9.6C20.5502 9.76 20.2402 9.71 20.0802 9.48C19.1802 8.22 18.0402 7.23 16.6902 6.54C13.8202 5.07 10.1502 5.07 7.29023 6.55C5.93023 7.25 4.79023 8.25 3.89023 9.51C3.81023 9.65 3.66023 9.72 3.50023 9.72ZM9.75023 21.79C9.62023 21.79 9.49023 21.74 9.40023 21.64C8.53023 20.77 8.06023 20.21 7.39023 19C6.70023 17.77 6.34023 16.27 6.34023 14.66C6.34023 11.69 8.88023 9.27 12.0002 9.27C15.1202 9.27 17.6602 11.69 17.6602 14.66C17.6602 14.94 17.4402 15.16 17.1602 15.16C16.8802 15.16 16.6602 14.94 16.6602 14.66C16.6602 12.24 14.5702 10.27 12.0002 10.27C9.43023 10.27 7.34023 12.24 7.34023 14.66C7.34023 16.1 7.66023 17.43 8.27023 18.51C8.91023 19.66 9.35023 20.15 10.1202 20.93C10.3102 21.13 10.3102 21.44 10.1202 21.64C10.0102 21.74 9.88023 21.79 9.75023 21.79ZM16.9202 19.94C15.7302 19.94 14.6802 19.64 13.8202 19.05C12.3302 18.04 11.4402 16.4 11.4402 14.66C11.4402 14.38 11.6602 14.16 11.9402 14.16C12.2202 14.16 12.4402 14.38 12.4402 14.66C12.4402 16.07 13.1602 17.4 14.3802 18.22C15.0902 18.7 15.9202 18.93 16.9202 18.93C17.1602 18.93 17.5602 18.9 17.9602 18.83C18.2302 18.78 18.4902 18.96 18.5402 19.24C18.5902 19.51 18.4102 19.77 18.1302 19.82C17.5602 19.93 17.0602 19.94 16.9202 19.94ZM14.9102 22C14.8702 22 14.8202 21.99 14.7802 21.98C13.1902 21.54 12.1502 20.95 11.0602 19.88C9.66023 18.49 8.89023 16.64 8.89023 14.66C8.89023 13.04 10.2702 11.72 11.9702 11.72C13.6702 11.72 15.0502 13.04 15.0502 14.66C15.0502 15.73 15.9802 16.6 17.1302 16.6C18.2802 16.6 19.2102 15.73 19.2102 14.66C19.2102 10.89 15.9602 7.83 11.9602 7.83C9.12023 7.83 6.52023 9.41 5.35023 11.86C4.96023 12.67 4.76023 13.62 4.76023 14.66C4.76023 15.44 4.83023 16.67 5.43023 18.27C5.53023 18.53 5.40023 18.82 5.14023 18.91C4.88023 19.01 4.59023 18.87 4.50023 18.62C4.01023 17.31 3.77023 16.01 3.77023 14.66C3.77023 13.46 4.00023 12.37 4.45023 11.42C5.78023 8.63 8.73023 6.82 11.9602 6.82C16.5102 6.82 20.2102 10.33 20.2102 14.65C20.2102 16.27 18.8302 17.59 17.1302 17.59C15.4302 17.59 14.0502 16.27 14.0502 14.65C14.0502 13.58 13.1202 12.71 11.9702 12.71C10.8202 12.71 9.89023 13.58 9.89023 14.65C9.89023 16.36 10.5502 17.96 11.7602 19.16C12.7102 20.1 13.6202 20.62 15.0302 21.01C15.3002 21.08 15.4502 21.36 15.3802 21.62C15.3302 21.85 15.1202 22 14.9102 22Z',
+  launch:
+    'M19 19H5V5H12V3H5C3.89 3 3 3.9 3 5V19C3 20.1 3.89 21 5 21H19C20.1 21 21 20.1 21 19V12H19V19ZM14 3V5H17.59L7.76 14.83L9.17 16.24L19 6.41V10H21V3H14Z',
+  navigate_next: 'M10.0001 6L8.59009 7.41L13.1701 12L8.59009 16.59L10.0001 18L16.0001 12L10.0001 6Z',
+  navigate_before: 'M15.41 7.41L14 6L8 12L14 18L15.41 16.59L10.83 12L15.41 7.41Z'
 };
 
 export const COMPONENT_METADATA: Record<string, ComponentMetadata> = {
   Alert: {
     name: 'Alert',
-    dependencies: ['class-variance-authority', 'tailwind-merge', 'clsx', 'lucide-react-native']
+    dependencies: [],
+    internalDependencies: ['Icon']
   },
   Banner: {
     name: 'Banner',
-    dependencies: ['class-variance-authority', 'tailwind-merge', 'clsx', 'react-native-svg']
+    dependencies: [],
+    internalDependencies: ['Icon']
   },
   BiometricSignIn: {
     name: 'BiometricSignIn',
-    dependencies: ['react-native-biometrics', 'class-variance-authority', 'tailwind-merge', 'clsx']
+    dependencies: [],
+    internalDependencies: ['Icon']
   },
   Button: {
     name: 'Button',
-    dependencies: ['class-variance-authority', 'tailwind-merge', 'clsx']
+    dependencies: [],
+    internalDependencies: ['Text']
   },
   ButtonGroup: {
     name: 'ButtonGroup',
-    dependencies: ['class-variance-authority', 'tailwind-merge', 'clsx']
+    dependencies: [],
+    internalDependencies: []
   },
   Card: {
     name: 'Card',
-    dependencies: ['class-variance-authority', 'tailwind-merge', 'clsx']
-  },
-  Input: {
-    name: 'Input',
-    dependencies: ['class-variance-authority', 'tailwind-merge', 'clsx']
+    dependencies: [],
+    internalDependencies: ['Button']
   },
   Checkbox: {
     name: 'Checkbox',
-    dependencies: ['@rn-primitives/checkbox', 'tailwind-merge', 'clsx', 'lucide-react-native']
+    dependencies: ['@rn-primitives/checkbox'],
+    internalDependencies: []
   },
   CheckboxTile: {
     name: 'CheckboxTile',
-    dependencies: ['@rn-primitives/checkbox', 'class-variance-authority', 'tailwind-merge', 'clsx', 'lucide-react-native']
+    dependencies: ['@rn-primitives/checkbox'],
+    internalDependencies: ['Checkbox']
   },
   Icon: {
     name: 'Icon',
-    dependencies: ['react-native-svg']
+    dependencies: []
   },
   Link: {
     name: 'Link',
-    dependencies: ['class-variance-authority', 'tailwind-merge', 'clsx', 'lucide-react-native']
+    dependencies: [],
+    internalDependencies: [] 
   },
   Pagination: {
     name: 'Pagination',
-    dependencies: ['class-variance-authority', 'tailwind-merge', 'clsx', 'lucide-react-native']
+    dependencies: [],
+    internalDependencies: ['Button']
   },
   RadioButton: {
     name: 'RadioButton',
-    dependencies: ['@rn-primitives/radio-group', 'class-variance-authority', 'tailwind-merge', 'clsx']
+    dependencies: ['@rn-primitives/radio-group'],
+    internalDependencies: []
   },
   RadioTile: {
     name: 'RadioTile',
-    dependencies: ['@rn-primitives/radio-group', 'class-variance-authority', 'tailwind-merge', 'clsx']
+    dependencies: ['@rn-primitives/radio-group'],
+    internalDependencies: ['RadioButton'] 
   },
   Snackbar: {
     name: 'Snackbar',
-    dependencies: ['class-variance-authority', 'tailwind-merge', 'clsx', 'lucide-react-native']
+    dependencies: [],
+    internalDependencies: ['Icon']
   },
   StepIndicator: {
     name: 'StepIndicator',
-    dependencies: ['class-variance-authority', 'tailwind-merge', 'clsx']
+    dependencies: [],
+    internalDependencies: []
   },
   Tag: {
     name: 'Tag',
-    dependencies: ['class-variance-authority', 'tailwind-merge', 'clsx']
+    dependencies: [],
+    internalDependencies: ['Icon']
   },
   Text: {
     name: 'Text',
-    dependencies: ['@rn-primitives/slot', '@rn-primitives/types', 'tailwind-merge', 'clsx']
+    dependencies: ['@rn-primitives/slot', '@rn-primitives/types']
   },
   Textarea: {
     name: 'Textarea',
-    dependencies: ['class-variance-authority', 'tailwind-merge', 'clsx']
+    dependencies: [],
+    internalDependencies: []
   },
   TextInput: {
     name: 'TextInput',
-    dependencies: ['class-variance-authority', 'tailwind-merge', 'clsx']
+    dependencies: [],
+    internalDependencies: []
   },
   Toggle: {
     name: 'Toggle',
-    dependencies: ['class-variance-authority', 'tailwind-merge', 'clsx']
+    dependencies: ['@rn-primitives/toggle']
+    // No internal dependencies
   }
-  // Add more components as we build them
 };
 
 export const COMPONENT_TEMPLATES: Record<string, string> = {
   Alert: `import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
 import { View, Text } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { Info } from 'lucide-react-native';
+import { Icon } from '@components/ui/icon';
 import { cn } from '@/lib/utils';
 
 const alertVariants = cva('flex flex-row items-start p-4 w-[329px]', {
@@ -320,7 +346,8 @@ const Alert = forwardRef<ElementRef<typeof View>, AlertProps>(
               variant === 'emergency' ? 'bg-transparent' : 'bg-base-ink'
             )}
           >
-            <Info
+            <Icon
+              name='info'
               className={cn(variant === 'emergency' ? 'text-emergency fill-white' : 'text-white fill-base-ink')}
               size={alertStyle === 'slim' ? 24 : 32}
             />
@@ -343,7 +370,7 @@ export { Alert, type AlertProps };`,
   Banner: `import { ComponentPropsWithoutRef, ElementRef, forwardRef, ReactNode } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '@/lib/utils';
+import { cn } from '@lib/utils';
 import Svg, { Path, Defs, Pattern, Image, Use } from 'react-native-svg';
 
 const bannerVariants = cva('flex flex-row items-center', {
@@ -361,8 +388,8 @@ const bannerVariants = cva('flex flex-row items-center', {
 const bannerTextVariants = cva('whitespace-nowrap', {
   variants: {
     variant: {
-      'standard-app': 'text-base-darker text-[12px] leading-[14px] font-public',
-      welcome: 'text-foreground text-[22px] leading-[28px] font-bold w-[273px] font-source-sans-pro'
+      'standard-app': 'text-base-darker text-[12px] leading-[14px]',
+      welcome: 'text-foreground text-[22px] leading-[28px] font-bold w-[273px]'
     }
   },
   defaultVariants: {
@@ -422,7 +449,7 @@ const Banner = forwardRef<ElementRef<typeof View>, BannerProps>(({ className, va
         </Text>
         {isStandardApp && link && (
           <Pressable accessibilityRole='link' accessibilityLabel={link}>
-            <Text className='text-primary text-[12px] leading-[14px] font-bold underline whitespace-nowrap font-public' numberOfLines={1}>
+            <Text className='text-primary text-[12px] leading-[14px] font-bold underline whitespace-nowrap' numberOfLines={1}>
               {link}
             </Text>
           </Pressable>
@@ -446,8 +473,10 @@ export { Banner, type BannerProps };`,
 import { View, Text, Pressable } from 'react-native';
 import * as CheckboxPrimitive from '@rn-primitives/checkbox';
 import { cn } from '@/lib/utils';
-import { Fingerprint, Scan, ScanFace, Check } from 'lucide-react-native';
+import { Icon } from '@components/ui/icon';
+import { cssInterop } from 'nativewind';
 
+cssInterop(CheckboxPrimitive.Root, { className: 'style' });
 interface BiometricSignInProps extends ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> {
   biometricType?: 'faceId' | 'touchId' | 'biometric';
   className?: string;
@@ -477,13 +506,13 @@ const BiometricSignIn = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Bi
     const getBiometricIcon = () => {
       switch (biometricType) {
         case 'faceId':
-          return <ScanFace size={20} className="text-base-ink" />;
+          return <Icon name='face_id' size={20} className='text-base-ink' />;
         case 'touchId':
-          return <Fingerprint size={20} className="text-base-ink" />;
+          return <Icon name='fingerprint' size={20} className='text-base-ink' />;
         case 'biometric':
-          return <Scan size={20} className="text-base-ink" />;
+          return <Icon name='fingerprint' size={20} className='text-base-ink' />;
         default:
-          return <ScanFace size={20} className="text-base-ink" />;
+          return <Icon name='face_id' size={20} className='text-base-ink' />;
       }
     };
 
@@ -510,7 +539,7 @@ const BiometricSignIn = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Bi
               )}
             >
               <CheckboxPrimitive.Indicator>
-                <Check size={12} className='text-white' strokeWidth={3} />
+                <Icon name='check' size={14} className='text-white' />
               </CheckboxPrimitive.Indicator>
             </CheckboxPrimitive.Root>
 
@@ -531,29 +560,28 @@ export { BiometricSignIn };`,
   Button: `import { ComponentPropsWithoutRef, ElementRef, forwardRef, ReactNode } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { Pressable, PressableStateCallbackType } from 'react-native';
-import { TextClassContext } from '@/components/Text';
+import { TextClassContext } from '@components/ui/text';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva('flex items-center justify-center rounded-[4px] font-sans text-center', {
   variants: {
     variant: {
-      default: 'bg-primary hover:bg-primary-hover active:bg-primary-active text-white',
-      secondary: 'bg-secondary hover:bg-secondary-hover active:bg-secondary-active text-white',
-      'accent-cool': [
-        'bg-accent-cool hover:bg-accent-cool-hover active:bg-accent-cool-active',
-        'text-base-800 hover:text-base-800 active:text-white'
-      ],
-      'accent-warm': ['bg-accent-warm hover:bg-accent-warm-hover active:bg-accent-warm-active', 'text-base-800 hover:text-white active:text-white'],
-      base: 'bg-base hover:bg-base-hover active:bg-base-active text-white',
+      default: ['bg-primary hover:bg-primary-dark active:bg-primary-darker', 'text-white'],
+      secondary: ['bg-secondary hover:bg-secondary-dark active:bg-secondary-darker', 'text-white'],
+      'accent-cool': ['bg-accent-cool hover:bg-accent-cool-dark active:bg-accent-cool-darker', 'text-base-ink hover:text-base-ink active:text-white'],
+      'accent-warm': ['bg-accent-warm hover:bg-accent-warm-dark active:bg-accent-warm-darker', 'text-base-ink hover:text-white active:text-white'],
+      base: ['bg-gray-50 hover:bg-gray-60 active:bg-gray-80', 'text-white'],
       outline: [
         'border-2 bg-transparent',
-        'border-primary hover:border-primary-hover active:border-primary-active',
-        'text-primary hover:text-primary-hover active:text-primary-active'
+        'border-primary text-primary',
+        'hover:border-primary-dark hover:text-primary-dark',
+        'active:border-primary-darker active:text-primary-darker'
       ],
       inverse: [
         'border-2 bg-transparent',
-        'border-inverse-border hover:border-inverse-border-hover active:border-inverse-border-active',
-        'text-inverse-border hover:text-inverse-border-hover active:text-inverse-border-active'
+        'border-gray-10 text-gray-10',
+        'hover:border-gray-5 hover:text-gray-5',
+        'active:border-white active:text-white'
       ]
     },
     size: {
@@ -564,7 +592,7 @@ const buttonVariants = cva('flex items-center justify-center rounded-[4px] font-
       icon: 'h-[44px] w-[44px] p-0'
     },
     focus: {
-      true: 'outline-none ring-4 ring-focus-ring'
+      true: 'outline-none ring-[4px] ring-blue-vivid-40'
     },
     iconPosition: {
       left: 'flex-row gap-2',
@@ -585,11 +613,11 @@ const buttonTextVariants = cva('text-center font-[700] text-[16px] leading-[20px
     variant: {
       default: 'text-white',
       secondary: 'text-white',
-      'accent-cool': 'text-base-800 group-active:text-white',
-      'accent-warm': 'text-base-800 group-hover:text-white group-active:text-white',
+      'accent-cool': 'text-base-ink group-active:text-white',
+      'accent-warm': 'text-base-ink group-hover:text-white group-active:text-white',
       base: 'text-white',
-      outline: 'text-primary group-hover:text-primary-hover group-active:text-primary-active',
-      inverse: 'text-inverse-border group-hover:text-inverse-border-hover group-active:text-inverse-border-active'
+      outline: ['text-primary', 'group-hover:text-primary-dark', 'group-active:text-primary-darker'],
+      inverse: ['text-gray-10', 'group-hover:text-gray-5', 'group-active:text-white']
     },
     size: {
       default: 'text-[16px] leading-[20px]',
@@ -621,8 +649,7 @@ const Button = forwardRef<ElementRef<typeof Pressable>, ButtonProps>(({ classNam
       })}
     >
       <Pressable
-        ref={ref}
-        className={cn(props.disabled && 'opacity-50 pointer-events-none', buttonVariants({ variant, size, iconPosition, className }))}
+        className={cn('group', props.disabled && 'opacity-50 pointer-events-none', buttonVariants({ variant, size, iconPosition, className }))}
         ref={ref}
         role='button'
         {...props}
@@ -648,7 +675,10 @@ export type { ButtonProps };`,
 import { View, Text, Pressable } from 'react-native';
 import * as CheckboxPrimitive from '@rn-primitives/checkbox';
 import { cn } from '@/lib/utils';
-import { Check } from 'lucide-react-native';
+import { Icon } from '@components/ui/icon';
+import { cssInterop } from 'nativewind';
+
+cssInterop(CheckboxPrimitive.Root, { className: 'style' });
 
 interface CheckboxProps extends ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> {
   label: string;
@@ -664,7 +694,7 @@ const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, CheckboxP
 
     return (
       <Pressable onPress={handlePress}>
-        <View className='flex flex-row items-start gap-2 w-[329px] h-5'>
+        <View className='flex flex-row items-center gap-2 w-[329px] h-5'>
           <CheckboxPrimitive.Root
             ref={ref}
             disabled={disabled}
@@ -676,12 +706,12 @@ const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, CheckboxP
               checked
                 ? disabled
                   ? 'bg-disabled border-disabled' // disabled state
-                  : 'bg-primary border-primary'   // checked state
+                  : 'bg-primary border-primary' // checked state
                 : 'bg-transparent border-base-ink' // unchecked state
             )}
           >
             <CheckboxPrimitive.Indicator>
-              <Check size={12} color='white' strokeWidth={3} />
+              <Icon name='check' size={14} className='text-white' />
             </CheckboxPrimitive.Indicator>
           </CheckboxPrimitive.Root>
 
@@ -701,7 +731,10 @@ import { View, Text, Pressable } from 'react-native';
 import * as CheckboxPrimitive from '@rn-primitives/checkbox';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
-import { Check } from 'lucide-react-native';
+import { Icon } from '@components/ui/icon';
+import { cssInterop } from 'nativewind';
+
+cssInterop(CheckboxPrimitive.Root, { className: 'style' });
 
 const checkboxTileVariants = cva('flex flex-col w-[329px] rounded-[2px] border-2', {
   variants: {
@@ -755,7 +788,7 @@ const CheckboxTile = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Check
                 )}
               >
                 <CheckboxPrimitive.Indicator>
-                  <Check size={12} className='text-white' strokeWidth={3} />
+                  <Icon name='check' size={14} className='text-white' />
                 </CheckboxPrimitive.Indicator>
               </CheckboxPrimitive.Root>
             </View>
@@ -778,46 +811,43 @@ CheckboxTile.displayName = 'CheckboxTile';
 
 export { CheckboxTile, type CheckboxTileProps };`,
 
-  ButtonGroup: `import { ComponentPropsWithoutRef, forwardRef } from 'react';
-import { View } from 'react-native';
-import { cva, type VariantProps } from 'class-variance-authority';
+  ButtonGroup: `import { View } from 'react-native';
 import { cn } from '@/lib/utils';
+import { ComponentPropsWithoutRef, forwardRef } from 'react';
 
-const buttonGroupVariants = cva('flex flex-row gap-2', {
-  variants: {
-    variant: {
-      default: '',
-      segmented: 'border border-base-lighter rounded-[4px] overflow-hidden'
-    }
-  },
-  defaultVariants: {
-    variant: 'default'
-  }
-});
-
-interface ButtonGroupProps extends ComponentPropsWithoutRef<typeof View>, VariantProps<typeof buttonGroupVariants> {
+interface ButtonGroupProps extends ComponentPropsWithoutRef<typeof View> {
+  orientation?: 'horizontal' | 'vertical';
+  gap?: number;
   className?: string;
 }
 
-const ButtonGroup = forwardRef<View, ButtonGroupProps>(({ className, variant, children, ...props }, ref) => {
+const ButtonGroup = forwardRef<View, ButtonGroupProps>(({ className, orientation = 'vertical', gap = 8, style, ...props }, ref) => {
   return (
-    <View ref={ref} className={cn(buttonGroupVariants({ variant }), className)} {...props}>
-      {children}
-    </View>
+    <View
+      ref={ref}
+      className={cn('flex', orientation === 'vertical' ? 'flex-col' : 'flex-row', className)}
+      style={[
+        {
+          gap,
+          flexDirection: orientation === 'vertical' ? 'column' : 'row'
+        },
+        style
+      ]}
+      {...props}
+    />
   );
 });
 
 ButtonGroup.displayName = 'ButtonGroup';
 
-export { ButtonGroup };
-export type { ButtonGroupProps };`,
+export { ButtonGroup };`,
 
   Card: `import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import { View, Image } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
-import { Button } from '../Button/Button';
-import { Text } from '../Text/Text';
+import { Button } from '@components/ui/button';
+import { Text } from '@components/ui/text';
 
 const cardVariants = cva(
   'flex flex-col justify-between items-start bg-white border border-base-lighter rounded-[4px] w-[329px] min-h-[471px] mx-auto',
@@ -905,16 +935,21 @@ export { Card };`,
 
   Icon: `import { View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
-import { ICON_PATHS } from '@/utils/registry';
+import { iconPaths } from '@/utils/registry';
+import { cn } from '@/lib/utils';
+import { cssInterop } from 'nativewind';
+cssInterop(Svg, { className: 'style' });
+cssInterop(View, { className: 'style' });
 
 interface IconProps {
-  name: keyof typeof ICON_PATHS;
+  name: keyof typeof iconPaths;
   size?: number;
   color?: string;
+  className?: string;
 }
 
-export const Icon = ({ name, size = 24, color = '#000000' }: IconProps) => {
-  const path = ICON_PATHS[name];
+export const Icon = ({ name, size = 24, color, className }: IconProps) => {
+  const path = iconPaths[name];
 
   if (!path) {
     console.warn(\`Icon "\${name}" not found\`);
@@ -923,8 +958,8 @@ export const Icon = ({ name, size = 24, color = '#000000' }: IconProps) => {
 
   return (
     <View style={{ width: size, height: size }}>
-      <Svg width={size} height={size} viewBox='0 0 24 24' fill='none'>
-        <Path d={path} fill={color} />
+      <Svg width={size} height={size} viewBox='0 0 24 24' className={cn(className)} fill='currentColor' stroke='currentColor'>
+        <Path d={path} />
       </Svg>
     </View>
   );
@@ -933,8 +968,8 @@ export const Icon = ({ name, size = 24, color = '#000000' }: IconProps) => {
   Link: `import { ComponentPropsWithoutRef, forwardRef, useState } from 'react';
 import { Text, Pressable, View } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '../../lib/utils';
-import { ExternalLink } from 'lucide-react-native';
+import { cn } from '@/lib/utils';
+import { Icon } from '@components/ui/icon';
 
 const linkVariants = cva('font-source-sans-pro text-base leading-[162%] underline', {
   variants: {
@@ -985,7 +1020,8 @@ const Link = forwardRef<View, LinkProps>(({ href, label, className, external, vi
         <View className={cn(linkVariants({ variant, external, focus: pressed || isPressed || focus }))}>
           <Text className={linkVariants({ variant, external, focus: pressed || isPressed || focus })}>{label}</Text>
           {external && (
-            <ExternalLink
+            <Icon
+              name='launch'
               size={10}
               className={cn(variant === 'dark-background' ? 'text-primary-light' : visited ? 'text-violet-vivid-70' : 'text-primary')}
             />
@@ -1003,8 +1039,7 @@ export { Link };`,
   Pagination: `import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { cn } from '@/lib/utils';
-import { ChevronLeft, ChevronRight } from 'lucide-react-native';
-
+import { Icon } from '@components/ui/icon';
 interface PaginationProps extends ComponentPropsWithoutRef<typeof View> {
   currentPage: number;
   totalPages: number;
@@ -1057,7 +1092,7 @@ const Pagination = ({ currentPage, totalPages, totalItems, onPageChange, classNa
         accessibilityState={{ disabled: currentPage === 1 }}
         testID='previous-button'
       >
-        <ChevronLeft color='white' size={24} />
+        <Icon name='navigate_before' size={24} className='text-white' />
       </PaginationButton>
 
       <Text className='flex-1 text-center text-[20px] leading-[30px] text-gray-70'>
@@ -1073,7 +1108,7 @@ const Pagination = ({ currentPage, totalPages, totalItems, onPageChange, classNa
         accessibilityState={{ disabled: currentPage === totalPages }}
         testID='next-button'
       >
-        <ChevronRight color='white' size={24} />
+        <Icon name='navigate_next' size={24} className='text-white' />
       </PaginationButton>
     </View>
   );
@@ -1088,9 +1123,13 @@ export { Pagination };`,
 import { View, Text, Pressable, GestureResponderEvent } from 'react-native';
 import * as RadioGroupPrimitive from '@rn-primitives/radio-group';
 import { cn } from '@/lib/utils';
+import { cssInterop } from 'nativewind';
+
+cssInterop(RadioGroupPrimitive.Root, { className: 'style' });
+cssInterop(RadioGroupPrimitive.Item, { className: 'style' });
+cssInterop(RadioGroupPrimitive.Indicator, { className: 'style' });
 
 const RadioContext = createContext<{ value?: string }>({});
-
 interface RadioButtonProps extends ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item> {
   label: string;
   className?: string;
@@ -1160,6 +1199,11 @@ import { View, Text, Pressable, GestureResponderEvent } from 'react-native';
 import * as RadioGroupPrimitive from '@rn-primitives/radio-group';
 import { cn } from '@/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { cssInterop } from 'nativewind';
+
+cssInterop(RadioGroupPrimitive.Root, { className: 'style' });
+cssInterop(RadioGroupPrimitive.Item, { className: 'style' });
+cssInterop(RadioGroupPrimitive.Indicator, { className: 'style' });
 
 const RadioContext = createContext<{ value?: string; onValueChange?: (value: string) => void }>({});
 
@@ -1268,8 +1312,8 @@ export { RadioTileGroup, RadioTile, type RadioTileProps };`,
   Snackbar: `import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { Check, AlertCircle } from 'lucide-react-native';
 import { cn } from '@/lib/utils';
+import { Icon } from '@components/ui/icon';
 
 const snackbarVariants = cva('flex w-[329px] bg-base-darkest rounded-[4px] p-3', {
   variants: {
@@ -1297,14 +1341,14 @@ const Snackbar = forwardRef<ElementRef<typeof View>, SnackbarProps & { isVisible
   ({ className, layout, message, variant = 'success', onAction, onDismiss, actionLabel = 'Action', isVisible }, ref) => {
     if (!isVisible) return null;
 
-    const Icon = variant === 'success' ? Check : AlertCircle;
+    const iconName = variant === 'success' ? 'check' : 'error_outline';
 
     if (layout === 'two-lines') {
       return (
         <View ref={ref} testID='snackbar-container' className={cn(snackbarVariants({ layout }), className)}>
           <View className='flex flex-row gap-2 mb-3'>
             <View className='flex items-center justify-center h-6'>
-              <Icon className='text-base-lightest' size={24} />
+              <Icon name={iconName} size={24} className='bg-white text-base-darkest rounded-full' />
             </View>
             <Text className='text-base-lightest text-base leading-6 flex-1 flex-wrap'>{message}</Text>
           </View>
@@ -1329,7 +1373,7 @@ const Snackbar = forwardRef<ElementRef<typeof View>, SnackbarProps & { isVisible
       <View ref={ref} testID='snackbar-container' className={cn(snackbarVariants({ layout }), className)}>
         <View className='flex flex-row items-center gap-2 flex-shrink min-w-0 max-w-[171px]'>
           <View className='flex items-center justify-center h-6 flex-shrink-0'>
-            <Icon className='text-base-lightest' size={24} />
+            <Icon name={iconName} size={24} className='bg-white text-base-darkest rounded-full' />
           </View>
           <Text numberOfLines={1} className='text-base-lightest text-base leading-6 flex-shrink'>
             {message}
@@ -1485,13 +1529,24 @@ const TextClassContext = createContext<string | undefined>(undefined);
 const Text = forwardRef<TextRef, SlottableTextProps>(({ className, asChild = false, ...props }, ref) => {
   const textClass = useContext(TextClassContext);
   const Component = asChild ? Slot.Text : RNText;
-  return <Component className={cn('text-base text-foreground web:select-text', textClass, className)} ref={ref} {...props} />;
+
+  return (
+    <Component
+      className={cn(
+        'text-base web:select-text',
+        textClass, // Context classes take precedence
+        className // Allow override if needed
+      )}
+      ref={ref}
+      {...props}
+    />
+  );
 });
 Text.displayName = 'Text';
 
 export { Text, TextClassContext };`,
 
-  Textarea: `import { ComponentPropsWithoutRef, forwardRef } from 'react';
+  Textarea: `import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
 import { View, TextInput, Text } from 'react-native';
 import { cn } from '@/lib/utils';
 
@@ -1503,10 +1558,11 @@ type TextAreaProps = ComponentPropsWithoutRef<typeof TextInput> & {
   maxLength?: number;
   value?: string;
   disabled?: boolean;
+  onChangeText?: (text: string) => void;
 };
 
 const TextArea = forwardRef<ElementRef<typeof TextInput>, TextAreaProps>(
-  ({ className, label, helperText, error, maxLength, value = '', disabled, ...props }, ref) => {
+  ({ className, label, helperText, error, maxLength, value = '', disabled, onChangeText, ...props }, ref) => {
     const characterCount = value.toString().length;
 
     return (
@@ -1532,6 +1588,7 @@ const TextArea = forwardRef<ElementRef<typeof TextInput>, TextAreaProps>(
           editable={!disabled}
           value={value}
           maxLength={maxLength}
+          onChangeText={onChangeText}
           {...props}
         />
 
@@ -1547,10 +1604,7 @@ const TextArea = forwardRef<ElementRef<typeof TextInput>, TextAreaProps>(
 
 TextArea.displayName = 'TextArea';
 
-export { TextArea, type TextAreaProps };
-';
-
-export { Textarea };`,
+export { TextArea, type TextAreaProps };`,
 
   TextInput: `import { ComponentPropsWithoutRef, ElementRef, forwardRef, useState } from 'react';
 import { View, TextInput as RNTextInput, Text } from 'react-native';
@@ -1667,7 +1721,7 @@ TextInput.displayName = 'TextInput';
 
 export { TextInput, type TextInputProps };`,
 
-  Toggle: `import { ComponentPropsWithoutRef, forwardRef } from 'react';
+  Toggle: `import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
 import { View } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';

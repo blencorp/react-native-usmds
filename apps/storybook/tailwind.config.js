@@ -8,54 +8,51 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        border: 'hsl(var(--border))',
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
+        // Base
+        background: '#FFFFFF',
+        foreground: '#1B1B1B',
 
+        // Primary
         primary: {
           DEFAULT: '#005EA2',
-          hover: 'hsl(var(--primary-hover))',
-          active: 'hsl(var(--primary-active))',
           lighter: '#D9E8F6',
           light: '#73B3E7',
           vivid: '#0050D8',
           dark: '#1A4480',
           darker: '#162E51'
         },
+
+        // Secondary
         secondary: {
           DEFAULT: '#D83933',
-          hover: 'hsl(var(--secondary-hover))',
-          active: 'hsl(var(--secondary-active))',
           lighter: '#F8DFE2',
           light: '#F2938C',
           vivid: '#E41D3D',
           dark: '#B50909',
           darker: '#8B0A03'
         },
-        accent: {
-          cool: {
-            DEFAULT: '#00BDE3',
-            hover: 'hsl(var(--accent-cool-hover))',
-            active: 'hsl(var(--accent-cool-active))',
-            lighter: '#E1F3F8',
-            light: '#97D4EA',
-            dark: '#28A0CB',
-            darker: '#07648D'
-          },
-          warm: {
-            DEFAULT: '#FA9441',
-            hover: 'hsl(var(--accent-warm-hover))',
-            active: 'hsl(var(--accent-warm-active))',
-            lighter: '#F2E4D4',
-            light: '#FFBC78',
-            dark: '#C05600',
-            darker: '#775540'
-          }
+
+        // Accent Cool
+        'accent-cool': {
+          DEFAULT: '#00BDE3',
+          lighter: '#E1F3F8',
+          light: '#97D4EA',
+          dark: '#28A0CB',
+          darker: '#07648D'
         },
+
+        // Accent Warm
+        'accent-warm': {
+          DEFAULT: '#FA9441',
+          lighter: '#F2E4D4',
+          light: '#FFBC78',
+          dark: '#C05600',
+          darker: '#775540'
+        },
+
+        // Base Colors
         base: {
-          DEFAULT: '#71767A',
-          hover: 'hsl(var(--base-hover))',
-          active: 'hsl(var(--base-active))',
+          DEFAULT: '#757575',
           lightest: '#F0F0F0',
           lighter: '#DFE1E2',
           light: '#A9AEB1',
@@ -64,55 +61,51 @@ module.exports = {
           darkest: '#1B1B1B',
           ink: '#1B1B1B'
         },
+
+        // Focus
         focus: {
-          ring: 'hsl(var(--focus-ring))'
+          ring: '#2491FF'
         },
-        inverse: {
-          border: {
-            DEFAULT: 'hsl(var(--inverse-border))',
-            hover: 'hsl(var(--inverse-border-hover))',
-            active: 'hsl(var(--inverse-border-active))'
-          }
-        },
+
         // State Colors
         info: {
-          DEFAULT: '#00BDE3', // info
-          lighter: '#E7F6F8', // info-lighter
-          light: '#99DEEA', // info-light
-          dark: '#009EC1', // info-dark
-          darker: '#2E6276' // info-darker
+          DEFAULT: '#00BDE3',
+          lighter: '#E7F6F8',
+          light: '#99DEEA',
+          dark: '#009EC1',
+          darker: '#2E6276'
         },
         error: {
-          DEFAULT: '#D54309', // error
-          lighter: '#F4E3DB', // error-lighter
-          light: '#F39268', // error-light
-          dark: '#B50909', // error-dark
-          darker: '#6F3331' // error-darker
+          DEFAULT: '#D54309',
+          lighter: '#F4E3DB',
+          light: '#F39268',
+          dark: '#B50909',
+          darker: '#6F3331'
         },
         warning: {
-          DEFAULT: '#FFBE2E', // warning
-          lighter: '#FAF3D1', // warning-lighter
-          light: '#FEE685', // warning-light
-          dark: '#E5A000', // warning-dark
-          darker: '#936F38' // warning-darker
+          DEFAULT: '#FFBE2E',
+          lighter: '#FAF3D1',
+          light: '#FEE685',
+          dark: '#E5A000',
+          darker: '#936F38'
         },
         success: {
-          DEFAULT: '#00A91C', // success
-          lighter: '#ECF3EC', // success-lighter
-          light: '#70E17B', // success-light
-          dark: '#4D8055', // success-dark
-          darker: '#446443' // success-darker
+          DEFAULT: '#00A91C',
+          lighter: '#ECF3EC',
+          light: '#70E17B',
+          dark: '#4D8055',
+          darker: '#446443'
         },
         disabled: {
-          DEFAULT: '#757575', // disabled (gray-50)
-          lighter: '#C9C9C9', // disabled-lighter (gray-20)
-          light: '#919191', // disabled-light (gray-40)
-          dark: '#454545', // disabled-dark (gray-70)
-          darker: '#1B1B1B' // disabled-darker (gray-90)
+          DEFAULT: '#757575',
+          lighter: '#C9C9C9',
+          light: '#919191',
+          dark: '#454545',
+          darker: '#1B1B1B'
         },
         emergency: {
-          DEFAULT: '#9C3D10', // emergency
-          dark: '#332D29' // emergency-dark
+          DEFAULT: '#9C3D10',
+          dark: '#332D29'
         },
         // System Colors - Red Variations
         'red-cool': {
@@ -677,6 +670,16 @@ module.exports = {
           70: '#454540',
           80: '#2E2E2A',
           90: '#171716'
+        },
+        // Inverse
+        inverse: {
+          DEFAULT: 'transparent',
+          border: '#E6E6E6', // gray-10
+          'border-hover': '#F0F0F0', // gray-5
+          'border-active': '#FFFFFF',
+          text: '#E6E6E6', // gray-10
+          'text-hover': '#F0F0F0', // gray-5
+          'text-active': '#FFFFFF'
         }
       },
       borderWidth: {
@@ -757,8 +760,113 @@ module.exports = {
       },
       spacing: {
         'measure-6': '75ch'
+      },
+      textStyles: ({ theme }) => ({
+        'prose-h1': {
+          fontSize: theme('fontSize.2xl'),
+          fontWeight: theme('fontWeight.normal'),
+          marginTop: '1em'
+        },
+        'prose-h2': {
+          fontSize: theme('fontSize.xl'),
+          fontWeight: theme('fontWeight.normal'),
+          marginTop: '105px'
+        },
+        'prose-h3': {
+          fontSize: theme('fontSize.lg'),
+          fontWeight: theme('fontWeight.normal'),
+          marginTop: '1em'
+        },
+        'prose-h4': {
+          fontSize: theme('fontSize.sm'),
+          fontWeight: theme('fontWeight.normal'),
+          lineHeight: theme('lineHeight.heading-2'),
+          marginTop: '105px',
+          measure: '6'
+        },
+        'prose-h5': {
+          fontSize: theme('fontSize.xs'),
+          fontWeight: theme('fontWeight.normal'),
+          lineHeight: theme('lineHeight.heading-2'),
+          marginTop: '105px',
+          measure: '6'
+        },
+        'prose-h6': {
+          fontSize: theme('fontSize.3xs'),
+          fontWeight: theme('fontWeight.normal'),
+          textTransform: 'uppercase',
+          lineHeight: theme('lineHeight.heading-2'),
+          marginTop: '105px',
+          measure: '6',
+          letterSpacing: '1px'
+        },
+        'prose-body': {
+          fontSize: theme('fontSize.sm'),
+          fontWeight: theme('fontWeight.normal'),
+          lineHeight: theme('lineHeight.body-5'),
+          measure: '6'
+        },
+        'prose-intro': {
+          fontSize: theme('fontSize.xl'),
+          fontWeight: theme('fontWeight.normal'),
+          lineHeight: theme('lineHeight.alt-5'),
+          marginTop: '1em',
+          measure: '6'
+        }
+      })
+    },
+    darkMode: {
+      background: '#0C0A09',
+      foreground: '#FAFAFA',
+
+      primary: {
+        DEFAULT: '#73B3E7',
+        hover: '#73B3E7',
+        active: '#2D7BBF'
+      },
+      secondary: {
+        DEFAULT: '#F2938C',
+        hover: '#E85D57',
+        active: '#B31B1B'
+      },
+      'accent-cool': {
+        DEFAULT: '#28A0CB',
+        hover: '#07648D',
+        active: '#044E6C'
+      },
+      'accent-warm': {
+        DEFAULT: '#C05600',
+        hover: '#775540',
+        active: '#332D29'
       }
     }
   },
-  plugins: [require('tailwindcss-animate')]
+  plugins: [
+    require('tailwindcss-animate'),
+    function ({ addComponents, theme }) {
+      addComponents({
+        '.usa-prose-h1': theme('textStyles.prose-h1'),
+        '.usa-prose-h2': theme('textStyles.prose-h2'),
+        '.usa-prose-h3': theme('textStyles.prose-h3'),
+        '.usa-prose-h4': theme('textStyles.prose-h4'),
+        '.usa-prose-h5': theme('textStyles.prose-h5'),
+        '.usa-prose-h6': theme('textStyles.prose-h6'),
+        '.usa-prose-body': theme('textStyles.prose-body'),
+        '.usa-prose-intro': theme('textStyles.prose-intro'),
+        '.usa-prose-ol': {
+          listStyleType: 'decimal',
+          paddingLeft: '1rem',
+          marginTop: '1em'
+        },
+        '.usa-prose-ul': {
+          listStyleType: 'disc',
+          paddingLeft: '1rem',
+          marginTop: '1em'
+        },
+        '.usa-prose-li': {
+          marginTop: '0.5em'
+        }
+      });
+    }
+  ]
 };

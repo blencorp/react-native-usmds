@@ -6,6 +6,24 @@ import prompts from 'prompts';
 import * as z from 'zod';
 import { logger } from '../utils/logger';
 import { COMPONENT_TEMPLATES, COMPONENT_METADATA, ICON_PATHS } from '../utils/registry';
+import { execa } from 'execa';
+import { getPackageManager } from '../utils/get-package-manager';
+import { runInit } from './init';
+
+const REQUIRED_DEPENDENCIES = [
+  'class-variance-authority',
+  'clsx',
+  'nativewind@^4.1.23',
+  'tailwindcss-animate',
+  'tailwind-merge',
+  'react-native-reanimated',
+  'react-native-svg',
+  '@rn-primitives/types',
+  '@rn-primitives/slot',
+  '@rn-primitives/portal',
+  '@rn-primitives/checkbox',
+  '@rn-primitives/radio-group'
+];
 
 // Available components from our registry
 const AVAILABLE_COMPONENTS = Object.keys(COMPONENT_METADATA).map((name) => name.toLowerCase());
@@ -17,6 +35,18 @@ const addOptionsSchema = z.object({
   cwd: z.string(),
   all: z.boolean()
 });
+
+async function isProjectInitialized(cwd: string): Promise<boolean> {
+  // First check for a marker file that indicates successful initialization
+  const markerPath = path.join(cwd, '.usmds-initialized');
+
+  // Check required files
+  const requiredFiles = ['tailwind.config.js', 'nativewind-env.d.ts', 'babel.config.js', 'global.css', 'metro.config.js', 'lib/utils.ts'];
+
+  const filesExist = requiredFiles.every((file) => existsSync(path.join(cwd, file)));
+
+  return existsSync(markerPath) && filesExist;
+}
 
 export const add = new Command()
   .name('add')
@@ -39,55 +69,113 @@ export const add = new Command()
       process.exit(1);
     }
 
-    // Determine which components to install
-    let selectedComponents = options.all ? AVAILABLE_COMPONENTS : options.components;
-
-    // If no components specified, show selection prompt
-    if (!selectedComponents?.length && !options.all) {
-      const response = await prompts({
-        type: 'multiselect',
-        name: 'components',
-        message: 'Select components to add:',
-        choices: AVAILABLE_COMPONENTS.map((component) => ({
-          title: component,
-          value: component
-        }))
-      });
-
-      selectedComponents = response.components;
+    // Single initialization check
+    const initialized = await isProjectInitialized(cwd);
+    if (!initialized) {
+      logger.info(`Project not initialized. Running 'usmds init' first...`);
+      try {
+        await runInit(cwd);
+        logger.success('Successfully initialized project');
+      } catch (error) {
+        logger.error('Failed to initialize project');
+        logger.error(error as Error);
+        process.exit(1);
+      }
     }
-
-    if (!selectedComponents?.length) {
-      logger.warn('No components selected');
-      process.exit(0);
-    }
-
-    const spinner = ora('Installing components...').start();
 
     try {
-      for (const component of selectedComponents) {
-        spinner.text = `Adding ${component}...`;
+      // Determine which components to install
+      let selectedComponents = options.all ? AVAILABLE_COMPONENTS : options.components;
 
-        const componentDir = path.join(cwd, 'components');
-        await fs.mkdir(componentDir, { recursive: true });
+      // If no components specified, show selection prompt
+      if (!selectedComponents?.length && !options.all) {
+        const response = await prompts({
+          type: 'multiselect',
+          name: 'components',
+          message: 'Select components to add:',
+          choices: AVAILABLE_COMPONENTS.map((component) => ({
+            title: component,
+            value: component
+          }))
+        });
 
-        const targetPath = path.join(componentDir, `${component.charAt(0).toUpperCase() + component.slice(1)}.tsx`);
-
-        // Check if component already exists
-        if (existsSync(targetPath) && !options.overwrite) {
-          spinner.warn(`${component} already exists, skipping`);
-          continue;
-        }
-
-        // Get component template and write file
-        const template = await getComponentTemplate(component, cwd, { overwrite: options.overwrite });
-        await fs.writeFile(targetPath, template);
+        selectedComponents = response.components;
       }
 
-      spinner.succeed('Components installed successfully!');
+      if (!selectedComponents?.length) {
+        logger.warn('No components selected');
+        process.exit(0);
+      }
+
+      const spinner = ora('Installing components...').start();
+
+      try {
+        // Create the ui directory if it doesn't exist
+        const uiDir = path.join(cwd, 'components', 'ui');
+        if (!existsSync(uiDir)) {
+          await fs.mkdir(uiDir, { recursive: true });
+        }
+
+        for (const component of selectedComponents) {
+          spinner.text = `Adding ${component}...`;
+
+          const componentName = component.charAt(0).toUpperCase() + component.slice(1);
+
+          // Check if component exists in registry BEFORE creating directory
+          if (!COMPONENT_TEMPLATES[componentName]) {
+            spinner.fail(`Component "${component}" not found in registry`);
+            continue;
+          }
+
+          // Update path to include ui directory
+          const componentDir = path.join(uiDir, component.toLowerCase());
+          const componentPath = path.join(componentDir, 'index.tsx');
+
+          // Only create directory if component exists and isn't already installed
+          if (existsSync(componentPath) && !options.overwrite) {
+            spinner.warn(`${component} already exists, skipping`);
+            continue;
+          }
+
+          // Create the component directory
+          await fs.mkdir(componentDir, { recursive: true });
+
+          // Get internal dependencies
+          const internalDeps = COMPONENT_METADATA[componentName]?.internalDependencies || [];
+
+          // Add internal dependencies to the installation queue
+          for (const dep of internalDeps) {
+            if (!selectedComponents.includes(dep.toLowerCase())) {
+              selectedComponents.push(dep.toLowerCase());
+            }
+          }
+
+          // Get component template and write file
+          const template = await getComponentTemplate(component, cwd, { overwrite: options.overwrite });
+          await fs.writeFile(componentPath, template, 'utf8');
+
+          // Install external dependencies
+          const componentDeps = COMPONENT_METADATA[componentName]?.dependencies || [];
+          if (componentDeps.length > 0) {
+            const packageManager = await getPackageManager(cwd);
+            const packageCommand = packageManager === 'npm' ? 'install' : 'add';
+            await execa(packageManager, [packageCommand, ...componentDeps], { cwd });
+          }
+        }
+
+        // Only show success if at least one component was installed
+        if (selectedComponents.some((component) => COMPONENT_TEMPLATES[component.charAt(0).toUpperCase() + component.slice(1)])) {
+          spinner.succeed('Components installed successfully!');
+        } else {
+          spinner.fail('No valid components were installed');
+        }
+      } catch (error) {
+        spinner.fail('Failed to install components');
+        logger.error(error as Error);
+        process.exit(1);
+      }
     } catch (error) {
-      spinner.fail('Failed to install components');
-      logger.error(error as Error);
+      logger.error('Failed to parse package.json');
       process.exit(1);
     }
   });

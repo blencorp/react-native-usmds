@@ -10,10 +10,11 @@ type TextAreaProps = ComponentPropsWithoutRef<typeof TextInput> & {
   maxLength?: number;
   value?: string;
   disabled?: boolean;
+  onChangeText?: (text: string) => void;
 };
 
 const TextArea = forwardRef<ElementRef<typeof TextInput>, TextAreaProps>(
-  ({ className, label, helperText, error, maxLength, value = '', disabled, ...props }, ref) => {
+  ({ className, label, helperText, error, maxLength, value = '', disabled, onChangeText, ...props }, ref) => {
     const characterCount = value.toString().length;
 
     return (
@@ -39,6 +40,7 @@ const TextArea = forwardRef<ElementRef<typeof TextInput>, TextAreaProps>(
           editable={!disabled}
           value={value}
           maxLength={maxLength}
+          onChangeText={onChangeText}
           {...props}
         />
 

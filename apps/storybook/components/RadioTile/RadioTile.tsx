@@ -3,6 +3,11 @@ import { View, Text, Pressable, GestureResponderEvent } from 'react-native';
 import * as RadioGroupPrimitive from '@rn-primitives/radio-group';
 import { cn } from '@/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { cssInterop } from 'nativewind';
+
+cssInterop(RadioGroupPrimitive.Root, { className: 'style' });
+cssInterop(RadioGroupPrimitive.Item, { className: 'style' });
+cssInterop(RadioGroupPrimitive.Indicator, { className: 'style' });
 
 const RadioContext = createContext<{ value?: string; onValueChange?: (value: string) => void }>({});
 

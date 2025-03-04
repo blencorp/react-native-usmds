@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
 import { View, Text } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { Info } from 'lucide-react-native';
+import { Icon } from '../icon';
 import { cn } from '@/lib/utils';
 
 const alertVariants = cva('flex flex-row items-start p-4 w-[329px]', {
@@ -113,7 +113,8 @@ const Alert = forwardRef<ElementRef<typeof View>, AlertProps>(
               variant === 'emergency' ? 'bg-transparent' : 'bg-base-ink'
             )}
           >
-            <Info
+            <Icon
+              name='info'
               className={cn(variant === 'emergency' ? 'text-emergency fill-white' : 'text-white fill-base-ink')}
               size={alertStyle === 'slim' ? 24 : 32}
             />

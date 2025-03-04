@@ -3,7 +3,7 @@ export const TAILWIND_CONFIG = `const { hairlineWidth } = require('nativewind/th
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: 'class',
-  content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
+  content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}', './.rnstorybook/**/*.{ts,tsx}', '../../packages/ui/src/**/*.{ts,tsx}'],
   presets: [require('nativewind/preset')],
   theme: {
     extend: {
@@ -683,15 +683,69 @@ module.exports = {
         hairline: hairlineWidth()
       },
       fontSize: {
-        '3xs': ['13px', { lineHeight: '16px', fontWeight: '400' }],
-        '2xs': ['14px', { lineHeight: '18px', fontWeight: '400' }],
-        xs: ['15px', { lineHeight: '19px', fontWeight: '400' }],
-        sm: ['16px', { lineHeight: '20px', fontWeight: '400' }],
-        md: ['17px', { lineHeight: '21px', fontWeight: '400' }],
-        lg: ['22px', { lineHeight: '28px', fontWeight: '400' }],
-        xl: ['32px', { lineHeight: '40px', fontWeight: '400' }],
-        '2xl': ['42px', { lineHeight: '53px', fontWeight: '400' }],
-        '3xl': ['48px', { lineHeight: '60px', fontWeight: '400' }]
+        '3xs': [
+          '13px',
+          {
+            lineHeight: '16px',
+            fontWeight: '400'
+          }
+        ],
+        '2xs': [
+          '14px',
+          {
+            lineHeight: '18px',
+            fontWeight: '400'
+          }
+        ],
+        xs: [
+          '15px',
+          {
+            lineHeight: '19px',
+            fontWeight: '400'
+          }
+        ],
+        sm: [
+          '16px',
+          {
+            lineHeight: '20px',
+            fontWeight: '400'
+          }
+        ],
+        md: [
+          '17px',
+          {
+            lineHeight: '21px',
+            fontWeight: '400'
+          }
+        ],
+        lg: [
+          '22px',
+          {
+            lineHeight: '28px',
+            fontWeight: '400'
+          }
+        ],
+        xl: [
+          '32px',
+          {
+            lineHeight: '40px',
+            fontWeight: '400'
+          }
+        ],
+        '2xl': [
+          '42px',
+          {
+            lineHeight: '53px',
+            fontWeight: '400'
+          }
+        ],
+        '3xl': [
+          '48px',
+          {
+            lineHeight: '60px',
+            fontWeight: '400'
+          }
+        ]
       },
       fontFamily: {
         sans: ['Source Sans Pro', 'sans-serif']
@@ -703,10 +757,90 @@ module.exports = {
       },
       spacing: {
         'measure-6': '75ch'
-      }
+      },
+      textStyles: ({ theme }) => ({
+        'prose-h1': {
+          fontSize: theme('fontSize.2xl'),
+          fontWeight: theme('fontWeight.normal'),
+          marginTop: '1em'
+        },
+        'prose-h2': {
+          fontSize: theme('fontSize.xl'),
+          fontWeight: theme('fontWeight.normal'),
+          marginTop: '105px'
+        },
+        'prose-h3': {
+          fontSize: theme('fontSize.lg'),
+          fontWeight: theme('fontWeight.normal'),
+          marginTop: '1em'
+        },
+        'prose-h4': {
+          fontSize: theme('fontSize.sm'),
+          fontWeight: theme('fontWeight.normal'),
+          lineHeight: theme('lineHeight.heading-2'),
+          marginTop: '105px',
+          measure: '6'
+        },
+        'prose-h5': {
+          fontSize: theme('fontSize.xs'),
+          fontWeight: theme('fontWeight.normal'),
+          lineHeight: theme('lineHeight.heading-2'),
+          marginTop: '105px',
+          measure: '6'
+        },
+        'prose-h6': {
+          fontSize: theme('fontSize.3xs'),
+          fontWeight: theme('fontWeight.normal'),
+          textTransform: 'uppercase',
+          lineHeight: theme('lineHeight.heading-2'),
+          marginTop: '105px',
+          measure: '6',
+          letterSpacing: '1px'
+        },
+        'prose-body': {
+          fontSize: theme('fontSize.sm'),
+          fontWeight: theme('fontWeight.normal'),
+          lineHeight: theme('lineHeight.body-5'),
+          measure: '6'
+        },
+        'prose-intro': {
+          fontSize: theme('fontSize.xl'),
+          fontWeight: theme('fontWeight.normal'),
+          lineHeight: theme('lineHeight.alt-5'),
+          marginTop: '1em',
+          measure: '6'
+        }
+      })
     }
   },
-  plugins: [require('tailwindcss-animate')]
+  plugins: [
+    require('tailwindcss-animate'),
+    function ({ addComponents, theme }) {
+      addComponents({
+        '.usa-prose-h1': theme('textStyles.prose-h1'),
+        '.usa-prose-h2': theme('textStyles.prose-h2'),
+        '.usa-prose-h3': theme('textStyles.prose-h3'),
+        '.usa-prose-h4': theme('textStyles.prose-h4'),
+        '.usa-prose-h5': theme('textStyles.prose-h5'),
+        '.usa-prose-h6': theme('textStyles.prose-h6'),
+        '.usa-prose-body': theme('textStyles.prose-body'),
+        '.usa-prose-intro': theme('textStyles.prose-intro'),
+        '.usa-prose-ol': {
+          listStyleType: 'decimal',
+          paddingLeft: '1rem',
+          marginTop: '1em'
+        },
+        '.usa-prose-ul': {
+          listStyleType: 'disc',
+          paddingLeft: '1rem',
+          marginTop: '1em'
+        },
+        '.usa-prose-li': {
+          marginTop: '0.5em'
+        }
+      });
+    }
+  ]
 };`;
 
 export const UTILS = `import { type ClassValue, clsx } from "clsx";
@@ -743,179 +877,6 @@ module.exports = withNativeWind(config, { input: './global.css' });`;
 export const GLOBAL_STYLES = `@tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer base {
-    :root {
-        --background: 0 0% 100%;
-        --foreground: 0 0% 11%;  /* #1B1B1B */
-        
-        /* Primary Colors */
-        --primary: 204 100% 32%;  /* #005EA2 */
-        --primary-hover: 217 100% 25%;  /* #1A4480 */
-        --primary-active: 215 57% 20%;  /* #162E51 */
-        
-        /* Secondary Colors */
-        --secondary: 3 61% 53%;  /* #D83933 */
-        --secondary-hover: 2 89% 35%;  /* #B50909 */
-        --secondary-active: 4 96% 27%;  /* #8B0A03 */
-        
-        /* Accent Cool */
-        --accent-cool: 190 100% 44%;  /* #00BDE3 */
-        --accent-cool-hover: 196 67% 48%;  /* #28A0CB */
-        --accent-cool-active: 198 85% 29%;  /* #07648D */
-        
-        /* Accent Warm */
-        --accent-warm: 28 95% 62%;  /* #FA9441 */
-        --accent-warm-hover: 24 100% 38%;  /* #C05600 */
-        --accent-warm-active: 17 27% 36%;  /* #775540 */
-
-        /* Base Colors */
-        --base: 0 0% 46%;  /* #757575 */
-        --base-hover: 0 0% 36%;  /* #5C5C5C */
-        --base-active: 0 0% 18%;  /* #2E2E2E */
-
-        /* Focus Ring */
-        --focus-ring: 208 100% 57%;  /* #2491FF */
-
-        /* Inverse Colors */
-        --inverse-border: 0 0% 90%;  /* #E6E6E6 */
-        --inverse-border-hover: 0 0% 94%;  /* #F0F0F0 */
-        --inverse-border-active: 0 0% 100%;  /* #FFFFFF */
-    }
-
-    .dark:root {
-        --background: 240 10% 3.9%;
-        --foreground: 0 0% 98%;
-
-        --primary: 203 54% 68%;  /* #73B3E7 */
-        --primary-hover: 203 54% 68%;  /* #4F97D1 */
-        --primary-active: 204 69% 45%;  /* #2378C3 */
-
-        --secondary: 4 75% 64%;  /* #E9695D */
-        --secondary-hover: 6 77% 55%;  /* #E34732 */
-        --secondary-active: 5 81% 38%;  /* #B21D12 */
-
-        --accent-cool: 196 67% 48%;  /* #28A0CB */
-        --accent-cool-hover: 197 91% 29%;  /* #07648D */
-        --accent-cool-active: 197 91% 22%;  /* #044E6C */
-
-        --accent-warm: 25 100% 38%;  /* #C05600 */
-        --accent-warm-hover: 19 19% 36%;  /* #775540 */
-        --accent-warm-active: 12 20% 19%;  /* #3D2925 */
-    }
-}
-
-@layer components {
-    /* Headings */
-    .usa-prose-h1 {
-        @apply text-2xl font-normal;
-        margin-top: 1em;
-    }
-
-    .usa-prose-h2 {
-        @apply text-xl font-normal;
-        margin-top: 105px;
-    }
-
-    .usa-prose-h3 {
-        @apply text-lg font-normal;
-        margin-top: 1em;
-    }
-
-    .usa-prose-h4 {
-        @apply text-sm font-normal;
-        line-height: theme('lineHeight.heading-2');
-        margin-top: 105px;
-        measure: 6;
-    }
-
-    .usa-prose-h5 {
-        @apply text-xs font-normal;
-        line-height: theme('lineHeight.heading-2');
-        margin-top: 105px;
-        measure: 6;
-    }
-
-    .usa-prose-h6 {
-        @apply text-3xs font-normal uppercase;
-        line-height: theme('lineHeight.heading-2');
-        margin-top: 105px;
-        measure: 6;
-        letter-spacing: 1px;
-    }
-
-    /* Body text */
-    .usa-prose-body {
-        @apply text-sm font-normal;
-        line-height: theme('lineHeight.body-5');
-        measure: 6;
-    }
-
-    /* Intro text */
-    .usa-prose-intro {
-        @apply text-xl font-normal;
-        line-height: theme('lineHeight.alt-5');
-        margin-top: 1em;
-        measure: 6;
-    }
-
-    /* Lists */
-    .usa-prose-ol {
-        @apply list-decimal pl-4;
-        margin-top: 1em;
-    }
-
-    .usa-prose-ul {
-        @apply list-disc pl-4;
-        margin-top: 1em;
-    }
-
-    .usa-prose-li {
-        margin-top: 0.5em;
-    }
-}
-
-@layer utilities {
-    /* Measure */
-    .measure-6 {
-        measure: 6;
-    }
-}
 `;
 
 export const NATIVEWIND_ENV = `/// <reference types="nativewind/types" />`;
-
-export const NATIVEWIND_REMAP = `import { Info, Fingerprint, Scan, ScanFace, Check, ExternalLink } from 'lucide-react-native';
-import { cssInterop } from 'nativewind';
-import * as CheckboxPrimitive from '@rn-primitives/checkbox';
-import * as RadioGroupPrimitive from '@rn-primitives/radio-group';
-/**
- *  Use this file to setup cssInterop and remapProps for third party components to work with NativeWind
- *  This is only imported once  globally in app/_layout.tsx
- *
- * cssInterop: https://www.nativewind.dev/api/css-interop
- *
- * This function "tags" components so that when its rendered, the runtime will know to resolve the className strings into styles. You should only use this when:
- * - You have a custom native component
- * - You are using a third party component that needs the style prop to be resolved
- * - You are using a thrid party component that does not pass all its props to its children
- *
- * remapProps: https://www.nativewind.dev/api/remap-props
- *
- * NativeWind provides the remapProps utility to simplify working with third-party components with multiple "style" props.
- */
-
-cssInterop(Info, { className: 'style' });
-cssInterop(Fingerprint, { className: 'style' });
-cssInterop(Scan, { className: 'style' });
-cssInterop(ScanFace, { className: 'style' });
-cssInterop(Check, { className: 'style' });
-cssInterop(ExternalLink, { className: 'style' });
-cssInterop(CheckboxPrimitive.Root, { className: 'style' });
-cssInterop(RadioGroupPrimitive.Root, { className: 'style' });
-cssInterop(RadioGroupPrimitive.Item, {
-  className: 'style',
-  androidRippleColor: 'style'
-});
-cssInterop(RadioGroupPrimitive.Indicator, { className: 'style' });
-`;

@@ -2,7 +2,10 @@ import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import * as CheckboxPrimitive from '@rn-primitives/checkbox';
 import { cn } from '@/lib/utils';
-import { Check } from 'lucide-react-native';
+import { Icon } from '../icon';
+import { cssInterop } from 'nativewind';
+
+cssInterop(CheckboxPrimitive.Root, { className: 'style' });
 
 interface CheckboxProps extends ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> {
   label: string;
@@ -30,12 +33,12 @@ const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, CheckboxP
               checked
                 ? disabled
                   ? 'bg-disabled border-disabled' // disabled state
-                  : 'bg-primary border-primary'   // checked state
+                  : 'bg-primary border-primary' // checked state
                 : 'bg-transparent border-base-ink' // unchecked state
             )}
           >
             <CheckboxPrimitive.Indicator>
-              <Check size={12} className="text-white" strokeWidth={3} />
+              <Icon name='check' size={14} className='text-white' />
             </CheckboxPrimitive.Indicator>
           </CheckboxPrimitive.Root>
 
