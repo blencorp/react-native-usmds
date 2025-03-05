@@ -10456,6 +10456,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "docs@workspace:apps/docs"
   dependencies:
+    "@swc/helpers": "npm:0.5.15"
     "@tailwindcss/postcss": "npm:^4.0.7"
     "@types/mdx": "npm:^2.0.13"
     "@types/node": "npm:22.13.4"
