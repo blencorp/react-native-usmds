@@ -28,21 +28,8 @@ jobs:
           corepack enable
           corepack prepare yarn@4.3.1 --activate
 
-      - name: Install Dependencies
-        run: yarn install --frozen-lockfile
-
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
-
-      - name: Create Vercel JSON
-        working-directory: apps/docs
-        run: |
-          cat > vercel.json << EOF
-          {
-            "buildCommand": "cd ../.. && corepack enable && corepack prepare yarn@4.3.1 --activate && yarn install && yarn workspace docs build",
-            "outputDirectory": ".next"
-          }
-          EOF
 
       - name: Pull Vercel Environment Information
         working-directory: apps/docs
