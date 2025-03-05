@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef, forwardRef, useState } from 'react';
 import { Text, Pressable, View } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
-import { ExternalLink } from 'lucide-react-native';
+import { Icon } from '../Icon/Icon';
 
 const linkVariants = cva('font-source-sans-pro text-base leading-[162%] underline', {
   variants: {
@@ -53,7 +53,8 @@ const Link = forwardRef<View, LinkProps>(({ href, label, className, external, vi
         <View className={cn(linkVariants({ variant, external, focus: pressed || isPressed || focus }))}>
           <Text className={linkVariants({ variant, external, focus: pressed || isPressed || focus })}>{label}</Text>
           {external && (
-            <ExternalLink
+            <Icon
+              name='launch'
               size={10}
               className={cn(variant === 'dark-background' ? 'text-primary-light' : visited ? 'text-violet-vivid-70' : 'text-primary')}
             />

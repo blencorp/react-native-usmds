@@ -1,8 +1,8 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { Check, AlertCircle } from 'lucide-react-native';
 import { cn } from '@/lib/utils';
+import { Icon } from '../Icon/Icon';
 
 const snackbarVariants = cva('flex w-[329px] bg-base-darkest rounded-[4px] p-3', {
   variants: {
@@ -30,14 +30,14 @@ const Snackbar = forwardRef<ElementRef<typeof View>, SnackbarProps & { isVisible
   ({ className, layout, message, variant = 'success', onAction, onDismiss, actionLabel = 'Action', isVisible }, ref) => {
     if (!isVisible) return null;
 
-    const Icon = variant === 'success' ? Check : AlertCircle;
+    const iconName = variant === 'success' ? 'check' : 'error_outline';
 
     if (layout === 'two-lines') {
       return (
         <View ref={ref} testID='snackbar-container' className={cn(snackbarVariants({ layout }), className)}>
           <View className='flex flex-row gap-2 mb-3'>
             <View className='flex items-center justify-center h-6'>
-              <Icon className='text-base-lightest' size={24} />
+              <Icon name={iconName} size={24} className='bg-white text-base-darkest rounded-full' />
             </View>
             <Text className='text-base-lightest text-base leading-6 flex-1 flex-wrap'>{message}</Text>
           </View>
@@ -62,7 +62,7 @@ const Snackbar = forwardRef<ElementRef<typeof View>, SnackbarProps & { isVisible
       <View ref={ref} testID='snackbar-container' className={cn(snackbarVariants({ layout }), className)}>
         <View className='flex flex-row items-center gap-2 flex-shrink min-w-0 max-w-[171px]'>
           <View className='flex items-center justify-center h-6 flex-shrink-0'>
-            <Icon className='text-base-lightest' size={24} />
+            <Icon name={iconName} size={24} className='bg-white text-base-darkest rounded-full' />
           </View>
           <Text numberOfLines={1} className='text-base-lightest text-base leading-6 flex-shrink'>
             {message}

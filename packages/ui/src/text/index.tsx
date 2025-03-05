@@ -9,7 +9,18 @@ const TextClassContext = createContext<string | undefined>(undefined);
 const Text = forwardRef<TextRef, SlottableTextProps>(({ className, asChild = false, ...props }, ref) => {
   const textClass = useContext(TextClassContext);
   const Component = asChild ? Slot.Text : RNText;
-  return <Component className={cn('text-base text-foreground web:select-text', textClass, className)} ref={ref} {...props} />;
+
+  return (
+    <Component
+      className={cn(
+        'text-base web:select-text',
+        textClass, // Context classes take precedence
+        className // Allow override if needed
+      )}
+      ref={ref}
+      {...props}
+    />
+  );
 });
 Text.displayName = 'Text';
 

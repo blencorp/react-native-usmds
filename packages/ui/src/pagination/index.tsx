@@ -1,8 +1,7 @@
 import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { cn } from '@/lib/utils';
-import { ChevronLeft, ChevronRight } from 'lucide-react-native';
-
+import { Icon } from '../icon';
 interface PaginationProps extends ComponentPropsWithoutRef<typeof View> {
   currentPage: number;
   totalPages: number;
@@ -55,7 +54,7 @@ const Pagination = ({ currentPage, totalPages, totalItems, onPageChange, classNa
         accessibilityState={{ disabled: currentPage === 1 }}
         testID='previous-button'
       >
-        <ChevronLeft color='white' size={24} />
+        <Icon name='navigate_before' size={24} className='text-white' />
       </PaginationButton>
 
       <Text className='flex-1 text-center text-[20px] leading-[30px] text-gray-70'>
@@ -71,7 +70,7 @@ const Pagination = ({ currentPage, totalPages, totalItems, onPageChange, classNa
         accessibilityState={{ disabled: currentPage === totalPages }}
         testID='next-button'
       >
-        <ChevronRight color='white' size={24} />
+        <Icon name='navigate_next' size={24} className='text-white' />
       </PaginationButton>
     </View>
   );

@@ -1,8 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 import './global.css';
 import 'react-native-reanimated';
-
-import './components/nativewind-remap';
 import { Button } from './components/Button/Button';
 import { Text } from './components/Text/Text';
 

@@ -2,9 +2,10 @@ import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import * as CheckboxPrimitive from '@rn-primitives/checkbox';
 import { cn } from '../../lib/utils';
-import { Fingerprint, Scan, ScanFace } from 'lucide-react-native';
-import { Check } from 'lucide-react-native';
+import { Icon } from '../Icon/Icon';
+import { cssInterop } from 'nativewind';
 
+cssInterop(CheckboxPrimitive.Root, { className: 'style' });
 interface BiometricSignInProps extends ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> {
   biometricType?: 'faceId' | 'touchId' | 'biometric';
   className?: string;
@@ -34,13 +35,13 @@ const BiometricSignIn = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Bi
     const getBiometricIcon = () => {
       switch (biometricType) {
         case 'faceId':
-          return <ScanFace size={20} className='text-base-ink fill-base-ink' />;
+          return <Icon name='face_id' size={20} className='text-base-ink' />;
         case 'touchId':
-          return <Fingerprint size={20} className='text-base-ink' />;
+          return <Icon name='fingerprint' size={20} className='text-base-ink' />;
         case 'biometric':
-          return <Scan size={20} className='text-base-ink fill-base-ink' />;
+          return <Icon name='fingerprint' size={20} className='text-base-ink' />;
         default:
-          return <ScanFace size={20} className='text-base-ink fill-base-ink' />;
+          return <Icon name='face_id' size={20} className='text-base-ink' />;
       }
     };
 
@@ -67,7 +68,7 @@ const BiometricSignIn = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Bi
               )}
             >
               <CheckboxPrimitive.Indicator>
-                <Check size={12} className='text-white' strokeWidth={3} />
+                <Icon name='check' size={14} className='text-white' />
               </CheckboxPrimitive.Indicator>
             </CheckboxPrimitive.Root>
 

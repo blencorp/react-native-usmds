@@ -7,23 +7,22 @@ import { cn } from '../../lib/utils';
 const buttonVariants = cva('flex items-center justify-center rounded-[4px] font-sans text-center', {
   variants: {
     variant: {
-      default: 'bg-primary hover:bg-primary-hover active:bg-primary-active text-white',
-      secondary: 'bg-secondary hover:bg-secondary-hover active:bg-secondary-active text-white',
-      'accent-cool': [
-        'bg-accent-cool hover:bg-accent-cool-hover active:bg-accent-cool-active',
-        'text-base-800 hover:text-base-800 active:text-white'
-      ],
-      'accent-warm': ['bg-accent-warm hover:bg-accent-warm-hover active:bg-accent-warm-active', 'text-base-800 hover:text-white active:text-white'],
-      base: 'bg-base hover:bg-base-hover active:bg-base-active text-white',
+      default: ['bg-primary hover:bg-primary-dark active:bg-primary-darker', 'text-white'],
+      secondary: ['bg-secondary hover:bg-secondary-dark active:bg-secondary-darker', 'text-white'],
+      'accent-cool': ['bg-accent-cool hover:bg-accent-cool-dark active:bg-accent-cool-darker', 'text-base-ink hover:text-base-ink active:text-white'],
+      'accent-warm': ['bg-accent-warm hover:bg-accent-warm-dark active:bg-accent-warm-darker', 'text-base-ink hover:text-white active:text-white'],
+      base: ['bg-gray-50 hover:bg-gray-60 active:bg-gray-80', 'text-white'],
       outline: [
         'border-2 bg-transparent',
-        'border-primary hover:border-primary-hover active:border-primary-active',
-        'text-primary hover:text-primary-hover active:text-primary-active'
+        'border-primary text-primary',
+        'hover:border-primary-dark hover:text-primary-dark',
+        'active:border-primary-darker active:text-primary-darker'
       ],
       inverse: [
         'border-2 bg-transparent',
-        'border-inverse-border hover:border-inverse-border-hover active:border-inverse-border-active',
-        'text-inverse-border hover:text-inverse-border-hover active:text-inverse-border-active'
+        'border-gray-10 text-gray-10',
+        'hover:border-gray-5 hover:text-gray-5',
+        'active:border-white active:text-white'
       ]
     },
     size: {
@@ -34,7 +33,7 @@ const buttonVariants = cva('flex items-center justify-center rounded-[4px] font-
       icon: 'h-[44px] w-[44px] p-0'
     },
     focus: {
-      true: 'outline-none ring-4 ring-focus-ring'
+      true: 'outline-none ring-[4px] ring-blue-vivid-40'
     },
     iconPosition: {
       left: 'flex-row gap-2',
@@ -55,11 +54,11 @@ const buttonTextVariants = cva('text-center font-[700] text-[16px] leading-[20px
     variant: {
       default: 'text-white',
       secondary: 'text-white',
-      'accent-cool': 'text-base-800 group-active:text-white',
-      'accent-warm': 'text-base-800 group-hover:text-white group-active:text-white',
+      'accent-cool': 'text-base-ink group-active:text-white',
+      'accent-warm': 'text-base-ink group-hover:text-white group-active:text-white',
       base: 'text-white',
-      outline: 'text-primary group-hover:text-primary-hover group-active:text-primary-active',
-      inverse: 'text-inverse-border group-hover:text-inverse-border-hover group-active:text-inverse-border-active'
+      outline: ['text-primary', 'group-hover:text-primary-dark', 'group-active:text-primary-darker'],
+      inverse: ['text-gray-10', 'group-hover:text-gray-5', 'group-active:text-white']
     },
     size: {
       default: 'text-[16px] leading-[20px]',
@@ -91,7 +90,7 @@ const Button = forwardRef<ElementRef<typeof Pressable>, ButtonProps>(({ classNam
       })}
     >
       <Pressable
-        className={cn(props.disabled && 'opacity-50 pointer-events-none', buttonVariants({ variant, size, iconPosition, className }))}
+        className={cn('group', props.disabled && 'opacity-50 pointer-events-none', buttonVariants({ variant, size, iconPosition, className }))}
         ref={ref}
         role='button'
         {...props}

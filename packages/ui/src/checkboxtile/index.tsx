@@ -2,8 +2,11 @@ import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import * as CheckboxPrimitive from '@rn-primitives/checkbox';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '../../lib/utils';
-import { Check } from 'lucide-react-native';
+import { cn } from '@/lib/utils';
+import { Icon } from '../icon';
+import { cssInterop } from 'nativewind';
+
+cssInterop(CheckboxPrimitive.Root, { className: 'style' });
 
 const checkboxTileVariants = cva('flex flex-col w-[329px] rounded-[2px] border-2', {
   variants: {
@@ -57,7 +60,7 @@ const CheckboxTile = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Check
                 )}
               >
                 <CheckboxPrimitive.Indicator>
-                  <Check size={12} className='text-white' strokeWidth={3} />
+                  <Icon name='check' size={14} className='text-white' />
                 </CheckboxPrimitive.Indicator>
               </CheckboxPrimitive.Root>
             </View>
