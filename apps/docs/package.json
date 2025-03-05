@@ -15,7 +15,7 @@
     "next": "15.1.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "@swc/helpers": "^0.5.3"
+    "@swc/helpers": "0.5.15"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.7",
