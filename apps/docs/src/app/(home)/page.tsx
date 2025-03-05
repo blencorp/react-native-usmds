@@ -29,7 +29,7 @@ export default function HomePage() {
                   <div className='flex justify-center mb-4'>
                     {/* Placeholder for USMDS logo or illustration */}
                     <div className='w-16 h-16 bg-white rounded-full flex items-center justify-center'>
-                      <span className='text-blue-700 text-2xl font-bold'>US</span>
+                      <span className='text-blue-700 text-2xl font-bold'>USMDS</span>
                     </div>
                   </div>
                   <p className='text-white font-medium'>USMDS Component Preview</p>

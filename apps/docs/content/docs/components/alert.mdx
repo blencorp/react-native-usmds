@@ -14,6 +14,16 @@ npx usmds add alert
 ```tsx
 import { Alert } from '@components/Alert';
 
+// Basic usage
+<Alert
+  variant="info"
+  title="Alert message"
+  description={{
+    body: 'Basic alert message'
+  }}
+/>
+
+// With link
 <Alert
   variant="info"
   title="Alert message"
@@ -147,25 +157,31 @@ Extends `View` props.
 ### Info Alert
 
 ```tsx
-<Alert
-  variant="info"
-  title="Info alert"
-  description={{
-    body: 'This is an informational alert.'
-  }}
-/>
+<Alert variant='info' title='Info alert' description={{ body: 'This is an informational alert.' }} />
+```
+
+### Error Alert
+
+```tsx
+<Alert variant='error' title='Error alert' description={{ body: 'This is an error alert.' }} />
+```
+
+### Warning Alert
+
+```tsx
+<Alert variant='warning' title='Warning alert' description={{ body: 'This is a warning alert.' }} />
+```
+
+### Success Alert
+
+```tsx
+<Alert variant='success' title='Success alert' description={{ body: 'This is a success alert.' }} />
 ```
 
 ### Emergency Alert
 
 ```tsx
-<Alert
-  variant="emergency"
-  title="Emergency alert"
-  description={{
-    body: 'This is an emergency alert.'
-  }}
-/>
+<Alert variant='emergency' title='Emergency alert' description={{ body: 'This is an emergency alert.' }} />
 ```
 
 ## Alert Styles
@@ -174,9 +190,9 @@ Extends `View` props.
 
 ```tsx
 <Alert
-  variant="info"
-  alertStyle="default"
-  title="Default alert"
+  variant='info'
+  alertStyle='default'
+  title='Default alert'
   description={{
     body: 'Standard alert with icon and header.'
   }}
@@ -187,8 +203,8 @@ Extends `View` props.
 
 ```tsx
 <Alert
-  variant="info"
-  alertStyle="no-header"
+  variant='info'
+  alertStyle='no-header'
   description={{
     title: 'Compact message',
     body: 'Alert without separate header section.'
@@ -200,9 +216,9 @@ Extends `View` props.
 
 ```tsx
 <Alert
-  variant="info"
-  alertStyle="list"
-  title="List alert"
+  variant='info'
+  alertStyle='list'
+  title='List alert'
   description={{
     messages: [
       {
@@ -222,8 +238,8 @@ Extends `View` props.
 
 ```tsx
 <Alert
-  variant="info"
-  alertStyle="slim"
+  variant='info'
+  alertStyle='slim'
   description={{
     title: 'Slim alert',
     body: 'Compact version with smaller icon.'
@@ -235,8 +251,8 @@ Extends `View` props.
 
 ```tsx
 <Alert
-  variant="info"
-  alertStyle="no-icon"
+  variant='info'
+  alertStyle='no-icon'
   description={{
     title: 'No icon alert',
     body: 'Alert without an icon.'

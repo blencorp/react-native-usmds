@@ -15,16 +15,10 @@ npx usmds add biometricsignin
 import { BiometricSignIn } from '@components/BiometricSignIn';
 import { useState } from 'react';
 
-function App() {
+function BiometricSettings() {
   const [enabled, setEnabled] = useState(false);
 
-  return (
-    <BiometricSignIn
-      checked={enabled}
-      onCheckedChange={setEnabled}
-      biometricType="faceId"
-    />
-  );
+  return <BiometricSignIn checked={enabled} onCheckedChange={setEnabled} biometricType='faceId' />;
 }
 ```
 
@@ -48,7 +42,7 @@ Extends `Checkbox.Root` props.
       <td>biometricType</td>
       <td>`'faceId' | 'touchId' | 'biometric'`</td>
       <td>`'faceId'`</td>
-      <td>Determines which biometric authentication type to display.</td>
+      <td>Determines which biometric authentication type to display. Affects both icon and text label.</td>
     </tr>
     <tr>
       <td>checked</td>
@@ -66,13 +60,13 @@ Extends `Checkbox.Root` props.
       <td>disabled</td>
       <td>`boolean`</td>
       <td>`false`</td>
-      <td>When true, prevents the user from interacting with the checkbox.</td>
+      <td>When true, applies disabled styling and prevents interactions.</td>
     </tr>
     <tr>
       <td>className</td>
       <td>`string`</td>
       <td>-</td>
-      <td>Additional CSS classes to apply to the container.</td>
+      <td>Additional Tailwind CSS classes to apply to the container.</td>
     </tr>
   </tbody>
 </table>
@@ -82,60 +76,56 @@ Extends `Checkbox.Root` props.
 ### Face ID
 
 ```tsx
-<BiometricSignIn
-  checked={enabled}
-  onCheckedChange={setEnabled}
-  biometricType="faceId"
-/>
+<BiometricSignIn checked={enabled} onCheckedChange={setEnabled} biometricType='faceId' />
 ```
 
 ### Touch ID
 
 ```tsx
-<BiometricSignIn
-  checked={enabled}
-  onCheckedChange={setEnabled}
-  biometricType="touchId"
-/>
+<BiometricSignIn checked={enabled} onCheckedChange={setEnabled} biometricType='touchId' />
 ```
 
 ### Generic Biometric
 
 ```tsx
-<BiometricSignIn
-  checked={enabled}
-  onCheckedChange={setEnabled}
-  biometricType="biometric"
-/>
+<BiometricSignIn checked={enabled} onCheckedChange={setEnabled} biometricType='biometric' />
 ```
 
 ## Styling
 
-The BiometricSignIn component uses Tailwind CSS classes for styling. The appearance can be customized using the `className` prop:
+The component uses Tailwind CSS for styling with these default characteristics:
 
 ```tsx
-<BiometricSignIn
-  checked={enabled}
-  onCheckedChange={setEnabled}
-  className="my-custom-class"
-/>
+<BiometricSignIn checked={enabled} onCheckedChange={setEnabled} className='my-custom-classes' />
 ```
 
 Default styling includes:
-- Container dimensions: 318.88px × 50px
-- Rounded borders with base ink color
-- Consistent padding and spacing
-- Checkbox with primary color when checked
-- Disabled state styling
+
+- Container: 318.88px × 50px
+- Checkbox: 24px × 24px with 2px border
+- Primary color for checked state
+- Disabled state styling with muted colors
+- Consistent padding and spacing (15px horizontal, 12px vertical)
+- Rounded borders
+- Base ink color for text and icons
 
 ## Accessibility
 
-The BiometricSignIn component:
-- Uses `accessibilityRole="checkbox"` for proper semantic structure
-- Supports keyboard navigation
-- Maintains WCAG color contrast requirements
-- Provides appropriate `accessibilityState` for checked and disabled states
-- Includes clear, descriptive text labels
+The BiometricSignIn component includes:
+
+- `accessibilityRole="checkbox"` for semantic structure
+- Proper `accessibilityState` for checked and disabled states
+- Keyboard navigation support
+- Clear, descriptive text labels
+- WCAG-compliant color contrast
+- Touch target size meets accessibility guidelines
+
+## Test IDs
+
+For testing purposes, the component includes:
+
+- `testID="biometric-pressable"` on the outer pressable container
+- `testID="biometric-checkbox"` on the checkbox element
 
 ## State Management
 
@@ -147,12 +137,6 @@ import { useState } from 'react';
 function BiometricSettings() {
   const [enabled, setEnabled] = useState(false);
 
-  return (
-    <BiometricSignIn
-      checked={enabled}
-      onCheckedChange={setEnabled}
-      biometricType="faceId"
-    />
-  );
+  return <BiometricSignIn checked={enabled} onCheckedChange={setEnabled} biometricType='faceId' />;
 }
 ```

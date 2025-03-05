@@ -14,7 +14,7 @@ npx usmds add icon
 ```tsx
 import { Icon } from '@components/Icon';
 
-<Icon name="accessibility-new" size={24} color="#000000" />
+<Icon name='accessibility-new' size={24} color='#000000' />;
 ```
 
 ## Props
@@ -35,62 +35,66 @@ import { Icon } from '@components/Icon';
       <td>name</td>
       <td>`IconName` (see available icons below)</td>
       <td>-</td>
-      <td>The name of the icon to display.</td>
+      <td>The name of the icon to display. Must be one of the available icons.</td>
     </tr>
     <tr>
       <td>size</td>
       <td>`number`</td>
       <td>`24`</td>
-      <td>The width and height of the icon in pixels.</td>
+      <td>The width and height of the icon in pixels. Icon maintains aspect ratio.</td>
     </tr>
     <tr>
-      <td>color</td>
+      <td>className</td>
       <td>`string`</td>
-      <td>`'#000000'`</td>
-      <td>The color of the icon.</td>
+      <td>-</td>
+      <td>Tailwind CSS classes to style the icon, including color (e.g., 'text-red-500').</td>
     </tr>
   </tbody>
 </table>
+
+## Implementation Details
+
+The Icon component:
+
+- Uses React Native SVG with NativeWind styling
+- Maintains consistent viewBox scaling (24x24)
+- Uses `currentColor` for color inheritance through Tailwind classes
+- Provides console warning for invalid icon names
 
 ## Examples
 
 ### Basic Usage
 
 ```tsx
-<Icon name="accessibility-new" />
+<Icon name='accessibility-new' />
 ```
 
 ### Custom Size
 
 ```tsx
-<Icon name="accessibility-new" size={32} />
+<Icon name='accessibility-new' size={32} />
 ```
 
-### Custom Color
+### Custom Color using Tailwind
 
 ```tsx
-<Icon name="accessibility-new" color="#FF0000" />
+<Icon name='accessibility-new' className='text-red-500' />
 ```
 
-### Different Sizes
+### Styling Examples
 
 ```tsx
-<View style={{ flexDirection: 'row', gap: 20, alignItems: 'center' }}>
-  <Icon name="accessibility-new" size={16} />
-  <Icon name="accessibility-new" size={24} />
-  <Icon name="accessibility-new" size={32} />
-  <Icon name="accessibility-new" size={48} />
-</View>
-```
+<View className='flex-row gap-5 items-center'>
+  {/* Different colors */}
+  <Icon name='accessibility-new' className='text-black' />
+  <Icon name='accessibility-new' className='text-red-500' />
+  <Icon name='accessibility-new' className='text-blue-500' />
 
-### Different Colors
+  {/* With opacity */}
+  <Icon name='accessibility-new' className='text-black opacity-50' />
 
-```tsx
-<View style={{ flexDirection: 'row', gap: 20, alignItems: 'center' }}>
-  <Icon name="accessibility-new" color="#000000" />
-  <Icon name="accessibility-new" color="#FF0000" />
-  <Icon name="accessibility-new" color="#00FF00" />
-  <Icon name="accessibility-new" color="#0000FF" />
+  {/* With hover states */}
+  <Icon name='accessibility-new' className='text-black hover:text-blue-500' />
 </View>
 ```
 
@@ -98,63 +102,123 @@ import { Icon } from '@components/Icon';
 
 The following icons are available:
 
-- accessibility-new
-- autorenew
-- attach_money
-- attach_file
-- assessment
-- arrow_upward
-- arrow_forward
-- arrow_drop_up
-- arrow_drop_down
-- arrow_downward
-- arrow_back
-- api
-- announcement
-- alternate_email
-- alarm
-- remove_circle
-- add
-- add_circle
-- add_circle_outline
-- account_circle
-- account_box
-- account_balance
-- accessible_forward
-- content_copy
-- contact_page
-- construction_worker
-- construction
-- connect_without_contact
-- comment
-- code
-- cloud
-- clothes
-- closed_caption
-- close
-- clean_hands
-- checkroom
-- check
-- check_circle
-- check_circle_outline
-- check_box_outline_blank
-- chat
-- cancel
-- camping
-- campaign
-- calendar_today
-- backpack
-- bathtub
-- build
-- bedding
-- bookmark
-- bug_report
+```tsx
+type IconName =
+  | 'accessibility-new'
+  | 'autorenew'
+  | 'attach_money'
+  | 'attach_file'
+  | 'assessment'
+  | 'arrow_upward'
+  | 'arrow_forward'
+  | 'arrow_drop_up'
+  | 'arrow_drop_down'
+  | 'arrow_downward'
+  | 'arrow_back'
+  | 'api'
+  | 'announcement'
+  | 'alternate_email'
+  | 'alarm'
+  | 'remove_circle'
+  | 'add'
+  | 'add_circle'
+  | 'add_circle_outline'
+  | 'account_circle'
+  | 'account_box'
+  | 'account_balance'
+  | 'accessible_forward'
+  | 'content_copy'
+  | 'contact_page'
+  | 'construction_worker'
+  | 'construction'
+  | 'connect_without_contact'
+  | 'comment'
+  | 'code'
+  | 'cloud'
+  | 'clothes'
+  | 'closed_caption'
+  | 'close'
+  | 'clean_hands'
+  | 'checkroom'
+  | 'check'
+  | 'check_circle'
+  | 'check_circle_outline'
+  | 'check_box_outline_blank'
+  | 'chat'
+  | 'cancel'
+  | 'camping'
+  | 'campaign'
+  | 'calendar_today'
+  | 'backpack'
+  | 'bathtub'
+  | 'bedding'
+  | 'bookmark'
+  | 'bug_report'
+  | 'error_outline'
+  | 'info'
+  | 'face_id'
+  | 'fingerprint'
+  | 'launch'
+  | 'navigate_next'
+  | 'navigate_before';
+```
 
-More will be added soon.
+### Icon Categories
+
+Icons are organized into functional categories:
+
+**Navigation**
+
+- `navigate_next`
+- `navigate_before`
+- `arrow_back`
+- `arrow_forward`
+- `arrow_upward`
+- `arrow_downward`
+- `arrow_drop_up`
+- `arrow_drop_down`
+
+**Authentication & Security**
+
+- `face_id`
+- `fingerprint`
+- `check`
+- `check_circle`
+- `check_circle_outline`
+
+**UI Elements**
+
+- `close`
+- `add`
+- `add_circle`
+- `add_circle_outline`
+- `cancel`
+- `info`
+- `error_outline`
+
+**Actions**
+
+- `launch`
+- `code`
+- `cloud`
+- `bookmark`
+- `chat`
+- `comment`
+
+**Objects & Items**
+
+- `backpack`
+- `bathtub`
+- `bedding`
+- `clothes`
+- `camping`
+
+Each icon maintains a consistent 24x24 viewBox and can be styled using Tailwind classes.
 
 ## Accessibility
 
 The Icon component:
+
 - Uses SVG for crisp rendering at any size
 - Supports color customization for proper contrast
 - Should be accompanied by descriptive text or labels when used in interactive elements
