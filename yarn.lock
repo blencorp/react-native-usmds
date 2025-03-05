@@ -7112,16 +7112,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/helpers@npm:0.5.1":
-  version: 0.5.1
-  resolution: "@swc/helpers@npm:0.5.1"
-  dependencies:
-    tslib: "npm:^2.4.0"
-  checksum: 10c0/2e2272c8278351670e1daf27cc634ace793afb378dcc85be2800d30a7b4d3afad37707371ead2a6d96662fa30294da678d66cdc4dc7f3e698bd8e111235c60fc
-  languageName: node
-  linkType: hard
-
-"@swc/helpers@npm:0.5.15":
+"@swc/helpers@npm:0.5.15, @swc/helpers@npm:^0.5.15":
   version: 0.5.15
   resolution: "@swc/helpers@npm:0.5.15"
   dependencies:
@@ -10591,7 +10582,7 @@ __metadata:
   resolution: "docs@workspace:apps/docs"
   dependencies:
     "@swc/core": "npm:1.3.96"
-    "@swc/helpers": "npm:0.5.1"
+    "@swc/helpers": "npm:^0.5.15"
     "@tailwindcss/postcss": "npm:^4.0.7"
     "@types/mdx": "npm:^2.0.13"
     "@types/node": "npm:22.13.4"
