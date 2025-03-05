@@ -1,3 +1,9 @@
+## [1.2.0](https://github.com/blencorp/react-native-usmds/compare/v1.1.0...v1.2.0) (2025-03-05)
+
+### Features
+
+* refactor components and update to cli ([b55f68f](https://github.com/blencorp/react-native-usmds/commit/b55f68f2bb98baa428cc84fc8bfc6ac4695a0b10))
+
 ## [1.1.0](https://github.com/blencorp/react-native-usmds/compare/v1.0.0...v1.1.0) (2025-02-28)
 
 ### Features
