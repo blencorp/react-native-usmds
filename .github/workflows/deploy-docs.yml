@@ -30,7 +30,5 @@ jobs:
       - name: Deploy to Vercel
         run: |
           cd apps/docs
-          echo 'Running LS'
-          ls
           vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-          vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+          vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }}
