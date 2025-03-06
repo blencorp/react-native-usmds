@@ -121,24 +121,24 @@ export const add = new Command()
 
           const componentName = component.charAt(0).toUpperCase() + component.slice(1);
 
-          // Check if component exists in registry BEFORE creating directory
+          // Check if component exists in registry
           if (!COMPONENT_TEMPLATES[componentName]) {
             spinner.fail(`Component "${component}" not found in registry`);
             continue;
           }
 
-          // Update path to include ui directory
-          const componentDir = path.join(uiDir, component.toLowerCase());
-          const componentPath = path.join(componentDir, 'index.tsx');
+          // Changed: Update path to be a direct .tsx file instead of a directory
+          const componentPath = path.join(uiDir, `${component.toLowerCase()}.tsx`);
 
-          // Only create directory if component exists and isn't already installed
+          // Changed: Check if file exists (not directory)
           if (existsSync(componentPath) && !options.overwrite) {
             spinner.warn(`${component} already exists, skipping`);
             continue;
           }
 
-          // Create the component directory
-          await fs.mkdir(componentDir, { recursive: true });
+          // Changed: No need to create directory, just write the file
+          const template = await getComponentTemplate(component, cwd, { overwrite: options.overwrite });
+          await fs.writeFile(componentPath, template, 'utf8');
 
           // Get internal dependencies
           const internalDeps = COMPONENT_METADATA[componentName]?.internalDependencies || [];
@@ -149,10 +149,6 @@ export const add = new Command()
               selectedComponents.push(dep.toLowerCase());
             }
           }
-
-          // Get component template and write file
-          const template = await getComponentTemplate(component, cwd, { overwrite: options.overwrite });
-          await fs.writeFile(componentPath, template, 'utf8');
 
           // Install external dependencies
           const componentDeps = COMPONENT_METADATA[componentName]?.dependencies || [];
