@@ -1,3 +1,9 @@
+## [1.2.2](https://github.com/blencorp/react-native-usmds/compare/v1.2.1...v1.2.2) (2025-03-07)
+
+### Bug Fixes
+
+* imports ([20b30ef](https://github.com/blencorp/react-native-usmds/commit/20b30ef7e040dc1ef91eed1c65df206e2474b56f))
+
 ## [1.2.1](https://github.com/blencorp/react-native-usmds/compare/v1.2.0...v1.2.1) (2025-03-06)
 
 ### Bug Fixes
