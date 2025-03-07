@@ -1,3 +1,9 @@
+## [1.2.1](https://github.com/blencorp/react-native-usmds/compare/v1.2.0...v1.2.1) (2025-03-06)
+
+### Bug Fixes
+
+* delete ns as well ([033928f](https://github.com/blencorp/react-native-usmds/commit/033928f2c6b653dcb6d8ca3de2d423d2ea5b2daa))
+
 ## [1.2.0](https://github.com/blencorp/react-native-usmds/compare/v1.1.0...v1.2.0) (2025-03-05)
 
 ### Features
