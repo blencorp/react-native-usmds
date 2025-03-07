@@ -234,7 +234,7 @@ export const COMPONENT_TEMPLATES: Record<string, string> = {
   Alert: `import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
 import { View, Text } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { Icon } from '@components/ui/icon';
+import { Icon } from '@/components/ui/icon';
 import { cn } from '@/lib/utils';
 
 const alertVariants = cva('flex flex-row items-start p-4 w-[329px]', {
@@ -473,7 +473,7 @@ export { Banner, type BannerProps };`,
 import { View, Text, Pressable } from 'react-native';
 import * as CheckboxPrimitive from '@rn-primitives/checkbox';
 import { cn } from '@/lib/utils';
-import { Icon } from '@components/ui/icon';
+import { Icon } from '@/components/ui/icon';
 import { cssInterop } from 'nativewind';
 
 cssInterop(CheckboxPrimitive.Root, { className: 'style' });
@@ -560,7 +560,7 @@ export { BiometricSignIn };`,
   Button: `import { ComponentPropsWithoutRef, ElementRef, forwardRef, ReactNode } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { Pressable, PressableStateCallbackType } from 'react-native';
-import { TextClassContext } from '@components/ui/text';
+import { TextClassContext } from '@/components/ui/text';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva('flex items-center justify-center rounded-[4px] font-sans text-center', {
@@ -675,7 +675,7 @@ export type { ButtonProps };`,
 import { View, Text, Pressable } from 'react-native';
 import * as CheckboxPrimitive from '@rn-primitives/checkbox';
 import { cn } from '@/lib/utils';
-import { Icon } from '@components/ui/icon';
+import { Icon } from '@/components/ui/icon';
 import { cssInterop } from 'nativewind';
 
 cssInterop(CheckboxPrimitive.Root, { className: 'style' });
@@ -731,7 +731,7 @@ import { View, Text, Pressable } from 'react-native';
 import * as CheckboxPrimitive from '@rn-primitives/checkbox';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
-import { Icon } from '@components/ui/icon';
+import { Icon } from '@/components/ui/icon';
 import { cssInterop } from 'nativewind';
 
 cssInterop(CheckboxPrimitive.Root, { className: 'style' });
@@ -846,8 +846,8 @@ export { ButtonGroup };`,
 import { View, Image } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
-import { Button } from '@components/ui/button';
-import { Text } from '@components/ui/text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 const cardVariants = cva(
   'flex flex-col justify-between items-start bg-white border border-base-lighter rounded-[4px] w-[329px] min-h-[471px] mx-auto',
@@ -969,7 +969,7 @@ export const Icon = ({ name, size = 24, color, className }: IconProps) => {
 import { Text, Pressable, View } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
-import { Icon } from '@components/ui/icon';
+import { Icon } from '@/components/ui/icon';
 
 const linkVariants = cva('font-source-sans-pro text-base leading-[162%] underline', {
   variants: {
@@ -1039,7 +1039,7 @@ export { Link };`,
   Pagination: `import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { cn } from '@/lib/utils';
-import { Icon } from '@components/ui/icon';
+import { Icon } from '@/components/ui/icon';
 interface PaginationProps extends ComponentPropsWithoutRef<typeof View> {
   currentPage: number;
   totalPages: number;
@@ -1313,7 +1313,7 @@ export { RadioTileGroup, RadioTile, type RadioTileProps };`,
 import { View, Text, Pressable } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
-import { Icon } from '@components/ui/icon';
+import { Icon } from '@/components/ui/icon';
 
 const snackbarVariants = cva('flex w-[329px] bg-base-darkest rounded-[4px] p-3', {
   variants: {
