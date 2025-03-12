@@ -1,3 +1,9 @@
+## [1.3.0](https://github.com/blencorp/react-native-usmds/compare/v1.2.2...v1.3.0) (2025-03-12)
+
+### Features
+
+* fix cli inits + add pnpm/bun support + update docs ([4ca9f25](https://github.com/blencorp/react-native-usmds/commit/4ca9f25848bff4b8e6f2f4430669e7f11c8c404e))
+
 ## [1.2.2](https://github.com/blencorp/react-native-usmds/compare/v1.2.1...v1.2.2) (2025-03-07)
 
 ### Bug Fixes
