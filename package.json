@@ -4,6 +4,11 @@
   "description": "React Native UI components based on US Mobile Design System",
   "main": "./packages/ui/src/index.ts",
   "bin": "packages/cli/dist/index.js",
+  "files": [
+    "packages/ui/src/**/*",
+    "packages/cli/dist/**/*",
+    "packages/cli/package.json"
+  ],
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
@@ -53,7 +58,6 @@
   },
   "packageManager": "yarn@4.3.1",
   "workspaces": [
-    "apps/*",
     "packages/*"
   ]
 }
