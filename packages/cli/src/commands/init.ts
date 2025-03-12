@@ -1,11 +1,11 @@
 import chalk from 'chalk';
 import { Command } from 'commander';
-import { existsSync, promises as fs, mkdir, writeFile } from 'fs';
+import { existsSync, promises as fs } from 'fs';
 import ora from 'ora';
 import path from 'path';
 import { execa } from 'execa';
 import * as z from 'zod';
-import { getPackageManager } from '../utils/get-package-manager';
+import { getPackageManager, getInstallCommand } from '../utils/get-package-manager';
 import { handleError } from '../utils/handle-error';
 import { logger } from '../utils/logger';
 import * as templates from '../utils/templates';
@@ -20,9 +20,7 @@ const DEPENDENCIES = [
   'react-native-svg',
   '@rn-primitives/types',
   '@rn-primitives/slot',
-  '@rn-primitives/portal',
-  '@rn-primitives/checkbox',
-  '@rn-primitives/radio-group'
+  '@rn-primitives/portal'
 ];
 
 const DEV_DEPENDENCIES = ['tailwindcss@^3.3.2'];
@@ -53,11 +51,88 @@ export const init = new Command()
 async function writeFileGracefully(filePath: string, content: string) {
   if (existsSync(filePath)) {
     const existingContent = await fs.readFile(filePath, 'utf8');
-    if (!existingContent.includes(content)) {
+
+    // Special handling for metro.config.js
+    if (filePath.endsWith('metro.config.js')) {
+      const hasNativeWind = await hasNativeWindConfig(filePath);
+      if (!hasNativeWind) {
+        // Parse the existing config structure
+        const configMatch = existingContent.match(/const config = ([^;]+);/);
+        if (configMatch) {
+          // If there's an existing config, wrap it with NativeWind
+          const updatedContent = existingContent.replace(
+            /module\.exports = ([^;]+);/,
+            "module.exports = withNativeWind($1, { input: './global.css' });"
+          );
+
+          // Add NativeWind import if it doesn't exist
+          const finalContent = existingContent.includes('nativewind/metro')
+            ? updatedContent
+            : `const { withNativeWind } = require('nativewind/metro');\n\n${updatedContent}`;
+
+          await fs.writeFile(filePath, finalContent, 'utf8');
+        } else {
+          // If we can't parse the existing config, use our default template
+          await fs.writeFile(filePath, content, 'utf8');
+        }
+      }
+      return;
+    }
+
+    // For other files, continue with the existing append logic
+    const normalizedExisting = existingContent.replace(/\s+/g, '').replace(/\r\n/g, '\n');
+    const normalizedContent = content.replace(/\s+/g, '').replace(/\r\n/g, '\n');
+
+    if (!normalizedExisting.includes(normalizedContent)) {
       await fs.writeFile(filePath, `${existingContent}\n${content}`, 'utf8');
     }
   } else {
     await fs.writeFile(filePath, content, 'utf8');
+  }
+}
+
+async function hasExistingCnFunction(filePath: string): Promise<boolean> {
+  try {
+    const content = await fs.readFile(filePath, 'utf8');
+
+    // Remove comments and strings to avoid false positives
+    const cleanContent = content
+      .replace(/\/\*[\s\S]*?\*\//g, '') // Remove multi-line comments
+      .replace(/\/\/.*/g, '') // Remove single-line comments
+      .replace(/'.*?'/g, '') // Remove single-quote strings
+      .replace(/".*?"/g, '') // Remove double-quote strings
+      .replace(/`.*?`/g, ''); // Remove template literals
+
+    // Look for function declaration or arrow function assignment
+    const cnPatterns = [
+      /function\s+cn\s*\(/, // function cn(
+      /const\s+cn\s*=\s*function\s*\(/, // const cn = function(
+      /const\s+cn\s*=\s*\([^)]*\)\s*=>/, // const cn = (...) =>
+      /export\s+(?:const|function)\s+cn\s*[=\(]/ // export const/function cn
+    ];
+
+    return cnPatterns.some((pattern) => pattern.test(cleanContent));
+  } catch {
+    return false;
+  }
+}
+
+async function hasNativeWindConfig(filePath: string): Promise<boolean> {
+  try {
+    const content = await fs.readFile(filePath, 'utf8');
+
+    // Remove comments and strings to avoid false positives
+    const cleanContent = content
+      .replace(/\/\*[\s\S]*?\*\//g, '') // Remove multi-line comments
+      .replace(/\/\/.*/g, '') // Remove single-line comments
+      .replace(/'.*?'/g, '') // Remove single-quote strings
+      .replace(/".*?"/g, '') // Remove double-quote strings
+      .replace(/`.*?`/g, ''); // Remove template literals
+
+    // Check for withNativeWind configuration
+    return cleanContent.includes('withNativeWind') && cleanContent.includes('nativewind/metro');
+  } catch {
+    return false;
   }
 }
 
@@ -70,23 +145,33 @@ export async function runInit(cwd: string) {
     await writeFileGracefully(path.join(cwd, 'nativewind-env.d.ts'), templates.NATIVEWIND_ENV);
     await writeFileGracefully(path.join(cwd, 'babel.config.js'), templates.BABEL_CONFIG);
     await writeFileGracefully(path.join(cwd, 'global.css'), templates.GLOBAL_STYLES);
-    await writeFileGracefully(path.join(cwd, 'metro.config.js'), templates.METRO_CONFIG);
+
+    // Check metro.config.js
+    const metroConfigPath = path.join(cwd, 'metro.config.js');
+    if (existsSync(metroConfigPath)) {
+      const hasNativeWind = await hasNativeWindConfig(metroConfigPath);
+      if (!hasNativeWind) {
+        // Only write if NativeWind config doesn't exist
+        await writeFileGracefully(metroConfigPath, templates.METRO_CONFIG);
+      }
+    } else {
+      await writeFileGracefully(metroConfigPath, templates.METRO_CONFIG);
+    }
 
     // Check if lib directory exists
     const libDir = path.join(cwd, 'lib');
-    const hasLibDir = existsSync(libDir);
+    const utilsPath = path.join(libDir, 'utils.ts');
 
-    // If lib doesn't exist, create it and add utils.ts
-    if (!hasLibDir) {
+    if (!existsSync(libDir)) {
       await fs.mkdir(libDir, { recursive: true });
-      await fs.writeFile(path.join(libDir, 'utils.ts'), templates.UTILS, 'utf8');
+      await fs.writeFile(utilsPath, templates.UTILS, 'utf8');
     } else {
-      // If lib exists, check for utils.ts
-      const utilsPath = path.join(libDir, 'utils.ts');
+      // If utils.ts exists, check if it already has cn function
       if (existsSync(utilsPath)) {
-        const existingContent = await fs.readFile(utilsPath, 'utf8');
-        if (!existingContent.includes(templates.UTILS)) {
-          await fs.writeFile(utilsPath, `${existingContent}\n${templates.UTILS}`, 'utf8');
+        const hasCn = await hasExistingCnFunction(utilsPath);
+        if (!hasCn) {
+          // Only append if cn function doesn't exist
+          await fs.writeFile(utilsPath, `${await fs.readFile(utilsPath, 'utf8')}\n${templates.UTILS}`, 'utf8');
         }
       } else {
         await fs.writeFile(utilsPath, templates.UTILS, 'utf8');
@@ -99,13 +184,13 @@ export async function runInit(cwd: string) {
 
     spinner.succeed();
 
-    // Then install all dependencies at once
+    // Install dependencies
     const dependenciesSpinner = ora(`Installing dependencies...`)?.start();
     const packageManager = await getPackageManager(cwd);
-    const packageCommand = packageManager === 'npm' ? 'install' : 'add';
+    const { install, installDev } = getInstallCommand(packageManager);
 
-    await execa(packageManager, [packageCommand, ...DEPENDENCIES], { cwd });
-    await execa(packageManager, [packageCommand, ...DEV_DEPENDENCIES, packageManager === 'npm' ? '--save-dev' : '--dev'], { cwd });
+    await execa(packageManager, [...install, ...DEPENDENCIES], { cwd });
+    await execa(packageManager, [...installDev, ...DEV_DEPENDENCIES], { cwd });
 
     // Create a marker file after successful initialization
     const markerPath = path.join(cwd, '.usmds-initialized');
