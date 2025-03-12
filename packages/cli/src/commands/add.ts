@@ -7,7 +7,7 @@ import * as z from 'zod';
 import { logger } from '../utils/logger';
 import { COMPONENT_TEMPLATES, COMPONENT_METADATA, ICON_PATHS } from '../utils/registry';
 import { execa } from 'execa';
-import { getPackageManager } from '../utils/get-package-manager';
+import { getPackageManager, getInstallCommand } from '../utils/get-package-manager';
 import { runInit } from './init';
 
 const REQUIRED_DEPENDENCIES = [
@@ -154,8 +154,8 @@ export const add = new Command()
           const componentDeps = COMPONENT_METADATA[componentName]?.dependencies || [];
           if (componentDeps.length > 0) {
             const packageManager = await getPackageManager(cwd);
-            const packageCommand = packageManager === 'npm' ? 'install' : 'add';
-            await execa(packageManager, [packageCommand, ...componentDeps], { cwd });
+            const { install } = getInstallCommand(packageManager);
+            await execa(packageManager, [...install, ...componentDeps], { cwd });
           }
         }
 
