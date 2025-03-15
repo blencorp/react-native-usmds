@@ -105,62 +105,73 @@ The following icons are available:
 ```tsx
 type IconName =
   | 'accessibility-new'
-  | 'autorenew'
-  | 'attach_money'
-  | 'attach_file'
-  | 'assessment'
-  | 'arrow_upward'
-  | 'arrow_forward'
-  | 'arrow_drop_up'
-  | 'arrow_drop_down'
-  | 'arrow_downward'
-  | 'arrow_back'
-  | 'api'
-  | 'announcement'
-  | 'alternate_email'
-  | 'alarm'
-  | 'remove_circle'
+  | 'accessible_forward'
+  | 'account_balance'
+  | 'account_box'
+  | 'account_circle'
   | 'add'
   | 'add_circle'
   | 'add_circle_outline'
-  | 'account_circle'
-  | 'account_box'
-  | 'account_balance'
-  | 'accessible_forward'
-  | 'content_copy'
-  | 'contact_page'
-  | 'construction_worker'
-  | 'construction'
-  | 'connect_without_contact'
-  | 'comment'
-  | 'code'
-  | 'cloud'
-  | 'clothes'
-  | 'closed_caption'
-  | 'close'
-  | 'clean_hands'
-  | 'checkroom'
-  | 'check'
-  | 'check_circle'
-  | 'check_circle_outline'
-  | 'check_box_outline_blank'
-  | 'chat'
-  | 'cancel'
-  | 'camping'
-  | 'campaign'
-  | 'calendar_today'
+  | 'alarm'
+  | 'alternate_email'
+  | 'announcement'
+  | 'api'
+  | 'arrow_back'
+  | 'arrow_downward'
+  | 'arrow_drop_down'
+  | 'arrow_drop_up'
+  | 'arrow_forward'
+  | 'arrow_upward'
+  | 'assessment'
+  | 'attach_file'
+  | 'attach_money'
+  | 'autorenew'
   | 'backpack'
   | 'bathtub'
   | 'bedding'
   | 'bookmark'
   | 'bug_report'
+  | 'calendar_today'
+  | 'campaign'
+  | 'camping'
+  | 'cancel'
+  | 'chat'
+  | 'check'
+  | 'check_box_outline_blank'
+  | 'check_circle'
+  | 'check_circle_outline'
+  | 'checkroom'
+  | 'clean_hands'
+  | 'close'
+  | 'closed_caption'
+  | 'clothes'
+  | 'cloud'
+  | 'code'
+  | 'comment'
+  | 'connect_without_contact'
+  | 'construction'
+  | 'construction_worker'
+  | 'contact_page'
+  | 'content_copy'
   | 'error_outline'
-  | 'info'
   | 'face_id'
   | 'fingerprint'
+  | 'info'
   | 'launch'
+  | 'navigate_before'
   | 'navigate_next'
-  | 'navigate_before';
+  | 'remove_circle'
+  | 'visibility'
+  | 'visibility_off'
+  | 'volume_off'
+  | 'warning'
+  | 'wash'
+  | 'wifi'
+  | 'work'
+  | 'youtube'
+  | 'zoom_in'
+  | 'zoom_out'
+  | 'zoom_out_map';
 ```
 
 ### Icon Categories
@@ -177,11 +188,16 @@ Icons are organized into functional categories:
 - `arrow_downward`
 - `arrow_drop_up`
 - `arrow_drop_down`
+- `zoom_in`
+- `zoom_out`
+- `zoom_out_map`
 
 **Authentication & Security**
 
 - `face_id`
 - `fingerprint`
+- `visibility`
+- `visibility_off`
 - `check`
 - `check_circle`
 - `check_circle_outline`
@@ -195,6 +211,7 @@ Icons are organized into functional categories:
 - `cancel`
 - `info`
 - `error_outline`
+- `warning`
 
 **Actions**
 
@@ -204,6 +221,8 @@ Icons are organized into functional categories:
 - `bookmark`
 - `chat`
 - `comment`
+- `content_copy`
+- `autorenew`
 
 **Objects & Items**
 
@@ -212,6 +231,22 @@ Icons are organized into functional categories:
 - `bedding`
 - `clothes`
 - `camping`
+- `work`
+
+**Media & Communication**
+
+- `volume_off`
+- `youtube`
+- `wifi`
+- `alternate_email`
+
+**Accessibility & Users**
+
+- `accessibility-new`
+- `accessible_forward`
+- `account_circle`
+- `account_box`
+- `account_balance`
 
 Each icon maintains a consistent 24x24 viewBox and can be styled using Tailwind classes.
 
