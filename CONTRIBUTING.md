@@ -4,16 +4,19 @@ Thank you for your interest in contributing to USMDS (US Mobile Design System fo
 
 ## About this Repository
 
-This is a monorepo managed with Yarn workspaces and Turborepo as the build system. The project uses semantic-release for versioning and publishing.
+This is a monorepo managed with npm workspaces and Turborepo as the build system. The project uses semantic-release for versioning and publishing.
 
 ### Repository Structure
 
+```text
 .
 ├── apps/
-│ └── docs/ # Documentation site
+│   └── docs/          # Documentation site
 ├── packages/
-│ ├── cli/ # USMDS CLI tool
-│ └── ui/ # Core UI components
+│   ├── cli/          # USMDS CLI tool
+│   └── ui/           # Core UI components
+```
+```
 
 ## Development Setup
 
@@ -27,25 +30,25 @@ This is a monorepo managed with Yarn workspaces and Turborepo as the build syste
 2. **Install Dependencies**
 
    ```bash
-   yarn install
+   npm install
    ```
 3. **Run Storybook**
 
    ```bash
    cd apps/storybook
-   yarn storybook --reset-cache
+   npm storybook --reset-cache
    ```
 
 ## Working with the Monorepo
 
 We use Turborepo for managing our monorepo. Here are some common commands:
 
-- Build all packages: `yarn build`
-- Build documentation: `yarn build:docs`
-- Build examples: `yarn build:examples`
-- Run development server: `yarn dev`
-- Lint code: `yarn lint`
-- Format code: `yarn format`
+- Build all packages: `npm build`
+- Build documentation: `npm build:docs`
+- Build examples: `npm build:examples`
+- Run development server: `npm dev`
+- Lint code: `npm lint`
+- Format code: `npm format`
 
 ## Commit Convention
 
