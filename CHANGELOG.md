@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/blencorp/react-native-usmds/compare/v1.3.0...v1.3.1) (2025-03-18)
+
+### Bug Fixes
+
+* complete list of icons and add CONTRIBUTING guidelines ([52bacdb](https://github.com/blencorp/react-native-usmds/commit/52bacdb55dbad62a74f91396466d164902dea270))
+* complete list of icons and add CONTRIBUTING guidelines ([80cf74f](https://github.com/blencorp/react-native-usmds/commit/80cf74f3829f0738b668afeed70926f2bf670093))
+
 ## [1.3.0](https://github.com/blencorp/react-native-usmds/compare/v1.2.2...v1.3.0) (2025-03-12)
 
 ### Features
