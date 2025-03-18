@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Icon } from './Icon';
 import { iconPaths } from './iconPaths';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 
 const meta = {
   title: 'Components/Icon',
@@ -39,8 +39,8 @@ export const Default: Story = {
 // Show all icons
 export const IconGallery: Story = {
   render: () => (
-    <View
-      style={{
+    <ScrollView
+      contentContainerStyle={{
         flexDirection: 'row',
         flexWrap: 'wrap',
         gap: 20,
@@ -59,7 +59,7 @@ export const IconGallery: Story = {
             width: 100
           }}
         >
-          <Icon name={name as keyof typeof iconPaths} size={24} />
+          <Icon name={name as keyof typeof iconPaths} size={24} className='text-base-ink' />
           <Text
             style={{
               fontSize: 12,
@@ -71,7 +71,7 @@ export const IconGallery: Story = {
           </Text>
         </View>
       ))}
-    </View>
+    </ScrollView>
   )
 };
 
@@ -79,10 +79,10 @@ export const IconGallery: Story = {
 export const Sizes: Story = {
   render: () => (
     <View style={{ flexDirection: 'row', gap: 20, alignItems: 'center' }}>
-      <Icon name='accessibility-new' size={16} />
-      <Icon name='accessibility-new' size={24} />
-      <Icon name='accessibility-new' size={32} />
-      <Icon name='accessibility-new' size={48} />
+      <Icon name='accessibility_new' size={16} />
+      <Icon name='accessibility_new' size={24} />
+      <Icon name='accessibility_new' size={32} />
+      <Icon name='accessibility_new' size={48} />
     </View>
   )
 };
@@ -91,10 +91,10 @@ export const Sizes: Story = {
 export const Colors: Story = {
   render: () => (
     <View style={{ flexDirection: 'row', gap: 20, alignItems: 'center' }}>
-      <Icon name='accessibility-new' color='#000000' />
-      <Icon name='accessibility-new' color='#FF0000' />
-      <Icon name='accessibility-new' color='#00FF00' />
-      <Icon name='accessibility-new' color='#0000FF' />
+      <Icon name='accessibility_new' color='#000000' />
+      <Icon name='accessibility_new' color='#FF0000' />
+      <Icon name='accessibility_new' color='#00FF00' />
+      <Icon name='accessibility_new' color='#0000FF' />
     </View>
   )
 };
