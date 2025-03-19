@@ -1,3 +1,10 @@
+## [1.5.0](https://github.com/blencorp/react-native-usmds/compare/v1.4.0...v1.5.0) (2025-03-19)
+
+### Features
+
+* refactor cli, update docs, use css vars for tailwind config ([2eaefce](https://github.com/blencorp/react-native-usmds/commit/2eaefcedb78c8059d43b655a3dd36cc6e6852eb0))
+* refactor cli, update docs, use css vars for tailwind config ([7574f98](https://github.com/blencorp/react-native-usmds/commit/7574f98b0d54b2f5cd0c2c003b34d9b9c63ca6ff))
+
 ## [1.4.0](https://github.com/blencorp/react-native-usmds/compare/v1.3.2...v1.4.0) (2025-03-19)
 
 ### Features
