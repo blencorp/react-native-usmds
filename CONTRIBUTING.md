@@ -1,10 +1,5 @@
 # Contributing to USMDS
 
-Thank you for your interest in contributing to USMDS (US Mobile Design System for React Native). We're excited to welcome you to our community.
-
-## About this Repository
-
-This is a monorepo managed with npm workspaces and Turborepo as the build system. The project uses semantic-release for versioning and publishing.
 
 ### Repository Structure
 

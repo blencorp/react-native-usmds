@@ -56,21 +56,24 @@ async function writeFileGracefully(filePath: string, content: string) {
     if (filePath.endsWith('metro.config.js')) {
       const hasNativeWind = await hasNativeWindConfig(filePath);
       if (!hasNativeWind) {
+        // Check if there's already a withNativeWind wrapper
+        if (existingContent.includes('withNativeWind')) {
+          return; // Skip if withNativeWind is already present
+        }
+
         // Parse the existing config structure
         const configMatch = existingContent.match(/const config = ([^;]+);/);
         if (configMatch) {
-          // If there's an existing config, wrap it with NativeWind
-          const updatedContent = existingContent.replace(
+          // Add NativeWind import if it doesn't exist
+          const importStatement = existingContent.includes('nativewind/metro') ? '' : "const { withNativeWind } = require('nativewind/metro');\n\n";
+
+          // Create the updated content with single withNativeWind wrapper
+          const updatedContent = `${importStatement}${existingContent.replace(
             /module\.exports = ([^;]+);/,
             "module.exports = withNativeWind($1, { input: './global.css' });"
-          );
+          )}`;
 
-          // Add NativeWind import if it doesn't exist
-          const finalContent = existingContent.includes('nativewind/metro')
-            ? updatedContent
-            : `const { withNativeWind } = require('nativewind/metro');\n\n${updatedContent}`;
-
-          await fs.writeFile(filePath, finalContent, 'utf8');
+          await fs.writeFile(filePath, updatedContent, 'utf8');
         } else {
           // If we can't parse the existing config, use our default template
           await fs.writeFile(filePath, content, 'utf8');
@@ -78,7 +81,11 @@ async function writeFileGracefully(filePath: string, content: string) {
       }
       return;
     }
-
+    if (filePath.endsWith('tailwind.config.js')) {
+      // Always replace tailwind config to ensure required configurations are present
+      await fs.writeFile(filePath, content, 'utf8');
+      return;
+    }
     // For other files, continue with the existing append logic
     const normalizedExisting = existingContent.replace(/\s+/g, '').replace(/\r\n/g, '\n');
     const normalizedContent = content.replace(/\s+/g, '').replace(/\r\n/g, '\n');
