@@ -98,7 +98,7 @@ export async function checkDependenciesExist(cwd: string): Promise<boolean> {
   try {
     const packageJsonPath = path.join(cwd, 'package.json');
     if (!existsSync(packageJsonPath)) {
-      console.log('No package.json found');
+      logger.warn('No package.json found');
       return false;
     }
 
