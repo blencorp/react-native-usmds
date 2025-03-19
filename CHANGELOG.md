@@ -1,3 +1,10 @@
+## [1.4.0](https://github.com/blencorp/react-native-usmds/compare/v1.3.2...v1.4.0) (2025-03-19)
+
+### Features
+
+* init issues ([a40c95b](https://github.com/blencorp/react-native-usmds/commit/a40c95bea67d9a3086779ae501e68321210b9519))
+* init issues ([c9a752d](https://github.com/blencorp/react-native-usmds/commit/c9a752d73cceaa40bf390a52cc8636fa2d1421a7))
+
 ## [1.3.2](https://github.com/blencorp/react-native-usmds/compare/v1.3.1...v1.3.2) (2025-03-19)
 
 ### Bug Fixes
