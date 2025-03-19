@@ -8,7 +8,7 @@ import { logger } from '../utils/logger';
 import { COMPONENT_TEMPLATES, COMPONENT_METADATA, ICON_PATHS } from '../utils/registry';
 import { execa } from 'execa';
 import { getPackageManager, getInstallCommand } from '../utils/get-package-manager';
-import { runInit } from './init';
+import { checkDependenciesExist, runInit } from './init';
 
 const REQUIRED_DEPENDENCIES = [
   'class-variance-authority',
@@ -36,18 +36,6 @@ const addOptionsSchema = z.object({
   all: z.boolean()
 });
 
-async function isProjectInitialized(cwd: string): Promise<boolean> {
-  // First check for a marker file that indicates successful initialization
-  const markerPath = path.join(cwd, '.usmds-initialized');
-
-  // Check required files
-  const requiredFiles = ['tailwind.config.js', 'nativewind-env.d.ts', 'babel.config.js', 'global.css', 'metro.config.js', 'lib/utils.ts'];
-
-  const filesExist = requiredFiles.every((file) => existsSync(path.join(cwd, file)));
-
-  return existsSync(markerPath) && filesExist;
-}
-
 export const add = new Command()
   .name('add')
   .description('Add USMDS components to your project')
@@ -70,7 +58,7 @@ export const add = new Command()
     }
 
     // Single initialization check
-    const initialized = await isProjectInitialized(cwd);
+    const initialized = await checkDependenciesExist(cwd);
     if (!initialized) {
       logger.info(`Project not initialized. Running 'usmds init' first...`);
       try {

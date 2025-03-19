@@ -10,7 +10,7 @@ import { handleError } from '../utils/handle-error';
 import { logger } from '../utils/logger';
 import * as templates from '../utils/templates';
 
-const DEPENDENCIES = [
+const ESSENTIAL_DEPENDENCIES = [
   'class-variance-authority',
   'clsx',
   'nativewind@^4.1.23',
@@ -52,37 +52,7 @@ async function writeFileGracefully(filePath: string, content: string) {
   if (existsSync(filePath)) {
     const existingContent = await fs.readFile(filePath, 'utf8');
 
-    // Special handling for metro.config.js
-    if (filePath.endsWith('metro.config.js')) {
-      const hasNativeWind = await hasNativeWindConfig(filePath);
-      if (!hasNativeWind) {
-        // Check if there's already a withNativeWind wrapper
-        if (existingContent.includes('withNativeWind')) {
-          return; // Skip if withNativeWind is already present
-        }
-
-        // Parse the existing config structure
-        const configMatch = existingContent.match(/const config = ([^;]+);/);
-        if (configMatch) {
-          // Add NativeWind import if it doesn't exist
-          const importStatement = existingContent.includes('nativewind/metro') ? '' : "const { withNativeWind } = require('nativewind/metro');\n\n";
-
-          // Create the updated content with single withNativeWind wrapper
-          const updatedContent = `${importStatement}${existingContent.replace(
-            /module\.exports = ([^;]+);/,
-            "module.exports = withNativeWind($1, { input: './global.css' });"
-          )}`;
-
-          await fs.writeFile(filePath, updatedContent, 'utf8');
-        } else {
-          // If we can't parse the existing config, use our default template
-          await fs.writeFile(filePath, content, 'utf8');
-        }
-      }
-      return;
-    }
     if (filePath.endsWith('tailwind.config.js')) {
-      // Always replace tailwind config to ensure required configurations are present
       await fs.writeFile(filePath, content, 'utf8');
       return;
     }
@@ -124,46 +94,50 @@ async function hasExistingCnFunction(filePath: string): Promise<boolean> {
   }
 }
 
-async function hasNativeWindConfig(filePath: string): Promise<boolean> {
+export async function checkDependenciesExist(cwd: string): Promise<boolean> {
   try {
-    const content = await fs.readFile(filePath, 'utf8');
+    const packageJsonPath = path.join(cwd, 'package.json');
+    if (!existsSync(packageJsonPath)) {
+      logger.warn('No package.json found');
+      return false;
+    }
 
-    // Remove comments and strings to avoid false positives
-    const cleanContent = content
-      .replace(/\/\*[\s\S]*?\*\//g, '') // Remove multi-line comments
-      .replace(/\/\/.*/g, '') // Remove single-line comments
-      .replace(/'.*?'/g, '') // Remove single-quote strings
-      .replace(/".*?"/g, '') // Remove double-quote strings
-      .replace(/`.*?`/g, ''); // Remove template literals
+    const packageJson = JSON.parse(await fs.readFile(packageJsonPath, 'utf8'));
+    const allDependencies = {
+      ...(packageJson.dependencies || {}),
+      ...(packageJson.devDependencies || {})
+    };
 
-    // Check for withNativeWind configuration
-    return cleanContent.includes('withNativeWind') && cleanContent.includes('nativewind/metro');
-  } catch {
+    const missingDeps = ESSENTIAL_DEPENDENCIES.filter((pkg) => {
+      const pkgName = pkg.split('@')[0] || pkg;
+      const exists = allDependencies.hasOwnProperty(pkgName);
+      return !exists;
+    });
+
+    return missingDeps.length === 0;
+  } catch (error) {
+    logger.error(`Error checking dependencies: ${error}`);
     return false;
   }
 }
 
 export async function runInit(cwd: string) {
-  const spinner = ora(`Initializing project...`)?.start();
+  const spinner = ora(`Checking existing installation...`)?.start();
 
   try {
-    // Create config files
-    await writeFileGracefully(path.join(cwd, 'tailwind.config.js'), templates.TAILWIND_CONFIG);
-    await writeFileGracefully(path.join(cwd, 'nativewind-env.d.ts'), templates.NATIVEWIND_ENV);
-    await writeFileGracefully(path.join(cwd, 'babel.config.js'), templates.BABEL_CONFIG);
-    await writeFileGracefully(path.join(cwd, 'global.css'), templates.GLOBAL_STYLES);
+    // Check if already initialized
+    const isInitialized = await checkDependenciesExist(cwd);
 
-    // Check metro.config.js
-    const metroConfigPath = path.join(cwd, 'metro.config.js');
-    if (existsSync(metroConfigPath)) {
-      const hasNativeWind = await hasNativeWindConfig(metroConfigPath);
-      if (!hasNativeWind) {
-        // Only write if NativeWind config doesn't exist
-        await writeFileGracefully(metroConfigPath, templates.METRO_CONFIG);
-      }
-    } else {
-      await writeFileGracefully(metroConfigPath, templates.METRO_CONFIG);
+    if (isInitialized) {
+      spinner?.stop();
+      logger.warn('USMDS dependencies already installed. Skipping initialization.');
+      return;
     }
+
+    spinner.text = 'Initializing project...';
+
+    // Only create tailwind config and lib utils
+    await writeFileGracefully(path.join(cwd, 'tailwind.config.js'), templates.TAILWIND_CONFIG);
 
     // Check if lib directory exists
     const libDir = path.join(cwd, 'lib');
@@ -177,7 +151,6 @@ export async function runInit(cwd: string) {
       if (existsSync(utilsPath)) {
         const hasCn = await hasExistingCnFunction(utilsPath);
         if (!hasCn) {
-          // Only append if cn function doesn't exist
           await fs.writeFile(utilsPath, `${await fs.readFile(utilsPath, 'utf8')}\n${templates.UTILS}`, 'utf8');
         }
       } else {
@@ -185,7 +158,7 @@ export async function runInit(cwd: string) {
       }
     }
 
-    // Create components directory and nativewind-remap.ts
+    // Create components directory
     const componentsDir = path.join(cwd, 'components');
     await fs.mkdir(componentsDir, { recursive: true });
 
@@ -194,16 +167,42 @@ export async function runInit(cwd: string) {
     // Install dependencies
     const dependenciesSpinner = ora(`Installing dependencies...`)?.start();
     const packageManager = await getPackageManager(cwd);
-    const { install, installDev } = getInstallCommand(packageManager);
+    const { install, installDev, useExeca } = getInstallCommand(packageManager);
 
-    await execa(packageManager, [...install, ...DEPENDENCIES], { cwd });
-    await execa(packageManager, [...installDev, ...DEV_DEPENDENCIES], { cwd });
+    if (useExeca) {
+      await execa(packageManager, [...install, ...ESSENTIAL_DEPENDENCIES], { cwd });
+      await execa(packageManager, [...installDev, ...DEV_DEPENDENCIES], { cwd });
+    } else {
+      // For Bun, use native Node.js spawn to avoid workspace: protocol issues
+      const { spawn } = require('child_process');
 
-    // Create a marker file after successful initialization
-    const markerPath = path.join(cwd, '.usmds-initialized');
-    await fs.writeFile(markerPath, new Date().toISOString());
+      // Install regular dependencies
+      await new Promise((resolve, reject) => {
+        const proc = spawn(packageManager, [...install, '--cwd', cwd, ...ESSENTIAL_DEPENDENCIES], {
+          stdio: 'inherit'
+        });
+        proc.on('exit', (code: number) => (code === 0 ? resolve(null) : reject(new Error(`Process exited with code ${code}`))));
+      });
+
+      // Install dev dependencies
+      await new Promise((resolve, reject) => {
+        const proc = spawn(packageManager, [...installDev, '--cwd', cwd, ...DEV_DEPENDENCIES], {
+          stdio: 'inherit'
+        });
+        proc.on('exit', (code: number) => (code === 0 ? resolve(null) : reject(new Error(`Process exited with code ${code}`))));
+      });
+    }
 
     dependenciesSpinner?.succeed();
+
+    logger.info('\n');
+    logger.info(chalk.yellow('Important: Manual Configuration Required'));
+    logger.info('Please add the following files manually (see documentation):');
+    logger.info('1. metro.config.js');
+    logger.info('2. babel.config.js');
+    logger.info('3. global.css');
+    logger.info('4. nativewind-env.d.ts');
+    logger.info('\nRefer to the documentation at: https://usmds.blencorp.com/docs/getting-started/initial-setup');
   } catch (error) {
     spinner?.fail();
     throw error;
