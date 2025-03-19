@@ -30,7 +30,7 @@ type Story = StoryObj<typeof Icon>;
 // Basic usage
 export const Default: Story = {
   args: {
-    name: 'accessibility-new',
+    name: 'accessibility_new',
     size: 24,
     color: '#000000'
   }

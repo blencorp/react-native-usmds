@@ -8,675 +8,648 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        border: 'hsl(var(--border))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
 
         primary: {
-          DEFAULT: '#005EA2',
-          hover: 'hsl(var(--primary-hover))',
-          active: 'hsl(var(--primary-active))',
-          lighter: '#D9E8F6',
-          light: '#73B3E7',
-          vivid: '#0050D8',
-          dark: '#1A4480',
-          darker: '#162E51'
+          DEFAULT: 'hsl(var(--primary))',
+          lighter: 'hsl(var(--primary-lighter))',
+          light: 'hsl(var(--primary-light))',
+          vivid: 'hsl(var(--primary-vivid))',
+          dark: 'hsl(var(--primary-dark))',
+          darker: 'hsl(var(--primary-darker))'
         },
+
         secondary: {
-          DEFAULT: '#D83933',
-          hover: 'hsl(var(--secondary-hover))',
-          active: 'hsl(var(--secondary-active))',
-          lighter: '#F8DFE2',
-          light: '#F2938C',
-          vivid: '#E41D3D',
-          dark: '#B50909',
-          darker: '#8B0A03'
+          DEFAULT: 'hsl(var(--secondary))',
+          lighter: 'hsl(var(--secondary-lighter))',
+          light: 'hsl(var(--secondary-light))',
+          vivid: 'hsl(var(--secondary-vivid))',
+          dark: 'hsl(var(--secondary-dark))',
+          darker: 'hsl(var(--secondary-darker))'
         },
-        accent: {
-          cool: {
-            DEFAULT: '#00BDE3',
-            hover: 'hsl(var(--accent-cool-hover))',
-            active: 'hsl(var(--accent-cool-active))',
-            lighter: '#E1F3F8',
-            light: '#97D4EA',
-            dark: '#28A0CB',
-            darker: '#07648D'
-          },
-          warm: {
-            DEFAULT: '#FA9441',
-            hover: 'hsl(var(--accent-warm-hover))',
-            active: 'hsl(var(--accent-warm-active))',
-            lighter: '#F2E4D4',
-            light: '#FFBC78',
-            dark: '#C05600',
-            darker: '#775540'
-          }
+
+        'accent-cool': {
+          DEFAULT: 'hsl(var(--accent-cool))',
+          lighter: 'hsl(var(--accent-cool-lighter))',
+          light: 'hsl(var(--accent-cool-light))',
+          dark: 'hsl(var(--accent-cool-dark))',
+          darker: 'hsl(var(--accent-cool-darker))'
         },
+
+        'accent-warm': {
+          DEFAULT: 'hsl(var(--accent-warm))',
+          lighter: 'hsl(var(--accent-warm-lighter))',
+          light: 'hsl(var(--accent-warm-light))',
+          dark: 'hsl(var(--accent-warm-dark))',
+          darker: 'hsl(var(--accent-warm-darker))'
+        },
+
         base: {
-          DEFAULT: '#71767A',
-          hover: 'hsl(var(--base-hover))',
-          active: 'hsl(var(--base-active))',
-          lightest: '#F0F0F0',
-          lighter: '#DFE1E2',
-          light: '#A9AEB1',
-          dark: '#565C65',
-          darker: '#3D4551',
-          darkest: '#1B1B1B',
-          ink: '#1B1B1B'
+          DEFAULT: 'hsl(var(--base))',
+          lightest: 'hsl(var(--base-lightest))',
+          lighter: 'hsl(var(--base-lighter))',
+          light: 'hsl(var(--base-light))',
+          dark: 'hsl(var(--base-dark))',
+          darker: 'hsl(var(--base-darker))',
+          darkest: 'hsl(var(--base-darkest))',
+          ink: 'hsl(var(--base-ink))'
         },
+
         focus: {
           ring: 'hsl(var(--focus-ring))'
         },
-        inverse: {
-          border: {
-            DEFAULT: 'hsl(var(--inverse-border))',
-            hover: 'hsl(var(--inverse-border-hover))',
-            active: 'hsl(var(--inverse-border-active))'
-          }
-        },
-        // State Colors
+
         info: {
-          DEFAULT: '#00BDE3', // info
-          lighter: '#E7F6F8', // info-lighter
-          light: '#99DEEA', // info-light
-          dark: '#009EC1', // info-dark
-          darker: '#2E6276' // info-darker
+          DEFAULT: 'hsl(var(--info))',
+          lighter: 'hsl(var(--info-lighter))',
+          light: 'hsl(var(--info-light))',
+          dark: 'hsl(var(--info-dark))',
+          darker: 'hsl(var(--info-darker))'
         },
         error: {
-          DEFAULT: '#D54309', // error
-          lighter: '#F4E3DB', // error-lighter
-          light: '#F39268', // error-light
-          dark: '#B50909', // error-dark
-          darker: '#6F3331' // error-darker
+          DEFAULT: 'hsl(var(--error))',
+          lighter: 'hsl(var(--error-lighter))',
+          light: 'hsl(var(--error-light))',
+          dark: 'hsl(var(--error-dark))',
+          darker: 'hsl(var(--error-darker))'
         },
         warning: {
-          DEFAULT: '#FFBE2E', // warning
-          lighter: '#FAF3D1', // warning-lighter
-          light: '#FEE685', // warning-light
-          dark: '#E5A000', // warning-dark
-          darker: '#936F38' // warning-darker
+          DEFAULT: 'hsl(var(--warning))',
+          lighter: 'hsl(var(--warning-lighter))',
+          light: 'hsl(var(--warning-light))',
+          dark: 'hsl(var(--warning-dark))',
+          darker: 'hsl(var(--warning-darker))'
         },
         success: {
-          DEFAULT: '#00A91C', // success
-          lighter: '#ECF3EC', // success-lighter
-          light: '#70E17B', // success-light
-          dark: '#4D8055', // success-dark
-          darker: '#446443' // success-darker
+          DEFAULT: 'hsl(var(--success))',
+          lighter: 'hsl(var(--success-lighter))',
+          light: 'hsl(var(--success-light))',
+          dark: 'hsl(var(--success-dark))',
+          darker: 'hsl(var(--success-darker))'
         },
         disabled: {
-          DEFAULT: '#757575', // disabled (gray-50)
-          lighter: '#C9C9C9', // disabled-lighter (gray-20)
-          light: '#919191', // disabled-light (gray-40)
-          dark: '#454545', // disabled-dark (gray-70)
-          darker: '#1B1B1B' // disabled-darker (gray-90)
+          DEFAULT: 'hsl(var(--disabled))',
+          lighter: 'hsl(var(--disabled-lighter))',
+          light: 'hsl(var(--disabled-light))',
+          dark: 'hsl(var(--disabled-dark))',
+          darker: 'hsl(var(--disabled-darker))'
         },
         emergency: {
-          DEFAULT: '#9C3D10', // emergency
-          dark: '#332D29' // emergency-dark
+          DEFAULT: 'hsl(var(--emergency))',
+          dark: 'hsl(var(--emergency-dark))'
         },
-        // System Colors - Red Variations
         'red-cool': {
-          5: '#F8EFF1',
-          10: '#F3E1E4',
-          20: '#ECBEC6',
-          30: '#E09AA6',
-          40: '#E16B80',
-          50: '#CD425B',
-          60: '#9E394B',
-          70: '#68363F',
-          80: '#40282C',
-          90: '#1E1517'
+          5: 'hsl(var(--red-cool-5))',
+          10: 'hsl(var(--red-cool-10))',
+          20: 'hsl(var(--red-cool-20))',
+          30: 'hsl(var(--red-cool-30))',
+          40: 'hsl(var(--red-cool-40))',
+          50: 'hsl(var(--red-cool-50))',
+          60: 'hsl(var(--red-cool-60))',
+          70: 'hsl(var(--red-cool-70))',
+          80: 'hsl(var(--red-cool-80))',
+          90: 'hsl(var(--red-cool-90))'
         },
         'red-cool-vivid': {
-          5: '#FFF0F3',
-          10: '#F8DEE1',
-          20: '#F8B9C5',
-          30: '#FD8BA0',
-          40: '#F45D79',
-          50: '#E41B3C',
-          60: '#B41D39',
-          70: '#832133',
-          80: '#4F1C24'
+          5: 'hsl(var(--red-cool-vivid-5))',
+          10: 'hsl(var(--red-cool-vivid-10))',
+          20: 'hsl(var(--red-cool-vivid-20))',
+          30: 'hsl(var(--red-cool-vivid-30))',
+          40: 'hsl(var(--red-cool-vivid-40))',
+          50: 'hsl(var(--red-cool-vivid-50))',
+          60: 'hsl(var(--red-cool-vivid-60))',
+          70: 'hsl(var(--red-cool-vivid-70))',
+          80: 'hsl(var(--red-cool-vivid-80))'
         },
         red: {
-          5: '#F9EEEE',
-          10: '#F8E1DE',
-          20: '#F7BBB1',
-          30: '#F2938C',
-          40: '#E9695F',
-          50: '#D83933',
-          60: '#A23737',
-          70: '#6F3331',
-          80: '#3E2927',
-          90: '#1B1616'
+          5: 'hsl(var(--red-5))',
+          10: 'hsl(var(--red-10))',
+          20: 'hsl(var(--red-20))',
+          30: 'hsl(var(--red-30))',
+          40: 'hsl(var(--red-40))',
+          50: 'hsl(var(--red-50))',
+          60: 'hsl(var(--red-60))',
+          70: 'hsl(var(--red-70))',
+          80: 'hsl(var(--red-80))',
+          90: 'hsl(var(--red-90))'
         },
         'red-warm': {
-          5: '#F6EFEA',
-          10: '#F4E3DB',
-          20: '#ECC0A7',
-          30: '#DCA081',
-          40: '#D27A56',
-          50: '#C3512C',
-          60: '#805039',
-          70: '#524236',
-          80: '#332D29',
-          90: '#1F1C18'
+          5: 'hsl(var(--red-warm-5))',
+          10: 'hsl(var(--red-warm-10))',
+          20: 'hsl(var(--red-warm-20))',
+          30: 'hsl(var(--red-warm-30))',
+          40: 'hsl(var(--red-warm-40))',
+          50: 'hsl(var(--red-warm-50))',
+          60: 'hsl(var(--red-warm-60))',
+          70: 'hsl(var(--red-warm-70))',
+          80: 'hsl(var(--red-warm-80))',
+          90: 'hsl(var(--red-warm-90))'
         },
         'red-warm-vivid': {
-          5: '#FFF5EE',
-          10: '#FCE1D4',
-          20: '#F6BD9C',
-          30: '#F39268',
-          40: '#EF5E25',
-          50: '#D54309',
-          60: '#9C3D10',
-          70: '#63340F',
-          80: '#3E2A1E'
+          5: 'hsl(var(--red-warm-vivid-5))',
+          10: 'hsl(var(--red-warm-vivid-10))',
+          20: 'hsl(var(--red-warm-vivid-20))',
+          30: 'hsl(var(--red-warm-vivid-30))',
+          40: 'hsl(var(--red-warm-vivid-40))',
+          50: 'hsl(var(--red-warm-vivid-50))',
+          60: 'hsl(var(--red-warm-vivid-60))',
+          70: 'hsl(var(--red-warm-vivid-70))',
+          80: 'hsl(var(--red-warm-vivid-80))'
         },
         'red-vivid': {
-          5: '#FFF3F2',
-          10: '#FDE0DB',
-          20: '#FDB8AE',
-          30: '#FF8D7B',
-          40: '#FB5A47',
-          50: '#E52207',
-          60: '#B50909',
-          70: '#8B0A03',
-          80: '#5C1111'
+          5: 'hsl(var(--red-vivid-5))',
+          10: 'hsl(var(--red-vivid-10))',
+          20: 'hsl(var(--red-vivid-20))',
+          30: 'hsl(var(--red-vivid-30))',
+          40: 'hsl(var(--red-vivid-40))',
+          50: 'hsl(var(--red-vivid-50))',
+          60: 'hsl(var(--red-vivid-60))',
+          70: 'hsl(var(--red-vivid-70))',
+          80: 'hsl(var(--red-vivid-80))'
         },
-        // Orange Variations
         'orange-warm': {
-          5: '#FAEEE5',
-          10: '#FBE0D0',
-          20: '#F7BCA2',
-          30: '#F3966D',
-          40: '#E17141',
-          50: '#BD5727',
-          60: '#914734',
-          70: '#633A32',
-          80: '#3D2925',
-          90: '#1C1615'
+          5: 'hsl(var(--orange-warm-5))',
+          10: 'hsl(var(--orange-warm-10))',
+          20: 'hsl(var(--orange-warm-20))',
+          30: 'hsl(var(--orange-warm-30))',
+          40: 'hsl(var(--orange-warm-40))',
+          50: 'hsl(var(--orange-warm-50))',
+          60: 'hsl(var(--orange-warm-60))',
+          70: 'hsl(var(--orange-warm-70))',
+          80: 'hsl(var(--orange-warm-80))',
+          90: 'hsl(var(--orange-warm-90))'
         },
         'orange-warm-vivid': {
-          5: '#FFF3EA',
-          10: '#FFE2D1',
-          20: '#FBBAA7',
-          30: '#FC906D',
-          40: '#FF580A',
-          50: '#CF4900',
-          60: '#A72F10',
-          70: '#782312',
-          80: '#3D231D'
+          5: 'hsl(var(--orange-warm-vivid-5))',
+          10: 'hsl(var(--orange-warm-vivid-10))',
+          20: 'hsl(var(--orange-warm-vivid-20))',
+          30: 'hsl(var(--orange-warm-vivid-30))',
+          40: 'hsl(var(--orange-warm-vivid-40))',
+          50: 'hsl(var(--orange-warm-vivid-50))',
+          60: 'hsl(var(--orange-warm-vivid-60))',
+          70: 'hsl(var(--orange-warm-vivid-70))',
+          80: 'hsl(var(--orange-warm-vivid-80))'
         },
         orange: {
-          5: '#F6EFE9',
-          10: '#F2E4D4',
-          20: '#F3BF90',
-          30: '#F09860',
-          40: '#DD7533',
-          50: '#A86437',
-          60: '#775540',
-          70: '#524236',
-          80: '#332D27',
-          90: '#1B1614'
+          5: 'hsl(var(--orange-5))',
+          10: 'hsl(var(--orange-10))',
+          20: 'hsl(var(--orange-20))',
+          30: 'hsl(var(--orange-30))',
+          40: 'hsl(var(--orange-40))',
+          50: 'hsl(var(--orange-50))',
+          60: 'hsl(var(--orange-60))',
+          70: 'hsl(var(--orange-70))',
+          80: 'hsl(var(--orange-80))',
+          90: 'hsl(var(--orange-90))'
         },
         'orange-vivid': {
-          5: '#FEF2E4',
-          10: '#FCE2C5',
-          20: '#FFBC78',
-          30: '#FA9441',
-          40: '#E66F0E',
-          50: '#C05600',
-          60: '#8C471C',
-          70: '#5F3617',
-          80: '#352313'
+          5: 'hsl(var(--orange-vivid-5))',
+          10: 'hsl(var(--orange-vivid-10))',
+          20: 'hsl(var(--orange-vivid-20))',
+          30: 'hsl(var(--orange-vivid-30))',
+          40: 'hsl(var(--orange-vivid-40))',
+          50: 'hsl(var(--orange-vivid-50))',
+          60: 'hsl(var(--orange-vivid-60))',
+          70: 'hsl(var(--orange-vivid-70))',
+          80: 'hsl(var(--orange-vivid-80))'
         },
-        // Gold Variations
         gold: {
-          5: '#F5F0E6',
-          10: '#F1E5CD',
-          20: '#DEC69A',
-          30: '#C7A97B',
-          40: '#AD8B65',
-          50: '#8E704F',
-          60: '#6B5947',
-          70: '#4D4438',
-          80: '#322D26',
-          90: '#191714'
+          5: 'hsl(var(--gold-5))',
+          10: 'hsl(var(--gold-10))',
+          20: 'hsl(var(--gold-20))',
+          30: 'hsl(var(--gold-30))',
+          40: 'hsl(var(--gold-40))',
+          50: 'hsl(var(--gold-50))',
+          60: 'hsl(var(--gold-60))',
+          70: 'hsl(var(--gold-70))',
+          80: 'hsl(var(--gold-80))',
+          90: 'hsl(var(--gold-90))'
         },
         'gold-vivid': {
-          5: '#FEF0C8',
-          10: '#FFE396',
-          20: '#FFBE2E',
-          30: '#E5A000',
-          40: '#C2850C',
-          50: '#936F38',
-          60: '#7A591A',
-          70: '#5C410A',
-          80: '#3B2B15'
+          5: 'hsl(var(--gold-vivid-5))',
+          10: 'hsl(var(--gold-vivid-10))',
+          20: 'hsl(var(--gold-vivid-20))',
+          30: 'hsl(var(--gold-vivid-30))',
+          40: 'hsl(var(--gold-vivid-40))',
+          50: 'hsl(var(--gold-vivid-50))',
+          60: 'hsl(var(--gold-vivid-60))',
+          70: 'hsl(var(--gold-vivid-70))',
+          80: 'hsl(var(--gold-vivid-80))'
         },
-        // Yellow Variations
         yellow: {
-          5: '#FAF3D1',
-          10: '#F5E6AF',
-          20: '#E6C74C',
-          30: '#C9AB48',
-          40: '#A88F48',
-          50: '#8A7237',
-          60: '#6B5A39',
-          70: '#504332',
-          80: '#332D27',
-          90: '#1A1614'
+          5: 'hsl(var(--yellow-5))',
+          10: 'hsl(var(--yellow-10))',
+          20: 'hsl(var(--yellow-20))',
+          30: 'hsl(var(--yellow-30))',
+          40: 'hsl(var(--yellow-40))',
+          50: 'hsl(var(--yellow-50))',
+          60: 'hsl(var(--yellow-60))',
+          70: 'hsl(var(--yellow-70))',
+          80: 'hsl(var(--yellow-80))',
+          90: 'hsl(var(--yellow-90))'
         },
         'yellow-vivid': {
-          5: '#FFF5C2',
-          10: '#FEE685',
-          20: '#FACE00',
-          30: '#DDAA01',
-          40: '#B38C00',
-          50: '#947100',
-          60: '#776017',
-          70: '#5C4809',
-          80: '#422D19'
+          5: 'hsl(var(--yellow-vivid-5))',
+          10: 'hsl(var(--yellow-vivid-10))',
+          20: 'hsl(var(--yellow-vivid-20))',
+          30: 'hsl(var(--yellow-vivid-30))',
+          40: 'hsl(var(--yellow-vivid-40))',
+          50: 'hsl(var(--yellow-vivid-50))',
+          60: 'hsl(var(--yellow-vivid-60))',
+          70: 'hsl(var(--yellow-vivid-70))',
+          80: 'hsl(var(--yellow-vivid-80))'
         },
-
-        // Green Variations
         green: {
-          5: '#EAF4DD',
-          10: '#DFEACD',
-          20: '#B8D293',
-          30: '#9BB672',
-          40: '#7D9B4E',
-          50: '#607F35',
-          60: '#4C6424',
-          70: '#3C4A29',
-          80: '#293021',
-          90: '#161814'
+          5: 'hsl(var(--green-5))',
+          10: 'hsl(var(--green-10))',
+          20: 'hsl(var(--green-20))',
+          30: 'hsl(var(--green-30))',
+          40: 'hsl(var(--green-40))',
+          50: 'hsl(var(--green-50))',
+          60: 'hsl(var(--green-60))',
+          70: 'hsl(var(--green-70))',
+          80: 'hsl(var(--green-80))',
+          90: 'hsl(var(--green-90))'
         },
         'green-vivid': {
-          5: '#DDF9C7',
-          10: '#C5EE93',
-          20: '#98D035',
-          30: '#7FB135',
-          40: '#719F2A',
-          50: '#538200',
-          60: '#466C04',
-          70: '#2F4A0B',
-          80: '#243413'
+          5: 'hsl(var(--green-vivid-5))',
+          10: 'hsl(var(--green-vivid-10))',
+          20: 'hsl(var(--green-vivid-20))',
+          30: 'hsl(var(--green-vivid-30))',
+          40: 'hsl(var(--green-vivid-40))',
+          50: 'hsl(var(--green-vivid-50))',
+          60: 'hsl(var(--green-vivid-60))',
+          70: 'hsl(var(--green-vivid-70))',
+          80: 'hsl(var(--green-vivid-80))'
         },
         'green-warm': {
-          5: '#F1F4D7',
-          10: '#E7EAB7',
-          20: '#CBD17A',
-          30: '#A6B557',
-          40: '#8A984B',
-          50: '#6F7A41',
-          60: '#5A5F38',
-          70: '#454540',
-          80: '#2D2F21',
-          90: '#171712'
+          5: 'hsl(var(--green-warm-5))',
+          10: 'hsl(var(--green-warm-10))',
+          20: 'hsl(var(--green-warm-20))',
+          30: 'hsl(var(--green-warm-30))',
+          40: 'hsl(var(--green-warm-40))',
+          50: 'hsl(var(--green-warm-50))',
+          60: 'hsl(var(--green-warm-60))',
+          70: 'hsl(var(--green-warm-70))',
+          80: 'hsl(var(--green-warm-80))',
+          90: 'hsl(var(--green-warm-90))'
         },
         'green-warm-vivid': {
-          5: '#F5FBC1',
-          10: '#E7F434',
-          20: '#C5D30A',
-          30: '#A3B72C',
-          40: '#7E9C1D',
-          50: '#6A7D00',
-          60: '#5A6613',
-          70: '#4B4E10',
-          80: '#38380B'
+          5: 'hsl(var(--green-warm-vivid-5))',
+          10: 'hsl(var(--green-warm-vivid-10))',
+          20: 'hsl(var(--green-warm-vivid-20))',
+          30: 'hsl(var(--green-warm-vivid-30))',
+          40: 'hsl(var(--green-warm-vivid-40))',
+          50: 'hsl(var(--green-warm-vivid-50))',
+          60: 'hsl(var(--green-warm-vivid-60))',
+          70: 'hsl(var(--green-warm-vivid-70))',
+          80: 'hsl(var(--green-warm-vivid-80))'
         },
         'green-cool': {
-          5: '#ECF3EC',
-          10: '#DBEBDE',
-          20: '#B4D0B9',
-          30: '#86B98E',
-          40: '#5E9F69',
-          50: '#4D8055',
-          60: '#446443',
-          70: '#3D4551',
-          80: '#28312A',
-          90: '#1A1F1A'
+          5: 'hsl(var(--green-cool-5))',
+          10: 'hsl(var(--green-cool-10))',
+          20: 'hsl(var(--green-cool-20))',
+          30: 'hsl(var(--green-cool-30))',
+          40: 'hsl(var(--green-cool-40))',
+          50: 'hsl(var(--green-cool-50))',
+          60: 'hsl(var(--green-cool-60))',
+          70: 'hsl(var(--green-cool-70))',
+          80: 'hsl(var(--green-cool-80))',
+          90: 'hsl(var(--green-cool-90))'
         },
         'green-cool-vivid': {
-          5: '#E3F5E1',
-          10: '#B7F5BD',
-          20: '#70E17B',
-          30: '#21C834',
-          40: '#00A91C',
-          50: '#008817',
-          60: '#216E1F',
-          70: '#154C21',
-          80: '#19311E'
+          5: 'hsl(var(--green-cool-vivid-5))',
+          10: 'hsl(var(--green-cool-vivid-10))',
+          20: 'hsl(var(--green-cool-vivid-20))',
+          30: 'hsl(var(--green-cool-vivid-30))',
+          40: 'hsl(var(--green-cool-vivid-40))',
+          50: 'hsl(var(--green-cool-vivid-50))',
+          60: 'hsl(var(--green-cool-vivid-60))',
+          70: 'hsl(var(--green-cool-vivid-70))',
+          80: 'hsl(var(--green-cool-vivid-80))'
         },
-
-        // Mint Variations
         mint: {
-          5: '#DBF6ED',
-          10: '#C7EFE2',
-          20: '#92D9BB',
-          30: '#5ABF95',
-          40: '#34A37E',
-          50: '#2E8367',
-          60: '#286846',
-          70: '#204E34',
-          80: '#193324',
-          90: '#0D1A12'
+          5: 'hsl(var(--mint-5))',
+          10: 'hsl(var(--mint-10))',
+          20: 'hsl(var(--mint-20))',
+          30: 'hsl(var(--mint-30))',
+          40: 'hsl(var(--mint-40))',
+          50: 'hsl(var(--mint-50))',
+          60: 'hsl(var(--mint-60))',
+          70: 'hsl(var(--mint-70))',
+          80: 'hsl(var(--mint-80))',
+          90: 'hsl(var(--mint-90))'
         },
         'mint-vivid': {
-          5: '#C9FBEB',
-          10: '#83FCD4',
-          20: '#0CEDA6',
-          30: '#04C585',
-          40: '#00A871',
-          50: '#008659',
-          60: '#146947',
-          70: '#0C4E29',
-          80: '#0D351E'
+          5: 'hsl(var(--mint-vivid-5))',
+          10: 'hsl(var(--mint-vivid-10))',
+          20: 'hsl(var(--mint-vivid-20))',
+          30: 'hsl(var(--mint-vivid-30))',
+          40: 'hsl(var(--mint-vivid-40))',
+          50: 'hsl(var(--mint-vivid-50))',
+          60: 'hsl(var(--mint-vivid-60))',
+          70: 'hsl(var(--mint-vivid-70))',
+          80: 'hsl(var(--mint-vivid-80))'
         },
         'mint-cool': {
-          5: '#E0F7F6',
-          10: '#C4EEEB',
-          20: '#9BD4CF',
-          30: '#6FBAB3',
-          40: '#4F9E99',
-          50: '#40807E',
-          60: '#376462',
-          70: '#2A4B45',
-          80: '#203131',
-          90: '#111818'
+          5: 'hsl(var(--mint-cool-5))',
+          10: 'hsl(var(--mint-cool-10))',
+          20: 'hsl(var(--mint-cool-20))',
+          30: 'hsl(var(--mint-cool-30))',
+          40: 'hsl(var(--mint-cool-40))',
+          50: 'hsl(var(--mint-cool-50))',
+          60: 'hsl(var(--mint-cool-60))',
+          70: 'hsl(var(--mint-cool-70))',
+          80: 'hsl(var(--mint-cool-80))',
+          90: 'hsl(var(--mint-cool-90))'
         },
         'mint-cool-vivid': {
-          5: '#D5FBF3',
-          10: '#7EFBE1',
-          20: '#29E1CB',
-          30: '#1DC2AE',
-          40: '#00A398',
-          50: '#008480',
-          60: '#0F6460',
-          70: '#0B4B3F',
-          80: '#123131'
+          5: 'hsl(var(--mint-cool-vivid-5))',
+          10: 'hsl(var(--mint-cool-vivid-10))',
+          20: 'hsl(var(--mint-cool-vivid-20))',
+          30: 'hsl(var(--mint-cool-vivid-30))',
+          40: 'hsl(var(--mint-cool-vivid-40))',
+          50: 'hsl(var(--mint-cool-vivid-50))',
+          60: 'hsl(var(--mint-cool-vivid-60))',
+          70: 'hsl(var(--mint-cool-vivid-70))',
+          80: 'hsl(var(--mint-cool-vivid-80))'
         },
-        // Cyan variations
         cyan: {
-          5: '#E7F6F8',
-          10: '#CCECF2',
-          20: '#99DEEA',
-          30: '#5DC0D1',
-          40: '#449DAC',
-          50: '#168092',
-          60: '#2A646D',
-          70: '#2C4A4E',
-          80: '#203133',
-          90: '#111819'
+          5: 'hsl(var(--cyan-5))',
+          10: 'hsl(var(--cyan-10))',
+          20: 'hsl(var(--cyan-20))',
+          30: 'hsl(var(--cyan-30))',
+          40: 'hsl(var(--cyan-40))',
+          50: 'hsl(var(--cyan-50))',
+          60: 'hsl(var(--cyan-60))',
+          70: 'hsl(var(--cyan-70))',
+          80: 'hsl(var(--cyan-80))',
+          90: 'hsl(var(--cyan-90))'
         },
         'cyan-vivid': {
-          5: '#E5FAFF',
-          10: '#A8F2FF',
-          20: '#52DAF2',
-          30: '#00BDE3',
-          40: '#009EC1',
-          50: '#0081A1',
-          60: '#00687D',
-          70: '#0E4F5C',
-          80: '#093B44'
+          5: 'hsl(var(--cyan-vivid-5))',
+          10: 'hsl(var(--cyan-vivid-10))',
+          20: 'hsl(var(--cyan-vivid-20))',
+          30: 'hsl(var(--cyan-vivid-30))',
+          40: 'hsl(var(--cyan-vivid-40))',
+          50: 'hsl(var(--cyan-vivid-50))',
+          60: 'hsl(var(--cyan-vivid-60))',
+          70: 'hsl(var(--cyan-vivid-70))',
+          80: 'hsl(var(--cyan-vivid-80))'
         },
-
-        // Blue variations
         blue: {
-          5: '#EFF6FB',
-          10: '#D9E8F6',
-          20: '#AACDEC',
-          30: '#73B3E7',
-          40: '#4F97D1',
-          50: '#2378C3',
-          60: '#2C608A',
-          70: '#274863',
-          80: '#1F303E',
-          90: '#11181D'
+          5: 'hsl(var(--blue-5))',
+          10: 'hsl(var(--blue-10))',
+          20: 'hsl(var(--blue-20))',
+          30: 'hsl(var(--blue-30))',
+          40: 'hsl(var(--blue-40))',
+          50: 'hsl(var(--blue-50))',
+          60: 'hsl(var(--blue-60))',
+          70: 'hsl(var(--blue-70))',
+          80: 'hsl(var(--blue-80))',
+          90: 'hsl(var(--blue-90))'
         },
         'blue-vivid': {
-          5: '#E8F5FF',
-          10: '#CFE8FF',
-          20: '#A1D3FF',
-          30: '#58B4FF',
-          40: '#2491FF',
-          50: '#0076D6',
-          60: '#005EA2',
-          70: '#0B4778',
-          80: '#112F4E'
+          5: 'hsl(var(--blue-vivid-5))',
+          10: 'hsl(var(--blue-vivid-10))',
+          20: 'hsl(var(--blue-vivid-20))',
+          30: 'hsl(var(--blue-vivid-30))',
+          40: 'hsl(var(--blue-vivid-40))',
+          50: 'hsl(var(--blue-vivid-50))',
+          60: 'hsl(var(--blue-vivid-60))',
+          70: 'hsl(var(--blue-vivid-70))',
+          80: 'hsl(var(--blue-vivid-80))'
         },
         'blue-warm': {
-          5: '#ECF1F7',
-          10: '#E1E7F1',
-          20: '#BBCAE4',
-          30: '#98AFD2',
-          40: '#7292C7',
-          50: '#4A77B4',
-          60: '#345D96',
-          70: '#2F4668',
-          80: '#252F3E',
-          90: '#13171F'
+          5: 'hsl(var(--blue-warm-5))',
+          10: 'hsl(var(--blue-warm-10))',
+          20: 'hsl(var(--blue-warm-20))',
+          30: 'hsl(var(--blue-warm-30))',
+          40: 'hsl(var(--blue-warm-40))',
+          50: 'hsl(var(--blue-warm-50))',
+          60: 'hsl(var(--blue-warm-60))',
+          70: 'hsl(var(--blue-warm-70))',
+          80: 'hsl(var(--blue-warm-80))',
+          90: 'hsl(var(--blue-warm-90))'
         },
         'blue-warm-vivid': {
-          5: '#EDF5FF',
-          10: '#D4E5FF',
-          20: '#ADCDFF',
-          30: '#81AEFC',
-          40: '#5994F6',
-          50: '#2672DE',
-          60: '#0050D8',
-          70: '#1A4480',
-          80: '#162E51'
+          5: 'hsl(var(--blue-warm-vivid-5))',
+          10: 'hsl(var(--blue-warm-vivid-10))',
+          20: 'hsl(var(--blue-warm-vivid-20))',
+          30: 'hsl(var(--blue-warm-vivid-30))',
+          40: 'hsl(var(--blue-warm-vivid-40))',
+          50: 'hsl(var(--blue-warm-vivid-50))',
+          60: 'hsl(var(--blue-warm-vivid-60))',
+          70: 'hsl(var(--blue-warm-vivid-70))',
+          80: 'hsl(var(--blue-warm-vivid-80))'
         },
         'blue-cool': {
-          5: '#E7F2F5',
-          10: '#DAE9EE',
-          20: '#ADCFDC',
-          30: '#82B4C9',
-          40: '#6499AF',
-          50: '#3A7D95',
-          60: '#2E6276',
-          70: '#224A58',
-          80: '#14333D',
-          90: '#0F191C'
+          5: 'hsl(var(--blue-cool-5))',
+          10: 'hsl(var(--blue-cool-10))',
+          20: 'hsl(var(--blue-cool-20))',
+          30: 'hsl(var(--blue-cool-30))',
+          40: 'hsl(var(--blue-cool-40))',
+          50: 'hsl(var(--blue-cool-50))',
+          60: 'hsl(var(--blue-cool-60))',
+          70: 'hsl(var(--blue-cool-70))',
+          80: 'hsl(var(--blue-cool-80))',
+          90: 'hsl(var(--blue-cool-90))'
         },
-
-        // Indigo variations
         indigo: {
-          5: '#EFEFF8',
-          10: '#E5E4FA',
-          20: '#C5C5F3',
-          30: '#A5A8EB',
-          40: '#8889DB',
-          50: '#676CC8',
-          60: '#4D52AF',
-          70: '#3D4076',
-          80: '#2B2C40',
-          90: '#16171F'
+          5: 'hsl(var(--indigo-5))',
+          10: 'hsl(var(--indigo-10))',
+          20: 'hsl(var(--indigo-20))',
+          30: 'hsl(var(--indigo-30))',
+          40: 'hsl(var(--indigo-40))',
+          50: 'hsl(var(--indigo-50))',
+          60: 'hsl(var(--indigo-60))',
+          70: 'hsl(var(--indigo-70))',
+          80: 'hsl(var(--indigo-80))',
+          90: 'hsl(var(--indigo-90))'
         },
         'indigo-vivid': {
-          5: '#F0F0FF',
-          10: '#E0E0FF',
-          20: '#CCCEFF',
-          30: '#A3A7FA',
-          40: '#8289FF',
-          50: '#656BD7',
-          60: '#4A50C4',
-          70: '#3333A3',
-          80: '#212463'
+          5: 'hsl(var(--indigo-vivid-5))',
+          10: 'hsl(var(--indigo-vivid-10))',
+          20: 'hsl(var(--indigo-vivid-20))',
+          30: 'hsl(var(--indigo-vivid-30))',
+          40: 'hsl(var(--indigo-vivid-40))',
+          50: 'hsl(var(--indigo-vivid-50))',
+          60: 'hsl(var(--indigo-vivid-60))',
+          70: 'hsl(var(--indigo-vivid-70))',
+          80: 'hsl(var(--indigo-vivid-80))'
         },
         'indigo-cool': {
-          5: '#EEF0F9',
-          10: '#E1E6F9',
-          20: '#BBC8F5',
-          30: '#96ABEE',
-          40: '#6B8EE8',
-          50: '#496FD8',
-          60: '#3F57A6',
-          70: '#374274',
-          80: '#292D42',
-          90: '#151622'
+          5: 'hsl(var(--indigo-cool-5))',
+          10: 'hsl(var(--indigo-cool-10))',
+          20: 'hsl(var(--indigo-cool-20))',
+          30: 'hsl(var(--indigo-cool-30))',
+          40: 'hsl(var(--indigo-cool-40))',
+          50: 'hsl(var(--indigo-cool-50))',
+          60: 'hsl(var(--indigo-cool-60))',
+          70: 'hsl(var(--indigo-cool-70))',
+          80: 'hsl(var(--indigo-cool-80))',
+          90: 'hsl(var(--indigo-cool-90))'
         },
         'indigo-cool-vivid': {
-          5: '#EDF0FF',
-          10: '#DEE5FF',
-          20: '#B8C8FF',
-          30: '#94ADFF',
-          40: '#628EF4',
-          50: '#4866FF',
-          60: '#3E4DED',
-          70: '#222FBF',
-          80: '#1B2B85'
+          5: 'hsl(var(--indigo-cool-vivid-5))',
+          10: 'hsl(var(--indigo-cool-vivid-10))',
+          20: 'hsl(var(--indigo-cool-vivid-20))',
+          30: 'hsl(var(--indigo-cool-vivid-30))',
+          40: 'hsl(var(--indigo-cool-vivid-40))',
+          50: 'hsl(var(--indigo-cool-vivid-50))',
+          60: 'hsl(var(--indigo-cool-vivid-60))',
+          70: 'hsl(var(--indigo-cool-vivid-70))',
+          80: 'hsl(var(--indigo-cool-vivid-80))'
         },
-
-        // Indigo warm variations
         'indigo-warm': {
-          5: '#F1EFF7',
-          10: '#E7E3FA',
-          20: '#CBC4F2',
-          30: '#AFA5E8',
-          40: '#9287D8',
-          50: '#7665D1',
-          60: '#5E519E',
-          70: '#453C7B',
-          80: '#2E2C40',
-          90: '#18161D'
+          5: 'hsl(var(--indigo-warm-5))',
+          10: 'hsl(var(--indigo-warm-10))',
+          20: 'hsl(var(--indigo-warm-20))',
+          30: 'hsl(var(--indigo-warm-30))',
+          40: 'hsl(var(--indigo-warm-40))',
+          50: 'hsl(var(--indigo-warm-50))',
+          60: 'hsl(var(--indigo-warm-60))',
+          70: 'hsl(var(--indigo-warm-70))',
+          80: 'hsl(var(--indigo-warm-80))',
+          90: 'hsl(var(--indigo-warm-90))'
         },
         'indigo-warm-vivid': {
-          5: '#F5F2FF',
-          10: '#E4DEFF',
-          20: '#CFC4FD',
-          30: '#B69FFF',
-          40: '#967EFB',
-          50: '#745FE9',
-          60: '#5942D2',
-          70: '#3D2C9D',
-          80: '#261F5B'
+          5: 'hsl(var(--indigo-warm-vivid-5))',
+          10: 'hsl(var(--indigo-warm-vivid-10))',
+          20: 'hsl(var(--indigo-warm-vivid-20))',
+          30: 'hsl(var(--indigo-warm-vivid-30))',
+          40: 'hsl(var(--indigo-warm-vivid-40))',
+          50: 'hsl(var(--indigo-warm-vivid-50))',
+          60: 'hsl(var(--indigo-warm-vivid-60))',
+          70: 'hsl(var(--indigo-warm-vivid-70))',
+          80: 'hsl(var(--indigo-warm-vivid-80))'
         },
-
-        // Violet variations
         violet: {
-          5: '#F4F1F9',
-          10: '#EBE3F9',
-          20: '#D0C3E9',
-          30: '#B8A2E3',
-          40: '#9D84D2',
-          50: '#8168B3',
-          60: '#665190',
-          70: '#4C3D69',
-          80: '#312B3F',
-          90: '#18161D'
+          5: 'hsl(var(--violet-5))',
+          10: 'hsl(var(--violet-10))',
+          20: 'hsl(var(--violet-20))',
+          30: 'hsl(var(--violet-30))',
+          40: 'hsl(var(--violet-40))',
+          50: 'hsl(var(--violet-50))',
+          60: 'hsl(var(--violet-60))',
+          70: 'hsl(var(--violet-70))',
+          80: 'hsl(var(--violet-80))',
+          90: 'hsl(var(--violet-90))'
         },
         'violet-vivid': {
-          5: '#F7F2FF',
-          10: '#EDE3FF',
-          20: '#D5BFFF',
-          30: '#C39DEB',
-          40: '#AD79E9',
-          50: '#9355DC',
-          60: '#783CB9',
-          70: '#54278F',
-          80: '#39215E'
+          5: 'hsl(var(--violet-vivid-5))',
+          10: 'hsl(var(--violet-vivid-10))',
+          20: 'hsl(var(--violet-vivid-20))',
+          30: 'hsl(var(--violet-vivid-30))',
+          40: 'hsl(var(--violet-vivid-40))',
+          50: 'hsl(var(--violet-vivid-50))',
+          60: 'hsl(var(--violet-vivid-60))',
+          70: 'hsl(var(--violet-vivid-70))',
+          80: 'hsl(var(--violet-vivid-80))'
         },
         'violet-warm': {
-          5: '#F8F0F9',
-          10: '#F6DFF8',
-          20: '#E2BEE4',
-          30: '#D29AD8',
-          40: '#BF77C8',
-          50: '#B04ABD',
-          60: '#864381',
-          70: '#5C395A',
-          80: '#382936',
-          90: '#1B151B'
+          5: 'hsl(var(--violet-warm-5))',
+          10: 'hsl(var(--violet-warm-10))',
+          20: 'hsl(var(--violet-warm-20))',
+          30: 'hsl(var(--violet-warm-30))',
+          40: 'hsl(var(--violet-warm-40))',
+          50: 'hsl(var(--violet-warm-50))',
+          60: 'hsl(var(--violet-warm-60))',
+          70: 'hsl(var(--violet-warm-70))',
+          80: 'hsl(var(--violet-warm-80))',
+          90: 'hsl(var(--violet-warm-90))'
         },
         'violet-warm-vivid': {
-          5: '#FEF2FF',
-          10: '#FBDCFF',
-          20: '#F4B2FF',
-          30: '#EE83FF',
-          40: '#D85BEF',
-          50: '#BE32D0',
-          60: '#93348C',
-          70: '#711E6C',
-          80: '#481441'
+          5: 'hsl(var(--violet-warm-vivid-5))',
+          10: 'hsl(var(--violet-warm-vivid-10))',
+          20: 'hsl(var(--violet-warm-vivid-20))',
+          30: 'hsl(var(--violet-warm-vivid-30))',
+          40: 'hsl(var(--violet-warm-vivid-40))',
+          50: 'hsl(var(--violet-warm-vivid-50))',
+          60: 'hsl(var(--violet-warm-vivid-60))',
+          70: 'hsl(var(--violet-warm-vivid-70))',
+          80: 'hsl(var(--violet-warm-vivid-80))'
         },
-
-        // Magenta variations
         magenta: {
-          5: '#F9F0F2',
-          10: '#F6E1E8',
-          20: '#F0BBCC',
-          30: '#E895B3',
-          40: '#E0699F',
-          50: '#C84281',
-          60: '#8B4566',
-          70: '#66364B',
-          80: '#402731',
-          90: '#1B1617'
+          5: 'hsl(var(--magenta-5))',
+          10: 'hsl(var(--magenta-10))',
+          20: 'hsl(var(--magenta-20))',
+          30: 'hsl(var(--magenta-30))',
+          40: 'hsl(var(--magenta-40))',
+          50: 'hsl(var(--magenta-50))',
+          60: 'hsl(var(--magenta-60))',
+          70: 'hsl(var(--magenta-70))',
+          80: 'hsl(var(--magenta-80))',
+          90: 'hsl(var(--magenta-90))'
         },
         'magenta-vivid': {
-          5: '#FFF2F5',
-          10: '#FFDDEA',
-          20: '#FFB4CF',
-          30: '#FF87B2',
-          40: '#FD4496',
-          50: '#D72D79',
-          60: '#AB2165',
-          70: '#731F44',
-          80: '#4F172E'
+          5: 'hsl(var(--magenta-vivid-5))',
+          10: 'hsl(var(--magenta-vivid-10))',
+          20: 'hsl(var(--magenta-vivid-20))',
+          30: 'hsl(var(--magenta-vivid-30))',
+          40: 'hsl(var(--magenta-vivid-40))',
+          50: 'hsl(var(--magenta-vivid-50))',
+          60: 'hsl(var(--magenta-vivid-60))',
+          70: 'hsl(var(--magenta-vivid-70))',
+          80: 'hsl(var(--magenta-vivid-80))'
         },
-
-        // Gray variations
         gray: {
-          1: '#FCFCFC',
-          2: '#F9F9F9',
-          3: '#F6F6F6',
-          4: '#F3F3F3',
-          5: '#F0F0F0',
-          10: '#E6E6E6',
-          20: '#C9C9C9',
-          30: '#ADADAD',
-          40: '#919191',
-          50: '#757575',
-          60: '#5C5C5C',
-          70: '#454545',
-          80: '#2E2E2E',
-          90: '#1B1B1B'
+          1: 'hsl(var(--gray-1))',
+          2: 'hsl(var(--gray-2))',
+          3: 'hsl(var(--gray-3))',
+          4: 'hsl(var(--gray-4))',
+          5: 'hsl(var(--gray-5))',
+          10: 'hsl(var(--gray-10))',
+          20: 'hsl(var(--gray-20))',
+          30: 'hsl(var(--gray-30))',
+          40: 'hsl(var(--gray-40))',
+          50: 'hsl(var(--gray-50))',
+          60: 'hsl(var(--gray-60))',
+          70: 'hsl(var(--gray-70))',
+          80: 'hsl(var(--gray-80))',
+          90: 'hsl(var(--gray-90))'
         },
         'gray-cool': {
-          1: '#FBFCFD',
-          2: '#F7F9FA',
-          3: '#F5F6F7',
-          4: '#F1F3F6',
-          5: '#EDEFF0',
-          10: '#DFE1E2',
-          20: '#C6CACE',
-          30: '#A9AEB1',
-          40: '#8D9297',
-          50: '#71767A',
-          60: '#565C65',
-          70: '#3D4551',
-          80: '#2D2E2F',
-          90: '#1C1D1F'
+          1: 'hsl(var(--gray-cool-1))',
+          2: 'hsl(var(--gray-cool-2))',
+          3: 'hsl(var(--gray-cool-3))',
+          4: 'hsl(var(--gray-cool-4))',
+          5: 'hsl(var(--gray-cool-5))',
+          10: 'hsl(var(--gray-cool-10))',
+          20: 'hsl(var(--gray-cool-20))',
+          30: 'hsl(var(--gray-cool-30))',
+          40: 'hsl(var(--gray-cool-40))',
+          50: 'hsl(var(--gray-cool-50))',
+          60: 'hsl(var(--gray-cool-60))',
+          70: 'hsl(var(--gray-cool-70))',
+          80: 'hsl(var(--gray-cool-80))',
+          90: 'hsl(var(--gray-cool-90))'
         },
         'gray-warm': {
-          1: '#FCFCFB',
-          2: '#F9F9F7',
-          3: '#F6F6F2',
-          4: '#F5F5F0',
-          5: '#F0F0EC',
-          10: '#E6E6E2',
-          20: '#CAC9C0',
-          30: '#AFAEA2',
-          40: '#929285',
-          50: '#76766A',
-          60: '#5D5D52',
-          70: '#454540',
-          80: '#2E2E2A',
-          90: '#171716'
+          1: 'hsl(var(--gray-warm-1))',
+          2: 'hsl(var(--gray-warm-2))',
+          3: 'hsl(var(--gray-warm-3))',
+          4: 'hsl(var(--gray-warm-4))',
+          5: 'hsl(var(--gray-warm-5))',
+          10: 'hsl(var(--gray-warm-10))',
+          20: 'hsl(var(--gray-warm-20))',
+          30: 'hsl(var(--gray-warm-30))',
+          40: 'hsl(var(--gray-warm-40))',
+          50: 'hsl(var(--gray-warm-50))',
+          60: 'hsl(var(--gray-warm-60))',
+          70: 'hsl(var(--gray-warm-70))',
+          80: 'hsl(var(--gray-warm-80))',
+          90: 'hsl(var(--gray-warm-90))'
+        },
+        inverse: {
+          DEFAULT: 'hsl(var(--inverse-default))',
+          border: 'hsl(var(--inverse-border))',
+          'border-hover': 'hsl(var(--inverse-border-hover))',
+          'border-active': 'hsl(var(--inverse-border-active))',
+          text: 'hsl(var(--inverse-text))',
+          'text-hover': 'hsl(var(--inverse-text-hover))',
+          'text-active': 'hsl(var(--inverse-text-active))'
         }
       },
       borderWidth: {
@@ -811,6 +784,31 @@ module.exports = {
           measure: '6'
         }
       })
+    },
+    darkMode: {
+      background: '#0C0A09',
+      foreground: '#FAFAFA',
+
+      primary: {
+        DEFAULT: '#73B3E7',
+        hover: '#73B3E7',
+        active: '#2D7BBF'
+      },
+      secondary: {
+        DEFAULT: '#F2938C',
+        hover: '#E85D57',
+        active: '#B31B1B'
+      },
+      'accent-cool': {
+        DEFAULT: '#28A0CB',
+        hover: '#07648D',
+        active: '#044E6C'
+      },
+      'accent-warm': {
+        DEFAULT: '#C05600',
+        hover: '#775540',
+        active: '#332D29'
+      }
     }
   },
   plugins: [

@@ -2,6 +2,7 @@
 title: Initial Setup
 description: Set up React Native USMDS in your project
 ---
+
 ## Prerequisites
 
 Before you start, make sure you have:
@@ -26,15 +27,687 @@ This command:
 - Creates necessary configuration files
 - Installs required dependencies
 
-The following files will be created:
+The following files will be created or need to be configured:
 
-- `tailwind.config.js` - Tailwind CSS configuration
-- `nativewind-env.d.ts` - TypeScript types for NativeWind
-- `babel.config.js` - Updated Babel configuration
-- `global.css` - Global styles with USMDS color tokens
-- `metro.config.js` - Metro bundler configuration
-- `lib/utils.ts` - Utility functions
-- `utils/registry.ts` - Icon registry
+### Required Configuration Files
+
+#### 1. metro.config.js
+
+```javascript
+const { getDefaultConfig } = require("expo/metro-config");
+const { withNativeWind } = require('nativewind/metro');
+
+const config = getDefaultConfig(__dirname);
+
+module.exports = withNativeWind(config, { input: './global.css' });
+```
+
+#### 2. babel.config.js
+
+```javascript
+module.exports = function (api) {
+  api.cache(true);
+  return {
+    presets: [['babel-preset-expo', { jsxImportSource: 'nativewind' }], 'nativewind/babel']
+  };
+};
+```
+
+#### 3. global.css
+
+Create this file in your project root:
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Base */
+    --background: 0 0% 100%; /* #FFFFFF */
+    --foreground: 0 0% 11%; /* #1B1B1B */
+
+    /* Primary */
+    --primary: 209 100% 32%; /* #005EA2 */
+    --primary-lighter: 210 71% 91%; /* #D9E8F6 */
+    --primary-light: 208 74% 68%; /* #73B3E7 */
+    --primary-vivid: 213 100% 42%; /* #0050D8 */
+    --primary-dark: 213 64% 30%; /* #1A4480 */
+    --primary-darker: 213 57% 20%; /* #162E51 */
+
+    /* Secondary */
+    --secondary: 3 61% 52%; /* #D83933 */
+    --secondary-lighter: 351 56% 92%; /* #F8DFE2 */
+    --secondary-light: 3 77% 74%; /* #F2938C */
+    --secondary-vivid: 350 85% 51%; /* #E41D3D */
+    --secondary-dark: 0 91% 37%; /* #B50909 */
+    --secondary-darker: 3 96% 27%; /* #8B0A03 */
+
+    /* Accent Cool */
+    --accent-cool: 190 100% 44%; /* #00BDE3 */
+    --accent-cool-lighter: 193 79% 93%; /* #E1F3F8 */
+    --accent-cool-light: 197 70% 75%; /* #97D4EA */
+    --accent-cool-dark: 196 67% 48%; /* #28A0CB */
+    --accent-cool-darker: 197 91% 29%; /* #07648D */
+
+    /* Accent Warm */
+    --accent-warm: 28 95% 62%; /* #FA9441 */
+    --accent-warm-lighter: 30 47% 89%; /* #F2E4D4 */
+    --accent-warm-light: 33 100% 74%; /* #FFBC78 */
+    --accent-warm-dark: 28 100% 38%; /* #C05600 */
+    --accent-warm-darker: 19 19% 35%; /* #775540 */
+
+    /* Base Colors */
+    --base: 0 0% 46%; /* #757575 */
+    --base-lightest: 0 0% 94%; /* #F0F0F0 */
+    --base-lighter: 204 3% 88%; /* #DFE1E2 */
+    --base-light: 204 6% 68%; /* #A9AEB1 */
+    --base-dark: 214 8% 39%; /* #565C65 */
+    --base-darker: 216 13% 28%; /* #3D4551 */
+    --base-darkest: 0 0% 11%; /* #1B1B1B */
+    --base-ink: 0 0% 11%; /* #1B1B1B */
+
+    /* Focus */
+    --focus-ring: 211 100% 57%; /* #2491FF */
+
+    /* State Colors */
+    --info: 190 100% 44%; /* #00BDE3 */
+    --info-lighter: 193 64% 94%; /* #E7F6F8 */
+    --info-light: 190 77% 76%; /* #99DEEA */
+    --info-dark: 190 100% 38%; /* #009EC1 */
+    --info-darker: 197 45% 32%; /* #2E6276 */
+
+    --error: 17 94% 43%; /* #D54309 */
+    --error-lighter: 20 53% 91%; /* #F4E3DB */
+    --error-light: 20 87% 68%; /* #F39268 */
+    --error-dark: 0 91% 37%; /* #B50909 */
+    --error-darker: 1 38% 31%; /* #6F3331 */
+
+    --warning: 44 100% 59%; /* #FFBE2E */
+    --warning-lighter: 48 83% 90%; /* #FAF3D1 */
+    --warning-light: 48 98% 76%; /* #FEE685 */
+    --warning-dark: 39 100% 45%; /* #E5A000 */
+    --warning-darker: 35 45% 40%; /* #936F38 */
+
+    --success: 128 100% 33%; /* #00A91C */
+    --success-lighter: 120 19% 93%; /* #ECF3EC */
+    --success-light: 125 69% 66%; /* #70E17B */
+    --success-dark: 123 24% 40%; /* #4D8055 */
+    --success-darker: 123 20% 33%; /* #446443 */
+
+    --disabled: 0 0% 46%; /* #757575 */
+    --disabled-lighter: 0 0% 79%; /* #C9C9C9 */
+    --disabled-light: 0 0% 57%; /* #919191 */
+    --disabled-dark: 0 0% 27%; /* #454545 */
+    --disabled-darker: 0 0% 11%; /* #1B1B1B */
+
+    --emergency: 14 82% 34%; /* #9C3D10 */
+    --emergency-dark: 20 10% 18%; /* #332D29 */
+
+    /* Red Cool */
+    --red-cool-5: 345 41% 95%; /* #F8EFF1 */
+    --red-cool-10: 349 43% 92%; /* #F3E1E4 */
+    --red-cool-20: 350 52% 84%; /* #ECBEC6 */
+    --red-cool-30: 350 48% 74%; /* #E09AA6 */
+    --red-cool-40: 351 71% 65%; /* #E16B80 */
+    --red-cool-50: 349 67% 53%; /* #CD425B */
+    --red-cool-60: 349 47% 42%; /* #9E394B */
+    --red-cool-70: 348 32% 31%; /* #68363F */
+    --red-cool-80: 344 23% 20%; /* #40282C */
+    --red-cool-90: 345 15% 10%; /* #1E1517 */
+
+    /* Red Cool Vivid */
+    --red-cool-vivid-5: 350 100% 97%; /* #FFF0F3 */
+    --red-cool-vivid-10: 350 71% 93%; /* #F8DEE1 */
+    --red-cool-vivid-20: 350 85% 85%; /* #F8B9C5 */
+    --red-cool-vivid-30: 350 100% 77%; /* #FD8BA0 */
+    --red-cool-vivid-40: 348 89% 66%; /* #F45D79 */
+    --red-cool-vivid-50: 348 83% 50%; /* #E41B3C */
+    --red-cool-vivid-60: 348 72% 41%; /* #B41D39 */
+    --red-cool-vivid-70: 348 45% 32%; /* #832133 */
+    --red-cool-vivid-80: 348 45% 21%; /* #4F1C24 */
+
+    /* Red */
+    --red-5: 0 44% 95%; /* #F9EEEE */
+    --red-10: 6 71% 92%; /* #F8E1DE */
+    --red-20: 6 82% 83%; /* #F7BBB1 */
+    --red-30: 3 77% 74%; /* #F2938C */
+    --red-40: 3 76% 64%; /* #E9695F */
+    --red-50: 3 61% 52%; /* #D83933 */
+    --red-60: 0 50% 42%; /* #A23737 */
+    --red-70: 1 38% 31%; /* #6F3331 */
+    --red-80: 4 24% 20%; /* #3E2927 */
+    --red-90: 0 9% 10%; /* #1B1616 */
+
+    /* Red Warm */
+    --red-warm-5: 20 33% 94%; /* #F6EFEA */
+    --red-warm-10: 14 53% 91%; /* #F4E3DB */
+    --red-warm-20: 19 60% 79%; /* #ECC0A7 */
+    --red-warm-30: 21 54% 68%; /* #DCA081 */
+    --red-warm-40: 17 59% 58%; /* #D27A56 */
+    --red-warm-50: 14 58% 47%; /* #C3512C */
+    --red-warm-60: 12 36% 36%; /* #805039 */
+    --red-warm-70: 12 14% 27%; /* #524236 */
+    --red-warm-80: 20 10% 18%; /* #332D29 */
+    --red-warm-90: 20 11% 11%; /* #1F1C18 */
+
+    /* Red Warm Vivid */
+    --red-warm-vivid-5: 20 100% 97%; /* #FFF5EE */
+    --red-warm-vivid-10: 18 89% 91%; /* #FCE1D4 */
+    --red-warm-vivid-20: 20 84% 79%; /* #F6BD9C */
+    --red-warm-vivid-30: 20 87% 68%; /* #F39268 */
+    --red-warm-vivid-40: 14 95% 54%; /* #EF5E25 */
+    --red-warm-vivid-50: 17 94% 43%; /* #D54309 */
+    --red-warm-vivid-60: 14 82% 34%; /* #9C3D10 */
+    --red-warm-vivid-70: 17 72% 22%; /* #63340F */
+    --red-warm-vivid-80: 12 34% 18%; /* #3E2A1E */
+
+    /* Red Vivid */
+    --red-vivid-5: 0 100% 97%; /* #FFF3F2 */
+    --red-vivid-10: 3 98% 93%; /* #FDE0DB */
+    --red-vivid-20: 4 97% 84%; /* #FDB8AE */
+    --red-vivid-30: 5 100% 74%; /* #FF8D7B */
+    --red-vivid-40: 4 96% 63%; /* #FB5A47 */
+    --red-vivid-50: 3 91% 45%; /* #E52207 */
+    --red-vivid-60: 0 91% 37%; /* #B50909 */
+    --red-vivid-70: 3 96% 27%; /* #8B0A03 */
+    --red-vivid-80: 0 32% 22%; /* #5C1111 */
+
+    /* Orange Warm */
+    --orange-warm-5: 24 71% 94%; /* #FAEEE5 */
+    --orange-warm-10: 24 89% 90%; /* #FBE0D0 */
+    --orange-warm-20: 24 83% 80%; /* #F7BCA2 */
+    --orange-warm-30: 20 84% 69%; /* #F3966D */
+    --orange-warm-40: 19 71% 57%; /* #E17141 */
+    --orange-warm-50: 19 66% 45%; /* #BD5727 */
+    --orange-warm-60: 9 47% 39%; /* #914734 */
+    --orange-warm-70: 9 32% 29%; /* #633A32 */
+    --orange-warm-80: 7 25% 19%; /* #3D2925 */
+    --orange-warm-90: 12 10% 10%; /* #1C1615 */
+
+    /* Orange Warm Vivid */
+    --orange-warm-vivid-5: 27 100% 96%; /* #FFF3EA */
+    --orange-warm-vivid-10: 27 100% 91%; /* #FFE2D1 */
+    --orange-warm-vivid-20: 19 92% 82%; /* #FBBAA7 */
+    --orange-warm-vivid-30: 17 97% 71%; /* #FC906D */
+    --orange-warm-vivid-40: 21 100% 52%; /* #FF580A */
+    --orange-warm-vivid-50: 21 100% 41%; /* #CF4900 */
+    --orange-warm-vivid-60: 12 82% 36%; /* #A72F10 */
+    --orange-warm-vivid-70: 9 71% 27%; /* #782312 */
+    --orange-warm-vivid-80: 7 34% 18%; /* #3D231D */
+
+    /* Orange */
+    --orange-5: 30 41% 94%; /* #F6EFE9 */
+    --orange-10: 30 47% 89%; /* #F2E4D4 */
+    --orange-20: 31 79% 76%; /* #F3BF90 */
+    --orange-30: 28 79% 66%; /* #F09860 */
+    --orange-40: 24 71% 53%; /* #DD7533 */
+    --orange-50: 27 49% 44%; /* #A86437 */
+    --orange-60: 19 19% 35%; /* #775540 */
+    --orange-70: 17 14% 27%; /* #524236 */
+    --orange-80: 20 10% 18%; /* #332D27 */
+    --orange-90: 20 8% 10%; /* #1B1614 */
+
+    /* Orange Vivid */
+    --orange-vivid-5: 35 95% 95%; /* #FEF2E4 */
+    --orange-vivid-10: 33 89% 88%; /* #FCE2C5 */
+    --orange-vivid-20: 33 100% 74%; /* #FFBC78 */
+    --orange-vivid-30: 28 95% 62%; /* #FA9441 */
+    --orange-vivid-40: 28 90% 48%; /* #E66F0E */
+    --orange-vivid-50: 28 100% 38%; /* #C05600 */
+    --orange-vivid-60: 21 66% 33%; /* #8C471C */
+    --orange-vivid-70: 19 63% 23%; /* #5F3617 */
+    --orange-vivid-80: 19 45% 14%; /* #352313 */
+
+    /* Gold */
+    --gold-5: 39 41% 93%; /* #F5F0E6 */
+    --gold-10: 37 52% 87%; /* #F1E5CD */
+    --gold-20: 37 45% 74%; /* #DEC69A */
+    --gold-30: 35 39% 63%; /* #C7A97B */
+    --gold-40: 35 30% 54%; /* #AD8B65 */
+    --gold-50: 35 29% 43%; /* #8E704F */
+    --gold-60: 32 18% 35%; /* #6B5947 */
+    --gold-70: 30 12% 26%; /* #4D4438 */
+    --gold-80: 32 9% 18%; /* #322D26 */
+    --gold-90: 30 8% 9%; /* #191714 */
+
+    /* Gold Vivid */
+    --gold-vivid-5: 43 98% 89%; /* #FEF0C8 */
+    --gold-vivid-10: 45 100% 79%; /* #FFE396 */
+    --gold-vivid-20: 44 100% 59%; /* #FFBE2E */
+    --gold-vivid-30: 39 100% 45%; /* #E5A000 */
+    --gold-vivid-40: 38 88% 41%; /* #C2850C */
+    --gold-vivid-50: 35 45% 40%; /* #936F38 */
+    --gold-vivid-60: 35 64% 29%; /* #7A591A */
+    --gold-vivid-70: 35 85% 20%; /* #5C410A */
+    --gold-vivid-80: 32 47% 16%; /* #3B2B15 */
+
+    /* Yellow */
+    --yellow-5: 48 83% 90%; /* #FAF3D1 */
+    --yellow-10: 45 74% 82%; /* #F5E6AF */
+    --yellow-20: 47 71% 60%; /* #E6C74C */
+    --yellow-30: 43 45% 53%; /* #C9AB48 */
+    --yellow-40: 43 38% 47%; /* #A88F48 */
+    --yellow-50: 43 42% 38%; /* #8A7237 */
+    --yellow-60: 43 29% 32%; /* #6B5A39 */
+    --yellow-70: 33 24% 25%; /* #504332 */
+    --yellow-80: 20 10% 18%; /* #332D27 */
+    --yellow-90: 30 8% 10%; /* #1A1614 */
+
+    /* Yellow Vivid */
+    --yellow-vivid-5: 48 100% 95%; /* #FFF5C2 */
+    --yellow-vivid-10: 48 98% 76%; /* #FEE685 */
+    --yellow-vivid-20: 48 100% 50%; /* #FACE00 */
+    --yellow-vivid-30: 43 100% 44%; /* #DDAA01 */
+    --yellow-vivid-40: 43 100% 35%; /* #B38C00 */
+    --yellow-vivid-50: 43 100% 29%; /* #947100 */
+    --yellow-vivid-60: 43 63% 28%; /* #776017 */
+    --yellow-vivid-70: 43 71% 20%; /* #5C4809 */
+    --yellow-vivid-80: 32 48% 18%; /* #422D19 */
+
+    /* Green */
+    --green-5: 90 47% 91%; /* #EAF4DD */
+    --green-10: 90 39% 86%; /* #DFEACD */
+    --green-20: 90 36% 70%; /* #B8D293 */
+    --green-30: 90 24% 58%; /* #9BB672 */
+    --green-40: 90 32% 46%; /* #7D9B4E */
+    --green-50: 90 41% 35%; /* #607F35 */
+    --green-60: 90 46% 27%; /* #4C6424 */
+    --green-70: 90 19% 22%; /* #3C4A29 */
+    --green-80: 90 15% 17%; /* #293021 */
+    --green-90: 90 8% 9%; /* #161814 */
+
+    /* Green Vivid */
+    --green-vivid-5: 90 83% 88%; /* #DDF9C7 */
+    --green-vivid-10: 90 75% 75%; /* #C5EE93 */
+    --green-vivid-20: 90 57% 51%; /* #98D035 */
+    --green-vivid-30: 90 54% 45%; /* #7FB135 */
+    --green-vivid-40: 90 48% 39%; /* #719F2A */
+    --green-vivid-50: 90 100% 26%; /* #538200 */
+    --green-vivid-60: 90 96% 22%; /* #466C04 */
+    --green-vivid-70: 90 63% 17%; /* #2F4A0B */
+    --green-vivid-80: 90 31% 14%; /* #243413 */
+
+    /* Green Warm */
+    --green-warm-5: 65 56% 90%; /* #F1F4D7 */
+    --green-warm-10: 65 53% 82%; /* #E7EAB7 */
+    --green-warm-20: 65 45% 65%; /* #CBD17A */
+    --green-warm-30: 65 36% 53%; /* #A6B557 */
+    --green-warm-40: 65 33% 45%; /* #8A984B */
+    --green-warm-50: 65 30% 37%; /* #6F7A41 */
+    --green-warm-60: 65 24% 30%; /* #5A5F38 */
+    --green-warm-70: 60 7% 26%; /* #454540 */
+    --green-warm-80: 65 17% 15%; /* #2D2F21 */
+    --green-warm-90: 60 12% 8%; /* #171712 */
+
+    /* Green Warm Vivid */
+    --green-warm-vivid-5: 65 95% 87%; /* #F5FBC1 */
+    --green-warm-vivid-10: 65 89% 58%; /* #E7F434 */
+    --green-warm-vivid-20: 65 90% 43%; /* #C5D30A */
+    --green-warm-vivid-30: 65 57% 45%; /* #A3B72C */
+    --green-warm-vivid-40: 65 68% 37%; /* #7E9C1D */
+    --green-warm-vivid-50: 65 100% 25%; /* #6A7D00 */
+    --green-warm-vivid-60: 65 63% 24%; /* #5A6613 */
+    --green-warm-vivid-70: 65 65% 18%; /* #4B4E10 */
+    --green-warm-vivid-80: 60 65% 13%; /* #38380B */
+
+    /* Green Cool */
+    --green-cool-5: 140 28% 91%; /* #ECF3EC */
+    --green-cool-10: 140 31% 89%; /* #DBEBDE */
+    --green-cool-20: 140 25% 76%; /* #B4D0B9 */
+    --green-cool-30: 140 27% 63%; /* #86B98E */
+    --green-cool-40: 140 26% 50%; /* #5E9F69 */
+    --green-cool-50: 140 24% 41%; /* #4D8055 */
+    --green-cool-60: 140 21% 33%; /* #446443 */
+    --green-cool-70: 210 14% 28%; /* #3D4551 */
+    --green-cool-80: 140 10% 18%; /* #28312A */
+    --green-cool-90: 140 9% 11%; /* #1A1F1A */
+
+    /* Green Cool Vivid */
+    --green-cool-vivid-5: 140 67% 92%; /* #E3F5E1 */
+    --green-cool-vivid-10: 140 82% 84%; /* #B7F5BD */
+    --green-cool-vivid-20: 140 64% 66%; /* #70E17B */
+    --green-cool-vivid-30: 140 74% 45%; /* #21C834 */
+    --green-cool-vivid-40: 140 100% 33%; /* #00A91C */
+    --green-cool-vivid-50: 140 100% 27%; /* #008817 */
+    --green-cool-vivid-60: 140 54% 28%; /* #216E1F */
+    --green-cool-vivid-70: 140 54% 19%; /* #154C21 */
+    --green-cool-vivid-80: 140 25% 15%; /* #19311E */
+
+    /* Mint */
+    --mint-5: 160 64% 91%; /* #DBF6ED */
+    --mint-10: 160 53% 86%; /* #C7EFE2 */
+    --mint-20: 160 42% 71%; /* #92D9BB */
+    --mint-30: 160 51% 55%; /* #5ABF95 */
+    --mint-40: 160 52% 42%; /* #34A37E */
+    --mint-50: 160 45% 35%; /* #2E8367 */
+    --mint-60: 160 42% 28%; /* #286846 */
+    --mint-70: 160 41% 21%; /* #204E34 */
+    --mint-80: 160 28% 15%; /* #193324 */
+    --mint-90: 160 28% 8%; /* #0D1A12 */
+
+    /* Mint Vivid */
+    --mint-vivid-5: 160 89% 89%; /* #C9FBEB */
+    --mint-vivid-10: 160 96% 75%; /* #83FCD4 */
+    --mint-vivid-20: 160 91% 49%; /* #0CEDA6 */
+    --mint-vivid-30: 160 96% 39%; /* #04C585 */
+    --mint-vivid-40: 160 100% 33%; /* #00A871 */
+    --mint-vivid-50: 160 100% 26%; /* #008659 */
+    --mint-vivid-60: 160 47% 25%; /* #146947 */
+    --mint-vivid-70: 160 72% 18%; /* #0C4E29 */
+    --mint-vivid-80: 160 54% 13%; /* #0D351E */
+
+    /* Mint Cool */
+    --mint-cool-5: 180 57% 92%; /* #E0F7F6 */
+    --mint-cool-10: 180 45% 85%; /* #C4EEEB */
+    --mint-cool-20: 180 31% 72%; /* #9BD4CF */
+    --mint-cool-30: 180 29% 58%; /* #6FBAB3 */
+    --mint-cool-40: 180 33% 46%; /* #4F9E99 */
+    --mint-cool-50: 180 33% 38%; /* #40807E */
+    --mint-cool-60: 180 26% 31%; /* #376462 */
+    --mint-cool-70: 170 28% 23%; /* #2A4B45 */
+    --mint-cool-80: 180 20% 16%; /* #203131 */
+    --mint-cool-90: 180 15% 8%; /* #111818 */
+
+    /* Mint Cool Vivid */
+    --mint-cool-vivid-5: 180 89% 91%; /* #D5FBF3 */
+    --mint-cool-vivid-10: 180 96% 74%; /* #7EFBE1 */
+    --mint-cool-vivid-20: 180 77% 52%; /* #29E1CB */
+    --mint-cool-vivid-30: 180 73% 44%; /* #1DC2AE */
+    --mint-cool-vivid-40: 180 100% 32%; /* #00A398 */
+    --mint-cool-vivid-50: 180 100% 26%; /* #008480 */
+    --mint-cool-vivid-60: 180 69% 23%; /* #0F6460 */
+    --mint-cool-vivid-70: 170 72% 17%; /* #0B4B3F */
+    --mint-cool-vivid-80: 180 47% 13%; /* #123131 */
+
+    /* Cyan */
+    --cyan-5: 190 47% 94%; /* #E7F6F8 */
+    --cyan-10: 190 51% 87%; /* #CCECF2 */
+    --cyan-20: 190 57% 76%; /* #99DEEA */
+    --cyan-30: 190 54% 59%; /* #5DC0D1 */
+    --cyan-40: 190 43% 47%; /* #449DAC */
+    --cyan-50: 190 72% 33%; /* #168092 */
+    --cyan-60: 190 42% 30%; /* #2A646D */
+    --cyan-70: 190 26% 24%; /* #2C4A4E */
+    --cyan-80: 190 22% 16%; /* #203133 */
+    --cyan-90: 190 18% 8%; /* #111819 */
+
+    /* Cyan Vivid */
+    --cyan-vivid-5: 190 100% 95%; /* #E5FAFF */
+    --cyan-vivid-10: 190 100% 83%; /* #A8F2FF */
+    --cyan-vivid-20: 190 82% 64%; /* #52DAF2 */
+    --cyan-vivid-30: 190 100% 45%; /* #00BDE3 */
+    --cyan-vivid-40: 190 100% 38%; /* #009EC1 */
+    --cyan-vivid-50: 190 100% 32%; /* #0081A1 */
+    --cyan-vivid-60: 190 100% 25%; /* #00687D */
+    --cyan-vivid-70: 190 71% 21%; /* #0E4F5C */
+    --cyan-vivid-80: 190 64% 15%; /* #093B44 */
+
+    /* Blue */
+    --blue-5: 209 75% 96%; /* #EFF6FB */
+    --blue-10: 209 63% 91%; /* #D9E8F6 */
+    --blue-20: 209 67% 80%; /* #AACDEC */
+    --blue-30: 209 67% 68%; /* #73B3E7 */
+    --blue-40: 209 57% 56%; /* #4F97D1 */
+    --blue-50: 209 71% 45%; /* #2378C3 */
+    --blue-60: 209 51% 36%; /* #2C608A */
+    --blue-70: 209 44% 27%; /* #274863 */
+    --blue-80: 209 32% 18%; /* #1F303E */
+    --blue-90: 209 24% 9%; /* #11181D */
+
+    /* Blue Vivid */
+    --blue-vivid-5: 204 100% 96%; /* #E8F5FF */
+    --blue-vivid-10: 204 100% 91%; /* #CFE8FF */
+    --blue-vivid-20: 204 100% 82%; /* #A1D3FF */
+    --blue-vivid-30: 204 100% 68%; /* #58B4FF */
+    --blue-vivid-40: 204 100% 57%; /* #2491FF */
+    --blue-vivid-50: 204 100% 42%; /* #0076D6 */
+    --blue-vivid-60: 204 100% 32%; /* #005EA2 */
+    --blue-vivid-70: 209 83% 26%; /* #0B4778 */
+    --blue-vivid-80: 209 62% 19%; /* #112F4E */
+
+    /* Blue Warm */
+    --blue-warm-5: 216 43% 95%; /* #ECF1F7 */
+    --blue-warm-10: 216 35% 91%; /* #E1E7F1 */
+    --blue-warm-20: 216 36% 82%; /* #BBCAE4 */
+    --blue-warm-30: 216 30% 71%; /* #98AFD2 */
+    --blue-warm-40: 216 37% 61%; /* #7292C7 */
+    --blue-warm-50: 216 42% 50%; /* #4A77B4 */
+    --blue-warm-60: 216 48% 40%; /* #345D96 */
+    --blue-warm-70: 216 33% 29%; /* #2F4668 */
+    --blue-warm-80: 216 25% 19%; /* #252F3E */
+    --blue-warm-90: 216 24% 10%; /* #13171F */
+
+    /* Blue Warm Vivid */
+    --blue-warm-vivid-5: 217 100% 97%; /* #EDF5FF */
+    --blue-warm-vivid-10: 217 100% 92%; /* #D4E5FF */
+    --blue-warm-vivid-20: 217 100% 84%; /* #ADCDFF */
+    --blue-warm-vivid-30: 217 96% 75%; /* #81AEFC */
+    --blue-warm-vivid-40: 217 91% 66%; /* #5994F6 */
+    --blue-warm-vivid-50: 217 89% 51%; /* #2672DE */
+    --blue-warm-vivid-60: 217 100% 42%; /* #0050D8 */
+    --blue-warm-vivid-70: 217 62% 31%; /* #1A4480 */
+    --blue-warm-vivid-80: 217 57% 21%; /* #162E51 */
+
+    /* Blue Cool */
+    --blue-cool-5: 195 33% 93%; /* #E7F2F5 */
+    --blue-cool-10: 195 31% 89%; /* #DAE9EE */
+    --blue-cool-20: 195 28% 77%; /* #ADCFDC */
+    --blue-cool-30: 195 29% 65%; /* #82B4C9 */
+    --blue-cool-40: 195 26% 54%; /* #6499AF */
+    --blue-cool-50: 195 42% 41%; /* #3A7D95 */
+    --blue-cool-60: 195 43% 32%; /* #2E6276 */
+    --blue-cool-70: 195 40% 24%; /* #224A58 */
+    --blue-cool-80: 195 54% 16%; /* #14333D */
+    --blue-cool-90: 195 30% 9%; /* #0F191C */
+
+    /* Indigo */
+    --indigo-5: 240 43% 95%; /* #EFEFF8 */
+    --indigo-10: 240 67% 94%; /* #E5E4FA */
+    --indigo-20: 240 71% 86%; /* #C5C5F3 */
+    --indigo-30: 240 63% 78%; /* #A5A8EB */
+    --indigo-40: 240 53% 70%; /* #8889DB */
+    --indigo-50: 240 47% 60%; /* #676CC8 */
+    --indigo-60: 240 40% 50%; /* #4D52AF */
+    --indigo-70: 240 31% 35%; /* #3D4076 */
+    --indigo-80: 240 19% 21%; /* #2B2C40 */
+    --indigo-90: 240 20% 10%; /* #16171F */
+
+    /* Indigo Vivid */
+    --indigo-vivid-5: 240 100% 97%; /* #F0F0FF */
+    --indigo-vivid-10: 240 100% 94%; /* #E0E0FF */
+    --indigo-vivid-20: 240 100% 90%; /* #CCCEFF */
+    --indigo-vivid-30: 240 95% 81%; /* #A3A7FA */
+    --indigo-vivid-40: 240 100% 77%; /* #8289FF */
+    --indigo-vivid-50: 240 47% 62%; /* #656BD7 */
+    --indigo-vivid-60: 240 45% 53%; /* #4A50C4 */
+    --indigo-vivid-70: 240 52% 42%; /* #3333A3 */
+    --indigo-vivid-80: 240 48% 26%; /* #212463 */
+
+    /* Indigo Cool */
+    --indigo-cool-5: 230 43% 95%; /* #EEF0F9 */
+    --indigo-cool-10: 230 53% 93%; /* #E1E6F9 */
+    --indigo-cool-20: 230 59% 85%; /* #BBC8F5 */
+    --indigo-cool-30: 230 52% 76%; /* #96ABEE */
+    --indigo-cool-40: 230 57% 67%; /* #6B8EE8 */
+    --indigo-cool-50: 230 63% 57%; /* #496FD8 */
+    --indigo-cool-60: 230 45% 45%; /* #3F57A6 */
+    --indigo-cool-70: 230 31% 34%; /* #374274 */
+    --indigo-cool-80: 230 19% 21%; /* #292D42 */
+    --indigo-cool-90: 230 20% 11%; /* #151622 */
+
+    /* Indigo Cool Vivid */
+    --indigo-cool-vivid-5: 230 100% 97%; /* #EDF0FF */
+    --indigo-cool-vivid-10: 230 100% 94%; /* #DEE5FF */
+    --indigo-cool-vivid-20: 230 100% 86%; /* #B8C8FF */
+    --indigo-cool-vivid-30: 230 100% 79%; /* #94ADFF */
+    --indigo-cool-vivid-40: 230 91% 67%; /* #628EF4 */
+    --indigo-cool-vivid-50: 230 100% 64%; /* #4866FF */
+    --indigo-cool-vivid-60: 230 93% 59%; /* #3E4DED */
+    --indigo-cool-vivid-70: 230 70% 44%; /* #222FBF */
+    --indigo-cool-vivid-80: 230 57% 31%; /* #1B2B85 */
+
+    /* Indigo Warm */
+    --indigo-warm-5: 255 33% 95%; /* #F1EFF7 */
+    --indigo-warm-10: 255 63% 94%; /* #E7E3FA */
+    --indigo-warm-20: 255 58% 86%; /* #CBC4F3 */
+    --indigo-warm-30: 255 63% 78%; /* #AFA5E8 */
+    --indigo-warm-40: 255 53% 69%; /* #9287D8 */
+    --indigo-warm-50: 255 54% 61%; /* #7665D1 */
+    --indigo-warm-60: 255 33% 47%; /* #5E519E */
+    --indigo-warm-70: 255 33% 36%; /* #453C7B */
+    --indigo-warm-80: 255 19% 21%; /* #2E2C40 */
+    --indigo-warm-90: 255 13% 10%; /* #18161D */
+
+    /* Indigo Warm Vivid */
+    --indigo-warm-vivid-5: 260 100% 98%; /* #F5F2FF */
+    --indigo-warm-vivid-10: 260 100% 94%; /* #E4DEFF */
+    --indigo-warm-vivid-20: 260 93% 88%; /* #CFC4FD */
+    --indigo-warm-vivid-30: 260 100% 81%; /* #B69FFF */
+    --indigo-warm-vivid-40: 260 94% 74%; /* #967EFB */
+    --indigo-warm-vivid-50: 260 77% 65%; /* #745FE9 */
+    --indigo-warm-vivid-60: 260 63% 52%; /* #5942D2 */
+    --indigo-warm-vivid-70: 260 57% 40%; /* #3D2C9D */
+    --indigo-warm-vivid-80: 260 49% 24%; /* #261F5B */
+
+    /* Violet */
+    --violet-5: 270 36% 95%; /* #F4F1F9 */
+    --violet-10: 270 63% 94%; /* #EBE3F9 */
+    --violet-20: 270 45% 84%; /* #D0C3E9 */
+    --violet-30: 270 48% 76%; /* #B8A2E3 */
+    --violet-40: 270 44% 67%; /* #9D84D2 */
+    --violet-50: 270 33% 55%; /* #8168B3 */
+    --violet-60: 270 26% 44%; /* #665190 */
+    --violet-70: 270 23% 32%; /* #4C3D69 */
+    --violet-80: 270 17% 21%; /* #312B3F */
+    --violet-90: 270 13% 10%; /* #18161D */
+
+    /* Violet Vivid */
+    --violet-vivid-5: 280 100% 98%; /* #F7F2FF */
+    --violet-vivid-10: 280 100% 95%; /* #EDE3FF */
+    --violet-vivid-20: 280 100% 87%; /* #D5BFFF */
+    --violet-vivid-30: 280 71% 77%; /* #C39DEB */
+    --violet-vivid-40: 280 71% 70%; /* #AD79E9 */
+    --violet-vivid-50: 280 63% 60%; /* #9355DC */
+    --violet-vivid-60: 280 53% 48%; /* #783CB9 */
+    --violet-vivid-70: 280 57% 36%; /* #54278F */
+    --violet-vivid-80: 280 47% 25%; /* #39215E */
+
+    /* Violet Warm */
+    --violet-warm-5: 300 44% 96%; /* #F8F0F9 */
+    --violet-warm-10: 300 75% 95%; /* #F6DFF8 */
+    --violet-warm-20: 300 38% 82%; /* #E2BEE4 */
+    --violet-warm-30: 300 45% 72%; /* #D29AD8 */
+    --violet-warm-40: 300 47% 63%; /* #BF77C8 */
+    --violet-warm-50: 300 60% 52%; /* #B04ABD */
+    --violet-warm-60: 300 33% 39%; /* #864381 */
+    --violet-warm-70: 300 24% 29%; /* #5C395A */
+    --violet-warm-80: 300 17% 21%; /* #382936 */
+    --violet-warm-90: 300 15% 9%; /* #1B151B */
+
+    /* Violet Warm Vivid */
+    --violet-warm-vivid-5: 300 100% 98%; /* #FEF2FF */
+    --violet-warm-vivid-10: 300 100% 93%; /* #FBDCFF */
+    --violet-warm-vivid-20: 300 100% 83%; /* #F4B2FF */
+    --violet-warm-vivid-30: 300 100% 76%; /* #EE83FF */
+    --violet-warm-vivid-40: 300 83% 65%; /* #D85BEF */
+    --violet-warm-vivid-50: 300 74% 51%; /* #BE32D0 */
+    --violet-warm-vivid-60: 300 47% 39%; /* #93348C */
+    --violet-warm-vivid-70: 300 57% 28%; /* #711E6C */
+    --violet-warm-vivid-80: 300 54% 18%; /* #481441 */
+
+    /* Magenta */
+    --magenta-5: 340 45% 96%; /* #F9F0F2 */
+    --magenta-10: 340 63% 92%; /* #F6E1E8 */
+    --magenta-20: 340 67% 84%; /* #F0BBCC */
+    --magenta-30: 340 65% 75%; /* #E895B3 */
+    --magenta-40: 340 65% 65%; /* #E0699F */
+    --magenta-50: 340 53% 52%; /* #C84281 */
+    --magenta-60: 340 33% 41%; /* #8B4566 */
+    --magenta-70: 340 31% 31%; /* #66364B */
+    --magenta-80: 340 24% 21%; /* #402731 */
+    --magenta-90: 340 13% 10%; /* #1B1617 */
+
+    /* Magenta Vivid */
+    --magenta-vivid-5: 340 100% 97%; /* #FFF2F5 */
+    --magenta-vivid-10: 340 100% 93%; /* #FFDDEA */
+    --magenta-vivid-20: 340 100% 85%; /* #FFB4CF */
+    --magenta-vivid-30: 340 100% 77%; /* #FF87B2 */
+    --magenta-vivid-40: 340 98% 63%; /* #FD4496 */
+    --magenta-vivid-50: 340 67% 51%; /* #D72D79 */
+    --magenta-vivid-60: 340 68% 40%; /* #AB2165 */
+    --magenta-vivid-70: 340 57% 29%; /* #731F44 */
+    --magenta-vivid-80: 340 53% 20%; /* #4F172E */
+
+    /* Gray */
+    --gray-1: 0 0% 99%; /* #FCFCFC */
+    --gray-2: 0 0% 98%; /* #F9F9F9 */
+    --gray-3: 0 0% 96%; /* #F6F6F6 */
+    --gray-4: 0 0% 95%; /* #F3F3F3 */
+    --gray-5: 0 0% 94%; /* #F0F0F0 */
+    --gray-10: 0 0% 90%; /* #E6E6E6 */
+    --gray-20: 0 0% 79%; /* #C9C9C9 */
+    --gray-30: 0 0% 68%; /* #ADADAD */
+    --gray-40: 0 0% 57%; /* #919191 */
+    --gray-50: 0 0% 46%; /* #757575 */
+    --gray-60: 0 0% 36%; /* #5C5C5C */
+    --gray-70: 0 0% 27%; /* #454545 */
+    --gray-80: 0 0% 18%; /* #2E2E2E */
+    --gray-90: 0 0% 11%; /* #1B1B1B */
+
+    /* Gray Cool */
+    --gray-cool-1: 210 40% 99%; /* #FBFCFD */
+    --gray-cool-2: 210 33% 98%; /* #F7F9FA */
+    --gray-cool-3: 210 20% 97%; /* #F5F6F7 */
+    --gray-cool-4: 210 29% 95%; /* #F1F3F6 */
+    --gray-cool-5: 200 14% 94%; /* #EDEFF0 */
+    --gray-cool-10: 200 10% 88%; /* #DFE1E2 */
+    --gray-cool-20: 200 10% 80%; /* #C6CACE */
+    --gray-cool-30: 200 6% 68%; /* #A9AEB1 */
+    --gray-cool-40: 200 5% 57%; /* #8D9297 */
+    --gray-cool-50: 200 6% 46%; /* #71767A */
+    --gray-cool-60: 200 7% 37%; /* #565C65 */
+    --gray-cool-70: 215 14% 28%; /* #3D4551 */
+    --gray-cool-80: 210 2% 18%; /* #2D2E2F */
+    --gray-cool-90: 210 3% 11%; /* #1C1D1F */
+
+    /* Gray Warm */
+    --gray-warm-1: 60 33% 99%; /* #FCFCFB */
+    --gray-warm-2: 60 20% 98%; /* #F9F9F7 */
+    --gray-warm-3: 60 33% 96%; /* #F6F6F2 */
+    --gray-warm-4: 60 33% 95%; /* #F5F5F0 */
+    --gray-warm-5: 60 20% 94%; /* #F0F0EC */
+    --gray-warm-10: 60 12% 89%; /* #E6E6E2 */
+    --gray-warm-20: 60 6% 77%; /* #CAC9C0 */
+    --gray-warm-30: 60 6% 66%; /* #AFAEA2 */
+    --gray-warm-40: 60 4% 55%; /* #929285 */
+    --gray-warm-50: 60 4% 44%; /* #76766A */
+    --gray-warm-60: 60 4% 34%; /* #5D5D52 */
+    --gray-warm-70: 60 3% 26%; /* #454540 */
+    --gray-warm-80: 60 4% 17%; /* #2E2E2A */
+    --gray-warm-90: 60 3% 9%; /* #171716 */
+
+    /* Inverse Theme Colors */
+    --inverse-default: 0 0% 0% / 0%; /* transparent */
+    --inverse-border: 0 0% 90%; /* #E6E6E6 */
+    --inverse-border-hover: 0 0% 94%; /* #F0F0F0 */
+    --inverse-border-active: 0 0% 100%; /* #FFFFFF */
+    --inverse-text: 0 0% 90%; /* #E6E6E6 */
+    --inverse-text-hover: 0 0% 94%; /* #F0F0F0 */
+    --inverse-text-active: 0 0% 100%; /* #FFFFFF */
+  }
+}
+
+```
+
+#### 4. nativewind-env.d.ts
+
+Create this file in your project root:
+
+```typescript
+/// <reference types="nativewind/types" />
+```
 
 ### 3. Add components
 
@@ -76,7 +749,7 @@ The USMDS components use a consistent theme based on the U.S. Web Design System.
 
 ```js
 module.exports = {
-  content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
+  content: ['./app/**/*.{js,jsx,ts,tsx}', './components/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
       colors: {
@@ -84,7 +757,7 @@ module.exports = {
           DEFAULT: '#005EA2',
           hover: '#1A4480',
           active: '#162E51'
-        },
+        }
         // Add more custom colors as needed
       }
     }
