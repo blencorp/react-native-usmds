@@ -1,3 +1,9 @@
+## [1.5.1](https://github.com/blencorp/react-native-usmds/compare/v1.5.0...v1.5.1) (2025-03-20)
+
+### Bug Fixes
+
+* fix icon path for icon component ([3a54bd1](https://github.com/blencorp/react-native-usmds/commit/3a54bd1cea034bc008789db7071ab568e02b7855))
+
 ## [1.5.0](https://github.com/blencorp/react-native-usmds/compare/v1.4.0...v1.5.0) (2025-03-19)
 
 ### Features
