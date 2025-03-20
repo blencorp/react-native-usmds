@@ -10,21 +10,6 @@ import { execa } from 'execa';
 import { getPackageManager, getInstallCommand } from '../utils/get-package-manager';
 import { checkDependenciesExist, runInit } from './init';
 
-const REQUIRED_DEPENDENCIES = [
-  'class-variance-authority',
-  'clsx',
-  'nativewind@^4.1.23',
-  'tailwindcss-animate',
-  'tailwind-merge',
-  'react-native-reanimated',
-  'react-native-svg',
-  '@rn-primitives/types',
-  '@rn-primitives/slot',
-  '@rn-primitives/portal',
-  '@rn-primitives/checkbox',
-  '@rn-primitives/radio-group'
-];
-
 // Available components from our registry
 const AVAILABLE_COMPONENTS = Object.keys(COMPONENT_METADATA).map((name) => name.toLowerCase());
 
@@ -184,7 +169,7 @@ async function getComponentTemplate(name: string, cwd: string, options: { overwr
 
     // Create registry file if it doesn't exist
     if (!existsSync(registryPath) || options.overwrite) {
-      const registryContent = `export const ICON_PATHS = ${JSON.stringify(ICON_PATHS, null, 2)};`;
+      const registryContent = `export const iconPaths = ${JSON.stringify(ICON_PATHS, null, 2)};`;
       await fs.writeFile(registryPath, registryContent, 'utf8');
     }
   }
