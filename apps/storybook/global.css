@@ -637,4 +637,92 @@
     --inverse-text-hover: 0 0% 94%; /* #F0F0F0 */
     --inverse-text-active: 0 0% 100%; /* #FFFFFF */
   }
+
+  .dark:root {
+    /* Base */
+    --background: 220 20% 10%; /* #121720 */
+    --foreground: 0 0% 90%; /* #E6E6E6 */
+
+    /* Primary - Custom theme for dark mode */
+    --primary: 0 0% 100%; /* #FFFFFF */
+    --primary-lighter: 0 0% 85%; /* #D9D9D9 */
+    --primary-light: 0 0% 95%; /* #F2F2F2 */
+    --primary-vivid: 0 0% 100%; /* #FFFFFF */
+    --primary-dark: 0 0% 90%; /* #E6E6E6 */
+    --primary-darker: 0 0% 80%; /* #CCCCCC */
+
+    /* Secondary - Brightened for dark mode */
+    --secondary: 3 71% 62%; /* #F05A54 */
+    --secondary-lighter: 351 56% 32%; /* #6B2F36 */
+    --secondary-light: 3 77% 54%; /* #E3665F */
+    --secondary-vivid: 350 85% 61%; /* #EB4A63 */
+    --secondary-dark: 0 91% 47%; /* #E00B0B */
+    --secondary-darker: 3 96% 37%; /* #BB0F05 */
+
+    /* Accent Cool - Brightened for dark mode */
+    --accent-cool: 190 100% 54%; /* #00E7FF */
+    --accent-cool-lighter: 193 50% 23%; /* #1A3F47 */
+    --accent-cool-light: 197 60% 45%; /* #4482A0 */
+    --accent-cool-dark: 196 67% 58%; /* #51B4D9 */
+    --accent-cool-darker: 197 91% 39%; /* #0A87BD */
+
+    /* Accent Warm - Adjusted for dark mode */
+    --accent-warm: 28 95% 67%; /* #FB9F53 */
+    --accent-warm-lighter: 30 47% 29%; /* #4D3D30 */
+    --accent-warm-light: 33 100% 44%; /* #995F00 */
+    --accent-warm-dark: 28 100% 48%; /* #F06A00 */
+    --accent-warm-darker: 19 19% 45%; /* #976B56 */
+
+    /* Base Colors - Inverted for dark mode */
+    --base: 0 0% 60%; /* #999999 */
+    --base-lightest: 0 0% 16%; /* #292929 */
+    --base-lighter: 204 3% 22%; /* #383A3B */
+    --base-light: 204 6% 38%; /* #5E6266 */
+    --base-dark: 214 8% 69%; /* #ADB3BC */
+    --base-darker: 216 13% 78%; /* #C0C8D4 */
+    --base-darkest: 0 0% 89%; /* #E3E3E3 */
+    --base-ink: 0 0% 89%; /* #E3E3E3 */
+
+    /* Focus */
+    --focus-ring: 211 100% 67%; /* #57A9FF */
+
+    /* State Colors - Adjusted for dark mode */
+    --info: 190 100% 54%; /* #00E4FF */
+    --info-lighter: 193 64% 24%; /* #1A393C */
+    --info-light: 190 77% 46%; /* #00A7BE */
+    --info-dark: 190 100% 48%; /* #00C4F1 */
+    --info-darker: 197 45% 52%; /* #4DA2BC */
+
+    /* Error - Adjusted for dark mode */
+    --error: 17 94% 53%; /* #FF5014 */
+    --error-lighter: 20 33% 31%; /* #5C3E35 */
+    --error-light: 20 87% 48%; /* #E15C28 */
+    --error-dark: 0 91% 47%; /* #E00B0B */
+    --error-darker: 1 38% 51%; /* #B8514D */
+
+    /* Warning - Adjusted for dark mode */
+    --warning: 44 100% 69%; /* #FFCB54 */
+    --warning-lighter: 48 43% 30%; /* #534B2A */
+    --warning-light: 48 98% 56%; /* #FED42B */
+    --warning-dark: 39 100% 55%; /* #FFB800 */
+    --warning-darker: 35 45% 60%; /* #DBA754 */
+
+    /* Success - Adjusted for dark mode */
+    --success: 128 100% 43%; /* #00DC24 */
+    --success-lighter: 120 19% 23%; /* #2A3B2A */
+    --success-light: 125 69% 46%; /* #31CC3D */
+    --success-dark: 123 24% 60%; /* #73BF7E */
+    --success-darker: 123 20% 53%; /* #6CA36A */
+
+    /* Disabled - Adjusted for dark mode */
+    --disabled: 0 0% 40%; /* #666666 */
+    --disabled-lighter: 0 0% 25%; /* #404040 */
+    --disabled-light: 0 0% 33%; /* #545454 */
+    --disabled-dark: 0 0% 57%; /* #919191 */
+    --disabled-darker: 0 0% 69%; /* #B0B0B0 */
+
+    /* Emergency - Adjusted for dark mode */
+    --emergency: 14 82% 44%; /* #CB4F15 */
+    --emergency-dark: 20 10% 28%; /* #4F433E */
+  }
 }
