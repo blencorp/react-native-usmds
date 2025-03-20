@@ -1,8 +1,8 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef, ReactNode } from 'react';
-import { cva, type VariantProps } from 'class-variance-authority';
-import { Pressable, PressableStateCallbackType } from 'react-native';
+import { type VariantProps, cva } from 'class-variance-authority';
+import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef } from 'react';
+import { Pressable, PressableStateCallbackType, View } from 'react-native';
 import { TextClassContext } from '../Text/Text';
-import { cn } from '../../lib/utils';
+import { cn } from '@/lib/utils';
 
 const buttonVariants = cva('flex items-center justify-center rounded-[4px] font-sans text-center', {
   variants: {
@@ -26,7 +26,7 @@ const buttonVariants = cva('flex items-center justify-center rounded-[4px] font-
       ]
     },
     size: {
-      default: 'h-[44px] px-[20px] py-[12px] min-w-[329px]',
+      default: 'h-[44px] px-[20px] py-[10px] min-w-[329px]',
       sm: 'h-[32px] px-[12px] py-[8px]',
       lg: 'h-[48px] px-[24px] py-[16px]',
       big: 'h-[60px] px-[24px] py-[16px] min-w-[329px]',
@@ -37,7 +37,7 @@ const buttonVariants = cva('flex items-center justify-center rounded-[4px] font-
     },
     iconPosition: {
       left: 'flex-row gap-2',
-      right: 'flex-row-reverse gap-2',
+      right: 'flex-row gap-2',
       none: ''
     }
   },
@@ -49,7 +49,7 @@ const buttonVariants = cva('flex items-center justify-center rounded-[4px] font-
   }
 });
 
-const buttonTextVariants = cva('text-center font-[700] text-[16px] leading-[20px]', {
+const buttonTextVariants = cva('text-center font-[700] text-[16px] leading-[20px] my-auto', {
   variants: {
     variant: {
       default: 'text-white',
@@ -96,11 +96,11 @@ const Button = forwardRef<ElementRef<typeof Pressable>, ButtonProps>(({ classNam
         {...props}
       >
         {(state) => (
-          <>
+          <View className='flex-row items-center justify-center flex-1'>
             {startIcon}
             {typeof children === 'function' ? children(state) : children}
             {endIcon}
-          </>
+          </View>
         )}
       </Pressable>
     </TextClassContext.Provider>
