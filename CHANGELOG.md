@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/blencorp/react-native-usmds/compare/v1.5.1...v1.5.2) (2025-03-20)
+
+### Bug Fixes
+
+* minor fix for default btn ([f99460d](https://github.com/blencorp/react-native-usmds/commit/f99460d2ead5078134f2608e2093f93efcdedbd4))
+* minor fix for default btn ([8f30aae](https://github.com/blencorp/react-native-usmds/commit/8f30aaee2ac7d0699524ef292ebcd8f2944f26ec))
+
 ## [1.5.1](https://github.com/blencorp/react-native-usmds/compare/v1.5.0...v1.5.1) (2025-03-20)
 
 ### Bug Fixes
