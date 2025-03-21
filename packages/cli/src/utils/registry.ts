@@ -1266,7 +1266,7 @@ interface IconProps {
   className?: string;
 }
 
-export const Icon = ({ name, size = 24, color, className }: IconProps) => {
+export const Icon = ({ name, size = 24, className }: IconProps) => {
   const path = iconPaths[name];
 
   if (!path) {
