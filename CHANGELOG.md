@@ -1,3 +1,9 @@
+## [1.5.3](https://github.com/blencorp/react-native-usmds/compare/v1.5.2...v1.5.3) (2025-03-21)
+
+### Bug Fixes
+
+* revert get package manager ([d4b3850](https://github.com/blencorp/react-native-usmds/commit/d4b38501a675ef3fffd23ed83c3e307defddcab8))
+
 ## [1.5.2](https://github.com/blencorp/react-native-usmds/compare/v1.5.1...v1.5.2) (2025-03-20)
 
 ### Bug Fixes
