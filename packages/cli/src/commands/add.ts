@@ -132,23 +132,35 @@ export const add = new Command()
             const packageManager = await getPackageManager(cwd);
             const { install, isBun } = getInstallCommand(packageManager);
 
-            if (isBun) {
-              const proc = Bun.spawn([packageManager, ...install, ...componentDeps], {
-                cwd,
-                stdio: ['inherit', 'inherit', 'inherit']
-              });
-              await proc.exited;
-            } else {
-              await new Promise<void>((resolve, reject) => {
-                const proc = spawn(packageManager, [...install, ...componentDeps], {
-                  cwd,
-                  stdio: 'inherit'
-                });
-                proc.on('exit', (code) => {
-                  if (code === 0) resolve();
-                  else reject(new Error(`Process exited with code ${code}`));
-                });
-              });
+            try {
+              // Filter out workspace: dependencies as they're handled differently
+              const filteredDeps = componentDeps.filter((dep) => !dep.startsWith('workspace:'));
+
+              if (filteredDeps.length > 0) {
+                if (isBun) {
+                  const proc = Bun.spawn([packageManager, ...install, ...filteredDeps], {
+                    cwd,
+                    stdio: ['pipe', 'pipe', 'pipe'] // Changed from 'inherit' to reduce noise
+                  });
+                  await proc.exited;
+                } else {
+                  await new Promise<void>((resolve, reject) => {
+                    const proc = spawn(packageManager, [...install, ...filteredDeps], {
+                      cwd,
+                      stdio: ['pipe', 'pipe', 'pipe'] // Changed from 'inherit' to reduce noise
+                    });
+
+                    proc.on('exit', (code) => {
+                      if (code === 0) resolve();
+                      else reject(new Error(`Process exited with code ${code}`));
+                    });
+                  });
+                }
+              }
+            } catch (error) {
+              // If dependency installation fails, log it but continue with component creation
+              spinner.warn(`Warning: Some dependencies for ${componentName} could not be installed`);
+              logger.debug(error as Error);
             }
           }
         }
