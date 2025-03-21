@@ -1,3 +1,9 @@
+## [1.7.5](https://github.com/blencorp/react-native-usmds/compare/v1.7.4...v1.7.5) (2025-03-21)
+
+### Bug Fixes
+
+* remove color prop from icon ([a3365f1](https://github.com/blencorp/react-native-usmds/commit/a3365f1be1b89fed4de7eb9c1e8ac0f8a9943d41))
+
 ## [1.7.4](https://github.com/blencorp/react-native-usmds/compare/v1.7.3...v1.7.4) (2025-03-21)
 
 ### Bug Fixes
