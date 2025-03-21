@@ -515,7 +515,7 @@ export const COMPONENT_METADATA: Record<string, ComponentMetadata> = {
   },
   Text: {
     name: 'Text',
-    dependencies: ['@rn-primitives/slot', '@rn-primitives/types']
+    dependencies: []
   },
   Textarea: {
     name: 'Textarea',
@@ -863,7 +863,7 @@ export { BiometricSignIn };`,
 
   Button: `import { ComponentPropsWithoutRef, ElementRef, forwardRef, ReactNode } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { Pressable, PressableStateCallbackType } from 'react-native';
+import { Pressable, PressableStateCallbackType, View } from 'react-native';
 import { TextClassContext } from '@/components/ui/text';
 import { cn } from '@/lib/utils';
 
