@@ -1,3 +1,9 @@
+## [1.7.3](https://github.com/blencorp/react-native-usmds/compare/v1.7.2...v1.7.3) (2025-03-21)
+
+### Bug Fixes
+
+* icon import and add component dir structure ([9b757b4](https://github.com/blencorp/react-native-usmds/commit/9b757b43b8d0eec8e2ceedefb2eb9e5ffa2a9681))
+
 ## [1.7.2](https://github.com/blencorp/react-native-usmds/compare/v1.7.1...v1.7.2) (2025-03-21)
 
 ### Bug Fixes
