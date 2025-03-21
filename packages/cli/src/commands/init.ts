@@ -167,33 +167,50 @@ export async function runInit(cwd: string) {
     // Install dependencies
     const dependenciesSpinner = ora(`Installing dependencies...`)?.start();
     const packageManager = await getPackageManager(cwd);
-    const { install, installDev, useExeca } = getInstallCommand(packageManager);
+    const { install, installDev, useExeca, isBun } = getInstallCommand(packageManager);
 
-    if (useExeca) {
-      await execa(packageManager, [...install, ...ESSENTIAL_DEPENDENCIES], { cwd });
-      await execa(packageManager, [...installDev, ...DEV_DEPENDENCIES], { cwd });
-    } else {
-      // For Bun, use native Node.js spawn to avoid workspace: protocol issues
-      const { spawn } = require('child_process');
-
-      // Install regular dependencies
-      await new Promise((resolve, reject) => {
-        const proc = spawn(packageManager, [...install, '--cwd', cwd, ...ESSENTIAL_DEPENDENCIES], {
-          stdio: 'inherit'
+    try {
+      if (isBun) {
+        // Use Bun.spawn for Bun
+        const installProc = Bun.spawn([packageManager, ...install, ...ESSENTIAL_DEPENDENCIES], {
+          cwd,
+          stdio: ['inherit', 'inherit', 'inherit']
         });
-        proc.on('exit', (code: number) => (code === 0 ? resolve(null) : reject(new Error(`Process exited with code ${code}`))));
-      });
+        await installProc.exited;
 
-      // Install dev dependencies
-      await new Promise((resolve, reject) => {
-        const proc = spawn(packageManager, [...installDev, '--cwd', cwd, ...DEV_DEPENDENCIES], {
-          stdio: 'inherit'
+        const installDevProc = Bun.spawn([packageManager, ...installDev, ...DEV_DEPENDENCIES], {
+          cwd,
+          stdio: ['inherit', 'inherit', 'inherit']
         });
-        proc.on('exit', (code: number) => (code === 0 ? resolve(null) : reject(new Error(`Process exited with code ${code}`))));
-      });
+        await installDevProc.exited;
+      } else if (useExeca) {
+        // Use execa for other package managers
+        await execa(packageManager, [...install, ...ESSENTIAL_DEPENDENCIES], { cwd });
+        await execa(packageManager, [...installDev, ...DEV_DEPENDENCIES], { cwd });
+      } else {
+        // Fallback to Node.js spawn
+        const { spawn } = require('child_process');
+        // Install regular dependencies
+        await new Promise((resolve, reject) => {
+          const proc = spawn(packageManager, [...install, '--cwd', cwd, ...ESSENTIAL_DEPENDENCIES], {
+            stdio: 'inherit'
+          });
+          proc.on('exit', (code: number) => (code === 0 ? resolve(null) : reject(new Error(`Process exited with code ${code}`))));
+        });
+
+        // Install dev dependencies
+        await new Promise((resolve, reject) => {
+          const proc = spawn(packageManager, [...installDev, '--cwd', cwd, ...DEV_DEPENDENCIES], {
+            stdio: 'inherit'
+          });
+          proc.on('exit', (code: number) => (code === 0 ? resolve(null) : reject(new Error(`Process exited with code ${code}`))));
+        });
+      }
+      dependenciesSpinner?.succeed();
+    } catch (error) {
+      dependenciesSpinner?.fail();
+      throw error;
     }
-
-    dependenciesSpinner?.succeed();
 
     logger.info('\n');
     logger.info(chalk.yellow('Important: Manual Configuration Required'));

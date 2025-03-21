@@ -127,8 +127,17 @@ export const add = new Command()
           const componentDeps = COMPONENT_METADATA[componentName]?.dependencies || [];
           if (componentDeps.length > 0) {
             const packageManager = await getPackageManager(cwd);
-            const { install } = getInstallCommand(packageManager);
-            await execa(packageManager, [...install, ...componentDeps], { cwd });
+            const { install, isBun } = getInstallCommand(packageManager);
+
+            if (isBun) {
+              const proc = Bun.spawn([packageManager, ...install, ...componentDeps], {
+                cwd,
+                stdio: ['inherit', 'inherit', 'inherit']
+              });
+              await proc.exited;
+            } else {
+              await execa(packageManager, [...install, ...componentDeps], { cwd });
+            }
           }
         }
 
