@@ -34,32 +34,27 @@ export async function getPackageManager(targetDir: string): Promise<PackageManag
 export function getInstallCommand(packageManager: PackageManager): {
   install: string[];
   installDev: string[];
-  useExeca: boolean;
 } {
   switch (packageManager) {
     case 'bun':
       return {
         install: ['add'],
-        installDev: ['add', '-d'],
-        useExeca: false
+        installDev: ['add', '-d']
       };
     case 'pnpm':
       return {
         install: ['add'],
-        installDev: ['add', '-D'],
-        useExeca: true
+        installDev: ['add', '-D']
       };
     case 'yarn':
       return {
         install: ['add'],
-        installDev: ['add', '--dev'],
-        useExeca: true
+        installDev: ['add', '--dev']
       };
     default:
       return {
         install: ['install'],
-        installDev: ['install', '--save-dev'],
-        useExeca: true
+        installDev: ['install', '--save-dev']
       };
   }
 }
