@@ -37,7 +37,7 @@ type TextInputProps = ComponentPropsWithoutRef<typeof RNTextInput> &
 
 const TextInput = forwardRef<ElementRef<typeof RNTextInput>, TextInputProps>(
   (
-    { className, label, helperText = 'Helper text', errorMessage, required = true, variant = 'default', state = 'default', suffix, prefix, ...props },
+    { className, label, helperText = '', errorMessage, required = true, variant = 'default', state = 'default', suffix, prefix, ...props },
     ref
   ) => {
     const [isFocused, setIsFocused] = useState(false);
