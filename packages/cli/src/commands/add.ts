@@ -89,6 +89,8 @@ export const add = new Command()
           await fs.mkdir(uiDir, { recursive: true });
         }
 
+        let hasErrors = false;
+
         for (const component of selectedComponents) {
           spinner.text = `Adding ${component}...`;
 
@@ -100,79 +102,91 @@ export const add = new Command()
             continue;
           }
 
-          // Changed: Update path to be a directory with index.tsx
-          const componentDir = path.join(uiDir, component.toLowerCase());
-          const componentPath = path.join(componentDir, 'index.tsx');
+          try {
+            // Changed: Update path to be a directory with index.tsx
+            const componentDir = path.join(uiDir, component.toLowerCase());
+            const componentPath = path.join(componentDir, 'index.tsx');
 
-          // Changed: Create component directory first
-          if (!existsSync(componentDir)) {
-            await fs.mkdir(componentDir, { recursive: true });
-          } else if (!options.overwrite) {
-            spinner.warn(`${component} already exists, skipping`);
+            // Changed: Create component directory first
+            if (!existsSync(componentDir)) {
+              await fs.mkdir(componentDir, { recursive: true });
+            } else if (!options.overwrite) {
+              spinner.warn(`${component} already exists, skipping`);
+              continue;
+            }
+
+            // Changed: Write template to index.tsx in component directory
+            const template = await getComponentTemplate(component, cwd, { overwrite: options.overwrite });
+            await fs.writeFile(componentPath, template, 'utf8');
+
+            // Get internal dependencies
+            const internalDeps = COMPONENT_METADATA[componentName]?.internalDependencies || [];
+
+            // Add internal dependencies to the installation queue
+            for (const dep of internalDeps) {
+              if (!selectedComponents.includes(dep.toLowerCase())) {
+                selectedComponents.push(dep.toLowerCase());
+              }
+            }
+
+            // Install external dependencies
+            const componentDeps = COMPONENT_METADATA[componentName]?.dependencies || [];
+            if (componentDeps.length > 0) {
+              const packageManager = await getPackageManager(cwd);
+              const { install, isBun } = getInstallCommand(packageManager);
+
+              try {
+                // Filter out workspace: dependencies
+                const filteredDeps = componentDeps.filter((dep) => !dep.startsWith('workspace:'));
+
+                if (filteredDeps.length > 0) {
+                  if (isBun) {
+                    const proc = Bun.spawn([packageManager, ...install, ...filteredDeps], {
+                      cwd,
+                      stdio: ['pipe', 'pipe', 'pipe']
+                    });
+                    await proc.exited;
+                  } else {
+                    await new Promise<void>((resolve, reject) => {
+                      const proc = spawn(packageManager, [...install, ...filteredDeps], {
+                        cwd,
+                        stdio: ['pipe', 'pipe', 'pipe']
+                      });
+
+                      proc.on('exit', (code) => {
+                        if (code === 0) resolve();
+                        else reject(new Error(`Process exited with code ${code}`));
+                      });
+                    });
+                  }
+                }
+              } catch (error) {
+                hasErrors = true;
+                spinner.warn(`Warning: Some dependencies for ${componentName} could not be installed`);
+                logger.error(error as Error);
+                // Continue with next component instead of stopping
+                continue;
+              }
+            }
+
+            spinner.succeed(`Added ${componentName} successfully`);
+          } catch (error) {
+            hasErrors = true;
+            spinner.fail(`Failed to add ${componentName}`);
+            logger.error(error as Error);
+            // Continue with next component instead of stopping
             continue;
           }
-
-          // Changed: Write template to index.tsx in component directory
-          const template = await getComponentTemplate(component, cwd, { overwrite: options.overwrite });
-          await fs.writeFile(componentPath, template, 'utf8');
-
-          // Get internal dependencies
-          const internalDeps = COMPONENT_METADATA[componentName]?.internalDependencies || [];
-
-          // Add internal dependencies to the installation queue
-          for (const dep of internalDeps) {
-            if (!selectedComponents.includes(dep.toLowerCase())) {
-              selectedComponents.push(dep.toLowerCase());
-            }
-          }
-
-          // Install external dependencies
-          const componentDeps = COMPONENT_METADATA[componentName]?.dependencies || [];
-          if (componentDeps.length > 0) {
-            const packageManager = await getPackageManager(cwd);
-            const { install, isBun } = getInstallCommand(packageManager);
-
-            try {
-              // Filter out workspace: dependencies as they're handled differently
-              const filteredDeps = componentDeps.filter((dep) => !dep.startsWith('workspace:'));
-
-              if (filteredDeps.length > 0) {
-                if (isBun) {
-                  const proc = Bun.spawn([packageManager, ...install, ...filteredDeps], {
-                    cwd,
-                    stdio: ['pipe', 'pipe', 'pipe'] // Changed from 'inherit' to reduce noise
-                  });
-                  await proc.exited;
-                } else {
-                  await new Promise<void>((resolve, reject) => {
-                    const proc = spawn(packageManager, [...install, ...filteredDeps], {
-                      cwd,
-                      stdio: ['pipe', 'pipe', 'pipe'] // Changed from 'inherit' to reduce noise
-                    });
-
-                    proc.on('exit', (code) => {
-                      if (code === 0) resolve();
-                      else reject(new Error(`Process exited with code ${code}`));
-                    });
-                  });
-                }
-              }
-            } catch (error) {
-              // If dependency installation fails, log it but continue with component creation
-              spinner.warn(`Warning: Some dependencies for ${componentName} could not be installed`);
-              logger.debug(error as Error);
-            }
-          }
         }
 
-        // Only show success if at least one component was installed
-        if (selectedComponents.some((component) => COMPONENT_TEMPLATES[component.charAt(0).toUpperCase() + component.slice(1)])) {
-          spinner.succeed('Components installed successfully!');
+        // Show final status
+        if (hasErrors) {
+          spinner.warn('Components installed with some warnings');
         } else {
-          spinner.fail('No valid components were installed');
+          spinner.succeed('All components installed successfully!');
         }
       } catch (error) {
-        spinner.fail('Failed to install components');
+        spinner.fail('Failed to create component directory');
         logger.error(error as Error);
         process.exit(1);
       }
