@@ -1,3 +1,9 @@
+## [1.6.0](https://github.com/blencorp/react-native-usmds/compare/v1.5.3...v1.6.0) (2025-03-21)
+
+### Features
+
+* support for bun ([6b94109](https://github.com/blencorp/react-native-usmds/commit/6b94109e442a2a2f45ca9b35c2c24280440534d0))
+
 ## [1.5.3](https://github.com/blencorp/react-native-usmds/compare/v1.5.2...v1.5.3) (2025-03-21)
 
 ### Bug Fixes
