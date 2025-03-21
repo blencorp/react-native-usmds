@@ -1,3 +1,9 @@
+## [1.7.0](https://github.com/blencorp/react-native-usmds/compare/v1.6.0...v1.7.0) (2025-03-21)
+
+### Features
+
+* support dark mode ([12ff877](https://github.com/blencorp/react-native-usmds/commit/12ff8778642262667d9ed4cfa4197ccf47d99315))
+
 ## [1.6.0](https://github.com/blencorp/react-native-usmds/compare/v1.5.3...v1.6.0) (2025-03-21)
 
 ### Features
