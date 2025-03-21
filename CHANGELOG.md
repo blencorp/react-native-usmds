@@ -1,3 +1,9 @@
+## [1.7.4](https://github.com/blencorp/react-native-usmds/compare/v1.7.3...v1.7.4) (2025-03-21)
+
+### Bug Fixes
+
+* bun add and button import ([f09ec20](https://github.com/blencorp/react-native-usmds/commit/f09ec201701824d996f0b11864c7908f2a7bb695))
+
 ## [1.7.3](https://github.com/blencorp/react-native-usmds/compare/v1.7.2...v1.7.3) (2025-03-21)
 
 ### Bug Fixes
