@@ -1253,7 +1253,7 @@ export { Card };`,
 
   Icon: `import { View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
-import { iconPaths } from '@/utils/registry';
+import { iconPaths } from './registry';
 import { cn } from '@/lib/utils';
 import { cssInterop } from 'nativewind';
 cssInterop(Svg, { className: 'style' });

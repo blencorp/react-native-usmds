@@ -3,12 +3,12 @@ import { Command } from 'commander';
 import { existsSync, promises as fs } from 'fs';
 import ora from 'ora';
 import path from 'path';
-import { execa } from 'execa';
 import * as z from 'zod';
 import { getPackageManager, getInstallCommand } from '../utils/get-package-manager';
 import { handleError } from '../utils/handle-error';
 import { logger } from '../utils/logger';
 import * as templates from '../utils/templates';
+import { spawn } from 'child_process';
 
 const ESSENTIAL_DEPENDENCIES = [
   'class-variance-authority',
@@ -167,7 +167,7 @@ export async function runInit(cwd: string) {
     // Install dependencies
     const dependenciesSpinner = ora(`Installing dependencies...`)?.start();
     const packageManager = await getPackageManager(cwd);
-    const { install, installDev, useExeca, isBun } = getInstallCommand(packageManager);
+    const { install, installDev, isBun } = getInstallCommand(packageManager);
 
     try {
       if (isBun) {
@@ -183,27 +183,28 @@ export async function runInit(cwd: string) {
           stdio: ['inherit', 'inherit', 'inherit']
         });
         await installDevProc.exited;
-      } else if (useExeca) {
-        // Use execa for other package managers
-        await execa(packageManager, [...install, ...ESSENTIAL_DEPENDENCIES], { cwd });
-        await execa(packageManager, [...installDev, ...DEV_DEPENDENCIES], { cwd });
       } else {
-        // Fallback to Node.js spawn
-        const { spawn } = require('child_process');
-        // Install regular dependencies
-        await new Promise((resolve, reject) => {
-          const proc = spawn(packageManager, [...install, '--cwd', cwd, ...ESSENTIAL_DEPENDENCIES], {
+        // Use Node's spawn for other package managers
+        await new Promise<void>((resolve, reject) => {
+          const proc = spawn(packageManager, [...install, ...ESSENTIAL_DEPENDENCIES], {
+            cwd,
             stdio: 'inherit'
           });
-          proc.on('exit', (code: number) => (code === 0 ? resolve(null) : reject(new Error(`Process exited with code ${code}`))));
+          proc.on('exit', (code) => {
+            if (code === 0) resolve();
+            else reject(new Error(`Process exited with code ${code}`));
+          });
         });
 
-        // Install dev dependencies
-        await new Promise((resolve, reject) => {
-          const proc = spawn(packageManager, [...installDev, '--cwd', cwd, ...DEV_DEPENDENCIES], {
+        await new Promise<void>((resolve, reject) => {
+          const proc = spawn(packageManager, [...installDev, ...DEV_DEPENDENCIES], {
+            cwd,
             stdio: 'inherit'
           });
-          proc.on('exit', (code: number) => (code === 0 ? resolve(null) : reject(new Error(`Process exited with code ${code}`))));
+          proc.on('exit', (code) => {
+            if (code === 0) resolve();
+            else reject(new Error(`Process exited with code ${code}`));
+          });
         });
       }
       dependenciesSpinner?.succeed();

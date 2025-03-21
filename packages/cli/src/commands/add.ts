@@ -6,9 +6,9 @@ import prompts from 'prompts';
 import * as z from 'zod';
 import { logger } from '../utils/logger';
 import { COMPONENT_TEMPLATES, COMPONENT_METADATA, ICON_PATHS } from '../utils/registry';
-import { execa } from 'execa';
 import { getPackageManager, getInstallCommand } from '../utils/get-package-manager';
 import { checkDependenciesExist, runInit } from './init';
+import { spawn } from 'child_process';
 
 // Available components from our registry
 const AVAILABLE_COMPONENTS = Object.keys(COMPONENT_METADATA).map((name) => name.toLowerCase());
@@ -100,16 +100,19 @@ export const add = new Command()
             continue;
           }
 
-          // Changed: Update path to be a direct .tsx file instead of a directory
-          const componentPath = path.join(uiDir, `${component.toLowerCase()}.tsx`);
+          // Changed: Update path to be a directory with index.tsx
+          const componentDir = path.join(uiDir, component.toLowerCase());
+          const componentPath = path.join(componentDir, 'index.tsx');
 
-          // Changed: Check if file exists (not directory)
-          if (existsSync(componentPath) && !options.overwrite) {
+          // Changed: Create component directory first
+          if (!existsSync(componentDir)) {
+            await fs.mkdir(componentDir, { recursive: true });
+          } else if (!options.overwrite) {
             spinner.warn(`${component} already exists, skipping`);
             continue;
           }
 
-          // Changed: No need to create directory, just write the file
+          // Changed: Write template to index.tsx in component directory
           const template = await getComponentTemplate(component, cwd, { overwrite: options.overwrite });
           await fs.writeFile(componentPath, template, 'utf8');
 
@@ -136,7 +139,16 @@ export const add = new Command()
               });
               await proc.exited;
             } else {
-              await execa(packageManager, [...install, ...componentDeps], { cwd });
+              await new Promise<void>((resolve, reject) => {
+                const proc = spawn(packageManager, [...install, ...componentDeps], {
+                  cwd,
+                  stdio: 'inherit'
+                });
+                proc.on('exit', (code) => {
+                  if (code === 0) resolve();
+                  else reject(new Error(`Process exited with code ${code}`));
+                });
+              });
             }
           }
         }
@@ -166,14 +178,14 @@ async function getComponentTemplate(name: string, cwd: string, options: { overwr
     throw new Error(`Template not found for component: ${componentName}`);
   }
 
-  // If it's the Icon component, ensure registry file exists
+  // If it's the Icon component, create registry file in the Icon directory
   if (componentName === 'Icon') {
-    const utilsDir = path.join(cwd, 'utils');
-    const registryPath = path.join(utilsDir, 'registry.ts');
+    const iconDir = path.join(cwd, 'components', 'ui', 'icon');
+    const registryPath = path.join(iconDir, 'registry.ts');
 
-    // Create utils directory if it doesn't exist
-    if (!existsSync(utilsDir)) {
-      await fs.mkdir(utilsDir, { recursive: true });
+    // Create Icon directory if it doesn't exist
+    if (!existsSync(iconDir)) {
+      await fs.mkdir(iconDir, { recursive: true });
     }
 
     // Create registry file if it doesn't exist
@@ -181,6 +193,9 @@ async function getComponentTemplate(name: string, cwd: string, options: { overwr
       const registryContent = `export const iconPaths = ${JSON.stringify(ICON_PATHS, null, 2)};`;
       await fs.writeFile(registryPath, registryContent, 'utf8');
     }
+
+    // Update the import path in the Icon component template
+    return template.replace('@/utils/registry', './registry');
   }
 
   return template;
