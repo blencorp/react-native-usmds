@@ -1,3 +1,9 @@
+## [1.7.6](https://github.com/blencorp/react-native-usmds/compare/v1.7.5...v1.7.6) (2025-03-21)
+
+### Bug Fixes
+
+* textinput helpertext ([023e015](https://github.com/blencorp/react-native-usmds/commit/023e015b63b07a028fd9782c9a2953b7266537d1))
+
 ## [1.7.5](https://github.com/blencorp/react-native-usmds/compare/v1.7.4...v1.7.5) (2025-03-21)
 
 ### Bug Fixes
