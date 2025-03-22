@@ -1,3 +1,9 @@
+## [1.7.7](https://github.com/blencorp/react-native-usmds/compare/v1.7.6...v1.7.7) (2025-03-22)
+
+### Bug Fixes
+
+* textinput minor fix blur ([0879c4d](https://github.com/blencorp/react-native-usmds/commit/0879c4d213b745a2673a74dc014da12af0e467c5))
+
 ## [1.7.6](https://github.com/blencorp/react-native-usmds/compare/v1.7.5...v1.7.6) (2025-03-21)
 
 ### Bug Fixes
