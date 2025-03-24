@@ -105,7 +105,7 @@ export const add = new Command()
           try {
             // Changed: Update path to be a directory with index.tsx
             const componentDir = path.join(uiDir, component.toLowerCase());
-            const componentPath = path.join(componentDir, `${componentName}.tsx`);
+            const componentPath = path.join(componentDir, `${componentName.toLowerCase()}.tsx`);
 
             // Changed: Create component directory first
             if (!existsSync(componentDir)) {
