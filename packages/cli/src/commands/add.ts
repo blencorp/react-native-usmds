@@ -83,7 +83,7 @@ export const add = new Command()
       const spinner = ora('Installing components...').start();
 
       try {
-        // Create the ui directory if it doesn't exist
+        // Changed: Update path based on whether component needs a directory
         const uiDir = path.join(cwd, 'components', 'ui');
         if (!existsSync(uiDir)) {
           await fs.mkdir(uiDir, { recursive: true });
@@ -103,19 +103,27 @@ export const add = new Command()
           }
 
           try {
-            // Changed: Update path to be a directory with index.tsx
-            const componentDir = path.join(uiDir, component.toLowerCase());
-            const componentPath = path.join(componentDir, `${componentName.toLowerCase()}.tsx`);
+            // Only create directory for components that need it (like Icon)
+            const needsDirectory = componentName === 'Icon'; 
+            const componentPath = needsDirectory
+              ? path.join(uiDir, component.toLowerCase(), `${componentName.toLowerCase()}.tsx`)
+              : path.join(uiDir, `${componentName.toLowerCase()}.tsx`);
 
-            // Changed: Create component directory first
-            if (!existsSync(componentDir)) {
-              await fs.mkdir(componentDir, { recursive: true });
-            } else if (!options.overwrite) {
+            // Create directory only if needed
+            if (needsDirectory) {
+              const componentDir = path.dirname(componentPath);
+              if (!existsSync(componentDir)) {
+                await fs.mkdir(componentDir, { recursive: true });
+              } else if (!options.overwrite) {
+                spinner.warn(`${component} already exists, skipping`);
+                continue;
+              }
+            } else if (existsSync(componentPath) && !options.overwrite) {
               spinner.warn(`${component} already exists, skipping`);
               continue;
             }
 
-            // Changed: Write template to index.tsx in component directory
+            // Write component file
             const template = await getComponentTemplate(component, cwd, { overwrite: options.overwrite });
             await fs.writeFile(componentPath, template, 'utf8');
 
