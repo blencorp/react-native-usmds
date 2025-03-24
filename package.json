@@ -1,6 +1,6 @@
 {
   "name": "usmds",
-  "version": "1.7.8",
+  "version": "1.7.9",
   "description": "React Native UI components based on US Mobile Design System",
   "main": "./packages/ui/src/index.ts",
   "bin": "packages/cli/dist/index.js",

@@ -1,3 +1,9 @@
+## [1.7.9](https://github.com/blencorp/react-native-usmds/compare/v1.7.8...v1.7.9) (2025-03-24)
+
+### Bug Fixes
+
+* dir file name and lint ([c2ca47c](https://github.com/blencorp/react-native-usmds/commit/c2ca47c2497768bda0617ca75a50d61bc36b5b7c))
+
 ## [1.7.8](https://github.com/blencorp/react-native-usmds/compare/v1.7.7...v1.7.8) (2025-03-24)
 
 ### Bug Fixes
