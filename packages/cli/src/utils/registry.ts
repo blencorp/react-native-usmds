@@ -862,8 +862,8 @@ BiometricSignIn.displayName = 'BiometricSignIn';
 export { BiometricSignIn };`,
 
   Button: `import { ComponentPropsWithoutRef, ElementRef, forwardRef, ReactNode } from 'react';
-import { cva, type VariantProps } from 'class-variance-authority';
 import { Pressable, PressableStateCallbackType, View } from 'react-native';
+import { cva, type VariantProps } from 'class-variance-authority';
 import { TextClassContext } from '@/components/ui/text';
 import { cn } from '@/lib/utils';
 
@@ -1262,7 +1262,6 @@ cssInterop(View, { className: 'style' });
 interface IconProps {
   name: keyof typeof iconPaths;
   size?: number;
-  color?: string;
   className?: string;
 }
 

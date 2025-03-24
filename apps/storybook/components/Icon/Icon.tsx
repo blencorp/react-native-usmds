@@ -9,7 +9,6 @@ cssInterop(View, { className: 'style' });
 interface IconProps {
   name: keyof typeof iconPaths;
   size?: number;
-  color?: string;
   className?: string;
 }
 

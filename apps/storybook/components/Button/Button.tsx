@@ -1,6 +1,6 @@
-import { type VariantProps, cva } from 'class-variance-authority';
 import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef } from 'react';
 import { Pressable, PressableStateCallbackType, View } from 'react-native';
+import { type VariantProps, cva } from 'class-variance-authority';
 import { TextClassContext } from '../Text/Text';
 import { cn } from '@/lib/utils';
 
