@@ -4,37 +4,22 @@ import { type VariantProps, cva } from 'class-variance-authority';
 import { TextClassContext } from '../text';
 import { cn } from '@/lib/utils';
 
-
-const buttonVariants = cva('flex items-center justify-center rounded-[4px] font-sans text-center', {
+const buttonVariants = cva('flex items-center justify-center rounded-lg font-sans text-center', {
   variants: {
     variant: {
-      default: ['bg-primary hover:bg-primary-dark active:bg-primary-darker', 'text-white'],
-      secondary: ['bg-secondary hover:bg-secondary-dark active:bg-secondary-darker', 'text-white'],
-      'accent-cool': ['bg-accent-cool hover:bg-accent-cool-dark active:bg-accent-cool-darker', 'text-base-ink hover:text-base-ink active:text-white'],
-      'accent-warm': ['bg-accent-warm hover:bg-accent-warm-dark active:bg-accent-warm-darker', 'text-base-ink hover:text-white active:text-white'],
-      base: ['bg-gray-50 hover:bg-gray-60 active:bg-gray-80', 'text-white'],
-      outline: [
-        'border-2 bg-transparent',
-        'border-primary text-primary',
-        'hover:border-primary-dark hover:text-primary-dark',
-        'active:border-primary-darker active:text-primary-darker'
-      ],
-      inverse: [
-        'border-2 bg-transparent',
-        'border-gray-10 text-gray-10',
-        'hover:border-gray-5 hover:text-gray-5',
-        'active:border-white active:text-white'
-      ]
+      default: ['bg-primary', 'active:bg-primary/90', 'disabled:bg-primary/50'],
+      destructive: ['bg-destructive', 'active:bg-destructive/90', 'disabled:bg-destructive/50'],
+      outline: ['border bg-background', 'border-input', 'active:bg-accent', 'disabled:bg-background/50 disabled:border-muted'],
+      secondary: ['bg-secondary', 'active:bg-secondary/80', 'disabled:bg-secondary/50'],
+      ghost: ['active:bg-accent', 'disabled:bg-transparent'],
+      link: ['text-primary underline-offset-4 hover:underline', 'active:underline', 'disabled:text-primary/50']
     },
     size: {
-      default: 'h-[44px] px-[20px] py-[10px] min-w-[329px]',
-      sm: 'h-[32px] px-[12px] py-[8px]',
+      default: 'h-[44px] px-[20px] py-[10px]',
+      sm: 'h-[36px] px-[12px] py-[8px] text-sm',
       lg: 'h-[48px] px-[24px] py-[16px]',
       big: 'h-[60px] px-[24px] py-[16px] min-w-[329px]',
       icon: 'h-[44px] w-[44px] p-0'
-    },
-    focus: {
-      true: 'outline-none ring-[4px] ring-blue-vivid-40'
     },
     iconPosition: {
       left: 'flex-row gap-2',
@@ -45,21 +30,19 @@ const buttonVariants = cva('flex items-center justify-center rounded-[4px] font-
   defaultVariants: {
     variant: 'default',
     size: 'default',
-    focus: false,
     iconPosition: 'none'
   }
 });
 
-const buttonTextVariants = cva('text-center font-[700] text-[16px] leading-[20px] my-auto', {
+const buttonTextVariants = cva('text-center', {
   variants: {
     variant: {
-      default: 'text-white',
-      secondary: 'text-white',
-      'accent-cool': 'text-base-ink group-active:text-white',
-      'accent-warm': 'text-base-ink group-hover:text-white group-active:text-white',
-      base: 'text-white',
-      outline: ['text-primary', 'group-hover:text-primary-dark', 'group-active:text-primary-darker'],
-      inverse: ['text-gray-10', 'group-hover:text-gray-5', 'group-active:text-white']
+      default: 'text-primary-foreground disabled:text-primary-foreground/70',
+      destructive: 'text-destructive-foreground disabled:text-destructive-foreground/70',
+      outline: 'text-foreground disabled:text-muted-foreground',
+      secondary: 'text-secondary-foreground disabled:text-secondary-foreground/70',
+      ghost: 'text-foreground disabled:text-muted-foreground',
+      link: 'text-primary underline disabled:text-primary/50'
     },
     size: {
       default: 'text-[16px] leading-[20px]',
@@ -91,16 +74,27 @@ const Button = forwardRef<ElementRef<typeof Pressable>, ButtonProps>(({ classNam
       })}
     >
       <Pressable
-        className={cn('group', props.disabled && 'opacity-50 pointer-events-none', buttonVariants({ variant, size, iconPosition, className }))}
+        className={cn('group', buttonVariants({ variant, size, iconPosition, className }))}
         ref={ref}
         role='button'
+        android_ripple={{
+          color: 'rgba(0, 0, 0, 0.2)',
+          borderless: false,
+          foreground: true
+        }}
+        style={({ pressed }) => [
+          {
+            opacity: props.disabled ? 0.5 : pressed ? 0.8 : 1,
+            transform: [{ scale: pressed && !props.disabled ? 0.98 : 1 }]
+          }
+        ]}
         {...props}
       >
         {(state) => (
-          <View className='flex-row items-center justify-center flex-1'>
-            {startIcon}
+          <View className='flex-row items-center justify-center flex-1' style={{ opacity: state.pressed && !props.disabled ? 0.8 : 1 }}>
+            {startIcon && <View className='mr-2'>{startIcon}</View>}
             {typeof children === 'function' ? children(state) : children}
-            {endIcon}
+            {endIcon && <View className='ml-2'>{endIcon}</View>}
           </View>
         )}
       </Pressable>
@@ -110,5 +104,5 @@ const Button = forwardRef<ElementRef<typeof Pressable>, ButtonProps>(({ classNam
 
 Button.displayName = 'Button';
 
-export { Button, buttonVariants, buttonTextVariants };
+export { Button, buttonTextVariants, buttonVariants };
 export type { ButtonProps };

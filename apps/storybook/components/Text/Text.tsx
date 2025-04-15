@@ -1,7 +1,8 @@
-import { forwardRef, createContext, useContext } from 'react';
 import * as Slot from '@rn-primitives/slot';
 import { SlottableTextProps, TextRef } from '@rn-primitives/types';
+import { createContext, forwardRef, useContext } from 'react';
 import { Text as RNText } from 'react-native';
+
 import { cn } from '@/lib/utils';
 
 const TextClassContext = createContext<string | undefined>(undefined);
@@ -13,7 +14,7 @@ const Text = forwardRef<TextRef, SlottableTextProps>(({ className, asChild = fal
   return (
     <Component
       className={cn(
-        'text-base web:select-text',
+        'text-base web:select-text text-foreground',
         textClass, // Context classes take precedence
         className // Allow override if needed
       )}
