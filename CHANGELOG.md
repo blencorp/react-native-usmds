@@ -1,3 +1,10 @@
+## [1.7.11](https://github.com/blencorp/react-native-usmds/compare/v1.7.10...v1.7.11) (2025-04-15)
+
+### Bug Fixes
+
+* textinput, button, add badge, text ([5ab5d0f](https://github.com/blencorp/react-native-usmds/commit/5ab5d0f3d42b720c430b58164d5cb44e33af13ee))
+* textinput, button, add badge, text ([c39e802](https://github.com/blencorp/react-native-usmds/commit/c39e802b111158aee1bfaf067b91be356568498d))
+
 ## [1.7.10](https://github.com/blencorp/react-native-usmds/compare/v1.7.9...v1.7.10) (2025-03-24)
 
 ### Bug Fixes
