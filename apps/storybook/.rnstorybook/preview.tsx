@@ -1,8 +1,20 @@
 import { withBackgrounds } from '@storybook/addon-ondevice-backgrounds';
 import type { Preview } from '@storybook/react';
+import { PortalHost } from '@rn-primitives/portal';
+import * as React from 'react';
+import { View } from 'react-native';
+
+const withPortal = (Story: React.ComponentType) => {
+  return (
+    <>
+      <Story />
+      <PortalHost name='dropdown' />
+    </>
+  );
+};
 
 const preview: Preview = {
-  decorators: [withBackgrounds],
+  decorators: [withPortal, withBackgrounds],
 
   parameters: {
     backgrounds: {

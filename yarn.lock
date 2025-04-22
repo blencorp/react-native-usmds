@@ -5579,7 +5579,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rn-primitives/dropdown-menu@npm:~1.1.0":
+"@rn-primitives/dropdown-menu@npm:^1.1.0, @rn-primitives/dropdown-menu@npm:~1.1.0":
   version: 1.1.0
   resolution: "@rn-primitives/dropdown-menu@npm:1.1.0"
   dependencies:
@@ -21711,6 +21711,7 @@ __metadata:
     "@react-native-async-storage/async-storage": "npm:1.23.1"
     "@react-native-community/datetimepicker": "npm:8.2.0"
     "@react-native-community/slider": "npm:4.5.5"
+    "@rn-primitives/dropdown-menu": "npm:^1.1.0"
     "@rn-primitives/portal": "npm:^1.1.0"
     "@rn-primitives/slot": "npm:^1.1.0"
     "@rn-primitives/types": "npm:^1.1.0"
