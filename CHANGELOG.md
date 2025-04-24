@@ -1,3 +1,9 @@
+## [1.7.12](https://github.com/blencorp/react-native-usmds/compare/v1.7.11...v1.7.12) (2025-04-24)
+
+### Bug Fixes
+
+* **ISSUE-31:** fix various classNames for styling ([b7b8eb3](https://github.com/blencorp/react-native-usmds/commit/b7b8eb316012265a81fcd7d17707d38a19b3c98f))
+
 ## [1.7.11](https://github.com/blencorp/react-native-usmds/compare/v1.7.10...v1.7.11) (2025-04-15)
 
 ### Bug Fixes
