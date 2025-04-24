@@ -11,8 +11,8 @@ const toggleVariants = cva('relative flex items-center justify-center', {
     },
     state: {
       on: 'bg-primary',
-      off: 'bg-gray-cool-20',
-      disabled: 'bg-gray-cool-20 opacity-50'
+      off: 'bg-muted-foreground',
+      disabled: 'bg-muted-foreground opacity-50'
     }
   },
   defaultVariants: {
@@ -21,7 +21,7 @@ const toggleVariants = cva('relative flex items-center justify-center', {
   }
 });
 
-const knobVariants = cva('absolute w-[27px] h-[27px] bg-white rounded-full', {
+const knobVariants = cva('absolute w-[27px] h-[27px] bg-background rounded-full', {
   variants: {
     state: {
       on: 'left-[22px] top-[2px]',
@@ -70,3 +70,4 @@ const Toggle = forwardRef<ElementRef<typeof TogglePrimitive.Root>, ToggleProps>(
 Toggle.displayName = 'Toggle';
 
 export { Toggle, type ToggleProps };
+

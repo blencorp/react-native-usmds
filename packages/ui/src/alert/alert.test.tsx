@@ -54,7 +54,7 @@ describe('Alert', () => {
     );
 
     const alert = getByTestId('alert');
-    expect(alert.props.className).toContain('bg-red-warm-vivid-60');
+    expect(alert.props.className).toContain('bg-emergency');
     expect(getByText('Emergency message')).toBeTruthy();
   });
 });

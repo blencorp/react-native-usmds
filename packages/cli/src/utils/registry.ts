@@ -553,7 +553,7 @@ const alertVariants = cva('flex flex-row items-start p-4 w-[329px]', {
       error: 'bg-error-lighter',
       warning: 'bg-warning-lighter',
       success: 'bg-success-lighter',
-      emergency: 'bg-red-warm-vivid-60'
+      emergency: 'bg-emergency'
     },
     alertStyle: {
       default: 'gap-[15px]',
@@ -576,7 +576,7 @@ const alertTextVariants = cva('font-sans text-[22px] leading-[28px] font-bold te
       error: 'text-base-ink',
       warning: 'text-base-ink',
       success: 'text-base-ink',
-      emergency: 'text-white'
+      emergency: 'text-primary-foreground'
     },
     alertStyle: {
       default: '',
@@ -617,10 +617,10 @@ const Alert = forwardRef<ElementRef<typeof View>, AlertProps>(
           <View className='space-y-4'>
             {description.messages.map((message, index) => (
               <View key={index} className='flex flex-row items-start'>
-                <Text className={cn('text-base leading-[24px] mr-2', variant === 'emergency' ? 'text-white' : 'text-base-ink')}>•</Text>
-                <Text className={cn('text-base leading-[24px] flex-1', variant === 'emergency' ? 'text-white' : 'text-base-ink')}>
+                <Text className={cn('text-base leading-[24px] mr-2', variant === 'emergency' ? 'text-primary-foreground' : 'text-base-ink')}>•</Text>
+                <Text className={cn('text-base leading-[24px] flex-1', variant === 'emergency' ? 'text-primary-foreground' : 'text-base-ink')}>
                   {message.text}
-                  {message.link && <Text className={cn('underline', variant === 'emergency' ? 'text-white' : 'text-primary')}>{message.link}</Text>}
+                  {message.link && <Text className={cn('underline', variant === 'emergency' ? 'text-primary-foreground' : 'text-primary')}>{message.link}</Text>}
                   {message.suffix}
                 </Text>
               </View>
@@ -630,10 +630,10 @@ const Alert = forwardRef<ElementRef<typeof View>, AlertProps>(
       }
 
       return (
-        <Text className={cn('text-base leading-5', variant === 'emergency' ? 'text-white' : 'text-base-ink')}>
+        <Text className={cn('text-base leading-5', variant === 'emergency' ? 'text-primary-foreground' : 'text-base-ink')}>
           {description.title && <Text className='font-bold'>{description.title} </Text>}
           {description.body}
-          {description.link && <Text className={cn('underline', variant === 'emergency' ? 'text-white' : 'text-primary')}>{description.link}</Text>}
+          {description.link && <Text className={cn('underline', variant === 'emergency' ? 'text-primary-foreground' : 'text-primary')}>{description.link}</Text>}
         </Text>
       );
     };
@@ -657,7 +657,7 @@ const Alert = forwardRef<ElementRef<typeof View>, AlertProps>(
           >
             <Icon
               name='info'
-              className={cn(variant === 'emergency' ? 'text-emergency fill-white' : 'text-white fill-base-ink')}
+              className={cn(variant === 'emergency' ? 'text-emergency fill-primary-foreground' : 'text-primary-foreground fill-base-ink')}
               size={alertStyle === 'slim' ? 24 : 32}
             />
           </View>
@@ -689,12 +689,12 @@ const badgeVariants = cva('flex-row items-center justify-center rounded-full px-
       success: 'bg-success-lighter border-success-light',
       warning: 'bg-warning-lighter border-warning-light',
       info: 'bg-info-lighter border-info-light',
-      destructive: 'bg-destructive border-destructive',
-    },
+      destructive: 'bg-destructive border-destructive'
+    }
   },
   defaultVariants: {
-    variant: 'default',
-  },
+    variant: 'default'
+  }
 });
 
 const badgeTextVariants = cva('text-xs font-medium', {
@@ -704,12 +704,12 @@ const badgeTextVariants = cva('text-xs font-medium', {
       success: 'text-success-dark',
       warning: 'text-warning-dark',
       info: 'text-info-dark',
-      destructive: 'text-destructive-foreground',
-    },
+      destructive: 'text-destructive-foreground'
+    }
   },
   defaultVariants: {
-    variant: 'default',
-  },
+    variant: 'default'
+  }
 });
 
 interface BadgeProps extends VariantProps<typeof badgeVariants> {
@@ -1098,8 +1098,8 @@ const checkboxTileVariants = cva('flex flex-col w-[329px] rounded-[2px] border-2
     },
     state: {
       checked: 'bg-primary-lighter border-primary-light',
-      unchecked: 'bg-white border-disabled-lighter',
-      disabled: 'bg-white border-gray-10'
+      unchecked: 'bg-background border-disabled-lighter',
+      disabled: 'bg-background border-disabled-light'
     }
   },
   defaultVariants: {
@@ -1148,10 +1148,10 @@ const CheckboxTile = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Check
             </View>
 
             <View className='flex-1 flex-col gap-1.5'>
-              <Text className={cn('text-base leading-5 font-source-sans-pro', disabled ? 'text-disabled' : 'text-base-ink')}>{label}</Text>
+              <Text className={cn('text-base leading-5', disabled ? 'text-disabled' : 'text-base-ink')}>{label}</Text>
 
               {description && (
-                <Text className={cn('text-base leading-5 font-source-sans-pro', disabled ? 'text-disabled' : 'text-base-ink')}>{description}</Text>
+                <Text className={cn('text-base leading-5', disabled ? 'text-disabled' : 'text-base-ink')}>{description}</Text>
               )}
             </View>
           </View>
@@ -1204,7 +1204,7 @@ import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 
 const cardVariants = cva(
-  'flex flex-col justify-between items-start bg-white border border-base-lighter rounded-[4px] w-[329px] min-h-[471px] mx-auto',
+  'flex flex-col justify-between items-start bg-background border border-base-lighter rounded-[4px] w-[329px] min-h-[471px] mx-auto',
   {
     variants: {
       variant: {
@@ -1252,7 +1252,7 @@ const Card = forwardRef<View, CardProps>(({ title, description, buttonText, medi
         )}
 
         <View className='px-6 pt-6 pb-2'>
-          <Text className='font-merriweather font-bold text-[22px] leading-7 text-base-ink'>{title}</Text>
+          <Text className='font-bold text-[22px] leading-7 text-base-ink'>{title}</Text>
         </View>
 
         {showMedia && isInset && mediaUrl && (
@@ -1393,6 +1393,7 @@ export { Link };`,
 import { View, Text, Pressable } from 'react-native';
 import { cn } from '@/lib/utils';
 import { Icon } from '@/components/ui/icon';
+
 interface PaginationProps extends ComponentPropsWithoutRef<typeof View> {
   currentPage: number;
   totalPages: number;
@@ -1408,7 +1409,7 @@ const PaginationButton = forwardRef<View, ComponentPropsWithoutRef<typeof Pressa
         ref={ref}
         className={cn(
           'w-[50px] h-[50px] rounded justify-center items-center',
-          active ? 'bg-primary' : disabled ? 'bg-gray-40' : 'bg-primary',
+          active ? 'bg-primary' : disabled ? 'bg-disabled' : 'bg-primary',
           className
         )}
         disabled={disabled}
@@ -1435,11 +1436,11 @@ const Pagination = ({ currentPage, totalPages, totalItems, onPageChange, classNa
   };
 
   return (
-    <View className={cn('flex-row items-center p-8 gap-3 bg-gray-3 w-[393px]', className)}>
+    <View className={cn('flex-row items-center p-8 gap-3 bg-muted w-[393px]', className)}>
       <PaginationButton
         onPress={handlePrevious}
         disabled={currentPage === 1}
-        className={currentPage === 1 ? 'bg-gray-40' : 'bg-primary'}
+        className={currentPage === 1 ? 'bg-disabled' : 'bg-primary'}
         accessibilityLabel='Previous page'
         accessibilityRole='button'
         accessibilityState={{ disabled: currentPage === 1 }}
@@ -1448,14 +1449,14 @@ const Pagination = ({ currentPage, totalPages, totalItems, onPageChange, classNa
         <Icon name='navigate_before' size={24} className='text-white' />
       </PaginationButton>
 
-      <Text className='flex-1 text-center text-[20px] leading-[30px] text-gray-70'>
+      <Text className='flex-1 text-center text-[20px] leading-[30px] text-muted-foreground'>
         {currentPage} to {totalPages} of {totalItems}
       </Text>
 
       <PaginationButton
         onPress={handleNext}
         disabled={currentPage === totalPages}
-        className={currentPage === totalPages ? 'bg-gray-40' : 'bg-primary'}
+        className={currentPage === totalPages ? 'bg-disabled' : 'bg-primary'}
         accessibilityLabel='Next page'
         accessibilityRole='button'
         accessibilityState={{ disabled: currentPage === totalPages }}
@@ -1524,7 +1525,7 @@ const RadioButton = forwardRef<ElementRef<typeof RadioGroupPrimitive.Item>, Radi
           aria-labelledby={labelId}
           testID={\`radio-\${props.value}\`}
           className={cn(
-            'absolute left-0 top-0 w-5 h-5 rounded-full border-2 flex items-center justify-center bg-white',
+            'absolute left-0 top-0 w-5 h-5 rounded-full border-2 flex items-center justify-center bg-background',
             props.disabled ? 'border-disabled' : isSelected ? 'border-primary' : 'border-base-ink'
           )}
           {...props}
@@ -1568,8 +1569,8 @@ const radioTileVariants = cva('flex flex-col w-[329px] rounded-[2px] border-2', 
     },
     state: {
       checked: 'bg-primary-lighter border-primary',
-      unchecked: 'bg-white border-disabled-lighter',
-      disabled: 'bg-white border-gray-10'
+      unchecked: 'bg-background border-disabled-lighter',
+      disabled: 'bg-background border-muted'
     }
   },
   defaultVariants: {
@@ -1578,10 +1579,36 @@ const radioTileVariants = cva('flex flex-col w-[329px] rounded-[2px] border-2', 
   }
 });
 
+const radioItemVariants = cva('aspect-square h-5 w-5 rounded-full border-2 bg-background', {
+  variants: {
+    state: {
+      checked: 'border-primary',
+      unchecked: 'border-foreground',
+      disabled: 'border-disabled'
+    }
+  },
+  defaultVariants: {
+    state: 'unchecked'
+  }
+});
+
+const radioIndicatorVariants = cva('h-[10px] w-[10px] rounded-full', {
+  variants: {
+    state: {
+      checked: 'bg-primary',
+      disabled: 'bg-disabled'
+    }
+  },
+  defaultVariants: {
+    state: 'checked'
+  }
+});
+
 interface RadioTileProps extends ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>, VariantProps<typeof radioTileVariants> {
   label: string;
   description?: string;
   className?: string;
+  variant?: 'default' | 'withDescription';
 }
 
 const RadioTileGroup = forwardRef<ElementRef<typeof RadioGroupPrimitive.Root>, ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>>(
@@ -1615,33 +1642,19 @@ const RadioTile = forwardRef<ElementRef<typeof RadioGroupPrimitive.Item>, RadioT
       <Pressable onPress={handlePress} disabled={props.disabled}>
         <View className={cn(radioTileVariants({ variant, state }), 'p-[13px_16px_13px_9px]', className)}>
           <View className='flex flex-row items-center gap-2 min-h-[44px]'>
-            <RadioGroupPrimitive.Item
-              ref={ref}
-              aria-labelledby={labelId}
-              aria-describedby={description ? descriptionId : undefined}
-              style={{
-                width: 20,
-                height: 20,
-                borderRadius: 9999,
-                borderWidth: 2,
-                backgroundColor: 'white',
-                borderColor: props.disabled ? '#757575' : isSelected ? '#005EA2' : '#1B1B1B',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-              {...props}
-            >
-              <RadioGroupPrimitive.Indicator>
-                <View
-                  style={{
-                    width: 12.5,
-                    height: 12.5,
-                    borderRadius: 9999,
-                    backgroundColor: props.disabled ? '#757575' : '#005EA2'
-                  }}
-                />
-              </RadioGroupPrimitive.Indicator>
-            </RadioGroupPrimitive.Item>
+            <View className={cn(radioItemVariants({ state }), 'flex items-center justify-center')}>
+              <RadioGroupPrimitive.Item
+                ref={ref}
+                aria-labelledby={labelId}
+                aria-describedby={description ? descriptionId : undefined}
+                className='w-full h-full items-center justify-center'
+                {...props}
+              >
+                <RadioGroupPrimitive.Indicator className='items-center justify-center'>
+                  <View className={cn(radioIndicatorVariants({ state: props.disabled ? 'disabled' : 'checked' }))} />
+                </RadioGroupPrimitive.Indicator>
+              </RadioGroupPrimitive.Item>
+            </View>
             <Text nativeID={labelId} className={cn('flex-1 text-base leading-5', props.disabled ? 'text-disabled' : 'text-base-ink')}>
               {label}
             </Text>
@@ -1657,10 +1670,11 @@ const RadioTile = forwardRef<ElementRef<typeof RadioGroupPrimitive.Item>, RadioT
   }
 );
 
-RadioTile.displayName = 'RadioTile';
 RadioTileGroup.displayName = 'RadioTileGroup';
+RadioTile.displayName = 'RadioTile';
 
-export { RadioTileGroup, RadioTile, type RadioTileProps };`,
+export { RadioTile, RadioTileGroup };
+export type { RadioTileProps };`,
 
   Snackbar: `import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
 import { View, Text, Pressable } from 'react-native';
@@ -1701,7 +1715,7 @@ const Snackbar = forwardRef<ElementRef<typeof View>, SnackbarProps & { isVisible
         <View ref={ref} testID='snackbar-container' className={cn(snackbarVariants({ layout }), className)}>
           <View className='flex flex-row gap-2 mb-3'>
             <View className='flex items-center justify-center h-6'>
-              <Icon name={iconName} size={24} className='bg-white text-base-darkest rounded-full' />
+              <Icon name={iconName} size={24} className='bg-background text-base-darkest rounded-full' />
             </View>
             <Text className='text-base-lightest text-base leading-6 flex-1 flex-wrap'>{message}</Text>
           </View>
@@ -1726,7 +1740,7 @@ const Snackbar = forwardRef<ElementRef<typeof View>, SnackbarProps & { isVisible
       <View ref={ref} testID='snackbar-container' className={cn(snackbarVariants({ layout }), className)}>
         <View className='flex flex-row items-center gap-2 flex-shrink min-w-0 max-w-[171px]'>
           <View className='flex items-center justify-center h-6 flex-shrink-0'>
-            <Icon name={iconName} size={24} className='bg-white text-base-darkest rounded-full' />
+            <Icon name={iconName} size={24} className='bg-background text-base-darkest rounded-full' />
           </View>
           <Text numberOfLines={1} className='text-base-lightest text-base leading-6 flex-shrink'>
             {message}
@@ -1811,10 +1825,10 @@ const StepIndicator = forwardRef<View, StepIndicatorProps>(({ steps, currentStep
       {/* Heading */}
       <View className='flex flex-row items-center gap-2 w-full'>
         <View className={cn('rounded-full flex items-center justify-center', size === 'default' ? 'w-10 h-10' : 'w-6 h-6', 'bg-primary')}>
-          <Text className='text-white font-source-sans-pro font-normal'>{currentStep}</Text>
+          <Text className='text-background font-normal'>{currentStep}</Text>
         </View>
-        <Text className='text-primary font-source-sans-pro font-normal'>of {steps}</Text>
-        <Text className='text-base-ink font-source-sans-pro font-bold text-[22px] leading-7'>{title}</Text>
+        <Text className='text-primary font-normal'>of {steps}</Text>
+        <Text className='text-base-ink font-bold text-[22px] leading-7'>{title}</Text>
       </View>
     </View>
   );
@@ -1829,7 +1843,7 @@ import { View, Text } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
-const tagVariants = cva('flex flex-row justify-center items-center bg-gray-60 rounded-[2px]', {
+const tagVariants = cva('flex flex-row justify-center items-center bg-base rounded-[2px]', {
   variants: {
     size: {
       default: 'px-2 py-0.5 h-[18px]',
@@ -1841,7 +1855,7 @@ const tagVariants = cva('flex flex-row justify-center items-center bg-gray-60 ro
   }
 });
 
-const tagTextVariants = cva('text-white font-normal text-center', {
+const tagTextVariants = cva('text-background font-normal text-center', {
   variants: {
     size: {
       default: 'text-[14px] leading-[14px]',
@@ -1920,16 +1934,16 @@ const TextArea = forwardRef<ElementRef<typeof TextInput>, TextAreaProps>(
 
     return (
       <View className='flex flex-col gap-2 w-[329px]'>
-        {label && <Text className='text-base-ink text-base leading-5'>{label}</Text>}
+        {label && <Text className='text-base-ink leading-5'>{label}</Text>}
 
-        {helperText && <Text className={cn('text-base leading-5', error ? 'text-error-dark' : 'text-gray-50')}>{helperText}</Text>}
+        {helperText && <Text className={cn('text-base leading-5', error ? 'text-error-dark' : 'text-muted-foreground')}>{helperText}</Text>}
 
         <TextInput
           ref={ref}
           className={cn(
-            'min-h-[160px] w-full rounded-md border border-base-ink bg-white px-3 py-2',
-            'text-base leading-6 text-base-ink',
-            'placeholder:text-gray-50',
+            'min-h-[160px] w-full rounded-md border border-base bg-background px-3 py-2',
+            'text-base leading-6',
+            'placeholder:text-base',
             error && 'border-error-dark',
             disabled && 'opacity-50 bg-disabled-lighter',
             className
@@ -1937,7 +1951,6 @@ const TextArea = forwardRef<ElementRef<typeof TextInput>, TextAreaProps>(
           multiline={true}
           numberOfLines={4}
           textAlignVertical='top'
-          placeholderTextColor='#757575'
           editable={!disabled}
           value={value}
           maxLength={maxLength}
@@ -1946,7 +1959,7 @@ const TextArea = forwardRef<ElementRef<typeof TextInput>, TextAreaProps>(
         />
 
         {maxLength && (
-          <Text className='text-gray-50 text-base leading-5 text-right'>
+          <Text className='text-muted-foreground text-base leading-5 text-right'>
             {characterCount}/{maxLength}
           </Text>
         )}
@@ -1965,7 +1978,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const inputVariants = cva(
-  ['flex h-10 rounded-none', 'font-source-sans-pro text-base', 'text-foreground placeholder:text-muted-foreground bg-background'],
+  ['flex h-10 rounded-none', 'text-base', 'text-foreground placeholder:text-muted-foreground bg-background'],
   {
     variants: {
       variant: {
@@ -2027,13 +2040,13 @@ const TextInput = forwardRef<ElementRef<typeof RNTextInput>, TextInputProps>(
     return (
       <View className='w-full'>
         <View className='flex-row gap-1'>
-          <Text className='text-foreground text-base leading-5 font-source-sans-pro'>{label}</Text>
-          {required && <Text className='text-destructive text-base leading-5 font-source-sans-pro'>*</Text>}
+          <Text className='text-foreground text-base leading-5'>{label}</Text>
+          {required && <Text className='text-destructive text-base leading-5'>*</Text>}
         </View>
 
-        {helperText && <Text className='text-muted-foreground text-base leading-5 font-source-sans-pro mt-2'>{helperText}</Text>}
+        {helperText && <Text className='text-muted-foreground text-base leading-5 mt-2'>{helperText}</Text>}
 
-        {showError && errorMessage && <Text className='text-destructive text-base leading-5 font-source-sans-pro font-bold'>{errorMessage}</Text>}
+        {showError && errorMessage && <Text className='text-destructive text-base leading-5 font-bold'>{errorMessage}</Text>}
 
         <View className='relative mt-2 w-full'>
           <RNTextInput
@@ -2042,7 +2055,7 @@ const TextInput = forwardRef<ElementRef<typeof RNTextInput>, TextInputProps>(
             accessibilityRole='text'
             accessibilityLabel={label}
             accessibilityState={{ disabled: isDisabled }}
-            className={cn(inputVariants({ variant, state: currentState }), 'w-full text-foreground font-sans', className)}
+            className={cn(inputVariants({ variant, state: currentState }), 'w-full text-foreground', className)}
             placeholderTextColor='#666'
             style={{
               height: 40,
@@ -2118,8 +2131,8 @@ const toggleVariants = cva('relative flex items-center justify-center', {
     },
     state: {
       on: 'bg-primary',
-      off: 'bg-gray-cool-20',
-      disabled: 'bg-gray-cool-20 opacity-50'
+      off: 'bg-muted-foreground',
+      disabled: 'bg-muted-foreground opacity-50'
     }
   },
   defaultVariants: {
@@ -2128,7 +2141,7 @@ const toggleVariants = cva('relative flex items-center justify-center', {
   }
 });
 
-const knobVariants = cva('absolute w-[27px] h-[27px] bg-white rounded-full', {
+const knobVariants = cva('absolute w-[27px] h-[27px] bg-background rounded-full', {
   variants: {
     state: {
       on: 'left-[22px] top-[2px]',

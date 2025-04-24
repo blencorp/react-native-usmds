@@ -55,10 +55,10 @@ const StepIndicator = forwardRef<View, StepIndicatorProps>(({ steps, currentStep
       {/* Heading */}
       <View className='flex flex-row items-center gap-2 w-full'>
         <View className={cn('rounded-full flex items-center justify-center', size === 'default' ? 'w-10 h-10' : 'w-6 h-6', 'bg-primary')}>
-          <Text className='text-white font-source-sans-pro font-normal'>{currentStep}</Text>
+          <Text className='text-background font-normal'>{currentStep}</Text>
         </View>
-        <Text className='text-primary font-source-sans-pro font-normal'>of {steps}</Text>
-        <Text className='text-base-ink font-source-sans-pro font-bold text-[22px] leading-7'>{title}</Text>
+        <Text className='text-primary font-normal'>of {steps}</Text>
+        <Text className='text-base-ink font-bold text-[22px] leading-7'>{title}</Text>
       </View>
     </View>
   );

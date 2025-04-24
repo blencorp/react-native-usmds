@@ -19,10 +19,10 @@ export const VerticalDefault: Story = {
   render: () => (
     <View className='flex items-center justify-center'>
       <ButtonGroup orientation='vertical' gap={8}>
-        <Button variant='base'>
+        <Button variant='default'>
           <Text>Primary Button</Text>
         </Button>
-        <Button variant='default'>
+        <Button variant='ghost'>
           <Text>Secondary Button</Text>
         </Button>
         <Button variant='outline'>
@@ -37,10 +37,10 @@ export const VerticalLargeGap: Story = {
   render: () => (
     <View className='flex items-center justify-center'>
       <ButtonGroup orientation='vertical' gap={16}>
-        <Button variant='base'>
+        <Button variant='default'>
           <Text>Primary Button</Text>
         </Button>
-        <Button variant='default'>
+        <Button variant='ghost'>
           <Text>Secondary Button</Text>
         </Button>
         <Button variant='outline'>
@@ -55,7 +55,7 @@ export const HorizontalDefault: Story = {
   render: () => (
     <View className='flex items-center justify-center'>
       <ButtonGroup orientation='horizontal' gap={8}>
-        <Button variant='base'>
+        <Button variant='default'>
           <Text>Primary</Text>
         </Button>
         <Button variant='default'>
@@ -73,10 +73,10 @@ export const HorizontalLargeGap: Story = {
   render: () => (
     <View className='flex items-center justify-center'>
       <ButtonGroup orientation='horizontal' gap={16}>
-        <Button variant='base'>
+        <Button variant='default'>
           <Text>Primary</Text>
         </Button>
-        <Button variant='default'>
+        <Button variant='ghost'>
           <Text>Secondary</Text>
         </Button>
         <Button variant='outline'>
@@ -91,7 +91,7 @@ export const WithDifferentSizes: Story = {
   render: () => (
     <View className='flex items-center justify-center'>
       <ButtonGroup orientation='vertical' gap={8}>
-        <Button variant='base' size='big'>
+        <Button variant='default' size='big'>
           <Text>Big Button</Text>
         </Button>
         <Button variant='default'>
@@ -109,7 +109,7 @@ export const WithDifferentWidths: Story = {
   render: () => (
     <View className='flex items-center justify-center'>
       <ButtonGroup orientation='vertical' gap={8}>
-        <Button variant='base' className='w-[300px]'>
+        <Button variant='default' className='w-[300px]'>
           <Text>Wide Button</Text>
         </Button>
         <Button variant='default' className='w-[200px]'>
@@ -127,7 +127,7 @@ export const WithMixedContent: Story = {
   render: () => (
     <View className='flex items-center justify-center'>
       <ButtonGroup orientation='vertical' gap={8}>
-        <Button variant='base'>
+        <Button variant='default'>
           <Text>Regular Button</Text>
         </Button>
         <ButtonGroup orientation='horizontal' gap={8}>
