@@ -4,7 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const inputVariants = cva(
-  ['flex h-10 rounded-none', 'font-source-sans-pro text-base', 'text-foreground placeholder:text-muted-foreground bg-background'],
+  ['flex h-10 rounded-none', 'text-base', 'text-foreground placeholder:text-muted-foreground bg-background'],
   {
     variants: {
       variant: {
@@ -66,13 +66,13 @@ const TextInput = forwardRef<ElementRef<typeof RNTextInput>, TextInputProps>(
     return (
       <View className='w-full'>
         <View className='flex-row gap-1'>
-          <Text className='text-foreground text-base leading-5 font-source-sans-pro'>{label}</Text>
-          {required && <Text className='text-destructive text-base leading-5 font-source-sans-pro'>*</Text>}
+          <Text className='text-foreground text-base leading-5'>{label}</Text>
+          {required && <Text className='text-destructive text-base leading-5'>*</Text>}
         </View>
 
-        {helperText && <Text className='text-muted-foreground text-base leading-5 font-source-sans-pro mt-2'>{helperText}</Text>}
+        {helperText && <Text className='text-muted-foreground text-base leading-5 mt-2'>{helperText}</Text>}
 
-        {showError && errorMessage && <Text className='text-destructive text-base leading-5 font-source-sans-pro font-bold'>{errorMessage}</Text>}
+        {showError && errorMessage && <Text className='text-destructive text-base leading-5 font-bold'>{errorMessage}</Text>}
 
         <View className='relative mt-2 w-full'>
           <RNTextInput
@@ -81,7 +81,7 @@ const TextInput = forwardRef<ElementRef<typeof RNTextInput>, TextInputProps>(
             accessibilityRole='text'
             accessibilityLabel={label}
             accessibilityState={{ disabled: isDisabled }}
-            className={cn(inputVariants({ variant, state: currentState }), 'w-full text-foreground font-sans', className)}
+            className={cn(inputVariants({ variant, state: currentState }), 'w-full text-foreground', className)}
             placeholderTextColor='#666'
             style={{
               height: 40,

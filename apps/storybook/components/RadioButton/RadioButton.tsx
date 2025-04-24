@@ -50,7 +50,7 @@ const RadioButton = forwardRef<ElementRef<typeof RadioGroupPrimitive.Item>, Radi
           aria-labelledby={labelId}
           testID={`radio-${props.value}`}
           className={cn(
-            'absolute left-0 top-0 w-5 h-5 rounded-full border-2 flex items-center justify-center bg-white',
+            'absolute left-0 top-0 w-5 h-5 rounded-full border-2 flex items-center justify-center bg-background',
             props.disabled ? 'border-disabled' : isSelected ? 'border-primary' : 'border-base-ink'
           )}
           {...props}

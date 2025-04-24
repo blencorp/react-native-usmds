@@ -11,12 +11,12 @@ const badgeVariants = cva('flex-row items-center justify-center rounded-full px-
       success: 'bg-success-lighter border-success-light',
       warning: 'bg-warning-lighter border-warning-light',
       info: 'bg-info-lighter border-info-light',
-      destructive: 'bg-destructive border-destructive',
-    },
+      destructive: 'bg-destructive border-destructive'
+    }
   },
   defaultVariants: {
-    variant: 'default',
-  },
+    variant: 'default'
+  }
 });
 
 const badgeTextVariants = cva('text-xs font-medium', {
@@ -26,12 +26,12 @@ const badgeTextVariants = cva('text-xs font-medium', {
       success: 'text-success-dark',
       warning: 'text-warning-dark',
       info: 'text-info-dark',
-      destructive: 'text-destructive-foreground',
-    },
+      destructive: 'text-destructive-foreground'
+    }
   },
   defaultVariants: {
-    variant: 'default',
-  },
+    variant: 'default'
+  }
 });
 
 interface BadgeProps extends VariantProps<typeof badgeVariants> {

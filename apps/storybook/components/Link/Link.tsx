@@ -4,7 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
 import { Icon } from '../Icon/Icon';
 
-const linkVariants = cva('font-source-sans-pro text-base leading-[162%] underline', {
+const linkVariants = cva('text-base leading-[162%] underline', {
   variants: {
     variant: {
       default: 'text-primary',

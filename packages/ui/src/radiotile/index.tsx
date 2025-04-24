@@ -19,13 +19,38 @@ const radioTileVariants = cva('flex flex-col w-[329px] rounded-[2px] border-2', 
     },
     state: {
       checked: 'bg-primary-lighter border-primary',
-      unchecked: 'bg-white border-disabled-lighter',
-      disabled: 'bg-white border-gray-10'
+      unchecked: 'bg-background border-disabled-lighter',
+      disabled: 'bg-background border-muted'
     }
   },
   defaultVariants: {
     variant: 'default',
     state: 'unchecked'
+  }
+});
+
+const radioItemVariants = cva('aspect-square h-5 w-5 rounded-full border-2 bg-background', {
+  variants: {
+    state: {
+      checked: 'border-primary',
+      unchecked: 'border-foreground',
+      disabled: 'border-disabled'
+    }
+  },
+  defaultVariants: {
+    state: 'unchecked'
+  }
+});
+
+const radioIndicatorVariants = cva('h-[10px] w-[10px] rounded-full', {
+  variants: {
+    state: {
+      checked: 'bg-primary',
+      disabled: 'bg-disabled'
+    }
+  },
+  defaultVariants: {
+    state: 'checked'
   }
 });
 
@@ -67,33 +92,19 @@ const RadioTile = forwardRef<ElementRef<typeof RadioGroupPrimitive.Item>, RadioT
       <Pressable onPress={handlePress} disabled={props.disabled}>
         <View className={cn(radioTileVariants({ variant, state }), 'p-[13px_16px_13px_9px]', className)}>
           <View className='flex flex-row items-center gap-2 min-h-[44px]'>
-            <RadioGroupPrimitive.Item
-              ref={ref}
-              aria-labelledby={labelId}
-              aria-describedby={description ? descriptionId : undefined}
-              style={{
-                width: 20,
-                height: 20,
-                borderRadius: 9999,
-                borderWidth: 2,
-                backgroundColor: 'white',
-                borderColor: props.disabled ? '#757575' : isSelected ? '#005EA2' : '#1B1B1B',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-              {...props}
-            >
-              <RadioGroupPrimitive.Indicator>
-                <View
-                  style={{
-                    width: 12.5,
-                    height: 12.5,
-                    borderRadius: 9999,
-                    backgroundColor: props.disabled ? '#757575' : '#005EA2'
-                  }}
-                />
-              </RadioGroupPrimitive.Indicator>
-            </RadioGroupPrimitive.Item>
+            <View className={cn(radioItemVariants({ state }), 'flex items-center justify-center')}>
+              <RadioGroupPrimitive.Item
+                ref={ref}
+                aria-labelledby={labelId}
+                aria-describedby={description ? descriptionId : undefined}
+                className='w-full h-full items-center justify-center'
+                {...props}
+              >
+                <RadioGroupPrimitive.Indicator className='items-center justify-center'>
+                  <View className={cn(radioIndicatorVariants({ state: props.disabled ? 'disabled' : 'checked' }))} />
+                </RadioGroupPrimitive.Indicator>
+              </RadioGroupPrimitive.Item>
+            </View>
             <Text nativeID={labelId} className={cn('flex-1 text-base leading-5', props.disabled ? 'text-disabled' : 'text-base-ink')}>
               {label}
             </Text>
@@ -109,7 +120,8 @@ const RadioTile = forwardRef<ElementRef<typeof RadioGroupPrimitive.Item>, RadioT
   }
 );
 
-RadioTile.displayName = 'RadioTile';
 RadioTileGroup.displayName = 'RadioTileGroup';
+RadioTile.displayName = 'RadioTile';
 
-export { RadioTileGroup, RadioTile, type RadioTileProps };
+export { RadioTile, RadioTileGroup };
+export type { RadioTileProps };

@@ -19,16 +19,16 @@ const TextArea = forwardRef<ElementRef<typeof TextInput>, TextAreaProps>(
 
     return (
       <View className='flex flex-col gap-2 w-[329px]'>
-        {label && <Text className='text-base-ink text-base leading-5'>{label}</Text>}
+        {label && <Text className='text-base-ink leading-5'>{label}</Text>}
 
-        {helperText && <Text className={cn('text-base leading-5', error ? 'text-error-dark' : 'text-gray-50')}>{helperText}</Text>}
+        {helperText && <Text className={cn('text-base leading-5', error ? 'text-error-dark' : 'text-muted-foreground')}>{helperText}</Text>}
 
         <TextInput
           ref={ref}
           className={cn(
-            'min-h-[160px] w-full rounded-md border border-base-ink bg-white px-3 py-2',
-            'text-base leading-6 text-base-ink',
-            'placeholder:text-gray-50',
+            'min-h-[160px] w-full rounded-md border border-base bg-background px-3 py-2',
+            'text-base leading-6',
+            'placeholder:text-base',
             error && 'border-error-dark',
             disabled && 'opacity-50 bg-disabled-lighter',
             className
@@ -36,7 +36,6 @@ const TextArea = forwardRef<ElementRef<typeof TextInput>, TextAreaProps>(
           multiline={true}
           numberOfLines={4}
           textAlignVertical='top'
-          placeholderTextColor='#757575'
           editable={!disabled}
           value={value}
           maxLength={maxLength}
@@ -45,7 +44,7 @@ const TextArea = forwardRef<ElementRef<typeof TextInput>, TextAreaProps>(
         />
 
         {maxLength && (
-          <Text className='text-gray-50 text-base leading-5 text-right'>
+          <Text className='text-muted-foreground text-base leading-5 text-right'>
             {characterCount}/{maxLength}
           </Text>
         )}

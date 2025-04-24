@@ -6,7 +6,7 @@ import { Button } from '../button';
 import { Text } from '../text';
 
 const cardVariants = cva(
-  'flex flex-col justify-between items-start bg-white border border-base-lighter rounded-[4px] w-[329px] min-h-[471px] mx-auto',
+  'flex flex-col justify-between items-start bg-background border border-base-lighter rounded-[4px] w-[329px] min-h-[471px] mx-auto',
   {
     variants: {
       variant: {
@@ -54,7 +54,7 @@ const Card = forwardRef<View, CardProps>(({ title, description, buttonText, medi
         )}
 
         <View className='px-6 pt-6 pb-2'>
-          <Text className='font-merriweather font-bold text-[22px] leading-7 text-base-ink'>{title}</Text>
+          <Text className='font-bold text-[22px] leading-7 text-base-ink'>{title}</Text>
         </View>
 
         {showMedia && isInset && mediaUrl && (

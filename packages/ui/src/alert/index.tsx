@@ -11,7 +11,7 @@ const alertVariants = cva('flex flex-row items-start p-4 w-[329px]', {
       error: 'bg-error-lighter',
       warning: 'bg-warning-lighter',
       success: 'bg-success-lighter',
-      emergency: 'bg-red-warm-vivid-60'
+      emergency: 'bg-emergency'
     },
     alertStyle: {
       default: 'gap-[15px]',
@@ -34,7 +34,7 @@ const alertTextVariants = cva('font-sans text-[22px] leading-[28px] font-bold te
       error: 'text-base-ink',
       warning: 'text-base-ink',
       success: 'text-base-ink',
-      emergency: 'text-white'
+      emergency: 'text-primary-foreground'
     },
     alertStyle: {
       default: '',
@@ -75,10 +75,12 @@ const Alert = forwardRef<ElementRef<typeof View>, AlertProps>(
           <View className='space-y-4'>
             {description.messages.map((message, index) => (
               <View key={index} className='flex flex-row items-start'>
-                <Text className={cn('text-base leading-[24px] mr-2', variant === 'emergency' ? 'text-white' : 'text-base-ink')}>•</Text>
-                <Text className={cn('text-base leading-[24px] flex-1', variant === 'emergency' ? 'text-white' : 'text-base-ink')}>
+                <Text className={cn('text-base leading-[24px] mr-2', variant === 'emergency' ? 'text-primary-foreground' : 'text-base-ink')}>•</Text>
+                <Text className={cn('text-base leading-[24px] flex-1', variant === 'emergency' ? 'text-primary-foreground' : 'text-base-ink')}>
                   {message.text}
-                  {message.link && <Text className={cn('underline', variant === 'emergency' ? 'text-white' : 'text-primary')}>{message.link}</Text>}
+                  {message.link && (
+                    <Text className={cn('underline', variant === 'emergency' ? 'text-primary-foreground' : 'text-primary')}>{message.link}</Text>
+                  )}
                   {message.suffix}
                 </Text>
               </View>
@@ -88,10 +90,12 @@ const Alert = forwardRef<ElementRef<typeof View>, AlertProps>(
       }
 
       return (
-        <Text className={cn('text-base leading-5', variant === 'emergency' ? 'text-white' : 'text-base-ink')}>
+        <Text className={cn('text-base leading-5', variant === 'emergency' ? 'text-primary-foreground' : 'text-base-ink')}>
           {description.title && <Text className='font-bold'>{description.title} </Text>}
           {description.body}
-          {description.link && <Text className={cn('underline', variant === 'emergency' ? 'text-white' : 'text-primary')}>{description.link}</Text>}
+          {description.link && (
+            <Text className={cn('underline', variant === 'emergency' ? 'text-primary-foreground' : 'text-primary')}>{description.link}</Text>
+          )}
         </Text>
       );
     };
@@ -115,7 +119,7 @@ const Alert = forwardRef<ElementRef<typeof View>, AlertProps>(
           >
             <Icon
               name='info'
-              className={cn(variant === 'emergency' ? 'text-emergency fill-white' : 'text-white fill-base-ink')}
+              className={cn(variant === 'emergency' ? 'text-emergency fill-primary-foreground' : 'text-primary-foreground fill-base-ink')}
               size={alertStyle === 'slim' ? 24 : 32}
             />
           </View>
