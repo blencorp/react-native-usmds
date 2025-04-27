@@ -21712,6 +21712,7 @@ __metadata:
     "@react-native-community/datetimepicker": "npm:8.2.0"
     "@react-native-community/slider": "npm:4.5.5"
     "@rn-primitives/portal": "npm:^1.1.0"
+    "@rn-primitives/progress": "npm:^1.1.0"
     "@rn-primitives/slot": "npm:^1.1.0"
     "@rn-primitives/types": "npm:^1.1.0"
     "@storybook/addon-actions": "npm:^8.5.3"
