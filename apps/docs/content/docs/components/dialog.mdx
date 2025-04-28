@@ -1,0 +1,232 @@
+---
+title: Dialog
+description: A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.
+---
+
+# Dialog
+
+A modal dialog that renders content on top of the app, with an optional overlay backdrop.
+
+## Installation
+
+The Dialog component is built on top of `@rn-primitives/dialog`. No additional installation is required as it comes pre-installed.
+
+## Anatomy
+
+```tsx
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+  DialogClose,
+} from '@/components/ui/dialog'
+```
+
+## Portal Setup
+
+Important: The Dialog component requires a Portal Host to function properly. Add this to your root component:
+
+```tsx
+import { PortalHost } from '@rn-primitives/portal';
+
+function Root() {
+  return (
+    <>
+      <Stack />
+      {/* Default Portal Host (one per app) */}
+      <PortalHost />
+    </>
+  );
+}
+```
+
+## Usage
+
+### Basic Dialog
+
+```tsx
+<Dialog>
+  <DialogTrigger asChild>
+    <Button variant="outline">
+      <Text>Open Dialog</Text>
+    </Button>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Example Dialog</DialogTitle>
+      <DialogDescription>
+        This is a simple dialog that demonstrates the basic functionality.
+      </DialogDescription>
+    </DialogHeader>
+    <View className="py-4">
+      <Text className="text-base text-foreground">
+        Dialogs are great for displaying important information or getting user confirmation.
+      </Text>
+    </View>
+    <DialogFooter>
+      <DialogClose asChild>
+        <Button variant="outline">
+          <Text>Cancel</Text>
+        </Button>
+      </DialogClose>
+      <DialogClose asChild>
+        <Button variant="default">
+          <Text className="text-white">Continue</Text>
+        </Button>
+      </DialogClose>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+```
+
+### Form Dialog
+
+```tsx
+<Dialog>
+  <DialogTrigger asChild>
+    <Button>
+      <Text>Edit Profile</Text>
+    </Button>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Edit Profile</DialogTitle>
+      <DialogDescription>Make changes to your profile here.</DialogDescription>
+    </DialogHeader>
+    <View className="gap-4 py-4">
+      <View className="gap-2">
+        <Text className="text-sm font-medium text-foreground">Name</Text>
+        <View className="h-10 rounded-md border border-border bg-transparent px-3 py-2">
+          <Text>John Doe</Text>
+        </View>
+      </View>
+      <View className="gap-2">
+        <Text className="text-sm font-medium text-foreground">Email</Text>
+        <View className="h-10 rounded-md border border-border bg-transparent px-3 py-2">
+          <Text>john@example.com</Text>
+        </View>
+      </View>
+    </View>
+    <DialogFooter>
+      <DialogClose asChild>
+        <Button variant="outline">
+          <Text>Cancel</Text>
+        </Button>
+      </DialogClose>
+      <DialogClose asChild>
+        <Button>
+          <Text>Save Changes</Text>
+        </Button>
+      </DialogClose>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+```
+
+### Destructive Dialog
+
+```tsx
+<Dialog>
+  <DialogTrigger asChild>
+    <Button variant="destructive">
+      <Text>Delete Account</Text>
+    </Button>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Delete Account</DialogTitle>
+      <DialogDescription>
+        Are you sure you want to delete your account? This action cannot be undone.
+      </DialogDescription>
+    </DialogHeader>
+    <DialogFooter>
+      <DialogClose asChild>
+        <Button variant="outline">
+          <Text>Cancel</Text>
+        </Button>
+      </DialogClose>
+      <DialogClose asChild>
+        <Button variant="destructive">
+          <Text>Delete</Text>
+        </Button>
+      </DialogClose>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+```
+
+## Props
+
+### Dialog
+
+The root component that manages the dialog state.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `defaultOpen` | `boolean` | The open state of the dialog when it is initially rendered |
+| `open` | `boolean` | The controlled open state of the dialog |
+| `onOpenChange` | `(open: boolean) => void` | Event handler called when the open state changes |
+
+### DialogTrigger
+
+The button that opens the dialog.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `asChild` | `boolean` | Change the component to the HTML tag or custom component of the only child |
+
+### DialogContent
+
+The component that contains the dialog content.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `className` | `string` | Additional styles for the content container |
+| `portalHost` | `string` | Optional custom portal host name |
+
+### DialogHeader
+
+A container for the dialog header content.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `className` | `string` | Additional styles for the header container |
+
+### DialogFooter
+
+A container for the dialog footer content.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `className` | `string` | Additional styles for the footer container |
+
+### DialogTitle
+
+The title of the dialog.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `className` | `string` | Additional styles for the title text |
+
+### DialogDescription
+
+The description of the dialog.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `className` | `string` | Additional styles for the description text |
+
+### DialogClose
+
+The button that closes the dialog.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `asChild` | `boolean` | Change the component to the HTML tag or custom component of the only child |
+
+
+
