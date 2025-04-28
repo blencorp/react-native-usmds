@@ -1,3 +1,9 @@
+## [1.8.0](https://github.com/blencorp/react-native-usmds/compare/v1.7.12...v1.8.0) (2025-04-28)
+
+### Features
+
+* **ISSUE-34:** add progress component ([5e11884](https://github.com/blencorp/react-native-usmds/commit/5e118846d574b3475fa5683e8507d22fd818da51))
+
 ## [1.7.12](https://github.com/blencorp/react-native-usmds/compare/v1.7.11...v1.7.12) (2025-04-24)
 
 ### Bug Fixes
