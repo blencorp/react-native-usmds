@@ -1,0 +1,165 @@
+---
+title: Progress
+description: Progress indicators express an unspecified wait time or display the length of a process.
+---
+
+## Installation
+
+```package-install
+npx usmds add progress
+```
+
+## Usage
+
+```tsx
+import { Progress } from '@components/Progress';
+
+<Progress value={40} />
+```
+
+## Props
+
+### Progress
+
+Extends `ProgressPrimitive.Root` props.
+
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>value</td>
+      <td>`number`</td>
+      <td>-</td>
+      <td>The progress value between 0 and 100.</td>
+    </tr>
+    <tr>
+      <td>variant</td>
+      <td>`'default' | 'success' | 'error' | 'warning' | 'info'`</td>
+      <td>`'default'`</td>
+      <td>The visual style variant of the progress bar.</td>
+    </tr>
+    <tr>
+      <td>size</td>
+      <td>`'sm' | 'md' | 'lg'`</td>
+      <td>`'md'`</td>
+      <td>The size variant of the progress bar.</td>
+    </tr>
+    <tr>
+      <td>className</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>Additional Tailwind classes to apply to the root element.</td>
+    </tr>
+    <tr>
+      <td>indicatorClassName</td>
+      <td>`string`</td>
+      <td>-</td>
+      <td>Additional Tailwind classes to apply to the indicator element.</td>
+    </tr>
+  </tbody>
+</table>
+
+## Variants
+
+### Default
+
+```tsx
+<Progress value={40} variant="default" />
+```
+
+### Success
+
+```tsx
+<Progress value={80} variant="success" />
+```
+
+### Error
+
+```tsx
+<Progress value={40} variant="error" />
+```
+
+### Warning
+
+```tsx
+<Progress value={60} variant="warning" />
+```
+
+### Info
+
+```tsx
+<Progress value={80} variant="info" />
+```
+
+## Sizes
+
+### Small
+```tsx
+<Progress value={40} size="sm" />
+```
+
+### Default (Medium)
+```tsx
+<Progress value={40} size="md" />
+```
+
+### Large
+```tsx
+<Progress value={40} size="lg" />
+```
+
+## Custom Styling
+
+The Progress component can be customized using className props:
+
+### Custom Width
+```tsx
+<Progress value={40} className="w-[400px]" />
+```
+
+### Custom Colors
+```tsx
+<Progress 
+  value={40} 
+  className="bg-gray-200" 
+  indicatorClassName="bg-blue-500"
+/>
+```
+
+## Animated Progress
+
+The Progress component includes built-in smooth animations when the value changes:
+
+```tsx
+function AnimatedProgress() {
+  const [progress, setProgress] = useState(40);
+
+  const randomize = useCallback(() => {
+    setProgress(Math.floor(Math.random() * 100));
+  }, []);
+
+  return (
+    <View className="gap-4">
+      <Progress value={progress} />
+      <Button onPress={randomize}>
+        <Text>Randomize</Text>
+      </Button>
+    </View>
+  );
+}
+```
+
+## Accessibility
+
+The Progress component:
+- Uses semantic HTML `<progress>` element on web
+- Provides ARIA attributes for screen readers
+- Maintains WCAG color contrast requirements
+- Includes smooth animations that respect reduced motion preferences
