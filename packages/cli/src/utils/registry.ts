@@ -1,5 +1,6 @@
 export const ALL_COMPONENTS = [
   'Alert',
+  'Avatar',
   'Badge',
   'Banner',
   'BiometricSignIn',
@@ -8,6 +9,8 @@ export const ALL_COMPONENTS = [
   'Card',
   'Checkbox',
   'CheckboxTile',
+  'Collapsible',
+  'Dialog',
   'Icon',
   'Link',
   'Pagination',
@@ -441,6 +444,11 @@ export const COMPONENT_METADATA: Record<string, ComponentMetadata> = {
     dependencies: [],
     internalDependencies: ['Icon']
   },
+  Avatar: {
+    name: 'Avatar',
+    dependencies: ['@rn-primitives/avatar'],
+    internalDependencies: []
+  },
   Badge: {
     name: 'Badge',
     dependencies: [],
@@ -480,6 +488,15 @@ export const COMPONENT_METADATA: Record<string, ComponentMetadata> = {
     name: 'CheckboxTile',
     dependencies: ['@rn-primitives/checkbox'],
     internalDependencies: ['Checkbox']
+  },
+  Collapsible: {
+    name: 'Collapsible',
+    dependencies: ['@rn-primitives/collapsible']
+  },
+  Dialog: {
+    name: 'Dialog',
+    dependencies: ['@rn-primitives/dialog', '@rn-primitives/portal'],
+    internalDependencies: []
   },
   Icon: {
     name: 'Icon',
@@ -682,6 +699,49 @@ const Alert = forwardRef<ElementRef<typeof View>, AlertProps>(
 Alert.displayName = 'Alert';
 
 export { Alert, type AlertProps };`,
+
+  Avatar: `import * as AvatarPrimitive from '@rn-primitives/avatar';
+import * as React from 'react';
+import { cn } from '../../lib/utils';
+
+const Avatar = React.forwardRef<AvatarPrimitive.RootRef, AvatarPrimitive.RootProps>(
+  ({ className, ...props }, ref) => (
+    <AvatarPrimitive.Root
+      ref={ref}
+      className={cn('relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full', className)}
+      {...props}
+    />
+  )
+);
+Avatar.displayName = AvatarPrimitive.Root.displayName;
+
+const AvatarImage = React.forwardRef<AvatarPrimitive.ImageRef, AvatarPrimitive.ImageProps>(
+  ({ className, ...props }, ref) => (
+    <AvatarPrimitive.Image
+      ref={ref}
+      className={cn('aspect-square h-full w-full', className)}
+      {...props}
+    />
+  )
+);
+AvatarImage.displayName = AvatarPrimitive.Image.displayName;
+
+const AvatarFallback = React.forwardRef<AvatarPrimitive.FallbackRef, AvatarPrimitive.FallbackProps>(
+  ({ className, ...props }, ref) => (
+    <AvatarPrimitive.Fallback
+      ref={ref}
+      className={cn(
+        'flex h-full w-full items-center justify-center rounded-full bg-muted',
+        className
+      )}
+      {...props}
+    />
+  )
+);
+AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;
+
+export { Avatar, AvatarFallback, AvatarImage };`,
+
 
   Badge: `import { type VariantProps, cva } from 'class-variance-authority';
 import { View } from 'react-native';
@@ -1293,6 +1353,123 @@ const Card = forwardRef<View, CardProps>(({ title, description, buttonText, medi
 Card.displayName = 'Card';
 
 export { Card };`,
+
+  Collapsible: `import * as CollapsiblePrimitive from '@rn-primitives/collapsible';
+
+const Collapsible = CollapsiblePrimitive.Root;
+
+const CollapsibleTrigger = CollapsiblePrimitive.Trigger;
+
+const CollapsibleContent = CollapsiblePrimitive.Content;
+
+export { Collapsible, CollapsibleTrigger, CollapsibleContent };`,
+
+  Dialog: `import * as DialogPrimitive from '@rn-primitives/dialog';
+import * as React from 'react';
+import { StyleSheet, View, type ViewProps } from 'react-native';
+import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
+import { cn } from '@/lib/utils';
+import { Text } from '@/components/ui/text';
+
+const Dialog = DialogPrimitive.Root;
+
+const DialogTrigger = DialogPrimitive.Trigger;
+
+const DialogPortal = DialogPrimitive.Portal;
+
+const DialogClose = DialogPrimitive.Close;
+
+const DialogOverlay = React.forwardRef<DialogPrimitive.OverlayRef, DialogPrimitive.OverlayProps>(
+  ({ className, children, ...props }, ref) => {
+    return (
+      <DialogPrimitive.Overlay
+        style={StyleSheet.absoluteFill}
+        className={cn('flex bg-black/80 justify-center items-center p-2', className)}
+        {...props}
+        ref={ref}
+      >
+        <Animated.View entering={FadeIn.duration(150)} exiting={FadeOut.duration(150)}>
+          <>{children}</>
+        </Animated.View>
+      </DialogPrimitive.Overlay>
+    );
+  }
+);
+
+DialogOverlay.displayName = 'DialogOverlay';
+
+const DialogContent = React.forwardRef<
+  DialogPrimitive.ContentRef,
+  DialogPrimitive.ContentProps & { portalHost?: string }
+>(({ className, children, portalHost, ...props }, ref) => {
+  return (
+    <DialogPortal hostName={portalHost}>
+      <DialogOverlay>
+        <DialogPrimitive.Content
+          ref={ref}
+          className={cn(
+            'max-w-lg gap-4 border border-border bg-background p-6 shadow-lg rounded-lg',
+            className
+          )}
+          {...props}
+        >
+          {children}
+          <DialogPrimitive.Close className="absolute right-4 top-4 p-0.5 rounded-sm opacity-70">
+            <Text className='text-muted-foreground text-lg font-medium'>X</Text>
+          </DialogPrimitive.Close>
+        </DialogPrimitive.Content>
+      </DialogOverlay>
+    </DialogPortal>
+  );
+});
+
+DialogContent.displayName = DialogPrimitive.Content.displayName;
+
+const DialogHeader = ({ className, ...props }: ViewProps) => (
+  <View className={cn('flex flex-col gap-1.5 text-center', className)} {...props} />
+);
+DialogHeader.displayName = 'DialogHeader';
+
+const DialogFooter = ({ className, ...props }: ViewProps) => (
+  <View className={cn('flex flex-col-reverse gap-2', className)} {...props} />
+);
+DialogFooter.displayName = 'DialogFooter';
+
+const DialogTitle = React.forwardRef<DialogPrimitive.TitleRef, DialogPrimitive.TitleProps>(
+  ({ className, ...props }, ref) => (
+    <DialogPrimitive.Title
+      ref={ref}
+      className={cn('text-xl text-foreground font-semibold leading-none tracking-tight', className)}
+      {...props}
+    />
+  )
+);
+DialogTitle.displayName = DialogPrimitive.Title.displayName;
+
+const DialogDescription = React.forwardRef<
+  DialogPrimitive.DescriptionRef,
+  DialogPrimitive.DescriptionProps
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Description
+    ref={ref}
+    className={cn('text-base text-muted-foreground', className)}
+    {...props}
+  />
+));
+DialogDescription.displayName = DialogPrimitive.Description.displayName;
+
+export {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogOverlay,
+  DialogPortal,
+  DialogTitle,
+  DialogTrigger,
+};`,
 
   Icon: `import { View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
