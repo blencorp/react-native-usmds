@@ -1,3 +1,9 @@
+## [1.9.0](https://github.com/blencorp/react-native-usmds/compare/v1.8.0...v1.9.0) (2025-04-28)
+
+### Features
+
+* **ISSUE-19:** avatar, dialog, collapsible ([6513a06](https://github.com/blencorp/react-native-usmds/commit/6513a06b892770109ae23694dfe501b7ccf0b608))
+
 ## [1.8.0](https://github.com/blencorp/react-native-usmds/compare/v1.7.12...v1.8.0) (2025-04-28)
 
 ### Features
