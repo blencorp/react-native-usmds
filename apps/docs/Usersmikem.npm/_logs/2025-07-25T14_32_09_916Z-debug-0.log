@@ -1,0 +1,49 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@10.9.2
+2 info using node@v22.17.1
+3 silly config load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\mikem\.npmrc
+5 silly config load:file:C:\Users\mikem\.npm-global\etc\npmrc
+6 verbose title npm install yarn
+7 verbose argv "install" "--global" "yarn"
+8 verbose logfile logs-max:10 dir:C:\Users\mikem\OneDrive\Documents\AI-Intern-Files\Week-One\USMDS-Repo\react-native-usmds\apps\docs\Usersmikem.npm\_logs\2025-07-25T14_32_09_916Z-
+9 verbose logfile C:\Users\mikem\OneDrive\Documents\AI-Intern-Files\Week-One\USMDS-Repo\react-native-usmds\apps\docs\Usersmikem.npm\_logs\2025-07-25T14_32_09_916Z-debug-0.log
+10 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+11 silly logfile start cleaning logs, removing 1 files
+12 silly idealTree buildDeps
+13 silly fetch manifest yarn@*
+14 silly packumentCache full:https://registry.npmjs.org/yarn cache-miss
+15 silly logfile done cleaning log files
+16 http fetch GET 200 https://registry.npmjs.org/yarn 246ms (cache miss)
+17 silly packumentCache full:https://registry.npmjs.org/yarn set size:undefined disposed:false
+18 silly placeDep ROOT yarn@1.22.22 OK for:  want: *
+19 silly reify mark retired [
+19 silly reify   'C:\\Users\\mikem\\.npm-global\\node_modules\\yarn',
+19 silly reify   'C:\\Users\\mikem\\.npm-global\\yarn',
+19 silly reify   'C:\\Users\\mikem\\.npm-global\\yarn.cmd',
+19 silly reify   'C:\\Users\\mikem\\.npm-global\\yarn.ps1',
+19 silly reify   'C:\\Users\\mikem\\.npm-global\\yarnpkg',
+19 silly reify   'C:\\Users\\mikem\\.npm-global\\yarnpkg.cmd',
+19 silly reify   'C:\\Users\\mikem\\.npm-global\\yarnpkg.ps1'
+19 silly reify ]
+20 silly reify moves {
+20 silly reify   'C:\\Users\\mikem\\.npm-global\\node_modules\\yarn': 'C:\\Users\\mikem\\.npm-global\\node_modules\\.yarn-ADpQ7w1C',
+20 silly reify   'C:\\Users\\mikem\\.npm-global\\yarn': 'C:\\Users\\mikem\\.npm-global\\.yarn-QxXD51xT',
+20 silly reify   'C:\\Users\\mikem\\.npm-global\\yarn.cmd': 'C:\\Users\\mikem\\.npm-global\\.yarn.cmd-GioulDCn',
+20 silly reify   'C:\\Users\\mikem\\.npm-global\\yarn.ps1': 'C:\\Users\\mikem\\.npm-global\\.yarn.ps1-OtGhmvnb',
+20 silly reify   'C:\\Users\\mikem\\.npm-global\\yarnpkg': 'C:\\Users\\mikem\\.npm-global\\.yarnpkg-IYNRmm3m',
+20 silly reify   'C:\\Users\\mikem\\.npm-global\\yarnpkg.cmd': 'C:\\Users\\mikem\\.npm-global\\.yarnpkg.cmd-IyoaFBMc',
+20 silly reify   'C:\\Users\\mikem\\.npm-global\\yarnpkg.ps1': 'C:\\Users\\mikem\\.npm-global\\.yarnpkg.ps1-TINQXihr'
+20 silly reify }
+21 http cache yarn@https://registry.npmjs.org/yarn/-/yarn-1.22.22.tgz 0ms (cache hit)
+22 silly tarball no local data for yarn@https://registry.npmjs.org/yarn/-/yarn-1.22.22.tgz. Extracting by manifest.
+23 http fetch GET 200 https://registry.npmjs.org/yarn/-/yarn-1.22.22.tgz 228ms (cache miss)
+24 info run yarn@1.22.22 preinstall node_modules/yarn :; (node ./preinstall.js > /dev/null 2>&1 || true)
+25 info run yarn@1.22.22 preinstall { code: 0, signal: null }
+26 silly CHANGE node_modules/yarn
+27 verbose cwd C:\Users\mikem\OneDrive\Documents\AI-Intern-Files\Week-One\USMDS-Repo\react-native-usmds\apps\docs
+28 verbose os Windows_NT 10.0.26100
+29 verbose node v22.17.1
+30 verbose npm  v10.9.2
+31 verbose exit 0
+32 info ok

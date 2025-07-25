@@ -1,8 +1,9 @@
 import { View } from 'react-native';
 import { cn } from '@/lib/utils';
 import { ComponentPropsWithoutRef, forwardRef } from 'react';
+import type { ViewProps } from 'react-native';
 
-interface ButtonGroupProps extends ComponentPropsWithoutRef<typeof View> {
+interface ButtonGroupProps extends ViewProps {
   orientation?: 'horizontal' | 'vertical';
   gap?: number;
   className?: string;

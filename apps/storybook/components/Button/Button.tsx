@@ -2,7 +2,9 @@ import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef } from 'rea
 import { Pressable, PressableStateCallbackType, View } from 'react-native';
 import { type VariantProps, cva } from 'class-variance-authority';
 import { TextClassContext } from '../Text/Text';
-import { cn } from '@/lib/utils';
+import { cn } from '../../../storybook/lib/utils';
+import type { PressableProps } from 'react-native';
+import type { Ref } from 'react';
 
 const buttonVariants = cva('flex items-center justify-center rounded-lg font-sans text-center', {
   variants: {
@@ -54,7 +56,7 @@ const buttonTextVariants = cva('text-center', {
   }
 });
 
-type ButtonProps = ComponentPropsWithoutRef<typeof Pressable> &
+type ButtonProps = PressableProps &
   VariantProps<typeof buttonVariants> & {
     className?: string;
     startIcon?: React.ReactNode;
@@ -62,45 +64,50 @@ type ButtonProps = ComponentPropsWithoutRef<typeof Pressable> &
     children: ReactNode | ((state: PressableStateCallbackType) => ReactNode);
   };
 
-const Button = forwardRef<ElementRef<typeof Pressable>, ButtonProps>(({ className, variant, size, children, startIcon, endIcon, ...props }, ref) => {
-  const iconPosition = startIcon ? 'left' : endIcon ? 'right' : 'none';
+const Button = forwardRef(
+  (
+    { className, variant, size, children, startIcon, endIcon, disabled, ...props }: ButtonProps,
+    ref: Ref<View>
+  ) => {
+    const iconPosition = startIcon ? 'left' : endIcon ? 'right' : 'none';
 
-  return (
-    <TextClassContext.Provider
-      value={buttonTextVariants({
-        variant,
-        size,
-        className: 'web:pointer-events-none'
-      })}
-    >
-      <Pressable
-        className={cn('group', buttonVariants({ variant, size, iconPosition, className }))}
-        ref={ref}
-        role='button'
-        android_ripple={{
-          color: 'rgba(0, 0, 0, 0.2)',
-          borderless: false,
-          foreground: true
-        }}
-        style={({ pressed }) => [
-          {
-            opacity: props.disabled ? 0.5 : pressed ? 0.8 : 1,
-            transform: [{ scale: pressed && !props.disabled ? 0.98 : 1 }]
-          }
-        ]}
-        {...props}
+    return (
+      <TextClassContext.Provider
+        value={buttonTextVariants({
+          variant,
+          size,
+          className: 'web:pointer-events-none'
+        })}
       >
-        {(state) => (
-          <View className='flex-row items-center justify-center flex-1' style={{ opacity: state.pressed && !props.disabled ? 0.8 : 1 }}>
-            {startIcon && <View className='mr-2'>{startIcon}</View>}
-            {typeof children === 'function' ? children(state) : children}
-            {endIcon && <View className='ml-2'>{endIcon}</View>}
-          </View>
-        )}
-      </Pressable>
-    </TextClassContext.Provider>
-  );
-});
+        <Pressable
+          className={cn('group', buttonVariants({ variant, size, iconPosition, className }))}
+          ref={ref}
+          role='button'
+          android_ripple={{
+            color: 'rgba(0, 0, 0, 0.2)',
+            borderless: false,
+            foreground: true
+          }}
+          style={({ pressed }) => [
+            {
+              opacity: disabled ? 0.5 : pressed ? 0.8 : 1,
+              transform: [{ scale: pressed && !disabled ? 0.98 : 1 }]
+            }
+          ]}
+          {...props}
+        >
+          {(state) => (
+            <View className='flex-row items-center justify-center flex-1' style={{ opacity: state.pressed && !disabled ? 0.8 : 1 }}>
+              {startIcon && <View className='mr-2'>{startIcon}</View>}
+              {typeof children === 'function' ? children(state) : children}
+              {endIcon && <View className='ml-2'>{endIcon}</View>}
+            </View>
+          )}
+        </Pressable>
+      </TextClassContext.Provider>
+    );
+  }
+) as React.FC<ButtonProps>;
 
 Button.displayName = 'Button';
 
