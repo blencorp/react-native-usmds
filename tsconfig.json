@@ -2,19 +2,17 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
     "target": "esnext",
-    "module": "commonjs",
-    "lib": ["esnext"],
-    "moduleResolution": "node",
+    "module": "esnext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
+    "jsx": "preserve",
+    "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "isolatedModules": false,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./*"]
-    }
-  },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+    "resolveJsonModule": true,
+    "isolatedModules": true
+  }
 }
+
