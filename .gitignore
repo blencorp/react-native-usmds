@@ -2,6 +2,7 @@
 apps/*/credentials.json
 apps/*/build
 packages/*/build
+**/Usersmikem.npm/
 
 # Turborepo
 .turbo
