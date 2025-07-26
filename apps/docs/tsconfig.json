@@ -1,11 +1,22 @@
 {
-  "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "jsx": "preserve",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
     "baseUrl": ".",
     "paths": {
-  "@components-web": ["apps/web/components-web/index.ts"],
-  "@components-web/*": ["apps/web/components-web/*"]
-},
+      "@components-web": ["apps/web/components-web/index.ts"],
+      "@components-web/*": ["apps/web/components-web/*"]
+    },
     "noEmit": true,
     "incremental": true,
     "plugins": [
@@ -21,7 +32,5 @@
     ".next/types/**/*.ts",
     "content/docs/gettingstarted.mdx"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }
