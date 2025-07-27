@@ -14,6 +14,7 @@
     "isolatedModules": true,
     "baseUrl": ".",
     "paths": {
+      "@/*": ["src/*"],
       "@components-web": ["apps/web/components-web/index.ts"],
       "@components-web/*": ["apps/web/components-web/*"]
     },
