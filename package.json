@@ -30,6 +30,7 @@
     "lucide-react-native": "^0.475.0",
     "nativewind": "^4.1.23",
     "ora": "^7.0.1",
+    "prismjs": "^1.30.0",
     "prompts": "^2.4.2",
     "react-native-reanimated": "^3.16.7",
     "react-native-svg": "^15.11.1",
