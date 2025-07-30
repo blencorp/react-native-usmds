@@ -8,7 +8,7 @@ This is a Next.js application generated with
 Ensure you're using Node.js version 22:
 
 ```bash
-nvm install 22 # Only if it's not already installed
+nvm install
 nvm use
 
 Run development server:
