@@ -1,22 +1,49 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
+import Link from "next/link";
+import { useEffect } from "react";
+import InstallSnippet from "./installSnippet"; // ✅ Make sure this path is correct
 
 export default function HomePage() {
+  useEffect(() => {
+    // Optional: Prism fallback (only needed if Prism is fully set up)
+    try {
+      // @ts-ignore - PrismJS component types not available
+      import("prismjs/components/prism-bash");
+      import("prismjs").then((Prism) => Prism.highlightAll());
+    } catch {}
+  }, []);
+
   return (
     <div className="min-h-screen bg-white text-gray-900">
-
       {/* Navigation */}
       <nav className="border-b bg-white/80 backdrop-blur sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
           <div className="flex items-center gap-2">
-            <div className="h-8 w-8 flex items-center justify-center rounded-md bg-blue-600 text-white font-bold text-sm">U</div>
+            <div className="h-8 w-8 flex items-center justify-center rounded-md bg-blue-600 text-white font-bold text-sm">
+              U
+            </div>
             <span className="text-lg font-semibold">USMDS</span>
           </div>
           <div className="hidden md:flex items-center gap-6 text-sm font-medium">
-            <Link href="/docs" className="text-gray-500 hover:text-gray-900 transition">Documentation</Link>
-            <Link href="/playground" className="text-gray-500 hover:text-gray-900 transition">Playground</Link>
-            <Link href="/docs/components" className="text-gray-500 hover:text-gray-900 transition">Components</Link>
+            <Link
+              href="/docs"
+              className="text-gray-500 hover:text-gray-900 transition"
+            >
+              Documentation
+            </Link>
+            <Link
+              href="/playground"
+              className="text-gray-500 hover:text-gray-900 transition"
+            >
+              Playground
+            </Link>
+            <Link
+              href="/docs/components"
+              className="text-gray-500 hover:text-gray-900 transition"
+            >
+              Components
+            </Link>
             <Link
               href="/docs"
               className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
@@ -32,13 +59,14 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
           <div className="text-center lg:text-left">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
-              React Native{' '}
+              React Native{" "}
               <span className="bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
                 USMDS
               </span>
             </h1>
             <p className="mt-6 text-lg text-gray-600 max-w-xl mx-auto lg:mx-0">
-              U.S. Mobile Design System components for React Native apps. Build consistent, accessible, and beautiful mobile experiences.
+              U.S. Mobile Design System components for React Native apps. Build
+              consistent, accessible, and beautiful mobile experiences.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link
@@ -61,11 +89,15 @@ export default function HomePage() {
               <div className="relative bg-white border rounded-2xl p-8 shadow-xl">
                 <div className="flex items-center justify-center h-48 w-48 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl">
                   <div className="text-center">
-                    <div className="text-4xl font-bold text-blue-600 mb-2">📱</div>
+                    <div className="text-4xl font-bold text-blue-600 mb-2">
+                      📱
+                    </div>
                     <p className="text-sm font-medium text-gray-600">USMDS</p>
                   </div>
                 </div>
-                <p className="text-xs text-center text-gray-500 mt-4">USMDS Component Preview</p>
+                <p className="text-xs text-center text-gray-500 mt-4">
+                  USMDS Component Preview
+                </p>
               </div>
             </div>
           </div>
@@ -84,19 +116,22 @@ export default function HomePage() {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                title: 'Accessible',
-                desc: 'Built with accessibility in mind. All components meet WCAG standards and are tested for screen readers.',
+                title: "Accessible",
+                desc: "Built with accessibility in mind. All components meet WCAG standards and are tested for screen readers.",
               },
               {
-                title: 'Customizable',
-                desc: 'Easily adapt components to your specific requirements while maintaining design consistency.',
+                title: "Customizable",
+                desc: "Easily adapt components to your specific requirements while maintaining design consistency.",
               },
               {
-                title: 'Cross-Platform',
-                desc: 'Works seamlessly on both iOS and Android platforms with consistent behavior.',
+                title: "Cross-Platform",
+                desc: "Works seamlessly on both iOS and Android platforms with consistent behavior.",
               },
             ].map(({ title, desc }) => (
-              <div key={title} className="bg-white p-6 rounded-lg shadow-sm text-center md:text-left">
+              <div
+                key={title}
+                className="bg-white p-6 rounded-lg shadow-sm text-center md:text-left"
+              >
                 <h3 className="text-xl font-bold mb-2">{title}</h3>
                 <p className="text-gray-600">{desc}</p>
               </div>
@@ -105,12 +140,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ✅ Playground Preview Section */}
+      {/* Playground Preview Section */}
       <section className="py-20 bg-blue-50">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold mb-6">Try it Live</h2>
           <p className="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
-            Use the interactive playground to explore and test USMDS components in real time.
+            Use the interactive playground to explore and test USMDS components
+            in real time.
           </p>
           <Link
             href="/playground"
@@ -121,7 +157,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Components */}
+      {/* Featured Components */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
@@ -133,23 +169,29 @@ export default function HomePage() {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                title: 'Alert',
-                desc: 'Display important messages with severity levels.',
-                href: '/docs/components/alert',
+                title: "Alert",
+                desc: "Display important messages with severity levels.",
+                href: "/docs/components/alert",
               },
               {
-                title: 'Button',
-                desc: 'Multiple variants and sizes for actions.',
-                href: '/docs/components/button',
+                title: "Button",
+                desc: "Multiple variants and sizes for actions.",
+                href: "/docs/components/button",
               },
               {
-                title: 'Card',
-                desc: 'Flexible containers for UI content and actions.',
-                href: '/docs/components/card',
+                title: "Card",
+                desc: "Flexible containers for UI content and actions.",
+                href: "/docs/components/card",
               },
             ].map(({ title, desc, href }) => (
-              <Link key={title} href={href} className="block group bg-white p-6 border rounded-lg hover:shadow-md transition">
-                <h3 className="text-xl font-bold mb-2 group-hover:text-blue-600">{title}</h3>
+              <Link
+                key={title}
+                href={href}
+                className="block group bg-white p-6 border rounded-lg hover:shadow-md transition"
+              >
+                <h3 className="text-xl font-bold mb-2 group-hover:text-blue-600">
+                  {title}
+                </h3>
                 <p className="text-gray-600 mb-4">{desc}</p>
                 <p className="text-blue-600 font-medium">View component →</p>
               </Link>
@@ -166,13 +208,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Getting Started */}
+      {/* 🆕 Get Started with InstallSnippet */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <h2 className="text-3xl font-bold mb-4">Get Started</h2>
             <p className="text-gray-600 mb-6">
-              Follow our guide to install and configure the USMDS component library.
+              Follow our guide to install and configure the USMDS component
+              library.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
@@ -189,15 +232,9 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <pre className="bg-gray-900 text-gray-100 p-4 rounded text-sm overflow-x-auto">
-              <code>{`# Using npm
-npx usmds init
 
-# Using yarn
-yarn usmds init`}</code>
-            </pre>
-          </div>
+          {/* ✅ Copy-enabled snippet */}
+          <InstallSnippet />
         </div>
       </section>
 
@@ -206,7 +243,9 @@ yarn usmds init`}</code>
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12">
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <div className="h-8 w-8 flex items-center justify-center rounded-md bg-white text-blue-700 font-bold text-sm">U</div>
+              <div className="h-8 w-8 flex items-center justify-center rounded-md bg-white text-blue-700 font-bold text-sm">
+                U
+              </div>
               <span className="text-lg font-semibold">USMDS</span>
             </div>
             <p className="text-sm text-gray-400">© 2025 React Native USMDS</p>
@@ -214,9 +253,21 @@ yarn usmds init`}</code>
           <div>
             <h4 className="text-sm font-semibold mb-4">Documentation</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li><Link href="/docs" className="hover:text-white">Getting Started</Link></li>
-              <li><Link href="/docs/components" className="hover:text-white">Components</Link></li>
-              <li><Link href="/playground" className="hover:text-white">Playground</Link></li>
+              <li>
+                <Link href="/docs" className="hover:text-white">
+                  Getting Started
+                </Link>
+              </li>
+              <li>
+                <Link href="/docs/components" className="hover:text-white">
+                  Components
+                </Link>
+              </li>
+              <li>
+                <Link href="/playground" className="hover:text-white">
+                  Playground
+                </Link>
+              </li>
             </ul>
           </div>
           <div>
