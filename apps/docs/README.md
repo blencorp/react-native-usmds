@@ -3,13 +3,12 @@
 This is a Next.js application generated with
 [Create Fumadocs](https://github.com/fuma-nama/fumadocs).
 
-## Node Version Setup
+## Getting Started
 
 Ensure you're using Node.js version 22:
 
 ```bash
-nvm install
-nvm use
+nvm install && nvm use
 
 Run development server:
 
