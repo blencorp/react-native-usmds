@@ -1,6 +1,16 @@
+'use client';
+
 import Link from 'next/link';
+import { useEffect } from 'react';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-bash';
+import 'prismjs/themes/prism.css';
 
 export default function HomePage() {
+  useEffect(() => {
+    Prism.highlightAll();
+  }, []);
+  
   return (
     <div className='flex flex-col min-h-screen'>
       {/* Header/Hero Section */}
@@ -136,7 +146,7 @@ export default function HomePage() {
             </div>
             <div className='md:w-1/2 bg-white p-4 rounded-lg shadow-sm'>
               <pre className='bg-gray-900 text-gray-100 p-4 rounded text-sm overflow-x-auto'>
-                <code>{`# Using npm
+                <code className = 'language-bash'>{`# Using npm
 npx usmds init
 
 # Using yarn

@@ -7874,6 +7874,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/prismjs@npm:^1":
+  version: 1.26.5
+  resolution: "@types/prismjs@npm:1.26.5"
+  checksum: 10c0/5619cb449e0d8df098c8759d6f47bf8fdd510abf5dbdfa999e55c6a2545efbd1e209cc85a33d8d9f4ff2898089a1a6d9a70737c9baffaae635c46852c40d384a
+  languageName: node
+  linkType: hard
+
 "@types/prompts@npm:^2.4.5":
   version: 2.4.9
   resolution: "@types/prompts@npm:2.4.9"
@@ -19579,6 +19586,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"prismjs@npm:^1.30.0":
+  version: 1.30.0
+  resolution: "prismjs@npm:1.30.0"
+  checksum: 10c0/f56205bfd58ef71ccfcbcb691fd0eb84adc96c6ff21b0b69fc6fdcf02be42d6ef972ba4aed60466310de3d67733f6a746f89f2fb79c00bf217406d465b3e8f23
+  languageName: node
+  linkType: hard
+
 "proc-log@npm:^4.0.0":
   version: 4.2.0
   resolution: "proc-log@npm:4.2.0"
@@ -23789,6 +23803,7 @@ __metadata:
     "@semantic-release/changelog": "npm:^6.0.3"
     "@semantic-release/git": "npm:^10.0.1"
     "@semantic-release/npm": "npm:^12.0.1"
+    "@types/prismjs": "npm:^1"
     chalk: "npm:^5.3.0"
     class-variance-authority: "npm:^0.7.1"
     clsx: "npm:^2.1.1"
@@ -23799,6 +23814,7 @@ __metadata:
     nativewind: "npm:^4.1.23"
     ora: "npm:^7.0.1"
     prettier: "npm:^3.2.5"
+    prismjs: "npm:^1.30.0"
     prompts: "npm:^2.4.2"
     react-native-reanimated: "npm:^3.16.7"
     react-native-svg: "npm:^15.11.1"
