@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-bash';
 import 'prismjs/themes/prism.css';
+
 export default function HomePage() {
   useEffect(() => {
     Prism.highlightAll();
