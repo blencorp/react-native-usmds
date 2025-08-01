@@ -1,0 +1,429 @@
+:root {
+
+  /* === USWDS THEME COLOR TOKENS === */
+  --tw-ring-color: var(--usa-color-focus);
+  /* === SYSTEM COLOR TOKENS === */
+  /* Red cool */
+--uswds-red-cool-5:    #f8eff1;
+--uswds-red-cool-10:   #f3e1e4;
+--uswds-red-cool-20:   #ecbec6;
+--uswds-red-cool-30:   #e09aa6;
+--uswds-red-cool-40:   #e16b80;
+--uswds-red-cool-50:   #cd425b;
+--uswds-red-cool-60:   #9e394b;
+--uswds-red-cool-70:   #68363f;
+--uswds-red-cool-80:   #40282c;
+--uswds-red-cool-90:   #1e1517;
+--uswds-red-cool-5v:   #fff2f5;
+--uswds-red-cool-10v:  #f8dfe2;
+--uswds-red-cool-20v:  #f8b9c5;
+--uswds-red-cool-30v:  #fd8ba0;
+--uswds-red-cool-40v:  #f45d79;
+--uswds-red-cool-50v:  #e41d3d;
+--uswds-red-cool-60v:  #b21d38;
+--uswds-red-cool-70v:  #822133;
+--uswds-red-cool-80v:  #4f1c24;
+
+/* Red */
+--uswds-red-5:    #f9eeee;
+--uswds-red-10:   #f8e1de;
+--uswds-red-20:   #f7bbb1;
+--uswds-red-30:   #f2938c;
+--uswds-red-40:   #e9695f;
+--uswds-red-50:   #d83933;
+--uswds-red-60:   #a23737;
+--uswds-red-70:   #6f3331;
+--uswds-red-80:   #3e2927;
+--uswds-red-90:   #1b1616;
+
+/* Red warm */
+--uswds-red-warm-5:   #f6efea;
+--uswds-red-warm-10:  #f4e3db;
+--uswds-red-warm-20:  #ecc0a7;
+--uswds-red-warm-30:  #dca081;
+--uswds-red-warm-40:  #d27a56;
+--uswds-red-warm-50:  #c3512c;
+--uswds-red-warm-60:  #805039;
+--uswds-red-warm-70:  #524236;
+--uswds-red-warm-80:  #332d29;
+--uswds-red-warm-90:  #1f1c18;
+--uswds-red-warm-5v:  #fff5ee;
+--uswds-red-warm-10v: #fce1d4;
+--uswds-red-warm-20v: #f6bd9c;
+--uswds-red-warm-30v: #f39268;
+--uswds-red-warm-40v: #ef5e25;
+--uswds-red-warm-50v: #d54309;
+--uswds-red-warm-60v: #9c3d10;
+--uswds-red-warm-70v: #63340f;
+--uswds-red-warm-80v: #3e2a1e;
+
+/* Red vivid */
+--uswds-red-5v:  #fff3f2;
+--uswds-red-10v: #fde0db;
+--uswds-red-20v: #fdb8ae;
+--uswds-red-30v: #ff8d7b;
+--uswds-red-40v: #fb5a47;
+--uswds-red-50v: #e52207;
+--uswds-red-60v: #b50909;
+--uswds-red-70v: #8b0a03;
+--uswds-red-80v: #5c1111;
+
+/* Orange warm */
+--uswds-orange-warm-5:    #faeee5;
+--uswds-orange-warm-10:   #fbe0d0;
+--uswds-orange-warm-20:   #f7bca2;
+--uswds-orange-warm-30:   #f3966d;
+--uswds-orange-warm-40:   #e17141;
+--uswds-orange-warm-50:   #bd5727;
+--uswds-orange-warm-60:   #914734;
+--uswds-orange-warm-70:   #633a32;
+--uswds-orange-warm-80:   #3d2925;
+--uswds-orange-warm-90:   #1c1615;
+--uswds-orange-warm-5v:   #fff3ea;
+--uswds-orange-warm-10v:  #ffe2d1;
+--uswds-orange-warm-20v:  #fbbaa7;
+--uswds-orange-warm-30v:  #fc906d;
+--uswds-orange-warm-40v:  #ff580a;
+--uswds-orange-warm-50v:  #cf4900;
+--uswds-orange-warm-60v:  #a72f10;
+--uswds-orange-warm-70v:  #782312;
+--uswds-orange-warm-80v:  #3d231d;
+
+/* Orange */
+--uswds-orange-5:   #f6efe9;
+--uswds-orange-10:  #f2e4d4;
+--uswds-orange-20:  #f3bf90;
+--uswds-orange-30:  #f09860;
+--uswds-orange-40:  #dd7533;
+--uswds-orange-50:  #a86437;
+--uswds-orange-60:  #775540;
+--uswds-orange-70:  #524236;
+--uswds-orange-80:  #332d27;
+--uswds-orange-90:  #1b1614;
+
+/* Orange vivid */
+--uswds-orange-5v:  #fef2e4;
+--uswds-orange-10v: #fce2c5;
+--uswds-orange-20v: #ffbc78;
+--uswds-orange-30v: #fa9441;
+--uswds-orange-40v: #e66f0e;
+--uswds-orange-50v: #c05600;
+--uswds-orange-60v: #8c471c;
+--uswds-orange-70v: #5f3617;
+--uswds-orange-80v: #352313;
+
+/* Gold */
+--uswds-gold-5:   #f5f0e6;
+--uswds-gold-10:  #f1e5cd;
+--uswds-gold-20:  #dec69a;
+--uswds-gold-30:  #c7a97b;
+--uswds-gold-40:  #ad8b65;
+--uswds-gold-50:  #8e704f;
+--uswds-gold-60:  #6b5947;
+--uswds-gold-70:  #4d4438;
+--uswds-gold-80:  #322d26;
+--uswds-gold-90:  #191714;
+--uswds-gold-5v:  #fef0c8;
+--uswds-gold-10v: #ffe396;
+--uswds-gold-20v: #ffbe2e;
+--uswds-gold-30v: #e5a000;
+--uswds-gold-40v: #c2850c;
+--uswds-gold-50v: #936f38;
+--uswds-gold-60v: #7a591a;
+--uswds-gold-70v: #5c410a;
+--uswds-gold-80v: #3b2b15;
+
+/* Yellow */
+--uswds-yellow-5:  #faf3d1;
+--uswds-yellow-10: #f5e6af;
+--uswds-yellow-20: #e6c74c;
+--uswds-yellow-30: #c9ab48;
+--uswds-yellow-40: #a88f48;
+--uswds-yellow-50: #8a7237;
+--uswds-yellow-60: #6b5a39;
+--uswds-yellow-70: #504332;
+--uswds-yellow-80: #332d27;
+--uswds-yellow-90: #1a1614;
+--uswds-yellow-5v:  #fff5c2;
+--uswds-yellow-10v: #fee685;
+--uswds-yellow-20v: #face00;
+--uswds-yellow-30v: #ddaa01;
+--uswds-yellow-40v: #b38c00;
+--uswds-yellow-50v: #947100;
+--uswds-yellow-60v: #776017;
+--uswds-yellow-70v: #5c4809;
+--uswds-yellow-80v: #422d19;
+
+/* Green warm */
+--uswds-green-warm-5:   #f1f4d7;
+--uswds-green-warm-10:  #e7eab7;
+--uswds-green-warm-20:  #cbd17a;
+--uswds-green-warm-30:  #a6b557;
+--uswds-green-warm-40:  #8a984b;
+--uswds-green-warm-50:  #6f7a41;
+--uswds-green-warm-60:  #5a5f38;
+--uswds-green-warm-70:  #45472f;
+--uswds-green-warm-80:  #2d2f21;
+--uswds-green-warm-90:  #171712;
+--uswds-green-warm-5v:  #f5fbc1;
+--uswds-green-warm-10v: #e7f434;
+--uswds-green-warm-20v: #c5d30a;
+--uswds-green-warm-30v: #a3b72c;
+--uswds-green-warm-40v: #7e9c1d;
+--uswds-green-warm-50v: #6a7d00;
+--uswds-green-warm-60v: #5a6613;
+--uswds-green-warm-70v: #4b4e10;
+--uswds-green-warm-80v: #38380b;
+
+/* Green */
+--uswds-green-5:   #eaf4dd;
+--uswds-green-10:  #dfeacd;
+--uswds-green-20:  #b8d293;
+--uswds-green-30:  #9bb672;
+--uswds-green-40:  #7d9b4e;
+--uswds-green-50:  #607f35;
+--uswds-green-60:  #4c6424;
+--uswds-green-70:  #3c4a29;
+--uswds-green-80:  #293021;
+--uswds-green-90:  #161814;
+--uswds-green-5v:  #ddf9c7;
+--uswds-green-10v: #c5ee93;
+--uswds-green-20v: #98d035;
+--uswds-green-30v: #7fb135;
+--uswds-green-40v: #719f2a;
+--uswds-green-50v: #538200;
+--uswds-green-60v: #466c04;
+--uswds-green-70v: #2f4a0b;
+--uswds-green-80v: #243413;
+
+/* Green cool */
+--uswds-green-cool-5:   #ecf3ec;
+--uswds-green-cool-10:  #dbebde;
+--uswds-green-cool-20:  #b4d0b9;
+--uswds-green-cool-30:  #86b98e;
+--uswds-green-cool-40:  #5e9f69;
+--uswds-green-cool-50:  #4d8055;
+--uswds-green-cool-60:  #446443;
+--uswds-green-cool-70:  #37493b;
+--uswds-green-cool-80:  #28312a;
+--uswds-green-cool-90:  #1a1f1a;
+--uswds-green-cool-5v:  #e3f5e1;
+--uswds-green-cool-10v: #b7f5bd;
+--uswds-green-cool-20v: #70e17b;
+--uswds-green-cool-30v: #21c834;
+--uswds-green-cool-40v: #00a91c;
+--uswds-green-cool-50v: #008817;
+--uswds-green-cool-60v: #216e1f;
+--uswds-green-cool-70v: #154c21; 
+
+
+/* Blue */
+
+--uswds-blue-5:  #eff6fb; 
+--uswds-blue-10: #d9e8f6;
+--uswds-blue-20: #aacdec;  
+--uswds-blue-30: #73b3e7;  
+--uswds-blue-40: #4f97d1; 
+--uswds-blue-50: #2378c3;  
+--uswds-blue-60: #2c608a;   /* mid-tone */  
+--uswds-blue-70: #274863;  
+--uswds-blue-80: #1f303e;  
+--uswds-blue-90: #11181d;  
+
+--uswds-blue-5v:  #e8f5ff;  
+--uswds-blue-10v: #cfe8ff; 
+--uswds-blue-20v: #a1d3ff;  
+--uswds-blue-30v: #58b4ff;
+--uswds-blue-40v: #2491ff;
+--uswds-blue-50v: #0076d6;
+--uswds-blue-60v: #005ea2;   /* richer/brand tone */  
+--uswds-blue-70v: #0b4778;
+--uswds-blue-80v: #112f4e;
+
+--uswds-blue-cool-5:  #e7f2f5;
+--uswds-blue-cool-10: #dae9ee;
+--uswds-blue-cool-20: #adcfdc;
+--uswds-blue-cool-30: #82b4c9;
+--uswds-blue-cool-40: #6499af;
+--uswds-blue-cool-50: #3a7d95;
+--uswds-blue-cool-60: #2e6276;
+--uswds-blue-cool-70: #224a58;
+--uswds-blue-cool-80: #14333d;
+--uswds-blue-cool-90: #0f191c;
+
+/* Gray  (Primary Neutral Family) */
+--uswds-gray-5:  #f9f9f9;
+--uswds-gray-10: #f0f0f0;
+--uswds-gray-20: #d9d9d9;
+--uswds-gray-30: #bfbfbf;
+--uswds-gray-40: #a6a6a6;
+--uswds-gray-50: #8c8c8c;
+--uswds-gray-60: #737373;
+--uswds-gray-70: #595959;
+--uswds-gray-80: #404040;
+--uswds-gray-90: #262626;
+--uswds-gray-100: #0d0d0d;
+/* Gray Warm (Primary Neutral Family) */
+--uswds-gray-warm-5:  #fafaf8;
+--uswds-gray-warm-10: #f0f0eb;
+--uswds-gray-warm-20: #e6e6de;
+--uswds-gray-warm-30: #ccccc2;
+--uswds-gray-warm-40: #b3b3a5;
+--uswds-gray-warm-50: #999988;
+--uswds-gray-warm-60: #80806b;
+--uswds-gray-warm-70: #666655;
+--uswds-gray-warm-80: #4d4d40;
+--uswds-gray-warm-90: #333326;
+--uswds-gray-warm-100: #1a1a13;
+
+/* Gray Cool (Primary Neutral Family) */
+--uswds-gray-cool-1:  #fbfcfd;
+--uswds-gray-cool-2:  #f7f9fa;
+--uswds-gray-cool-3:  #f5f6f7;
+--uswds-gray-cool-4:  #f1f3f6;
+--uswds-gray-cool-5:  #edeff0;
+--uswds-gray-cool-10: #dfe1e2;
+--uswds-gray-cool-20: #c6cace;
+--uswds-gray-cool-30: #a9aeb1;
+--uswds-gray-cool-40: #71767a; /* base */
+--uswds-gray-cool-50: #565c65;
+--uswds-gray-cool-60: #3d4551;
+--uswds-gray-cool-70: #1b1b1b;
+
+  /* === THEME COLOR TOKENS (MAPPED TO SYSTEM) === */
+  --usa-color-primary: var(--uswds-blue-60);
+  --usa-color-primary-dark: var(--uswds-blue-70);
+  --usa-color-primary-light: var(--uswds-blue-20);
+
+  --usa-color-base-lightest: var(--uswds-gray-5);
+  --usa-color-base-lighter: var(--uswds-gray-10);
+  --usa-color-base-light: var(--uswds-gray-20);
+  --usa-color-base: var(--uswds-gray-30);
+  --usa-color-base-dark: var(--uswds-gray-40);
+  --usa-color-base-darker: var(--uswds-gray-50);
+  --usa-color-base-darkest: var(--uswds-gray-60);
+
+  --usa-color-error: var(--uswds-red-warm-50v);
+  --usa-color-warning: #fdb81e;
+  --usa-color-success: #2e8540;
+  --usa-color-focus: #2491ff;
+  --usa-color-visited: #4c2c92;
+  --usa-color-disabled: #d6d7d9;
+  --usa-color-secondary: #e1f3f8;
+  --usa-color-accent-warm: #fa9441;
+  --usa-color-accent-cool: #00bde3;
+
+  /* === TYPOGRAPHY TOKENS === */
+  --usa-font-family-sans: "Public Sans", system-ui, sans-serif;
+  --usa-font-family-serif: "Merriweather", Georgia, serif;
+  --usa-font-family-mono: "Source Sans Pro", monospace;
+
+  --usa-font-size-2xs: 0.625rem;
+  --usa-font-size-xs:  0.75rem;
+  --usa-font-size-sm:  0.875rem;
+  --usa-font-size-md:  1rem;
+  --usa-font-size-lg:  1.125rem;
+  --usa-font-size-xl:  1.25rem;
+  --usa-font-size-2xl: 1.5rem;
+  --usa-font-size-3xl: 2rem;
+  --usa-font-size-4xl: 2.5rem;
+
+  --usa-line-height-default: 1.5;
+  --usa-line-height-heading: 1.25;
+  --usa-letter-spacing-tight: -0.5px;
+  --usa-letter-spacing-normal: 0;
+  --usa-letter-spacing-wide: 0.5px;
+
+  /* === SPACING TOKENS === */
+  --usa-space-1px: 1px;
+  --usa-space-2px: 2px;
+  --usa-space-05: 0.25rem;
+  --usa-space-1: 0.5rem;
+  --usa-space-15: 0.75rem;
+  --usa-space-2: 1rem;
+  --usa-space-25: 1.25rem;
+  --usa-space-3: 1.5rem;
+  --usa-space-4: 2rem;
+  --usa-space-5: 2.5rem;
+  --usa-space-6: 3rem;
+  --usa-space-7: 3.5rem;
+  --usa-space-8: 4rem;
+  --usa-space-9: 4.5rem;
+  --usa-space-10: 5rem;
+  --usa-space-card: 10rem;
+  --usa-space-card-lg: 15rem;
+  --usa-space-mobile: 20rem;
+  --usa-space-mobile-lg: 30rem;
+  --usa-space-tablet: 40rem;
+  --usa-space-tablet-lg: 55rem;
+  --usa-space-desktop: 128rem;
+
+
+
+  --background: var(--usa-color-base-lightest);        /* #f0f0f0 */
+  --foreground: var(--usa-color-base-darkest);         /* #1b1b1b */
+  --card: var(--usa-color-base-lightest);              /* Same as background */
+  --card-foreground: var(--usa-color-base-darkest);
+  --popover: var(--usa-color-base-lightest);
+  --popover-foreground: var(--usa-color-base-darkest);
+  --primary: var(--usa-color-primary);                 /* #005ea2 */
+  --primary-foreground: var(--usa-color-base-lightest);
+  --secondary: var(--usa-color-secondary);             /* #e1f3f8 */
+  --secondary-foreground: var(--usa-color-base-darkest);
+  --muted: var(--uswds-gray-10);                       /* #dfe1e2 */
+  --muted-foreground: var(--uswds-gray-40);            /* #565c65 */
+  --accent: var(--usa-color-accent-cool);              /* #00bde3 */
+  --accent-foreground: var(--usa-color-base-darkest);
+  --destructive: var(--usa-color-error);               /* #d54309 */
+  --border: var(--uswds-gray-20);                      /* #a9aeb1 */
+  --input: var(--uswds-gray-20);                       /* same as border */
+  --ring: var(--usa-color-focus);                      /* #2491ff */
+
+  /* Charts don't have direct USWDS equivalents — leave as-is or custom map */
+  --chart-1: #f54900;
+  --chart-2: #009689;
+  --chart-3: #104e64;
+  --chart-4: #ffb900;
+  --chart-5: #fe9a00;
+
+  --sidebar: var(--usa-color-base-lightest);
+  --sidebar-foreground: var(--usa-color-base-darkest);
+  --sidebar-primary: var(--usa-color-primary);
+  --sidebar-primary-foreground: var(--usa-color-base-lightest);
+  --sidebar-accent: var(--usa-color-secondary);
+  --sidebar-accent-foreground: var(--usa-color-base-darkest);
+  --sidebar-border: var(--uswds-gray-20);
+  --sidebar-ring: var(--usa-color-focus);
+
+  --font-sans: var(--usa-font-family-sans);
+--font-serif: var(--usa-font-family-serif);
+--font-mono: var(--usa-font-family-mono);
+
+  --radius: 0.25rem; /* USWDS default border radius */
+
+  --shadow-2xs: 0 1px 1px rgba(0, 0, 0, 0.05);
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+.dark {
+  --usa-color-primary: #90cdf4;
+  --usa-color-primary-dark: #63b3ed;
+  --usa-color-base-lightest: #1a1a1a;
+  --usa-color-base-darkest: #ffffff;
+  --usa-color-focus: #66b3ff;
+  --usa-color-secondary: #2d3748;
+  --usa-color-error: #ff6b6b;            /* Soft red for dark BG */
+  --usa-color-warning: #ffc857;         /* Brighter amber */
+  --usa-color-success: #48bb78;         /* Lighter green */
+  --usa-color-focus: #66b3ff;           /* Lighter blue for better visibility */
+  --usa-color-visited: #a78bfa;         /* Muted purple with contrast */
+  --usa-color-disabled: #4b5563;        /* Muted gray (Tailwind slate-600) */
+  --usa-color-secondary: #2a2f38;       /* Soft cool-gray tone */
+  --usa-color-accent-warm: #ff9444;     /* Brightened orange */
+  --usa-color-accent-cool: #22d3ee;     /* Cyan-400 / Tailwind match */
+}
