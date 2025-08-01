@@ -4,7 +4,7 @@ import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
 
 export const metadata = {
-  title: 'My App',
+  title: 'USMDS Docs',
   description: 'USWDS + ShadCN + Tailwind 4',
 };
 const inter = Inter({
