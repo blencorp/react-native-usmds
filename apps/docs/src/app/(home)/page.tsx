@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import {FeaturesSection} from '@/components/landing/features-section';
 
 export default function HomePage() {
   return (
@@ -43,21 +44,10 @@ export default function HomePage() {
       {/* Features Section */}
       <section className='py-16 bg-gray-50'>
         <div className='container mx-auto px-4 max-w-6xl'>
-          <h2 className='text-3xl font-bold text-center mb-12'>Key Features</h2>
-          <div className='grid md:grid-cols-3 gap-8'>
-            <div className='bg-white p-6 rounded-lg shadow-sm'>
-              <h3 className='text-xl font-bold mb-3'>Accessible</h3>
-              <p className='text-gray-600'>Built with accessibility in mind. All components meet WCAG standards and are tested for screen readers.</p>
-            </div>
-            <div className='bg-white p-6 rounded-lg shadow-sm'>
-              <h3 className='text-xl font-bold mb-3'>Customizable</h3>
-              <p className='text-gray-600'>Easily adapt components to your specific requirements while maintaining design consistency.</p>
-            </div>
-            <div className='bg-white p-6 rounded-lg shadow-sm'>
-              <h3 className='text-xl font-bold mb-3'>Cross-Platform</h3>
-              <p className='text-gray-600'>Works seamlessly on both iOS and Android platforms with consistent behavior.</p>
-            </div>
-          </div>
+          <h2 className="text-3xl font-bold text-center mb-3 text-gray-900 dark:text-gray-100">
+            Key Features
+          </h2>
+          <FeaturesSection />
         </div>
       </section>
 
