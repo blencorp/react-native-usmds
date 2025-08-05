@@ -1,3 +1,15 @@
+## [1.9.0](https://github.com/blencorp/react-native-usmds/compare/v1.8.0...v1.9.0) (2025-08-05)
+
+### Features
+
+* integrate Shadcn UI with USWDS design system ([36ea4ac](https://github.com/blencorp/react-native-usmds/commit/36ea4ace59f74d315a4085d191ec3d899c59d604))
+* **ISSUE-19:** avatar, dialog, collapsible ([f8c5073](https://github.com/blencorp/react-native-usmds/commit/f8c50738d2c9455be087e3407dae51b67ab66bcd))
+
+### Bug Fixes
+
+* docs prismjs pkg ([0eefafb](https://github.com/blencorp/react-native-usmds/commit/0eefafb7cb9db8de447bcff1240205cb6b3b34ca))
+* update title in layout.tsx to "USMDS Docs" ([505d781](https://github.com/blencorp/react-native-usmds/commit/505d781721fa4fdbc0fbff18b80aa9568942daeb))
+
 ## [1.9.0](https://github.com/blencorp/react-native-usmds/compare/v1.8.0...v1.9.0) (2025-04-28)
 
 ### Features
