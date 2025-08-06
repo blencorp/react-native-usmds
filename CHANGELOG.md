@@ -1,3 +1,9 @@
+## [1.10.1](https://github.com/blencorp/react-native-usmds/compare/v1.10.0...v1.10.1) (2025-08-06)
+
+### Bug Fixes
+
+* unused var ([d900f11](https://github.com/blencorp/react-native-usmds/commit/d900f1145443c4f197b321311d9f82a532c92cd1))
+
 ## [1.10.0](https://github.com/blencorp/react-native-usmds/compare/v1.9.1...v1.10.0) (2025-08-06)
 
 ### Features
