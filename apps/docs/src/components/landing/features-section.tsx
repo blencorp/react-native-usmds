@@ -5,7 +5,7 @@ import {
   CardTitle
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, Code, Eye, Landmark, TabletSmartphone } from "lucide-react";
+import { Code, Eye, Landmark, TabletSmartphone } from "lucide-react";
 
 export function FeaturesSection() {
   const features = [
