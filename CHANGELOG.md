@@ -1,3 +1,9 @@
+## [1.10.0](https://github.com/blencorp/react-native-usmds/compare/v1.9.1...v1.10.0) (2025-08-06)
+
+### Features
+
+* implement responsive features section ([ab111b1](https://github.com/blencorp/react-native-usmds/commit/ab111b1389187ab36dcc879587e9ac24e18fb3d2))
+
 ## [1.9.1](https://github.com/blencorp/react-native-usmds/compare/v1.9.0...v1.9.1) (2025-08-05)
 
 ### Bug Fixes
