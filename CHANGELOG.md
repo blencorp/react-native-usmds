@@ -1,3 +1,9 @@
+## [1.10.2](https://github.com/blencorp/react-native-usmds/compare/v1.10.1...v1.10.2) (2025-08-08)
+
+### Bug Fixes
+
+* minor build err ([05430ba](https://github.com/blencorp/react-native-usmds/commit/05430baf11ce43a881ed280af724b5ed2c80fb7e))
+
 ## [1.10.1](https://github.com/blencorp/react-native-usmds/compare/v1.10.0...v1.10.1) (2025-08-06)
 
 ### Bug Fixes

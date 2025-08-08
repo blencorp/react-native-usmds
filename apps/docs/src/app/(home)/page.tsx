@@ -1,11 +1,13 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { FeaturesSection } from '@/components/landing/features-section';
-import { useEffect } from 'react';
-import Prism from 'prismjs';
-import 'prismjs/components/prism-bash';
-import 'prismjs/themes/prism.css';
+import Link from "next/link";
+import { FeaturesSection } from "@/components/landing/features-section";
+import { Footer } from "@/components/landing/footer";
+import { useEffect } from "react";
+import Prism from "prismjs";
+import "prismjs/components/prism-bash";
+import "prismjs/themes/prism.css";
+import { HeroSection } from "../../components/landing/HeroSection";
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -17,45 +19,7 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Header/Hero Section */}
-      <header className="py-12 md:py-24 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="md:w-1/2 space-y-6">
-              <h1 className="text-4xl md:text-5xl font-bold">React Native USMDS</h1>
-              <p className="text-xl md:text-2xl font-light">
-                U.S. Mobile Design System components for React Native applications
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Link
-                  href="/docs"
-                  className="px-6 py-3 bg-white text-blue-700 font-medium rounded-md hover:bg-blue-50 transition"
-                >
-                  Get Started
-                </Link>
-                <Link
-                  href="/docs/components"
-                  className="px-6 py-3 bg-blue-800 text-white font-medium rounded-md hover:bg-blue-900 transition"
-                >
-                  Components
-                </Link>
-              </div>
-            </div>
-            <div className="md:w-1/2 flex justify-center">
-              <div className="w-full max-w-md h-80 bg-white bg-opacity-10 rounded-lg flex items-center justify-center p-4">
-                <div className="text-center">
-                  <div className="flex justify-center mb-4">
-                    <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center">
-                      <span className="text-blue-700 text-2xl font-bold">USMDS</span>
-                    </div>
-                  </div>
-                  <p className="text-white font-medium">USMDS Component Preview</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
+      <HeroSection />
 
       {/* Features Section */}
       <section className="py-16 bg-gray-50">
@@ -131,13 +95,24 @@ export default function HomePage() {
           </div>
 
           <div className="text-center mt-12">
-            <Button
-              asChild
-              size="lg"
-              className="bg-blue-600 hover:bg-blue-700 text-white"
+            <Link
+              href="/docs/components"
+              className="px-6 py-3 bg-gray-100 text-gray-800 font-medium rounded-md hover:bg-gray-200 transition inline-flex items-center"
             >
-              <Link href="/docs/components">View All Components</Link>
-            </Button>
+              View All Components
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 ml-2"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </Link>
           </div>
         </div>
       </section>
@@ -149,8 +124,9 @@ export default function HomePage() {
             <div className="md:w-1/2">
               <h2 className="text-3xl font-bold mb-6">Get Started</h2>
               <p className="text-gray-600 mb-6">
-                Start building your React Native application with USMDS components. Follow
-                our step-by-step guide to install and configure the library.
+                Start building your React Native application with USMDS
+                components. Follow our step-by-step guide to install and
+                configure the library.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link
@@ -181,29 +157,8 @@ yarn usmds init`}</code>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 bg-gray-900 text-white">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-4 md:mb-0">
-              <p>© 2025 React Native USMDS</p>
-            </div>
-            <div className="flex gap-6">
-              <Link href="/docs" className="hover:text-blue-400 transition">
-                Documentation
-              </Link>
-              <Link href="/docs/components" className="hover:text-blue-400 transition">
-                Components
-              </Link>
-              <a
-                href="https://github.com/blencorp/react-native-usmds"
-                className="hover:text-blue-400 transition"
-              >
-                GitHub
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
+
+      < Footer />
     </div>
   );
 }
