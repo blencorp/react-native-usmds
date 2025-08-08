@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { FeaturesSection } from "@/components/landing/features-section";
+import { Footer } from "@/components/landing/footer";
 import { useEffect } from "react";
 import Prism from "prismjs";
 import "prismjs/components/prism-bash";
@@ -136,34 +137,7 @@ yarn usmds init`}</code>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 bg-gray-900 text-white">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-4 md:mb-0">
-              <p>© 2025 React Native USMDS</p>
-            </div>
-            <div className="flex gap-6">
-              <Link href="/docs" className="hover:text-blue-400 transition">
-                Documentation
-              </Link>
-              <Link
-                href="/docs/components"
-                className="hover:text-blue-400 transition"
-              >
-                Components
-              </Link>
-              <a
-                href="https://github.com/blencorp/react-native-usmds"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-blue-400 transition"
-              >
-                GitHub
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
+      < Footer />
     </div>
   );
 }
