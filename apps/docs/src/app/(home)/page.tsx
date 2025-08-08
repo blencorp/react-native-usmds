@@ -8,6 +8,9 @@ import Prism from "prismjs";
 import "prismjs/components/prism-bash";
 import "prismjs/themes/prism.css";
 import { HeroSection } from "../../components/landing/HeroSection";
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function HomePage() {
   useEffect(() => {
@@ -16,7 +19,6 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      
       <HeroSection />
 
       {/* Features Section */}
@@ -29,48 +31,66 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Featured Components Section */}
-      <section className="py-16">
+      {/* Components Preview Section */}
+      <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4 max-w-6xl">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            Featured Components
+          <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">
+            Popular Components
           </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Link href="/docs/components/alert" className="group">
-              <div className="bg-white p-6 rounded-lg border border-gray-200 hover:border-blue-500 transition">
-                <h3 className="text-xl font-bold mb-3 group-hover:text-blue-600">
-                  Alert
-                </h3>
-                <p className="text-gray-600 mb-4">
-                  Display important messages to users with various severity
-                  levels.
-                </p>
-                <p className="text-blue-600 font-medium">View component →</p>
-              </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Badge Preview */}
+            <Link href="/docs/components/badge" className="group">
+              <Card className="h-full border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition flex flex-col">
+                <CardHeader>
+                  <CardTitle className="group-hover:text-blue-600 text-xl font-bold">
+                    Badge
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="flex flex-col flex-1 justify-between">
+                  <div className="space-x-2">
+                    <Badge>Default</Badge>
+                    <Badge variant="secondary">Secondary</Badge>
+                    <Badge className="bg-blue-500 text-white">Custom</Badge>
+                  </div>
+                  <p className="text-blue-600 font-medium mt-4">View component →</p>
+                </CardContent>
+              </Card>
             </Link>
 
+            {/* Button Preview */}
             <Link href="/docs/components/button" className="group">
-              <div className="bg-white p-6 rounded-lg border border-gray-200 hover:border-blue-500 transition">
-                <h3 className="text-xl font-bold mb-3 group-hover:text-blue-600">
-                  Button
-                </h3>
-                <p className="text-gray-600 mb-4">
-                  Interactive button elements with multiple variants and sizes.
-                </p>
-                <p className="text-blue-600 font-medium">View component →</p>
-              </div>
+              <Card className="h-full border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition flex flex-col">
+                <CardHeader>
+                  <CardTitle className="group-hover:text-blue-600 text-xl font-bold">
+                    Button
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="flex flex-col flex-1 justify-between">
+                  <div className="space-x-2">
+                    <Button>Primary</Button>
+                    <Button variant="outline">Outline</Button>
+                    <Button variant="destructive">Destructive</Button>
+                  </div>
+                  <p className="text-blue-600 font-medium mt-4">View component →</p>
+                </CardContent>
+              </Card>
             </Link>
 
+            {/* Card Preview */}
             <Link href="/docs/components/card" className="group">
-              <div className="bg-white p-6 rounded-lg border border-gray-200 hover:border-blue-500 transition">
-                <h3 className="text-xl font-bold mb-3 group-hover:text-blue-600">
-                  Card
-                </h3>
-                <p className="text-gray-600 mb-4">
-                  Versatile containers for displaying content and actions.
-                </p>
-                <p className="text-blue-600 font-medium">View component →</p>
-              </div>
+              <Card className="h-full border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition flex flex-col">
+                <CardHeader>
+                  <CardTitle className="group-hover:text-blue-600 text-xl font-bold">
+                    Card
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="flex flex-col flex-1 justify-between">
+                  <p className="text-gray-600">
+                    A flexible container to group related content and actions.
+                  </p>
+                  <p className="text-blue-600 font-medium mt-4">View component →</p>
+                </CardContent>
+              </Card>
             </Link>
           </div>
 
@@ -137,6 +157,7 @@ yarn usmds init`}</code>
       </section>
 
       {/* Footer */}
+
       < Footer />
     </div>
   );
