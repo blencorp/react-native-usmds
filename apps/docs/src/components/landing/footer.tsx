@@ -37,7 +37,7 @@ const links = [
 
 export const Footer = () => {
   return (
-    <footer className="bg-gray-900 border-t border-gray-600 py-6 mt-12">
+    <footer className="bg-gray-800 dark:bg-black border-t border-t-gray-300 dark:border-t-gray-800 py-6 mt-6">
       <div className="container mx-auto px-4 text-center text-sm text-gray-300">
         <div className="flex flex-wrap justify-center gap-4 mb-4">
           {links.map((link) => (
