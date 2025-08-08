@@ -16,54 +16,7 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Hero Section */}
-      <header className="py-12 md:py-24 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="md:w-1/2 space-y-6">
-              <h1 className="text-4xl md:text-5xl font-bold">
-                React Native USMDS
-              </h1>
-              <p className="text-xl md:text-2xl font-light">
-                U.S. Mobile Design System components for React Native
-                applications
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Link
-                  href="/docs"
-                  className="px-6 py-3 bg-white text-blue-700 font-medium rounded-md hover:bg-blue-50 transition"
-                >
-                  Get Started
-                </Link>
-                <Link
-                  href="/docs/components"
-                  className="px-6 py-3 bg-blue-800 text-white font-medium rounded-md hover:bg-blue-900 transition"
-                >
-                  Components
-                </Link>
-              </div>
-            </div>
-            <div className="md:w-1/2 flex justify-center">
-              <div className="w-full max-w-md h-80 bg-white bg-opacity-10 rounded-lg flex items-center justify-center p-4">
-                <div className="text-center">
-                  <div className="flex justify-center mb-4">
-                    <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center">
-                      <span className="text-blue-700 text-2xl font-bold">
-                        USMDS
-                      </span>
-                    </div>
-                  </div>
-                  <p className="text-white font-medium">
-                    USMDS Component Preview
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      {/* HeroSection Component */}
+      
       <HeroSection />
 
       {/* Features Section */}
