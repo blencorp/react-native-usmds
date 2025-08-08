@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { FeaturesSection } from "@/components/landing/features-section";
 import { useEffect } from "react";
-// @ts-expect-error Prism types missing, safe to ignore
 import Prism from "prismjs";
 import "prismjs/components/prism-bash";
 import "prismjs/themes/prism.css";
