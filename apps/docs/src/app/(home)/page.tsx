@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { FeaturesSection } from "@/components/landing/features-section";
 import { useEffect } from "react";
-// @ts-ignore
+// @ts-expect-error
 import Prism from "prismjs";
 import "prismjs/components/prism-bash";
 import "prismjs/themes/prism.css";
