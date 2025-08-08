@@ -1,3 +1,4 @@
+'use client';
 import {
   Card,
   CardContent,
@@ -33,7 +34,7 @@ export function FeaturesSection() {
       icon: <Code className="h-10 w-10 text-purple-500" />,
       certified: true
     }
-  ]
+  ];
 
   return (
     <section className="container px-4 py-10 md:px-8">
@@ -52,11 +53,11 @@ export function FeaturesSection() {
               </div>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground ">{feature.description}</p>
+              <p className="text-muted-foreground">{feature.description}</p>
             </CardContent>
           </Card>
         ))}
       </div>
     </section>
-  )
+  );
 }
