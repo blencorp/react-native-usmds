@@ -42,11 +42,9 @@ export default function HomePage() {
               </div>
             </div>
             <div className="md:w-1/2 flex justify-center">
-              {/* You can replace this with an actual screenshot or illustration */}
               <div className="w-full max-w-md h-80 bg-white bg-opacity-10 rounded-lg flex items-center justify-center p-4">
                 <div className="text-center">
                   <div className="flex justify-center mb-4">
-                    {/* Placeholder for USMDS logo or illustration */}
                     <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center">
                       <span className="text-blue-700 text-2xl font-bold">USMDS</span>
                     </div>
@@ -69,7 +67,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Components Preview Section - matched title size to FeaturesSection */}
+      {/* Components Preview Section */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4 max-w-6xl">
           <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">
@@ -78,16 +76,18 @@ export default function HomePage() {
           <div className="grid md:grid-cols-3 gap-8">
             {/* Badge Preview */}
             <Link href="/docs/components/badge" className="group">
-              <Card className="hover:border-blue-500 transition">
+              <Card className="h-full border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition flex flex-col">
                 <CardHeader>
                   <CardTitle className="group-hover:text-blue-600 text-xl font-bold">
                     Badge
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-x-2">
-                  <Badge>Default</Badge>
-                  <Badge variant="secondary">Secondary</Badge>
-                  <Badge className="bg-blue-500 text-white">Custom</Badge>
+                <CardContent className="flex flex-col flex-1 justify-between">
+                  <div className="space-x-2">
+                    <Badge>Default</Badge>
+                    <Badge variant="secondary">Secondary</Badge>
+                    <Badge className="bg-blue-500 text-white">Custom</Badge>
+                  </div>
                   <p className="text-blue-600 font-medium mt-4">View component →</p>
                 </CardContent>
               </Card>
@@ -95,16 +95,18 @@ export default function HomePage() {
 
             {/* Button Preview */}
             <Link href="/docs/components/button" className="group">
-              <Card className="hover:border-blue-500 transition">
+              <Card className="h-full border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition flex flex-col">
                 <CardHeader>
                   <CardTitle className="group-hover:text-blue-600 text-xl font-bold">
                     Button
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-x-2">
-                  <Button>Primary</Button>
-                  <Button variant="outline">Outline</Button>
-                  <Button variant="destructive">Destructive</Button>
+                <CardContent className="flex flex-col flex-1 justify-between">
+                  <div className="space-x-2">
+                    <Button>Primary</Button>
+                    <Button variant="outline">Outline</Button>
+                    <Button variant="destructive">Destructive</Button>
+                  </div>
                   <p className="text-blue-600 font-medium mt-4">View component →</p>
                 </CardContent>
               </Card>
@@ -112,13 +114,13 @@ export default function HomePage() {
 
             {/* Card Preview */}
             <Link href="/docs/components/card" className="group">
-              <Card className="hover:border-blue-500 transition">
+              <Card className="h-full border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition flex flex-col">
                 <CardHeader>
                   <CardTitle className="group-hover:text-blue-600 text-xl font-bold">
                     Card
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="flex flex-col flex-1 justify-between">
                   <p className="text-gray-600">
                     A flexible container to group related content and actions.
                   </p>
