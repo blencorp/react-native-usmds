@@ -37,9 +37,9 @@ export function HeroSection() {
 
         {/* Visual Preview */}
         <div className="flex justify-center">
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-tr from-blue-100 to-purple-100 rounded-3xl blur-3xl"></div>
-            <div className="relative bg-white border rounded-2xl p-8 shadow-xl">
+          <Link href="/docs/components" className="relative group">
+            <div className="absolute inset-0 bg-gradient-to-tr from-blue-100 to-purple-100 rounded-3xl blur-3xl transition-transform group-hover:scale-105"></div>
+            <div className="relative bg-white border rounded-2xl p-8 shadow-xl transition-transform group-hover:scale-105">
               <div className="flex items-center justify-center h-48 w-48 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl">
                 <div className="text-center">
                   <div className="text-4xl font-bold text-blue-600 mb-2">
@@ -49,10 +49,10 @@ export function HeroSection() {
                 </div>
               </div>
               <p className="text-xs text-center text-gray-500 mt-4">
-                USMDS Component Preview
+                
               </p>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
     </section>
