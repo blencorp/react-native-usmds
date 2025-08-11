@@ -11,6 +11,8 @@ import { HeroSection } from "../../components/landing/HeroSection";
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import InstallSnippet from "@/components/landing/InstallSnippet";
+
 
 export default function HomePage() {
   useEffect(() => {
@@ -52,7 +54,9 @@ export default function HomePage() {
                     <Badge variant="secondary">Secondary</Badge>
                     <Badge className="bg-blue-500 text-white">Custom</Badge>
                   </div>
-                  <p className="text-blue-600 font-medium mt-4">View component →</p>
+                  <p className="text-blue-600 font-medium mt-4">
+                    View component →
+                  </p>
                 </CardContent>
               </Card>
             </Link>
@@ -71,7 +75,9 @@ export default function HomePage() {
                     <Button variant="outline">Outline</Button>
                     <Button variant="destructive">Destructive</Button>
                   </div>
-                  <p className="text-blue-600 font-medium mt-4">View component →</p>
+                  <p className="text-blue-600 font-medium mt-4">
+                    View component →
+                  </p>
                 </CardContent>
               </Card>
             </Link>
@@ -88,7 +94,9 @@ export default function HomePage() {
                   <p className="text-gray-600">
                     A flexible container to group related content and actions.
                   </p>
-                  <p className="text-blue-600 font-medium mt-4">View component →</p>
+                  <p className="text-blue-600 font-medium mt-4">
+                    View component →
+                  </p>
                 </CardContent>
               </Card>
             </Link>
@@ -145,11 +153,12 @@ export default function HomePage() {
             </div>
             <div className="md:w-1/2 bg-white p-4 rounded-lg shadow-sm">
               <pre className="bg-gray-900 text-gray-100 p-4 rounded text-sm overflow-x-auto">
-                <code className="language-bash">{`# Using npm
+                <InstallSnippet />
+                {/* <code className="language-bash">{`# Using npm
 npx usmds init
 
 # Using yarn
-yarn usmds init`}</code>
+yarn usmds init`}</code> */}
               </pre>
             </div>
           </div>
@@ -158,7 +167,7 @@ yarn usmds init`}</code>
 
       {/* Footer */}
 
-      < Footer />
+      <Footer />
     </div>
   );
 }
