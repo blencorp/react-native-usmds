@@ -1,3 +1,9 @@
+## [1.11.0](https://github.com/blencorp/react-native-usmds/compare/v1.10.2...v1.11.0) (2025-08-11)
+
+### Features
+
+* add copy button to install snippet ([9735dc1](https://github.com/blencorp/react-native-usmds/commit/9735dc180f71bd052d1d294e869fbee9c0466cbc))
+
 ## [1.10.2](https://github.com/blencorp/react-native-usmds/compare/v1.10.1...v1.10.2) (2025-08-08)
 
 ### Bug Fixes
