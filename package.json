@@ -27,6 +27,7 @@
     "clsx": "^2.1.1",
     "commander": "^11.0.0",
     "execa": "^8.0.1",
+    "lucide-react": "^0.539.0",
     "lucide-react-native": "^0.475.0",
     "nativewind": "^4.1.23",
     "ora": "^7.0.1",

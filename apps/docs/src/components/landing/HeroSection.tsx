@@ -18,20 +18,18 @@ export function HeroSection() {
             platforms.
           </p>
           <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <Link href="/docs">
-              <Button variant="default" size="lg">
-                Get Started
-              </Button>
-            </Link>
-            <Link href="/docs/components">
-              <Button
-                variant="outline"
-                size="lg"
-                className="text-white border-white hover:bg-white/10"
-              >
-                View Components
-              </Button>
-            </Link>
+            <Button asChild variant="default" size="lg">
+              <Link href="/docs">Get Started</Link>
+            </Button>
+
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="text-white border-white hover:bg-white/10"
+            >
+              <Link href="/docs/components">View Components</Link>
+            </Button>
           </div>
         </div>
 
@@ -48,9 +46,7 @@ export function HeroSection() {
                   <p className="text-sm font-medium text-gray-600">USMDS</p>
                 </div>
               </div>
-              <p className="text-xs text-center text-gray-500 mt-4">
-                
-              </p>
+              <p className="text-xs text-center text-gray-500 mt-4"></p>
             </div>
           </Link>
         </div>
