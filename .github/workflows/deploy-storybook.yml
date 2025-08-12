@@ -36,9 +36,7 @@ jobs:
         run: yarn install --frozen-lockfile
         
       - name: Build Storybook
-        run: |
-          cd apps/storybook
-          yarn build-storybook
+        run: yarn workspace storybook build-storybook
         
       - name: Setup Pages
         uses: actions/configure-pages@v4
