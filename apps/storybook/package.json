@@ -10,7 +10,7 @@
     "web": "expo start --web",
     "storybook:web": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "build-storybook:web": "storybook build -c .storybook --config-file main.web.ts",
+    "build-storybook:web": "mv .storybook/main.ts .storybook/main.native.ts && mv .storybook/main.web.ts .storybook/main.ts && storybook build && mv .storybook/main.ts .storybook/main.web.ts && mv .storybook/main.native.ts .storybook/main.ts",
     "storybook-generate": "sb-rn-get-stories --config-path .rnstorybook",
     "storybook": "cross-env EXPO_PUBLIC_STORYBOOK_ENABLED='true' expo start",
     "storybook:ios": "cross-env EXPO_PUBLIC_STORYBOOK_ENABLED='true' expo run:ios",
