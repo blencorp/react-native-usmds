@@ -3,6 +3,11 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'packages/**'
+      - 'package.json'
+      - 'yarn.lock'
+      - '.github/workflows/release.yml'
 
 jobs:
   release:
