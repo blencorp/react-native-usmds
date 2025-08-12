@@ -39,7 +39,7 @@ jobs:
         run: |
           cd apps/storybook
           yarn install
-          yarn build-storybook
+          yarn build-storybook:web
         
       - name: Setup Pages
         uses: actions/configure-pages@v4
