@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: react-native-usmds-storybook
+    runtime: docker
+    dockerfilePath: ./apps/storybook/Dockerfile
+    dockerContext: .
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: EXPO_PUBLIC_STORYBOOK_ENABLED
+        value: "true"
