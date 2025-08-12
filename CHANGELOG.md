@@ -1,3 +1,9 @@
+## [1.12.0](https://github.com/blencorp/react-native-usmds/compare/v1.11.0...v1.12.0) (2025-08-12)
+
+### Features
+
+* deploy storybook as rn web ([a326d31](https://github.com/blencorp/react-native-usmds/commit/a326d311415e6ff04778ac559b73763c48e0638b))
+
 ## [1.11.0](https://github.com/blencorp/react-native-usmds/compare/v1.10.2...v1.11.0) (2025-08-11)
 
 ### Features
