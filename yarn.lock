@@ -6947,7 +6947,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/core@npm:8.6.14, @storybook/core@npm:^8.6.14, @storybook/core@npm:^8.6.6":
+"@storybook/core@npm:8.6.14, @storybook/core@npm:^8.5.4, @storybook/core@npm:^8.6.6":
   version: 8.6.14
   resolution: "@storybook/core@npm:8.6.14"
   dependencies:
@@ -7040,7 +7040,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/preview-api@npm:8.6.14, @storybook/preview-api@npm:^8.6.14":
+"@storybook/preview-api@npm:8.6.14":
   version: 8.6.14
   resolution: "@storybook/preview-api@npm:8.6.14"
   peerDependencies:
@@ -7199,7 +7199,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react@npm:^8.6.14, @storybook/react@npm:^8.6.6":
+"@storybook/react@npm:^8.5.4, @storybook/react@npm:^8.6.6":
   version: 8.6.14
   resolution: "@storybook/react@npm:8.6.14"
   dependencies:
@@ -12416,9 +12416,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-image@npm:^2.0.5":
-  version: 2.4.0
-  resolution: "expo-image@npm:2.4.0"
+"expo-image@npm:~2.1.0":
+  version: 2.1.7
+  resolution: "expo-image@npm:2.1.7"
   peerDependencies:
     expo: "*"
     react: "*"
@@ -12427,7 +12427,7 @@ __metadata:
   peerDependenciesMeta:
     react-native-web:
       optional: true
-  checksum: 10c0/820499d8ce633566ee07ff75f0d90f205c59ad1dd67135ada54ccf453c65227eaf95158be9327bac290bcb829b030bed65f7f5d7faf9e78cafafd76c92223ef8
+  checksum: 10c0/19f1025b031b3ec344cdf7939334063c3a0487bd604bf7c8c7620e9fd6ddde9192749a759e4e2ba59e3a75ffcbfa897ced27faa6af7240cdc855c1681c097945
   languageName: node
   linkType: hard
 
@@ -20169,7 +20169,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-safe-area-context@npm:4.12.0":
+"react-native-reanimated@npm:~3.17.5":
+  version: 3.17.5
+  resolution: "react-native-reanimated@npm:3.17.5"
+  dependencies:
+    "@babel/plugin-transform-arrow-functions": "npm:^7.0.0-0"
+    "@babel/plugin-transform-class-properties": "npm:^7.0.0-0"
+    "@babel/plugin-transform-classes": "npm:^7.0.0-0"
+    "@babel/plugin-transform-nullish-coalescing-operator": "npm:^7.0.0-0"
+    "@babel/plugin-transform-optional-chaining": "npm:^7.0.0-0"
+    "@babel/plugin-transform-shorthand-properties": "npm:^7.0.0-0"
+    "@babel/plugin-transform-template-literals": "npm:^7.0.0-0"
+    "@babel/plugin-transform-unicode-regex": "npm:^7.0.0-0"
+    "@babel/preset-typescript": "npm:^7.16.7"
+    convert-source-map: "npm:^2.0.0"
+    invariant: "npm:^2.2.4"
+    react-native-is-edge-to-edge: "npm:1.1.7"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/22788541546cf3e818f0ad9fc9fb1cb53fd7b398d5f49078cd6adf8064957663d97de4e60de9e7894a359d2379685a9dd5d69183c3e13b5e4e78f2d49333921a
+  languageName: node
+  linkType: hard
+
+"react-native-safe-area-context@npm:~4.12.0":
   version: 4.12.0
   resolution: "react-native-safe-area-context@npm:4.12.0"
   peerDependencies:
@@ -22142,9 +22166,8 @@ __metadata:
     "@storybook/addon-ondevice-backgrounds": "npm:^8.5.4"
     "@storybook/addon-ondevice-controls": "npm:^8.5.4"
     "@storybook/addon-ondevice-notes": "npm:^8.5.4"
-    "@storybook/core": "npm:^8.6.14"
-    "@storybook/preview-api": "npm:^8.6.14"
-    "@storybook/react": "npm:^8.6.14"
+    "@storybook/core": "npm:^8.5.4"
+    "@storybook/react": "npm:^8.5.4"
     "@storybook/react-native": "npm:^8.5.4"
     "@storybook/react-native-web-vite": "npm:^9.1.2"
     "@storybook/test": "npm:^8.5.3"
@@ -22157,7 +22180,7 @@ __metadata:
     expo: "npm:~52.0.31"
     expo-constants: "npm:~17.0.5"
     expo-font: "npm:^13.0.3"
-    expo-image: "npm:^2.0.5"
+    expo-image: "npm:~2.1.0"
     expo-splash-screen: "npm:^0.29.21"
     expo-status-bar: "npm:~2.0.1"
     lucide-react-native: "npm:^0.475.0"
@@ -22166,8 +22189,8 @@ __metadata:
     react-dom: "npm:18.3.1"
     react-native: "npm:0.76.7"
     react-native-gesture-handler: "npm:~2.20.2"
-    react-native-reanimated: "npm:^3.16.7"
-    react-native-safe-area-context: "npm:4.12.0"
+    react-native-reanimated: "npm:~3.17.5"
+    react-native-safe-area-context: "npm:~4.12.0"
     react-native-svg: "npm:^15.11.1"
     react-native-web: "npm:~0.19.13"
     storybook: "npm:^8.5.3"

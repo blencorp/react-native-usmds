@@ -9,15 +9,6 @@ const main: StorybookConfig = {
     name: '@storybook/react-native-web-vite',
     // @ts-ignore - modulesToTranspile is supported but types may be outdated
     options: {
-      modulesToTranspile: [
-        '@rn-primitives/portal',
-        '@rn-primitives/slot',
-        '@rn-primitives/types',
-        '@rn-primitives/avatar',
-        '@rn-primitives/collapsible',
-        '@rn-primitives/dialog',
-        '@rn-primitives/progress'
-      ],
       pluginReactOptions: {
         jsxImportSource: "nativewind",
       },
