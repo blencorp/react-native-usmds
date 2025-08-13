@@ -7,7 +7,6 @@ RUN corepack enable && corepack prepare yarn@4.3.1 --activate
 
 # Copy workspace configuration files first
 COPY package.json yarn.lock .yarnrc.yml ./
-COPY .yarn ./.yarn
 
 # Copy only the storybook app and the UI package it needs to watch
 COPY apps/storybook ./apps/storybook
