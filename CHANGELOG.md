@@ -1,3 +1,13 @@
+## [1.14.1](https://github.com/blencorp/react-native-usmds/compare/v1.14.0...v1.14.1) (2025-08-13)
+
+### Bug Fixes
+
+* resolve pkg ([486ab99](https://github.com/blencorp/react-native-usmds/commit/486ab994e7691b3d75572e7a0ee619d16ec5f48c))
+
+### Reverts
+
+* Revert "fix: resolve pkg" ([4f01034](https://github.com/blencorp/react-native-usmds/commit/4f01034b9021ac91fff3745eb472af8803be9e5e))
+
 ## [1.14.0](https://github.com/blencorp/react-native-usmds/compare/v1.13.0...v1.14.0) (2025-08-13)
 
 ### Features
