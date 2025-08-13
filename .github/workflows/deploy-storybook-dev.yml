@@ -51,7 +51,6 @@ jobs:
           project_id: ${{ env.PROJECT_ID }}
           flags: --port=8080 --cpu=2 --memory=2Gi --timeout=3600 --max-instances=10 --allow-unauthenticated
           env_vars: |
-            PORT=8080
             EXPO_PUBLIC_STORYBOOK_ENABLED=true
 
       - name: Show Output
