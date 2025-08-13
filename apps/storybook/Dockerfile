@@ -17,8 +17,10 @@ RUN yarn install
 
 WORKDIR /app/apps/storybook
 
-# Expose the port that Expo uses
-EXPOSE 8081
+# Cloud Run provides PORT env var, default to 8080 if not set
+ENV PORT=8080
+# Expose the port that will be used
+EXPOSE $PORT
 ENV EXPO_PUBLIC_STORYBOOK_ENABLED=true  
-# Run Storybook in web mode
-CMD ["yarn", "storybook:web", "--", "--host", "lan", "--port", "8081"]
+# Run Storybook in web mode with correct Expo CLI flags for Cloud Run
+CMD ["sh", "-c", "cross-env EXPO_PUBLIC_STORYBOOK_ENABLED=true expo start --web --host 0.0.0.0 --port $PORT"]
