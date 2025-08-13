@@ -1,3 +1,11 @@
+## [1.14.2](https://github.com/blencorp/react-native-usmds/compare/v1.14.1...v1.14.2) (2025-08-13)
+
+### Bug Fixes
+
+* resolve Docker build issue by removing gitignored .yarn directory copy ([33a4848](https://github.com/blencorp/react-native-usmds/commit/33a4848e63e6808dbdb3045743631da7bc355d93))
+* storybook ([90842f9](https://github.com/blencorp/react-native-usmds/commit/90842f97044e47e5a39bac8741e92d617b906120))
+* tailwind css ([d9483b4](https://github.com/blencorp/react-native-usmds/commit/d9483b45ee7ad0fd6afe7590d64357abdf4e1e67))
+
 ## [1.14.1](https://github.com/blencorp/react-native-usmds/compare/v1.14.0...v1.14.1) (2025-08-13)
 
 ### Bug Fixes
