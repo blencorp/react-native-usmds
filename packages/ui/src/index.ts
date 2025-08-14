@@ -19,8 +19,12 @@ export * from './alert';
 export * from './snackbar';
 
 // Content & Layout
+export * from './avatar';
 export * from './banner';
 export * from './card';
+export * from './collapsible';
+export * from './dialog';
+export * from './progress';
 export * from './tag';
 export * from './text';
 
