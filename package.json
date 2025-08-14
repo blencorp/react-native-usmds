@@ -59,5 +59,8 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "resolutions": {
+    "semver": "7.6.3"
+  }
 }
