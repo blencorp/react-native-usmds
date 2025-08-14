@@ -61,6 +61,7 @@
     "packages/*"
   ],
   "resolutions": {
-    "semver": "7.6.3"
+    "semver": "7.6.3",
+    "lru-cache": "^7.18.3"
   }
 }
