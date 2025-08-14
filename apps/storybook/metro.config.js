@@ -15,7 +15,8 @@ config.watchFolders = [...(config.watchFolders || []), path.resolve(__dirname, '
 
 // First apply NativeWind configuration
 const nativewindConfig = withNativeWind(config, {
-  input: './global.css'
+  input: './global.css',
+  inlineRem: 16
 });
 
 // Then apply Storybook configuration
