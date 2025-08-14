@@ -30,5 +30,5 @@ ENV CI=1
 EXPOSE 8081
 ENV EXPO_PUBLIC_STORYBOOK_ENABLED=true  
 
-# Run Storybook in web mode (use lan for container networking, port flag is ignored for web)
-CMD ["yarn", "storybook:web", "--", "--host", "lan"]
+# Run Storybook in web mode (use lan for container networking, disable file watching)
+CMD ["yarn", "storybook:web", "--", "--host", "lan", "--no-dev"]
