@@ -17,8 +17,18 @@ RUN yarn install
 
 WORKDIR /app/apps/storybook
 
+# Create a proper home directory for Expo
+RUN mkdir -p /app/.expo && chmod 755 /app/.expo
+ENV HOME=/app
+
+# Disable Expo telemetry and analytics to avoid file system issues
+ENV EXPO_NO_TELEMETRY=1
+ENV EXPO_NO_UPDATE_CHECK=1
+ENV CI=1
+
 # Expose the port that Expo uses
 EXPOSE 8081
 ENV EXPO_PUBLIC_STORYBOOK_ENABLED=true  
-# Run Storybook in web mode
-CMD ["yarn", "storybook:web", "--", "--host", "lan", "--port", "8081"]
+
+# Run Storybook in web mode (host must be 0.0.0.0 for containers, port flag is ignored for web)
+CMD ["yarn", "storybook:web", "--", "--host", "0.0.0.0"]
