@@ -29,6 +29,7 @@ ENV CI=1
 # NativeWind environment variables for web production
 ENV NODE_ENV=production
 ENV EXPO_WEB_TARGET=web
+ENV NATIVEWIND_OUTPUT=web
 
 # Expose the port that Expo uses
 EXPOSE 8081
