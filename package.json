@@ -62,6 +62,7 @@
   ],
   "resolutions": {
     "semver": "7.6.3",
-    "lru-cache": "^7.18.3"
+    "lru-cache": "^7.18.3",
+    "path-scurry": "^1.10.1"
   }
 }
