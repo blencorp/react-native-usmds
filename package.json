@@ -8,6 +8,12 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
+  "files": [
+    "packages/ui/src/**/*",
+    "packages/cli/dist/**/*",
+    "packages/cli/package.json",
+    "packages/ui/package.json"
+  ],
   "scripts": {
     "build": "turbo build",
     "build:docs": "turbo run build --filter=docs",
