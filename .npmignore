@@ -1,0 +1,26 @@
+# Ignore everything by default
+*
+.*
+
+# Include only what we want to publish
+!packages/ui/src/**/*
+!packages/cli/dist/**/*
+!README.md
+!package.json
+!LICENSE
+
+# But exclude test files
+**/*.test.*
+**/*.spec.*
+**/__tests__/**
+**/*.stories.*
+
+# Exclude workspace-specific files
+apps/
+.github/
+.turbo/
+.yarn/
+node_modules/
+*.log
+*.tgz
+.DS_Store

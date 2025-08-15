@@ -10,7 +10,6 @@ import { getPackageManager, getInstallCommand } from '../utils/get-package-manag
 import { checkDependenciesExist, runInit } from './init';
 import { spawn } from 'child_process';
 
-// Available components from our registry
 const AVAILABLE_COMPONENTS = Object.keys(COMPONENT_METADATA).map((name) => name.toLowerCase());
 
 const addOptionsSchema = z.object({

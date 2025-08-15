@@ -38,6 +38,16 @@ jobs:
           yarn workspace @blen/react-native-usmds-cli-internal build
           yarn build '--filter=!docs' '--filter=!storybook'
 
+      - name: Debug npm environment
+        run: |
+          echo "Node version: $(node --version)"
+          echo "NPM version: $(npm --version)"
+          echo "Current directory: $(pwd)"
+          echo "Package.json content:"
+          cat package.json
+          echo "Testing npm pack locally:"
+          npm pack --dry-run 2>&1 | head -30 || true
+
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
