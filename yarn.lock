@@ -19889,7 +19889,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semantic-release@npm:^24.2.3":
+"semantic-release@npm:^24.2.7":
   version: 24.2.7
   resolution: "semantic-release@npm:24.2.7"
   dependencies:
@@ -22388,7 +22388,7 @@ __metadata:
     prompts: "npm:^2.4.2"
     react-native-reanimated: "npm:^3.16.7"
     react-native-svg: "npm:^15.11.1"
-    semantic-release: "npm:^24.2.3"
+    semantic-release: "npm:^24.2.7"
     tailwind-merge: "npm:^3.0.1"
     tailwindcss: "npm:^3.3.2"
     tailwindcss-animate: "npm:^1.0.7"
