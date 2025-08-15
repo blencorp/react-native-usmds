@@ -12211,10 +12211,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"get-stream@npm:6.0.1":
-  version: 6.0.1
-  resolution: "get-stream@npm:6.0.1"
-  checksum: 10c0/49825d57d3fd6964228e6200a58169464b8e8970489b3acdc24906c782fb7f01f9f56f8e6653c4a50713771d6658f7cfe051e5eb8c12e334138c9c918b296341
+"get-stream@npm:6.0.0":
+  version: 6.0.0
+  resolution: "get-stream@npm:6.0.0"
+  checksum: 10c0/7cd835cb9180041e7be2cc3de236e5db9f2144515921aeb60ae78d3a46f9944439d654c2aae5b0191e41eb6e2500f0237494a2e6c0790367183f788d1c9f6dd6
   languageName: node
   linkType: hard
 
@@ -20034,14 +20034,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"signale@npm:1.4.0":
-  version: 1.4.0
-  resolution: "signale@npm:1.4.0"
+"signale@npm:1.2.1":
+  version: 1.2.1
+  resolution: "signale@npm:1.2.1"
   dependencies:
     chalk: "npm:^2.3.2"
     figures: "npm:^2.0.0"
     pkg-conf: "npm:^2.1.0"
-  checksum: 10c0/3b637421368a30805da3948f82350cb9959ddfb19073f44609495384b98baba1c62b1c5c094db57000836c8bc84c6c05c979aa7e072ceeaaf0032d7991b329c7
+  checksum: 10c0/2f6edb8929012fd4c1fac397e4df1f7aa9e78bb86ac8c9bfd4d232caa98dfc9e1196772eb093d1af1e96a698ac21efc362fc21703c8094e570e19cbe15505b7f
   languageName: node
   linkType: hard
 
