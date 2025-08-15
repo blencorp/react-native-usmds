@@ -17,6 +17,9 @@ RUN yarn install
 
 WORKDIR /app/apps/storybook
 
+# Pre-generate the web CSS file for production
+RUN npx tailwindcss -i ./web.css -o ./web-generated.css --config ./tailwind.config.js --minify
+
 # Create a proper home directory for Expo
 RUN mkdir -p /app/.expo && chmod 755 /app/.expo
 ENV HOME=/app

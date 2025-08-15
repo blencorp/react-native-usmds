@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
@@ -37,25 +36,46 @@ const links = [
 
 export const Footer = () => {
   return (
-    <footer className="bg-gray-800 dark:bg-black border-t border-t-gray-300 dark:border-t-gray-800 py-6 mt-6">
-      <div className="container mx-auto px-4 text-center text-sm text-gray-300">
-        <div className="flex flex-wrap justify-center gap-4 mb-4">
-          {links.map((link) => (
-            <Link key={link.name} href={link.href} passHref legacyBehavior>
-              <Button
-                asChild
-                variant="link"
-                className="text-gray-300 hover:text-white underline-offset-4"
-              >
-                <a
-                  target={link.external ? "_blank" : "_self"}
-                  rel={link.external ? "noopener noreferrer" : undefined}
+    <footer className="bg-slate-800 text-white py-12 mt-6" role="contentinfo">
+      <div className="max-w-screen-xl mx-auto px-4 md:px-6 lg:px-8">
+        {/* Government Links */}
+        <div className="border-t border-gray-700 pt-8">
+          <div className="flex flex-wrap justify-center gap-6 mb-8">
+            {links.map((link) => (
+              <Link key={link.name} href={link.href} passHref legacyBehavior>
+                <Button
+                  asChild
+                  variant="link"
+                  className="text-gray-300 hover:text-white underline-offset-4 focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
                 >
-                  {link.name}
-                </a>
-              </Button>
-            </Link>
-          ))}
+                  <a
+                    target={link.external ? "_blank" : "_self"}
+                    rel={link.external ? "noopener noreferrer" : undefined}
+                  >
+                    {link.name}
+                  </a>
+                </Button>
+              </Link>
+            ))}
+          </div>
+
+          <div className="text-center text-sm text-gray-400">
+            <p>
+              © 2024 U.S. Mobile Design System. Built for the federal
+              government.
+            </p>
+            <p className="mt-2">
+              An official website of the United States government managed by the{" "}
+              <a
+                href="https://www.gsa.gov"
+                className="text-gray-300 hover:text-white underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                General Services Administration
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </footer>
