@@ -16,13 +16,7 @@
       }
     ],
     "@semantic-release/changelog",
-    [
-      "@semantic-release/npm",
-      {
-        "pkgRoot": ".",
-        "tarballDir": "dist"
-      }
-    ],
+    "@semantic-release/npm",
     [
       "@semantic-release/git",
       {
