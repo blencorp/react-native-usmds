@@ -1,28 +1,42 @@
-import './global.css';
-import { RootProvider } from 'fumadocs-ui/provider';
-import { Inter } from 'next/font/google';
-import type { ReactNode } from 'react';
+import "./global.css";
+import { Inter } from "next/font/google";
+import { Public_Sans, Merriweather, Source_Sans_3 } from "next/font/google";
+import type { ReactNode } from "react";
 
 export const metadata = {
-  title: 'USMDS Docs',
-  description: 'USWDS + ShadCN + Tailwind 4',
+  title: "USMDS Docs",
+  description: "USWDS + ShadCN + Tailwind 4",
 };
+
 const inter = Inter({
-  subsets: ['latin'],
+  subsets: ["latin"],
+});
+
+const publicSans = Public_Sans({
+  subsets: ["latin"],
+  variable: "--font-public-sans",
+});
+
+const merriweather = Merriweather({
+  subsets: ["latin"],
+  weight: ["300", "400", "700", "900"],
+  variable: "--font-merriweather",
+});
+
+const sourceSansPro = Source_Sans_3({
+  subsets: ["latin"],
+  weight: ["300", "400", "600", "700"],
+  variable: "--font-source-sans-pro",
 });
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={inter.className} suppressHydrationWarning>
-      <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Public+Sans&family=Merriweather&family=Source+Sans+Pro&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className="flex flex-col min-h-screen">
-        <RootProvider>{children}</RootProvider>
-      </body>
+    <html
+      lang="en"
+      className={`${inter.className} ${publicSans.variable} ${merriweather.variable} ${sourceSansPro.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="flex flex-col min-h-screen">{children}</body>
     </html>
   );
 }
