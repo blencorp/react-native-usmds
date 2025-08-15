@@ -15218,15 +15218,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lucide-react@npm:^0.539.0":
-  version: 0.539.0
-  resolution: "lucide-react@npm:0.539.0"
-  peerDependencies:
-    react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10c0/ae85244dc23a78c51cc5f829ee09321cf68201333ab3d5614ed73cda77a4cd12284d3630a5a2167a39e31e02811056336de76a597c6874b28bb9984baf876494
-  languageName: node
-  linkType: hard
-
 "lz-string@npm:^1.5.0":
   version: 1.5.0
   resolution: "lz-string@npm:1.5.0"
@@ -22379,7 +22370,6 @@ __metadata:
     commander: "npm:^11.0.0"
     conventional-changelog-conventionalcommits: "npm:^8.0.0"
     execa: "npm:^8.0.1"
-    lucide-react: "npm:^0.539.0"
     lucide-react-native: "npm:^0.475.0"
     nativewind: "npm:^4.1.23"
     ora: "npm:^7.0.1"
