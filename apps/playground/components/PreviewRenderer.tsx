@@ -137,7 +137,7 @@ const executeCode = (code: string, onError?: (error: string) => void) => {
               <Text>Name: {name}</Text>
             </View>
             <View className='flex-row space-x-2'>
-              <Button onPress={() => setName('Alice')}>
+              <Button variant='destructive' onPress={() => setName('Alice')}>
                 <Text>Alice</Text>
               </Button>
               <Button onPress={() => setName('Bob')}>

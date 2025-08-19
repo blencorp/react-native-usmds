@@ -6,8 +6,9 @@ import Link from "next/link";
 export function HeroSection() {
   return (
     <section
+      className="py-24 sm:py-32 bg-blue-800 text-white"
       aria-labelledby="hero-heading"
-      className="py-24 sm:py-32 bg-[var(--usa-color-blue-60v,#005ea2)] text-[var(--usa-base-lightest,#ffffff)]"
+      role="banner"
     >
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
         {/* Text Content */}
@@ -32,7 +33,7 @@ export function HeroSection() {
             aria-label="Primary actions"
           >
             <Button asChild variant="destructive" size="lg">
-              <Link href="/docs">
+              <Link href="/docs" aria-describedby="get-started-description">
                 Get Started
                 <span id="get-started-description" className="sr-only">
                   Begin using USMDS components in your government mobile
@@ -45,16 +46,17 @@ export function HeroSection() {
               asChild
               variant="outline"
               size="lg"
-              className="
-    border-[var(--usa-base-lightest,#ffffff)]
-    text-[var(--usa-base-lightest,#ffffff)]
-    hover:bg-[var(--usa-base-lightest,#ffffff)]
-    hover:text-[var(--usa-color-blue-60v,#005ea2)]
-    focus-visible:ring-[var(--usa-base-lightest,#ffffff)]
-    bg-transparent
-  "
+              className="border-white text-white hover:bg-white hover:text-blue-800 focus-visible:bg-white focus-visible:text-blue-800 bg-transparent"
             >
-              <Link href="/docs/components">View Components</Link>
+              <Link
+                href="/docs/components"
+                aria-describedby="view-components-description"
+              >
+                View Components
+                <span id="view-components-description" className="sr-only">
+                  Browse the complete library of USMDS mobile components
+                </span>
+              </Link>
             </Button>
           </div>
         </div>
