@@ -1765,6 +1765,7 @@ __metadata:
     "@babel/core": "npm:^7.26.7"
     "@babel/preset-react": "npm:^7.26.3"
     "@babel/preset-typescript": "npm:^7.26.0"
+    "@react-native/babel-preset": "npm:^0.76.0"
     "@rn-primitives/accordion": "npm:~1.1.0"
     "@rn-primitives/avatar": "npm:~1.1.0"
     "@rn-primitives/checkbox": "npm:~1.1.0"
@@ -5487,7 +5488,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native/babel-preset@npm:0.76.9":
+"@react-native/babel-preset@npm:0.76.9, @react-native/babel-preset@npm:^0.76.0":
   version: 0.76.9
   resolution: "@react-native/babel-preset@npm:0.76.9"
   dependencies:
