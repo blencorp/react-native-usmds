@@ -53,6 +53,10 @@ const buttonTextVariants = cva('text-center', {
       big: 'text-[20px] leading-[24px]',
       icon: 'text-[16px] leading-[20px]'
     }
+  },
+  defaultVariants: {
+    variant: 'default',
+    size: 'default'
   }
 });
 
@@ -64,16 +68,15 @@ type ButtonProps = ComponentPropsWithoutRef<typeof Pressable> &
     children: ReactNode | ((state: PressableStateCallbackType) => ReactNode);
   };
 
-const Button = forwardRef<ElementRef<typeof Pressable>, ButtonProps>(({ className, variant, size, children, startIcon, endIcon, ...props }, ref) => {
+const Button = forwardRef<ElementRef<typeof Pressable>, ButtonProps>(({ className, variant = 'default', size = 'default', children, startIcon, endIcon, ...props }, ref) => {
   const iconPosition = startIcon ? 'left' : endIcon ? 'right' : 'none';
+  
+  const textClasses = buttonTextVariants({ variant, size });
+  console.log('Button text classes:', textClasses, 'for variant:', variant);
 
   return (
     <TextClassContext.Provider
-      value={buttonTextVariants({
-        variant,
-        size,
-        className: 'web:pointer-events-none'
-      })}
+      value={textClasses}
     >
       <Pressable
         className={cn('group', buttonVariants({ variant, size, iconPosition, className }))}

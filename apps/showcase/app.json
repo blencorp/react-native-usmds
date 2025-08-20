@@ -3,14 +3,20 @@
     "name": "USMDS Showcase",
     "slug": "usmds-showcase",
     "version": "1.0.0",
-    "platforms": ["ios", "android", "web"],
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
     "splash": {
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -20,9 +26,15 @@
       }
     },
     "web": {
+      "output": "single",
       "bundler": "metro"
     },
     "scheme": "usmds-showcase",
-    "newArchEnabled": true
+    "newArchEnabled": true,
+    "extra": {
+      "eas": {
+        "projectId": "6964d508-47bb-4ac8-aeca-cf4ff3f2a829"
+      }
+    }
   }
 }

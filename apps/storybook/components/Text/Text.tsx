@@ -14,9 +14,9 @@ const Text = forwardRef<TextRef, SlottableTextProps>(({ className, asChild = fal
   return (
     <Component
       className={cn(
-        'web:select-text text-background',
-        textClass, // Context classes take precedence
-        className // Allow override if needed
+        'web:select-text',
+        textClass ? textClass : 'text-foreground',
+        className
       )}
       ref={ref}
       {...props}
