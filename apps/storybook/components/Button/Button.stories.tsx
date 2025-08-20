@@ -139,14 +139,14 @@ export const AccentCool: Story = {
 
         <View>
           <Text className='text-sm mb-2'>Hover</Text>
-          <Button variant='accent-cool' className='bg-accent-cool-hover'>
+          <Button variant='accent-cool' className='bg-accent-cool-dark'>
             <Text>Accent Cool</Text>
           </Button>
         </View>
 
         <View>
           <Text className='text-sm mb-2'>Active</Text>
-          <Button variant='accent-cool' className='bg-accent-cool-active'>
+          <Button variant='accent-cool' className='bg-accent-cool-darker'>
             <Text>Accent Cool</Text>
           </Button>
         </View>

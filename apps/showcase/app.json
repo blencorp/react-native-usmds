@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "USMDS Playground",
-    "slug": "usmds-playground",
+    "name": "USMDS Showcase",
+    "slug": "usmds-showcase",
     "version": "1.0.0",
     "platforms": ["ios", "android", "web"],
     "orientation": "portrait",
@@ -22,7 +22,7 @@
     "web": {
       "bundler": "metro"
     },
-    "scheme": "usmds-playground",
+    "scheme": "usmds-showcase",
     "newArchEnabled": true
   }
 }

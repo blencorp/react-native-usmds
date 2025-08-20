@@ -12,7 +12,8 @@ const buttonVariants = cva('flex items-center justify-center rounded-lg font-san
       outline: ['border bg-background', 'border-input', 'active:bg-accent', 'disabled:bg-background/50 disabled:border-muted'],
       secondary: ['bg-secondary', 'active:bg-secondary/80', 'disabled:bg-secondary/50'],
       ghost: ['active:bg-accent', 'disabled:bg-transparent'],
-      link: ['text-primary underline-offset-4 hover:underline', 'active:underline', 'disabled:text-primary/50']
+      link: ['text-primary underline-offset-4 hover:underline', 'active:underline', 'disabled:text-primary/50'],
+      'accent-cool': ['bg-accent-cool', 'active:bg-accent-cool/80', 'disabled:bg-accent-cool/50']
     },
     size: {
       default: 'h-[44px] px-[20px] py-[10px]',
@@ -42,7 +43,8 @@ const buttonTextVariants = cva('text-center', {
       outline: 'text-foreground disabled:text-muted-foreground',
       secondary: 'text-secondary-foreground disabled:text-secondary-foreground/70',
       ghost: 'text-foreground disabled:text-muted-foreground',
-      link: 'text-primary underline disabled:text-primary/50'
+      link: 'text-primary underline disabled:text-primary/50',
+      'accent-cool': 'text-primary-foreground disabled:text-primary-foreground/70',
     },
     size: {
       default: 'text-[16px] leading-[20px]',
