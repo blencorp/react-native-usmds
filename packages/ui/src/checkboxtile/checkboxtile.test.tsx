@@ -1,13 +1,17 @@
 // Mock react-native-svg so Jest never parses its source (which pulls Flow/RN files)
-jest.mock("react-native", () => require("react-native-web"));
-jest.mock("react-native-svg", () => {
-  const React = require("react");
-  const Svg = (props: any) => React.createElement("svg", props, props.children);
-  const Path = (props: any) => React.createElement("path", props);
-  const Circle = (props: any) => React.createElement("circle", props);
-  const Rect = (props: any) => React.createElement("rect", props);
+// Make NativeWind a no-op in tests (avoids native RN bridge access)
+jest.mock('nativewind', () => ({ cssInterop: () => {} }));
+
+// Stub react-native-svg to avoid pulling RN internals
+jest.mock('react-native-svg', () => {
+  const React = require('react');
+  const Svg = (props: any) => React.createElement('svg', props, props.children);
+  const Path = (props: any) => React.createElement('path', props);
+  const Circle = (props: any) => React.createElement('circle', props);
+  const Rect = (props: any) => React.createElement('rect', props);
   return { __esModule: true, default: Svg, Path, Circle, Rect };
 });
+
 
 import { render, fireEvent } from "@testing-library/react-native";
 import { CheckboxTile } from "./";

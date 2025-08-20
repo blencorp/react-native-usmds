@@ -1,4 +1,7 @@
-jest.mock("react-native", () => require("react-native-web"));
+// Make NativeWind a no-op in tests (avoids native RN bridge access)
+jest.mock("nativewind", () => ({ cssInterop: () => {} }));
+
+// Stub react-native-svg to avoid pulling RN internals
 jest.mock("react-native-svg", () => {
   const React = require("react");
   const Svg = (props: any) => React.createElement("svg", props, props.children);
