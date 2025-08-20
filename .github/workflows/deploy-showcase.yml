@@ -7,9 +7,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: apps/showcase
     steps:
       - name: 🏗 Setup repo
         uses: actions/checkout@v4
@@ -27,14 +24,13 @@ jobs:
           corepack enable
           corepack prepare yarn@4.3.1 --activate
       
-      - name: 🏗 Setup EAS
-        uses: expo/expo-github-action@v8
-        with:
-          eas-version: latest
-          token: ${{ secrets.EXPO_TOKEN }}
+      - name: Install CLI
+        run: |
+          npm install -g expo-cli eas-cli
 
       - name: 📦 Install dependencies
         run: |
+          cd apps/showcase
           yarn install
       - name: 🚀 Build and Deploy
         env:
