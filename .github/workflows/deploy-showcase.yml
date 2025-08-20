@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: 🏗 Setup repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  
 
       - name: 🏗 Setup Node
         uses: actions/setup-node@v3
@@ -24,13 +26,15 @@ jobs:
         run: |
           corepack enable
           corepack prepare yarn@4.3.1 --activate
+      
+      - name: Install CLI
+        run: |
+          npm install -g expo-cli eas-cli
 
       - name: 📦 Install dependencies
         run: |
           cd apps/showcase
           yarn install
-          yarn add -D eas-cli expo
-
       - name: 🚀 Build and Deploy
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
