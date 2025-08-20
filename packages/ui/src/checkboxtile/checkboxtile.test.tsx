@@ -1,9 +1,9 @@
 // Mock react-native-svg so Jest never parses its source (which pulls Flow/RN files)
+jest.mock("react-native", () => require("react-native-web"));
 jest.mock("react-native-svg", () => {
   const React = require("react");
   const Svg = (props: any) => React.createElement("svg", props, props.children);
   const Path = (props: any) => React.createElement("path", props);
-  // Add more tags only if your component uses them:
   const Circle = (props: any) => React.createElement("circle", props);
   const Rect = (props: any) => React.createElement("rect", props);
   return { __esModule: true, default: Svg, Path, Circle, Rect };

@@ -1,14 +1,13 @@
-// Make RN work in JSDOM and avoid parsing RN-SVG source
-jest.mock("react-native", () => require("react-native-web"));
-jest.mock("react-native-svg", () => {
-  const React = require("react");
-  const Svg = (props: any) => React.createElement("svg", props, props.children);
-  const Path = (props: any) => React.createElement("path", props);
-  const Circle = (props: any) => React.createElement("circle", props);
-  const Rect = (props: any) => React.createElement("rect", props);
+jest.mock('react-native', () => require('react-native-web'));
+jest.mock('react-native-svg', () => {
+  const React = require('react');
+  const Svg = (props: any) => React.createElement('svg', props, props.children);
+  const Path = (props: any) => React.createElement('path', props);
+  const Circle = (props: any) => React.createElement('circle', props);
+  const Rect = (props: any) => React.createElement('rect', props);
   return { __esModule: true, default: Svg, Path, Circle, Rect };
 });
-// ...rest of your test remains the same
+
 
 import { render, fireEvent } from "@testing-library/react-native";
 import { Link } from "./";

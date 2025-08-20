@@ -8,8 +8,6 @@ jest.mock("react-native-svg", () => {
   return { __esModule: true, default: Svg, Path, Circle, Rect };
 });
 
-
-
 import { render, fireEvent } from "@testing-library/react-native";
 import { Button } from "./index";
 
