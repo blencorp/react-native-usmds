@@ -64,27 +64,6 @@ export const Default: Story = {
             <Text>Default</Text>
           </Button>
         </View>
-
-        <View>
-          <Text className='text-sm mb-2'>Hover</Text>
-          <Button variant='default' className='bg-primary-hover'>
-            <Text>Default</Text>
-          </Button>
-        </View>
-
-        <View>
-          <Text className='text-sm mb-2'>Active</Text>
-          <Button variant='default' className='bg-primary-active'>
-            <Text>Default</Text>
-          </Button>
-        </View>
-
-        <View>
-          <Text className='text-sm mb-2'>Focus</Text>
-          <Button variant='default' className='ring-2 ring-focus-ring ring-offset-2'>
-            <Text>Default</Text>
-          </Button>
-        </View>
       </View>
     </ScrollView>
   )
@@ -97,27 +76,6 @@ export const Secondary: Story = {
         <View>
           <Text className='text-sm mb-2'>Default</Text>
           <Button variant='secondary'>
-            <Text>Secondary</Text>
-          </Button>
-        </View>
-
-        <View>
-          <Text className='text-sm mb-2'>Hover</Text>
-          <Button variant='secondary' className='bg-secondary-hover'>
-            <Text>Secondary</Text>
-          </Button>
-        </View>
-
-        <View>
-          <Text className='text-sm mb-2'>Active</Text>
-          <Button variant='secondary' className='bg-secondary-active'>
-            <Text>Secondary</Text>
-          </Button>
-        </View>
-
-        <View>
-          <Text className='text-sm mb-2'>Focus</Text>
-          <Button variant='secondary' className='ring-2 ring-focus-ring ring-offset-2'>
             <Text>Secondary</Text>
           </Button>
         </View>
@@ -136,27 +94,6 @@ export const AccentCool: Story = {
             <Text>Accent Cool</Text>
           </Button>
         </View>
-
-        <View>
-          <Text className='text-sm mb-2'>Hover</Text>
-          <Button variant='accent-cool' className='bg-accent-cool-dark'>
-            <Text>Accent Cool</Text>
-          </Button>
-        </View>
-
-        <View>
-          <Text className='text-sm mb-2'>Active</Text>
-          <Button variant='accent-cool' className='bg-accent-cool-darker'>
-            <Text>Accent Cool</Text>
-          </Button>
-        </View>
-
-        <View>
-          <Text className='text-sm mb-2'>Focus</Text>
-          <Button variant='accent-cool' className='ring-2 ring-focus-ring ring-offset-2'>
-            <Text>Accent Cool</Text>
-          </Button>
-        </View>
       </View>
     </ScrollView>
   )
@@ -169,27 +106,6 @@ export const AccentWarm: Story = {
         <View>
           <Text className='text-sm mb-2'>Default</Text>
           <Button variant='accent-warm'>
-            <Text>Accent Warm</Text>
-          </Button>
-        </View>
-
-        <View>
-          <Text className='text-sm mb-2'>Hover</Text>
-          <Button variant='accent-warm' className='bg-accent-warm-hover'>
-            <Text>Accent Warm</Text>
-          </Button>
-        </View>
-
-        <View>
-          <Text className='text-sm mb-2'>Active</Text>
-          <Button variant='accent-warm' className='bg-accent-warm-active'>
-            <Text>Accent Warm</Text>
-          </Button>
-        </View>
-
-        <View>
-          <Text className='text-sm mb-2'>Focus</Text>
-          <Button variant='accent-warm' className='ring-2 ring-focus-ring ring-offset-2'>
             <Text>Accent Warm</Text>
           </Button>
         </View>
@@ -208,27 +124,6 @@ export const Base: Story = {
             <Text>Base</Text>
           </Button>
         </View>
-
-        <View>
-          <Text className='text-sm mb-2'>Hover</Text>
-          <Button variant='base' className='bg-base-hover'>
-            <Text>Base</Text>
-          </Button>
-        </View>
-
-        <View>
-          <Text className='text-sm mb-2'>Active</Text>
-          <Button variant='base' className='bg-base-active'>
-            <Text>Base</Text>
-          </Button>
-        </View>
-
-        <View>
-          <Text className='text-sm mb-2'>Focus</Text>
-          <Button variant='base' className='ring-2 ring-focus-ring ring-offset-2'>
-            <Text>Base</Text>
-          </Button>
-        </View>
       </View>
     </ScrollView>
   )
@@ -241,30 +136,6 @@ export const Outline: Story = {
         <View>
           <Text className='text-sm mb-2'>Default</Text>
           <Button variant='outline'>
-            <Text>Outline</Text>
-          </Button>
-        </View>
-
-        <View>
-          <Text className='text-sm mb-2'>Hover</Text>
-          <Button variant='outline'>
-            <Text>Outline</Text>
-          </Button>
-        </View>
-
-        <View>
-          <Text className='text-sm mb-2'>Active</Text>
-          <Button variant='outline'>
-            <Text>Outline</Text>
-          </Button>
-        </View>
-
-        <View>
-          <Text className='text-sm mb-2'>Focus</Text>
-          <Button
-            variant='outline'
-            className='ring-4 ring-blue-vivid-40v' // #2491FF
-          >
             <Text>Outline</Text>
           </Button>
         </View>
@@ -285,27 +156,6 @@ export const Inverse: Story = {
                 <Text>Inverse</Text>
               </Button>
             </View>
-
-            <View>
-              <Text className='text-sm mb-2 text-white'>Hover</Text>
-              <Button variant='inverse'>
-                <Text>Inverse</Text>
-              </Button>
-            </View>
-
-            <View>
-              <Text className='text-sm mb-2 text-white'>Active</Text>
-              <Button variant='inverse'>
-                <Text>Inverse</Text>
-              </Button>
-            </View>
-
-            <View>
-              <Text className='text-sm mb-2 text-white'>Focus</Text>
-              <Button variant='inverse' className='ring-4 ring-blue-vivid-40v'>
-                <Text>Inverse</Text>
-              </Button>
-            </View>
           </View>
         </View>
       </View>
@@ -316,7 +166,7 @@ export const Inverse: Story = {
 export const Sizes: Story = {
   render: () => (
     <ScrollView>
-      <View className='space-y-4'>
+      <View className='flex-1 gap-4 p-4'>
         <Button size='sm'>
           <Text>Small Button</Text>
         </Button>
@@ -330,7 +180,7 @@ export const Sizes: Story = {
           <Text>Big Button</Text>
         </Button>
         <Button size='icon'>
-          <Mail />
+          <Mail className='text-primary-foreground' />
         </Button>
       </View>
     </ScrollView>
@@ -340,14 +190,14 @@ export const Sizes: Story = {
 export const WithIcons: Story = {
   render: () => (
     <ScrollView>
-      <View className='space-y-4'>
-        <Button startIcon={<Mail />}>
+      <View className='flex-1 gap-4 p-4'>
+        <Button startIcon={<Mail className='text-primary-foreground' />}>
           <Text>Start Icon</Text>
         </Button>
-        <Button endIcon={<ArrowRight />}>
+        <Button endIcon={<ArrowRight className='text-primary-foreground' />}>
           <Text>End Icon</Text>
         </Button>
-        <Button startIcon={<Mail />} endIcon={<ArrowRight />}>
+        <Button startIcon={<Mail className='text-primary-foreground' />} endIcon={<ArrowRight className='text-primary-foreground' />}>
           <Text>Both Icons</Text>
         </Button>
       </View>
@@ -376,27 +226,6 @@ export const AllVariants: Story = {
                 <Text>Primary</Text>
               </Button>
             </View>
-
-            <View>
-              <Text className='text-sm mb-2'>Hover</Text>
-              <Button variant='default'>
-                <Text>Primary</Text>
-              </Button>
-            </View>
-
-            <View>
-              <Text className='text-sm mb-2'>Active</Text>
-              <Button variant='default'>
-                <Text>Primary</Text>
-              </Button>
-            </View>
-
-            <View>
-              <Text className='text-sm mb-2'>Focus</Text>
-              <Button variant='default' focus>
-                <Text>Primary</Text>
-              </Button>
-            </View>
           </View>
         </View>
 
@@ -407,27 +236,6 @@ export const AllVariants: Story = {
             <View>
               <Text className='text-sm mb-2'>Default</Text>
               <Button variant='secondary'>
-                <Text>Secondary</Text>
-              </Button>
-            </View>
-
-            <View>
-              <Text className='text-sm mb-2'>Hover</Text>
-              <Button variant='secondary'>
-                <Text>Secondary</Text>
-              </Button>
-            </View>
-
-            <View>
-              <Text className='text-sm mb-2'>Active</Text>
-              <Button variant='secondary'>
-                <Text>Secondary</Text>
-              </Button>
-            </View>
-
-            <View>
-              <Text className='text-sm mb-2'>Focus</Text>
-              <Button variant='secondary' focus>
                 <Text>Secondary</Text>
               </Button>
             </View>
@@ -444,27 +252,6 @@ export const AllVariants: Story = {
                 <Text>Accent Cool</Text>
               </Button>
             </View>
-
-            <View>
-              <Text className='text-sm mb-2'>Hover</Text>
-              <Button variant='accent-cool'>
-                <Text>Accent Cool</Text>
-              </Button>
-            </View>
-
-            <View>
-              <Text className='text-sm mb-2'>Active</Text>
-              <Button variant='accent-cool'>
-                <Text>Accent Cool</Text>
-              </Button>
-            </View>
-
-            <View>
-              <Text className='text-sm mb-2'>Focus</Text>
-              <Button variant='accent-cool' focus>
-                <Text>Accent Cool</Text>
-              </Button>
-            </View>
           </View>
         </View>
 
@@ -475,27 +262,6 @@ export const AllVariants: Story = {
             <View>
               <Text className='text-sm mb-2'>Default</Text>
               <Button variant='accent-warm'>
-                <Text>Accent Warm</Text>
-              </Button>
-            </View>
-
-            <View>
-              <Text className='text-sm mb-2'>Hover</Text>
-              <Button variant='accent-warm' className='bg-accent-warm-hover'>
-                <Text>Accent Warm</Text>
-              </Button>
-            </View>
-
-            <View>
-              <Text className='text-sm mb-2'>Active</Text>
-              <Button variant='accent-warm' className='bg-accent-warm-active'>
-                <Text>Accent Warm</Text>
-              </Button>
-            </View>
-
-            <View>
-              <Text className='text-sm mb-2'>Focus</Text>
-              <Button variant='accent-warm' className='ring-2 ring-focus-ring ring-offset-2'>
                 <Text>Accent Warm</Text>
               </Button>
             </View>
@@ -512,27 +278,6 @@ export const AllVariants: Story = {
                 <Text>Base</Text>
               </Button>
             </View>
-
-            <View>
-              <Text className='text-sm mb-2'>Hover</Text>
-              <Button variant='base'>
-                <Text>Base</Text>
-              </Button>
-            </View>
-
-            <View>
-              <Text className='text-sm mb-2'>Active</Text>
-              <Button variant='base'>
-                <Text>Base</Text>
-              </Button>
-            </View>
-
-            <View>
-              <Text className='text-sm mb-2'>Focus</Text>
-              <Button variant='base' focus>
-                <Text>Base</Text>
-              </Button>
-            </View>
           </View>
         </View>
 
@@ -543,27 +288,6 @@ export const AllVariants: Story = {
             <View>
               <Text className='text-sm mb-2'>Default</Text>
               <Button variant='outline'>
-                <Text>Outline</Text>
-              </Button>
-            </View>
-
-            <View>
-              <Text className='text-sm mb-2'>Hover</Text>
-              <Button variant='outline'>
-                <Text>Outline</Text>
-              </Button>
-            </View>
-
-            <View>
-              <Text className='text-sm mb-2'>Active</Text>
-              <Button variant='outline'>
-                <Text>Outline</Text>
-              </Button>
-            </View>
-
-            <View>
-              <Text className='text-sm mb-2'>Focus</Text>
-              <Button variant='outline' focus>
                 <Text>Outline</Text>
               </Button>
             </View>
@@ -581,27 +305,6 @@ export const AllVariants: Story = {
                   <Text>Inverse</Text>
                 </Button>
               </View>
-
-              <View>
-                <Text className='text-sm mb-2 text-white'>Hover</Text>
-                <Button variant='inverse'>
-                  <Text>Inverse</Text>
-                </Button>
-              </View>
-
-              <View>
-                <Text className='text-sm mb-2 text-white'>Active</Text>
-                <Button variant='inverse'>
-                  <Text>Inverse</Text>
-                </Button>
-              </View>
-
-              <View>
-                <Text className='text-sm mb-2 text-white'>Focus</Text>
-                <Button variant='inverse' focus>
-                  <Text>Inverse</Text>
-                </Button>
-              </View>
             </View>
           </View>
         </View>
@@ -612,6 +315,6 @@ export const AllVariants: Story = {
 
 export const Interactive: Story = {
   args: {
-    children: (state) => <Text>{state.pressed ? 'Pressing!' : state.hovered ? 'Hovering!' : 'Interactive'}</Text>
+    children: (state) => <Text>{state.pressed ? 'Pressing!' : 'Interactive'}</Text>
   }
 };

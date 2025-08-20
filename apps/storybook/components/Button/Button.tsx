@@ -12,14 +12,17 @@ const buttonVariants = cva('flex items-center justify-center rounded-lg font-san
       outline: ['border bg-background', 'border-input', 'active:bg-accent', 'disabled:bg-background/50 disabled:border-muted'],
       secondary: ['bg-secondary', 'active:bg-secondary/80', 'disabled:bg-secondary/50'],
       ghost: ['active:bg-accent', 'disabled:bg-transparent'],
-      link: ['text-primary underline-offset-4 hover:underline', 'active:underline', 'disabled:text-primary/50'],
-      'accent-cool': ['bg-accent-cool', 'active:bg-accent-cool/80', 'disabled:bg-accent-cool/50']
+      link: ['text-primary underline-offset-4', 'active:underline', 'disabled:text-primary/50'],
+      'accent-cool': ['bg-accent-cool', 'active:bg-accent-cool/80', 'disabled:bg-accent-cool/50'],
+      'accent-warm': ['bg-accent-warm', 'active:bg-accent-warm/80', 'disabled:bg-accent-warm/50'],
+      base: ['bg-base', 'active:bg-base/80', 'disabled:bg-base/50'],
+      inverse: ['border border-primary-foreground bg-foreground web:border-primary-foreground', 'active:bg-foreground/80', 'disabled:bg-foreground/50']
     },
     size: {
       default: 'h-[44px] px-[20px] py-[10px]',
       sm: 'h-[36px] px-[12px] py-[8px] text-sm',
-      lg: 'h-[48px] px-[24px] py-[16px]',
-      big: 'h-[60px] px-[24px] py-[16px] min-w-[329px]',
+      lg: 'h-[54px] px-[24px] py-[16px]',
+      big: 'h-[62px] px-[24px] py-[16px] min-w-[329px]',
       icon: 'h-[44px] w-[44px] p-0'
     },
     iconPosition: {
@@ -45,6 +48,9 @@ const buttonTextVariants = cva('text-center', {
       ghost: 'text-foreground disabled:text-muted-foreground',
       link: 'text-primary underline disabled:text-primary/50',
       'accent-cool': 'text-primary-foreground disabled:text-primary-foreground/70',
+      'accent-warm': 'text-primary-foreground disabled:text-primary-foreground/70',
+      base: 'text-primary-foreground disabled:text-primary-foreground/70',
+      inverse: 'text-primary-foreground disabled:text-primary-foreground/70'
     },
     size: {
       default: 'text-[16px] leading-[20px]',
@@ -68,44 +74,43 @@ type ButtonProps = ComponentPropsWithoutRef<typeof Pressable> &
     children: ReactNode | ((state: PressableStateCallbackType) => ReactNode);
   };
 
-const Button = forwardRef<ElementRef<typeof Pressable>, ButtonProps>(({ className, variant = 'default', size = 'default', children, startIcon, endIcon, ...props }, ref) => {
-  const iconPosition = startIcon ? 'left' : endIcon ? 'right' : 'none';
-  
-  const textClasses = buttonTextVariants({ variant, size });
-  console.log('Button text classes:', textClasses, 'for variant:', variant);
+const Button = forwardRef<ElementRef<typeof Pressable>, ButtonProps>(
+  ({ className, variant = 'default', size = 'default', children, startIcon, endIcon, ...props }, ref) => {
+    const iconPosition = startIcon ? 'left' : endIcon ? 'right' : 'none';
 
-  return (
-    <TextClassContext.Provider
-      value={textClasses}
-    >
-      <Pressable
-        className={cn('group', buttonVariants({ variant, size, iconPosition, className }))}
-        ref={ref}
-        role='button'
-        android_ripple={{
-          color: 'rgba(0, 0, 0, 0.2)',
-          borderless: false,
-          foreground: true
-        }}
-        style={({ pressed }) => [
-          {
-            opacity: props.disabled ? 0.5 : pressed ? 0.8 : 1,
-            transform: [{ scale: pressed && !props.disabled ? 0.98 : 1 }]
-          }
-        ]}
-        {...props}
-      >
-        {(state) => (
-          <View className='flex-row items-center justify-center flex-1' style={{ opacity: state.pressed && !props.disabled ? 0.8 : 1 }}>
-            {startIcon && <View className='mr-2'>{startIcon}</View>}
-            {typeof children === 'function' ? children(state) : children}
-            {endIcon && <View className='ml-2'>{endIcon}</View>}
-          </View>
-        )}
-      </Pressable>
-    </TextClassContext.Provider>
-  );
-});
+    const textClasses = buttonTextVariants({ variant, size });
+
+    return (
+      <TextClassContext.Provider value={textClasses}>
+        <Pressable
+          className={cn('group', buttonVariants({ variant, size, iconPosition, className }))}
+          ref={ref}
+          role='button'
+          android_ripple={{
+            color: 'rgba(0, 0, 0, 0.2)',
+            borderless: false,
+            foreground: true
+          }}
+          style={({ pressed }) => [
+            {
+              opacity: props.disabled ? 0.5 : pressed ? 0.8 : 1,
+              transform: [{ scale: pressed && !props.disabled ? 0.98 : 1 }]
+            }
+          ]}
+          {...props}
+        >
+          {(state) => (
+            <View className='flex-row items-center justify-center flex-1' style={{ opacity: state.pressed && !props.disabled ? 0.8 : 1 }}>
+              {startIcon && <View className='mr-2'>{startIcon}</View>}
+              {typeof children === 'function' ? children(state) : children}
+              {endIcon && <View className='ml-2'>{endIcon}</View>}
+            </View>
+          )}
+        </Pressable>
+      </TextClassContext.Provider>
+    );
+  }
+);
 
 Button.displayName = 'Button';
 

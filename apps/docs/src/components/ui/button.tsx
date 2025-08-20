@@ -25,7 +25,7 @@ const buttonVariants = cva(
   secondary: `
     bg-[var(--usa-color-secondary)]
     text-[var(--usa-color-base-darkest)]
-    hover:bg-[color-mix(in srgb, var(--usa-color-secondary) 90%, black)]
+    hover:bg-usa-color-error
     focus:ring-4
     focus:ring-[var(--usa-color-focus)]
     focus:ring-offset-4

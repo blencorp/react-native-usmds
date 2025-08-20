@@ -50,14 +50,6 @@ export const WithContext: Story = {
   )
 };
 
-export const AsChild: Story = {
-  render: () => (
-    <Text asChild>
-      <Slot.Text>This text uses Slot component</Slot.Text>
-    </Text>
-  )
-};
-
 export const TypographyVariants: Story = {
   render: () => (
     <View className='space-y-4'>

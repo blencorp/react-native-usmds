@@ -1,0 +1,36 @@
+name: Deploy Showcase
+
+on:
+    push:
+      branches:
+        - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v4
+
+      - name: 🏗 Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: yarn
+
+      - name: Enable Corepack
+        run: |
+          corepack enable
+          corepack prepare yarn@4.3.1 --activate
+
+      - name: 🏗 Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: 📦 Install dependencies and build and deploy
+        run: |
+          cd apps/showcase
+          yarn install
+          npx expo export --platform web
+          eas deploy --prod
