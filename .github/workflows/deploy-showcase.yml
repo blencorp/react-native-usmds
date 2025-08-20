@@ -38,4 +38,4 @@ jobs:
         run: |
           cd apps/showcase
           npx expo export --platform web
-          npx eas update --branch production --message "Deploy from GitHub Actions"
+          eas deploy --prod
