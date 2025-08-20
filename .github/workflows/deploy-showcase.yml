@@ -27,10 +27,8 @@ jobs:
 
       - name: 📦 Install dependencies
         run: |
+          cd apps/showcase
           yarn install
-
-      - name: 🏗 Install EAS CLI
-        run: |
           yarn add -D eas-cli expo
 
       - name: 🚀 Build and Deploy
