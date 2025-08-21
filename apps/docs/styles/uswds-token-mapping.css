@@ -316,7 +316,7 @@
   /* === TYPOGRAPHY TOKENS === */
   --usa-font-family-sans: "Public Sans", system-ui, sans-serif;
   --usa-font-family-serif: "Merriweather", Georgia, serif;
-  --usa-font-family-mono: "Source Sans Pro", monospace;
+  --usa-font-family-mono: "Google Sans Code", monospace;
 
   --usa-font-size-2xs: 0.625rem;
   --usa-font-size-xs:  0.75rem;
