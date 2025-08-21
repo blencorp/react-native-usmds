@@ -3,33 +3,33 @@ import { Button } from "@/components/ui/button";
 
 const links = [
   {
-    name: "Privacy Policy",
-    href: "https://www.gsa.gov/website-information/website-policies#privacy",
+    name: "Works",
+    href: "https://www.blencorp.com/works",
     external: true,
   },
   {
-    name: "Accessibility Statement",
-    href: "https://www.gsa.gov/website-information/accessibility-statement",
+    name: "Capabilities",
+    href: "https://www.blencorp.com/capabilities",
     external: true,
   },
   {
-    name: "FOIA Requests",
-    href: "https://www.gsa.gov/reference/freedom-of-information-act-foia",
+    name: "Company",
+    href: "https://www.blencorp.com/company",
     external: true,
   },
   {
-    name: "No Fear Act Data",
-    href: "https://www.gsa.gov/reference/civil-rights-programs/the-no-fear-act",
+    name: "Ideas",
+    href: "https://www.blencorp.com/blog",
     external: true,
   },
   {
-    name: "Office of the Inspector General",
-    href: "https://www.gsaig.gov/",
+    name: "Careers",
+    href: "https://www.blencorp.com/careers",
     external: true,
   },
   {
-    name: "USA.gov",
-    href: "https://www.usa.gov",
+    name: "Connect",
+    href: "https://www.blencorp.com/connect",
     external: true,
   },
 ];
@@ -61,19 +61,7 @@ export const Footer = () => {
 
           <div className="text-center text-sm text-gray-400">
             <p>
-              © 2024 U.S. Mobile Design System. Built for the federal
-              government.
-            </p>
-            <p className="mt-2">
-              An official website of the United States government managed by the{" "}
-              <a
-                href="https://www.gsa.gov"
-                className="text-gray-300 hover:text-white underline"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                General Services Administration
-              </a>
+              © 2025 BLEN, Inc. All rights reserved.
             </p>
           </div>
         </div>
