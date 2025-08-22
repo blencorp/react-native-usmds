@@ -31,27 +31,46 @@ export function HeroSection() {
             role="group"
             aria-label="Primary actions"
           >
-            <Button asChild variant="destructive" size="lg">
-              <Link href="/docs">
-                Get Started
-                <span id="get-started-description" className="sr-only">
-                  Begin using USMDS components in your government mobile
-                  application
-                </span>
-              </Link>
+            {/* Primary CTA — RED (USWDS “error” red) */}
+            <Button
+              asChild
+              variant="default"
+              size="lg"
+              className="
+    bg-[var(--usa-color-error,#b50909)]
+    text-[var(--usa-color-base-lightest,#ffffff)]
+    border border-[color-mix(in_srgb,var(--usa-color-error,#b50909)_70%,black)]
+    hover:bg-[var(--usa-color-red-70v,#8b0a03)]
+    active:bg-[var(--usa-color-red-80v,#5c0000)]
+    supports-[color:color-mix(in_srgb,red,black)]:hover:bg-[color-mix(in_srgb,var(--usa-color-error,#b50909)_90%,black)]
+    focus-visible:ring-4 focus-visible:ring-[var(--usa-color-focus,#2491ff)]
+    focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--usa-color-error,#b50909)]
+    rounded-sm h-12 px-[var(--usa-space-4,1rem)] py-[var(--usa-space-3,0.75rem)]
+    transition-colors
+  "
+            >
+              <Link href="/docs">Get Started</Link>
             </Button>
+            <span id="get-started-description" className="sr-only">
+              Begin using USMDS components in your government mobile application
+            </span>
 
+            {/* Secondary CTA — BLUE (filled, darker hover, still variant="outline") */}
             <Button
               asChild
               variant="outline"
               size="lg"
               className="
-    border-[var(--usa-base-lightest,#ffffff)]
-    text-[var(--usa-base-lightest,#ffffff)]
-    hover:bg-[var(--usa-base-lightest,#ffffff)]
-    hover:text-[var(--usa-color-blue-60v,#005ea2)]
-    focus-visible:ring-[var(--usa-base-lightest,#ffffff)]
-    bg-transparent
+    bg-[var(--usa-color-blue-60v,#005ea2)]
+    text-[var(--usa-color-base-lightest,#ffffff)]
+    border border-[var(--usa-color-blue-60v,#005ea2)]
+    hover:bg-[var(--usa-color-blue-70v,#1a4480)]
+    active:bg-[var(--usa-color-blue-80v,#0b4778)]
+    supports-[color:color-mix(in_srgb,blue,black)]:hover:bg-[color-mix(in_srgb,var(--usa-color-blue-60v,#005ea2)_90%,black)]
+    focus-visible:ring-4 focus-visible:ring-[var(--usa-color-focus,#2491ff)]
+    focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--usa-color-blue-60v,#005ea2)]
+    rounded-sm h-12 px-[var(--usa-space-4,1rem)] py-[var(--usa-space-3,0.75rem)]
+    transition-colors
   "
             >
               <Link href="/docs/components">View Components</Link>
