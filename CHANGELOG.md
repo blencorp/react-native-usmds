@@ -1,3 +1,15 @@
+## [1.16.0](https://github.com/blencorp/react-native-usmds/compare/v1.15.0...v1.16.0) (2025-08-24)
+
+### Features
+
+* finish up all showcase components ([d125bd2](https://github.com/blencorp/react-native-usmds/commit/d125bd2d08d0ae150d39545931e5357718ad7fc1))
+* implement DemoButton component ([2293dd6](https://github.com/blencorp/react-native-usmds/commit/2293dd667733a06a531703d003b1f2b4f9118957))
+
+### Bug Fixes
+
+* reduce excessive padding around demo button ([e70abd4](https://github.com/blencorp/react-native-usmds/commit/e70abd4b9f1442d3f4bea0445078efd23611abf6))
+* resolve [#84](https://github.com/blencorp/react-native-usmds/issues/84) ([f65093d](https://github.com/blencorp/react-native-usmds/commit/f65093dc1f46c3e4b110507839ae107262eb8802))
+
 ## [1.15.0](https://github.com/blencorp/react-native-usmds/compare/v1.14.3...v1.15.0) (2025-08-20)
 
 ### Features
