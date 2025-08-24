@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 const badgeVariants = cva('flex-row items-center justify-center rounded-full px-2.5 py-1 border', {
   variants: {
     variant: {
-      default: 'bg-primary-lighter border-primary-light',
+      default: 'bg-primary border-primary-light',
       success: 'bg-success-lighter border-success-light',
       warning: 'bg-warning-lighter border-warning-light',
       info: 'bg-info-lighter border-info-light',

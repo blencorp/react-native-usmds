@@ -1,5 +1,5 @@
-import { ComponentPropsWithoutRef, forwardRef } from 'react';
-import * as ProgressPrimitive from '@rn-primitives/progress';
+import { forwardRef } from 'react';
+import { View, ViewProps } from 'react-native';
 import { cn } from '../../lib/utils';
 import Animated, {
   Extrapolation,
@@ -9,7 +9,7 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 
-interface ProgressProps extends ComponentPropsWithoutRef<typeof ProgressPrimitive.Root> {
+interface ProgressProps extends ViewProps {
   className?: string;
   indicatorClassName?: string;
   value?: number;
@@ -17,54 +17,36 @@ interface ProgressProps extends ComponentPropsWithoutRef<typeof ProgressPrimitiv
   size?: 'sm' | 'md' | 'lg';
 }
 
-function Indicator({ 
-  value, 
-  variant = 'default',
-  className 
-}: { 
-  value: number | undefined | null; 
-  variant?: ProgressProps['variant'];
-  className?: string;
-}) {
-  const progress = useDerivedValue(() => value ?? 0);
-
-  const indicator = useAnimatedStyle(() => {
-    return {
-      width: withSpring(
-        `${interpolate(progress.value, [0, 100], [1, 100], Extrapolation.CLAMP)}%`,
-        { overshootClamping: true }
-      ),
-    };
-  });
-
-  const variantStyles = {
-    default: 'bg-primary',
-    success: 'bg-success',
-    error: 'bg-error',
-    warning: 'bg-warning',
-    info: 'bg-info'
-  };
-
-  return (
-    <ProgressPrimitive.Indicator asChild>
-      <Animated.View 
-        style={indicator}
-        className={cn('h-full rounded-full', variantStyles[variant], className)} 
-      />
-    </ProgressPrimitive.Indicator>
-  );
-}
-
-const Progress = forwardRef<ProgressPrimitive.RootRef, ProgressProps>(
-  ({ className, value, variant = 'default', size = 'md', indicatorClassName, ...props }, ref) => {
+const Progress = forwardRef<View, ProgressProps>(
+  ({ className, value = 0, variant = 'default', size = 'md', indicatorClassName, ...props }, ref) => {
     const sizeStyles = {
       sm: 'h-1',
       md: 'h-2',
       lg: 'h-3'
     };
 
+    const variantStyles = {
+      default: 'bg-primary',
+      success: 'bg-success',
+      error: 'bg-error',
+      warning: 'bg-warning',
+      info: 'bg-info'
+    };
+
+    const clampedValue = Math.min(100, Math.max(0, value));
+    const progress = useDerivedValue(() => clampedValue);
+
+    const indicator = useAnimatedStyle(() => {
+      return {
+        width: withSpring(
+          `${interpolate(progress.value, [0, 100], [1, 100], Extrapolation.CLAMP)}%`,
+          { overshootClamping: true }
+        ),
+      };
+    });
+
     return (
-      <ProgressPrimitive.Root
+      <View
         ref={ref}
         className={cn(
           'relative overflow-hidden rounded-full bg-base-lighter w-full min-w-[150px]',
@@ -73,8 +55,11 @@ const Progress = forwardRef<ProgressPrimitive.RootRef, ProgressProps>(
         )}
         {...props}
       >
-        <Indicator value={value} variant={variant} className={indicatorClassName} />
-      </ProgressPrimitive.Root>
+        <Animated.View 
+          style={indicator}
+          className={cn('h-full rounded-full', variantStyles[variant], indicatorClassName)} 
+        />
+      </View>
     );
   }
 );

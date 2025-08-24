@@ -514,6 +514,7 @@ export const COMPONENT_METADATA: Record<string, ComponentMetadata> = {
   },
   Progress: {
     name: 'Progress',
+    // TODO REMOVE THIS
     dependencies: ['@rn-primitives/progress'],
     internalDependencies: []
   },

@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef, useContext, createContext } from 'react';
-import { View, Text, Pressable, GestureResponderEvent } from 'react-native';
+import { View, Text, Pressable, GestureResponderEvent, Platform } from 'react-native';
 import * as RadioGroupPrimitive from '@rn-primitives/radio-group';
 import { cn } from '@/lib/utils';
 import { cssInterop } from 'nativewind';
@@ -44,22 +44,21 @@ const RadioButton = forwardRef<ElementRef<typeof RadioGroupPrimitive.Item>, Radi
       onPress={handlePress}
       className='flex flex-row items-center gap-2 min-h-[44px] w-[329px] px-4'
     >
-      <View className='relative w-5 h-5'>
-        <RadioGroupPrimitive.Item
-          ref={ref}
-          aria-labelledby={labelId}
-          testID={`radio-${props.value}`}
-          className={cn(
-            'absolute left-0 top-0 w-5 h-5 rounded-full border-2 flex items-center justify-center bg-background',
-            props.disabled ? 'border-disabled' : isSelected ? 'border-primary' : 'border-base-ink'
-          )}
-          {...props}
-        >
-          <RadioGroupPrimitive.Indicator forceMount className='w-full h-full flex items-center justify-center'>
-            <View className={cn('w-3.5 h-3.5 rounded-full', isSelected ? (props.disabled ? 'bg-disabled' : 'bg-primary') : 'bg-transparent')} />
-          </RadioGroupPrimitive.Indicator>
-        </RadioGroupPrimitive.Item>
-      </View>
+      <RadioGroupPrimitive.Item
+        ref={ref}
+        aria-labelledby={labelId}
+        testID={`radio-${props.value}`}
+        className={cn(
+          Platform.OS === 'web' ? 'w-5 h-5' : 'min-w-[20px] min-h-[20px] w-5 h-5',
+          'rounded-full border-2 flex items-center justify-center bg-background',
+          props.disabled ? 'border-disabled' : isSelected ? 'border-primary' : 'border-foreground'
+        )}
+        {...props}
+      >
+        <RadioGroupPrimitive.Indicator forceMount className={Platform.OS === 'web' ? 'flex items-center justify-center' : 'w-full h-full flex items-center justify-center'}>
+          <View className={cn('h-[10px] w-[10px] rounded-full', isSelected ? (props.disabled ? 'bg-disabled' : 'bg-primary') : 'bg-transparent')} />
+        </RadioGroupPrimitive.Indicator>
+      </RadioGroupPrimitive.Item>
 
       <Text nativeID={labelId} className={cn('flex-1 text-base leading-5', props.disabled ? 'text-disabled' : 'text-base-ink')}>
         {label}

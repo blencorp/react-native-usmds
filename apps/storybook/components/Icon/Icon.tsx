@@ -22,7 +22,7 @@ export const Icon = ({ name, size = 24, className }: IconProps) => {
 
   return (
     <View style={{ width: size, height: size }}>
-      <Svg width={size} height={size} viewBox='0 0 24 24' className={cn(className)} fill='currentColor' stroke='currentColor'>
+      <Svg width={size} height={size} viewBox='0 0 24 24' className={cn(className)} fill='currentColor'>
         <Path d={path} />
       </Svg>
     </View>

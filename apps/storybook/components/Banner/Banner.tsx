@@ -80,7 +80,7 @@ const Banner = forwardRef<ElementRef<typeof View>, BannerProps>(({ className, va
         </Text>
         {isStandardApp && link && (
           <Pressable accessibilityRole='link' accessibilityLabel={link}>
-            <Text className='text-primary text-[12px] leading-[14px] font-bold underline whitespace-nowrap' numberOfLines={1}>
+            <Text className='text-primary text-[12px] leading-[14px] font-semibold underline whitespace-nowrap' numberOfLines={1}>
               {link}
             </Text>
           </Pressable>

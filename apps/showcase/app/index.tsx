@@ -2,8 +2,31 @@ import { Link } from 'expo-router';
 import { View, Text, ScrollView, Pressable } from 'react-native';
 
 const components = [
+  { name: 'Alert', path: '/components/alert' },
+  { name: 'Avatar', path: '/components/avatar' },
+  { name: 'Badge', path: '/components/badge' },
+  { name: 'Banner', path: '/components/banner' },
+  { name: 'Biometric Sign In', path: '/components/biometric' },
   { name: 'Button', path: '/components/button' },
+  { name: 'Button Group', path: '/components/buttongroup' },
+  { name: 'Card', path: '/components/card' },
+  { name: 'Checkbox', path: '/components/checkbox' },
+  { name: 'Checkbox Tile', path: '/components/checkboxtile' },
+  { name: 'Collapsible', path: '/components/collapsible' },
+  { name: 'Dialog', path: '/components/dialog' },
+  { name: 'Icon', path: '/components/icon' },
+  { name: 'Link', path: '/components/link' },
+  { name: 'Pagination', path: '/components/pagination' },
+  { name: 'Progress', path: '/components/progress' },
+  { name: 'Radio Button', path: '/components/radiobutton' },
+  { name: 'Radio Tile', path: '/components/radiotile' },
+  { name: 'Snackbar', path: '/components/snackbar' },
+  { name: 'Step Indicator', path: '/components/stepindicator' },
+  { name: 'Tag', path: '/components/tag' },
   { name: 'Text', path: '/components/text' },
+  { name: 'Text Area', path: '/components/textarea' },
+  { name: 'Text Input', path: '/components/textinput' },
+  { name: 'Toggle', path: '/components/toggle' },
 ];
 
 export default function HomeScreen() {

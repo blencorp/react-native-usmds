@@ -19,7 +19,7 @@ const tagTextVariants = cva('text-background font-normal text-center', {
   variants: {
     size: {
       default: 'text-[14px] leading-[14px]',
-      big: 'text-base leading-[16px]'
+      big: 'text-[16px] leading-[16px]'
     }
   },
   defaultVariants: {

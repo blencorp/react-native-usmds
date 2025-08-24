@@ -69,6 +69,23 @@ const Alert = forwardRef<ElementRef<typeof View>, AlertProps>(
     const isNoIcon = alertStyle === 'no-icon';
     const shouldShowIcon = showIcon && !isNoIcon;
 
+    const getIconColor = () => {
+      switch (variant) {
+        case 'emergency':
+          return 'text-primary-foreground';
+        case 'info':
+          return 'text-base-ink';
+        case 'error':
+          return 'text-error';
+        case 'warning':
+          return 'text-warning';
+        case 'success':
+          return 'text-success';
+        default:
+          return 'text-base-ink';
+      }
+    };
+
     const renderDescription = () => {
       if (alertStyle === 'list' && description.messages) {
         return (
@@ -78,7 +95,9 @@ const Alert = forwardRef<ElementRef<typeof View>, AlertProps>(
                 <Text className={cn('text-base leading-[24px] mr-2', variant === 'emergency' ? 'text-primary-foreground' : 'text-base-ink')}>•</Text>
                 <Text className={cn('text-base leading-[24px] flex-1', variant === 'emergency' ? 'text-primary-foreground' : 'text-base-ink')}>
                   {message.text}
-                  {message.link && <Text className={cn('underline', variant === 'emergency' ? 'text-primary-foreground' : 'text-primary')}>{message.link}</Text>}
+                  {message.link && (
+                    <Text className={cn('underline', variant === 'emergency' ? 'text-primary-foreground' : 'text-primary')}>{message.link}</Text>
+                  )}
                   {message.suffix}
                 </Text>
               </View>
@@ -91,7 +110,9 @@ const Alert = forwardRef<ElementRef<typeof View>, AlertProps>(
         <Text className={cn('text-base leading-5', variant === 'emergency' ? 'text-primary-foreground' : 'text-base-ink')}>
           {description.title && <Text className='font-bold'>{description.title} </Text>}
           {description.body}
-          {description.link && <Text className={cn('underline', variant === 'emergency' ? 'text-primary-foreground' : 'text-primary')}>{description.link}</Text>}
+          {description.link && (
+            <Text className={cn('underline', variant === 'emergency' ? 'text-primary-foreground' : 'text-primary')}>{description.link}</Text>
+          )}
         </Text>
       );
     };
@@ -110,12 +131,11 @@ const Alert = forwardRef<ElementRef<typeof View>, AlertProps>(
             className={cn(
               'flex-shrink-0 rounded-full flex items-center justify-center',
               alertStyle === 'slim' ? 'w-6 h-6' : 'w-8 h-8',
-              variant === 'emergency' ? 'bg-transparent' : 'bg-base-ink'
             )}
           >
             <Icon
               name='info'
-              className={cn(variant === 'emergency' ? 'text-emergency fill-primary-foreground' : 'text-primary-foreground fill-base-ink')}
+              className={getIconColor()}
               size={alertStyle === 'slim' ? 24 : 32}
             />
           </View>
