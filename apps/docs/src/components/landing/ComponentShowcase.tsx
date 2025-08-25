@@ -31,7 +31,6 @@ export function ComponentShowcase() {
                 <div className="space-x-2 mb-4">
                   <Badge>Default</Badge>
                   <Badge variant="secondary">Secondary</Badge>
-                  {/* Use tokens instead of fixed blue */}
                   <Badge className="bg-primary text-primary-foreground">
                     Custom
                   </Badge>
@@ -76,7 +75,77 @@ export function ComponentShowcase() {
                 <p className="text-muted-foreground mb-4">
                   A flexible container to group related content and actions.
                 </p>
-                <p className="text-primary font-medium">View component →</p>
+                <Button asChild size="sm" className="mt-2">
+                  <Link href="/docs/components/card">View Card Docs →</Link>
+                </Button>
+              </CardContent>
+            </Card>
+          </Link>
+
+          {/* Checkbox Preview */}
+          <Link
+            href="/docs/components/checkbox"
+            className="group block h-full rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          >
+            <Card className="h-full bg-card text-card-foreground border-border hover:border-primary transition">
+              <CardHeader>
+                <CardTitle className="group-hover:text-primary">
+                  Checkbox
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="flex-1 flex flex-col justify-between">
+                <p className="text-muted-foreground mb-4">
+                  Standard form control for selecting one or more options.
+                </p>
+                <Button asChild size="sm" className="mt-2">
+                  <Link href="/docs/components/checkbox">
+                    View Checkbox Docs →
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+          </Link>
+
+          {/* Checkbox Tile Preview */}
+          <Link
+            href="/docs/components/checkbox-tile"
+            className="group block h-full rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          >
+            <Card className="h-full bg-card text-card-foreground border-border hover:border-primary transition">
+              <CardHeader>
+                <CardTitle className="group-hover:text-primary">
+                  Checkbox Tile
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="flex-1 flex flex-col justify-between">
+                <p className="text-muted-foreground mb-4">
+                  A tile-style checkbox for visual selection.
+                </p>
+                <Button asChild size="sm" className="mt-2">
+                  <Link href="/docs/components/checkbox-tile">
+                    View Checkbox Tile Docs →
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+          </Link>
+
+          {/* Icon Preview */}
+          <Link
+            href="/docs/components/icon"
+            className="group block h-full rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          >
+            <Card className="h-full bg-card text-card-foreground border-border hover:border-primary transition">
+              <CardHeader>
+                <CardTitle className="group-hover:text-primary">Icon</CardTitle>
+              </CardHeader>
+              <CardContent className="flex-1 flex flex-col justify-between">
+                <p className="text-muted-foreground mb-4">
+                  Icons for enhancing interface meaning.
+                </p>
+                <Button asChild size="sm" className="mt-2">
+                  <Link href="/docs/components/icon">View Icon Docs →</Link>
+                </Button>
               </CardContent>
             </Card>
           </Link>
