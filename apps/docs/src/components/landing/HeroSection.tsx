@@ -1,27 +1,21 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 
 export function HeroSection() {
   return (
-    <section
-      aria-labelledby="hero-heading"
-      className="py-24 sm:py-32 bg-[var(--usa-color-blue-60v,#005ea2)] text-[var(--usa-base-lightest,#ffffff)]"
-    >
+    <section aria-labelledby="hero-heading" className="py-24 sm:py-32 bg-background text-foreground">
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
         {/* Text Content */}
         <div className="text-center lg:text-left space-y-6">
           <h1
             id="hero-heading"
-            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight"
+            className="text-2xl sm:text-3xl lg:text-6xl font-bold tracking-tight leading-tight"
           >
             Build Compliant Government Mobile Apps
           </h1>
-          <p
-            className="text-lg sm:text-xl font-light max-w-xl mx-auto lg:mx-0 text-white/90"
-            aria-describedby="hero-heading"
-          >
+          <p className="text-lg sm:text-xl font-light max-w-xl mx-auto lg:mx-0" aria-describedby="hero-heading">
             React Native USMDS provides accessible, mobile-optimized components
             built for federal UI compliance and consistency across mobile
             platforms.
@@ -31,49 +25,14 @@ export function HeroSection() {
             role="group"
             aria-label="Primary actions"
           >
-            {/* Primary CTA — RED (USWDS “error” red) */}
-            <Button
-              asChild
-              variant="default"
-              size="lg"
-              className="
-    bg-[var(--usa-color-error,#b50909)]
-    text-[var(--usa-color-base-lightest,#ffffff)]
-    border border-[color-mix(in_srgb,var(--usa-color-error,#b50909)_70%,black)]
-    hover:bg-[var(--usa-color-red-70v,#8b0a03)]
-    active:bg-[var(--usa-color-red-80v,#5c0000)]
-    supports-[color:color-mix(in_srgb,red,black)]:hover:bg-[color-mix(in_srgb,var(--usa-color-error,#b50909)_90%,black)]
-    focus-visible:ring-4 focus-visible:ring-[var(--usa-color-focus,#2491ff)]
-    focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--usa-color-error,#b50909)]
-    rounded-sm h-12 px-[var(--usa-space-4,1rem)] py-[var(--usa-space-3,0.75rem)]
-    transition-colors
-  "
-            >
-              <Link href="/docs">Get Started</Link>
+            <Button asChild variant="destructive" size="lg" className="w-full sm:w-auto sm:flex-1">
+              <Link href="/docs" className="hover:bg-[var(--usa-color-error-dark)]">
+                Get Started
+              </Link>
             </Button>
-            <span id="get-started-description" className="sr-only">
-              Begin using USMDS components in your government mobile application
-            </span>
 
-            {/* Secondary CTA — BLUE (filled, darker hover, still variant="outline") */}
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="
-    bg-[var(--usa-color-blue-60v,#005ea2)]
-    text-[var(--usa-color-base-lightest,#ffffff)]
-    border border-[var(--usa-color-blue-60v,#005ea2)]
-    hover:bg-[var(--usa-color-blue-70v,#1a4480)]
-    active:bg-[var(--usa-color-blue-80v,#0b4778)]
-    supports-[color:color-mix(in_srgb,blue,black)]:hover:bg-[color-mix(in_srgb,var(--usa-color-blue-60v,#005ea2)_90%,black)]
-    focus-visible:ring-4 focus-visible:ring-[var(--usa-color-focus,#2491ff)]
-    focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--usa-color-blue-60v,#005ea2)]
-    rounded-sm h-12 px-[var(--usa-space-4,1rem)] py-[var(--usa-space-3,0.75rem)]
-    transition-colors
-  "
-            >
-              <Link href="/docs/components">View Components</Link>
+            <Button asChild variant="default" size="lg" className="w-full sm:w-auto sm:flex-1">
+              <Link href="/docs/components" className="hover:bg-[var(--usa-color-primary-dark)]">View Components</Link>
             </Button>
           </div>
         </div>
@@ -105,11 +64,17 @@ export function HeroSection() {
                       aria-hidden="true"
                       focusable="false"
                     >
+                     <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M7 2h10a2 2 0 012 2v16a2 2 0 01-2 2H7a2 2 0 01-2-2V4a2 2 0 012-2z"
+                      />
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
-                        d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2z"
+                        d="M12 18h.01"
                       />
                     </svg>
                   </div>

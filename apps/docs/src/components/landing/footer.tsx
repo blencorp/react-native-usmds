@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 
 const links = [
   {
@@ -36,7 +36,7 @@ const links = [
 
 export const Footer = () => {
   return (
-    <footer className="bg-slate-800 text-white py-12 mt-6" role="contentinfo">
+    <footer className="bg-slate-800 dark:bg-[oklch(0.145_0_0)] text-white py-12" role="contentinfo">
       <div className="max-w-screen-xl mx-auto px-4 md:px-6 lg:px-8">
         {/* Government Links */}
         <div className="border-t border-gray-700 pt-8">
