@@ -47,10 +47,10 @@ export default function HomePage() {
                 configure the library for federal compliance.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Button asChild size="lg">
+                <Button asChild size="sm">
                   <Link href="/docs">Introduction</Link>
                 </Button>
-                <Button asChild variant="outline" size="lg">
+                <Button asChild variant="outline" size="sm">
                   <Link href="/docs/getting-started/initial-setup">
                     Installation Guide
                   </Link>
