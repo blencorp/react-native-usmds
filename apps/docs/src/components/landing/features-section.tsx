@@ -66,9 +66,9 @@ export function FeaturesSection() {
 
         <ul role="list" className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {features.map((feature, index) => (
-            <li key={index}>
-              <Card className="bg-card text-card-foreground border-border">
-                <CardHeader className="flex flex-row items-center gap-4">
+            <li key={index} className="h-full"> {/* Add h-full to make each list item take full height */}
+              <Card className="bg-card text-card-foreground border-border h-full flex flex-col"> {/* Add h-full and flex flex-col */}
+                <CardHeader className="flex flex-row items-center gap-4 flex-shrink-0"> {/* Add flex-shrink-0 to prevent header from shrinking */}
                   {feature.icon}
                   <div>
                     <CardTitle>{feature.title}</CardTitle>
@@ -79,7 +79,7 @@ export function FeaturesSection() {
                     )}
                   </div>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="flex-1 flex flex-col justify-center"> {/* Add flex-1 and flex flex-col justify-center */}
                   <p className="text-muted-foreground">{feature.description}</p>
                 </CardContent>
               </Card>

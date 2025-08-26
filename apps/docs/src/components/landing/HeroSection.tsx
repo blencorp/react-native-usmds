@@ -7,11 +7,11 @@ export function HeroSection() {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="py-24 sm:py-32 bg-[var(--usa-color-blue-60v,#005ea2)] text-[var(--usa-base-lightest,#ffffff)]"
+      className="bg-[var(--usa-color-blue-60v,#005ea2)] text-[var(--usa-base-lightest,#ffffff)]"
     >
-      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-8 items-stretch"> {/* Change items-center to items-stretch */}
         {/* Text Content */}
-        <div className="text-center lg:text-left space-y-6">
+        <div className="text-center lg:text-left space-y-6 py-8 flex flex-col justify-center"> {/* Reduce padding and add flex centering */}
           <h1
             id="hero-heading"
             className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight"
@@ -27,7 +27,7 @@ export function HeroSection() {
             platforms.
           </p>
           <div
-            className="mt-6 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+            className="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             role="group"
             aria-label="Primary actions"
           >
@@ -55,18 +55,17 @@ export function HeroSection() {
               Begin using USMDS components in your government mobile application
             </span>
 
-            {/* Secondary CTA — BLUE (filled, darker hover, still variant="outline") */}
+            {/* Secondary CTA — WHITE (filled, with hover effects) */}
             <Button
               asChild
               variant="outline"
               size="lg"
               className="
-    bg-[var(--usa-color-blue-60v,#005ea2)]
-    text-[var(--usa-color-base-lightest,#ffffff)]
-    border border-[var(--usa-color-blue-60v,#005ea2)]
-    hover:bg-[var(--usa-color-blue-70v,#1a4480)]
-    active:bg-[var(--usa-color-blue-80v,#0b4778)]
-    supports-[color:color-mix(in_srgb,blue,black)]:hover:bg-[color-mix(in_srgb,var(--usa-color-blue-60v,#005ea2)_90%,black)]
+    bg-white
+    text-[var(--usa-color-blue-60v,#005ea2)] dark:text-black
+    border border-white
+    hover:bg-gray-100
+    active:bg-gray-200
     focus-visible:ring-4 focus-visible:ring-[var(--usa-color-focus,#2491ff)]
     focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--usa-color-blue-60v,#005ea2)]
     rounded-sm h-12 px-[var(--usa-space-4,1rem)] py-[var(--usa-space-3,0.75rem)]
@@ -80,47 +79,17 @@ export function HeroSection() {
 
         {/* Visual Preview */}
         <div
-          className="flex justify-center"
+          className="flex justify-center items-stretch h-full"
           role="img"
-          aria-label="USMDS mobile component preview"
+          aria-label="USMDS digital interface network illustration"
         >
-          <Link
-            href="/docs/components"
-            className="relative group focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-800 rounded-3xl"
-            aria-label="View USMDS mobile components documentation"
-          >
-            <div
-              className="absolute inset-0 bg-gradient-to-tr from-blue-100 to-purple-100 rounded-3xl blur-3xl transition-transform group-hover:scale-105"
-              aria-hidden="true"
-            ></div>
-            <div className="relative bg-white border rounded-2xl p-8 shadow-xl transition-transform group-hover:scale-105">
-              <div className="flex items-center justify-center h-48 w-48 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl">
-                <div className="text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 bg-blue-800 rounded-lg flex items-center justify-center">
-                    <svg
-                      className="w-8 h-8 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                      focusable="false"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2z"
-                      />
-                    </svg>
-                  </div>
-                  <p className="text-sm font-semibold text-gray-800">USMDS</p>
-                  <p className="text-xs text-gray-600 mt-1">
-                    Mobile Components
-                  </p>
-                </div>
-              </div>
-            </div>
-          </Link>
+          <div className="h-full w-full flex items-center justify-center">
+            <img
+              src="/digital-interfaces-illustration.png"
+              alt="Digital interfaces network illustration showing interconnected web pages, mobile screens, and digital elements"
+              className="w-full h-full object-contain rounded-2xl"
+            />
+          </div>
         </div>
       </div>
     </section>

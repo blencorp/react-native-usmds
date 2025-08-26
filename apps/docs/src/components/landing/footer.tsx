@@ -36,7 +36,7 @@ const links = [
 
 export const Footer = () => {
   return (
-    <footer className="bg-slate-800 text-white py-12 mt-6" role="contentinfo">
+    <footer className="bg-slate-800 dark:bg-black text-white py-12 mt-6" role="contentinfo">
       <div className="max-w-screen-xl mx-auto px-4 md:px-6 lg:px-8">
         {/* Government Links */}
         <div className="border-t border-gray-700 pt-8">
