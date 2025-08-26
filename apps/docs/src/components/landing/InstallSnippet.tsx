@@ -20,7 +20,7 @@ export default function InstallSnippet() {
   };
 
   return (
-    <div className="relative bg-gray-100 text-gray-800 p-4 rounded text-sm overflow-x-auto">
+    <div className="relative bg-gray-100 text-gray-800  rounded text-sm overflow-x-auto">
       <button
         onClick={handleCopy}
         className="absolute top-2 right-2 p-2 text-gray-400 hover:text-white transition-colors"

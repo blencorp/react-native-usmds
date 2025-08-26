@@ -1,6 +1,6 @@
 "use client";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+import { Badge } from "@/components/ui/Badge";
 import { Code, Eye, Landmark, TabletSmartphone } from "lucide-react";
 
 export function FeaturesSection() {
@@ -65,9 +65,9 @@ export function FeaturesSection() {
         </h2>
 
         <ul role="list" className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {features.map((feature, index) => (
-            <li key={index}>
-              <Card className="bg-card text-card-foreground border-border">
+            {features.map((feature, index) => (
+              <li key={index} className="flex h-full">
+                <Card className="bg-card text-card-foreground border-border flex flex-col w-full h-full min-h-[150px]">
                 <CardHeader className="flex flex-row items-center gap-4">
                   {feature.icon}
                   <div>

@@ -5,7 +5,7 @@
 @import '../../styles/uswds-token-mapping.css';
 @custom-variant dark (&:is(.dark *));
 
-@source '../../node_modules/fumadocs-ui/dist/**/*.js';
+@source '../../node_modules/fumadocs-ui/dist//*.js';
 
 @theme inline {
 

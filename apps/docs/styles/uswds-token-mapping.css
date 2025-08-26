@@ -304,6 +304,7 @@
   --usa-color-base-darkest: var(--uswds-gray-60);
 
   --usa-color-error: var(--uswds-red-warm-50v);
+  --usa-color-error-dark: #8b0a03;
   --usa-color-warning: #fdb81e;
   --usa-color-success: #2e8540;
   --usa-color-focus: #2491ff;

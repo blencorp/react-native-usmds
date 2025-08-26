@@ -38,7 +38,6 @@ const buttonVariants = cva(
   destructive: `
     bg-[var(--usa-color-error)]
     text-[var(--usa-color-base-lightest)]
-    hover:bg-[color-mix(in srgb, var(--usa-color-error) 90%, black)]
     focus:ring-4
     focus:ring-[var(--usa-color-focus)]
     focus:ring-offset-4
