@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { HeroSection } from "@/components/landing/HeroSection";
 import { FeaturesSection } from "@/components/landing/FeaturesSection";
 import {GettingStartedSection} from "@/components/landing/GetStartedSection";
-import { Footer } from "@/components/landing/Footer";
+import { Footer } from "@/components/landing/footer";
 
 
 export default function HomePage() {

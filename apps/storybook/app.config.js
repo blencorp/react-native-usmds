@@ -26,5 +26,11 @@ export default ({ config }) => ({
   },
   web: {
     favicon: './assets/favicon.png'
+  },
+  extra: {
+    storybookEnabled: process.env.EXPO_PUBLIC_STORYBOOK_ENABLED || true,
+    eas: {
+      projectId: '78815632-b857-48dc-aad5-e28b6bde764f'
+    }
   }
 });
