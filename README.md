@@ -57,6 +57,39 @@ Customization Options
 Best Practices
 Troubleshooting
 
+## Development
+
+### Registry Sync
+
+This project uses Storybook as the source of truth for components. To keep the CLI registry in sync with Storybook components:
+
+```sh
+# Sync all components from Storybook to registry
+npx tsx scripts/sync-registry.ts
+
+# Preview changes without modifying files (dry run)
+npx tsx scripts/sync-registry.ts --dry-run
+
+# Sync a specific component
+npx tsx scripts/sync-registry.ts --component Button
+
+# Test the sync functionality
+npx tsx scripts/test-sync.ts
+```
+
+**When to sync:**
+- After updating components in Storybook
+- Before publishing a new version
+- When adding new components
+
+The sync script will:
+- ✅ Extract components from `apps/storybook/components/`
+- ✅ Update dependency metadata (only `@rn-primitives/*` packages)
+- ✅ Convert import paths to `@/components/ui/[component]`
+- ✅ Preserve existing ICON_PATHS
+- ✅ Create automatic backups
+- ✅ Generate clean, consistent component templates
+
 ## Contributing
 
 We welcome contributions! Please see our contributing guidelines for more details.

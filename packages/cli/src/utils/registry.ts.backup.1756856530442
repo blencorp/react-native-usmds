@@ -442,32 +442,32 @@ export const COMPONENT_METADATA: Record<string, ComponentMetadata> = {
   Alert: {
     name: 'Alert',
     dependencies: [],
-    internalDependencies: ["Icon"]
+    internalDependencies: ['Icon']
   },
   Avatar: {
     name: 'Avatar',
-    dependencies: ["@rn-primitives/avatar"],
+    dependencies: ['@rn-primitives/avatar'],
     internalDependencies: []
   },
   Badge: {
     name: 'Badge',
     dependencies: [],
-    internalDependencies: ["Text"]
+    internalDependencies: ['Text']
   },
   Banner: {
     name: 'Banner',
     dependencies: [],
-    internalDependencies: []
+    internalDependencies: ['Icon']
   },
   BiometricSignIn: {
     name: 'BiometricSignIn',
-    dependencies: ["@rn-primitives/checkbox"],
-    internalDependencies: ["Icon"]
+    dependencies: [],
+    internalDependencies: ['Icon']
   },
   Button: {
     name: 'Button',
     dependencies: [],
-    internalDependencies: ["Text"]
+    internalDependencies: ['Text']
   },
   ButtonGroup: {
     name: 'ButtonGroup',
@@ -477,42 +477,40 @@ export const COMPONENT_METADATA: Record<string, ComponentMetadata> = {
   Card: {
     name: 'Card',
     dependencies: [],
-    internalDependencies: ["Button","Text"]
+    internalDependencies: ['Button']
   },
   Checkbox: {
     name: 'Checkbox',
-    dependencies: ["@rn-primitives/checkbox"],
-    internalDependencies: ["Icon"]
+    dependencies: ['@rn-primitives/checkbox'],
+    internalDependencies: []
   },
   CheckboxTile: {
     name: 'CheckboxTile',
-    dependencies: ["@rn-primitives/checkbox"],
-    internalDependencies: ["Icon"]
+    dependencies: ['@rn-primitives/checkbox'],
+    internalDependencies: ['Checkbox']
   },
   Collapsible: {
     name: 'Collapsible',
-    dependencies: ["@rn-primitives/collapsible"],
-    internalDependencies: []
+    dependencies: ['@rn-primitives/collapsible']
   },
   Dialog: {
     name: 'Dialog',
-    dependencies: ["@rn-primitives/dialog"],
-    internalDependencies: ["Text"]
+    dependencies: ['@rn-primitives/dialog', '@rn-primitives/portal'],
+    internalDependencies: []
   },
   Icon: {
     name: 'Icon',
-    dependencies: [],
-    internalDependencies: []
+    dependencies: []
   },
   Link: {
     name: 'Link',
     dependencies: [],
-    internalDependencies: ["Icon"]
+    internalDependencies: [] 
   },
   Pagination: {
     name: 'Pagination',
     dependencies: [],
-    internalDependencies: ["Icon"]
+    internalDependencies: ['Button']
   },
   Progress: {
     name: 'Progress',
@@ -521,18 +519,18 @@ export const COMPONENT_METADATA: Record<string, ComponentMetadata> = {
   },
   RadioButton: {
     name: 'RadioButton',
-    dependencies: ["@rn-primitives/radio-group"],
+    dependencies: ['@rn-primitives/radio-group'],
     internalDependencies: []
   },
   RadioTile: {
     name: 'RadioTile',
-    dependencies: ["@rn-primitives/radio-group"],
-    internalDependencies: []
+    dependencies: ['@rn-primitives/radio-group'],
+    internalDependencies: ['RadioButton'] 
   },
   Snackbar: {
     name: 'Snackbar',
     dependencies: [],
-    internalDependencies: ["Icon"]
+    internalDependencies: ['Icon']
   },
   StepIndicator: {
     name: 'StepIndicator',
@@ -542,12 +540,11 @@ export const COMPONENT_METADATA: Record<string, ComponentMetadata> = {
   Tag: {
     name: 'Tag',
     dependencies: [],
-    internalDependencies: []
+    internalDependencies: ['Icon']
   },
   Text: {
     name: 'Text',
-    dependencies: ["@rn-primitives/slot","@rn-primitives/types"],
-    internalDependencies: []
+    dependencies: []
   },
   Textarea: {
     name: 'Textarea',
@@ -561,7 +558,7 @@ export const COMPONENT_METADATA: Record<string, ComponentMetadata> = {
   },
   Toggle: {
     name: 'Toggle',
-    dependencies: ["@rn-primitives/toggle"],
+    dependencies: [],
     internalDependencies: []
   }
 };
@@ -638,23 +635,6 @@ const Alert = forwardRef<ElementRef<typeof View>, AlertProps>(
     const isNoIcon = alertStyle === 'no-icon';
     const shouldShowIcon = showIcon && !isNoIcon;
 
-    const getIconColor = () => {
-      switch (variant) {
-        case 'emergency':
-          return 'text-primary-foreground';
-        case 'info':
-          return 'text-base-ink';
-        case 'error':
-          return 'text-error';
-        case 'warning':
-          return 'text-warning';
-        case 'success':
-          return 'text-success';
-        default:
-          return 'text-base-ink';
-      }
-    };
-
     const renderDescription = () => {
       if (alertStyle === 'list' && description.messages) {
         return (
@@ -664,9 +644,7 @@ const Alert = forwardRef<ElementRef<typeof View>, AlertProps>(
                 <Text className={cn('text-base leading-[24px] mr-2', variant === 'emergency' ? 'text-primary-foreground' : 'text-base-ink')}>•</Text>
                 <Text className={cn('text-base leading-[24px] flex-1', variant === 'emergency' ? 'text-primary-foreground' : 'text-base-ink')}>
                   {message.text}
-                  {message.link && (
-                    <Text className={cn('underline', variant === 'emergency' ? 'text-primary-foreground' : 'text-primary')}>{message.link}</Text>
-                  )}
+                  {message.link && <Text className={cn('underline', variant === 'emergency' ? 'text-primary-foreground' : 'text-primary')}>{message.link}</Text>}
                   {message.suffix}
                 </Text>
               </View>
@@ -679,9 +657,7 @@ const Alert = forwardRef<ElementRef<typeof View>, AlertProps>(
         <Text className={cn('text-base leading-5', variant === 'emergency' ? 'text-primary-foreground' : 'text-base-ink')}>
           {description.title && <Text className='font-bold'>{description.title} </Text>}
           {description.body}
-          {description.link && (
-            <Text className={cn('underline', variant === 'emergency' ? 'text-primary-foreground' : 'text-primary')}>{description.link}</Text>
-          )}
+          {description.link && <Text className={cn('underline', variant === 'emergency' ? 'text-primary-foreground' : 'text-primary')}>{description.link}</Text>}
         </Text>
       );
     };
@@ -700,11 +676,12 @@ const Alert = forwardRef<ElementRef<typeof View>, AlertProps>(
             className={cn(
               'flex-shrink-0 rounded-full flex items-center justify-center',
               alertStyle === 'slim' ? 'w-6 h-6' : 'w-8 h-8',
+              variant === 'emergency' ? 'bg-transparent' : 'bg-base-ink'
             )}
           >
             <Icon
               name='info'
-              className={getIconColor()}
+              className={cn(variant === 'emergency' ? 'text-emergency fill-primary-foreground' : 'text-primary-foreground fill-base-ink')}
               size={alertStyle === 'slim' ? 24 : 32}
             />
           </View>
@@ -721,8 +698,8 @@ const Alert = forwardRef<ElementRef<typeof View>, AlertProps>(
 
 Alert.displayName = 'Alert';
 
-export { Alert, type AlertProps };
-`,
+export { Alert, type AlertProps };`,
+
   Avatar: `import * as AvatarPrimitive from '@rn-primitives/avatar';
 import * as React from 'react';
 import { cn } from '../../lib/utils';
@@ -763,7 +740,9 @@ const AvatarFallback = React.forwardRef<AvatarPrimitive.FallbackRef, AvatarPrimi
 );
 AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;
 
-export { Avatar, AvatarFallback, AvatarImage }; `,
+export { Avatar, AvatarFallback, AvatarImage };`,
+
+
   Badge: `import { type VariantProps, cva } from 'class-variance-authority';
 import { View } from 'react-native';
 
@@ -773,7 +752,7 @@ import { cn } from '@/lib/utils';
 const badgeVariants = cva('flex-row items-center justify-center rounded-full px-2.5 py-1 border', {
   variants: {
     variant: {
-      default: 'bg-primary border-primary-light',
+      default: 'bg-primary-lighter border-primary-light',
       success: 'bg-success-lighter border-success-light',
       warning: 'bg-warning-lighter border-warning-light',
       info: 'bg-info-lighter border-info-light',
@@ -812,12 +791,12 @@ export function Badge({ label, variant, className }: BadgeProps) {
     </View>
   );
 }
+`,
 
-export { Badge };`,
   Banner: `import { ComponentPropsWithoutRef, ElementRef, forwardRef, ReactNode } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '../../lib/utils';
+import { cn } from '@lib/utils';
 import Svg, { Path, Defs, Pattern, Image, Use } from 'react-native-svg';
 
 const bannerVariants = cva('flex flex-row items-center', {
@@ -896,7 +875,7 @@ const Banner = forwardRef<ElementRef<typeof View>, BannerProps>(({ className, va
         </Text>
         {isStandardApp && link && (
           <Pressable accessibilityRole='link' accessibilityLabel={link}>
-            <Text className='text-primary text-[12px] leading-[14px] font-semibold underline whitespace-nowrap' numberOfLines={1}>
+            <Text className='text-primary text-[12px] leading-[14px] font-bold underline whitespace-nowrap' numberOfLines={1}>
               {link}
             </Text>
           </Pressable>
@@ -914,12 +893,12 @@ const Banner = forwardRef<ElementRef<typeof View>, BannerProps>(({ className, va
 
 Banner.displayName = 'Banner';
 
-export { Banner, type BannerProps };
-`,
+export { Banner, type BannerProps };`,
+
   BiometricSignIn: `import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import * as CheckboxPrimitive from '@rn-primitives/checkbox';
-import { cn } from '../../lib/utils';
+import { cn } from '@/lib/utils';
 import { Icon } from '@/components/ui/icon';
 import { cssInterop } from 'nativewind';
 
@@ -1002,11 +981,11 @@ const BiometricSignIn = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Bi
 
 BiometricSignIn.displayName = 'BiometricSignIn';
 
-export { BiometricSignIn };
-`,
-  Button: `import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef } from 'react';
+export { BiometricSignIn };`,
+
+  Button: `import { ComponentPropsWithoutRef, ElementRef, forwardRef, ReactNode } from 'react';
 import { Pressable, PressableStateCallbackType, View } from 'react-native';
-import { type VariantProps, cva } from 'class-variance-authority';
+import { cva, type VariantProps } from 'class-variance-authority';
 import { TextClassContext } from '@/components/ui/text';
 import { cn } from '@/lib/utils';
 
@@ -1018,17 +997,13 @@ const buttonVariants = cva('flex items-center justify-center rounded-lg font-san
       outline: ['border bg-background', 'border-input', 'active:bg-accent', 'disabled:bg-background/50 disabled:border-muted'],
       secondary: ['bg-secondary', 'active:bg-secondary/80', 'disabled:bg-secondary/50'],
       ghost: ['active:bg-accent', 'disabled:bg-transparent'],
-      link: ['text-primary underline-offset-4', 'active:underline', 'disabled:text-primary/50'],
-      'accent-cool': ['bg-accent-cool', 'active:bg-accent-cool/80', 'disabled:bg-accent-cool/50'],
-      'accent-warm': ['bg-accent-warm', 'active:bg-accent-warm/80', 'disabled:bg-accent-warm/50'],
-      base: ['bg-base', 'active:bg-base/80', 'disabled:bg-base/50'],
-      inverse: ['border border-primary-foreground bg-foreground web:border-primary-foreground', 'active:bg-foreground/80', 'disabled:bg-foreground/50']
+      link: ['text-primary underline-offset-4 hover:underline', 'active:underline', 'disabled:text-primary/50']
     },
     size: {
       default: 'h-[44px] px-[20px] py-[10px]',
       sm: 'h-[36px] px-[12px] py-[8px] text-sm',
-      lg: 'h-[54px] px-[24px] py-[16px]',
-      big: 'h-[62px] px-[24px] py-[16px] min-w-[329px]',
+      lg: 'h-[48px] px-[24px] py-[16px]',
+      big: 'h-[60px] px-[24px] py-[16px] min-w-[329px]',
       icon: 'h-[44px] w-[44px] p-0'
     },
     iconPosition: {
@@ -1052,11 +1027,7 @@ const buttonTextVariants = cva('text-center', {
       outline: 'text-foreground disabled:text-muted-foreground',
       secondary: 'text-secondary-foreground disabled:text-secondary-foreground/70',
       ghost: 'text-foreground disabled:text-muted-foreground',
-      link: 'text-primary underline disabled:text-primary/50',
-      'accent-cool': 'text-primary-foreground disabled:text-primary-foreground/70',
-      'accent-warm': 'text-primary-foreground disabled:text-primary-foreground/70',
-      base: 'text-primary-foreground disabled:text-primary-foreground/70',
-      inverse: 'text-primary-foreground disabled:text-primary-foreground/70'
+      link: 'text-primary underline disabled:text-primary/50'
     },
     size: {
       default: 'text-[16px] leading-[20px]',
@@ -1065,10 +1036,6 @@ const buttonTextVariants = cva('text-center', {
       big: 'text-[20px] leading-[24px]',
       icon: 'text-[16px] leading-[20px]'
     }
-  },
-  defaultVariants: {
-    variant: 'default',
-    size: 'default'
   }
 });
 
@@ -1080,49 +1047,191 @@ type ButtonProps = ComponentPropsWithoutRef<typeof Pressable> &
     children: ReactNode | ((state: PressableStateCallbackType) => ReactNode);
   };
 
-const Button = forwardRef<ElementRef<typeof Pressable>, ButtonProps>(
-  ({ className, variant = 'default', size = 'default', children, startIcon, endIcon, ...props }, ref) => {
-    const iconPosition = startIcon ? 'left' : endIcon ? 'right' : 'none';
+const Button = forwardRef<ElementRef<typeof Pressable>, ButtonProps>(({ className, variant, size, children, startIcon, endIcon, ...props }, ref) => {
+  const iconPosition = startIcon ? 'left' : endIcon ? 'right' : 'none';
 
-    const textClasses = buttonTextVariants({ variant, size });
-
-    return (
-      <TextClassContext.Provider value={textClasses}>
-        <Pressable
-          className={cn('group', buttonVariants({ variant, size, iconPosition, className }))}
-          ref={ref}
-          role='button'
-          android_ripple={{
-            color: 'rgba(0, 0, 0, 0.2)',
-            borderless: false,
-            foreground: true
-          }}
-          style={({ pressed }) => [
-            {
-              opacity: props.disabled ? 0.5 : pressed ? 0.8 : 1,
-              transform: [{ scale: pressed && !props.disabled ? 0.98 : 1 }]
-            }
-          ]}
-          {...props}
-        >
-          {(state) => (
-            <View className='flex-row items-center justify-center flex-1' style={{ opacity: state.pressed && !props.disabled ? 0.8 : 1 }}>
-              {startIcon && <View className='mr-2'>{startIcon}</View>}
-              {typeof children === 'function' ? children(state) : children}
-              {endIcon && <View className='ml-2'>{endIcon}</View>}
-            </View>
-          )}
-        </Pressable>
-      </TextClassContext.Provider>
-    );
-  }
-);
+  return (
+    <TextClassContext.Provider
+      value={buttonTextVariants({
+        variant,
+        size,
+        className: 'web:pointer-events-none'
+      })}
+    >
+      <Pressable
+        className={cn('group', buttonVariants({ variant, size, iconPosition, className }))}
+        ref={ref}
+        role='button'
+        android_ripple={{
+          color: 'rgba(0, 0, 0, 0.2)',
+          borderless: false,
+          foreground: true
+        }}
+        style={({ pressed }) => [
+          {
+            opacity: props.disabled ? 0.5 : pressed ? 0.8 : 1,
+            transform: [{ scale: pressed && !props.disabled ? 0.98 : 1 }]
+          }
+        ]}
+        {...props}
+      >
+        {(state) => (
+          <View className='flex-row items-center justify-center flex-1' style={{ opacity: state.pressed && !props.disabled ? 0.8 : 1 }}>
+            {startIcon && <View className='mr-2'>{startIcon}</View>}
+            {typeof children === 'function' ? children(state) : children}
+            {endIcon && <View className='ml-2'>{endIcon}</View>}
+          </View>
+        )}
+      </Pressable>
+    </TextClassContext.Provider>
+  );
+});
 
 Button.displayName = 'Button';
 
 export { Button, buttonTextVariants, buttonVariants };
-export type { ButtonProps };
-`,
+export type { ButtonProps };`,
+
+  Checkbox: `import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
+import { View, Text, Pressable } from 'react-native';
+import * as CheckboxPrimitive from '@rn-primitives/checkbox';
+import { cn } from '@/lib/utils';
+import { Icon } from '@/components/ui/icon';
+import { cssInterop } from 'nativewind';
+
+cssInterop(CheckboxPrimitive.Root, { className: 'style' });
+
+interface CheckboxProps extends ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> {
+  label: string;
+}
+
+const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, CheckboxProps>(
+  ({ label, disabled, checked, onCheckedChange, ...props }, ref) => {
+    const handlePress = () => {
+      if (!disabled && onCheckedChange) {
+        onCheckedChange(!checked);
+      }
+    };
+
+    return (
+      <Pressable onPress={handlePress}>
+        <View className='flex flex-row items-center gap-2 w-[329px] h-5'>
+          <CheckboxPrimitive.Root
+            ref={ref}
+            disabled={disabled}
+            checked={checked}
+            onCheckedChange={onCheckedChange}
+            {...props}
+            className={cn(
+              'w-6 h-6 border-2 rounded-sm items-center justify-center flex-shrink-0',
+              checked
+                ? disabled
+                  ? 'bg-disabled border-disabled' // disabled state
+                  : 'bg-primary border-primary' // checked state
+                : 'bg-transparent border-base-ink' // unchecked state
+            )}
+          >
+            <CheckboxPrimitive.Indicator>
+              <Icon name='check' size={14} className='text-white' />
+            </CheckboxPrimitive.Indicator>
+          </CheckboxPrimitive.Root>
+
+          <Text className={cn('flex-1 text-base leading-5', disabled ? 'text-disabled' : 'text-base-ink')}>{label}</Text>
+        </View>
+      </Pressable>
+    );
+  }
+);
+
+Checkbox.displayName = 'Checkbox';
+
+export { Checkbox };`,
+
+  CheckboxTile: `import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
+import { View, Text, Pressable } from 'react-native';
+import * as CheckboxPrimitive from '@rn-primitives/checkbox';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { cn } from '@/lib/utils';
+import { Icon } from '@/components/ui/icon';
+import { cssInterop } from 'nativewind';
+
+cssInterop(CheckboxPrimitive.Root, { className: 'style' });
+
+const checkboxTileVariants = cva('flex flex-col w-[329px] rounded-[2px] border-2', {
+  variants: {
+    variant: {
+      default: 'gap-2.5',
+      withDescription: 'gap-1.5'
+    },
+    state: {
+      checked: 'bg-primary-lighter border-primary-light',
+      unchecked: 'bg-background border-disabled-lighter',
+      disabled: 'bg-background border-disabled-light'
+    }
+  },
+  defaultVariants: {
+    variant: 'default',
+    state: 'unchecked'
+  }
+});
+
+interface CheckboxTileProps extends ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>, VariantProps<typeof checkboxTileVariants> {
+  label: string;
+  description?: string;
+  className?: string;
+}
+
+const CheckboxTile = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, CheckboxTileProps>(
+  ({ label, description, className, disabled, checked, onCheckedChange, ...props }, ref) => {
+    const handlePress = () => {
+      if (!disabled && onCheckedChange) {
+        onCheckedChange(!checked);
+      }
+    };
+
+    const state = disabled ? 'disabled' : checked ? 'checked' : 'unchecked';
+    const variant = description ? 'withDescription' : 'default';
+
+    return (
+      <Pressable onPress={handlePress} disabled={disabled}>
+        <View className={cn(checkboxTileVariants({ variant, state }), 'p-[13px_16px_13px_9px]', className)}>
+          <View className='flex flex-row gap-2'>
+            <View className='w-5'>
+              <CheckboxPrimitive.Root
+                ref={ref}
+                disabled={disabled}
+                checked={checked}
+                onCheckedChange={onCheckedChange}
+                {...props}
+                className={cn(
+                  'w-5 h-5 border-2 rounded items-center justify-center flex-shrink-0',
+                  checked ? (disabled ? 'bg-disabled border-disabled' : 'bg-primary border-primary') : 'bg-transparent border-base-ink'
+                )}
+              >
+                <CheckboxPrimitive.Indicator>
+                  <Icon name='check' size={14} className='text-white' />
+                </CheckboxPrimitive.Indicator>
+              </CheckboxPrimitive.Root>
+            </View>
+
+            <View className='flex-1 flex-col gap-1.5'>
+              <Text className={cn('text-base leading-5', disabled ? 'text-disabled' : 'text-base-ink')}>{label}</Text>
+
+              {description && (
+                <Text className={cn('text-base leading-5', disabled ? 'text-disabled' : 'text-base-ink')}>{description}</Text>
+              )}
+            </View>
+          </View>
+        </View>
+      </Pressable>
+    );
+  }
+);
+
+CheckboxTile.displayName = 'CheckboxTile';
+
+export { CheckboxTile, type CheckboxTileProps };`,
+
   ButtonGroup: `import { View } from 'react-native';
 import { cn } from '@/lib/utils';
 import { ComponentPropsWithoutRef, forwardRef } from 'react';
@@ -1152,8 +1261,8 @@ const ButtonGroup = forwardRef<View, ButtonGroupProps>(({ className, orientation
 
 ButtonGroup.displayName = 'ButtonGroup';
 
-export { ButtonGroup };
-`,
+export { ButtonGroup };`,
+
   Card: `import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import { View, Image } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -1243,148 +1352,8 @@ const Card = forwardRef<View, CardProps>(({ title, description, buttonText, medi
 
 Card.displayName = 'Card';
 
-export { Card };
-`,
-  Checkbox: `import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
-import { View, Text, Pressable } from 'react-native';
-import * as CheckboxPrimitive from '@rn-primitives/checkbox';
-import { cn } from '@/lib/utils';
-import { Icon } from '@/components/ui/icon';
-import { cssInterop } from 'nativewind';
+export { Card };`,
 
-cssInterop(CheckboxPrimitive.Root, { className: 'style' });
-
-interface CheckboxProps extends ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> {
-  label: string;
-}
-
-const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, CheckboxProps>(
-  ({ label, disabled, checked, onCheckedChange, ...props }, ref) => {
-    const handlePress = () => {
-      if (!disabled && onCheckedChange) {
-        onCheckedChange(!checked);
-      }
-    };
-
-    return (
-      <Pressable onPress={handlePress}>
-        <View className='flex flex-row items-center gap-2 w-[329px] h-5'>
-          <CheckboxPrimitive.Root
-            ref={ref}
-            disabled={disabled}
-            checked={checked}
-            onCheckedChange={onCheckedChange}
-            {...props}
-            className={cn(
-              'w-6 h-6 border-2 rounded-sm items-center justify-center flex-shrink-0',
-              checked
-                ? disabled
-                  ? 'bg-disabled border-disabled' // disabled state
-                  : 'bg-primary border-primary' // checked state
-                : 'bg-transparent border-base-ink' // unchecked state
-            )}
-          >
-            <CheckboxPrimitive.Indicator>
-              <Icon name='check' size={14} className='text-white' />
-            </CheckboxPrimitive.Indicator>
-          </CheckboxPrimitive.Root>
-
-          <Text className={cn('flex-1 text-base leading-5', disabled ? 'text-disabled' : 'text-base-ink')}>{label}</Text>
-        </View>
-      </Pressable>
-    );
-  }
-);
-
-Checkbox.displayName = 'Checkbox';
-
-export { Checkbox };
-`,
-  CheckboxTile: `import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
-import { View, Text, Pressable } from 'react-native';
-import * as CheckboxPrimitive from '@rn-primitives/checkbox';
-import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '../../lib/utils';
-import { Icon } from '@/components/ui/icon';
-import { cssInterop } from 'nativewind';
-
-cssInterop(CheckboxPrimitive.Root, { className: 'style' });
-
-const checkboxTileVariants = cva('flex flex-col w-[329px] rounded-[2px] border-2', {
-  variants: {
-    variant: {
-      default: 'gap-2.5',
-      withDescription: 'gap-1.5'
-    },
-    state: {
-      checked: 'bg-primary-lighter border-primary-light',
-      unchecked: 'bg-background border-disabled-lighter',
-      disabled: 'bg-background border-disabled-light'
-    }
-  },
-  defaultVariants: {
-    variant: 'default',
-    state: 'unchecked'
-  }
-});
-
-interface CheckboxTileProps extends ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>, VariantProps<typeof checkboxTileVariants> {
-  label: string;
-  description?: string;
-  className?: string;
-}
-
-const CheckboxTile = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, CheckboxTileProps>(
-  ({ label, description, className, disabled, checked, onCheckedChange, ...props }, ref) => {
-    const handlePress = () => {
-      if (!disabled && onCheckedChange) {
-        onCheckedChange(!checked);
-      }
-    };
-
-    const state = disabled ? 'disabled' : checked ? 'checked' : 'unchecked';
-    const variant = description ? 'withDescription' : 'default';
-
-    return (
-      <Pressable onPress={handlePress} disabled={disabled}>
-        <View className={cn(checkboxTileVariants({ variant, state }), 'p-[13px_16px_13px_9px]', className)}>
-          <View className='flex flex-row gap-2'>
-            <View className='w-5'>
-              <CheckboxPrimitive.Root
-                ref={ref}
-                disabled={disabled}
-                checked={checked}
-                onCheckedChange={onCheckedChange}
-                {...props}
-                className={cn(
-                  'w-5 h-5 border-2 rounded items-center justify-center flex-shrink-0',
-                  checked ? (disabled ? 'bg-disabled border-disabled' : 'bg-primary border-primary') : 'bg-transparent border-base-ink'
-                )}
-              >
-                <CheckboxPrimitive.Indicator>
-                  <Icon name='check' size={14} className='text-white' />
-                </CheckboxPrimitive.Indicator>
-              </CheckboxPrimitive.Root>
-            </View>
-
-            <View className='flex-1 flex-col gap-1.5'>
-              <Text className={cn('text-base leading-5', disabled ? 'text-disabled' : 'text-base-ink')}>{label}</Text>
-
-              {description && (
-                <Text className={cn('text-base leading-5', disabled ? 'text-disabled' : 'text-base-ink')}>{description}</Text>
-              )}
-            </View>
-          </View>
-        </View>
-      </Pressable>
-    );
-  }
-);
-
-CheckboxTile.displayName = 'CheckboxTile';
-
-export { CheckboxTile, type CheckboxTileProps };
-`,
   Collapsible: `import * as CollapsiblePrimitive from '@rn-primitives/collapsible';
 
 const Collapsible = CollapsiblePrimitive.Root;
@@ -1394,6 +1363,7 @@ const CollapsibleTrigger = CollapsiblePrimitive.Trigger;
 const CollapsibleContent = CollapsiblePrimitive.Content;
 
 export { Collapsible, CollapsibleTrigger, CollapsibleContent };`,
+
   Dialog: `import * as DialogPrimitive from '@rn-primitives/dialog';
 import * as React from 'react';
 import { StyleSheet, View, type ViewProps } from 'react-native';
@@ -1499,12 +1469,11 @@ export {
   DialogPortal,
   DialogTitle,
   DialogTrigger,
-}; 
+};`,
 
-export { Dialog };`,
   Icon: `import { View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
-import { iconPaths } from '@/components/ui/iconpaths';
+import { iconPaths } from './registry';
 import { cn } from '@/lib/utils';
 import { cssInterop } from 'nativewind';
 cssInterop(Svg, { className: 'style' });
@@ -1526,21 +1495,20 @@ export const Icon = ({ name, size = 24, className }: IconProps) => {
 
   return (
     <View style={{ width: size, height: size }}>
-      <Svg width={size} height={size} viewBox='0 0 24 24' className={cn(className)} fill='currentColor'>
+      <Svg width={size} height={size} viewBox='0 0 24 24' className={cn(className)} fill='currentColor' stroke='currentColor'>
         <Path d={path} />
       </Svg>
     </View>
   );
-};
+};`,
 
-export { Icon };`,
   Link: `import { ComponentPropsWithoutRef, forwardRef, useState } from 'react';
 import { Text, Pressable, View } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '../../lib/utils';
+import { cn } from '@/lib/utils';
 import { Icon } from '@/components/ui/icon';
 
-const linkVariants = cva('text-base leading-[162%] underline', {
+const linkVariants = cva('font-source-sans-pro text-base leading-[162%] underline', {
   variants: {
     variant: {
       default: 'text-primary',
@@ -1603,8 +1571,8 @@ const Link = forwardRef<View, LinkProps>(({ href, label, className, external, vi
 
 Link.displayName = 'Link';
 
-export { Link };
-`,
+export { Link };`,
+
   Pagination: `import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { cn } from '@/lib/utils';
@@ -1687,11 +1655,11 @@ const Pagination = ({ currentPage, totalPages, totalItems, onPageChange, classNa
 PaginationButton.displayName = 'PaginationButton';
 Pagination.displayName = 'Pagination';
 
-export { Pagination };
-`,
-  Progress: `import { forwardRef } from 'react';
-import { View, ViewProps } from 'react-native';
-import { cn } from '../../lib/utils';
+export { Pagination };`,
+
+  Progress: `import { ComponentPropsWithoutRef, forwardRef } from 'react';
+import * as ProgressPrimitive from '@rn-primitives/progress';
+import { cn } from '@/lib/utils';
 import Animated, {
   Extrapolation,
   interpolate,
@@ -1700,7 +1668,7 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 
-interface ProgressProps extends ViewProps {
+interface ProgressProps extends ComponentPropsWithoutRef<typeof ProgressPrimitive.Root> {
   className?: string;
   indicatorClassName?: string;
   value?: number;
@@ -1708,36 +1676,54 @@ interface ProgressProps extends ViewProps {
   size?: 'sm' | 'md' | 'lg';
 }
 
-const Progress = forwardRef<View, ProgressProps>(
-  ({ className, value = 0, variant = 'default', size = 'md', indicatorClassName, ...props }, ref) => {
+function Indicator({ 
+  value, 
+  variant = 'default',
+  className 
+}: { 
+  value: number | undefined | null; 
+  variant?: ProgressProps['variant'];
+  className?: string;
+}) {
+  const progress = useDerivedValue(() => value ?? 0);
+
+  const indicator = useAnimatedStyle(() => {
+    return {
+      width: withSpring(
+        \`\${interpolate(progress.value, [0, 100], [1, 100], Extrapolation.CLAMP)}%\`
+        { overshootClamping: true }
+      ),
+    };
+  });
+
+  const variantStyles = {
+    default: 'bg-primary',
+    success: 'bg-success',
+    error: 'bg-error',
+    warning: 'bg-warning',
+    info: 'bg-info'
+  };
+
+  return (
+    <ProgressPrimitive.Indicator asChild>
+      <Animated.View 
+        style={indicator}
+        className={cn('h-full rounded-full', variantStyles[variant], className)} 
+      />
+    </ProgressPrimitive.Indicator>
+  );
+}
+
+const Progress = forwardRef<ProgressPrimitive.RootRef, ProgressProps>(
+  ({ className, value, variant = 'default', size = 'md', indicatorClassName, ...props }, ref) => {
     const sizeStyles = {
       sm: 'h-1',
       md: 'h-2',
       lg: 'h-3'
     };
 
-    const variantStyles = {
-      default: 'bg-primary',
-      success: 'bg-success',
-      error: 'bg-error',
-      warning: 'bg-warning',
-      info: 'bg-info'
-    };
-
-    const clampedValue = Math.min(100, Math.max(0, value));
-    const progress = useDerivedValue(() => clampedValue);
-
-    const indicator = useAnimatedStyle(() => {
-      return {
-        width: withSpring(
-          \`\${interpolate(progress.value, [0, 100], [1, 100], Extrapolation.CLAMP)}%\`,
-          { overshootClamping: true }
-        ),
-      };
-    });
-
     return (
-      <View
+      <ProgressPrimitive.Root
         ref={ref}
         className={cn(
           'relative overflow-hidden rounded-full bg-base-lighter w-full min-w-[150px]',
@@ -1746,20 +1732,18 @@ const Progress = forwardRef<View, ProgressProps>(
         )}
         {...props}
       >
-        <Animated.View 
-          style={indicator}
-          className={cn('h-full rounded-full', variantStyles[variant], indicatorClassName)} 
-        />
-      </View>
+        <Indicator value={value} variant={variant} className={indicatorClassName} />
+      </ProgressPrimitive.Root>
     );
   }
 );
 
 Progress.displayName = 'Progress';
 
-export { Progress }; `,
+export { Progress };`,
+
   RadioButton: `import { ComponentPropsWithoutRef, ElementRef, forwardRef, useContext, createContext } from 'react';
-import { View, Text, Pressable, GestureResponderEvent, Platform } from 'react-native';
+import { View, Text, Pressable, GestureResponderEvent } from 'react-native';
 import * as RadioGroupPrimitive from '@rn-primitives/radio-group';
 import { cn } from '@/lib/utils';
 import { cssInterop } from 'nativewind';
@@ -1804,21 +1788,22 @@ const RadioButton = forwardRef<ElementRef<typeof RadioGroupPrimitive.Item>, Radi
       onPress={handlePress}
       className='flex flex-row items-center gap-2 min-h-[44px] w-[329px] px-4'
     >
-      <RadioGroupPrimitive.Item
-        ref={ref}
-        aria-labelledby={labelId}
-        testID={\`radio-\${props.value}\`}
-        className={cn(
-          Platform.OS === 'web' ? 'w-5 h-5' : 'min-w-[20px] min-h-[20px] w-5 h-5',
-          'rounded-full border-2 flex items-center justify-center bg-background',
-          props.disabled ? 'border-disabled' : isSelected ? 'border-primary' : 'border-foreground'
-        )}
-        {...props}
-      >
-        <RadioGroupPrimitive.Indicator forceMount className={Platform.OS === 'web' ? 'flex items-center justify-center' : 'w-full h-full flex items-center justify-center'}>
-          <View className={cn('h-[10px] w-[10px] rounded-full', isSelected ? (props.disabled ? 'bg-disabled' : 'bg-primary') : 'bg-transparent')} />
-        </RadioGroupPrimitive.Indicator>
-      </RadioGroupPrimitive.Item>
+      <View className='relative w-5 h-5'>
+        <RadioGroupPrimitive.Item
+          ref={ref}
+          aria-labelledby={labelId}
+          testID={\`radio-\${props.value}\`}
+          className={cn(
+            'absolute left-0 top-0 w-5 h-5 rounded-full border-2 flex items-center justify-center bg-background',
+            props.disabled ? 'border-disabled' : isSelected ? 'border-primary' : 'border-base-ink'
+          )}
+          {...props}
+        >
+          <RadioGroupPrimitive.Indicator forceMount className='w-full h-full flex items-center justify-center'>
+            <View className={cn('w-3.5 h-3.5 rounded-full', isSelected ? (props.disabled ? 'bg-disabled' : 'bg-primary') : 'bg-transparent')} />
+          </RadioGroupPrimitive.Indicator>
+        </RadioGroupPrimitive.Item>
+      </View>
 
       <Text nativeID={labelId} className={cn('flex-1 text-base leading-5', props.disabled ? 'text-disabled' : 'text-base-ink')}>
         {label}
@@ -1830,9 +1815,8 @@ const RadioButton = forwardRef<ElementRef<typeof RadioGroupPrimitive.Item>, Radi
 RadioButton.displayName = 'RadioButton';
 RadioGroup.displayName = 'RadioGroup';
 
-export { RadioGroup, RadioButton };
+export { RadioGroup, RadioButton };`,
 
-export { RadioButton };`,
   RadioTile: `import { ComponentPropsWithoutRef, ElementRef, forwardRef, useContext, createContext } from 'react';
 import { View, Text, Pressable, GestureResponderEvent } from 'react-native';
 import * as RadioGroupPrimitive from '@rn-primitives/radio-group';
@@ -1959,8 +1943,8 @@ RadioTileGroup.displayName = 'RadioTileGroup';
 RadioTile.displayName = 'RadioTile';
 
 export { RadioTile, RadioTileGroup };
-export type { RadioTileProps };
-`,
+export type { RadioTileProps };`,
+
   Snackbar: `import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -2051,8 +2035,8 @@ const Snackbar = forwardRef<ElementRef<typeof View>, SnackbarProps & { isVisible
 
 Snackbar.displayName = 'Snackbar';
 
-export { Snackbar, type SnackbarProps };
-`,
+export { Snackbar, type SnackbarProps };`,
+
   StepIndicator: `import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import { View, Text } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -2121,8 +2105,8 @@ const StepIndicator = forwardRef<View, StepIndicatorProps>(({ steps, currentStep
 
 StepIndicator.displayName = 'StepIndicator';
 
-export { StepIndicator };
-`,
+export { StepIndicator };`,
+
   Tag: `import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import { View, Text } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -2144,7 +2128,7 @@ const tagTextVariants = cva('text-background font-normal text-center', {
   variants: {
     size: {
       default: 'text-[14px] leading-[14px]',
-      big: 'text-[16px] leading-[16px]'
+      big: 'text-base leading-[16px]'
     }
   },
   defaultVariants: {
@@ -2168,13 +2152,12 @@ const Tag = forwardRef<View, TagProps>(({ label, size, className, ...props }, re
 
 Tag.displayName = 'Tag';
 
-export { Tag };
-`,
-  Text: `import * as Slot from '@rn-primitives/slot';
-import { SlottableTextProps, TextRef } from '@rn-primitives/types';
-import { createContext, forwardRef, useContext } from 'react';
-import { Text as RNText } from 'react-native';
+export { Tag };`,
 
+  Text: `import { forwardRef, createContext, useContext } from 'react';
+import * as Slot from '@rn-primitives/slot';
+import { SlottableTextProps, TextRef } from '@rn-primitives/types';
+import { Text as RNText } from 'react-native';
 import { cn } from '@/lib/utils';
 
 const TextClassContext = createContext<string | undefined>(undefined);
@@ -2186,9 +2169,9 @@ const Text = forwardRef<TextRef, SlottableTextProps>(({ className, asChild = fal
   return (
     <Component
       className={cn(
-        'web:select-text',
-        textClass ? textClass : 'text-foreground',
-        className
+        'text-base web:select-text text-foreground',
+        textClass, // Context classes take precedence
+        className // Allow override if needed
       )}
       ref={ref}
       {...props}
@@ -2197,8 +2180,8 @@ const Text = forwardRef<TextRef, SlottableTextProps>(({ className, asChild = fal
 });
 Text.displayName = 'Text';
 
-export { Text, TextClassContext };
-`,
+export { Text, TextClassContext };`,
+
   Textarea: `import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
 import { View, TextInput, Text } from 'react-native';
 import { cn } from '@/lib/utils';
@@ -2256,8 +2239,8 @@ const TextArea = forwardRef<ElementRef<typeof TextInput>, TextAreaProps>(
 
 TextArea.displayName = 'TextArea';
 
-export { TextArea, type TextAreaProps };
-`,
+export { TextArea, type TextAreaProps };`,
+
   TextInput: `import { ComponentPropsWithoutRef, ElementRef, forwardRef, useState } from 'react';
 import { View, TextInput as RNTextInput, Text } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -2402,8 +2385,8 @@ const TextInput = forwardRef<ElementRef<typeof RNTextInput>, TextInputProps>(
 
 TextInput.displayName = 'TextInput';
 
-export { TextInput, type TextInputProps };
-`,
+export { TextInput, type TextInputProps };`,
+
   Toggle: `import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
 import { View } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -2475,8 +2458,7 @@ const Toggle = forwardRef<ElementRef<typeof TogglePrimitive.Root>, ToggleProps>(
 
 Toggle.displayName = 'Toggle';
 
-export { Toggle, type ToggleProps };
-`
+export { Toggle, type ToggleProps };`
 };
 
 export async function getComponentTemplate(name: string): Promise<string> {

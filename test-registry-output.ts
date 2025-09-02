@@ -21,7 +21,7 @@ export const ALL_COMPONENTS = [
   'StepIndicator',
   'Tag',
   'Text',
-  'Textarea',
+  'TextArea',
   'TextInput',
   'Toggle'
 ];
@@ -549,8 +549,8 @@ export const COMPONENT_METADATA: Record<string, ComponentMetadata> = {
     dependencies: ["@rn-primitives/slot","@rn-primitives/types"],
     internalDependencies: []
   },
-  Textarea: {
-    name: 'Textarea',
+  TextArea: {
+    name: 'TextArea',
     dependencies: [],
     internalDependencies: []
   },
@@ -570,7 +570,7 @@ export const COMPONENT_TEMPLATES: Record<string, string> = {
   Alert: `import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
 import { View, Text } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { Icon } from '@/components/ui/icon';
+import { Icon } from '@/components/ui/Icon';
 import { cn } from '@/lib/utils';
 
 const alertVariants = cva('flex flex-row items-start p-4 w-[329px]', {
@@ -767,7 +767,7 @@ export { Avatar, AvatarFallback, AvatarImage }; `,
   Badge: `import { type VariantProps, cva } from 'class-variance-authority';
 import { View } from 'react-native';
 
-import { Text } from '@/components/ui/text';
+import { Text } from '@/components/ui/Text';
 import { cn } from '@/lib/utils';
 
 const badgeVariants = cva('flex-row items-center justify-center rounded-full px-2.5 py-1 border', {
@@ -920,7 +920,7 @@ export { Banner, type BannerProps };
 import { View, Text, Pressable } from 'react-native';
 import * as CheckboxPrimitive from '@rn-primitives/checkbox';
 import { cn } from '../../lib/utils';
-import { Icon } from '@/components/ui/icon';
+import { Icon } from '@/components/ui/Icon';
 import { cssInterop } from 'nativewind';
 
 cssInterop(CheckboxPrimitive.Root, { className: 'style' });
@@ -1007,7 +1007,7 @@ export { BiometricSignIn };
   Button: `import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef } from 'react';
 import { Pressable, PressableStateCallbackType, View } from 'react-native';
 import { type VariantProps, cva } from 'class-variance-authority';
-import { TextClassContext } from '@/components/ui/text';
+import { TextClassContext } from '@/components/ui/Text';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva('flex items-center justify-center rounded-lg font-sans text-center', {
@@ -1158,8 +1158,8 @@ export { ButtonGroup };
 import { View, Image } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { Text } from '@/components/ui/text';
+import { Button } from '@/components/ui/Button';
+import { Text } from '@/components/ui/Text';
 
 const cardVariants = cva(
   'flex flex-col justify-between items-start bg-background border border-base-lighter rounded-[4px] w-[329px] min-h-[471px] mx-auto',
@@ -1249,7 +1249,7 @@ export { Card };
 import { View, Text, Pressable } from 'react-native';
 import * as CheckboxPrimitive from '@rn-primitives/checkbox';
 import { cn } from '@/lib/utils';
-import { Icon } from '@/components/ui/icon';
+import { Icon } from '@/components/ui/Icon';
 import { cssInterop } from 'nativewind';
 
 cssInterop(CheckboxPrimitive.Root, { className: 'style' });
@@ -1305,7 +1305,7 @@ import { View, Text, Pressable } from 'react-native';
 import * as CheckboxPrimitive from '@rn-primitives/checkbox';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
-import { Icon } from '@/components/ui/icon';
+import { Icon } from '@/components/ui/Icon';
 import { cssInterop } from 'nativewind';
 
 cssInterop(CheckboxPrimitive.Root, { className: 'style' });
@@ -1399,7 +1399,7 @@ import * as React from 'react';
 import { StyleSheet, View, type ViewProps } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { cn } from '@/lib/utils';
-import { Text } from '@/components/ui/text';
+import { Text } from '@/components/ui/Text';
 
 const Dialog = DialogPrimitive.Root;
 
@@ -1504,7 +1504,7 @@ export {
 export { Dialog };`,
   Icon: `import { View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
-import { iconPaths } from '@/components/ui/iconpaths';
+import { iconPaths } from '@/components/ui/iconPaths';
 import { cn } from '@/lib/utils';
 import { cssInterop } from 'nativewind';
 cssInterop(Svg, { className: 'style' });
@@ -1538,7 +1538,7 @@ export { Icon };`,
 import { Text, Pressable, View } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
-import { Icon } from '@/components/ui/icon';
+import { Icon } from '@/components/ui/Icon';
 
 const linkVariants = cva('text-base leading-[162%] underline', {
   variants: {
@@ -1608,7 +1608,7 @@ export { Link };
   Pagination: `import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { cn } from '@/lib/utils';
-import { Icon } from '@/components/ui/icon';
+import { Icon } from '@/components/ui/Icon';
 
 interface PaginationProps extends ComponentPropsWithoutRef<typeof View> {
   currentPage: number;
@@ -1965,7 +1965,7 @@ export type { RadioTileProps };
 import { View, Text, Pressable } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
-import { Icon } from '@/components/ui/icon';
+import { Icon } from '@/components/ui/Icon';
 
 const snackbarVariants = cva('flex w-[329px] bg-base-darkest rounded-[4px] p-3', {
   variants: {
@@ -2199,7 +2199,7 @@ Text.displayName = 'Text';
 
 export { Text, TextClassContext };
 `,
-  Textarea: `import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
+  TextArea: `import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
 import { View, TextInput, Text } from 'react-native';
 import { cn } from '@/lib/utils';
 
