@@ -40,6 +40,7 @@
     ".next/types/**/*.ts"
 , "content/docs/gettingstarted.mdx"  ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "../../scripts"
   ]
 }
