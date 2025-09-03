@@ -11,6 +11,7 @@ export async function getPackageManager(targetDir: string): Promise<PackageManag
   if (existsSync(path.join(targetDir, 'yarn.lock'))) return 'yarn';
   if (existsSync(path.join(targetDir, 'package-lock.json'))) return 'npm';
 
+  
   // If no lock file exists, try to detect from environment
   try {
     const detected = await detect({ programmatic: true, cwd: targetDir });
