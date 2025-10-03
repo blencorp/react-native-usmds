@@ -5,7 +5,7 @@ import path from 'path';
 import prompts from 'prompts';
 import * as z from 'zod';
 import { logger } from '../utils/logger';
-import { COMPONENT_TEMPLATES, COMPONENT_METADATA, ICON_PATHS } from '../utils/registry';
+import { COMPONENT_TEMPLATES, COMPONENT_METADATA} from '../utils/registry';
 import { getPackageManager, getInstallCommand } from '../utils/get-package-manager';
 import { checkDependenciesExist, runInit } from './init';
 import { spawn } from 'child_process';
@@ -215,17 +215,10 @@ async function getComponentTemplate(name: string, cwd: string, options: { overwr
   // If it's the Icon component, create registry file in the Icon directory
   if (componentName === 'Icon') {
     const iconDir = path.join(cwd, 'components', 'ui', 'icon');
-    const registryPath = path.join(iconDir, 'registry.ts');
 
     // Create Icon directory if it doesn't exist
     if (!existsSync(iconDir)) {
       await fs.mkdir(iconDir, { recursive: true });
-    }
-
-    // Create registry file if it doesn't exist
-    if (!existsSync(registryPath) || options.overwrite) {
-      const registryContent = `export const iconPaths = ${JSON.stringify(ICON_PATHS, null, 2)};`;
-      await fs.writeFile(registryPath, registryContent, 'utf8');
     }
 
     // Update the import path in the Icon component template
