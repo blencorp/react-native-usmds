@@ -212,13 +212,20 @@ async function getComponentTemplate(name: string, cwd: string, options: { overwr
     throw new Error(`Template not found for component: ${componentName}`);
   }
 
-  // If it's the Icon component, create registry file in the Icon directory
+  // If it's the Icon component, create index.tsx file in the Icon directory
   if (componentName === 'Icon') {
     const iconDir = path.join(cwd, 'components', 'ui', 'icon');
+    const indexPath = path.join(iconDir, 'index.tsx');
 
     // Create Icon directory if it doesn't exist
     if (!existsSync(iconDir)) {
       await fs.mkdir(iconDir, { recursive: true });
+    }
+
+    // Create index.tsx that exports Icon from icon.tsx
+    if (!existsSync(indexPath) || options.overwrite) {
+      const indexContent = `export { Icon } from './icon';\n`;
+      await fs.writeFile(indexPath, indexContent, 'utf8');
     }
 
     // Update the import path in the Icon component template

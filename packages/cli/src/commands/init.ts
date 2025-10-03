@@ -18,6 +18,7 @@ const ESSENTIAL_DEPENDENCIES = [
   'tailwind-merge',
   'react-native-reanimated',
   'react-native-svg',
+  'lucide-react-native',
   '@rn-primitives/types',
   '@rn-primitives/slot',
   '@rn-primitives/portal'
