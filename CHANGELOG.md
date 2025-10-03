@@ -1,3 +1,9 @@
+## [1.20.1](https://github.com/blencorp/react-native-usmds/compare/v1.20.0...v1.20.1) (2025-10-03)
+
+### Bug Fixes
+
+* cli icon depenency + lucide react native ([86f4fa2](https://github.com/blencorp/react-native-usmds/commit/86f4fa2950f1dc6091b1e041d3a1cc5c6135cd31))
+
 ## [1.20.0](https://github.com/blencorp/react-native-usmds/compare/v1.19.0...v1.20.0) (2025-10-03)
 
 ### Features
