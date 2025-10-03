@@ -7,7 +7,7 @@ import Svg, { Path, Defs, Pattern, Image, Use } from 'react-native-svg';
 const bannerVariants = cva('flex flex-row items-center', {
   variants: {
     variant: {
-      'standard-app': 'bg-base-lighter p-4 gap-5 h-[88px] w-full max-w-[393px]',
+      'standard-app': 'bg-muted p-4 gap-5 h-[88px] w-full max-w-[393px]',
       welcome: 'p-0 gap-4 h-[40px] w-[329px]'
     }
   },
@@ -19,7 +19,7 @@ const bannerVariants = cva('flex flex-row items-center', {
 const bannerTextVariants = cva('whitespace-nowrap', {
   variants: {
     variant: {
-      'standard-app': 'text-base-darker text-[12px] leading-[14px]',
+      'standard-app': 'text-foreground text-[12px] leading-[14px]',
       welcome: 'text-foreground text-[22px] leading-[28px] font-bold w-[273px]'
     }
   },
@@ -63,7 +63,7 @@ const Banner = forwardRef<ElementRef<typeof View>, BannerProps>(({ className, va
       {isStandardApp && (
         <>
           <FlagIcon />
-          <View className='h-14 w-[1px] bg-base-light flex-shrink-0' />
+          <View className='h-14 w-[1px] bg-border flex-shrink-0' />
         </>
       )}
 

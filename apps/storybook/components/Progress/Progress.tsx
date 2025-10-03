@@ -1,6 +1,6 @@
-import { forwardRef } from 'react';
-import { View, ViewProps } from 'react-native';
-import { cn } from '../../lib/utils';
+import { cn } from '@/lib/utils';
+import * as ProgressPrimitive from '@rn-primitives/progress';
+import { Platform, View } from 'react-native';
 import Animated, {
   Extrapolation,
   interpolate,
@@ -9,61 +9,74 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 
-interface ProgressProps extends ViewProps {
-  className?: string;
-  indicatorClassName?: string;
-  value?: number;
-  variant?: 'default' | 'success' | 'error' | 'warning' | 'info';
-  size?: 'sm' | 'md' | 'lg';
+function Progress({
+  className,
+  value,
+  indicatorClassName,
+  ...props
+}: ProgressPrimitive.RootProps &
+  React.RefAttributes<ProgressPrimitive.RootRef> & {
+    indicatorClassName?: string;
+  }) {
+  return (
+    <ProgressPrimitive.Root
+      className={cn('bg-primary/20 relative h-2 w-full overflow-hidden rounded-full', className)}
+      {...props}>
+      <Indicator value={value} className={indicatorClassName} />
+    </ProgressPrimitive.Root>
+  );
 }
 
-const Progress = forwardRef<View, ProgressProps>(
-  ({ className, value = 0, variant = 'default', size = 'md', indicatorClassName, ...props }, ref) => {
-    const sizeStyles = {
-      sm: 'h-1',
-      md: 'h-2',
-      lg: 'h-3'
-    };
+export { Progress };
 
-    const variantStyles = {
-      default: 'bg-primary',
-      success: 'bg-success',
-      error: 'bg-error',
-      warning: 'bg-warning',
-      info: 'bg-info'
-    };
+const Indicator = Platform.select({
+  web: WebIndicator,
+  native: NativeIndicator,
+  default: NullIndicator,
+});
 
-    const clampedValue = Math.min(100, Math.max(0, value));
-    const progress = useDerivedValue(() => clampedValue);
+type IndicatorProps = {
+  value: number | undefined | null;
+  className?: string;
+};
 
-    const indicator = useAnimatedStyle(() => {
-      return {
-        width: withSpring(
-          `${interpolate(progress.value, [0, 100], [1, 100], Extrapolation.CLAMP)}%`,
-          { overshootClamping: true }
-        ),
-      };
-    });
-
-    return (
-      <View
-        ref={ref}
-        className={cn(
-          'relative overflow-hidden rounded-full bg-base-lighter w-full min-w-[150px]',
-          sizeStyles[size],
-          className
-        )}
-        {...props}
-      >
-        <Animated.View 
-          style={indicator}
-          className={cn('h-full rounded-full', variantStyles[variant], indicatorClassName)} 
-        />
-      </View>
-    );
+function WebIndicator({ value, className }: IndicatorProps) {
+  if (Platform.OS !== 'web') {
+    return null;
   }
-);
 
-Progress.displayName = 'Progress';
+  return (
+    <View
+      className={cn('bg-primary h-full w-full flex-1 transition-all', className)}
+      style={{ transform: `translateX(-${100 - (value ?? 0)}%)` }}>
+      <ProgressPrimitive.Indicator className={cn('h-full w-full', className)} />
+    </View>
+  );
+}
 
-export { Progress }; 
+function NativeIndicator({ value, className }: IndicatorProps) {
+  const progress = useDerivedValue(() => value ?? 0);
+
+  const indicator = useAnimatedStyle(() => {
+    return {
+      width: withSpring(
+        `${interpolate(progress.value, [0, 100], [1, 100], Extrapolation.CLAMP)}%`,
+        { overshootClamping: true }
+      ),
+    };
+  }, [value]);
+
+  if (Platform.OS === 'web') {
+    return null;
+  }
+
+  return (
+    <ProgressPrimitive.Indicator asChild>
+      <Animated.View style={indicator} className={cn('bg-foreground h-full', className)} />
+    </ProgressPrimitive.Indicator>
+  );
+}
+
+function NullIndicator(_props: IndicatorProps) {
+  return null;
+}

@@ -1,90 +1,52 @@
-import { ComponentPropsWithoutRef, forwardRef } from 'react';
-import { View, Image } from 'react-native';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { Text, TextClassContext } from '../text';
 import { cn } from '@/lib/utils';
-import { Button } from '../button';
-import { Text } from '../text';
+import { View, type ViewProps } from 'react-native';
 
-const cardVariants = cva(
-  'flex flex-col justify-between items-start bg-background border border-base-lighter rounded-[4px] w-[329px] min-h-[471px] mx-auto',
-  {
-    variants: {
-      variant: {
-        default: '',
-        'media-first': '',
-        inset: ''
-      }
-    },
-    defaultVariants: {
-      variant: 'default'
-    }
-  }
-);
-
-interface CardProps extends ComponentPropsWithoutRef<typeof View>, VariantProps<typeof cardVariants> {
-  title: string;
-  description: string;
-  buttonText: string;
-  mediaUrl?: string;
-  showMedia?: boolean;
-  className?: string;
-  variant?: 'default' | 'media-first' | 'inset';
+function Card({ className, ...props }: ViewProps & React.RefAttributes<View>) {
+  return (
+    <TextClassContext.Provider value="text-card-foreground">
+      <View
+        className={cn(
+          'bg-card border-border flex flex-col gap-6 rounded-xl border py-6 shadow-sm shadow-black/5',
+          className
+        )}
+        {...props}
+      />
+    </TextClassContext.Provider>
+  );
 }
 
-const Card = forwardRef<View, CardProps>(({ title, description, buttonText, mediaUrl, showMedia = false, variant, className, ...props }, ref) => {
-  const isMediaFirst = variant === 'media-first';
-  const isInset = variant === 'inset';
+function CardHeader({ className, ...props }: ViewProps & React.RefAttributes<View>) {
+  return <View className={cn('flex flex-col gap-1.5 px-6', className)} {...props} />;
+}
 
+function CardTitle({
+  className,
+  ...props
+}: React.ComponentProps<typeof Text> & React.RefAttributes<Text>) {
   return (
-    <View ref={ref} className={cn(cardVariants({ variant }), className)} {...props}>
-      <View className='flex flex-col flex-1'>
-        {showMedia && isMediaFirst && mediaUrl && (
-          <View className='flex text-center items-center justify-center w-full'>
-            <Image
-              source={{ uri: mediaUrl }}
-              style={{
-                width: 327,
-                height: 188,
-                borderTopLeftRadius: 4,
-                borderTopRightRadius: 4
-              }}
-              resizeMode='cover'
-            />
-          </View>
-        )}
-
-        <View className='px-6 pt-6 pb-2'>
-          <Text className='font-bold text-[22px] leading-7 text-base-ink'>{title}</Text>
-        </View>
-
-        {showMedia && isInset && mediaUrl && (
-          <View className='px-6'>
-            <Image
-              source={{ uri: mediaUrl }}
-              style={{
-                width: '100%',
-                height: 162,
-                borderRadius: 0
-              }}
-              resizeMode='cover'
-            />
-          </View>
-        )}
-
-        <View className='px-6 py-2'>
-          <Text className='text-base leading-[162%] text-base-ink'>{description}</Text>
-        </View>
-      </View>
-
-      <View className='px-6 pb-6 w-full'>
-        <Button variant='default' size='sm'>
-          <Text>{buttonText}</Text>
-        </Button>
-      </View>
-    </View>
+    <Text
+      role="heading"
+      aria-level={3}
+      className={cn('font-semibold leading-none', className)}
+      {...props}
+    />
   );
-});
+}
 
-Card.displayName = 'Card';
+function CardDescription({
+  className,
+  ...props
+}: React.ComponentProps<typeof Text> & React.RefAttributes<Text>) {
+  return <Text className={cn('text-muted-foreground text-sm', className)} {...props} />;
+}
 
-export { Card };
+function CardContent({ className, ...props }: ViewProps & React.RefAttributes<View>) {
+  return <View className={cn('px-6', className)} {...props} />;
+}
+
+function CardFooter({ className, ...props }: ViewProps & React.RefAttributes<View>) {
+  return <View className={cn('flex flex-row items-center px-6', className)} {...props} />;
+}
+
+export { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle };

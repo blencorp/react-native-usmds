@@ -136,8 +136,12 @@ export async function runInit(cwd: string) {
 
     spinner.text = 'Initializing project...';
 
-    // Only create tailwind config and lib utils
+    // Create configuration files
     await writeFileGracefully(path.join(cwd, 'tailwind.config.js'), templates.TAILWIND_CONFIG);
+    await writeFileGracefully(path.join(cwd, 'metro.config.js'), templates.METRO_CONFIG);
+    await writeFileGracefully(path.join(cwd, 'babel.config.js'), templates.BABEL_CONFIG);
+    await writeFileGracefully(path.join(cwd, 'global.css'), templates.GLOBAL_STYLES);
+    await writeFileGracefully(path.join(cwd, 'nativewind-env.d.ts'), templates.NATIVEWIND_ENV);
 
     // Check if lib directory exists
     const libDir = path.join(cwd, 'lib');
@@ -212,15 +216,6 @@ export async function runInit(cwd: string) {
       dependenciesSpinner?.fail();
       throw error;
     }
-
-    logger.info('\n');
-    logger.info(chalk.yellow('Important: Manual Configuration Required'));
-    logger.info('Please add the following files manually (see documentation):');
-    logger.info('1. metro.config.js');
-    logger.info('2. babel.config.js');
-    logger.info('3. global.css');
-    logger.info('4. nativewind-env.d.ts');
-    logger.info('\nRefer to the documentation at: https://usmds.blencorp.com/docs/getting-started/initial-setup');
   } catch (error) {
     spinner?.fail();
     throw error;

@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
 import { View, ScrollView } from 'react-native';
 import { Mail, ArrowRight } from 'lucide-react-native';
 import { Button } from './Button';
@@ -20,7 +19,7 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <View className='w-full max-w-[393px]'>
+      <View className='w-full max-w-[393px] p-4 bg-background'>
         <Story />
       </View>
     )
@@ -31,12 +30,12 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'secondary', 'accent-cool', 'accent-warm', 'base', 'outline', 'inverse'],
+      options: ['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'],
       description: 'Button style variant'
     },
     size: {
       control: 'select',
-      options: ['default', 'sm', 'lg', 'big', 'icon'],
+      options: ['default', 'sm', 'lg', 'icon'],
       description: 'Button size variant'
     },
     disabled: {
@@ -55,266 +54,174 @@ export default meta;
 type Story = StoryObj<typeof Button>;
 
 export const Default: Story = {
-  render: () => (
-    <ScrollView>
-      <View className='space-y-4 p-4'>
-        <View>
-          <Text className='text-sm mb-2'>Default</Text>
-          <Button variant='default'>
-            <Text>Default</Text>
-          </Button>
-        </View>
-      </View>
-    </ScrollView>
-  )
+  args: {
+    children: <Text>Default</Text>
+  }
 };
 
 export const Secondary: Story = {
-  render: () => (
-    <ScrollView>
-      <View className='space-y-4 p-4'>
-        <View>
-          <Text className='text-sm mb-2'>Default</Text>
-          <Button variant='secondary'>
-            <Text>Secondary</Text>
-          </Button>
-        </View>
-      </View>
-    </ScrollView>
-  )
+  args: {
+    variant: 'secondary',
+    children: <Text>Secondary</Text>
+  }
 };
 
-export const AccentCool: Story = {
-  render: () => (
-    <ScrollView>
-      <View className='space-y-4 p-4'>
-        <View>
-          <Text className='text-sm mb-2'>Default</Text>
-          <Button variant='accent-cool'>
-            <Text>Accent Cool</Text>
-          </Button>
-        </View>
-      </View>
-    </ScrollView>
-  )
-};
-
-export const AccentWarm: Story = {
-  render: () => (
-    <ScrollView>
-      <View className='space-y-4 p-4'>
-        <View>
-          <Text className='text-sm mb-2'>Default</Text>
-          <Button variant='accent-warm'>
-            <Text>Accent Warm</Text>
-          </Button>
-        </View>
-      </View>
-    </ScrollView>
-  )
-};
-
-export const Base: Story = {
-  render: () => (
-    <ScrollView>
-      <View className='space-y-4 p-4'>
-        <View>
-          <Text className='text-sm mb-2'>Default</Text>
-          <Button variant='base'>
-            <Text>Base</Text>
-          </Button>
-        </View>
-      </View>
-    </ScrollView>
-  )
+export const Destructive: Story = {
+  args: {
+    variant: 'destructive',
+    children: <Text>Destructive</Text>
+  }
 };
 
 export const Outline: Story = {
-  render: () => (
-    <ScrollView>
-      <View className='space-y-4 p-4'>
-        <View>
-          <Text className='text-sm mb-2'>Default</Text>
-          <Button variant='outline'>
-            <Text>Outline</Text>
-          </Button>
-        </View>
-      </View>
-    </ScrollView>
-  )
+  args: {
+    variant: 'outline',
+    children: <Text>Outline</Text>
+  }
 };
 
-export const Inverse: Story = {
-  render: () => (
-    <ScrollView>
-      <View className='space-y-4 p-4'>
-        <View className='bg-foreground p-4 rounded-md'>
-          <View className='space-y-4'>
-            <View>
-              <Text className='text-sm mb-2 text-white'>Default</Text>
-              <Button variant='inverse'>
-                <Text>Inverse</Text>
-              </Button>
-            </View>
-          </View>
-        </View>
-      </View>
-    </ScrollView>
-  )
+export const Ghost: Story = {
+  args: {
+    variant: 'ghost',
+    children: <Text>Ghost</Text>
+  }
+};
+
+export const Link: Story = {
+  args: {
+    variant: 'link',
+    children: <Text>Link</Text>
+  }
 };
 
 export const Sizes: Story = {
   render: () => (
-    <ScrollView>
-      <View className='flex-1 gap-4 p-4'>
-        <Button size='sm'>
-          <Text>Small Button</Text>
-        </Button>
-        <Button size='default'>
-          <Text>Default Button</Text>
-        </Button>
-        <Button size='lg'>
-          <Text>Large Button</Text>
-        </Button>
-        <Button size='big'>
-          <Text>Big Button</Text>
-        </Button>
-        <Button size='icon'>
-          <Mail className='text-primary-foreground' />
-        </Button>
-      </View>
-    </ScrollView>
+    <View className='flex-1 gap-4'>
+      <Button size='sm'>
+        <Text>Small</Text>
+      </Button>
+      <Button size='default'>
+        <Text>Default</Text>
+      </Button>
+      <Button size='lg'>
+        <Text>Large</Text>
+      </Button>
+      <Button size='icon'>
+        <Mail />
+      </Button>
+    </View>
   )
 };
 
-export const WithIcons: Story = {
+export const WithIcon: Story = {
   render: () => (
-    <ScrollView>
-      <View className='flex-1 gap-4 p-4'>
-        <Button startIcon={<Mail className='text-primary-foreground' />}>
-          <Text>Start Icon</Text>
-        </Button>
-        <Button endIcon={<ArrowRight className='text-primary-foreground' />}>
-          <Text>End Icon</Text>
-        </Button>
-        <Button startIcon={<Mail className='text-primary-foreground' />} endIcon={<ArrowRight className='text-primary-foreground' />}>
-          <Text>Both Icons</Text>
-        </Button>
-      </View>
-    </ScrollView>
+    <View className='flex-1 gap-4'>
+      <Button>
+        <Mail className='mr-2' />
+        <Text>With Icon</Text>
+      </Button>
+      <Button>
+        <Text>With Icon</Text>
+        <ArrowRight className='ml-2' />
+      </Button>
+    </View>
   )
 };
 
 export const Disabled: Story = {
   args: {
     disabled: true,
-    children: <Text>Disabled Button</Text>
+    children: <Text>Disabled</Text>
   }
 };
 
 export const AllVariants: Story = {
   render: () => (
-    <ScrollView>
-      <View className='space-y-12 p-4 w-full max-w-[393px]'>
-        {/* Primary */}
+    <ScrollView className="bg-background">
+      <View className='gap-8 p-4 bg-background'>
+        {/* Default */}
         <View>
-          <Text className='text-lg font-bold mb-4'>Primary</Text>
-          <View className='space-y-4'>
-            <View>
-              <Text className='text-sm mb-2'>Default</Text>
-              <Button variant='default'>
-                <Text>Primary</Text>
-              </Button>
-            </View>
-          </View>
+          <Text className='text-sm font-medium mb-2 text-foreground'>Default</Text>
+          <Button>
+            <Text>Default</Text>
+          </Button>
         </View>
 
         {/* Secondary */}
         <View>
-          <Text className='text-lg font-bold mb-4'>Secondary</Text>
-          <View className='space-y-4'>
-            <View>
-              <Text className='text-sm mb-2'>Default</Text>
-              <Button variant='secondary'>
-                <Text>Secondary</Text>
-              </Button>
-            </View>
-          </View>
+          <Text className='text-sm font-medium mb-2 text-foreground'>Secondary</Text>
+          <Button variant='secondary'>
+            <Text>Secondary</Text>
+          </Button>
         </View>
 
-        {/* Accent Cool */}
+        {/* Destructive */}
         <View>
-          <Text className='text-lg font-bold mb-4'>Accent Cool</Text>
-          <View className='space-y-4'>
-            <View>
-              <Text className='text-sm mb-2'>Default</Text>
-              <Button variant='accent-cool'>
-                <Text>Accent Cool</Text>
-              </Button>
-            </View>
-          </View>
-        </View>
-
-        {/* Accent Warm */}
-        <View>
-          <Text className='text-lg font-bold mb-4'>Accent Warm</Text>
-          <View className='space-y-4'>
-            <View>
-              <Text className='text-sm mb-2'>Default</Text>
-              <Button variant='accent-warm'>
-                <Text>Accent Warm</Text>
-              </Button>
-            </View>
-          </View>
-        </View>
-
-        {/* Base */}
-        <View>
-          <Text className='text-lg font-bold mb-4'>Base</Text>
-          <View className='space-y-4'>
-            <View>
-              <Text className='text-sm mb-2'>Default</Text>
-              <Button variant='base'>
-                <Text>Base</Text>
-              </Button>
-            </View>
-          </View>
+          <Text className='text-sm font-medium mb-2 text-foreground'>Destructive</Text>
+          <Button variant='destructive'>
+            <Text>Destructive</Text>
+          </Button>
         </View>
 
         {/* Outline */}
         <View>
-          <Text className='text-lg font-bold mb-4'>Outline</Text>
-          <View className='space-y-4'>
-            <View>
-              <Text className='text-sm mb-2'>Default</Text>
-              <Button variant='outline'>
-                <Text>Outline</Text>
-              </Button>
-            </View>
+          <Text className='text-sm font-medium mb-2 text-foreground'>Outline</Text>
+          <Button variant='outline'>
+            <Text>Outline</Text>
+          </Button>
+        </View>
+
+        {/* Ghost */}
+        <View>
+          <Text className='text-sm font-medium mb-2 text-foreground'>Ghost</Text>
+          <Button variant='ghost'>
+            <Text>Ghost</Text>
+          </Button>
+        </View>
+
+        {/* Link */}
+        <View>
+          <Text className='text-sm font-medium mb-2 text-foreground'>Link</Text>
+          <Button variant='link'>
+            <Text>Link</Text>
+          </Button>
+        </View>
+
+        {/* Sizes */}
+        <View>
+          <Text className='text-sm font-medium mb-2 text-foreground'>Sizes</Text>
+          <View className='gap-3'>
+            <Button size='sm'>
+              <Text>Small</Text>
+            </Button>
+            <Button size='default'>
+              <Text>Default</Text>
+            </Button>
+            <Button size='lg'>
+              <Text>Large</Text>
+            </Button>
+            <Button size='icon'>
+              <Mail />
+            </Button>
           </View>
         </View>
 
-        {/* Inverse */}
-        <View className='w-full mb-8'>
-          <Text className='text-lg font-bold mb-4'>Inverse</Text>
-          <View className='bg-foreground p-4 rounded-md'>
-            <View className='space-y-4'>
-              <View>
-                <Text className='text-sm mb-2 text-white'>Default</Text>
-                <Button variant='inverse'>
-                  <Text>Inverse</Text>
-                </Button>
-              </View>
-            </View>
+        {/* Disabled */}
+        <View>
+          <Text className='text-sm font-medium mb-2 text-foreground'>Disabled</Text>
+          <View className='gap-3'>
+            <Button disabled>
+              <Text>Disabled Default</Text>
+            </Button>
+            <Button variant='secondary' disabled>
+              <Text>Disabled Secondary</Text>
+            </Button>
+            <Button variant='outline' disabled>
+              <Text>Disabled Outline</Text>
+            </Button>
           </View>
         </View>
       </View>
     </ScrollView>
   )
-};
-
-export const Interactive: Story = {
-  args: {
-    children: (state) => <Text>{state.pressed ? 'Pressing!' : 'Interactive'}</Text>
-  }
 };

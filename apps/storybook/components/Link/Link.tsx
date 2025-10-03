@@ -1,22 +1,23 @@
 import { ComponentPropsWithoutRef, forwardRef, useState } from 'react';
-import { Text, Pressable, View } from 'react-native';
+import { Text, Pressable, View, Platform } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
 import { Icon } from '../Icon/Icon';
+import { ExternalLink } from 'lucide-react-native';
 
-const linkVariants = cva('text-base leading-[162%] underline', {
+const linkVariants = cva(cn('text-base leading-[162%] underline', Platform.select({ web: 'cursor-pointer' })), {
   variants: {
     variant: {
       default: 'text-primary',
-      visited: 'text-violet-vivid-70',
-      'dark-background': 'text-primary-light'
+      visited: 'text-secondary',
+      'dark-background': 'text-primary'
     },
     external: {
       true: 'flex-row items-center gap-0.5',
       false: ''
     },
     focus: {
-      true: 'outline-none ring-4 ring-focus-ring rounded',
+      true: cn('outline-none rounded', Platform.select({ web: 'ring-4 ring-ring' })),
       false: ''
     }
   },
@@ -47,6 +48,7 @@ const Link = forwardRef<View, LinkProps>(({ href, label, className, external, vi
       onPressIn={() => setIsPressed(true)}
       onPressOut={() => setIsPressed(false)}
       className={cn(linkVariants({ variant, external, focus }), className)}
+      accessibilityRole='link'
       {...props}
     >
       {({ pressed }) => (
@@ -54,9 +56,9 @@ const Link = forwardRef<View, LinkProps>(({ href, label, className, external, vi
           <Text className={linkVariants({ variant, external, focus: pressed || isPressed || focus })}>{label}</Text>
           {external && (
             <Icon
-              name='launch'
-              size={10}
-              className={cn(variant === 'dark-background' ? 'text-primary-light' : visited ? 'text-violet-vivid-70' : 'text-primary')}
+              as={ExternalLink}
+              size={14}
+              className={cn(visited ? 'text-secondary' : 'text-primary')}
             />
           )}
         </View>

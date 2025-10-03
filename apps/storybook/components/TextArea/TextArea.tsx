@@ -1,58 +1,30 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
-import { View, TextInput, Text } from 'react-native';
 import { cn } from '@/lib/utils';
+import { Platform, TextInput, type TextInputProps } from 'react-native';
 
-type TextAreaProps = ComponentPropsWithoutRef<typeof TextInput> & {
-  label?: string;
-  helperText?: string;
-  error?: boolean;
-  className?: string;
-  maxLength?: number;
-  value?: string;
-  disabled?: boolean;
-  onChangeText?: (text: string) => void;
-};
+function Textarea({
+  className,
+  multiline = true,
+  numberOfLines = Platform.select({ web: 2, native: 8 }),
+  placeholderClassName,
+  ...props
+}: TextInputProps & React.RefAttributes<TextInput>) {
+  return (
+    <TextInput
+      className={cn(
+        'text-foreground border-input dark:bg-input/30 flex min-h-16 w-full flex-row rounded-md border bg-transparent px-3 py-2 text-base shadow-sm shadow-black/5 md:text-sm',
+        Platform.select({
+          web: 'placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive field-sizing-content resize-y outline-none transition-[color,box-shadow] focus-visible:ring-[3px] disabled:cursor-not-allowed',
+        }),
+        props.editable === false && 'opacity-50',
+        className
+      )}
+      placeholderClassName={cn('text-muted-foreground', placeholderClassName)}
+      multiline={multiline}
+      numberOfLines={numberOfLines}
+      textAlignVertical="top"
+      {...props}
+    />
+  );
+}
 
-const TextArea = forwardRef<ElementRef<typeof TextInput>, TextAreaProps>(
-  ({ className, label, helperText, error, maxLength, value = '', disabled, onChangeText, ...props }, ref) => {
-    const characterCount = value.toString().length;
-
-    return (
-      <View className='flex flex-col gap-2 w-[329px]'>
-        {label && <Text className='text-base-ink leading-5'>{label}</Text>}
-
-        {helperText && <Text className={cn('text-base leading-5', error ? 'text-error-dark' : 'text-muted-foreground')}>{helperText}</Text>}
-
-        <TextInput
-          ref={ref}
-          className={cn(
-            'min-h-[160px] w-full rounded-md border border-base bg-background px-3 py-2',
-            'text-base leading-6',
-            'placeholder:text-base',
-            error && 'border-error-dark',
-            disabled && 'opacity-50 bg-disabled-lighter',
-            className
-          )}
-          multiline={true}
-          numberOfLines={4}
-          textAlignVertical='top'
-          editable={!disabled}
-          value={value}
-          maxLength={maxLength}
-          onChangeText={onChangeText}
-          {...props}
-        />
-
-        {maxLength && (
-          <Text className='text-muted-foreground text-base leading-5 text-right'>
-            {characterCount}/{maxLength}
-          </Text>
-        )}
-      </View>
-    );
-  }
-);
-
-TextArea.displayName = 'TextArea';
-
-export { TextArea, type TextAreaProps };
+export { Textarea };

@@ -2,6 +2,7 @@ import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { cn } from '@/lib/utils';
 import { Icon } from '../Icon/Icon';
+import { ChevronLeft, ChevronRight } from 'lucide-react-native';
 
 interface PaginationProps extends ComponentPropsWithoutRef<typeof View> {
   currentPage: number;
@@ -18,7 +19,7 @@ const PaginationButton = forwardRef<View, ComponentPropsWithoutRef<typeof Pressa
         ref={ref}
         className={cn(
           'w-[50px] h-[50px] rounded justify-center items-center',
-          active ? 'bg-primary' : disabled ? 'bg-disabled' : 'bg-primary',
+          active ? 'bg-primary' : disabled ? 'bg-muted' : 'bg-primary',
           className
         )}
         disabled={disabled}
@@ -45,33 +46,33 @@ const Pagination = ({ currentPage, totalPages, totalItems, onPageChange, classNa
   };
 
   return (
-    <View className={cn('flex-row items-center p-8 gap-3 bg-muted w-[393px]', className)}>
+    <View className={cn('flex-row items-center p-8 gap-3 bg-accent w-[393px]', className)}>
       <PaginationButton
         onPress={handlePrevious}
         disabled={currentPage === 1}
-        className={currentPage === 1 ? 'bg-disabled' : 'bg-primary'}
+        className={currentPage === 1 ? 'bg-muted' : 'bg-primary'}
         accessibilityLabel='Previous page'
         accessibilityRole='button'
         accessibilityState={{ disabled: currentPage === 1 }}
         testID='previous-button'
       >
-        <Icon name='navigate_before' size={24} className='text-white' />
+        <Icon as={ChevronLeft} size={24} className='text-primary-foreground' />
       </PaginationButton>
 
-      <Text className='flex-1 text-center text-[20px] leading-[30px] text-muted-foreground'>
+      <Text className='flex-1 text-center text-[20px] leading-[30px] text-foreground'>
         {currentPage} to {totalPages} of {totalItems}
       </Text>
 
       <PaginationButton
         onPress={handleNext}
         disabled={currentPage === totalPages}
-        className={currentPage === totalPages ? 'bg-disabled' : 'bg-primary'}
+        className={currentPage === totalPages ? 'bg-muted' : 'bg-primary'}
         accessibilityLabel='Next page'
         accessibilityRole='button'
         accessibilityState={{ disabled: currentPage === totalPages }}
         testID='next-button'
       >
-        <Icon name='navigate_next' size={24} className='text-white' />
+        <Icon as={ChevronRight} size={24} className='text-primary-foreground' />
       </PaginationButton>
     </View>
   );

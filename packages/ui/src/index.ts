@@ -26,6 +26,12 @@ export * from './text';
 
 // Icons & Media
 export * from './icon';
+export * from './avatar';
+
+// Data Display
+export * from './collapsible';
+export * from './dialog';
+export * from './progress';
 
 // Authentication
 export * from './biometricsignin';

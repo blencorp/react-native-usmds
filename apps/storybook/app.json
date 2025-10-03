@@ -2,6 +2,7 @@
   "expo": {
     "name": "storybook",
     "slug": "storybook",
+    "userInterfaceStyle": "automatic",
     "extra": {
       "eas": {
         "projectId": "78815632-b857-48dc-aad5-e28b6bde764f"
