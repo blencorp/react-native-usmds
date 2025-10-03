@@ -1,3 +1,10 @@
+## [1.20.0](https://github.com/blencorp/react-native-usmds/compare/v1.19.0...v1.20.0) (2025-10-03)
+
+### Features
+
+* refactor sync updates ([896fb23](https://github.com/blencorp/react-native-usmds/commit/896fb233ec67473a758910a16b6d8d2c90b5118e))
+* refactor sync updates ([5789f9d](https://github.com/blencorp/react-native-usmds/commit/5789f9d48159213adc9d0338308b69ee4d701760))
+
 ## [1.19.0](https://github.com/blencorp/react-native-usmds/compare/v1.18.0...v1.19.0) (2025-09-03)
 
 ### Features
