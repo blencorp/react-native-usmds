@@ -1,46 +1,37 @@
 import { render, fireEvent } from '@testing-library/react-native';
-import { TextArea } from './';
+import { Textarea } from './';
 
-describe('TextArea', () => {
-  it('renders correctly with label', () => {
-    const { getByText, getByPlaceholderText } = render(<TextArea label='Test Label' placeholder='Enter text' />);
-
-    expect(getByText('Test Label')).toBeTruthy();
+describe('Textarea', () => {
+  it('renders correctly with placeholder', () => {
+    const { getByPlaceholderText } = render(<Textarea placeholder='Enter text' />);
     expect(getByPlaceholderText('Enter text')).toBeTruthy();
   });
 
   it('handles text input', () => {
     const onChangeText = jest.fn();
-    const { getByPlaceholderText } = render(<TextArea placeholder='Enter text' onChangeText={onChangeText} />);
+    const { getByPlaceholderText } = render(<Textarea placeholder='Enter text' onChangeText={onChangeText} />);
 
     const input = getByPlaceholderText('Enter text');
     fireEvent.changeText(input, 'New text');
     expect(onChangeText).toHaveBeenCalledWith('New text');
   });
 
-  it('shows error state', () => {
-    const { getByText } = render(<TextArea label='Test Label' error helperText='This is an error' />);
-
-    expect(getByText('This is an error')).toBeTruthy();
-  });
-
   it('handles disabled state', () => {
-    const { getByPlaceholderText } = render(<TextArea placeholder='Enter text' disabled />);
+    const { getByPlaceholderText } = render(<Textarea placeholder='Enter text' editable={false} />);
 
     const input = getByPlaceholderText('Enter text');
     expect(input.props.editable).toBe(false);
   });
 
-  it('shows character count when maxLength is set', () => {
-    const { getByText } = render(<TextArea maxLength={100} value='Test text' />);
-
-    expect(getByText('9/100')).toBeTruthy();
+  it('renders with value', () => {
+    const { getByDisplayValue } = render(<Textarea value='Test text' />);
+    expect(getByDisplayValue('Test text')).toBeTruthy();
   });
 
-  it('applies error styles to helper text', () => {
-    const { getByText } = render(<TextArea error helperText='Error message' />);
-    const helperText = getByText('Error message');
+  it('applies custom className', () => {
+    const { getByPlaceholderText } = render(<Textarea placeholder='Enter text' className='custom-class' />);
+    const textarea = getByPlaceholderText('Enter text');
 
-    expect(helperText.props.className).toContain('text-error-dark');
+    expect(textarea.props.className).toContain('custom-class');
   });
 });

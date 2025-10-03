@@ -1,15 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Progress } from './Progress';
-import { View, Pressable, Text } from 'react-native';
-import { useState, useCallback } from 'react';
+import { View } from 'react-native';
+import { Button } from '../Button/Button';
+import { Text } from '../Text/Text';
+import { useState, useCallback, useEffect } from 'react';
 
-interface ProgressDemoProps {
-  initialValue?: number;
-  size?: 'sm' | 'md' | 'lg';
-  variant?: 'default' | 'success' | 'error' | 'warning' | 'info';
-}
-
-const ProgressDemo = ({ initialValue = 40, size, variant = 'default' }: ProgressDemoProps) => {
+const ProgressDemo = ({ initialValue = 40 }: { initialValue?: number }) => {
   const [progress, setProgress] = useState(initialValue);
 
   const randomize = useCallback(() => {
@@ -17,19 +13,11 @@ const ProgressDemo = ({ initialValue = 40, size, variant = 'default' }: Progress
   }, []);
 
   return (
-    <View className="flex-1 items-center justify-center p-4 gap-6">
-      <Progress 
-        value={progress} 
-        size={size} 
-        variant={variant} 
-        className="w-[400px]"
-      />
-      <Pressable
-        onPress={randomize}
-        className="bg-primary px-6 py-3 rounded-lg"
-      >
-        <Text className="text-white font-medium text-base">Randomize</Text>
-      </Pressable>
+    <View className="flex-1 items-center justify-center gap-6 w-full">
+      <Progress value={progress} className="w-full" />
+      <Button onPress={randomize}>
+        <Text>Randomize</Text>
+      </Button>
     </View>
   );
 };
@@ -39,36 +27,42 @@ const meta = {
   component: Progress,
   parameters: {
     layout: 'centered'
-  }
+  },
+  decorators: [
+    (Story) => (
+      <View className='w-full max-w-[393px] p-4 bg-background'>
+        <Story />
+      </View>
+    )
+  ]
 } satisfies Meta<typeof Progress>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  render: () => <Progress value={60} className="w-full" />
+};
+
+export const Interactive: Story = {
   render: () => <ProgressDemo initialValue={40} />
 };
 
-export const Small: Story = {
-  render: () => <ProgressDemo initialValue={40} size="sm" />
-};
+export const Animated: Story = {
+  render: () => {
+    const [progress, setProgress] = useState(0);
 
-export const Large: Story = {
-  render: () => <ProgressDemo initialValue={40} size="lg" />
-};
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setProgress((prev) => {
+          if (prev >= 100) return 0;
+          return prev + 10;
+        });
+      }, 500);
 
-export const Success: Story = {
-  render: () => <ProgressDemo initialValue={80} variant="success" />
-};
+      return () => clearInterval(interval);
+    }, []);
 
-export const Error: Story = {
-  render: () => <ProgressDemo initialValue={40} variant="error" />
+    return <Progress value={progress} className="w-full" />;
+  }
 };
-
-export const Warning: Story = {
-  render: () => <ProgressDemo initialValue={60} variant="warning" />
-};
-
-export const Info: Story = {
-  render: () => <ProgressDemo initialValue={80} variant="info" />
-}; 

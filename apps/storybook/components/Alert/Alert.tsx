@@ -1,155 +1,76 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
-import { View, Text } from 'react-native';
-import { cva, type VariantProps } from 'class-variance-authority';
 import { Icon } from '../Icon/Icon';
+import { Text, TextClassContext } from '../Text/Text';
 import { cn } from '@/lib/utils';
+import type { LucideIcon } from 'lucide-react-native';
+import * as React from 'react';
+import { View, type ViewProps } from 'react-native';
 
-const alertVariants = cva('flex flex-row items-start p-4 w-[329px]', {
-  variants: {
-    variant: {
-      info: 'bg-info-lighter',
-      error: 'bg-error-lighter',
-      warning: 'bg-warning-lighter',
-      success: 'bg-success-lighter',
-      emergency: 'bg-emergency'
-    },
-    alertStyle: {
-      default: 'gap-[15px]',
-      'no-header': 'gap-[15px]',
-      list: 'gap-[15px]',
-      slim: 'gap-3',
-      'no-icon': 'gap-[10px]'
-    }
-  },
-  defaultVariants: {
-    variant: 'info',
-    alertStyle: 'default'
-  }
-});
-
-const alertTextVariants = cva('font-sans text-[22px] leading-[28px] font-bold text-base-ink mb-2', {
-  variants: {
-    variant: {
-      info: 'text-base-ink',
-      error: 'text-base-ink',
-      warning: 'text-base-ink',
-      success: 'text-base-ink',
-      emergency: 'text-primary-foreground'
-    },
-    alertStyle: {
-      default: '',
-      'no-header': '',
-      list: '',
-      slim: '',
-      'no-icon': ''
-    }
-  }
-});
-
-interface AlertProps extends ComponentPropsWithoutRef<typeof View>, VariantProps<typeof alertVariants> {
-  title?: string;
-  description: {
-    title?: string;
-    body?: string;
-    link?: string;
-    messages?: Array<{
-      text: string;
-      link?: string;
-      suffix?: string;
-    }>;
-  };
-  showIcon?: boolean;
-  className?: string;
-  variant?: 'info' | 'error' | 'warning' | 'success' | 'emergency';
-  alertStyle?: 'default' | 'no-header' | 'list' | 'slim' | 'no-icon';
+function Alert({
+  className,
+  variant,
+  children,
+  icon,
+  iconClassName,
+  ...props
+}: ViewProps &
+  React.RefAttributes<View> & {
+    icon: LucideIcon;
+    variant?: 'default' | 'destructive';
+    iconClassName?: string;
+  }) {
+  return (
+    <TextClassContext.Provider
+      value={cn(
+        'text-sm text-foreground',
+        variant === 'destructive' && 'text-destructive',
+        className
+      )}>
+      <View
+        role="alert"
+        className={cn(
+          'bg-card border-border relative w-full rounded-lg border px-4 pb-2 pt-3.5',
+          className
+        )}
+        {...props}>
+        <View className="absolute left-3.5 top-3">
+          <Icon
+            as={icon}
+            className={cn('size-4', variant === 'destructive' && 'text-destructive', iconClassName)}
+          />
+        </View>
+        {children}
+      </View>
+    </TextClassContext.Provider>
+  );
 }
 
-const Alert = forwardRef<ElementRef<typeof View>, AlertProps>(
-  ({ className, variant, alertStyle, title, description, showIcon = true, style, ...props }, ref) => {
-    const isNoIcon = alertStyle === 'no-icon';
-    const shouldShowIcon = showIcon && !isNoIcon;
+function AlertTitle({
+  className,
+  ...props
+}: React.ComponentProps<typeof Text> & React.RefAttributes<Text>) {
+  return (
+    <Text
+      className={cn('mb-1 ml-0.5 min-h-4 pl-6 font-medium leading-none tracking-tight', className)}
+      {...props}
+    />
+  );
+}
 
-    const getIconColor = () => {
-      switch (variant) {
-        case 'emergency':
-          return 'text-primary-foreground';
-        case 'info':
-          return 'text-base-ink';
-        case 'error':
-          return 'text-error';
-        case 'warning':
-          return 'text-warning';
-        case 'success':
-          return 'text-success';
-        default:
-          return 'text-base-ink';
-      }
-    };
+function AlertDescription({
+  className,
+  ...props
+}: React.ComponentProps<typeof Text> & React.RefAttributes<Text>) {
+  const textClass = React.useContext(TextClassContext);
+  return (
+    <Text
+      className={cn(
+        'text-muted-foreground ml-0.5 pb-1.5 pl-6 text-sm leading-relaxed',
+        textClass?.includes('text-destructive') && 'text-destructive/90',
+        className
+      )}
+      {...props}
+    />
+  );
+}
 
-    const renderDescription = () => {
-      if (alertStyle === 'list' && description.messages) {
-        return (
-          <View className='space-y-4'>
-            {description.messages.map((message, index) => (
-              <View key={index} className='flex flex-row items-start'>
-                <Text className={cn('text-base leading-[24px] mr-2', variant === 'emergency' ? 'text-primary-foreground' : 'text-base-ink')}>•</Text>
-                <Text className={cn('text-base leading-[24px] flex-1', variant === 'emergency' ? 'text-primary-foreground' : 'text-base-ink')}>
-                  {message.text}
-                  {message.link && (
-                    <Text className={cn('underline', variant === 'emergency' ? 'text-primary-foreground' : 'text-primary')}>{message.link}</Text>
-                  )}
-                  {message.suffix}
-                </Text>
-              </View>
-            ))}
-          </View>
-        );
-      }
-
-      return (
-        <Text className={cn('text-base leading-5', variant === 'emergency' ? 'text-primary-foreground' : 'text-base-ink')}>
-          {description.title && <Text className='font-bold'>{description.title} </Text>}
-          {description.body}
-          {description.link && (
-            <Text className={cn('underline', variant === 'emergency' ? 'text-primary-foreground' : 'text-primary')}>{description.link}</Text>
-          )}
-        </Text>
-      );
-    };
-
-    return (
-      <View
-        ref={ref}
-        testID='alert'
-        accessibilityRole='alert'
-        style={style}
-        className={cn(alertVariants({ variant, alertStyle }), className)}
-        {...props}
-      >
-        {shouldShowIcon && (
-          <View
-            className={cn(
-              'flex-shrink-0 rounded-full flex items-center justify-center',
-              alertStyle === 'slim' ? 'w-6 h-6' : 'w-8 h-8',
-            )}
-          >
-            <Icon
-              name='info'
-              className={getIconColor()}
-              size={alertStyle === 'slim' ? 24 : 32}
-            />
-          </View>
-        )}
-
-        <View className={cn('flex flex-col', alertStyle === 'no-icon' ? 'w-[297px]' : 'w-[250px]')}>
-          {title && <Text className={alertTextVariants({ alertStyle, variant })}>{title}</Text>}
-          {renderDescription()}
-        </View>
-      </View>
-    );
-  }
-);
-
-Alert.displayName = 'Alert';
-
-export { Alert, type AlertProps };
+export { Alert, AlertDescription, AlertTitle };

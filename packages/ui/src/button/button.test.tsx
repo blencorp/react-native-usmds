@@ -30,9 +30,6 @@ describe('Button', () => {
 
     rerender(<Button variant="ghost">Ghost</Button>);
     expect(getByRole('button').props.className).toContain('active:bg-accent');
-
-    rerender(<Button variant="link">Link</Button>);
-    expect(getByRole('button').props.className).toContain('text-primary');
   });
 
   it('handles disabled state', () => {
@@ -44,7 +41,7 @@ describe('Button', () => {
     );
 
     const button = getByRole('button');
-    expect(button.props.className).toContain('disabled:bg-primary/50');
+    expect(button.props.className).toContain('opacity-50');
 
     fireEvent.press(button);
     expect(onPress).not.toHaveBeenCalled();
@@ -52,18 +49,20 @@ describe('Button', () => {
 
   it('renders with different sizes', () => {
     const { getByRole, rerender } = render(<Button size="default">Default</Button>);
-    expect(getByRole('button').props.className).toContain('h-[44px]');
+    expect(getByRole('button').props.className).toContain('h-10');
 
     rerender(<Button size="sm">Small</Button>);
-    expect(getByRole('button').props.className).toContain('h-[36px]');
+    expect(getByRole('button').props.className).toContain('h-9');
 
     rerender(<Button size="lg">Large</Button>);
-    expect(getByRole('button').props.className).toContain('h-[48px]');
-
-    rerender(<Button size="big">Big</Button>);
-    expect(getByRole('button').props.className).toContain('h-[60px]');
+    expect(getByRole('button').props.className).toContain('h-11');
 
     rerender(<Button size="icon">Icon</Button>);
-    expect(getByRole('button').props.className).toContain('h-[44px] w-[44px]');
+    expect(getByRole('button').props.className).toContain('w-10');
+  });
+
+  it('applies custom className', () => {
+    const { getByRole } = render(<Button className="custom-class">Custom</Button>);
+    expect(getByRole('button').props.className).toContain('custom-class');
   });
 });

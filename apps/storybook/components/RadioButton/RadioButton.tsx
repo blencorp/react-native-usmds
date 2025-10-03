@@ -51,16 +51,16 @@ const RadioButton = forwardRef<ElementRef<typeof RadioGroupPrimitive.Item>, Radi
         className={cn(
           Platform.OS === 'web' ? 'w-5 h-5' : 'min-w-[20px] min-h-[20px] w-5 h-5',
           'rounded-full border-2 flex items-center justify-center bg-background',
-          props.disabled ? 'border-disabled' : isSelected ? 'border-primary' : 'border-foreground'
+          props.disabled ? 'border-muted-foreground' : isSelected ? 'border-primary' : 'border-foreground'
         )}
         {...props}
       >
         <RadioGroupPrimitive.Indicator forceMount className={Platform.OS === 'web' ? 'flex items-center justify-center' : 'w-full h-full flex items-center justify-center'}>
-          <View className={cn('h-[10px] w-[10px] rounded-full', isSelected ? (props.disabled ? 'bg-disabled' : 'bg-primary') : 'bg-transparent')} />
+          <View className={cn('h-[10px] w-[10px] rounded-full', isSelected ? (props.disabled ? 'bg-muted-foreground' : 'bg-primary') : 'bg-transparent')} />
         </RadioGroupPrimitive.Indicator>
       </RadioGroupPrimitive.Item>
 
-      <Text nativeID={labelId} className={cn('flex-1 text-base leading-5', props.disabled ? 'text-disabled' : 'text-base-ink')}>
+      <Text nativeID={labelId} className={cn('flex-1 text-base leading-5', props.disabled ? 'text-muted-foreground' : 'text-foreground')}>
         {label}
       </Text>
     </Pressable>

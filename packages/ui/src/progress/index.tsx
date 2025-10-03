@@ -1,6 +1,6 @@
-import { ComponentPropsWithoutRef, forwardRef } from 'react';
-import * as ProgressPrimitive from '@rn-primitives/progress';
 import { cn } from '@/lib/utils';
+import * as ProgressPrimitive from '@rn-primitives/progress';
+import { Platform, View } from 'react-native';
 import Animated, {
   Extrapolation,
   interpolate,
@@ -9,23 +9,52 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 
-interface ProgressProps extends ComponentPropsWithoutRef<typeof ProgressPrimitive.Root> {
-  className?: string;
-  indicatorClassName?: string;
-  value?: number;
-  variant?: 'default' | 'success' | 'error' | 'warning' | 'info';
-  size?: 'sm' | 'md' | 'lg';
+function Progress({
+  className,
+  value,
+  indicatorClassName,
+  ...props
+}: ProgressPrimitive.RootProps &
+  React.RefAttributes<ProgressPrimitive.RootRef> & {
+    indicatorClassName?: string;
+  }) {
+  return (
+    <ProgressPrimitive.Root
+      className={cn('bg-primary/20 relative h-2 w-full overflow-hidden rounded-full', className)}
+      {...props}>
+      <Indicator value={value} className={indicatorClassName} />
+    </ProgressPrimitive.Root>
+  );
 }
 
-function Indicator({ 
-  value, 
-  variant = 'default',
-  className 
-}: { 
-  value: number | undefined | null; 
-  variant?: ProgressProps['variant'];
+export { Progress };
+
+const Indicator = Platform.select({
+  web: WebIndicator,
+  native: NativeIndicator,
+  default: NullIndicator,
+});
+
+type IndicatorProps = {
+  value: number | undefined | null;
   className?: string;
-}) {
+};
+
+function WebIndicator({ value, className }: IndicatorProps) {
+  if (Platform.OS !== 'web') {
+    return null;
+  }
+
+  return (
+    <View
+      className={cn('bg-primary h-full w-full flex-1 transition-all', className)}
+      style={{ transform: `translateX(-${100 - (value ?? 0)}%)` }}>
+      <ProgressPrimitive.Indicator className={cn('h-full w-full', className)} />
+    </View>
+  );
+}
+
+function NativeIndicator({ value, className }: IndicatorProps) {
   const progress = useDerivedValue(() => value ?? 0);
 
   const indicator = useAnimatedStyle(() => {
@@ -35,50 +64,19 @@ function Indicator({
         { overshootClamping: true }
       ),
     };
-  });
+  }, [value]);
 
-  const variantStyles = {
-    default: 'bg-primary',
-    success: 'bg-success',
-    error: 'bg-error',
-    warning: 'bg-warning',
-    info: 'bg-info'
-  };
+  if (Platform.OS === 'web') {
+    return null;
+  }
 
   return (
     <ProgressPrimitive.Indicator asChild>
-      <Animated.View 
-        style={indicator}
-        className={cn('h-full rounded-full', variantStyles[variant], className)} 
-      />
+      <Animated.View style={indicator} className={cn('bg-foreground h-full', className)} />
     </ProgressPrimitive.Indicator>
   );
 }
 
-const Progress = forwardRef<ProgressPrimitive.RootRef, ProgressProps>(
-  ({ className, value, variant = 'default', size = 'md', indicatorClassName, ...props }, ref) => {
-    const sizeStyles = {
-      sm: 'h-1',
-      md: 'h-2',
-      lg: 'h-3'
-    };
-
-    return (
-      <ProgressPrimitive.Root
-        ref={ref}
-        className={cn(
-          'relative overflow-hidden rounded-full bg-base-lighter w-full min-w-[150px]',
-          sizeStyles[size],
-          className
-        )}
-        {...props}
-      >
-        <Indicator value={value} variant={variant} className={indicatorClassName} />
-      </ProgressPrimitive.Root>
-    );
-  }
-);
-
-Progress.displayName = 'Progress';
-
-export { Progress }; 
+function NullIndicator(_props: IndicatorProps) {
+  return null;
+}

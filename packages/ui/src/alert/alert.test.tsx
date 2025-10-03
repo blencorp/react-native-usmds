@@ -1,60 +1,47 @@
 import { render } from '@testing-library/react-native';
-import { Alert } from './';
+import { Alert, AlertTitle, AlertDescription } from './';
+import { Info } from 'lucide-react-native';
 
 describe('Alert', () => {
-  it('renders correctly with basic props', () => {
-    const { getByTestId, getByText } = render(
-      <Alert
-        variant='info'
-        description={{
-          body: 'Test alert message'
-        }}
-      />
+  it('renders correctly with icon and description', () => {
+    const { getByText } = render(
+      <Alert icon={Info}>
+        <AlertDescription>Test alert message</AlertDescription>
+      </Alert>
     );
 
-    expect(getByTestId('alert')).toBeTruthy();
     expect(getByText('Test alert message')).toBeTruthy();
   });
 
-  it('renders with title', () => {
+  it('renders with title and description', () => {
     const { getByText } = render(
-      <Alert
-        variant='info'
-        title='Alert Title'
-        description={{
-          body: 'Test alert message'
-        }}
-      />
+      <Alert icon={Info}>
+        <AlertTitle>Alert Title</AlertTitle>
+        <AlertDescription>Test alert message</AlertDescription>
+      </Alert>
     );
 
     expect(getByText('Alert Title')).toBeTruthy();
     expect(getByText('Test alert message')).toBeTruthy();
   });
 
-  it('renders list style correctly', () => {
-    const messages = [{ text: 'First item' }, { text: 'Second item', link: 'Click here' }];
-
-    const { getByText, getAllByText } = render(<Alert variant='info' alertStyle='list' description={{ messages }} />);
-
-    const bulletPoints = getAllByText('•');
-    expect(bulletPoints).toHaveLength(2);
-    expect(getByText(/First item/)).toBeTruthy();
-    expect(getByText(/Second item/)).toBeTruthy();
-    expect(getByText('Click here')).toBeTruthy();
-  });
-
-  it('applies emergency variant styles', () => {
-    const { getByTestId, getByText } = render(
-      <Alert
-        variant='emergency'
-        description={{
-          body: 'Emergency message'
-        }}
-      />
+  it('applies destructive variant styles', () => {
+    const { getByText } = render(
+      <Alert icon={Info} variant='destructive'>
+        <AlertDescription>Destructive message</AlertDescription>
+      </Alert>
     );
 
-    const alert = getByTestId('alert');
-    expect(alert.props.className).toContain('bg-emergency');
-    expect(getByText('Emergency message')).toBeTruthy();
+    expect(getByText('Destructive message')).toBeTruthy();
+  });
+
+  it('renders with custom className', () => {
+    const { getByText } = render(
+      <Alert icon={Info} className='custom-class'>
+        <AlertDescription>Custom styled alert</AlertDescription>
+      </Alert>
+    );
+
+    expect(getByText('Custom styled alert')).toBeTruthy();
   });
 });

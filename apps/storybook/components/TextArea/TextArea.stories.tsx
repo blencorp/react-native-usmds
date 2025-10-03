@@ -1,96 +1,33 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { useState } from 'react';
 import { View } from 'react-native';
-import { TextArea } from './TextArea';
+import { Textarea } from './TextArea';
 
 const meta = {
-  title: 'Components/TextArea',
-  component: TextArea,
+  title: 'Components/Textarea',
+  component: Textarea,
   parameters: {
     layout: 'centered'
-  }
-} satisfies Meta<typeof TextArea>;
+  },
+  decorators: [
+    (Story) => (
+      <View className='w-full max-w-[393px] p-4 bg-background'>
+        <Story />
+      </View>
+    )
+  ]
+} satisfies Meta<typeof Textarea>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Textarea>;
 
 export const Default: Story = {
-  render: () => {
-    const [value, setValue] = useState('');
-    return (
-      <View className='p-4'>
-        <TextArea 
-          label='Text input label' 
-          placeholder='Enter your text here'
-          value={value}
-          onChangeText={setValue}
-        />
-      </View>
-    );
-  }
+  render: () => <Textarea placeholder='Type your message here' />
 };
 
-export const WithHelperText: Story = {
-  render: () => {
-    const [value, setValue] = useState('');
-    return (
-      <View className='p-4'>
-        <TextArea 
-          label='Text input label' 
-          helperText='Helper text' 
-          placeholder='Enter your text here'
-          value={value}
-          onChangeText={setValue}
-        />
-      </View>
-    );
-  }
-};
-
-export const WithError: Story = {
-  render: () => {
-    const [value, setValue] = useState('');
-    return (
-      <View className='p-4'>
-        <TextArea 
-          label='Text input label' 
-          helperText='Error message' 
-          error={true} 
-          placeholder='Enter your text here'
-          value={value}
-          onChangeText={setValue}
-        />
-      </View>
-    );
-  }
-};
-
-export const WithCharacterLimit: Story = {
-  render: () => {
-    const [value, setValue] = useState('');
-    return (
-      <View className='p-4'>
-        <TextArea 
-          label='Text input label' 
-          placeholder='Enter your text here'
-          maxLength={100}
-          value={value}
-          onChangeText={setValue}
-        />
-      </View>
-    );
-  }
+export const WithValue: Story = {
+  render: () => <Textarea placeholder='Type your message here' value='This is some pre-filled text in the textarea.' />
 };
 
 export const Disabled: Story = {
-  render: () => (
-    <View className='p-4'>
-      <TextArea 
-        label='Text input label' 
-        placeholder='This field is disabled' 
-        editable={false}
-        value="This is disabled text"
-      />
-    </View>
-  )
+  render: () => <Textarea placeholder='This field is disabled' editable={false} value='Disabled textarea content' />
 };

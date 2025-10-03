@@ -4,6 +4,7 @@ import * as CheckboxPrimitive from '@rn-primitives/checkbox';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 import { Icon } from '../icon';
+import { Check } from 'lucide-react-native';
 import { cssInterop } from 'nativewind';
 
 cssInterop(CheckboxPrimitive.Root, { className: 'style' });
@@ -60,7 +61,7 @@ const CheckboxTile = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Check
                 )}
               >
                 <CheckboxPrimitive.Indicator>
-                  <Icon name='check' size={14} className='text-white' />
+                  <Icon as={Check} size={14} className='text-white' />
                 </CheckboxPrimitive.Indicator>
               </CheckboxPrimitive.Root>
             </View>

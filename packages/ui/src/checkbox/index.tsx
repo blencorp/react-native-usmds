@@ -1,54 +1,48 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
-import { View, Text, Pressable } from 'react-native';
-import * as CheckboxPrimitive from '@rn-primitives/checkbox';
-import { cn } from '@/lib/utils';
 import { Icon } from '../icon';
-import { cssInterop } from 'nativewind';
+import { cn } from '@/lib/utils';
+import * as CheckboxPrimitive from '@rn-primitives/checkbox';
+import { Check } from 'lucide-react-native';
+import { Platform } from 'react-native';
 
-cssInterop(CheckboxPrimitive.Root, { className: 'style' });
+const DEFAULT_HIT_SLOP = 24;
 
-interface CheckboxProps extends ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> {
-  label: string;
+function Checkbox({
+  className,
+  checkedClassName,
+  indicatorClassName,
+  iconClassName,
+  ...props
+}: CheckboxPrimitive.RootProps &
+  React.RefAttributes<CheckboxPrimitive.RootRef> & {
+    checkedClassName?: string;
+    indicatorClassName?: string;
+    iconClassName?: string;
+  }) {
+  return (
+    <CheckboxPrimitive.Root
+      className={cn(
+        'border-input dark:bg-input/30 size-4 shrink-0 rounded-[4px] border shadow-sm shadow-black/5',
+        Platform.select({
+          web: 'focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive peer cursor-default outline-none transition-shadow focus-visible:ring-[3px] disabled:cursor-not-allowed',
+          native: 'overflow-hidden',
+        }),
+        props.checked && cn('border-primary', checkedClassName),
+        props.disabled && 'opacity-50',
+        className
+      )}
+      hitSlop={DEFAULT_HIT_SLOP}
+      {...props}>
+      <CheckboxPrimitive.Indicator
+        className={cn('bg-primary h-full w-full items-center justify-center', indicatorClassName)}>
+        <Icon
+          as={Check}
+          size={12}
+          strokeWidth={Platform.OS === 'web' ? 2.5 : 3.5}
+          className={cn('text-primary-foreground', iconClassName)}
+        />
+      </CheckboxPrimitive.Indicator>
+    </CheckboxPrimitive.Root>
+  );
 }
-
-const Checkbox = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, CheckboxProps>(
-  ({ label, disabled, checked, onCheckedChange, ...props }, ref) => {
-    const handlePress = () => {
-      if (!disabled && onCheckedChange) {
-        onCheckedChange(!checked);
-      }
-    };
-
-    return (
-      <Pressable onPress={handlePress}>
-        <View className='flex flex-row items-center gap-2 w-[329px] h-5'>
-          <CheckboxPrimitive.Root
-            ref={ref}
-            disabled={disabled}
-            checked={checked}
-            onCheckedChange={onCheckedChange}
-            {...props}
-            className={cn(
-              'w-6 h-6 border-2 rounded-sm items-center justify-center flex-shrink-0',
-              checked
-                ? disabled
-                  ? 'bg-disabled border-disabled' // disabled state
-                  : 'bg-primary border-primary' // checked state
-                : 'bg-transparent border-base-ink' // unchecked state
-            )}
-          >
-            <CheckboxPrimitive.Indicator>
-              <Icon name='check' size={14} className='text-white' />
-            </CheckboxPrimitive.Indicator>
-          </CheckboxPrimitive.Root>
-
-          <Text className={cn('flex-1 text-base leading-5', disabled ? 'text-disabled' : 'text-base-ink')}>{label}</Text>
-        </View>
-      </Pressable>
-    );
-  }
-);
-
-Checkbox.displayName = 'Checkbox';
 
 export { Checkbox };

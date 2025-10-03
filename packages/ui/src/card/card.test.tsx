@@ -1,39 +1,66 @@
 import { render } from '@testing-library/react-native';
-import { Card } from './';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from './';
+import { Text } from 'react-native';
 
 describe('Card', () => {
-  const defaultProps = {
-    title: 'Test Card',
-    description: 'Test description',
-    buttonText: 'Click me'
-  };
-
-  it('renders correctly with basic props', () => {
-    const { getByText } = render(<Card {...defaultProps} testID='card' />);
+  it('renders correctly with all compositional parts', () => {
+    const { getByText, getByRole } = render(
+      <Card>
+        <CardHeader>
+          <CardTitle>Test Card</CardTitle>
+          <CardDescription>Test description</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Text>Card content</Text>
+        </CardContent>
+        <CardFooter>
+          <Text>Footer content</Text>
+        </CardFooter>
+      </Card>
+    );
 
     expect(getByText('Test Card')).toBeTruthy();
     expect(getByText('Test description')).toBeTruthy();
-    expect(getByText('Click me')).toBeTruthy();
+    expect(getByText('Card content')).toBeTruthy();
+    expect(getByText('Footer content')).toBeTruthy();
   });
 
-  it('renders media-first variant with image', () => {
-    const { getByTestId } = render(<Card {...defaultProps} variant='media-first' showMedia mediaUrl='test.jpg' testID='card-media' />);
+  it('renders CardTitle with heading role', () => {
+    const { getByRole } = render(
+      <Card>
+        <CardHeader>
+          <CardTitle>Heading Title</CardTitle>
+        </CardHeader>
+      </Card>
+    );
 
-    const card = getByTestId('card-media');
-    expect(card).toBeTruthy();
-  });
-
-  it('renders inset variant with image', () => {
-    const { getByTestId } = render(<Card {...defaultProps} variant='inset' showMedia mediaUrl='test.jpg' testID='card-inset' />);
-
-    const card = getByTestId('card-inset');
-    expect(card).toBeTruthy();
+    const heading = getByRole('heading');
+    expect(heading).toBeTruthy();
+    expect(heading.props.children).toBe('Heading Title');
   });
 
   it('renders with custom className', () => {
-    const { getByTestId } = render(<Card {...defaultProps} testID='custom-card' className='custom-class' />);
+    const { getByText } = render(
+      <Card className='custom-class'>
+        <CardHeader>
+          <CardTitle className='custom-title'>Custom Title</CardTitle>
+        </CardHeader>
+      </Card>
+    );
 
-    const card = getByTestId('custom-card');
-    expect(card.props.className).toContain('custom-class');
+    const title = getByText('Custom Title');
+    expect(title.props.className).toContain('custom-title');
+  });
+
+  it('renders minimal card with just content', () => {
+    const { getByText } = render(
+      <Card>
+        <CardContent>
+          <Text>Simple content</Text>
+        </CardContent>
+      </Card>
+    );
+
+    expect(getByText('Simple content')).toBeTruthy();
   });
 });

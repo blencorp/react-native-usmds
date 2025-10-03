@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
-const tagVariants = cva('flex flex-row justify-center items-center bg-base rounded-[2px]', {
+const tagVariants = cva('flex flex-row justify-center items-center bg-foreground rounded-[2px]', {
   variants: {
     size: {
       default: 'px-2 py-0.5 h-[18px]',

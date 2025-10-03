@@ -2,33 +2,36 @@ import { render, fireEvent } from '@testing-library/react-native';
 import { TextInput } from './index';
 
 describe('TextInput', () => {
-  it('renders correctly', () => {
-    const { getByTestId } = render(<TextInput placeholder='Enter text' />);
-    expect(getByTestId('textbox')).toBeTruthy();
+  it('renders correctly with placeholder', () => {
+    const { getByPlaceholderText } = render(<TextInput placeholder='Enter text' />);
+    expect(getByPlaceholderText('Enter text')).toBeTruthy();
   });
 
-  it('handles focus state', () => {
-    const { getByTestId } = render(<TextInput placeholder='Enter text' />);
-    const input = getByTestId('textbox');
+  it('handles text input', () => {
+    const onChangeText = jest.fn();
+    const { getByPlaceholderText } = render(<TextInput placeholder='Enter text' onChangeText={onChangeText} />);
 
-    fireEvent(input, 'focus');
-    expect(input.props.className).toContain('border-ring');
-
-    fireEvent(input, 'blur');
-    expect(input.props.className).not.toContain('border-ring');
-  });
-
-  it('shows error state', () => {
-    const { getByTestId, getByText } = render(<TextInput state='error' errorMessage='Error message' placeholder='Enter text' />);
-
-    const input = getByTestId('textbox');
-    expect(input.props.className).toContain('border-destructive');
-    expect(getByText('Error message')).toBeTruthy();
+    const input = getByPlaceholderText('Enter text');
+    fireEvent.changeText(input, 'New text');
+    expect(onChangeText).toHaveBeenCalledWith('New text');
   });
 
   it('handles disabled state', () => {
-    const { getByTestId } = render(<TextInput state='disabled' placeholder='Enter text' />);
-    const input = getByTestId('textbox');
-    expect(input.props.className).toContain('bg-muted');
+    const { getByPlaceholderText } = render(<TextInput placeholder='Enter text' editable={false} />);
+
+    const input = getByPlaceholderText('Enter text');
+    expect(input.props.editable).toBe(false);
+    expect(input.props.className).toContain('opacity-50');
+  });
+
+  it('renders with value', () => {
+    const { getByDisplayValue } = render(<TextInput value='Test text' />);
+    expect(getByDisplayValue('Test text')).toBeTruthy();
+  });
+
+  it('applies custom className', () => {
+    const { getByPlaceholderText } = render(<TextInput placeholder='Enter text' className='custom-class' />);
+    const input = getByPlaceholderText('Enter text');
+    expect(input.props.className).toContain('custom-class');
   });
 });

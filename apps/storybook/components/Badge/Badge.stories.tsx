@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { View } from 'react-native';
 import { Badge } from './Badge';
+import { Text } from '../Text/Text';
 
 const meta = {
   title: 'Components/Badge',
@@ -8,6 +9,13 @@ const meta = {
   parameters: {
     layout: 'centered',
   },
+  decorators: [
+    (Story) => (
+      <View className='w-full max-w-[393px] p-4 bg-background'>
+        <Story />
+      </View>
+    )
+  ],
   tags: ['autodocs'],
 } satisfies Meta<typeof Badge>;
 
@@ -15,49 +23,52 @@ export default meta;
 type Story = StoryObj<typeof Badge>;
 
 export const Default: Story = {
-  args: {
-    label: 'Default Badge',
-    variant: 'default',
-  },
+  render: () => (
+    <Badge>
+      <Text>Badge</Text>
+    </Badge>
+  )
 };
 
-export const Success: Story = {
-  args: {
-    label: 'Success',
-    variant: 'success',
-  },
-};
-
-export const Warning: Story = {
-  args: {
-    label: 'Warning',
-    variant: 'warning',
-  },
-};
-
-export const Info: Story = {
-  args: {
-    label: 'Info',
-    variant: 'info',
-  },
+export const Secondary: Story = {
+  render: () => (
+    <Badge variant="secondary">
+      <Text>Secondary</Text>
+    </Badge>
+  )
 };
 
 export const Destructive: Story = {
-  args: {
-    label: 'Destructive',
-    variant: 'destructive',
-  },
+  render: () => (
+    <Badge variant="destructive">
+      <Text>Destructive</Text>
+    </Badge>
+  )
 };
 
-// Example showing multiple badges in a row
+export const Outline: Story = {
+  render: () => (
+    <Badge variant="outline">
+      <Text>Outline</Text>
+    </Badge>
+  )
+};
+
 export const AllVariants: Story = {
   render: () => (
-    <View className="flex-row gap-2">
-      <Badge label="Default" variant="default" />
-      <Badge label="Success" variant="success" />
-      <Badge label="Warning" variant="warning" />
-      <Badge label="Info" variant="info" />
-      <Badge label="Destructive" variant="destructive" />
+    <View className="flex-row gap-2 flex-wrap">
+      <Badge>
+        <Text>Default</Text>
+      </Badge>
+      <Badge variant="secondary">
+        <Text>Secondary</Text>
+      </Badge>
+      <Badge variant="destructive">
+        <Text>Destructive</Text>
+      </Badge>
+      <Badge variant="outline">
+        <Text>Outline</Text>
+      </Badge>
     </View>
   ),
 };

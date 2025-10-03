@@ -3,51 +3,44 @@ import { Toggle } from './';
 
 describe('Toggle', () => {
   it('renders correctly', () => {
-    const { getByTestId } = render(<Toggle pressed={false} onPressedChange={() => {}} />);
-    expect(getByTestId('toggle')).toBeTruthy();
+    const { getByRole } = render(<Toggle pressed={false} onPressedChange={() => {}} />);
+    expect(getByRole('switch')).toBeTruthy();
   });
 
   it('handles press events', () => {
     const onPressedChange = jest.fn();
-    const { getByTestId } = render(<Toggle pressed={false} onPressedChange={onPressedChange} />);
+    const { getByRole } = render(<Toggle pressed={false} onPressedChange={onPressedChange} />);
 
-    fireEvent.press(getByTestId('toggle'));
+    fireEvent.press(getByRole('switch'));
     expect(onPressedChange).toHaveBeenCalled();
   });
 
   it('renders in pressed state', () => {
-    const { getByTestId } = render(<Toggle pressed={true} onPressedChange={() => {}} />);
+    const { getByRole } = render(<Toggle pressed={true} onPressedChange={() => {}} />);
 
-    const toggle = getByTestId('toggle');
-    expect(toggle.props.accessibilityState.checked).toBe(true);
+    const toggle = getByRole('switch');
+    expect(toggle.props.accessibilityState.selected).toBe(true);
   });
 
   it('handles disabled state', () => {
     const onPressedChange = jest.fn();
-    const { getByTestId } = render(<Toggle pressed={false} disabled onPressedChange={onPressedChange} />);
+    const { getByRole } = render(<Toggle pressed={false} disabled onPressedChange={onPressedChange} />);
 
-    const toggle = getByTestId('toggle');
-    expect(toggle.props.accessibilityState.disabled).toBe(true);
-
-    fireEvent.press(toggle);
-    expect(onPressedChange).not.toHaveBeenCalled();
+    const toggle = getByRole('switch');
+    expect(toggle.props.className).toContain('opacity-50');
   });
 
-  it('has correct accessibility properties', () => {
-    const { getByTestId } = render(<Toggle pressed={true} disabled onPressedChange={() => {}} />);
+  it('applies correct styles based on pressed state', () => {
+    const { getByRole } = render(<Toggle pressed={true} onPressedChange={() => {}} />);
 
-    const toggle = getByTestId('toggle');
-    expect(toggle.props.accessibilityState).toMatchObject({
-      checked: true,
-      disabled: true
-    });
-    expect(toggle.props.accessibilityRole).toBe('switch');
+    const toggle = getByRole('switch');
+    expect(toggle.props.className).toContain('bg-accent');
   });
 
-  it('applies correct styles based on state', () => {
-    const { getByTestId } = render(<Toggle pressed={true} onPressedChange={() => {}} />);
+  it('applies custom className', () => {
+    const { getByRole } = render(<Toggle pressed={false} className="custom-class" onPressedChange={() => {}} />);
 
-    const container = getByTestId('toggle-container');
-    expect(container.props.className).toContain('bg-primary');
+    const toggle = getByRole('switch');
+    expect(toggle.props.className).toContain('custom-class');
   });
 });

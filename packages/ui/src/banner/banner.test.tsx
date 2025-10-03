@@ -7,7 +7,7 @@ describe('Banner', () => {
     const { getByTestId, getByText } = render(<Banner variant='standard-app' />);
 
     const banner = getByTestId('banner');
-    expect(banner.props.className).toContain('bg-base-lighter');
+    expect(banner.props.className).toContain('bg-muted');
     expect(getByText('An official app')).toBeTruthy();
     expect(getByText('of the United States government')).toBeTruthy();
   });
@@ -24,7 +24,7 @@ describe('Banner', () => {
     const { getByTestId, getByText, getByRole } = render(<Banner variant='standard-app' link='Learn more' />);
 
     const banner = getByTestId('banner');
-    expect(banner.props.className).toContain('bg-base-lighter');
+    expect(banner.props.className).toContain('bg-muted');
 
     const link = getByRole('link');
     expect(link).toBeTruthy();

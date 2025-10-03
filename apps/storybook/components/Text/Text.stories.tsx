@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Text, TextClassContext } from './Text';
-import { View } from 'react-native';
-import * as Slot from '@rn-primitives/slot';
+import { View, ScrollView } from 'react-native';
 
 const meta = {
   title: 'Components/Text',
@@ -11,7 +10,7 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <View style={{ padding: 16 }}>
+      <View className='w-full max-w-[393px] p-4 bg-background'>
         <Story />
       </View>
     )
@@ -20,6 +19,11 @@ const meta = {
     children: 'Sample Text'
   },
   argTypes: {
+    variant: {
+      control: 'select',
+      options: ['default', 'h1', 'h2', 'h3', 'h4', 'p', 'blockquote', 'code', 'lead', 'large', 'small', 'muted'],
+      description: 'Text style variant'
+    },
     className: {
       control: 'text',
       description: 'Additional Tailwind classes'
@@ -41,51 +45,156 @@ export const Default: Story = {
   }
 };
 
+export const Heading1: Story = {
+  args: {
+    variant: 'h1',
+    children: 'Heading 1'
+  }
+};
+
+export const Heading2: Story = {
+  args: {
+    variant: 'h2',
+    children: 'Heading 2'
+  }
+};
+
+export const Heading3: Story = {
+  args: {
+    variant: 'h3',
+    children: 'Heading 3'
+  }
+};
+
+export const Heading4: Story = {
+  args: {
+    variant: 'h4',
+    children: 'Heading 4'
+  }
+};
+
+export const Paragraph: Story = {
+  args: {
+    variant: 'p',
+    children: 'This is a paragraph of text with proper spacing and line height for comfortable reading.'
+  }
+};
+
+export const Blockquote: Story = {
+  args: {
+    variant: 'blockquote',
+    children: 'This is a blockquote with italic styling and a left border.'
+  }
+};
+
+export const Code: Story = {
+  args: {
+    variant: 'code',
+    children: 'const example = true;'
+  }
+};
+
+export const Lead: Story = {
+  args: {
+    variant: 'lead',
+    children: 'This is lead text, larger and muted for introductory content.'
+  }
+};
+
+export const Large: Story = {
+  args: {
+    variant: 'large',
+    children: 'Large text for emphasis'
+  }
+};
+
+export const Small: Story = {
+  args: {
+    variant: 'small',
+    children: 'Small text for captions'
+  }
+};
+
+export const Muted: Story = {
+  args: {
+    variant: 'muted',
+    children: 'Muted text for secondary information'
+  }
+};
+
 export const WithContext: Story = {
   render: () => (
     <TextClassContext.Provider value='text-primary font-bold'>
       <Text>This text inherits styles from context</Text>
-      <Text className='text-secondary'>This overrides the context color</Text>
+      <Text className='text-secondary mt-2'>This overrides the context color</Text>
     </TextClassContext.Provider>
   )
 };
 
-export const TypographyVariants: Story = {
+export const AllVariants: Story = {
   render: () => (
-    <View className='space-y-4'>
-      <Text className='text-[40px] leading-[48px] font-bold'>Display Large</Text>
-      <Text className='text-[36px] leading-[44px] font-bold'>Display Medium</Text>
-      <Text className='text-[32px] leading-[40px] font-bold'>Display Small</Text>
-      <Text className='text-[22px] leading-[28px]'>Heading Large</Text>
-      <Text className='text-[20px] leading-[24px]'>Heading Medium</Text>
-      <Text className='text-[18px] leading-[22px]'>Heading Small</Text>
-      <Text className='text-[16px] leading-[20px]'>Body Large</Text>
-      <Text className='text-[14px] leading-[18px]'>Body Medium</Text>
-      <Text className='text-[12px] leading-[16px]'>Body Small</Text>
-    </View>
-  )
-};
+    <ScrollView className="bg-background">
+      <View className='gap-6 p-4 bg-background'>
+        <View>
+          <Text className='text-sm font-medium mb-2 text-muted-foreground'>Heading 1</Text>
+          <Text variant='h1'>The quick brown fox</Text>
+        </View>
 
-export const Colors: Story = {
-  render: () => (
-    <View className='space-y-2'>
-      <Text className='text-base-ink'>Base Ink</Text>
-      <Text className='text-primary'>Primary</Text>
-      <Text className='text-secondary'>Secondary</Text>
-      <Text className='text-error'>Error</Text>
-      <Text className='text-success'>Success</Text>
-      <Text className='text-warning'>Warning</Text>
-    </View>
-  )
-};
+        <View>
+          <Text className='text-sm font-medium mb-2 text-muted-foreground'>Heading 2</Text>
+          <Text variant='h2'>The quick brown fox</Text>
+        </View>
 
-export const Weights: Story = {
-  render: () => (
-    <View className='space-y-2'>
-      <Text className='font-normal'>Normal (400)</Text>
-      <Text className='font-medium'>Medium (500)</Text>
-      <Text className='font-semibold'>Semibold (600)</Text>
-      <Text className='font-bold'>Bold (700)</Text>
-    </View>
+        <View>
+          <Text className='text-sm font-medium mb-2 text-muted-foreground'>Heading 3</Text>
+          <Text variant='h3'>The quick brown fox</Text>
+        </View>
+
+        <View>
+          <Text className='text-sm font-medium mb-2 text-muted-foreground'>Heading 4</Text>
+          <Text variant='h4'>The quick brown fox</Text>
+        </View>
+
+        <View>
+          <Text className='text-sm font-medium mb-2 text-muted-foreground'>Paragraph</Text>
+          <Text variant='p'>The quick brown fox jumps over the lazy dog. This is a paragraph with proper spacing and line height.</Text>
+        </View>
+
+        <View>
+          <Text className='text-sm font-medium mb-2 text-muted-foreground'>Blockquote</Text>
+          <Text variant='blockquote'>The quick brown fox jumps over the lazy dog.</Text>
+        </View>
+
+        <View>
+          <Text className='text-sm font-medium mb-2 text-muted-foreground'>Code</Text>
+          <Text variant='code'>const example = true;</Text>
+        </View>
+
+        <View>
+          <Text className='text-sm font-medium mb-2 text-muted-foreground'>Lead</Text>
+          <Text variant='lead'>The quick brown fox jumps over the lazy dog.</Text>
+        </View>
+
+        <View>
+          <Text className='text-sm font-medium mb-2 text-muted-foreground'>Large</Text>
+          <Text variant='large'>The quick brown fox</Text>
+        </View>
+
+        <View>
+          <Text className='text-sm font-medium mb-2 text-muted-foreground'>Small</Text>
+          <Text variant='small'>The quick brown fox</Text>
+        </View>
+
+        <View>
+          <Text className='text-sm font-medium mb-2 text-muted-foreground'>Muted</Text>
+          <Text variant='muted'>The quick brown fox</Text>
+        </View>
+
+        <View>
+          <Text className='text-sm font-medium mb-2 text-muted-foreground'>Default</Text>
+          <Text>The quick brown fox</Text>
+        </View>
+      </View>
+    </ScrollView>
   )
 };

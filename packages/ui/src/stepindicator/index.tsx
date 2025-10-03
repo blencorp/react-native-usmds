@@ -18,9 +18,9 @@ const stepIndicatorVariants = cva('flex flex-col items-center justify-center mx-
 const segmentVariants = cva('flex flex-row items-center gap-1', {
   variants: {
     state: {
-      default: 'bg-disabled-light', // gray #919191
-      active: 'bg-primary', // blue #005EA2
-      complete: 'bg-primary-darker' // darker blue #162E51
+      default: 'bg-muted',
+      active: 'bg-primary',
+      complete: 'bg-secondary'
     },
     size: {
       default: 'h-12',
@@ -55,10 +55,10 @@ const StepIndicator = forwardRef<View, StepIndicatorProps>(({ steps, currentStep
       {/* Heading */}
       <View className='flex flex-row items-center gap-2 w-full'>
         <View className={cn('rounded-full flex items-center justify-center', size === 'default' ? 'w-10 h-10' : 'w-6 h-6', 'bg-primary')}>
-          <Text className='text-background font-normal'>{currentStep}</Text>
+          <Text className='text-primary-foreground font-normal'>{currentStep}</Text>
         </View>
         <Text className='text-primary font-normal'>of {steps}</Text>
-        <Text className='text-base-ink font-bold text-[22px] leading-7'>{title}</Text>
+        <Text className='text-foreground font-bold text-[22px] leading-7'>{title}</Text>
       </View>
     </View>
   );

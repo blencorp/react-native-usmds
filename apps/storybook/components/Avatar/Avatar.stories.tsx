@@ -1,14 +1,25 @@
 import { Text, View } from 'react-native';
 import { Avatar, AvatarFallback, AvatarImage } from './Avatar';
+import type { Meta, StoryObj } from '@storybook/react';
 
 const GITHUB_AVATAR_URI = 'https://github.com/mrzachnugent.png';
 
-export default {
-  title: 'components/Avatar',
+const meta = {
+  title: 'Components/Avatar',
   component: Avatar,
-};
+  decorators: [
+    (Story) => (
+      <View className='w-full max-w-[393px] p-4 bg-background'>
+        <Story />
+      </View>
+    )
+  ]
+} satisfies Meta<typeof Avatar>;
 
-export const Default = {
+export default meta;
+type Story = StoryObj<typeof Avatar>;
+
+export const Default: Story = {
   render: () => (
     <Avatar alt="User Avatar">
       <AvatarImage source={{ uri: GITHUB_AVATAR_URI }} />
@@ -19,7 +30,7 @@ export const Default = {
   ),
 };
 
-export const WithFallback = {
+export const WithFallback: Story = {
   render: () => (
     <Avatar alt="John Doe">
       <AvatarImage source={{ uri: 'invalid-image-url' }} />
@@ -30,9 +41,9 @@ export const WithFallback = {
   ),
 };
 
-export const CustomSize = {
+export const CustomSize: Story = {
   render: () => (
-    <Avatar alt="Custom Size Avatar" className="h-16 w-16">
+    <Avatar alt="Custom Size Avatar" className="size-16">
       <AvatarImage source={{ uri: GITHUB_AVATAR_URI }} />
       <AvatarFallback>
         <Text className="text-lg">CS</Text>
@@ -41,7 +52,7 @@ export const CustomSize = {
   ),
 };
 
-export const Multiple = {
+export const Multiple: Story = {
   render: () => (
     <View className="flex-row gap-4">
       <Avatar alt="User 1">
@@ -56,7 +67,7 @@ export const Multiple = {
           <Text>U2</Text>
         </AvatarFallback>
       </Avatar>
-      <Avatar alt="User 3" className="h-12 w-12">
+      <Avatar alt="User 3" className="size-12">
         <AvatarImage source={{ uri: GITHUB_AVATAR_URI }} />
         <AvatarFallback>
           <Text>U3</Text>
@@ -66,7 +77,7 @@ export const Multiple = {
   ),
 };
 
-export const CustomBackground = {
+export const CustomBackground: Story = {
   render: () => (
     <Avatar alt="Custom Background">
       <AvatarImage source={{ uri: 'invalid-image-url' }} />
@@ -75,4 +86,4 @@ export const CustomBackground = {
       </AvatarFallback>
     </Avatar>
   ),
-}; 
+};
