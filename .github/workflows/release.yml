@@ -25,18 +25,18 @@ jobs:
       - name: Enable Corepack
         run: |
           corepack enable
-          corepack prepare yarn@4.3.1 --activate
+          corepack prepare pnpm@10.18.1 --activate
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Run tests in UI package
-        run: yarn workspace @blen/react-native-usmds-ui-internal test
+        run: pnpm --filter @blen/react-native-usmds-ui-internal test
 
       - name: Build packages
         run: |
-          yarn workspace @blen/react-native-usmds-cli-internal build
-          yarn build '--filter=!docs' '--filter=!storybook'
+          pnpm --filter @blen/react-native-usmds-cli-internal build
+          pnpm turbo run build --filter=!docs --filter=!storybook
 
       - name: Debug npm environment
         run: |
@@ -56,4 +56,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release --debug
+        run: pnpm exec semantic-release --debug

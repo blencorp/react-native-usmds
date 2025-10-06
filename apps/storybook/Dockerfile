@@ -2,23 +2,23 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# Enable corepack for Yarn 4
-RUN corepack enable && corepack prepare yarn@4.3.1 --activate
+# Enable corepack for pnpm
+RUN corepack enable && corepack prepare pnpm@10.18.1 --activate
 
 # Copy workspace configuration files first
-COPY package.json yarn.lock .yarnrc.yml ./
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml .npmrc ./
 
 # Copy only the storybook app and the UI package it needs to watch
 COPY apps/storybook ./apps/storybook
 COPY packages/ui ./packages/ui
 
 # Install dependencies (this will install all workspace deps, but we only copied what we need)
-RUN yarn install
+RUN pnpm install --frozen-lockfile
 
 WORKDIR /app/apps/storybook
 
 # Pre-generate the web CSS file for production
-RUN npx tailwindcss -i ./web.css -o ./web-generated.css --config ./tailwind.config.js --minify
+RUN pnpm exec tailwindcss -i ./web.css -o ./web-generated.css --config ./tailwind.config.js --minify
 
 # Create a proper home directory for Expo
 RUN mkdir -p /app/.expo && chmod 755 /app/.expo
@@ -39,4 +39,4 @@ EXPOSE 8081
 ENV EXPO_PUBLIC_STORYBOOK_ENABLED=true  
 
 # Run Storybook in web mode (use lan for container networking, disable file watching)
-CMD ["yarn", "storybook:web", "--", "--host", "lan", "--no-dev"]
+CMD ["pnpm", "storybook:web", "--", "--host", "lan", "--no-dev"]

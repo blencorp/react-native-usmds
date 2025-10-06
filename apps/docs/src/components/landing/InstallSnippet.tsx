@@ -3,11 +3,11 @@
 import { useState } from "react";
 import { Copy, Check } from "lucide-react"; // icons
 
-const installCommand = `# Using npm
-npx usmds init
+const installCommand = `# Using pnpm
+pnpm dlx usmds init
 
-# Using yarn
-yarn usmds init`;
+# Using npm
+npx usmds init`;
 
 export default function InstallSnippet() {
   const [copied, setCopied] = useState(false);

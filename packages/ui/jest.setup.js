@@ -1,3 +1,5 @@
+jest.mock('react-native-svg');
+
 // Mock React Native modules that use Flow types incompatible with Jest
 jest.mock('react-native/Libraries/vendor/emitter/EventEmitter', () => {
   return class EventEmitter {

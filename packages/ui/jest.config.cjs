@@ -7,7 +7,10 @@ module.exports = {
   ],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1'
+    '^@/(.*)$': '<rootDir>/src/$1',
+    '^react-native-svg$': '<rootDir>/__mocks__/react-native-svg.js',
+    '^react$': require.resolve('react'),
+    'react-native/node_modules/react$': require.resolve('react')
   },
   globals: {
     __DEV__: true

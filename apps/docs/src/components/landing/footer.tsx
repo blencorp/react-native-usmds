@@ -42,20 +42,20 @@ export const Footer = () => {
         <div className="border-t border-gray-700 pt-8">
           <div className="flex flex-wrap justify-center gap-6 mb-8">
             {links.map((link) => (
-              <Link key={link.name} href={link.href} passHref legacyBehavior>
-                <Button
-                  asChild
-                  variant="link"
-                  className="text-gray-300 hover:text-white underline-offset-4 focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
+              <Button
+                key={link.name}
+                asChild
+                variant="link"
+                className="text-gray-300 hover:text-white underline-offset-4 focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
+              >
+                <Link
+                  href={link.href}
+                  target={link.external ? "_blank" : "_self"}
+                  rel={link.external ? "noopener noreferrer" : undefined}
                 >
-                  <a
-                    target={link.external ? "_blank" : "_self"}
-                    rel={link.external ? "noopener noreferrer" : undefined}
-                  >
-                    {link.name}
-                  </a>
-                </Button>
-              </Link>
+                  {link.name}
+                </Link>
+              </Button>
             ))}
           </div>
 
