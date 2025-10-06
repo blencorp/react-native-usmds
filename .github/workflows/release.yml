@@ -51,8 +51,9 @@ jobs:
         uses: google-github-actions/setup-gcloud@v2
 
       - name: Upload registry to GCS
+        working-directory: packages/ui
         run: |
-          ./packages/ui/upload-registry.sh
+          ./upload-registry.sh
 
       - name: Debug npm environment
         run: |
