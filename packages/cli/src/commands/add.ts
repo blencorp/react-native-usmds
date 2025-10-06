@@ -1,17 +1,24 @@
 import { Command } from 'commander';
-import { existsSync, promises as fs } from 'fs';
-import ora from 'ora';
+import { existsSync } from 'fs';
 import path from 'path';
 import prompts from 'prompts';
 import * as z from 'zod';
 import { logger } from '../utils/logger';
-import { COMPONENT_TEMPLATES, COMPONENT_METADATA} from '../utils/registry';
-import { getPackageManager, getInstallCommand } from '../utils/get-package-manager';
+import { getPackageManager } from '../utils/get-package-manager';
 import { checkDependenciesExist, runInit } from './init';
 import { spawn } from 'child_process';
 
-// Available components from our registry
-const AVAILABLE_COMPONENTS = Object.keys(COMPONENT_METADATA).map((name) => name.toLowerCase());
+// Registry configuration
+const REGISTRY_BASE_URL = 'https://storage.googleapis.com/usmds-registry/r/usa';
+
+// Available components
+const AVAILABLE_COMPONENTS = [
+  'alert', 'avatar', 'badge', 'banner', 'biometricsignin',
+  'button', 'buttongroup', 'card', 'checkbox', 'checkboxtile',
+  'collapsible', 'dialog', 'icon', 'link', 'pagination',
+  'progress', 'radiobutton', 'radiotile', 'snackbar',
+  'stepindicator', 'tag', 'text', 'textarea', 'textinput', 'toggle'
+];
 
 const addOptionsSchema = z.object({
   components: z.array(z.string()).optional(),
@@ -80,157 +87,68 @@ export const add = new Command()
         process.exit(0);
       }
 
-      const spinner = ora('Installing components...').start();
+      // Build component URLs
+      const componentUrls = selectedComponents.map((component) => {
+        const lowerCaseComponent = component.toLowerCase();
+        return lowerCaseComponent.startsWith('http')
+          ? lowerCaseComponent
+          : `${REGISTRY_BASE_URL}/${lowerCaseComponent}.json`;
+      });
 
-      try {
-        // Changed: Update path based on whether component needs a directory
-        const uiDir = path.join(cwd, 'components', 'ui');
-        if (!existsSync(uiDir)) {
-          await fs.mkdir(uiDir, { recursive: true });
-        }
-
-        let hasErrors = false;
-
-        for (const component of selectedComponents) {
-          spinner.text = `Adding ${component}...`;
-
-          const componentName = component.charAt(0).toUpperCase() + component.slice(1);
-
-          // Check if component exists in registry
-          if (!COMPONENT_TEMPLATES[componentName]) {
-            spinner.fail(`Component "${component}" not found in registry`);
-            continue;
-          }
-
-          try {
-            // Only create directory for components that need it (like Icon)
-            const needsDirectory = componentName === 'Icon'; 
-            const componentPath = needsDirectory
-              ? path.join(uiDir, component.toLowerCase(), `${componentName.toLowerCase()}.tsx`)
-              : path.join(uiDir, `${componentName.toLowerCase()}.tsx`);
-
-            // Create directory only if needed
-            if (needsDirectory) {
-              const componentDir = path.dirname(componentPath);
-              if (!existsSync(componentDir)) {
-                await fs.mkdir(componentDir, { recursive: true });
-              } else if (!options.overwrite) {
-                spinner.warn(`${component} already exists, skipping`);
-                continue;
-              }
-            } else if (existsSync(componentPath) && !options.overwrite) {
-              spinner.warn(`${component} already exists, skipping`);
-              continue;
-            }
-
-            // Write component file
-            const template = await getComponentTemplate(component, cwd, { overwrite: options.overwrite });
-            await fs.writeFile(componentPath, template, 'utf8');
-
-            // Get internal dependencies
-            const internalDeps = COMPONENT_METADATA[componentName]?.internalDependencies || [];
-
-            // Add internal dependencies to the installation queue
-            for (const dep of internalDeps) {
-              if (!selectedComponents.includes(dep.toLowerCase())) {
-                selectedComponents.push(dep.toLowerCase());
-              }
-            }
-
-            // Install external dependencies
-            const componentDeps = COMPONENT_METADATA[componentName]?.dependencies || [];
-            if (componentDeps.length > 0) {
-              const packageManager = await getPackageManager(cwd);
-              const { install, isBun } = getInstallCommand(packageManager);
-
-              try {
-                // Filter out workspace: dependencies
-                const filteredDeps = componentDeps.filter((dep) => !dep.startsWith('workspace:'));
-
-                if (filteredDeps.length > 0) {
-                  if (isBun) {
-                    const proc = Bun.spawn([packageManager, ...install, ...filteredDeps], {
-                      cwd,
-                      stdio: ['pipe', 'pipe', 'pipe']
-                    });
-                    await proc.exited;
-                  } else {
-                    await new Promise<void>((resolve, reject) => {
-                      const proc = spawn(packageManager, [...install, ...filteredDeps], {
-                        cwd,
-                        stdio: ['pipe', 'pipe', 'pipe']
-                      });
-
-                      proc.on('exit', (code) => {
-                        if (code === 0) resolve();
-                        else reject(new Error(`Process exited with code ${code}`));
-                      });
-                    });
-                  }
-                }
-              } catch (error) {
-                hasErrors = true;
-                spinner.warn(`Warning: Some dependencies for ${componentName} could not be installed`);
-                logger.error(error as Error);
-                // Continue with next component instead of stopping
-                continue;
-              }
-            }
-
-            spinner.succeed(`Added ${componentName} successfully`);
-          } catch (error) {
-            hasErrors = true;
-            spinner.fail(`Failed to add ${componentName}`);
-            logger.error(error as Error);
-            // Continue with next component instead of stopping
-            continue;
-          }
-        }
-
-        // Show final status
-        if (hasErrors) {
-          spinner.warn('Components installed with some warnings');
-        } else {
-          spinner.succeed('All components installed successfully!');
-        }
-      } catch (error) {
-        spinner.fail('Failed to create component directory');
-        logger.error(error as Error);
-        process.exit(1);
+      // Build shadcn command options
+      const shadcnOptions: string[] = [];
+      if (options.overwrite) {
+        shadcnOptions.push('--overwrite');
       }
+      if (options.yes) {
+        shadcnOptions.push('--yes');
+      }
+
+      // Get package manager and build command
+      const packageManager = await getPackageManager(cwd);
+
+      // Determine the binary runner (npx, pnpm dlx, yarn dlx, or bunx)
+      const binaryRunner = packageManager === 'npm'
+        ? ['npx']
+        : packageManager === 'pnpm'
+        ? ['pnpm', 'dlx']
+        : packageManager === 'yarn'
+        ? ['yarn', 'dlx']
+        : ['bunx'];
+
+      const commandArgs = [
+        ...binaryRunner.slice(1),
+        'shadcn@latest',
+        'add',
+        ...shadcnOptions,
+        ...componentUrls
+      ].filter((option) => option !== undefined && option !== '');
+
+      logger.info('Installing components...');
+
+      // Run shadcn add command
+      await new Promise<void>((resolve, reject) => {
+        const proc = spawn(binaryRunner[0], commandArgs, {
+          cwd,
+          stdio: 'inherit'
+        });
+
+        proc.on('exit', (code) => {
+          if (code === 0) {
+            logger.success('All components installed successfully!');
+            resolve();
+          } else {
+            reject(new Error(`shadcn add exited with code ${code}`));
+          }
+        });
+
+        proc.on('error', (error) => {
+          reject(error);
+        });
+      });
     } catch (error) {
-      logger.error('Failed to parse package.json');
+      logger.error('Failed to add components');
+      logger.error(error as Error);
       process.exit(1);
     }
   });
-
-async function getComponentTemplate(name: string, cwd: string, options: { overwrite: boolean }): Promise<string> {
-  const componentName = name.charAt(0).toUpperCase() + name.slice(1);
-  const template = COMPONENT_TEMPLATES[componentName];
-
-  if (!template) {
-    throw new Error(`Template not found for component: ${componentName}`);
-  }
-
-  // If it's the Icon component, create index.tsx file in the Icon directory
-  if (componentName === 'Icon') {
-    const iconDir = path.join(cwd, 'components', 'ui', 'icon');
-    const indexPath = path.join(iconDir, 'index.tsx');
-
-    // Create Icon directory if it doesn't exist
-    if (!existsSync(iconDir)) {
-      await fs.mkdir(iconDir, { recursive: true });
-    }
-
-    // Create index.tsx that exports Icon from icon.tsx
-    if (!existsSync(indexPath) || options.overwrite) {
-      const indexContent = `export { Icon } from './icon';\n`;
-      await fs.writeFile(indexPath, indexContent, 'utf8');
-    }
-
-    // Update the import path in the Icon component template
-    return template.replace('@/utils/registry', './registry');
-  }
-
-  return template;
-}

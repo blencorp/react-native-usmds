@@ -5,8 +5,8 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Path to packages/ui/src
-const UI_SRC_PATH = path.join(__dirname, '../../ui/src');
+// Path to packages/ui/src/usa/components/ui
+const UI_SRC_PATH = path.join(__dirname, '../../ui/src/usa/components/ui');
 const REGISTRY_OUTPUT_PATH = path.join(__dirname, '../src/utils/registry.ts');
 
 interface ComponentInfo {

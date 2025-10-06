@@ -351,3 +351,26 @@ export const GLOBAL_STYLES = `@tailwind base;
 }`;
 
 export const NATIVEWIND_ENV = `/// <reference types="nativewind/types" />`;
+
+export const COMPONENTS_JSON = `{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "default",
+  "rsc": false,
+  "tsx": true,
+  "tailwind": {
+    "config": "tailwind.config.js",
+    "css": "global.css",
+    "baseColor": "neutral",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "iconLibrary": "lucide",
+  "aliases": {
+    "components": "@/components",
+    "utils": "@/lib/utils",
+    "ui": "@/components/ui",
+    "lib": "@/lib",
+    "hooks": "@/hooks"
+  },
+  "registries": {}
+}`;

@@ -38,6 +38,22 @@ jobs:
           pnpm --filter @blen/react-native-usmds-cli-internal build
           pnpm turbo run build --filter=!docs --filter=!storybook
 
+      - name: Build registry
+        working-directory: packages/ui
+        run: npx shadcn build ./registry/usa.json --output ./public/r/usa
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Upload registry to GCS
+        run: |
+          ./packages/ui/upload-registry.sh
+
       - name: Debug npm environment
         run: |
           echo "Node version: $(node --version)"

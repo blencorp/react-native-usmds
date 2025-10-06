@@ -129,20 +129,21 @@ export async function runInit(cwd: string) {
     // Check if already initialized
     const isInitialized = await checkDependenciesExist(cwd);
 
-    if (isInitialized) {
-      spinner?.stop();
-      logger.warn('USMDS dependencies already installed. Skipping initialization.');
-      return;
-    }
-
     spinner.text = 'Initializing project...';
 
-    // Create configuration files
+    // Create configuration files (always create these, even if already initialized)
     await writeFileGracefully(path.join(cwd, 'tailwind.config.js'), templates.TAILWIND_CONFIG);
     await writeFileGracefully(path.join(cwd, 'metro.config.js'), templates.METRO_CONFIG);
     await writeFileGracefully(path.join(cwd, 'babel.config.js'), templates.BABEL_CONFIG);
     await writeFileGracefully(path.join(cwd, 'global.css'), templates.GLOBAL_STYLES);
     await writeFileGracefully(path.join(cwd, 'nativewind-env.d.ts'), templates.NATIVEWIND_ENV);
+    await writeFileGracefully(path.join(cwd, 'components.json'), templates.COMPONENTS_JSON);
+
+    if (isInitialized) {
+      spinner?.succeed();
+      logger.info('Configuration files updated. Dependencies already installed.');
+      return;
+    }
 
     // Check if lib directory exists
     const libDir = path.join(cwd, 'lib');
