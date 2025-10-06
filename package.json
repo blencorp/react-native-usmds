@@ -54,9 +54,18 @@
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "yarn@4.3.1",
+  "packageManager": "pnpm@10.18.1",
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "pnpm": {
+    "overrides": {
+      "@swc/helpers": "0.5.15",
+      "react-docgen-typescript": "2.2.2"
+    },
+    "onlyBuiltDependencies": [
+      "@swc/core"
+    ]
+  }
 }

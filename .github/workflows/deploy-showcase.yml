@@ -14,7 +14,7 @@ jobs:
           fetch-depth: 0  
 
       - name: 🏗 Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
 
@@ -22,20 +22,18 @@ jobs:
         working-directory: .
         run: |
           corepack enable
-          corepack prepare yarn@4.3.1 --activate
+          corepack prepare pnpm@10.18.1 --activate
       
       - name: Install CLI
         run: |
           npm install -g expo-cli eas-cli
 
       - name: 📦 Install dependencies
-        run: |
-          cd apps/showcase
-          yarn install
+        run: pnpm install --frozen-lockfile
       - name: 🚀 Build and Deploy
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
         run: |
           cd apps/showcase
-          npx expo export --platform web
+          pnpm exec expo export --platform web
           eas deploy --prod
