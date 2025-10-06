@@ -62,10 +62,12 @@
   "pnpm": {
     "overrides": {
       "@swc/helpers": "0.5.15",
-      "react-docgen-typescript": "2.2.2"
+      "react-docgen-typescript": "2.2.2",
+      "lucide-react": "0.544.0"
     },
     "onlyBuiltDependencies": [
-      "@swc/core"
+      "@swc/core",
+      "sharp"
     ]
   }
 }

@@ -2,11 +2,11 @@
 "use client";
 
 import Link from "next/link";
-import { FC, ReactNode } from "react";
+import { FC } from "react";
 
 interface DemoButtonProps {
   href: string;
-  children?: ReactNode;
+  children?: string;
   marginTop?: string;    // e.g. "-mt-4" or "mt-2"
   marginBottom?: string; // e.g. "-mb-6" or "mb-0"
   className?: string;    // optional extra classes for the wrapper
@@ -14,7 +14,7 @@ interface DemoButtonProps {
 
 const DemoButton: FC<DemoButtonProps> = ({
   href,
-  children,
+  children = "Demo",
   marginTop = "-mt-8",
   marginBottom = "-mb-6",
   className = "",
@@ -27,7 +27,7 @@ const DemoButton: FC<DemoButtonProps> = ({
         rel="noopener noreferrer"
         className="inline-flex items-center justify-center whitespace-nowrap font-medium ring-offset-background cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-6 rounded-md px-2 text-xs gap-1.5 no-underline"
       >
-        <span>{children ?? "Demo"}</span>
+        <span>{children}</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="12"
