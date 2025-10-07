@@ -1,5 +1,5 @@
 {
-  "name": "@blen/react-native-usmds-ui-internal",
+  "name": "@blen/react-native-usmds-registry-internal",
   "version": "0.1.0",
   "main": "index.ts",
   "type": "module",

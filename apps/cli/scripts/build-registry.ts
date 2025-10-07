@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Path to packages/ui/src/usa/components/ui
+// Path to packages/registry/src/usa/components/ui
 const UI_SRC_PATH = path.join(__dirname, '../../ui/src/usa/components/ui');
 const REGISTRY_OUTPUT_PATH = path.join(__dirname, '../src/utils/registry.ts');
 
@@ -16,7 +16,7 @@ interface ComponentInfo {
   externalDependencies: string[];
 }
 
-// Components list from packages/ui/src
+// Components list from packages/registry/src
 const ALL_COMPONENTS = [
   'alert',
   'avatar',
@@ -114,7 +114,7 @@ function extractDependencies(code: string): { internal: string[]; external: stri
 }
 
 /**
- * Read component code from packages/ui/src
+ * Read component code from packages/registry/src
  * @param componentName - Name of the component (lowercase folder name)
  * @returns Component info with name, code, and dependencies
  */
@@ -201,7 +201,7 @@ ${componentTemplates}
  * Main function to build the registry
  */
 async function buildRegistry() {
-  console.log('🔨 Building CLI registry from packages/ui/src...\n');
+  console.log('🔨 Building CLI registry from packages/registry/src...\n');
 
   const components: ComponentInfo[] = [];
 

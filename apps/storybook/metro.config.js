@@ -11,7 +11,7 @@ const config = getDefaultConfig(__dirname);
 config.resolver.resolverMainFields = ['sbmodern', ...config.resolver.resolverMainFields];
 
 // Add additional watch folders for monorepo setup
-config.watchFolders = [...(config.watchFolders || []), path.resolve(__dirname, '../../packages/ui')];
+config.watchFolders = [...(config.watchFolders || []), path.resolve(__dirname, '../../packages/registry')];
 
 // First apply NativeWind configuration
 const nativewindConfig = withNativeWind(config, {
