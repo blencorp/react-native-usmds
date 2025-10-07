@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "next build",
-    "dev": "next dev",
-    "start": "next start",
+    "build": "node --require ./scripts/react-alias.cjs --max-old-space-size=4096 ./scripts/next-cli.cjs build",
+    "dev": "node --require ./scripts/react-alias.cjs --max-old-space-size=4096 ./scripts/next-cli.cjs dev",
+    "start": "node --require ./scripts/react-alias.cjs --max-old-space-size=4096 ./scripts/next-cli.cjs start",
     "postinstall": "fumadocs-mdx"
   },
   "dependencies": {

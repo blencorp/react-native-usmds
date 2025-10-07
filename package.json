@@ -67,7 +67,12 @@
     },
     "onlyBuiltDependencies": [
       "@swc/core",
-      "sharp"
+      "@tailwindcss/oxide",
+      "bun",
+      "esbuild",
+      "msw",
+      "sharp",
+      "unrs-resolver"
     ]
   }
 }
