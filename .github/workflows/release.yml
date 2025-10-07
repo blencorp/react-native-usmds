@@ -55,6 +55,14 @@ jobs:
         run: |
           ./scripts/upload-registry.sh
 
+      - name: Clean up GCP credentials before publish
+        run: |
+          echo "Removing any GCP credential files..."
+          rm -f gha-creds-*.json
+          rm -f *-creds-*.json
+          find . -name "gha-creds-*.json" -delete
+          echo "Credentials cleaned up"
+
       - name: Debug npm environment
         run: |
           echo "Node version: $(node --version)"

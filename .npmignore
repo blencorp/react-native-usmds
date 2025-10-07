@@ -1,0 +1,57 @@
+# Source and config files
+.github/
+.vscode/
+.husky/
+apps/
+packages/
+*.config.js
+*.config.ts
+tsconfig.json
+.eslintrc*
+.prettierrc*
+
+# Development
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.DS_Store
+node_modules/
+.turbo/
+.next/
+dist/
+build/
+
+# Testing
+coverage/
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+__tests__/
+__mocks__/
+
+# GCP and secrets - CRITICAL!
+gha-creds-*.json
+*-creds-*.json
+*.pem
+*.key
+.env
+.env.*
+secrets/
+credentials/
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Documentation
+README.md
+CHANGELOG.md
+CONTRIBUTING.md
+docs/
+
+# Only publish the built CLI
+!apps/cli/dist/
