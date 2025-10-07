@@ -1,34 +1,35 @@
-name: Vercel Production Deployment
-env:
-  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-on:
-  push:
-    branches:
-      - main
-jobs:
-  Deploy-Production:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+# Workflow intentionally disabled. Vercel Git integration handles docs deployments.
+# name: Vercel Production Deployment
+# env:
+#   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+#   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+# on:
+#   push:
+#     branches:
+#       - main
+# jobs:
+#   Deploy-Production:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: '20'
 
-      - name: Enable Corepack
-        run: |
-          corepack enable
-          corepack prepare pnpm@10.18.1 --activate
+#       - name: Enable Corepack
+#         run: |
+#           corepack enable
+#           corepack prepare pnpm@10.18.1 --activate
 
-      - name: Install Vercel CLI
-        run: npm install --global vercel@latest
+#       - name: Install Vercel CLI
+#         run: npm install --global vercel@latest
 
-      - name: Deploy to Vercel
-        run: |
-          cd apps/docs
-          vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-          vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }}
+#       - name: Deploy to Vercel
+#         run: |
+#           cd apps/docs
+#           vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+#           vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }}
