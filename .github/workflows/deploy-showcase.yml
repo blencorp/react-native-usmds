@@ -1,39 +1,40 @@
-name: Deploy Showcase
+# Workflow intentionally disabled. Managed via Expo/EAS outside GitHub Actions.
+# name: Deploy Showcase
 
-on:
-    push:
-      branches:
-        - main
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: 🏗 Setup repo
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  
+# on:
+#   push:
+#     branches:
+#       - main
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: 🏗 Setup repo
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0
 
-      - name: 🏗 Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+#       - name: 🏗 Setup Node
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: "20"
 
-      - name: Enable Corepack
-        working-directory: .
-        run: |
-          corepack enable
-          corepack prepare pnpm@10.18.1 --activate
-      
-      - name: Install CLI
-        run: |
-          npm install -g expo-cli eas-cli
+#       - name: Enable Corepack
+#         working-directory: .
+#         run: |
+#           corepack enable
+#           corepack prepare pnpm@10.18.1 --activate
 
-      - name: 📦 Install dependencies
-        run: pnpm install --frozen-lockfile
-      - name: 🚀 Build and Deploy
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-        run: |
-          cd apps/showcase
-          pnpm exec expo export --platform web
-          eas deploy --prod
+#       - name: Install CLI
+#         run: |
+#           npm install -g expo-cli eas-cli
+
+#       - name: 📦 Install dependencies
+#         run: pnpm install --frozen-lockfile
+#       - name: 🚀 Build and Deploy
+#         env:
+#           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+#         run: |
+#           cd apps/showcase
+#           pnpm exec expo export --platform web
+#           eas deploy --prod
