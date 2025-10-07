@@ -1,3 +1,9 @@
+## [1.21.1](https://github.com/blencorp/react-native-usmds/compare/v1.21.0...v1.21.1) (2025-10-07)
+
+### Bug Fixes
+
+* credential cleanup to prevent key leaks ([8c4433f](https://github.com/blencorp/react-native-usmds/commit/8c4433fdf47d71edf23834fb8c98a36effb0925e))
+
 ## [1.21.0](https://github.com/blencorp/react-native-usmds/compare/v1.20.1...v1.21.0) (2025-10-07)
 
 ### Features
