@@ -1,9 +1,10 @@
 #!/bin/bash
 set -e
 
-# Get the directory where the script is located
+# Get the directory where the script is located and go to package root
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-cd "$SCRIPT_DIR"
+PACKAGE_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+cd "$PACKAGE_ROOT"
 
 echo "Building registry..."
 npx shadcn build ./registry/usa.json --output ./public/r/usa
