@@ -1,3 +1,16 @@
+## [1.21.0](https://github.com/blencorp/react-native-usmds/compare/v1.20.1...v1.21.0) (2025-10-07)
+
+### Features
+
+* shadcn registry system ([c257e7e](https://github.com/blencorp/react-native-usmds/commit/c257e7e38e03ccf58f4e297f782b5257380fcad2))
+* shadcn registry system ([0c55d16](https://github.com/blencorp/react-native-usmds/commit/0c55d162df15bca69079540fb96ff232240ab12f))
+
+### Bug Fixes
+
+* ci issue ([0a7ec13](https://github.com/blencorp/react-native-usmds/commit/0a7ec139f929c48df3552fcea7610d301c3f0c0a))
+* refactor foldr dir ([34516d9](https://github.com/blencorp/react-native-usmds/commit/34516d9e70e85dfe5c8a01a60fca35d5ac4ac986))
+* refactor foldr dir ([0c558fd](https://github.com/blencorp/react-native-usmds/commit/0c558fdb96ce7919f53a50b993c578e7ae97cb8a))
+
 ## [1.20.1](https://github.com/blencorp/react-native-usmds/compare/v1.20.0...v1.20.1) (2025-10-03)
 
 ### Bug Fixes
