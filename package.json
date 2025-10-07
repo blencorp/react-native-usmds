@@ -2,8 +2,8 @@
   "name": "usmds",
   "version": "1.20.1",
   "description": "React Native UI components based on US Mobile Design System",
-  "main": "./packages/ui/src/index.ts",
-  "bin": "packages/cli/dist/index.js",
+  "main": "./packages/registry/src/index.ts",
+  "bin": "apps/cli/dist/index.js",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"

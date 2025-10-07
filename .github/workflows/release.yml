@@ -30,13 +30,30 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run tests in UI package
-        run: pnpm --filter @blen/react-native-usmds-ui-internal test
+      - name: Run tests in Registry package
+        run: pnpm --filter @blen/react-native-usmds-registry-internal test
 
       - name: Build packages
         run: |
           pnpm --filter @blen/react-native-usmds-cli-internal build
           pnpm turbo run build --filter=!docs --filter=!storybook
+
+      - name: Build registry
+        working-directory: packages/registry
+        run: npx shadcn build ./registry/usa.json --output ./public/r/usa
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Upload registry to GCS
+        working-directory: packages/registry
+        run: |
+          ./scripts/upload-registry.sh
 
       - name: Debug npm environment
         run: |

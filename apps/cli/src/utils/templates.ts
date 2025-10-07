@@ -1,4 +1,4 @@
-const { hairlineWidth } = require('nativewind/theme');
+export const TAILWIND_CONFIG = `const { hairlineWidth } = require('nativewind/theme');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -212,3 +212,165 @@ module.exports = {
     }
   ]
 };
+`;
+
+export const UTILS = `import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}`;
+
+export const UTILS_TS = `import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}`;
+
+export const BABEL_CONFIG = `module.exports = function (api) {
+  api.cache(true);
+  return {
+    presets: [
+      ["babel-preset-expo", { jsxImportSource: "nativewind" }],
+      "nativewind/babel",
+    ],
+  };
+};`;
+
+export const METRO_CONFIG = `const { getDefaultConfig } = require("expo/metro-config");
+const { withNativeWind } = require('nativewind/metro');
+
+const config = getDefaultConfig(__dirname);
+
+module.exports = withNativeWind(config, { input: './global.css' });`;
+
+export const GLOBAL_STYLES = `@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Base */
+    --background: 0 0% 100%;           /* White */
+    --foreground: 0 0% 11%;            /* #1B1B1B - gray-90 */
+    
+    /* Card */
+    --card: 0 0% 100%;                 /* White */
+    --card-foreground: 0 0% 11%;       /* #1B1B1B - gray-90 */
+    
+    /* Popover */
+    --popover: 0 0% 100%;              /* White */
+    --popover-foreground: 0 0% 11%;    /* #1B1B1B - gray-90 */
+    
+    /* Primary - USWDS Blue */
+    --primary: 209 100% 32%;           /* #005EA2 - blue-60v */
+    --primary-foreground: 0 0% 100%;   /* White */
+    
+    /* Secondary - USWDS Red */
+    --secondary: 3 61% 52%;            /* #D83933 - red-50 */
+    --secondary-foreground: 0 0% 100%; /* White */
+    
+    /* Muted */
+    --muted: 0 0% 94%;                 /* #F0F0F0 - gray-5 */
+    --muted-foreground: 0 0% 45%;      /* #757575 - gray-50 */
+    
+    /* Accent - Subtle Gray */
+    --accent: 0 0% 96%;                /* #F5F5F5 - gray-3 */
+    --accent-foreground: 0 0% 11%;     /* #1B1B1B - gray-90 */
+    
+    /* Destructive - USWDS Error Red */
+    --destructive: 17 94% 43%;         /* #D54309 - red-warm-50v */
+    --destructive-foreground: 0 0% 100%; /* White */
+    
+    /* Border */
+    --border: 204 3% 88%;              /* #DFE1E2 - base-lighter */
+    --input: 204 3% 88%;               /* #DFE1E2 - base-lighter */
+    
+    /* Ring */
+    --ring: 211 100% 57%;              /* #2491FF - focus ring */
+    
+    /* Radius */
+    --radius: 0.625rem;
+    
+    /* Chart Colors (USWDS Data Viz palette) */
+    --chart-1: 209 100% 32%;           /* #005EA2 - blue-60v */
+    --chart-2: 190 100% 44%;           /* #00BDE3 - cyan-30v */
+    --chart-3: 128 100% 33%;           /* #00A91C - green-cool-50v */
+    --chart-4: 44 100% 59%;            /* #FFBE2E - gold-20v */
+    --chart-5: 3 61% 52%;              /* #D83933 - red-50 */
+  }
+
+  .dark {
+    /* Base */
+    --background: 0 0% 11%;            /* #1B1B1B - gray-90 */
+    --foreground: 0 0% 94%;            /* #F0F0F0 - gray-5 */
+    
+    /* Card */
+    --card: 0 0% 11%;                  /* #1B1B1B - gray-90 */
+    --card-foreground: 0 0% 94%;       /* #F0F0F0 - gray-5 */
+    
+    /* Popover */
+    --popover: 0 0% 11%;               /* #1B1B1B - gray-90 */
+    --popover-foreground: 0 0% 94%;    /* #F0F0F0 - gray-5 */
+    
+    /* Primary - Lighter blue for dark */
+    --primary: 208 74% 68%;            /* #73B3E7 - blue-30 */
+    --primary-foreground: 0 0% 11%;    /* #1B1B1B - gray-90 */
+    
+    /* Secondary - Lighter red for dark */
+    --secondary: 3 77% 74%;            /* #F2938C - red-30 */
+    --secondary-foreground: 0 0% 11%;  /* #1B1B1B - gray-90 */
+    
+    /* Muted */
+    --muted: 0 0% 18%;                 /* #2E2E2E - gray-80 */
+    --muted-foreground: 0 0% 68%;      /* #ADADAD - gray-30 */
+    
+    /* Accent - Subtle Gray for dark */
+    --accent: 0 0% 15%;                /* #262626 - gray-cool-80 */
+    --accent-foreground: 0 0% 94%;     /* #F0F0F0 - gray-5 */
+    
+    /* Destructive - Lighter red for dark */
+    --destructive: 17 94% 53%;         /* #FF5E1F - red-warm-40v (brighter) */
+    --destructive-foreground: 0 0% 94%; /* #F0F0F0 - gray-5 */
+    
+    /* Border */
+    --border: 0 0% 27%;                /* #454545 - gray-70 */
+    --input: 0 0% 27%;                 /* #454545 - gray-70 */
+    
+    /* Ring */
+    --ring: 211 100% 67%;              /* #57A9FF - blue-vivid-40 (brighter) */
+    
+    /* Chart Colors (same for dark) */
+    --chart-1: 208 74% 68%;            /* #73B3E7 - blue-30 */
+    --chart-2: 190 100% 54%;           /* #00E7FF - cyan-20v */
+    --chart-3: 125 69% 66%;            /* #70E17B - green-cool-20v */
+    --chart-4: 44 100% 69%;            /* #FFCB54 - gold-10v */
+    --chart-5: 3 77% 74%;              /* #F2938C - red-30 */
+  }
+}`;
+
+export const NATIVEWIND_ENV = `/// <reference types="nativewind/types" />`;
+
+export const COMPONENTS_JSON = `{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "default",
+  "rsc": false,
+  "tsx": true,
+  "tailwind": {
+    "config": "tailwind.config.js",
+    "css": "global.css",
+    "baseColor": "neutral",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "iconLibrary": "lucide",
+  "aliases": {
+    "components": "@/components",
+    "utils": "@/lib/utils",
+    "ui": "@/components/ui",
+    "lib": "@/lib",
+    "hooks": "@/hooks"
+  },
+  "registries": {}
+}`;
