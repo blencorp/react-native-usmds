@@ -5,7 +5,7 @@ import { StyleSheet } from 'react-native';
 
 export function NativeWindStyleSheet() {
   useServerInsertedHTML(() => {
-    // @ts-expect-error
+    // @ts-expect-error: This is a valid type
     const sheet = StyleSheet.getSheet();
     return (
       <style
