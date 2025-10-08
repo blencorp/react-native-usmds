@@ -4,12 +4,13 @@ description: Textarea allows users to enter and edit multiline text content.
 ---
 
 import { PreviewCard } from '@/components/ui/PreviewCard';
+import { TextareaPreview } from '@/components/examples';
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <Tabs items={['preview', 'code']}>
   <Tab value="preview">
-    <PreviewCard />
+    <PreviewCard preview={<TextareaPreview />} />
   </Tab>
   <Tab value="code">
     ```tsx title="textarea-example.tsx"

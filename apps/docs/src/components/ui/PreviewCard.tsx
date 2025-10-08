@@ -3,6 +3,7 @@
 import { useParams } from 'next/navigation';
 import { QRCodeSVG } from 'qrcode.react';
 import * as React from 'react';
+import { PlatformSelect, usePlatform } from './PlatformSelect';
 
 type PreviewCardProps = {
   preview?: React.ReactNode;
@@ -13,6 +14,7 @@ export function PreviewCard({ preview }: PreviewCardProps) {
   const isDark = useIsDarkMode();
   const params = useParams<{ slug: string[] }>();
   const [mounted, setMounted] = React.useState(false);
+  const [platform, setPlatform] = usePlatform();
 
   const component = params.slug?.at(-1);
 
@@ -23,8 +25,8 @@ export function PreviewCard({ preview }: PreviewCardProps) {
   if (!mounted) {
     return (
       <>
-        <div className="group/copy bg-card not-prose relative flex min-h-[450px] flex-col rounded-md border p-4">
-          <div className="flex flex-1 flex-col items-center justify-center">
+        <div className="group/copy bg-card not-prose relative flex min-h-[450px] flex-col rounded-md border">
+          <div className="flex flex-1 flex-col items-center justify-center p-4">
             <div className="flex max-w-sm flex-col items-center gap-6 p-4">
               <div className="h-[230px] w-[230px] animate-pulse rounded-md bg-muted" />
               <p className="text-center font-mono text-sm">Loading...</p>
@@ -76,9 +78,12 @@ export function PreviewCard({ preview }: PreviewCardProps) {
 
   return (
     <>
-      <div className="group/copy bg-card not-prose relative flex min-h-[450px] flex-col rounded-md border p-4">
-        <div className="flex flex-1 flex-col items-center justify-center">
-          {width >= 640 ? (
+      <div className="group/copy bg-card not-prose relative flex min-h-[450px] flex-col rounded-md border">
+        <div className="absolute -top-12 right-0 hidden items-center justify-end sm:flex">
+          <PlatformSelect value={platform} onValueChange={setPlatform} />
+        </div>
+        <div className="flex flex-1 flex-col items-center justify-center p-4">
+          {platform === 'native' && width >= 640 ? (
             <div className="flex max-w-sm flex-col items-center gap-6 p-4">
               <QRCodeSVG
                 value={`https://placeholder.usmds.com/showcase/links/${component}`}
@@ -90,13 +95,7 @@ export function PreviewCard({ preview }: PreviewCardProps) {
               <p className="text-center font-mono text-sm">Scan to preview.</p>
             </div>
           ) : (
-            preview || (
-              <div className="flex flex-col items-center gap-4 text-center">
-                <p className="text-sm text-muted-foreground">
-                  Preview not available on mobile
-                </p>
-              </div>
-            )
+            preview
           )}
         </div>
       </div>

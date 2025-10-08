@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "jsxImportSource": "nativewind",
     "baseUrl": ".",
     "target": "ESNext",
     "lib": [
@@ -21,10 +22,13 @@
     "incremental": true,
     "paths": {
       "@/.source": [
-        "./.source/index.ts"
+        "./.source/index.js"
       ],
       "@/*": [
         "./src/*"
+      ],
+      "@/registry/*": [
+        "../../packages/registry/src/usa/*"
       ]
     },
     "plugins": [

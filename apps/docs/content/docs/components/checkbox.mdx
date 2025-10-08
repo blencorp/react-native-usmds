@@ -4,12 +4,13 @@ description: A control that allows the user to toggle between checked and not ch
 ---
 
 import { PreviewCard } from '@/components/ui/PreviewCard';
+import { CheckboxPreview } from '@/components/examples';
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <Tabs items={['preview', 'code']}>
   <Tab value="preview">
-    <PreviewCard />
+    <PreviewCard preview={<CheckboxPreview />} />
   </Tab>
   <Tab value="code">
     ```tsx title="checkbox-example.tsx"

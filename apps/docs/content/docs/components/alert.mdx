@@ -4,26 +4,39 @@ description: Displays a callout for user attention.
 ---
 
 import { PreviewCard } from '@/components/ui/PreviewCard';
+import { AlertPreview } from '@/components/examples';
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
+## Preview
+
 <Tabs items={['preview', 'code']}>
   <Tab value="preview">
-    <PreviewCard />
+    <PreviewCard preview={<AlertPreview />} />
   </Tab>
   <Tab value="code">
     ```tsx title="alert-example.tsx"
     import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
-    import { AlertCircle } from 'lucide-react-native';
+    import { CheckCircle2, Terminal, AlertCircle } from 'lucide-react-native';
+    import { View } from 'react-native';
 
     export default function AlertExample() {
       return (
-        <Alert icon={AlertCircle} variant="default">
-          <AlertTitle>Heads up!</AlertTitle>
-          <AlertDescription>
-            You can add components to your app using the CLI.
-          </AlertDescription>
-        </Alert>
+        <View className="w-full max-w-xl gap-4">
+          <Alert icon={CheckCircle2}>
+            <AlertTitle>Success! Your changes have been saved</AlertTitle>
+            <AlertDescription>This is an alert with icon, title and description.</AlertDescription>
+          </Alert>
+
+          <Alert icon={Terminal}>
+            <AlertTitle>This Alert has no description.</AlertTitle>
+          </Alert>
+
+          <Alert variant="destructive" icon={AlertCircle}>
+            <AlertTitle>Unable to process your payment.</AlertTitle>
+            <AlertDescription>Please verify your billing information and try again.</AlertDescription>
+          </Alert>
+        </View>
       );
     }
     ```
@@ -41,22 +54,14 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
   <Tab value="manual">
     <Steps>
       <Step>
-        **Install the following dependencies:**
+        **Install dependencies:**
 
         ```bash
         npx expo install lucide-react-native
         ```
       </Step>
       <Step>
-        **Copy and paste the following code into your project.**
-
-        ```tsx title="@/components/ui/text.tsx"
-        // Copy from packages/registry/src/usa/components/ui/text.tsx
-        ```
-
-        ```tsx title="@/components/ui/icon.tsx"
-        // Copy from packages/registry/src/usa/components/ui/icon.tsx
-        ```
+        **Copy and paste the following code into your project:**
 
         ```tsx title="@/components/ui/alert.tsx"
         // Copy from packages/registry/src/usa/components/ui/alert.tsx
@@ -72,10 +77,10 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 ## Usage
 
 ```tsx
-import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { AlertCircle } from 'lucide-react-native';
 
-<Alert icon={AlertCircle} variant="default">
+<Alert icon={AlertCircle}>
   <AlertTitle>Heads up!</AlertTitle>
   <AlertDescription>
     You can add components to your app using the CLI.
@@ -85,70 +90,68 @@ import { AlertCircle } from 'lucide-react-native';
 
 ## Props
 
-### Alert
-
-Extends `View` props.
-
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| icon | `LucideIcon` | - | **Required.** The icon component to display. |
-| variant | `'default' \| 'destructive'` | `'default'` | The visual style variant. |
-| iconClassName | `string` | - | Additional classes for the icon. |
-| className | `string` | - | Additional classes for the container. |
-
-### AlertTitle
-
-Extends `Text` props.
-
-| Prop | Type | Description |
-|------|------|-------------|
-| className | `string` | Additional classes for the title. |
-
-### AlertDescription
-
-Extends `Text` props.
-
-| Prop | Type | Description |
-|------|------|-------------|
-| className | `string` | Additional classes for the description. |
+| variant | `'default' \| 'destructive'` | `'default'` | The visual style variant |
+| icon | `React.ComponentType` | - | Icon component to display |
+| className | `string` | - | Additional styles |
 
 ## Examples
 
-### Default
+### Default Alert
+
+```tsx
+<Alert>
+  <AlertTitle>Notification</AlertTitle>
+  <AlertDescription>This is a default alert message.</AlertDescription>
+</Alert>
+```
+
+### With Icon
 
 ```tsx
 import { Info } from 'lucide-react-native';
 
-<Alert icon={Info} variant="default">
-  <AlertTitle>Heads up!</AlertTitle>
+<Alert icon={Info}>
+  <AlertTitle>Information</AlertTitle>
   <AlertDescription>
-    You can add components to your app using the CLI.
+    Here's some important information for you.
   </AlertDescription>
 </Alert>
 ```
 
-### Destructive
+### Destructive Alert
 
 ```tsx
 import { AlertCircle } from 'lucide-react-native';
 
-<Alert icon={AlertCircle} variant="destructive">
+<Alert variant="destructive" icon={AlertCircle}>
   <AlertTitle>Error</AlertTitle>
   <AlertDescription>
-    Your session has expired. Please log in again.
+    Something went wrong. Please try again.
   </AlertDescription>
 </Alert>
 ```
 
-### With Custom Icon
+### Without Description
 
 ```tsx
-import { Terminal } from 'lucide-react-native';
-
-<Alert icon={Terminal} variant="default">
-  <AlertTitle>System Update</AlertTitle>
-  <AlertDescription>
-    A new software update is available for your device.
-  </AlertDescription>
+<Alert icon={Terminal}>
+  <AlertTitle>Command executed successfully</AlertTitle>
 </Alert>
 ```
+
+## Accessibility
+
+- Alert components have appropriate ARIA roles
+- Icons are decorative and marked with aria-hidden
+- Color is not the only indicator of alert type
+- Text contrast meets WCAG guidelines
+
+## Best Practices
+
+1. **Clear Messaging**: Use concise, actionable language
+2. **Appropriate Variants**: Use destructive only for errors
+3. **Icon Usage**: Include relevant icons to enhance meaning
+4. **Positioning**: Place alerts where users will notice them
+5. **Dismissible**: Consider making non-critical alerts dismissible

@@ -4,12 +4,13 @@ description: Displays a card with header, content, and footer.
 ---
 
 import { PreviewCard } from '@/components/ui/PreviewCard';
+import { CardPreview } from '@/components/examples';
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <Tabs items={['preview', 'code']}>
   <Tab value="preview">
-    <PreviewCard />
+    <PreviewCard preview={<CardPreview />} />
   </Tab>
   <Tab value="code">
     ```tsx title="card-example.tsx"

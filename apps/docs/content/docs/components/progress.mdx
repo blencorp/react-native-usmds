@@ -4,12 +4,13 @@ description: Displays an indicator showing the completion progress of a task.
 ---
 
 import { PreviewCard } from '@/components/ui/PreviewCard';
+import { ProgressPreview } from '@/components/examples';
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <Tabs items={['preview', 'code']}>
   <Tab value="preview">
-    <PreviewCard />
+    <PreviewCard preview={<ProgressPreview />} />
   </Tab>
   <Tab value="code">
     ```tsx title="progress-example.tsx"

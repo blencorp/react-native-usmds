@@ -1,27 +1,38 @@
 import './global.css';
-import { RootProvider } from 'fumadocs-ui/provider/next';
-import { Inter } from 'next/font/google';
+import { RootProvider } from 'fumadocs-ui/provider';
+import { Geist, Geist_Mono } from 'next/font/google';
+import { NativeWindStyleSheet } from '@/components/native-wind-provider';
+import { SafeAreaProvider } from '@/components/safe-area-provider';
+import { CookiesProvider } from '@/components/cookies-provider';
+import { cn } from '@/lib/utils';
 
 export const metadata = {
   title: 'USMDS Docs',
   description: 'USWDS + ShadCN + Tailwind 4',
 };
 
-const inter = Inter({
+const fontSans = Geist({
   subsets: ['latin'],
+  variable: '--font-sans',
+});
+
+const fontMono = Geist_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  weight: ['400'],
 });
 
 export default function Layout({ children }: LayoutProps<'/'>) {
   return (
-    <html lang="en" className={inter.className} suppressHydrationWarning>
-      <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Public+Sans&family=Merriweather&family=Source+Sans+Pro&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html lang="en" className={cn(fontSans.variable, fontMono.variable)} suppressHydrationWarning>
+      <head />
       <body className="flex flex-col min-h-screen">
-        <RootProvider>{children}</RootProvider>
+        <NativeWindStyleSheet />
+        <CookiesProvider>
+          <SafeAreaProvider>
+            <RootProvider>{children}</RootProvider>
+          </SafeAreaProvider>
+        </CookiesProvider>
       </body>
     </html>
   );
