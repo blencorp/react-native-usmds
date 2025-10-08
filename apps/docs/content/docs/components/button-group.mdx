@@ -1,25 +1,70 @@
 ---
-title: ButtonGroup
-description: ButtonGroup is used to group related buttons together with consistent spacing.
+title: Button Group
+description: Groups related buttons together with consistent spacing.
 ---
-import {DemoButton} from '@/components/ui/DemoButton';
 
-<DemoButton href="https://usmds-showcase.expo.app/components/buttongroup"/>
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard />
+  </Tab>
+  <Tab value="code">
+    ```tsx title="button-group-example.tsx"
+    import { ButtonGroup } from '@/components/ui/button-group';
+    import { Button } from '@/components/ui/button';
+    import { Text } from '@/components/ui/text';
+
+    export default function ButtonGroupExample() {
+      return (
+        <ButtonGroup orientation="vertical">
+          <Button variant="default">
+            <Text>Primary</Text>
+          </Button>
+          <Button variant="outline">
+            <Text>Secondary</Text>
+          </Button>
+        </ButtonGroup>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
 
 ## Installation
 
-```package-install
-npx usmds add buttongroup
-```
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    ```bash
+    npx usmds add button-group
+    ```
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Copy and paste the following code into your project.**
+
+        ```tsx title="@/components/ui/button-group.tsx"
+        // Copy from packages/registry/src/usa/components/ui/buttongroup.tsx
+        ```
+      </Step>
+      <Step>
+        **Update the import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
 
 ## Usage
 
 ```tsx
-import { ButtonGroup } from '@components/ButtonGroup';
-import { Button } from '@components/Button';
-import { Text } from '@components/Text';
+import { ButtonGroup } from '@/components/ui/button-group';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
-<ButtonGroup>
+<ButtonGroup orientation="vertical">
   <Button variant="default">
     <Text>Primary</Text>
   </Button>
@@ -35,55 +80,27 @@ import { Text } from '@components/Text';
 
 Extends `View` props.
 
-<table>
-  <thead>
-    <tr>
-      <th>Prop</th>
-      <th>Type</th>
-      <th>Default</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>orientation</td>
-      <td>`'horizontal' | 'vertical'`</td>
-      <td>`'vertical'`</td>
-      <td>The layout direction of the button group.</td>
-    </tr>
-    <tr>
-      <td>gap</td>
-      <td>`number`</td>
-      <td>`8`</td>
-      <td>The space between buttons in pixels.</td>
-    </tr>
-    <tr>
-      <td>className</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>Additional Tailwind classes to apply.</td>
-    </tr>
-  </tbody>
-</table>
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| orientation | `'horizontal' \| 'vertical'` | `'vertical'` | The layout direction of the button group. |
+| gap | `number` | `8` | The space between buttons in pixels. |
+| className | `string` | - | Additional classes for styling. |
 
 ## Examples
 
-### Vertical Layout (Default)
+### Vertical Layout
 
 ```tsx
-import { ButtonGroup } from '@components/ButtonGroup';
-import { Button } from '@components/Button';
-import { Text } from '@components/Text';
+import { ButtonGroup } from '@/components/ui/button-group';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 <ButtonGroup orientation="vertical" gap={8}>
-  <Button variant="base">
-    <Text>Primary Button</Text>
-  </Button>
   <Button variant="default">
-    <Text>Secondary Button</Text>
+    <Text>Primary</Text>
   </Button>
   <Button variant="outline">
-    <Text>Outline Button</Text>
+    <Text>Secondary</Text>
   </Button>
 </ButtonGroup>
 ```
@@ -92,101 +109,77 @@ import { Text } from '@components/Text';
 
 ```tsx
 <ButtonGroup orientation="horizontal" gap={8}>
-  <Button variant="base">
+  <Button variant="default">
     <Text>Primary</Text>
   </Button>
-  <Button variant="default">
+  <Button variant="outline">
     <Text>Secondary</Text>
+  </Button>
+</ButtonGroup>
+```
+
+### Custom Gap
+
+```tsx
+<ButtonGroup orientation="vertical" gap={16}>
+  <Button variant="default">
+    <Text>Primary</Text>
+  </Button>
+  <Button variant="outline">
+    <Text>Secondary</Text>
+  </Button>
+</ButtonGroup>
+```
+
+### Mixed Variants
+
+```tsx
+<ButtonGroup orientation="vertical">
+  <Button variant="default">
+    <Text>Default</Text>
+  </Button>
+  <Button variant="destructive">
+    <Text>Destructive</Text>
   </Button>
   <Button variant="outline">
     <Text>Outline</Text>
   </Button>
+  <Button variant="ghost">
+    <Text>Ghost</Text>
+  </Button>
 </ButtonGroup>
 ```
 
-### Custom Gap Spacing
+### With Icons
 
 ```tsx
-<ButtonGroup orientation="vertical" gap={16}>
-  <Button variant="base">
-    <Text>Primary Button</Text>
-  </Button>
+import { Mail, Share, Download } from 'lucide-react-native';
+
+<ButtonGroup orientation="vertical">
   <Button variant="default">
-    <Text>Secondary Button</Text>
+    <Mail />
+    <Text>Email</Text>
   </Button>
-</ButtonGroup>
-```
-
-### Mixed Button Sizes
-
-```tsx
-<ButtonGroup orientation="vertical" gap={8}>
-  <Button variant="base" size="big">
-    <Text>Big Button</Text>
-  </Button>
-  <Button variant="default">
-    <Text>Default Button</Text>
-  </Button>
-  <Button variant="outline" size="sm">
-    <Text>Small Button</Text>
-  </Button>
-</ButtonGroup>
-```
-
-### Custom Button Widths
-
-```tsx
-<ButtonGroup orientation="vertical" gap={8}>
-  <Button variant="base" className="w-[300px]">
-    <Text>Wide Button</Text>
-  </Button>
-  <Button variant="default" className="w-[200px]">
-    <Text>Medium Button</Text>
-  </Button>
-  <Button variant="outline" className="w-[100px]">
-    <Text>Small Button</Text>
-  </Button>
-</ButtonGroup>
-```
-
-### Nested Groups
-
-```tsx
-<ButtonGroup orientation="vertical" gap={8}>
-  <Button variant="base">
-    <Text>Regular Button</Text>
-  </Button>
-  <ButtonGroup orientation="horizontal" gap={8}>
-    <Button variant="default">
-      <Text>Left</Text>
-    </Button>
-    <Button variant="default">
-      <Text>Right</Text>
-    </Button>
-  </ButtonGroup>
   <Button variant="outline">
-    <Text>Bottom Button</Text>
+    <Share />
+    <Text>Share</Text>
+  </Button>
+  <Button variant="outline">
+    <Download />
+    <Text>Download</Text>
   </Button>
 </ButtonGroup>
 ```
 
-## Styling
-
-The ButtonGroup component uses Tailwind CSS classes for styling. The layout can be customized using the `className` prop:
+### Full Width Buttons
 
 ```tsx
-<ButtonGroup 
-  orientation="horizontal" 
-  className="justify-center items-center"
->
-  {/* Buttons */}
+<ButtonGroup orientation="vertical" className="w-full">
+  <Button variant="default" className="w-full">
+    <Text>Continue</Text>
+  </Button>
+  <Button variant="outline" className="w-full">
+    <Text>Cancel</Text>
+  </Button>
 </ButtonGroup>
 ```
-
-## Accessibility
-
-The ButtonGroup component:
-- Maintains proper spacing for touch targets
-- Preserves individual button accessibility features
-- Supports keyboard navigation between buttons
-- Groups related actions semantically

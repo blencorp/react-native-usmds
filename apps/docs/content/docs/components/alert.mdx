@@ -1,40 +1,86 @@
 ---
 title: Alert
-description: Alerts keep users informed of important and sometimes time-sensitive changes.
+description: Displays a callout for user attention.
 ---
-import {DemoButton} from '@/components/ui/DemoButton';
 
-<DemoButton href="https://usmds-showcase.expo.app/components/alert"/>
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard />
+  </Tab>
+  <Tab value="code">
+    ```tsx title="alert-example.tsx"
+    import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
+    import { AlertCircle } from 'lucide-react-native';
+
+    export default function AlertExample() {
+      return (
+        <Alert icon={AlertCircle} variant="default">
+          <AlertTitle>Heads up!</AlertTitle>
+          <AlertDescription>
+            You can add components to your app using the CLI.
+          </AlertDescription>
+        </Alert>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
 
 ## Installation
 
-```package-install
-npx usmds add alert
-```
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    ```bash
+    npx usmds add alert
+    ```
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install the following dependencies:**
+
+        ```bash
+        npx expo install lucide-react-native
+        ```
+      </Step>
+      <Step>
+        **Copy and paste the following code into your project.**
+
+        ```tsx title="@/components/ui/text.tsx"
+        // Copy from packages/registry/src/usa/components/ui/text.tsx
+        ```
+
+        ```tsx title="@/components/ui/icon.tsx"
+        // Copy from packages/registry/src/usa/components/ui/icon.tsx
+        ```
+
+        ```tsx title="@/components/ui/alert.tsx"
+        // Copy from packages/registry/src/usa/components/ui/alert.tsx
+        ```
+      </Step>
+      <Step>
+        **Update the import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
 
 ## Usage
 
 ```tsx
-import { Alert } from '@components/Alert';
+import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
+import { AlertCircle } from 'lucide-react-native';
 
-// Basic usage
-<Alert
-  variant="info"
-  title="Alert message"
-  description={{
-    body: 'Basic alert message'
-  }}
-/>
-
-// With link
-<Alert
-  variant="info"
-  title="Alert message"
-  description={{
-    body: 'Additional context and followup information including ',
-    link: 'a link'
-  }}
-/>
+<Alert icon={AlertCircle} variant="default">
+  <AlertTitle>Heads up!</AlertTitle>
+  <AlertDescription>
+    You can add components to your app using the CLI.
+  </AlertDescription>
+</Alert>
 ```
 
 ## Props
@@ -43,222 +89,66 @@ import { Alert } from '@components/Alert';
 
 Extends `View` props.
 
-<table>
-  <thead>
-    <tr>
-      <th>Prop</th>
-      <th>Type</th>
-      <th>Default</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>variant</td>
-      <td>`'info' | 'error' | 'warning' | 'success' | 'emergency'`</td>
-      <td>`'info'`</td>
-      <td>Determines the color scheme and style of the alert.</td>
-    </tr>
-    <tr>
-      <td>alertStyle</td>
-      <td>`'default' | 'no-header' | 'list' | 'slim' | 'no-icon'`</td>
-      <td>`'default'`</td>
-      <td>Controls the layout and appearance of the alert.</td>
-    </tr>
-    <tr>
-      <td>title</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>The main heading text of the alert.</td>
-    </tr>
-    <tr>
-      <td>description</td>
-      <td>`AlertDescription`</td>
-      <td>-</td>
-      <td>Content configuration for the alert body.</td>
-    </tr>
-    <tr>
-      <td>showIcon</td>
-      <td>`boolean`</td>
-      <td>`true`</td>
-      <td>Controls the visibility of the alert icon.</td>
-    </tr>
-    <tr>
-      <td>className</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>Additional CSS classes to apply to the alert.</td>
-    </tr>
-  </tbody>
-</table>
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| icon | `LucideIcon` | - | **Required.** The icon component to display. |
+| variant | `'default' \| 'destructive'` | `'default'` | The visual style variant. |
+| iconClassName | `string` | - | Additional classes for the icon. |
+| className | `string` | - | Additional classes for the container. |
+
+### AlertTitle
+
+Extends `Text` props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| className | `string` | Additional classes for the title. |
 
 ### AlertDescription
 
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>title</td>
-      <td>`string`</td>
-      <td>Optional title text for no-header and slim variants.</td>
-    </tr>
-    <tr>
-      <td>body</td>
-      <td>`string`</td>
-      <td>Main content text of the alert.</td>
-    </tr>
-    <tr>
-      <td>link</td>
-      <td>`string`</td>
-      <td>Optional link text to be displayed.</td>
-    </tr>
-    <tr>
-      <td>messages</td>
-      <td>`Array<AlertMessage>`</td>
-      <td>Array of messages for list-style alerts.</td>
-    </tr>
-  </tbody>
-</table>
+Extends `Text` props.
 
-### AlertMessage
+| Prop | Type | Description |
+|------|------|-------------|
+| className | `string` | Additional classes for the description. |
 
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>text</td>
-      <td>`string`</td>
-      <td>The main text content of the message.</td>
-    </tr>
-    <tr>
-      <td>link</td>
-      <td>`string`</td>
-      <td>Optional link text within the message.</td>
-    </tr>
-    <tr>
-      <td>suffix</td>
-      <td>`string`</td>
-      <td>Optional text to appear after the link.</td>
-    </tr>
-  </tbody>
-</table>
-
-## Variants
-
-### Info Alert
-
-```tsx
-<Alert variant='info' title='Info alert' description={{ body: 'This is an informational alert.' }} />
-```
-
-### Error Alert
-
-```tsx
-<Alert variant='error' title='Error alert' description={{ body: 'This is an error alert.' }} />
-```
-
-### Warning Alert
-
-```tsx
-<Alert variant='warning' title='Warning alert' description={{ body: 'This is a warning alert.' }} />
-```
-
-### Success Alert
-
-```tsx
-<Alert variant='success' title='Success alert' description={{ body: 'This is a success alert.' }} />
-```
-
-### Emergency Alert
-
-```tsx
-<Alert variant='emergency' title='Emergency alert' description={{ body: 'This is an emergency alert.' }} />
-```
-
-## Alert Styles
+## Examples
 
 ### Default
 
 ```tsx
-<Alert
-  variant='info'
-  alertStyle='default'
-  title='Default alert'
-  description={{
-    body: 'Standard alert with icon and header.'
-  }}
-/>
+import { Info } from 'lucide-react-native';
+
+<Alert icon={Info} variant="default">
+  <AlertTitle>Heads up!</AlertTitle>
+  <AlertDescription>
+    You can add components to your app using the CLI.
+  </AlertDescription>
+</Alert>
 ```
 
-### No Header
+### Destructive
 
 ```tsx
-<Alert
-  variant='info'
-  alertStyle='no-header'
-  description={{
-    title: 'Compact message',
-    body: 'Alert without separate header section.'
-  }}
-/>
+import { AlertCircle } from 'lucide-react-native';
+
+<Alert icon={AlertCircle} variant="destructive">
+  <AlertTitle>Error</AlertTitle>
+  <AlertDescription>
+    Your session has expired. Please log in again.
+  </AlertDescription>
+</Alert>
 ```
 
-### List
+### With Custom Icon
 
 ```tsx
-<Alert
-  variant='info'
-  alertStyle='list'
-  title='List alert'
-  description={{
-    messages: [
-      {
-        text: 'First message with ',
-        link: 'a link',
-        suffix: ' and more text.'
-      },
-      {
-        text: 'Second message item.'
-      }
-    ]
-  }}
-/>
-```
+import { Terminal } from 'lucide-react-native';
 
-### Slim
-
-```tsx
-<Alert
-  variant='info'
-  alertStyle='slim'
-  description={{
-    title: 'Slim alert',
-    body: 'Compact version with smaller icon.'
-  }}
-/>
-```
-
-### No Icon
-
-```tsx
-<Alert
-  variant='info'
-  alertStyle='no-icon'
-  description={{
-    title: 'No icon alert',
-    body: 'Alert without an icon.'
-  }}
-/>
+<Alert icon={Terminal} variant="default">
+  <AlertTitle>System Update</AlertTitle>
+  <AlertDescription>
+    A new software update is available for your device.
+  </AlertDescription>
+</Alert>
 ```

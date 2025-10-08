@@ -1,16 +1,104 @@
 ---
 title: Dialog
-description: A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.
+description: A window overlaid on the primary window rendering content underneath inert.
 ---
-import {DemoButton} from '@/components/ui/DemoButton';
 
-<DemoButton href="https://usmds-showcase.expo.app/components/dialog"/>
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard />
+  </Tab>
+  <Tab value="code">
+    ```tsx title="dialog-example.tsx"
+    import {
+      Dialog,
+      DialogTrigger,
+      DialogContent,
+      DialogHeader,
+      DialogTitle,
+      DialogDescription,
+    } from '@/components/ui/dialog';
+    import { Button } from '@/components/ui/button';
+    import { Text } from '@/components/ui/text';
+
+    export default function DialogExample() {
+      return (
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant="outline">
+              <Text>Open Dialog</Text>
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Dialog Title</DialogTitle>
+              <DialogDescription>
+                Dialog description goes here.
+              </DialogDescription>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
 
 ## Installation
 
-The Dialog component is built on top of `@rn-primitives/dialog`. No additional installation is required as it comes pre-installed.
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    ```bash
+    npx usmds add dialog
+    ```
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install the following dependencies:**
 
-## Anatomy
+        ```bash
+        npx expo install @rn-primitives/dialog @rn-primitives/portal lucide-react-native react-native-reanimated
+        ```
+      </Step>
+      <Step>
+        **Copy and paste the following code into your project.**
+
+        ```tsx title="@/components/ui/icon.tsx"
+        // Copy from packages/registry/src/usa/components/ui/icon.tsx
+        ```
+
+        ```tsx title="@/components/ui/dialog.tsx"
+        // Copy from packages/registry/src/usa/components/ui/dialog.tsx
+        ```
+      </Step>
+      <Step>
+        **Update the import paths to match your project setup.**
+      </Step>
+      <Step>
+        **Add Portal Host to your root layout:**
+
+        ```tsx
+        import { PortalHost } from '@rn-primitives/portal';
+
+        export default function RootLayout() {
+          return (
+            <>
+              <Stack />
+              <PortalHost />
+            </>
+          );
+        }
+        ```
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Usage
 
 ```tsx
 import {
@@ -18,142 +106,21 @@ import {
   DialogTrigger,
   DialogContent,
   DialogHeader,
-  DialogFooter,
   DialogTitle,
   DialogDescription,
-  DialogClose,
-} from '@/components/ui/dialog'
-```
+} from '@/components/ui/dialog';
 
-## Portal Setup
-
-Important: The Dialog component requires a Portal Host to function properly. Add this to your root component:
-
-```tsx
-import { PortalHost } from '@rn-primitives/portal';
-
-function Root() {
-  return (
-    <>
-      <Stack />
-      {/* Default Portal Host (one per app) */}
-      <PortalHost />
-    </>
-  );
-}
-```
-
-## Usage
-
-### Basic Dialog
-
-```tsx
 <Dialog>
   <DialogTrigger asChild>
     <Button variant="outline">
-      <Text>Open Dialog</Text>
+      <Text>Open</Text>
     </Button>
   </DialogTrigger>
   <DialogContent>
     <DialogHeader>
-      <DialogTitle>Example Dialog</DialogTitle>
-      <DialogDescription>
-        This is a simple dialog that demonstrates the basic functionality.
-      </DialogDescription>
+      <DialogTitle>Title</DialogTitle>
+      <DialogDescription>Description</DialogDescription>
     </DialogHeader>
-    <View className="py-4">
-      <Text className="text-base text-foreground">
-        Dialogs are great for displaying important information or getting user confirmation.
-      </Text>
-    </View>
-    <DialogFooter>
-      <DialogClose asChild>
-        <Button variant="outline">
-          <Text>Cancel</Text>
-        </Button>
-      </DialogClose>
-      <DialogClose asChild>
-        <Button variant="default">
-          <Text className="text-white">Continue</Text>
-        </Button>
-      </DialogClose>
-    </DialogFooter>
-  </DialogContent>
-</Dialog>
-```
-
-### Form Dialog
-
-```tsx
-<Dialog>
-  <DialogTrigger asChild>
-    <Button>
-      <Text>Edit Profile</Text>
-    </Button>
-  </DialogTrigger>
-  <DialogContent>
-    <DialogHeader>
-      <DialogTitle>Edit Profile</DialogTitle>
-      <DialogDescription>Make changes to your profile here.</DialogDescription>
-    </DialogHeader>
-    <View className="gap-4 py-4">
-      <View className="gap-2">
-        <Text className="text-sm font-medium text-foreground">Name</Text>
-        <View className="h-10 rounded-md border border-border bg-transparent px-3 py-2">
-          <Text>John Doe</Text>
-        </View>
-      </View>
-      <View className="gap-2">
-        <Text className="text-sm font-medium text-foreground">Email</Text>
-        <View className="h-10 rounded-md border border-border bg-transparent px-3 py-2">
-          <Text>john@example.com</Text>
-        </View>
-      </View>
-    </View>
-    <DialogFooter>
-      <DialogClose asChild>
-        <Button variant="outline">
-          <Text>Cancel</Text>
-        </Button>
-      </DialogClose>
-      <DialogClose asChild>
-        <Button>
-          <Text>Save Changes</Text>
-        </Button>
-      </DialogClose>
-    </DialogFooter>
-  </DialogContent>
-</Dialog>
-```
-
-### Destructive Dialog
-
-```tsx
-<Dialog>
-  <DialogTrigger asChild>
-    <Button variant="destructive">
-      <Text>Delete Account</Text>
-    </Button>
-  </DialogTrigger>
-  <DialogContent>
-    <DialogHeader>
-      <DialogTitle>Delete Account</DialogTitle>
-      <DialogDescription>
-        Are you sure you want to delete your account? This action cannot be undone.
-      </DialogDescription>
-    </DialogHeader>
-    <DialogFooter>
-      <DialogClose asChild>
-        <Button variant="outline">
-          <Text>Cancel</Text>
-        </Button>
-      </DialogClose>
-      <DialogClose asChild>
-        <Button variant="destructive">
-          <Text>Delete</Text>
-        </Button>
-      </DialogClose>
-    </DialogFooter>
   </DialogContent>
 </Dialog>
 ```
@@ -162,70 +129,111 @@ function Root() {
 
 ### Dialog
 
-The root component that manages the dialog state.
+Extends `@rn-primitives/dialog` Root props.
 
 | Prop | Type | Description |
 |------|------|-------------|
-| `defaultOpen` | `boolean` | The open state of the dialog when it is initially rendered |
-| `open` | `boolean` | The controlled open state of the dialog |
-| `onOpenChange` | `(open: boolean) => void` | Event handler called when the open state changes |
-
-### DialogTrigger
-
-The button that opens the dialog.
-
-| Prop | Type | Description |
-|------|------|-------------|
-| `asChild` | `boolean` | Change the component to the HTML tag or custom component of the only child |
+| open | `boolean` | The controlled open state. |
+| onOpenChange | `(open: boolean) => void` | Callback when open state changes. |
+| defaultOpen | `boolean` | The default open state. |
 
 ### DialogContent
 
-The component that contains the dialog content.
+Extends `@rn-primitives/dialog` Content props.
 
 | Prop | Type | Description |
 |------|------|-------------|
-| `className` | `string` | Additional styles for the content container |
-| `portalHost` | `string` | Optional custom portal host name |
+| className | `string` | Additional classes for styling. |
+| portalHost | `string` | Optional portal host name. |
 
 ### DialogHeader
 
-A container for the dialog header content.
+Extends `View` props.
 
 | Prop | Type | Description |
 |------|------|-------------|
-| `className` | `string` | Additional styles for the header container |
+| className | `string` | Additional classes for styling. |
 
 ### DialogFooter
 
-A container for the dialog footer content.
+Extends `View` props.
 
 | Prop | Type | Description |
 |------|------|-------------|
-| `className` | `string` | Additional styles for the footer container |
+| className | `string` | Additional classes for styling. |
 
 ### DialogTitle
 
-The title of the dialog.
+Extends `@rn-primitives/dialog` Title props.
 
 | Prop | Type | Description |
 |------|------|-------------|
-| `className` | `string` | Additional styles for the title text |
+| className | `string` | Additional classes for styling. |
 
 ### DialogDescription
 
-The description of the dialog.
+Extends `@rn-primitives/dialog` Description props.
 
 | Prop | Type | Description |
 |------|------|-------------|
-| `className` | `string` | Additional styles for the description text |
+| className | `string` | Additional classes for styling. |
 
-### DialogClose
+## Examples
 
-The button that closes the dialog.
+### Default
 
-| Prop | Type | Description |
-|------|------|-------------|
-| `asChild` | `boolean` | Change the component to the HTML tag or custom component of the only child |
+```tsx
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
+<Dialog>
+  <DialogTrigger asChild>
+    <Button variant="outline">
+      <Text>Open Dialog</Text>
+    </Button>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Are you sure?</DialogTitle>
+      <DialogDescription>
+        This action cannot be undone.
+      </DialogDescription>
+    </DialogHeader>
+  </DialogContent>
+</Dialog>
+```
 
+### With Footer
 
+```tsx
+import { DialogFooter, DialogClose } from '@/components/ui/dialog';
+
+<DialogContent>
+  <DialogHeader>
+    <DialogTitle>Confirm Action</DialogTitle>
+    <DialogDescription>
+      Please confirm you want to proceed.
+    </DialogDescription>
+  </DialogHeader>
+  <DialogFooter>
+    <DialogClose asChild>
+      <Button variant="outline">
+        <Text>Cancel</Text>
+      </Button>
+    </DialogClose>
+    <DialogClose asChild>
+      <Button variant="default">
+        <Text>Confirm</Text>
+      </Button>
+    </DialogClose>
+  </DialogFooter>
+</DialogContent>
+```

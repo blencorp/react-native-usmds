@@ -1,21 +1,66 @@
 ---
 title: Link
-description: Links allow users to navigate to different pages or external resources.
+description: A styled link component with variants and external link support.
 ---
-import {DemoButton} from '@/components/ui/DemoButton';
 
-<DemoButton href="https://usmds-showcase.expo.app/components/link"/>
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard />
+  </Tab>
+  <Tab value="code">
+    ```tsx title="link-example.tsx"
+    import { Link } from '@/components/ui/link';
+
+    export default function LinkExample() {
+      return <Link href="#" label="Link text" />;
+    }
+    ```
+  </Tab>
+</Tabs>
 
 ## Installation
 
-```package-install
-npx usmds add link
-```
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    ```bash
+    npx usmds add link
+    ```
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install the following dependencies:**
+
+        ```bash
+        npx expo install lucide-react-native
+        ```
+      </Step>
+      <Step>
+        **Copy and paste the following code into your project.**
+
+        ```tsx title="@/components/ui/icon.tsx"
+        // Copy from packages/registry/src/usa/components/ui/icon.tsx
+        ```
+
+        ```tsx title="@/components/ui/link.tsx"
+        // Copy from packages/registry/src/usa/components/ui/link.tsx
+        ```
+      </Step>
+      <Step>
+        **Update the import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
 
 ## Usage
 
 ```tsx
-import { Link } from '@components/Link';
+import { Link } from '@/components/ui/link';
 
 <Link href="#" label="Link text" />
 ```
@@ -26,139 +71,99 @@ import { Link } from '@components/Link';
 
 Extends `Pressable` props.
 
-<table>
-  <thead>
-    <tr>
-      <th>Prop</th>
-      <th>Type</th>
-      <th>Default</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>href</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>The URL that the link points to.</td>
-    </tr>
-    <tr>
-      <td>label</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>The text content of the link.</td>
-    </tr>
-    <tr>
-      <td>variant</td>
-      <td>`'default' | 'visited' | 'dark-background'`</td>
-      <td>`'default'`</td>
-      <td>The visual style variant of the link.</td>
-    </tr>
-    <tr>
-      <td>external</td>
-      <td>`boolean`</td>
-      <td>`false`</td>
-      <td>When true, displays an external link icon.</td>
-    </tr>
-    <tr>
-      <td>visited</td>
-      <td>`boolean`</td>
-      <td>`false`</td>
-      <td>When true, applies visited link styling.</td>
-    </tr>
-    <tr>
-      <td>focus</td>
-      <td>`boolean`</td>
-      <td>`false`</td>
-      <td>When true, applies focus ring styling.</td>
-    </tr>
-    <tr>
-      <td>className</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>Additional Tailwind classes to apply.</td>
-    </tr>
-  </tbody>
-</table>
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| href | `string` | - | **Required.** The URL the link points to. |
+| label | `string` | - | **Required.** The text content of the link. |
+| variant | `'default' \| 'visited' \| 'dark-background'` | `'default'` | The visual style variant. |
+| external | `boolean` | `false` | Show external link icon. |
+| visited | `boolean` | `false` | Apply visited link styling. |
+| focus | `boolean` | `false` | Apply focus ring styling. |
+| className | `string` | - | Additional classes for styling. |
 
-## Examples
+## Variants
 
-### Default Link
+### Default
 
 ```tsx
-<Link href="#" label="Link" />
+<Link href="#" label="Default Link" variant="default" />
 ```
 
-### External Link
+### Visited
 
 ```tsx
-<Link 
-  href="https://example.com" 
-  label="External link" 
-  external 
-/>
-```
-
-### Visited Link
-
-```tsx
-<Link 
-  href="#" 
-  label="Visited link" 
-  visited 
-/>
+<Link href="#" label="Visited Link" visited />
 ```
 
 ### Dark Background
 
 ```tsx
-<View className="bg-base-darker p-4">
-  <Link 
-    href="#" 
-    label="Link on dark background" 
-    variant="dark-background" 
-  />
-</View>
+<Link href="#" label="Dark Background Link" variant="dark-background" />
 ```
 
-### Focus State
+## Examples
+
+### Default
 
 ```tsx
-<Link 
-  href="#" 
-  label="Focused link" 
-  focus 
+import { Link } from '@/components/ui/link';
+
+<Link href="#" label="Click here" />
+```
+
+### External Link
+
+```tsx
+<Link
+  href="https://example.com"
+  label="External link"
+  external
 />
 ```
 
-## Styling
+### With Router
 
-The Link component uses Tailwind CSS classes for styling through class-variance-authority (cva). Default styling includes:
+```tsx
+import { Link } from '@/components/ui/link';
+import { useRouter } from 'expo-router';
 
-- Font: Source Sans Pro
-- Base text size with 162% line height
-- Underlined text
-- Primary color (default variant)
-- Focus ring when focused
-- External link icon spacing (when external)
-- Visited state color
-- Dark background variant for contrast
+function NavigationLink() {
+  const router = useRouter();
 
-## States
+  return (
+    <Link
+      href="/profile"
+      label="Go to Profile"
+      onPress={() => router.push('/profile')}
+    />
+  );
+}
+```
 
-Links have several visual states:
-- Default: Primary color
-- Visited: Violet color
-- Focus: Blue focus ring
-- Dark background: Light primary color
-- External: Includes external link icon
+### Multiple Links
 
-## Accessibility
+```tsx
+import { Link } from '@/components/ui/link';
+import { View } from 'react-native';
 
-The Link component:
-- Uses semantic link structure
-- Supports keyboard navigation
-- Maintains WCAG color contrast requirements
-- Provides visual feedback for interaction states
-- Includes external link indicators where appropriate
-- Uses proper text spacing for readability
+<View className="gap-2">
+  <Link href="#" label="Home" />
+  <Link href="#" label="About" />
+  <Link href="https://example.com" label="External Site" external />
+</View>
+```
+
+## Helper Functions
+
+### linkVariants
+
+Use `linkVariants` to create custom link-styled components:
+
+```tsx
+import { linkVariants } from '@/components/ui/link';
+import { Text } from 'react-native';
+
+<Text className={linkVariants({ variant: 'visited', external: true })}>
+  Custom Link
+</Text>
+```

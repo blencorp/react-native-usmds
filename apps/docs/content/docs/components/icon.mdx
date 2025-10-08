@@ -1,263 +1,134 @@
 ---
 title: Icon
-description: Icons are visual symbols used to represent ideas, objects, or actions.
+description: A wrapper component for Lucide icons with NativeWind className support.
 ---
-import {DemoButton} from '@/components/ui/DemoButton';
 
-<DemoButton href="https://usmds-showcase.expo.app/components/icon"/>
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard />
+  </Tab>
+  <Tab value="code">
+    ```tsx title="icon-example.tsx"
+    import { Icon } from '@/components/ui/icon';
+    import { Home } from 'lucide-react-native';
+
+    export default function IconExample() {
+      return <Icon as={Home} size={24} />;
+    }
+    ```
+  </Tab>
+</Tabs>
 
 ## Installation
 
-```package-install
-npx usmds add icon
-```
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    ```bash
+    npx usmds add icon
+    ```
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install the following dependencies:**
+
+        ```bash
+        npx expo install lucide-react-native
+        ```
+      </Step>
+      <Step>
+        **Copy and paste the following code into your project.**
+
+        ```tsx title="@/components/ui/icon.tsx"
+        // Copy from packages/registry/src/usa/components/ui/icon.tsx
+        ```
+      </Step>
+      <Step>
+        **Update the import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
 
 ## Usage
 
 ```tsx
-import { Icon } from '@components/Icon';
+import { Icon } from '@/components/ui/icon';
+import { Home } from 'lucide-react-native';
 
-<Icon name='accessibility-new' size={24} color='#000000' />;
+<Icon as={Home} size={24} className="text-foreground" />
 ```
 
 ## Props
 
 ### Icon
 
-<table>
-  <thead>
-    <tr>
-      <th>Prop</th>
-      <th>Type</th>
-      <th>Default</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>name</td>
-      <td>`IconName` (see available icons below)</td>
-      <td>-</td>
-      <td>The name of the icon to display. Must be one of the available icons.</td>
-    </tr>
-    <tr>
-      <td>size</td>
-      <td>`number`</td>
-      <td>`24`</td>
-      <td>The width and height of the icon in pixels. Icon maintains aspect ratio.</td>
-    </tr>
-    <tr>
-      <td>className</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>Tailwind CSS classes to style the icon, including color (e.g., 'text-red-500').</td>
-    </tr>
-  </tbody>
-</table>
+Extends Lucide icon props.
 
-## Implementation Details
-
-The Icon component:
-
-- Uses React Native SVG with NativeWind styling
-- Maintains consistent viewBox scaling (24x24)
-- Uses `currentColor` for color inheritance through Tailwind classes
-- Provides console warning for invalid icon names
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| as | `LucideIcon` | - | **Required.** The Lucide icon component to render. |
+| size | `number` | `14` | The size of the icon. |
+| className | `string` | `'text-foreground'` | Additional classes for styling. |
 
 ## Examples
 
-### Basic Usage
+### Default
 
 ```tsx
-<Icon name='accessibility-new' />
+import { Icon } from '@/components/ui/icon';
+import { Home } from 'lucide-react-native';
+
+<Icon as={Home} />
 ```
 
 ### Custom Size
 
 ```tsx
-<Icon name='accessibility-new' size={32} />
+import { Icon } from '@/components/ui/icon';
+import { Settings } from 'lucide-react-native';
+
+<Icon as={Settings} size={32} />
 ```
 
-### Custom Color using Tailwind
+### Custom Color
 
 ```tsx
-<Icon name='accessibility-new' className='text-red-500' />
+import { Icon } from '@/components/ui/icon';
+import { Heart } from 'lucide-react-native';
+
+<Icon as={Heart} className="text-destructive" />
 ```
 
-### Styling Examples
+### With Button
 
 ```tsx
-<View className='flex-row gap-5 items-center'>
-  {/* Different colors */}
-  <Icon name='accessibility-new' className='text-black' />
-  <Icon name='accessibility-new' className='text-red-500' />
-  <Icon name='accessibility-new' className='text-blue-500' />
+import { Icon } from '@/components/ui/icon';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+import { Mail } from 'lucide-react-native';
 
-  {/* With opacity */}
-  <Icon name='accessibility-new' className='text-black opacity-50' />
+<Button variant="default">
+  <Icon as={Mail} size={16} />
+  <Text>Send Email</Text>
+</Button>
+```
 
-  {/* With hover states */}
-  <Icon name='accessibility-new' className='text-black hover:text-blue-500' />
+### Multiple Icons
+
+```tsx
+import { Icon } from '@/components/ui/icon';
+import { Home, Settings, User, Bell } from 'lucide-react-native';
+import { View } from 'react-native';
+
+<View className="flex-row gap-4">
+  <Icon as={Home} size={20} />
+  <Icon as={Settings} size={20} />
+  <Icon as={User} size={20} />
+  <Icon as={Bell} size={20} />
 </View>
 ```
-
-## Available Icons
-
-The following icons are available:
-
-```tsx
-type IconName =
-  | 'accessibility-new'
-  | 'accessible_forward'
-  | 'account_balance'
-  | 'account_box'
-  | 'account_circle'
-  | 'add'
-  | 'add_circle'
-  | 'add_circle_outline'
-  | 'alarm'
-  | 'alternate_email'
-  | 'announcement'
-  | 'api'
-  | 'arrow_back'
-  | 'arrow_downward'
-  | 'arrow_drop_down'
-  | 'arrow_drop_up'
-  | 'arrow_forward'
-  | 'arrow_upward'
-  | 'assessment'
-  | 'attach_file'
-  | 'attach_money'
-  | 'autorenew'
-  | 'backpack'
-  | 'bathtub'
-  | 'bedding'
-  | 'bookmark'
-  | 'bug_report'
-  | 'calendar_today'
-  | 'campaign'
-  | 'camping'
-  | 'cancel'
-  | 'chat'
-  | 'check'
-  | 'check_box_outline_blank'
-  | 'check_circle'
-  | 'check_circle_outline'
-  | 'checkroom'
-  | 'clean_hands'
-  | 'close'
-  | 'closed_caption'
-  | 'clothes'
-  | 'cloud'
-  | 'code'
-  | 'comment'
-  | 'connect_without_contact'
-  | 'construction'
-  | 'construction_worker'
-  | 'contact_page'
-  | 'content_copy'
-  | 'error_outline'
-  | 'face_id'
-  | 'fingerprint'
-  | 'info'
-  | 'launch'
-  | 'navigate_before'
-  | 'navigate_next'
-  | 'remove_circle'
-  | 'visibility'
-  | 'visibility_off'
-  | 'volume_off'
-  | 'warning'
-  | 'wash'
-  | 'wifi'
-  | 'work'
-  | 'youtube'
-  | 'zoom_in'
-  | 'zoom_out'
-  | 'zoom_out_map';
-```
-
-### Icon Categories
-
-Icons are organized into functional categories:
-
-**Navigation**
-
-- `navigate_next`
-- `navigate_before`
-- `arrow_back`
-- `arrow_forward`
-- `arrow_upward`
-- `arrow_downward`
-- `arrow_drop_up`
-- `arrow_drop_down`
-- `zoom_in`
-- `zoom_out`
-- `zoom_out_map`
-
-**Authentication & Security**
-
-- `face_id`
-- `fingerprint`
-- `visibility`
-- `visibility_off`
-- `check`
-- `check_circle`
-- `check_circle_outline`
-
-**UI Elements**
-
-- `close`
-- `add`
-- `add_circle`
-- `add_circle_outline`
-- `cancel`
-- `info`
-- `error_outline`
-- `warning`
-
-**Actions**
-
-- `launch`
-- `code`
-- `cloud`
-- `bookmark`
-- `chat`
-- `comment`
-- `content_copy`
-- `autorenew`
-
-**Objects & Items**
-
-- `backpack`
-- `bathtub`
-- `bedding`
-- `clothes`
-- `camping`
-- `work`
-
-**Media & Communication**
-
-- `volume_off`
-- `youtube`
-- `wifi`
-- `alternate_email`
-
-**Accessibility & Users**
-
-- `accessibility-new`
-- `accessible_forward`
-- `account_circle`
-- `account_box`
-- `account_balance`
-
-Each icon maintains a consistent 24x24 viewBox and can be styled using Tailwind classes.
-
-## Accessibility
-
-The Icon component:
-
-- Uses SVG for crisp rendering at any size
-- Supports color customization for proper contrast
-- Should be accompanied by descriptive text or labels when used in interactive elements
-- Maintains consistent sizing for visual harmony

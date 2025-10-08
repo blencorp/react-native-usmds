@@ -1,28 +1,104 @@
 ---
 title: Card
-description: Cards are used to group related content and actions about a single subject.
+description: Displays a card with header, content, and footer.
 ---
-import {DemoButton} from '@/components/ui/DemoButton';
 
-<DemoButton href="https://usmds-showcase.expo.app/components/card"/>
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard />
+  </Tab>
+  <Tab value="code">
+    ```tsx title="card-example.tsx"
+    import {
+      Card,
+      CardHeader,
+      CardTitle,
+      CardDescription,
+      CardContent,
+      CardFooter,
+    } from '@/components/ui/card';
+    import { Text } from '@/components/ui/text';
+    import { Button } from '@/components/ui/button';
+
+    export default function CardExample() {
+      return (
+        <Card>
+          <CardHeader>
+            <CardTitle>Card Title</CardTitle>
+            <CardDescription>Card description goes here</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Text>Card content</Text>
+          </CardContent>
+          <CardFooter>
+            <Button variant="default">
+              <Text>Action</Text>
+            </Button>
+          </CardFooter>
+        </Card>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
 
 ## Installation
 
-```package-install
-npx usmds add card
-```
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    ```bash
+    npx usmds add card
+    ```
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Copy and paste the following code into your project.**
+
+        ```tsx title="@/components/ui/text.tsx"
+        // Copy from packages/registry/src/usa/components/ui/text.tsx
+        ```
+
+        ```tsx title="@/components/ui/card.tsx"
+        // Copy from packages/registry/src/usa/components/ui/card.tsx
+        ```
+      </Step>
+      <Step>
+        **Update the import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
 
 ## Usage
 
 ```tsx
-import { Card } from '@components/Card';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from '@/components/ui/card';
+import { Text } from '@/components/ui/text';
 
-<Card
-  title="Card title"
-  description="Card description text goes here."
-  buttonText="Button"
-  variant="default"
-/>
+<Card>
+  <CardHeader>
+    <CardTitle>Card Title</CardTitle>
+    <CardDescription>Card description</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <Text>Card content</Text>
+  </CardContent>
+  <CardFooter>
+    {/* Footer content */}
+  </CardFooter>
+</Card>
 ```
 
 ## Props
@@ -31,138 +107,156 @@ import { Card } from '@components/Card';
 
 Extends `View` props.
 
-<table>
-  <thead>
-    <tr>
-      <th>Prop</th>
-      <th>Type</th>
-      <th>Default</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>variant</td>
-      <td>`'default' | 'media-first' | 'inset'`</td>
-      <td>`'default'`</td>
-      <td>The visual style variant of the card.</td>
-    </tr>
-    <tr>
-      <td>title</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>The title text of the card.</td>
-    </tr>
-    <tr>
-      <td>description</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>The description text of the card.</td>
-    </tr>
-    <tr>
-      <td>buttonText</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>The text for the card's action button.</td>
-    </tr>
-    <tr>
-      <td>mediaUrl</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>URL for the card's media content.</td>
-    </tr>
-    <tr>
-      <td>showMedia</td>
-      <td>`boolean`</td>
-      <td>`false`</td>
-      <td>Whether to display the media content.</td>
-    </tr>
-    <tr>
-      <td>className</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>Additional Tailwind classes to apply.</td>
-    </tr>
-  </tbody>
-</table>
+| Prop | Type | Description |
+|------|------|-------------|
+| className | `string` | Additional classes for styling. |
 
-## Variants
+### CardHeader
+
+Extends `View` props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| className | `string` | Additional classes for styling. |
+
+### CardTitle
+
+Extends `Text` props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| className | `string` | Additional classes for styling. |
+
+### CardDescription
+
+Extends `Text` props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| className | `string` | Additional classes for styling. |
+
+### CardContent
+
+Extends `View` props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| className | `string` | Additional classes for styling. |
+
+### CardFooter
+
+Extends `View` props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| className | `string` | Additional classes for styling. |
+
+## Examples
 
 ### Default
 
-Basic card layout without media.
-
 ```tsx
-<Card
-  variant="default"
-  title="Card title"
-  description="Card description text goes here."
-  buttonText="Learn More"
-/>
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { Text } from '@/components/ui/text';
+
+<Card>
+  <CardHeader>
+    <CardTitle>Notifications</CardTitle>
+    <CardDescription>You have 3 unread messages</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <Text>Message content here</Text>
+  </CardContent>
+</Card>
 ```
 
-### Media First
-
-Card with media content at the top.
+### With Footer
 
 ```tsx
-<Card
-  variant="media-first"
-  title="Card title"
-  description="Card description text goes here."
-  buttonText="Learn More"
-  mediaUrl="https://example.com/image.jpg"
-  showMedia
-/>
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+
+<Card>
+  <CardHeader>
+    <CardTitle>Create Account</CardTitle>
+    <CardDescription>Enter your information below</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <Text>Form fields here</Text>
+  </CardContent>
+  <CardFooter>
+    <Button variant="default">
+      <Text>Submit</Text>
+    </Button>
+  </CardFooter>
+</Card>
 ```
 
-### Inset
-
-Card with inset media content below the title.
+### Custom Styling
 
 ```tsx
-<Card
-  variant="inset"
-  title="Card title"
-  description="Card description text goes here."
-  buttonText="Learn More"
-  mediaUrl="https://example.com/image.jpg"
-  showMedia
-/>
+<Card className="border-2 border-primary">
+  <CardHeader>
+    <CardTitle className="text-primary">Featured</CardTitle>
+    <CardDescription>This is a featured card</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <Text>Special content</Text>
+  </CardContent>
+</Card>
 ```
 
-## Styling
-
-The Card component uses Tailwind CSS classes for styling. The appearance can be customized using the `className` prop:
+### With Image
 
 ```tsx
-<Card
-  className="shadow-lg"
-  title="Custom Card"
-  description="This card has custom styling."
-  buttonText="Learn More"
-/>
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { Image, Text } from 'react-native';
+
+<Card>
+  <Image
+    source={{ uri: 'https://example.com/image.jpg' }}
+    className="w-full h-48 rounded-t-xl"
+  />
+  <CardHeader>
+    <CardTitle>Image Card</CardTitle>
+    <CardDescription>Card with image on top</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <Text>Content below the image</Text>
+  </CardContent>
+</Card>
 ```
 
-Default styling includes:
-- Width: 329px
-- Minimum height: 471px
-- White background
-- Light border
-- Rounded corners (4px)
-- Consistent padding
-- Flexible content layout
+### Multiple Cards
 
-## Media Dimensions
+```tsx
+import { View } from 'react-native';
 
-- Media First variant: 327px × 188px (top-rounded corners)
-- Inset variant: 100% width × 162px (no rounded corners)
+<View className="gap-4">
+  <Card>
+    <CardHeader>
+      <CardTitle>Card 1</CardTitle>
+    </CardHeader>
+    <CardContent>
+      <Text>First card content</Text>
+    </CardContent>
+  </Card>
 
-## Accessibility
-
-The Card component:
-- Uses semantic HTML structure
-- Maintains proper text contrast
-- Provides clear visual hierarchy
-- Ensures interactive elements are accessible
-- Supports keyboard navigation
+  <Card>
+    <CardHeader>
+      <CardTitle>Card 2</CardTitle>
+    </CardHeader>
+    <CardContent>
+      <Text>Second card content</Text>
+    </CardContent>
+  </Card>
+</View>
+```

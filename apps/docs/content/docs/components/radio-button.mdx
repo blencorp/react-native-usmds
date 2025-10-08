@@ -1,24 +1,113 @@
 ---
-title: RadioButton
+title: Radio Button
 description: Radio buttons allow users to select a single option from a list of choices.
 ---
-import {DemoButton} from '@/components/ui/DemoButton';
 
-<DemoButton href="https://usmds-showcase.expo.app/components/radiobutton"/>
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard />
+  </Tab>
+  <Tab value="code">
+    ```tsx title="radio-button-example.tsx"
+    import { RadioGroup, RadioButton } from '@/components/ui/radiobutton';
+    import { useState } from 'react';
+
+    export default function RadioButtonExample() {
+      const [value, setValue] = useState('1');
+
+      return (
+        <RadioGroup value={value} onValueChange={setValue}>
+          <RadioButton value="1" label="Option 1" />
+          <RadioButton value="2" label="Option 2" />
+          <RadioButton value="3" label="Option 3" />
+        </RadioGroup>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
 
 ## Installation
 
-```package-install
-npx usmds add radiobutton
-```
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    ```bash
+    npx usmds add radiobutton
+    ```
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install the following dependencies:**
+
+        ```bash
+        npx expo install @rn-primitives/radio-group
+        ```
+      </Step>
+      <Step>
+        **Copy and paste the following code into your project.**
+
+        ```tsx title="@/components/ui/radiobutton.tsx"
+        // Copy from packages/registry/src/usa/components/ui/radiobutton.tsx
+        ```
+      </Step>
+      <Step>
+        **Update the import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
 
 ## Usage
 
 ```tsx
-import { RadioGroup, RadioButton } from '@components/RadioButton';
+import { RadioGroup, RadioButton } from '@/components/ui/radiobutton';
 import { useState } from 'react';
 
-function App() {
+const [value, setValue] = useState('1');
+
+<RadioGroup value={value} onValueChange={setValue}>
+  <RadioButton value="1" label="Option 1" />
+  <RadioButton value="2" label="Option 2" />
+  <RadioButton value="3" label="Option 3" />
+</RadioGroup>
+```
+
+## Props
+
+### RadioButton
+
+Extends `RadioGroupPrimitive.Item` props.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| label | `string` | - | **Required.** The text label for the radio button. |
+| value | `string` | - | **Required.** The value associated with this radio button. |
+| disabled | `boolean` | `false` | When true, prevents user interaction. |
+| className | `string` | - | Additional classes for styling. |
+
+### RadioGroup
+
+Extends `RadioGroupPrimitive.Root` props.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| value | `string` | - | The value of the selected radio button. |
+| onValueChange | `(value: string) => void` | - | Callback fired when selection changes. |
+
+## Examples
+
+### Default
+
+```tsx
+import { RadioGroup, RadioButton } from '@/components/ui/radiobutton';
+import { useState } from 'react';
+
+function RadioButtonExample() {
   const [value, setValue] = useState('1');
 
   return (
@@ -31,133 +120,105 @@ function App() {
 }
 ```
 
-## Props
-
-### RadioButton
-
-Extends `RadioGroupPrimitive.Item` props.
-
-<table>
-  <thead>
-    <tr>
-      <th>Prop</th>
-      <th>Type</th>
-      <th>Default</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>label</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>The text label for the radio button.</td>
-    </tr>
-    <tr>
-      <td>value</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>The value associated with this radio button.</td>
-    </tr>
-    <tr>
-      <td>disabled</td>
-      <td>`boolean`</td>
-      <td>`false`</td>
-      <td>When true, prevents user interaction.</td>
-    </tr>
-    <tr>
-      <td>className</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>Additional Tailwind classes to apply.</td>
-    </tr>
-  </tbody>
-</table>
-
-### RadioGroup
-
-Extends `RadioGroupPrimitive.Root` props.
-
-<table>
-  <thead>
-    <tr>
-      <th>Prop</th>
-      <th>Type</th>
-      <th>Default</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>value</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>The value of the selected radio button.</td>
-    </tr>
-    <tr>
-      <td>onValueChange</td>
-      <td>`(value: string) => void`</td>
-      <td>-</td>
-      <td>Callback fired when selection changes.</td>
-    </tr>
-  </tbody>
-</table>
-
-## Examples
-
-### Basic Usage
-
-```tsx
-<RadioGroup value={value} onValueChange={setValue}>
-  <RadioButton value="1" label="Option 1" />
-  <RadioButton value="2" label="Option 2" />
-  <RadioButton value="3" label="Option 3" />
-</RadioGroup>
-```
-
 ### Single Radio Button
 
 ```tsx
 <RadioGroup value={value} onValueChange={setValue}>
-  <RadioButton value="1" label="Single radio button" />
+  <RadioButton value="1" label="Single option" />
 </RadioGroup>
 ```
 
-### Disabled States
+### Disabled Options
 
 ```tsx
-<RadioGroup value="4" onValueChange={() => {}}>
-  <RadioButton value="3" label="Disabled unselected" disabled />
-  <RadioButton value="4" label="Disabled selected" disabled />
+<RadioGroup value="2" onValueChange={setValue}>
+  <RadioButton value="1" label="Disabled unselected" disabled />
+  <RadioButton value="2" label="Selected" />
+  <RadioButton value="3" label="Disabled selected" disabled />
 </RadioGroup>
 ```
 
-## Styling
+### With Form
 
-The RadioButton component uses Tailwind CSS classes for styling. Default styling includes:
+```tsx
+import { RadioGroup, RadioButton } from '@/components/ui/radiobutton';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+import { useState } from 'react';
+import { View } from 'react-native';
 
-- Container dimensions: 329px × 44px (minimum height)
-- Radio button size: 20px × 20px
-- 2px border width
-- Rounded full circles
-- Primary color when selected
-- Disabled state styling
-- 8px gap between radio and label
+function RadioForm() {
+  const [size, setSize] = useState('medium');
 
-## States
+  const handleSubmit = () => {
+    console.log('Selected size:', size);
+  };
 
-Radio buttons have several visual states:
-- Unselected: White background with base ink border
-- Selected: Primary color fill with primary border
-- Disabled unselected: Gray border
-- Disabled selected: Gray fill and border
+  return (
+    <View className="gap-4">
+      <Text className="font-semibold">Choose a size</Text>
+      <RadioGroup value={size} onValueChange={setSize}>
+        <RadioButton value="small" label="Small" />
+        <RadioButton value="medium" label="Medium" />
+        <RadioButton value="large" label="Large" />
+        <RadioButton value="xlarge" label="Extra Large" />
+      </RadioGroup>
+      <Button onPress={handleSubmit}>
+        <Text>Submit</Text>
+      </Button>
+    </View>
+  );
+}
+```
 
-## Accessibility
+### Controlled State
 
-The RadioButton component:
-- Uses `accessibilityRole="radio"` for proper semantic structure
-- Supports keyboard navigation within RadioGroup
-- Maintains WCAG color contrast requirements
-- Provides appropriate `accessibilityState` for checked and disabled states
-- Uses proper labeling with `aria-labelledby`
-- Ensures adequate touch target size (44px minimum height)
+```tsx
+function ControlledRadio() {
+  const [value, setValue] = useState('option1');
+
+  const handleChange = (newValue: string) => {
+    console.log('Changed to:', newValue);
+    setValue(newValue);
+  };
+
+  return (
+    <RadioGroup value={value} onValueChange={handleChange}>
+      <RadioButton value="option1" label="First option" />
+      <RadioButton value="option2" label="Second option" />
+      <RadioButton value="option3" label="Third option" />
+    </RadioGroup>
+  );
+}
+```
+
+### Multiple Groups
+
+```tsx
+function MultipleGroups() {
+  const [color, setColor] = useState('red');
+  const [size, setSize] = useState('medium');
+
+  return (
+    <View className="gap-6">
+      <View className="gap-2">
+        <Text className="font-semibold">Color</Text>
+        <RadioGroup value={color} onValueChange={setColor}>
+          <RadioButton value="red" label="Red" />
+          <RadioButton value="blue" label="Blue" />
+          <RadioButton value="green" label="Green" />
+        </RadioGroup>
+      </View>
+
+      <View className="gap-2">
+        <Text className="font-semibold">Size</Text>
+        <RadioGroup value={size} onValueChange={setSize}>
+          <RadioButton value="small" label="Small" />
+          <RadioButton value="medium" label="Medium" />
+          <RadioButton value="large" label="Large" />
+        </RadioGroup>
+      </View>
+    </View>
+  );
+}
+```

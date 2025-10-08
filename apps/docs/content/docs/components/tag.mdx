@@ -2,20 +2,54 @@
 title: Tag
 description: Tags are used to label, categorize, or organize items using keywords.
 ---
-import { DemoButton } from '@/components/ui/DemoButton';
 
-<DemoButton href="https://usmds-showcase.expo.app/components/tag"/>
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard />
+  </Tab>
+  <Tab value="code">
+    ```tsx title="tag-example.tsx"
+    import { Tag } from '@/components/ui/tag';
+
+    export default function TagExample() {
+      return <Tag label="TAG" />;
+    }
+    ```
+  </Tab>
+</Tabs>
 
 ## Installation
 
-```package-install
-npx usmds add tag
-```
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    ```bash
+    npx usmds add tag
+    ```
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Copy and paste the following code into your project.**
+
+        ```tsx title="@/components/ui/tag.tsx"
+        // Copy from packages/registry/src/usa/components/ui/tag.tsx
+        ```
+      </Step>
+      <Step>
+        **Update the import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
 
 ## Usage
 
 ```tsx
-import { Tag } from '@components/Tag';
+import { Tag } from '@/components/ui/tag';
 
 <Tag label="TAG" />
 ```
@@ -26,42 +60,19 @@ import { Tag } from '@components/Tag';
 
 Extends `View` props.
 
-<table>
-  <thead>
-    <tr>
-      <th>Prop</th>
-      <th>Type</th>
-      <th>Default</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>label</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>The text content of the tag.</td>
-    </tr>
-    <tr>
-      <td>size</td>
-      <td>`'default' | 'big'`</td>
-      <td>`'default'`</td>
-      <td>The size variant of the tag.</td>
-    </tr>
-    <tr>
-      <td>className</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>Additional Tailwind classes to apply.</td>
-    </tr>
-  </tbody>
-</table>
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| label | `string` | - | **Required.** The text content of the tag. |
+| size | `'default' \| 'big'` | `'default'` | The size variant of the tag. |
+| className | `string` | - | Additional classes for styling. |
 
 ## Examples
 
 ### Default Size
 
 ```tsx
+import { Tag } from '@/components/ui/tag';
+
 <Tag label="TAG" />
 ```
 
@@ -74,43 +85,133 @@ Extends `View` props.
 ### Common Use Cases
 
 ```tsx
-<View className="flex-1 items-center justify-center gap-5">
+import { Tag } from '@/components/ui/tag';
+import { View } from 'react-native';
+
+<View className="flex-row gap-2 flex-wrap">
   <Tag label="new" />
-  <Tag label="beta" size="big" />
+  <Tag label="beta" />
   <Tag label="pro" />
-  <Tag label="sale" size="big" />
+  <Tag label="sale" />
 </View>
 ```
 
-## Styling
+### Status Tags
 
-The Tag component uses Tailwind CSS classes for styling through class-variance-authority (cva). Default styling includes:
+```tsx
+<View className="flex-row gap-2">
+  <Tag label="active" size="default" />
+  <Tag label="pending" size="default" />
+  <Tag label="completed" size="default" />
+</View>
+```
 
-- Container dimensions:
-  - Default: min-width 43px × height 18px
-  - Big: min-width 43px × height 24px
-- Background color: gray-60
-- Rounded corners (2px)
-- Text styling:
-  - Default: 14px font size, 14px line height
-  - Big: 16px font size, 16px line height
-- White text color
-- Centered content
-- Consistent padding:
-  - Default: 2px vertical, 8px horizontal
-  - Big: 4px vertical, 8px horizontal
+### Feature Tags
 
-## Variants
+```tsx
+<View className="flex-row gap-2 flex-wrap">
+  <Tag label="premium" size="big" />
+  <Tag label="verified" size="big" />
+  <Tag label="trending" size="big" />
+</View>
+```
 
-The tag has two size variants:
-- Default: Compact size for general use
-- Big: Larger size for more prominence
+### Category Labels
 
-## Accessibility
+```tsx
+import { Tag } from '@/components/ui/tag';
+import { View } from 'react-native';
 
-The Tag component:
-- Uses semantic text structure
-- Maintains proper text contrast on gray background
-- Provides adequate touch target sizes
-- Ensures readable text sizes
-- Uses consistent spacing and padding
+function CategoryTags() {
+  const categories = ['technology', 'design', 'business', 'health'];
+
+  return (
+    <View className="flex-row gap-2 flex-wrap">
+      {categories.map((category) => (
+        <Tag key={category} label={category} />
+      ))}
+    </View>
+  );
+}
+```
+
+### Product Badges
+
+```tsx
+import { Tag } from '@/components/ui/tag';
+import { Text } from '@/components/ui/text';
+import { View } from 'react-native';
+
+function ProductCard() {
+  return (
+    <View className="gap-2 p-4 border rounded-lg">
+      <View className="flex-row gap-2">
+        <Tag label="new" size="default" />
+        <Tag label="20% off" size="default" />
+      </View>
+      <Text className="font-semibold">Product Name</Text>
+      <Text className="text-muted-foreground">$99.99</Text>
+    </View>
+  );
+}
+```
+
+### Mixed Sizes
+
+```tsx
+<View className="flex-col gap-4">
+  <View className="flex-row gap-2">
+    <Tag label="small" size="default" />
+    <Tag label="default" size="default" />
+    <Tag label="tag" size="default" />
+  </View>
+
+  <View className="flex-row gap-2">
+    <Tag label="large" size="big" />
+    <Tag label="bigger" size="big" />
+    <Tag label="tag" size="big" />
+  </View>
+</View>
+```
+
+### With Custom Styling
+
+```tsx
+<Tag
+  label="custom"
+  size="default"
+  className="bg-blue-500"
+/>
+```
+
+### Article Tags
+
+```tsx
+function ArticleTags() {
+  const tags = ['React Native', 'TypeScript', 'Mobile'];
+
+  return (
+    <View className="gap-2">
+      <Text className="text-sm font-semibold">Topics:</Text>
+      <View className="flex-row gap-2 flex-wrap">
+        {tags.map((tag) => (
+          <Tag key={tag} label={tag} size="default" />
+        ))}
+      </View>
+    </View>
+  );
+}
+```
+
+### Notification Badge
+
+```tsx
+import { Tag } from '@/components/ui/tag';
+import { Text } from '@/components/ui/text';
+import { View } from 'react-native';
+
+<View className="flex-row items-center gap-2">
+  <Text>Messages</Text>
+  <Tag label="3" size="default" />
+</View>
+```

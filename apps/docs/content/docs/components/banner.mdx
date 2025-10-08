@@ -1,35 +1,69 @@
 ---
 title: Banner
-description: Banners communicate important information at the top of a screen.
+description: Displays a banner for official app identification or welcome messages.
 ---
-import {DemoButton} from '@/components/ui/DemoButton';
 
-<DemoButton href="https://usmds-showcase.expo.app/components/banner"/>
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard />
+  </Tab>
+  <Tab value="code">
+    ```tsx title="banner-example.tsx"
+    import { Banner } from '@/components/ui/banner';
+
+    export default function BannerExample() {
+      return (
+        <Banner
+          variant="standard-app"
+          link="agency.gov"
+        />
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
 
 ## Installation
 
-```package-install
-npx usmds add banner
-```
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    ```bash
+    npx usmds add banner
+    ```
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install the following dependencies:**
+
+        ```bash
+        npx expo install react-native-svg
+        ```
+      </Step>
+      <Step>
+        **Copy and paste the following code into your project.**
+
+        ```tsx title="@/components/ui/banner.tsx"
+        // Copy from packages/registry/src/usa/components/ui/banner.tsx
+        ```
+      </Step>
+      <Step>
+        **Update the import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
 
 ## Usage
 
 ```tsx
-import { Banner } from '@components/Banner';
+import { Banner } from '@/components/ui/banner';
 
-// Standard App Banner
-<Banner
-  variant="standard-app"
-  title="An official app of the United States government"
-  link="Here's how you know"
-/>
-
-// Welcome Banner
-<Banner
-  variant="welcome"
-  title="Good afternoon, Daniel"
-  trailingIcon={<Bell color="#1B1B1B" size={24} />}
-/>
+<Banner variant="standard-app" link="agency.gov" />
 ```
 
 ## Props
@@ -38,102 +72,103 @@ import { Banner } from '@components/Banner';
 
 Extends `View` props.
 
-<table>
-  <thead>
-    <tr>
-      <th>Prop</th>
-      <th>Type</th>
-      <th>Default</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>variant</td>
-      <td>`'standard-app' | 'welcome'`</td>
-      <td>`'standard-app'`</td>
-      <td>Determines the style and layout of the banner.</td>
-    </tr>
-    <tr>
-      <td>title</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>For welcome variant: displays custom title. For standard-app: only the non-bold portion can be customized.</td>
-    </tr>
-    <tr>
-      <td>link</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>Optional link text (only for standard-app variant). Appears underlined in primary color.</td>
-    </tr>
-    <tr>
-      <td>trailingIcon</td>
-      <td>`ReactNode`</td>
-      <td>-</td>
-      <td>Optional icon component displayed in a 40x40px container at the end of the banner.</td>
-    </tr>
-    <tr>
-      <td>className</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>Additional Tailwind CSS classes to apply to the banner container.</td>
-    </tr>
-  </tbody>
-</table>
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| variant | `'standard-app' \| 'welcome'` | `'standard-app'` | The visual style variant. |
+| title | `string` | - | Custom title text (used with 'welcome' variant). |
+| link | `string` | - | Domain link to display (used with 'standard-app' variant). |
+| trailingIcon | `ReactNode` | - | Optional trailing icon element. |
+| className | `string` | - | Additional classes for styling. |
 
 ## Variants
 
-### Standard App Banner
+### Standard App
 
-The standard app banner identifies official U.S. government applications.
+Shows the official US government app banner with flag icon and agency link.
 
 ```tsx
-<Banner variant='standard-app' title='An official app of the United States government' link="Here's how you know" />
+<Banner variant="standard-app" link="agency.gov" />
 ```
 
-Specifications:
+### Welcome
 
-- Fixed height: 88px
-- Maximum width: 393px
-- Background color: base-lighter
-- Text size: 12px (line height: 14px)
-- U.S. flag icon (31x22px)
-- Vertical divider (1px width, 56px height)
-- "An official app" portion is always bold
-- Link text is underlined and uses primary color
+Displays a welcome banner with custom title text.
+
+```tsx
+<Banner variant="welcome" title="Welcome to our application" />
+```
+
+## Examples
+
+### Standard App Banner
+
+```tsx
+import { Banner } from '@/components/ui/banner';
+
+<Banner
+  variant="standard-app"
+  link="usa.gov"
+/>
+```
 
 ### Welcome Banner
 
-The welcome banner provides a personalized greeting with optional icon.
-
 ```tsx
-<Banner variant='welcome' title='Good afternoon, Daniel' trailingIcon={<Bell color='#1B1B1B' size={24} />} />
+import { Banner } from '@/components/ui/banner';
+
+<Banner
+  variant="welcome"
+  title="Welcome back, User!"
+/>
 ```
 
-Specifications:
-
-- Fixed height: 40px
-- Fixed width: 329px
-- Text size: 22px (line height: 28px)
-- Bold font weight
-- Title width: 273px
-- Icon container: 40x40px with 8px padding
-- No background color
-
-## Accessibility
-
-The Banner component includes:
-
-- `accessibilityRole="header"` for semantic structure
-- `accessibilityRole="link"` for clickable links
-- `accessibilityLabel` for link elements
-- Single-line text truncation with `numberOfLines={1}`
-- Proper color contrast ratios
-
-## Styling
-
-The Banner uses Tailwind CSS through class-variance-authority (cva). Custom styles can be added via the `className` prop:
+### With Trailing Icon
 
 ```tsx
-<Banner variant='standard-app' title='An official app of the United States government' className='my-custom-classes' />
+import { Banner } from '@/components/ui/banner';
+import { Settings } from 'lucide-react-native';
+
+<Banner
+  variant="welcome"
+  title="Welcome to Settings"
+  trailingIcon={<Settings size={24} />}
+/>
+```
+
+### Custom Styling
+
+```tsx
+<Banner
+  variant="standard-app"
+  link="agency.gov"
+  className="border-b border-border"
+/>
+```
+
+## Helper Functions
+
+### bannerVariants
+
+Use `bannerVariants` to create custom banner-styled components:
+
+```tsx
+import { bannerVariants } from '@/components/ui/banner';
+import { View } from 'react-native';
+
+<View className={bannerVariants({ variant: 'welcome' })}>
+  {/* content */}
+</View>
+```
+
+### bannerTextVariants
+
+Use `bannerTextVariants` for text styling within banners:
+
+```tsx
+import { bannerTextVariants } from '@/components/ui/banner';
+import { Text } from 'react-native';
+
+<Text className={bannerTextVariants({ variant: 'standard-app' })}>
+  Custom text
+</Text>
 ```

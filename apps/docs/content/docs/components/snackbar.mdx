@@ -2,28 +2,121 @@
 title: Snackbar
 description: Snackbars provide brief messages about app processes at the bottom of the screen.
 ---
-import {DemoButton} from '@/components/ui/DemoButton';
 
-<DemoButton href="https://usmds-showcase.expo.app/components/snackbar"/>
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard />
+  </Tab>
+  <Tab value="code">
+    ```tsx title="snackbar-example.tsx"
+    import { Snackbar } from '@/components/ui/snackbar';
+    import { useState } from 'react';
+
+    export default function SnackbarExample() {
+      const [isVisible, setIsVisible] = useState(true);
+
+      return (
+        <Snackbar
+          isVisible={isVisible}
+          variant="success"
+          message="Message sent successfully"
+          onAction={() => console.log('Action clicked')}
+          onDismiss={() => setIsVisible(false)}
+        />
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
 
 ## Installation
 
-```package-install
-npx usmds add snackbar
-```
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    ```bash
+    npx usmds add snackbar
+    ```
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install the following dependencies:**
+
+        ```bash
+        npx expo install lucide-react-native
+        ```
+      </Step>
+      <Step>
+        **Copy and paste the following code into your project.**
+
+        ```tsx title="@/components/ui/icon.tsx"
+        // Copy from packages/registry/src/usa/components/ui/icon.tsx
+        ```
+
+        ```tsx title="@/components/ui/snackbar.tsx"
+        // Copy from packages/registry/src/usa/components/ui/snackbar.tsx
+        ```
+      </Step>
+      <Step>
+        **Update the import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
 
 ## Usage
 
 ```tsx
-import { Snackbar } from '@components/Snackbar';
+import { Snackbar } from '@/components/ui/snackbar';
 import { useState } from 'react';
 
-function App() {
+const [isVisible, setIsVisible] = useState(true);
+
+<Snackbar
+  isVisible={isVisible}
+  variant="success"
+  message="Message sent successfully"
+  onAction={() => console.log('Action')}
+  onDismiss={() => setIsVisible(false)}
+/>
+```
+
+## Props
+
+### Snackbar
+
+Extends `View` props.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| isVisible | `boolean` | - | **Required.** Controls the visibility of the snackbar. |
+| message | `string` | - | **Required.** The message to display in the snackbar. |
+| variant | `'success' \| 'error'` | `'success'` | The visual style variant of the snackbar. |
+| layout | `'one-line' \| 'two-lines'` | `'one-line'` | The layout style of the snackbar. |
+| onAction | `() => void` | - | Optional callback when action button is clicked. |
+| onDismiss | `() => void` | - | Optional callback when dismiss button is clicked. |
+| actionLabel | `string` | `'Action'` | Text for the action button. |
+| className | `string` | - | Additional classes for styling. |
+
+## Examples
+
+### Success One Line
+
+```tsx
+import { Snackbar } from '@/components/ui/snackbar';
+import { useState } from 'react';
+
+function SuccessSnackbar() {
   const [isVisible, setIsVisible] = useState(true);
 
   return (
     <Snackbar
       isVisible={isVisible}
+      layout="one-line"
       variant="success"
       message="Message sent successfully"
       onAction={() => console.log('Action clicked')}
@@ -33,92 +126,17 @@ function App() {
 }
 ```
 
-## Props
-
-### Snackbar
-
-Extends `View` props.
-
-<table>
-  <thead>
-    <tr>
-      <th>Prop</th>
-      <th>Type</th>
-      <th>Default</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>isVisible</td>
-      <td>`boolean`</td>
-      <td>-</td>
-      <td>Controls the visibility of the snackbar.</td>
-    </tr>
-    <tr>
-      <td>message</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>The message to display in the snackbar.</td>
-    </tr>
-    <tr>
-      <td>variant</td>
-      <td>`'success' | 'error'`</td>
-      <td>`'success'`</td>
-      <td>The visual style variant of the snackbar.</td>
-    </tr>
-    <tr>
-      <td>layout</td>
-      <td>`'one-line' | 'two-lines'`</td>
-      <td>`'one-line'`</td>
-      <td>The layout style of the snackbar.</td>
-    </tr>
-    <tr>
-      <td>onAction</td>
-      <td>`() => void`</td>
-      <td>-</td>
-      <td>Optional callback when action button is clicked.</td>
-    </tr>
-    <tr>
-      <td>onDismiss</td>
-      <td>`() => void`</td>
-      <td>-</td>
-      <td>Optional callback when dismiss button is clicked.</td>
-    </tr>
-    <tr>
-      <td>actionLabel</td>
-      <td>`string`</td>
-      <td>`'Action'`</td>
-      <td>Text for the action button.</td>
-    </tr>
-  </tbody>
-</table>
-
-## Examples
-
-### Success One Line
-
-```tsx
-<Snackbar
-  isVisible={true}
-  layout="one-line"
-  variant="success"
-  message="Message sent successfully"
-  onAction={() => console.log('Action clicked')}
-  onDismiss={() => console.log('Dismissed')}
-/>
-```
-
 ### Error One Line
 
 ```tsx
 <Snackbar
-  isVisible={true}
+  isVisible={isVisible}
   layout="one-line"
   variant="error"
   message="Failed to send message"
-  onAction={() => console.log('Action clicked')}
-  onDismiss={() => console.log('Dismissed')}
+  onAction={() => console.log('Retry')}
+  onDismiss={() => setIsVisible(false)}
+  actionLabel="Retry"
 />
 ```
 
@@ -126,12 +144,13 @@ Extends `View` props.
 
 ```tsx
 <Snackbar
-  isVisible={true}
+  isVisible={isVisible}
   layout="two-lines"
   variant="success"
-  message="Message sent successfully with additional context that wraps to a second line"
-  onAction={() => console.log('Action clicked')}
-  onDismiss={() => console.log('Dismissed')}
+  message="Your changes have been saved successfully and will be reflected across all devices"
+  onAction={() => console.log('View')}
+  onDismiss={() => setIsVisible(false)}
+  actionLabel="View"
 />
 ```
 
@@ -139,44 +158,119 @@ Extends `View` props.
 
 ```tsx
 <Snackbar
-  isVisible={true}
+  isVisible={isVisible}
   layout="two-lines"
   variant="error"
-  message="Failed to send message with additional context that wraps to a second line"
-  onAction={() => console.log('Action clicked')}
-  onDismiss={() => console.log('Dismissed')}
+  message="Unable to connect to the server. Please check your internet connection and try again"
+  onAction={() => console.log('Retry')}
+  onDismiss={() => setIsVisible(false)}
+  actionLabel="Retry"
 />
 ```
 
-## Styling
+### Auto Dismiss
 
-The Snackbar component uses Tailwind CSS classes for styling through class-variance-authority (cva). Default styling includes:
+```tsx
+import { Snackbar } from '@/components/ui/snackbar';
+import { useState, useEffect } from 'react';
 
-- Container width: 329px
-- One-line height: 48px
-- Two-lines minimum height: 70px
-- Dark background color
-- Rounded corners (4px)
-- Consistent padding
-- Light text color
-- Bold action buttons
+function AutoDismissSnackbar() {
+  const [isVisible, setIsVisible] = useState(false);
 
-## Variants
+  const showSnackbar = () => {
+    setIsVisible(true);
+    setTimeout(() => {
+      setIsVisible(false);
+    }, 3000); // Auto dismiss after 3 seconds
+  };
 
-The snackbar has two main variants:
-- Success: Displays with a checkmark icon
-- Error: Displays with an alert circle icon
+  return (
+    <>
+      <Button onPress={showSnackbar}>
+        <Text>Show Snackbar</Text>
+      </Button>
+      <Snackbar
+        isVisible={isVisible}
+        variant="success"
+        message="Action completed"
+        onDismiss={() => setIsVisible(false)}
+      />
+    </>
+  );
+}
+```
 
-And two layout options:
-- One-line: Compact layout for short messages
-- Two-lines: Expanded layout for longer messages
+### Without Action Button
 
-## Accessibility
+```tsx
+<Snackbar
+  isVisible={isVisible}
+  variant="success"
+  message="Settings saved"
+  onDismiss={() => setIsVisible(false)}
+/>
+```
 
-The Snackbar component:
-- Uses semantic structure for notifications
-- Maintains proper text contrast on dark background
-- Provides adequate touch targets for buttons
-- Supports keyboard navigation
-- Includes clear action labels
-- Times out automatically to prevent screen clutter
+### Custom Action Label
+
+```tsx
+<Snackbar
+  isVisible={isVisible}
+  variant="error"
+  message="Failed to upload file"
+  actionLabel="Retry Upload"
+  onAction={() => console.log('Retrying upload')}
+  onDismiss={() => setIsVisible(false)}
+/>
+```
+
+### Form Submission Feedback
+
+```tsx
+import { Snackbar } from '@/components/ui/snackbar';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+import { useState } from 'react';
+import { View } from 'react-native';
+
+function FormWithSnackbar() {
+  const [snackbar, setSnackbar] = useState({ visible: false, variant: 'success', message: '' });
+
+  const handleSubmit = async () => {
+    try {
+      // Submit form logic
+      await submitForm();
+      setSnackbar({
+        visible: true,
+        variant: 'success',
+        message: 'Form submitted successfully'
+      });
+    } catch (error) {
+      setSnackbar({
+        visible: true,
+        variant: 'error',
+        message: 'Failed to submit form'
+      });
+    }
+
+    // Auto dismiss after 4 seconds
+    setTimeout(() => {
+      setSnackbar(prev => ({ ...prev, visible: false }));
+    }, 4000);
+  };
+
+  return (
+    <View>
+      <Button onPress={handleSubmit}>
+        <Text>Submit Form</Text>
+      </Button>
+      <Snackbar
+        isVisible={snackbar.visible}
+        variant={snackbar.variant}
+        message={snackbar.message}
+        onDismiss={() => setSnackbar(prev => ({ ...prev, visible: false }))}
+      />
+    </View>
+  );
+}
+```

@@ -1,164 +1,196 @@
 ---
 title: Checkbox
-description: Checkboxes allow users to select one or more items from a list of options.
+description: A control that allows the user to toggle between checked and not checked.
 ---
-import {DemoButton} from '@/components/ui/DemoButton';
 
-<DemoButton href="https://usmds-showcase.expo.app/components/checkbox"/>
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard />
+  </Tab>
+  <Tab value="code">
+    ```tsx title="checkbox-example.tsx"
+    import { Checkbox } from '@/components/ui/checkbox';
+    import { useState } from 'react';
+
+    export default function CheckboxExample() {
+      const [checked, setChecked] = useState(false);
+
+      return (
+        <Checkbox
+          checked={checked}
+          onCheckedChange={setChecked}
+        />
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
 
 ## Installation
 
-```package-install
-npx usmds add checkbox
-```
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    ```bash
+    npx usmds add checkbox
+    ```
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install the following dependencies:**
+
+        ```bash
+        npx expo install @rn-primitives/checkbox lucide-react-native
+        ```
+      </Step>
+      <Step>
+        **Copy and paste the following code into your project.**
+
+        ```tsx title="@/components/ui/icon.tsx"
+        // Copy from packages/registry/src/usa/components/ui/icon.tsx
+        ```
+
+        ```tsx title="@/components/ui/checkbox.tsx"
+        // Copy from packages/registry/src/usa/components/ui/checkbox.tsx
+        ```
+      </Step>
+      <Step>
+        **Update the import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
 
 ## Usage
 
 ```tsx
-import { Checkbox } from '@components/Checkbox';
+import { Checkbox } from '@/components/ui/checkbox';
 import { useState } from 'react';
 
-function App() {
-  const [checked, setChecked] = useState(false);
+const [checked, setChecked] = useState(false);
 
-  return (
-    <Checkbox 
-      label="Checkbox item"
-      checked={checked}
-      onCheckedChange={setChecked}
-    />
-  );
-}
+<Checkbox
+  checked={checked}
+  onCheckedChange={setChecked}
+/>
 ```
 
 ## Props
 
 ### Checkbox
 
-Extends `CheckboxPrimitive.Root` props.
+Extends `@rn-primitives/checkbox` Root props.
 
-<table>
-  <thead>
-    <tr>
-      <th>Prop</th>
-      <th>Type</th>
-      <th>Default</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>label</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>The text label for the checkbox.</td>
-    </tr>
-    <tr>
-      <td>checked</td>
-      <td>`boolean`</td>
-      <td>`false`</td>
-      <td>The controlled checked state of the checkbox.</td>
-    </tr>
-    <tr>
-      <td>onCheckedChange</td>
-      <td>`(checked: boolean) => void`</td>
-      <td>-</td>
-      <td>Callback that fires when the checked state changes.</td>
-    </tr>
-    <tr>
-      <td>disabled</td>
-      <td>`boolean`</td>
-      <td>`false`</td>
-      <td>When true, prevents the user from interacting with the checkbox.</td>
-    </tr>
-    <tr>
-      <td>className</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>Additional Tailwind classes to apply.</td>
-    </tr>
-  </tbody>
-</table>
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| checked | `boolean` | - | The controlled checked state. |
+| onCheckedChange | `(checked: boolean) => void` | - | Callback when checked state changes. |
+| disabled | `boolean` | `false` | Whether the checkbox is disabled. |
+| className | `string` | - | Additional classes for the checkbox container. |
+| checkedClassName | `string` | - | Additional classes when checked. |
+| indicatorClassName | `string` | - | Additional classes for the indicator. |
+| iconClassName | `string` | - | Additional classes for the check icon. |
 
 ## Examples
 
-### Default State
+### Default
 
 ```tsx
-<Checkbox 
-  label="Checkbox item" 
-  checked={false} 
-  onCheckedChange={setChecked} 
-/>
-```
-
-### Checked State
-
-```tsx
-<Checkbox 
-  label="Checkbox item" 
-  checked={true} 
-  onCheckedChange={setChecked} 
-/>
-```
-
-### Disabled States
-
-```tsx
-// Disabled unchecked
-<Checkbox 
-  label="Disabled unchecked" 
-  checked={false} 
-  disabled 
-  onCheckedChange={() => {}} 
-/>
-
-// Disabled checked
-<Checkbox 
-  label="Disabled checked" 
-  checked={true} 
-  disabled 
-  onCheckedChange={() => {}} 
-/>
-```
-
-## Styling
-
-The Checkbox component uses Tailwind CSS classes for styling. Default styling includes:
-
-- Container dimensions: 329px × 20px
-- Checkbox dimensions: 24px × 24px
-- 2px border width
-- Rounded corners (2px)
-- Primary color when checked
-- Disabled state styling
-- 8px gap between checkbox and label
-
-## State Management
-
-The component uses controlled state pattern:
-
-```tsx
+import { Checkbox } from '@/components/ui/checkbox';
 import { useState } from 'react';
 
-function CheckboxExample() {
-  const [checked, setChecked] = useState(false);
+const [checked, setChecked] = useState(false);
+
+<Checkbox
+  checked={checked}
+  onCheckedChange={setChecked}
+/>
+```
+
+### With Label
+
+```tsx
+import { Checkbox } from '@/components/ui/checkbox';
+import { Text } from '@/components/ui/text';
+import { View } from 'react-native';
+import { useState } from 'react';
+
+const [checked, setChecked] = useState(false);
+
+<View className="flex-row items-center gap-2">
+  <Checkbox
+    checked={checked}
+    onCheckedChange={setChecked}
+  />
+  <Text>Accept terms and conditions</Text>
+</View>
+```
+
+### Disabled
+
+```tsx
+<Checkbox
+  checked={false}
+  onCheckedChange={() => {}}
+  disabled
+/>
+```
+
+### Disabled Checked
+
+```tsx
+<Checkbox
+  checked={true}
+  onCheckedChange={() => {}}
+  disabled
+/>
+```
+
+### Custom Styling
+
+```tsx
+<Checkbox
+  checked={checked}
+  onCheckedChange={setChecked}
+  className="size-6"
+  checkedClassName="bg-destructive border-destructive"
+/>
+```
+
+### Form Integration
+
+```tsx
+import { Checkbox } from '@/components/ui/checkbox';
+import { Text } from '@/components/ui/text';
+import { View } from 'react-native';
+import { useState } from 'react';
+
+function FormExample() {
+  const [acceptTerms, setAcceptTerms] = useState(false);
+  const [receiveEmails, setReceiveEmails] = useState(false);
 
   return (
-    <Checkbox
-      label="Controlled checkbox"
-      checked={checked}
-      onCheckedChange={setChecked}
-    />
+    <View className="gap-4">
+      <View className="flex-row items-center gap-2">
+        <Checkbox
+          checked={acceptTerms}
+          onCheckedChange={setAcceptTerms}
+        />
+        <Text>I accept the terms and conditions</Text>
+      </View>
+
+      <View className="flex-row items-center gap-2">
+        <Checkbox
+          checked={receiveEmails}
+          onCheckedChange={setReceiveEmails}
+        />
+        <Text>Send me promotional emails</Text>
+      </View>
+    </View>
   );
 }
 ```
-
-## Accessibility
-
-The Checkbox component:
-- Uses `accessibilityRole="checkbox"` for proper semantic structure
-- Supports keyboard navigation
-- Maintains WCAG color contrast requirements
-- Provides appropriate `accessibilityState` for checked and disabled states
-- Includes clear, descriptive text labels

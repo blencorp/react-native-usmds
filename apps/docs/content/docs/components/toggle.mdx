@@ -1,33 +1,86 @@
 ---
 title: Toggle
-description: Toggle is a switch that allows users to turn a setting on or off.
+description: A two-state button that can be either on or off.
 ---
-import { DemoButton } from '@/components/ui/DemoButton';
 
-<DemoButton href="https://usmds-showcase.expo.app/components/toggle"/>
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard />
+  </Tab>
+  <Tab value="code">
+    ```tsx title="toggle-example.tsx"
+    import { Toggle, ToggleIcon } from '@/components/ui/toggle';
+    import { Bold } from 'lucide-react-native';
+    import { useState } from 'react';
+
+    export default function ToggleExample() {
+      const [pressed, setPressed] = useState(false);
+
+      return (
+        <Toggle pressed={pressed} onPressedChange={setPressed}>
+          <ToggleIcon as={Bold} />
+        </Toggle>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
 
 ## Installation
 
-```package-install
-npx usmds add toggle
-```
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    ```bash
+    npx usmds add toggle
+    ```
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install the following dependencies:**
+
+        ```bash
+        npx expo install @rn-primitives/toggle lucide-react-native
+        ```
+      </Step>
+      <Step>
+        **Copy and paste the following code into your project.**
+
+        ```tsx title="@/components/ui/text.tsx"
+        // Copy from packages/registry/src/usa/components/ui/text.tsx
+        ```
+
+        ```tsx title="@/components/ui/icon.tsx"
+        // Copy from packages/registry/src/usa/components/ui/icon.tsx
+        ```
+
+        ```tsx title="@/components/ui/toggle.tsx"
+        // Copy from packages/registry/src/usa/components/ui/toggle.tsx
+        ```
+      </Step>
+      <Step>
+        **Update the import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
 
 ## Usage
 
 ```tsx
-import { Toggle } from '@components/Toggle';
+import { Toggle, ToggleIcon } from '@/components/ui/toggle';
+import { Bold } from 'lucide-react-native';
 import { useState } from 'react';
 
-function App() {
-  const [pressed, setPressed] = useState(false);
-  
-  return (
-    <Toggle 
-      pressed={pressed} 
-      onPressedChange={setPressed} 
-    />
-  );
-}
+const [pressed, setPressed] = useState(false);
+
+<Toggle pressed={pressed} onPressedChange={setPressed}>
+  <ToggleIcon as={Bold} />
+</Toggle>
 ```
 
 ## Props
@@ -36,55 +89,137 @@ function App() {
 
 Extends `TogglePrimitive.Root` props.
 
-<table>
-  <thead>
-    <tr>
-      <th>Prop</th>
-      <th>Type</th>
-      <th>Default</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>pressed</td>
-      <td>`boolean`</td>
-      <td>`false`</td>
-      <td>The controlled pressed state of the toggle.</td>
-    </tr>
-    <tr>
-      <td>onPressedChange</td>
-      <td>`(pressed: boolean) => void`</td>
-      <td>-</td>
-      <td>Callback when pressed state changes.</td>
-    </tr>
-    <tr>
-      <td>disabled</td>
-      <td>`boolean`</td>
-      <td>`false`</td>
-      <td>When true, prevents user interaction.</td>
-    </tr>
-    <tr>
-      <td>className</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>Additional Tailwind classes to apply.</td>
-    </tr>
-  </tbody>
-</table>
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| pressed | `boolean` | `false` | The controlled pressed state of the toggle. |
+| onPressedChange | `(pressed: boolean) => void` | - | Callback when pressed state changes. |
+| variant | `'default' \| 'outline'` | `'default'` | The visual style variant. |
+| size | `'default' \| 'sm' \| 'lg'` | `'default'` | The size of the toggle. |
+| disabled | `boolean` | `false` | When true, prevents user interaction. |
+| className | `string` | - | Additional classes for styling. |
+
+### ToggleIcon
+
+Extends `Icon` props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| as | `LucideIcon` | The icon component to display. |
+| className | `string` | Additional classes for styling. |
+
+## Variants
+
+### Default
+
+```tsx
+import { Toggle, ToggleIcon } from '@/components/ui/toggle';
+import { Bold } from 'lucide-react-native';
+import { useState } from 'react';
+
+function DefaultToggle() {
+  const [pressed, setPressed] = useState(false);
+
+  return (
+    <Toggle pressed={pressed} onPressedChange={setPressed}>
+      <ToggleIcon as={Bold} />
+    </Toggle>
+  );
+}
+```
+
+### Outline
+
+```tsx
+<Toggle variant="outline" pressed={pressed} onPressedChange={setPressed}>
+  <ToggleIcon as={Bold} />
+</Toggle>
+```
+
+## Sizes
+
+### Default
+
+```tsx
+<Toggle size="default" pressed={pressed} onPressedChange={setPressed}>
+  <ToggleIcon as={Bold} />
+</Toggle>
+```
+
+### Small
+
+```tsx
+<Toggle size="sm" pressed={pressed} onPressedChange={setPressed}>
+  <ToggleIcon as={Bold} />
+</Toggle>
+```
+
+### Large
+
+```tsx
+<Toggle size="lg" pressed={pressed} onPressedChange={setPressed}>
+  <ToggleIcon as={Bold} />
+</Toggle>
+```
 
 ## Examples
 
-### Basic Usage
+### With Text
 
 ```tsx
-function ToggleExample() {
+import { Toggle } from '@/components/ui/toggle';
+import { Text } from '@/components/ui/text';
+import { useState } from 'react';
+
+function ToggleWithText() {
   const [pressed, setPressed] = useState(false);
+
   return (
-    <Toggle 
-      pressed={pressed} 
-      onPressedChange={setPressed} 
-    />
+    <Toggle pressed={pressed} onPressedChange={setPressed}>
+      <Text>Bold</Text>
+    </Toggle>
+  );
+}
+```
+
+### With Icon and Text
+
+```tsx
+import { Toggle, ToggleIcon } from '@/components/ui/toggle';
+import { Text } from '@/components/ui/text';
+import { Bold } from 'lucide-react-native';
+import { useState } from 'react';
+
+<Toggle pressed={pressed} onPressedChange={setPressed}>
+  <ToggleIcon as={Bold} />
+  <Text>Bold</Text>
+</Toggle>
+```
+
+### Text Formatting Toolbar
+
+```tsx
+import { Toggle, ToggleIcon } from '@/components/ui/toggle';
+import { Bold, Italic, Underline } from 'lucide-react-native';
+import { View } from 'react-native';
+import { useState } from 'react';
+
+function FormattingToolbar() {
+  const [bold, setBold] = useState(false);
+  const [italic, setItalic] = useState(false);
+  const [underline, setUnderline] = useState(false);
+
+  return (
+    <View className="flex-row gap-1">
+      <Toggle pressed={bold} onPressedChange={setBold} variant="outline" size="sm">
+        <ToggleIcon as={Bold} />
+      </Toggle>
+      <Toggle pressed={italic} onPressedChange={setItalic} variant="outline" size="sm">
+        <ToggleIcon as={Italic} />
+      </Toggle>
+      <Toggle pressed={underline} onPressedChange={setUnderline} variant="outline" size="sm">
+        <ToggleIcon as={Underline} />
+      </Toggle>
+    </View>
   );
 }
 ```
@@ -92,45 +227,144 @@ function ToggleExample() {
 ### Disabled State
 
 ```tsx
-function DisabledToggle() {
-  const [pressed, setPressed] = useState(false);
+<Toggle pressed={false} onPressedChange={() => {}} disabled>
+  <ToggleIcon as={Bold} />
+</Toggle>
+```
+
+### Settings Panel
+
+```tsx
+import { Toggle, ToggleIcon } from '@/components/ui/toggle';
+import { Text } from '@/components/ui/text';
+import { Bell, Moon, Wifi } from 'lucide-react-native';
+import { View } from 'react-native';
+import { useState } from 'react';
+
+function SettingsPanel() {
+  const [notifications, setNotifications] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
+  const [wifi, setWifi] = useState(true);
+
   return (
-    <Toggle 
-      pressed={pressed} 
-      onPressedChange={setPressed} 
-      disabled 
-    />
+    <View className="gap-4">
+      <View className="flex-row items-center justify-between">
+        <View className="flex-row items-center gap-2">
+          <ToggleIcon as={Bell} />
+          <Text>Notifications</Text>
+        </View>
+        <Toggle
+          pressed={notifications}
+          onPressedChange={setNotifications}
+          variant="outline"
+        />
+      </View>
+
+      <View className="flex-row items-center justify-between">
+        <View className="flex-row items-center gap-2">
+          <ToggleIcon as={Moon} />
+          <Text>Dark Mode</Text>
+        </View>
+        <Toggle
+          pressed={darkMode}
+          onPressedChange={setDarkMode}
+          variant="outline"
+        />
+      </View>
+
+      <View className="flex-row items-center justify-between">
+        <View className="flex-row items-center gap-2">
+          <ToggleIcon as={Wifi} />
+          <Text>Wi-Fi</Text>
+        </View>
+        <Toggle
+          pressed={wifi}
+          onPressedChange={setWifi}
+          variant="outline"
+        />
+      </View>
+    </View>
   );
 }
 ```
 
-## Styling
+### Filter Options
 
-The Toggle component uses Tailwind CSS classes for styling through class-variance-authority (cva). Default styling includes:
+```tsx
+import { Toggle, ToggleIcon } from '@/components/ui/toggle';
+import { Text } from '@/components/ui/text';
+import { Star, Heart, Bookmark } from 'lucide-react-native';
+import { View } from 'react-native';
+import { useState } from 'react';
 
-- Container dimensions: 51px × 31px
-- Knob dimensions: 27px × 27px
-- Rounded full corners
-- Primary color when on
-- Cool gray color when off
-- White knob color
-- Consistent knob positioning:
-  - On: 22px from left
-  - Off: 2px from left
-- Disabled state opacity: 50%
+function FilterBar() {
+  const [favorites, setFavorites] = useState(false);
+  const [liked, setLiked] = useState(false);
+  const [saved, setSaved] = useState(false);
 
-## States
+  return (
+    <View className="gap-2">
+      <Text className="font-semibold">Filter by:</Text>
+      <View className="flex-row gap-2">
+        <Toggle pressed={favorites} onPressedChange={setFavorites} variant="outline">
+          <ToggleIcon as={Star} />
+          <Text>Favorites</Text>
+        </Toggle>
+        <Toggle pressed={liked} onPressedChange={setLiked} variant="outline">
+          <ToggleIcon as={Heart} />
+          <Text>Liked</Text>
+        </Toggle>
+        <Toggle pressed={saved} onPressedChange={setSaved} variant="outline">
+          <ToggleIcon as={Bookmark} />
+          <Text>Saved</Text>
+        </Toggle>
+      </View>
+    </View>
+  );
+}
+```
 
-The toggle has several visual states:
-- Off: Cool gray background with left-aligned knob
-- On: Primary color background with right-aligned knob
-- Disabled: Reduced opacity with left-aligned knob
+### Single Icon Toggle
 
-## Accessibility
+```tsx
+import { Toggle, ToggleIcon } from '@/components/ui/toggle';
+import { Volume2, VolumeX } from 'lucide-react-native';
+import { useState } from 'react';
 
-The Toggle component:
-- Uses `accessibilityRole="switch"` for proper semantic structure
-- Provides appropriate `accessibilityState` for checked and disabled states
-- Supports keyboard navigation
-- Maintains WCAG color contrast requirements
-- Uses adequate touch target size (31px height)
+function VolumeToggle() {
+  const [muted, setMuted] = useState(false);
+
+  return (
+    <Toggle pressed={muted} onPressedChange={setMuted} variant="outline">
+      <ToggleIcon as={muted ? VolumeX : Volume2} />
+    </Toggle>
+  );
+}
+```
+
+### Custom Styling
+
+```tsx
+<Toggle
+  pressed={pressed}
+  onPressedChange={setPressed}
+  className="bg-blue-100 hover:bg-blue-200"
+>
+  <ToggleIcon as={Bold} />
+</Toggle>
+```
+
+## Helper Functions
+
+### toggleVariants
+
+Use `toggleVariants` to create custom toggle-styled components:
+
+```tsx
+import { toggleVariants } from '@/components/ui/toggle';
+import { Pressable } from 'react-native';
+
+<Pressable className={toggleVariants({ variant: 'outline', size: 'lg' })}>
+  {/* custom content */}
+</Pressable>
+```
