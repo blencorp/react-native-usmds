@@ -2,31 +2,45 @@
 
 import React from 'react';
 import { View } from 'react-native';
+import { Checkbox } from '@/registry/components/ui/checkbox';
 import { Text } from '@/registry/components/ui/text';
 
 export function CheckboxPreview() {
   const [checked, setChecked] = React.useState(true);
+  const [terms, setTerms] = React.useState(false);
+  const [newsletter, setNewsletter] = React.useState(true);
 
   return (
-    <View className="flex flex-col gap-4">
-      <View className="flex flex-row items-center gap-2">
-        <View
-          className="h-4 w-4 rounded border border-gray-300 bg-white"
-          style={{ backgroundColor: checked ? '#3b82f6' : 'white' }}
+    <div className="flex flex-col gap-4 w-full max-w-sm">
+      <div className="flex flex-row items-center gap-2">
+        <Checkbox
+          checked={checked}
+          onCheckedChange={setChecked}
         />
-        <Text onPress={() => setChecked(!checked)}>
-          Accept terms and conditions
-        </Text>
-      </View>
-      <View className="flex flex-row items-center gap-2">
-        <View
-          className="h-4 w-4 rounded border border-gray-300 bg-white"
-          style={{ backgroundColor: false ? '#3b82f6' : 'white' }}
+        <Text>Accept terms and conditions</Text>
+      </div>
+      <div className="flex flex-row items-center gap-2">
+        <Checkbox
+          checked={terms}
+          onCheckedChange={setTerms}
         />
-        <Text className="text-gray-400">
-          Enable notifications (disabled)
-        </Text>
-      </View>
-    </View>
+        <Text>Subscribe to newsletter</Text>
+      </div>
+      <div className="flex flex-row items-center gap-2">
+        <Checkbox
+          checked={newsletter}
+          onCheckedChange={setNewsletter}
+        />
+        <Text>Receive product updates</Text>
+      </div>
+      <div className="flex flex-row items-center gap-2">
+        <Checkbox
+          checked={false}
+          onCheckedChange={() => {}}
+          disabled
+        />
+        <Text className="opacity-50">Disabled option</Text>
+      </div>
+    </div>
   );
 }

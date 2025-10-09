@@ -4,12 +4,13 @@ description: A two-state button that can be either on or off.
 ---
 
 import { PreviewCard } from '@/components/ui/PreviewCard';
+import { TogglePreview } from '@/components/examples';
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <Tabs items={['preview', 'code']}>
   <Tab value="preview">
-    <PreviewCard />
+    <PreviewCard preview={<TogglePreview />} />
   </Tab>
   <Tab value="code">
     ```tsx title="toggle-example.tsx"

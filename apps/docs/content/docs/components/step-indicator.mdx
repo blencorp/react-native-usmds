@@ -4,12 +4,13 @@ description: Step indicator shows progress through a sequence of steps or stages
 ---
 
 import { PreviewCard } from '@/components/ui/PreviewCard';
+import { StepIndicatorPreview } from '@/components/examples';
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <Tabs items={['preview', 'code']}>
   <Tab value="preview">
-    <PreviewCard />
+    <PreviewCard preview={<StepIndicatorPreview />} />
   </Tab>
   <Tab value="code">
     ```tsx title="step-indicator-example.tsx"

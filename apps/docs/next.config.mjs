@@ -30,6 +30,7 @@ const config = {
     'react-native-reanimated',
     'react-native-svg',
     'lucide-react-native',
+    '@react-native/assets-registry',
   ],
   experimental: {
     forceSwcTransforms: true,
@@ -67,6 +68,10 @@ function withExpo(nextConfig) {
           'react-native-web/dist/vendor/react-native/NativeEventEmitter',
         // For react-native-web 0.20 compatibility
         'react-native/Libraries/Renderer/shims/ReactNative$': 'react-native-web/dist/index',
+        // Ignore React Native assets registry (not needed for web)
+        '@react-native/assets-registry/registry': false,
+        // Shim for deprecated React DOM methods
+        'react-dom$': path.join(srcPath, 'lib/react-dom-shim.js'),
       };
 
       // Skip the problematic shim for now

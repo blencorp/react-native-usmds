@@ -4,12 +4,13 @@ description: A window overlaid on the primary window rendering content underneat
 ---
 
 import { PreviewCard } from '@/components/ui/PreviewCard';
+import { DialogPreview } from '@/components/examples';
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <Tabs items={['preview', 'code']}>
   <Tab value="preview">
-    <PreviewCard />
+    <PreviewCard preview={<DialogPreview />} />
   </Tab>
   <Tab value="code">
     ```tsx title="dialog-example.tsx"

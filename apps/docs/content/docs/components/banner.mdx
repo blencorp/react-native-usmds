@@ -4,12 +4,13 @@ description: Displays a banner for official app identification or welcome messag
 ---
 
 import { PreviewCard } from '@/components/ui/PreviewCard';
+import { BannerPreview } from '@/components/examples';
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <Tabs items={['preview', 'code']}>
   <Tab value="preview">
-    <PreviewCard />
+    <PreviewCard preview={<BannerPreview />} />
   </Tab>
   <Tab value="code">
     ```tsx title="banner-example.tsx"
@@ -19,7 +20,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       return (
         <Banner
           variant="standard-app"
-          link="agency.gov"
+          link="Here's how you know"
         />
       );
     }

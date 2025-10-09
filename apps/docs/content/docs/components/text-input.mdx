@@ -4,12 +4,13 @@ description: A foundational text input component for entering and editing text.
 ---
 
 import { PreviewCard } from '@/components/ui/PreviewCard';
+import { TextInputPreview } from '@/components/examples';
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <Tabs items={['preview', 'code']}>
   <Tab value="preview">
-    <PreviewCard />
+    <PreviewCard preview={<TextInputPreview />} />
   </Tab>
   <Tab value="code">
     ```tsx title="text-input-example.tsx"

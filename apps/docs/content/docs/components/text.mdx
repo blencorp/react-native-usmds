@@ -4,12 +4,13 @@ description: A foundational component for displaying text content with consisten
 ---
 
 import { PreviewCard } from '@/components/ui/PreviewCard';
+import { TextPreview } from '@/components/examples';
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <Tabs items={['preview', 'code']}>
   <Tab value="preview">
-    <PreviewCard />
+    <PreviewCard preview={<TextPreview />} />
   </Tab>
   <Tab value="code">
     ```tsx title="text-example.tsx"

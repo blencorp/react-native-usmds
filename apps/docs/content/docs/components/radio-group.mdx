@@ -1,0 +1,336 @@
+---
+title: Radio Group
+description: A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time.
+---
+
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { RadioGroupPreview } from '@/components/examples';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard preview={<RadioGroupPreview />} />
+  </Tab>
+  <Tab value="code">
+    ```tsx title="radio-group-example.tsx"
+    import { RadioGroup, RadioGroupItem } from '@/components/ui/radiogroup';
+    import { Label } from '@/components/ui/label';
+    import { useState } from 'react';
+
+    export default function RadioGroupExample() {
+      const [value, setValue] = useState('comfortable');
+
+      return (
+        <RadioGroup value={value} onValueChange={setValue}>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="default" id="r1" />
+            <Label htmlFor="r1">Default</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="comfortable" id="r2" />
+            <Label htmlFor="r2">Comfortable</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="compact" id="r3" />
+            <Label htmlFor="r3">Compact</Label>
+          </div>
+        </RadioGroup>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Installation
+
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    ```bash
+    npx usmds add radiogroup
+    ```
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install the following dependencies:**
+
+        ```bash
+        npx expo install @rn-primitives/radio-group
+        ```
+      </Step>
+      <Step>
+        **Copy and paste the following code into your project.**
+
+        ```tsx title="@/components/ui/radiogroup.tsx"
+        // Copy from packages/registry/src/usa/components/ui/radiogroup.tsx
+        ```
+      </Step>
+      <Step>
+        **Update the import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radiogroup';
+import { Label } from '@/components/ui/label';
+import { useState } from 'react';
+
+const [value, setValue] = useState('option-one');
+
+<RadioGroup value={value} onValueChange={setValue}>
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="option-one" id="option-one" />
+    <Label htmlFor="option-one">Option One</Label>
+  </div>
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="option-two" id="option-two" />
+    <Label htmlFor="option-two">Option Two</Label>
+  </div>
+</RadioGroup>
+```
+
+## Props
+
+### RadioGroup
+
+Extends `@rn-primitives/radio-group` Root props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| value | `string` | The controlled value of the radio item to check. |
+| onValueChange | `(value: string) => void` | Event handler called when the value changes. |
+| disabled | `boolean` | When true, prevents the user from interacting with radio items. |
+| className | `string` | Additional classes for styling. |
+
+### RadioGroupItem
+
+Extends `@rn-primitives/radio-group` Item props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| value | `string` | **Required.** The value of the radio item. |
+| id | `string` | The id of the radio item (for label association). |
+| disabled | `boolean` | When true, prevents the user from interacting with the radio item. |
+| className | `string` | Additional classes for styling. |
+
+## Examples
+
+### Default
+
+```tsx
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radiogroup';
+import { Label } from '@/components/ui/label';
+import { useState } from 'react';
+
+function RadioGroupExample() {
+  const [value, setValue] = useState('option-one');
+
+  return (
+    <RadioGroup value={value} onValueChange={setValue}>
+      <div className="flex items-center space-x-2">
+        <RadioGroupItem value="option-one" id="option-one" />
+        <Label htmlFor="option-one">Option One</Label>
+      </div>
+      <div className="flex items-center space-x-2">
+        <RadioGroupItem value="option-two" id="option-two" />
+        <Label htmlFor="option-two">Option Two</Label>
+      </div>
+    </RadioGroup>
+  );
+}
+```
+
+### With Form
+
+```tsx
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radiogroup';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import { Text } from '@/components/ui/text';
+import { useState } from 'react';
+import { View } from 'react-native';
+
+function FormExample() {
+  const [plan, setPlan] = useState('free');
+
+  const handleSubmit = () => {
+    console.log('Selected plan:', plan);
+  };
+
+  return (
+    <View className="gap-4">
+      <Text className="font-semibold">Choose a plan</Text>
+      <RadioGroup value={plan} onValueChange={setPlan}>
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="free" id="free" />
+          <Label htmlFor="free">Free</Label>
+        </div>
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="pro" id="pro" />
+          <Label htmlFor="pro">Pro</Label>
+        </div>
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="enterprise" id="enterprise" />
+          <Label htmlFor="enterprise">Enterprise</Label>
+        </div>
+      </RadioGroup>
+      <Button onPress={handleSubmit}>
+        <Text>Continue</Text>
+      </Button>
+    </View>
+  );
+}
+```
+
+### Disabled State
+
+```tsx
+<RadioGroup value="option-one" onValueChange={() => {}}>
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="option-one" id="option-one" />
+    <Label htmlFor="option-one">Option One</Label>
+  </div>
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="option-two" id="option-two" disabled />
+    <Label htmlFor="option-two" className="opacity-50">Option Two (Disabled)</Label>
+  </div>
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="option-three" id="option-three" disabled />
+    <Label htmlFor="option-three" className="opacity-50">Option Three (Disabled)</Label>
+  </div>
+</RadioGroup>
+```
+
+### Entire Group Disabled
+
+```tsx
+<RadioGroup value="option-one" disabled>
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="option-one" id="option-one" />
+    <Label htmlFor="option-one">Option One</Label>
+  </div>
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="option-two" id="option-two" />
+    <Label htmlFor="option-two">Option Two</Label>
+  </div>
+</RadioGroup>
+```
+
+### Vertical Layout (Default)
+
+```tsx
+<RadioGroup value={value} onValueChange={setValue}>
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="option-1" id="option-1" />
+    <Label htmlFor="option-1">Option 1</Label>
+  </div>
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="option-2" id="option-2" />
+    <Label htmlFor="option-2">Option 2</Label>
+  </div>
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="option-3" id="option-3" />
+    <Label htmlFor="option-3">Option 3</Label>
+  </div>
+</RadioGroup>
+```
+
+### Horizontal Layout
+
+```tsx
+<RadioGroup value={value} onValueChange={setValue} className="flex-row gap-6">
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="option-1" id="h-option-1" />
+    <Label htmlFor="h-option-1">Option 1</Label>
+  </div>
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="option-2" id="h-option-2" />
+    <Label htmlFor="h-option-2">Option 2</Label>
+  </div>
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="option-3" id="h-option-3" />
+    <Label htmlFor="h-option-3">Option 3</Label>
+  </div>
+</RadioGroup>
+```
+
+### With Descriptions
+
+```tsx
+import { Text } from '@/components/ui/text';
+
+<RadioGroup value={value} onValueChange={setValue}>
+  <div className="flex items-start space-x-2">
+    <RadioGroupItem value="option-1" id="desc-option-1" className="mt-1" />
+    <div className="flex-1">
+      <Label htmlFor="desc-option-1">Option 1</Label>
+      <Text className="text-sm text-muted-foreground">
+        This is a description for option 1
+      </Text>
+    </div>
+  </div>
+  <div className="flex items-start space-x-2">
+    <RadioGroupItem value="option-2" id="desc-option-2" className="mt-1" />
+    <div className="flex-1">
+      <Label htmlFor="desc-option-2">Option 2</Label>
+      <Text className="text-sm text-muted-foreground">
+        This is a description for option 2
+      </Text>
+    </div>
+  </div>
+</RadioGroup>
+```
+
+### Settings Example
+
+```tsx
+function SettingsExample() {
+  const [theme, setTheme] = useState('light');
+  const [notifications, setNotifications] = useState('all');
+
+  return (
+    <View className="gap-6">
+      <View className="gap-3">
+        <Text className="font-semibold">Theme</Text>
+        <RadioGroup value={theme} onValueChange={setTheme}>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="light" id="light" />
+            <Label htmlFor="light">Light</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="dark" id="dark" />
+            <Label htmlFor="dark">Dark</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="system" id="system" />
+            <Label htmlFor="system">System</Label>
+          </div>
+        </RadioGroup>
+      </View>
+
+      <View className="gap-3">
+        <Text className="font-semibold">Notifications</Text>
+        <RadioGroup value={notifications} onValueChange={setNotifications}>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="all" id="all" />
+            <Label htmlFor="all">All notifications</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="mentions" id="mentions" />
+            <Label htmlFor="mentions">Mentions only</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="none" id="none" />
+            <Label htmlFor="none">None</Label>
+          </div>
+        </RadioGroup>
+      </View>
+    </View>
+  );
+}
+```

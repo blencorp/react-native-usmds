@@ -4,12 +4,13 @@ description: Snackbars provide brief messages about app processes at the bottom 
 ---
 
 import { PreviewCard } from '@/components/ui/PreviewCard';
+import { SnackbarPreview } from '@/components/examples';
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <Tabs items={['preview', 'code']}>
   <Tab value="preview">
-    <PreviewCard />
+    <PreviewCard preview={<SnackbarPreview />} />
   </Tab>
   <Tab value="code">
     ```tsx title="snackbar-example.tsx"

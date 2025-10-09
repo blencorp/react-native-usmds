@@ -4,12 +4,13 @@ description: Tags are used to label, categorize, or organize items using keyword
 ---
 
 import { PreviewCard } from '@/components/ui/PreviewCard';
+import { TagPreview } from '@/components/examples';
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <Tabs items={['preview', 'code']}>
   <Tab value="preview">
-    <PreviewCard />
+    <PreviewCard preview={<TagPreview />} />
   </Tab>
   <Tab value="code">
     ```tsx title="tag-example.tsx"
