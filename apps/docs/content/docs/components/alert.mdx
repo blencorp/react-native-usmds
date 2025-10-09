@@ -1,264 +1,157 @@
 ---
 title: Alert
-description: Alerts keep users informed of important and sometimes time-sensitive changes.
+description: Displays a callout for user attention.
 ---
-import {DemoButton} from '@/components/ui/DemoButton';
 
-<DemoButton href="https://usmds-showcase.expo.app/components/alert"/>
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { AlertPreview } from '@/components/examples';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+## Preview
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard preview={<AlertPreview />} />
+  </Tab>
+  <Tab value="code">
+    ```tsx title="alert-example.tsx"
+    import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
+    import { CheckCircle2, Terminal, AlertCircle } from 'lucide-react-native';
+    import { View } from 'react-native';
+
+    export default function AlertExample() {
+      return (
+        <View className="w-full max-w-xl gap-4">
+          <Alert icon={CheckCircle2}>
+            <AlertTitle>Success! Your changes have been saved</AlertTitle>
+            <AlertDescription>This is an alert with icon, title and description.</AlertDescription>
+          </Alert>
+
+          <Alert icon={Terminal}>
+            <AlertTitle>This Alert has no description.</AlertTitle>
+          </Alert>
+
+          <Alert variant="destructive" icon={AlertCircle}>
+            <AlertTitle>Unable to process your payment.</AlertTitle>
+            <AlertDescription>Please verify your billing information and try again.</AlertDescription>
+          </Alert>
+        </View>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
 
 ## Installation
 
-```package-install
-npx usmds add alert
-```
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    ```bash
+    npx usmds add alert
+    ```
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install dependencies:**
+
+        ```bash
+        npx expo install lucide-react-native
+        ```
+      </Step>
+      <Step>
+        **Copy and paste the following code into your project:**
+
+        ```tsx title="@/components/ui/alert.tsx"
+        // Copy from packages/registry/src/usa/components/ui/alert.tsx
+        ```
+      </Step>
+      <Step>
+        **Update the import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
 
 ## Usage
 
 ```tsx
-import { Alert } from '@components/Alert';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { AlertCircle } from 'lucide-react-native';
 
-// Basic usage
-<Alert
-  variant="info"
-  title="Alert message"
-  description={{
-    body: 'Basic alert message'
-  }}
-/>
-
-// With link
-<Alert
-  variant="info"
-  title="Alert message"
-  description={{
-    body: 'Additional context and followup information including ',
-    link: 'a link'
-  }}
-/>
+<Alert icon={AlertCircle}>
+  <AlertTitle>Heads up!</AlertTitle>
+  <AlertDescription>
+    You can add components to your app using the CLI.
+  </AlertDescription>
+</Alert>
 ```
 
 ## Props
 
-### Alert
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| variant | `'default' \| 'destructive'` | `'default'` | The visual style variant |
+| icon | `React.ComponentType` | - | Icon component to display |
+| className | `string` | - | Additional styles |
 
-Extends `View` props.
+## Examples
 
-<table>
-  <thead>
-    <tr>
-      <th>Prop</th>
-      <th>Type</th>
-      <th>Default</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>variant</td>
-      <td>`'info' | 'error' | 'warning' | 'success' | 'emergency'`</td>
-      <td>`'info'`</td>
-      <td>Determines the color scheme and style of the alert.</td>
-    </tr>
-    <tr>
-      <td>alertStyle</td>
-      <td>`'default' | 'no-header' | 'list' | 'slim' | 'no-icon'`</td>
-      <td>`'default'`</td>
-      <td>Controls the layout and appearance of the alert.</td>
-    </tr>
-    <tr>
-      <td>title</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>The main heading text of the alert.</td>
-    </tr>
-    <tr>
-      <td>description</td>
-      <td>`AlertDescription`</td>
-      <td>-</td>
-      <td>Content configuration for the alert body.</td>
-    </tr>
-    <tr>
-      <td>showIcon</td>
-      <td>`boolean`</td>
-      <td>`true`</td>
-      <td>Controls the visibility of the alert icon.</td>
-    </tr>
-    <tr>
-      <td>className</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>Additional CSS classes to apply to the alert.</td>
-    </tr>
-  </tbody>
-</table>
-
-### AlertDescription
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>title</td>
-      <td>`string`</td>
-      <td>Optional title text for no-header and slim variants.</td>
-    </tr>
-    <tr>
-      <td>body</td>
-      <td>`string`</td>
-      <td>Main content text of the alert.</td>
-    </tr>
-    <tr>
-      <td>link</td>
-      <td>`string`</td>
-      <td>Optional link text to be displayed.</td>
-    </tr>
-    <tr>
-      <td>messages</td>
-      <td>`Array<AlertMessage>`</td>
-      <td>Array of messages for list-style alerts.</td>
-    </tr>
-  </tbody>
-</table>
-
-### AlertMessage
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>text</td>
-      <td>`string`</td>
-      <td>The main text content of the message.</td>
-    </tr>
-    <tr>
-      <td>link</td>
-      <td>`string`</td>
-      <td>Optional link text within the message.</td>
-    </tr>
-    <tr>
-      <td>suffix</td>
-      <td>`string`</td>
-      <td>Optional text to appear after the link.</td>
-    </tr>
-  </tbody>
-</table>
-
-## Variants
-
-### Info Alert
+### Default Alert
 
 ```tsx
-<Alert variant='info' title='Info alert' description={{ body: 'This is an informational alert.' }} />
+<Alert>
+  <AlertTitle>Notification</AlertTitle>
+  <AlertDescription>This is a default alert message.</AlertDescription>
+</Alert>
 ```
 
-### Error Alert
+### With Icon
 
 ```tsx
-<Alert variant='error' title='Error alert' description={{ body: 'This is an error alert.' }} />
+import { Info } from 'lucide-react-native';
+
+<Alert icon={Info}>
+  <AlertTitle>Information</AlertTitle>
+  <AlertDescription>
+    Here's some important information for you.
+  </AlertDescription>
+</Alert>
 ```
 
-### Warning Alert
+### Destructive Alert
 
 ```tsx
-<Alert variant='warning' title='Warning alert' description={{ body: 'This is a warning alert.' }} />
+import { AlertCircle } from 'lucide-react-native';
+
+<Alert variant="destructive" icon={AlertCircle}>
+  <AlertTitle>Error</AlertTitle>
+  <AlertDescription>
+    Something went wrong. Please try again.
+  </AlertDescription>
+</Alert>
 ```
 
-### Success Alert
+### Without Description
 
 ```tsx
-<Alert variant='success' title='Success alert' description={{ body: 'This is a success alert.' }} />
+<Alert icon={Terminal}>
+  <AlertTitle>Command executed successfully</AlertTitle>
+</Alert>
 ```
 
-### Emergency Alert
+## Accessibility
 
-```tsx
-<Alert variant='emergency' title='Emergency alert' description={{ body: 'This is an emergency alert.' }} />
-```
+- Alert components have appropriate ARIA roles
+- Icons are decorative and marked with aria-hidden
+- Color is not the only indicator of alert type
+- Text contrast meets WCAG guidelines
 
-## Alert Styles
+## Best Practices
 
-### Default
-
-```tsx
-<Alert
-  variant='info'
-  alertStyle='default'
-  title='Default alert'
-  description={{
-    body: 'Standard alert with icon and header.'
-  }}
-/>
-```
-
-### No Header
-
-```tsx
-<Alert
-  variant='info'
-  alertStyle='no-header'
-  description={{
-    title: 'Compact message',
-    body: 'Alert without separate header section.'
-  }}
-/>
-```
-
-### List
-
-```tsx
-<Alert
-  variant='info'
-  alertStyle='list'
-  title='List alert'
-  description={{
-    messages: [
-      {
-        text: 'First message with ',
-        link: 'a link',
-        suffix: ' and more text.'
-      },
-      {
-        text: 'Second message item.'
-      }
-    ]
-  }}
-/>
-```
-
-### Slim
-
-```tsx
-<Alert
-  variant='info'
-  alertStyle='slim'
-  description={{
-    title: 'Slim alert',
-    body: 'Compact version with smaller icon.'
-  }}
-/>
-```
-
-### No Icon
-
-```tsx
-<Alert
-  variant='info'
-  alertStyle='no-icon'
-  description={{
-    title: 'No icon alert',
-    body: 'Alert without an icon.'
-  }}
-/>
-```
+1. **Clear Messaging**: Use concise, actionable language
+2. **Appropriate Variants**: Use destructive only for errors
+3. **Icon Usage**: Include relevant icons to enhance meaning
+4. **Positioning**: Place alerts where users will notice them
+5. **Dismissible**: Consider making non-critical alerts dismissible

@@ -1,248 +1,226 @@
 ---
 title: Button
-description: Buttons allow users to trigger actions with a single tap.
+description: Displays a button or a component that looks like a button.
 ---
-import {DemoButton} from '@/components/ui/DemoButton';
 
-<DemoButton href="https://usmds-showcase.expo.app/components/button"/>
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import {
+  ButtonPreview,
+  ButtonSecondaryPreview,
+  ButtonDestructivePreview,
+  ButtonOutlinePreview,
+  ButtonGhostPreview,
+  ButtonLinkPreview,
+  ButtonIconPreview,
+  ButtonWithIconPreview
+} from '@/components/examples';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+## Preview
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard preview={<ButtonPreview />} />
+  </Tab>
+  <Tab value="code">
+    ```tsx title="button-example.tsx"
+    import { Button } from '@/components/ui/button';
+    import { Text } from '@/components/ui/text';
+
+    export default function ButtonExample() {
+      return (
+        <Button>
+          <Text>Button</Text>
+        </Button>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
 
 ## Installation
 
-```package-install
-npx usmds add button
-```
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    ```bash
+    npx usmds add button
+    ```
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install dependencies:**
+
+        ```bash
+        npx expo install lucide-react-native class-variance-authority
+        ```
+      </Step>
+      <Step>
+        **Copy and paste the following code into your project:**
+
+        ```tsx title="@/components/ui/text.tsx"
+        // Copy from packages/registry/src/usa/components/ui/text.tsx
+        ```
+
+        ```tsx title="@/components/ui/button.tsx"
+        // Copy from packages/registry/src/usa/components/ui/button.tsx
+        ```
+      </Step>
+      <Step>
+        **Update the import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
 
 ## Usage
 
 ```tsx
-import { Button } from '@components/Button';
-import { Text } from '@components/Text';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
-<Button>
-  <Text>Button</Text>
+<Button variant="default" size="default" onPress={() => console.log('Pressed')}>
+  <Text>Click me</Text>
 </Button>
 ```
 
 ## Props
 
-### Button
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| variant | `'default' \| 'secondary' \| 'destructive' \| 'outline' \| 'ghost' \| 'link'` | `'default'` | The visual style variant |
+| size | `'default' \| 'sm' \| 'lg' \| 'icon'` | `'default'` | The size of the button |
+| disabled | `boolean` | `false` | Whether the button is disabled |
+| onPress | `() => void` | - | Handler called when button is pressed |
+| className | `string` | - | Additional styles |
 
-Extends `Pressable` props.
+## Examples
 
-<table>
-  <thead>
-    <tr>
-      <th>Prop</th>
-      <th>Type</th>
-      <th>Default</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>variant</td>
-      <td>`'default' | 'secondary' | 'accent-cool' | 'accent-warm' | 'base' | 'outline' | 'inverse'`</td>
-      <td>`'default'`</td>
-      <td>The visual style variant of the button.</td>
-    </tr>
-    <tr>
-      <td>size</td>
-      <td>`'default' | 'sm' | 'lg' | 'big' | 'icon'`</td>
-      <td>`'default'`</td>
-      <td>The size variant of the button.</td>
-    </tr>
-    <tr>
-      <td>startIcon</td>
-      <td>`ReactNode`</td>
-      <td>-</td>
-      <td>Icon element to display before the button content.</td>
-    </tr>
-    <tr>
-      <td>endIcon</td>
-      <td>`ReactNode`</td>
-      <td>-</td>
-      <td>Icon element to display after the button content.</td>
-    </tr>
-    <tr>
-      <td>disabled</td>
-      <td>`boolean`</td>
-      <td>`false`</td>
-      <td>When true, disables button interactions.</td>
-    </tr>
-    <tr>
-      <td>className</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>Additional Tailwind classes to apply.</td>
-    </tr>
-  </tbody>
-</table>
+### Variants
 
-## Variants
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <div className="flex flex-row flex-wrap gap-2">
+      <ButtonPreview />
+      <ButtonSecondaryPreview />
+      <ButtonDestructivePreview />
+      <ButtonOutlinePreview />
+      <ButtonGhostPreview />
+      <ButtonLinkPreview />
+    </div>
+  </Tab>
+  <Tab value="code">
+    ```tsx
+    <View className="flex-row flex-wrap gap-2">
+      <Button variant="default">
+        <Text>Default</Text>
+      </Button>
+      <Button variant="secondary">
+        <Text>Secondary</Text>
+      </Button>
+      <Button variant="destructive">
+        <Text>Destructive</Text>
+      </Button>
+      <Button variant="outline">
+        <Text>Outline</Text>
+      </Button>
+      <Button variant="ghost">
+        <Text>Ghost</Text>
+      </Button>
+      <Button variant="link">
+        <Text>Link</Text>
+      </Button>
+    </View>
+    ```
+  </Tab>
+</Tabs>
 
-### Default (Primary)
+### With Icons
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard preview={<ButtonWithIconPreview />} />
+  </Tab>
+  <Tab value="code">
+    ```tsx
+    import { Mail } from 'lucide-react-native';
+
+    <Button>
+      <Mail className="mr-2 h-4 w-4" color="white" />
+      <Text>Login with Email</Text>
+    </Button>
+    ```
+  </Tab>
+</Tabs>
+
+### Icon Only
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard preview={<ButtonIconPreview />} />
+  </Tab>
+  <Tab value="code">
+    ```tsx
+    import { ChevronRight } from 'lucide-react-native';
+
+    <Button variant="outline" size="icon">
+      <ChevronRight className="h-4 w-4" />
+    </Button>
+    ```
+  </Tab>
+</Tabs>
+
+
+## Styling Tips
+
+### Custom Variants
+
+You can create custom button variants by using the className prop:
 
 ```tsx
-<Button variant="default">
-  <Text>Primary</Text>
+// Success variant
+<Button
+  variant="default"
+  className="bg-green-600 active:bg-green-700"
+>
+  <Text>Success</Text>
+</Button>
+
+// Warning variant
+<Button
+  variant="default"
+  className="bg-yellow-600 active:bg-yellow-700"
+>
+  <Text>Warning</Text>
 </Button>
 ```
 
-### Secondary
+### Rounded Buttons
 
 ```tsx
-<Button variant="secondary">
-  <Text>Secondary</Text>
-</Button>
-```
-
-### Accent Cool
-
-```tsx
-<Button variant="accent-cool">
-  <Text>Accent Cool</Text>
-</Button>
-```
-
-### Accent Warm
-
-```tsx
-<Button variant="accent-warm">
-  <Text>Accent Warm</Text>
-</Button>
-```
-
-### Base
-
-```tsx
-<Button variant="base">
-  <Text>Base</Text>
-</Button>
-```
-
-### Outline
-
-```tsx
-<Button variant="outline">
-  <Text>Outline</Text>
-</Button>
-```
-
-### Inverse
-
-```tsx
-<Button variant="inverse">
-  <Text>Inverse</Text>
-</Button>
-```
-
-## Sizes
-
-### Small
-```tsx
-<Button size="sm">
-  <Text>Small Button</Text>
-</Button>
-```
-
-### Default
-```tsx
-<Button size="default">
-  <Text>Default Button</Text>
-</Button>
-```
-
-### Large
-```tsx
-<Button size="lg">
-  <Text>Large Button</Text>
-</Button>
-```
-
-### Big
-```tsx
-<Button size="big">
-  <Text>Big Button</Text>
-</Button>
-```
-
-### Icon
-```tsx
-<Button size="icon">
-  <Mail />
-</Button>
-```
-
-## With Icons
-
-```tsx
-// Start Icon
-<Button startIcon={<Mail />}>
-  <Text>Start Icon</Text>
+<Button variant="default" className="rounded-full">
+  <Text>Rounded Full</Text>
 </Button>
 
-// End Icon
-<Button endIcon={<ArrowRight />}>
-  <Text>End Icon</Text>
-</Button>
-
-// Both Icons
-<Button startIcon={<Mail />} endIcon={<ArrowRight />}>
-  <Text>Both Icons</Text>
-</Button>
-```
-
-## States
-
-Buttons support various states through className props:
-
-### Hover
-```tsx
-<Button className="bg-primary-hover">
-  <Text>Hover State</Text>
-</Button>
-```
-
-### Active
-```tsx
-<Button className="bg-primary-active">
-  <Text>Active State</Text>
-</Button>
-```
-
-### Focus
-```tsx
-<Button className="ring-2 ring-focus-ring ring-offset-2">
-  <Text>Focus State</Text>
-</Button>
-```
-
-### Disabled
-```tsx
-<Button disabled>
-  <Text>Disabled Button</Text>
-</Button>
-```
-
-## Interactive State
-
-The Button component accepts a function as children to render content based on the press state:
-
-```tsx
-<Button>
-  {(state) => (
-    <Text>
-      {state.pressed ? 'Pressing!' : state.hovered ? 'Hovering!' : 'Interactive'}
-    </Text>
-  )}
+<Button variant="outline" className="rounded-lg">
+  <Text>Rounded Large</Text>
 </Button>
 ```
 
 ## Accessibility
 
-The Button component:
-- Uses `role="button"` for proper semantic structure
-- Supports keyboard navigation
-- Maintains WCAG color contrast requirements
-- Provides appropriate disabled states
-- Includes clear, descriptive text labels
+- Buttons have proper touch targets (minimum 44x44 points)
+- Disabled states are clearly indicated
+- Focus states are visible for keyboard navigation
+- Press states provide visual feedback
+- Text contrast meets WCAG guidelines
+
+## Best Practices
+
+1. **Clear Labels**: Use descriptive text that explains the action
+2. **Icon Usage**: Include icons to enhance meaning, not replace text
+3. **Consistent Styling**: Use variants consistently across your app
+4. **Loading States**: Show loading indicators for async actions
+5. **Disabled Logic**: Disable buttons during loading or invalid states
+6. **Touch Targets**: Ensure buttons are large enough for comfortable tapping

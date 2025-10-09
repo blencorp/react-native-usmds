@@ -2,36 +2,86 @@
 title: Pagination
 description: Pagination helps users navigate through multiple pages of content.
 ---
-import {DemoButton} from '@/components/ui/DemoButton';
 
-<DemoButton href="https://usmds-showcase.expo.app/components/pagination"/>
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { PaginationPreview } from '@/components/examples';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard preview={<PaginationPreview />} />
+  </Tab>
+  <Tab value="code">
+    ```tsx title="pagination-example.tsx"
+    import { Pagination } from '@/components/ui/pagination';
+    import { useState } from 'react';
+
+    export default function PaginationExample() {
+      const [currentPage, setCurrentPage] = useState(1);
+
+      return (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={10}
+          totalItems={100}
+          onPageChange={setCurrentPage}
+        />
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
 
 ## Installation
 
-```package-install
-npx usmds add pagination
-```
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    ```bash
+    npx usmds add pagination
+    ```
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install the following dependencies:**
+
+        ```bash
+        npx expo install lucide-react-native
+        ```
+      </Step>
+      <Step>
+        **Copy and paste the following code into your project.**
+
+        ```tsx title="@/components/ui/icon.tsx"
+        // Copy from packages/registry/src/usa/components/ui/icon.tsx
+        ```
+
+        ```tsx title="@/components/ui/pagination.tsx"
+        // Copy from packages/registry/src/usa/components/ui/pagination.tsx
+        ```
+      </Step>
+      <Step>
+        **Update the import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
 
 ## Usage
 
 ```tsx
-import { Pagination } from '@components/Pagination';
+import { Pagination } from '@/components/ui/pagination';
 import { useState } from 'react';
 
-function App() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = 10;
-  const totalItems = 100;
+const [currentPage, setCurrentPage] = useState(1);
 
-  return (
-    <Pagination
-      currentPage={currentPage}
-      totalPages={totalPages}
-      totalItems={totalItems}
-      onPageChange={setCurrentPage}
-    />
-  );
-}
+<Pagination
+  currentPage={currentPage}
+  totalPages={10}
+  totalItems={100}
+  onPageChange={setCurrentPage}
+/>
 ```
 
 ## Props
@@ -40,69 +90,55 @@ function App() {
 
 Extends `View` props.
 
-<table>
-  <thead>
-    <tr>
-      <th>Prop</th>
-      <th>Type</th>
-      <th>Default</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>currentPage</td>
-      <td>`number`</td>
-      <td>-</td>
-      <td>The current active page number.</td>
-    </tr>
-    <tr>
-      <td>totalPages</td>
-      <td>`number`</td>
-      <td>-</td>
-      <td>The total number of pages.</td>
-    </tr>
-    <tr>
-      <td>totalItems</td>
-      <td>`number`</td>
-      <td>-</td>
-      <td>The total number of items across all pages.</td>
-    </tr>
-    <tr>
-      <td>onPageChange</td>
-      <td>`(page: number) => void`</td>
-      <td>-</td>
-      <td>Callback fired when the page changes.</td>
-    </tr>
-    <tr>
-      <td>className</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>Additional Tailwind classes to apply.</td>
-    </tr>
-  </tbody>
-</table>
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| currentPage | `number` | - | **Required.** The current active page number. |
+| totalPages | `number` | - | **Required.** The total number of pages. |
+| totalItems | `number` | - | **Required.** The total number of items across all pages. |
+| onPageChange | `(page: number) => void` | - | **Required.** Callback fired when the page changes. |
+| className | `string` | - | Additional classes for the container. |
 
 ## Examples
 
 ### Basic Usage
 
 ```tsx
+import { Pagination } from '@/components/ui/pagination';
+import { useState } from 'react';
+
+function PaginationExample() {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  return (
+    <Pagination
+      currentPage={currentPage}
+      totalPages={10}
+      totalItems={100}
+      onPageChange={setCurrentPage}
+    />
+  );
+}
+```
+
+### With Custom Width
+
+```tsx
 <Pagination
   currentPage={1}
   totalPages={10}
   totalItems={100}
-  onPageChange={(page) => console.log(`Page changed to ${page}`)}
+  onPageChange={(page) => console.log(page)}
+  className="w-full"
 />
 ```
 
-### With State Management
+### Large Dataset
 
 ```tsx
-function PaginationExample() {
+function LargeDatasetExample() {
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = 10;
-  const totalItems = 100;
+  const totalPages = 100;
+  const totalItems = 1000;
 
   return (
     <Pagination
@@ -115,31 +151,28 @@ function PaginationExample() {
 }
 ```
 
-## Styling
+### Controlled Pagination
 
-The Pagination component uses Tailwind CSS classes for styling. Default styling includes:
+```tsx
+function ControlledPagination() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  const totalItems = 95;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-- Container width: 393px
-- Button dimensions: 50px × 50px
-- Rounded corners
-- Primary color for active buttons
-- Gray color for disabled state
-- Consistent padding and spacing
-- Center-aligned text
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    // Fetch new data for this page
+    fetchData(page, itemsPerPage);
+  };
 
-## States
-
-The pagination buttons have several states:
-- Active: Primary background color
-- Disabled: Gray background color (when at first/last page)
-- Default: Primary background color
-
-## Accessibility
-
-The Pagination component:
-- Uses `accessibilityRole="button"` for navigation buttons
-- Provides `accessibilityLabel` for screen readers
-- Includes proper `accessibilityState` for disabled buttons
-- Maintains WCAG color contrast requirements
-- Supports keyboard navigation
-- Uses adequate touch target sizes (50x50px)
+  return (
+    <Pagination
+      currentPage={currentPage}
+      totalPages={totalPages}
+      totalItems={totalItems}
+      onPageChange={handlePageChange}
+    />
+  );
+}
+```

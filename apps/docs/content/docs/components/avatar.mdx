@@ -2,26 +2,76 @@
 title: Avatar
 description: An image element with a fallback for representing the user.
 ---
-import {DemoButton} from '@/components/ui/DemoButton';
 
-<DemoButton href="https://usmds-showcase.expo.app/components/avatar"/>
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { AvatarPreview } from '@/components/examples';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard preview={<AvatarPreview />} />
+  </Tab>
+  <Tab value="code">
+    ```tsx title="avatar-example.tsx"
+    import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+    import { Text } from '@/components/ui/text';
+
+    export default function AvatarExample() {
+      return (
+        <Avatar>
+          <AvatarImage source={{ uri: 'https://github.com/shadcn.png' }} />
+          <AvatarFallback>
+            <Text>CN</Text>
+          </AvatarFallback>
+        </Avatar>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
 
 ## Installation
 
-```package-install
-npx usmds add avatar
-```
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    ```bash
+    npx usmds add avatar
+    ```
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install the following dependencies:**
+
+        ```bash
+        npx expo install @rn-primitives/avatar
+        ```
+      </Step>
+      <Step>
+        **Copy and paste the following code into your project.**
+
+        ```tsx title="@/components/ui/avatar.tsx"
+        // Copy from packages/registry/src/usa/components/ui/avatar.tsx
+        ```
+      </Step>
+      <Step>
+        **Update the import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
 
 ## Usage
 
 ```tsx
-import { Avatar, AvatarImage, AvatarFallback } from '@components/Avatar';
-import { Text } from 'react-native';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { Text } from '@/components/ui/text';
 
-<Avatar alt="User Avatar">
-  <AvatarImage source={{ uri: 'https://github.com/user.png' }} />
+<Avatar>
+  <AvatarImage source={{ uri: 'https://github.com/shadcn.png' }} />
   <AvatarFallback>
-    <Text>JD</Text>
+    <Text>CN</Text>
   </AvatarFallback>
 </Avatar>
 ```
@@ -30,110 +80,52 @@ import { Text } from 'react-native';
 
 ### Avatar
 
-Extends `AvatarPrimitive.Root` props.
+Extends `@rn-primitives/avatar` Root props.
 
-<table>
-  <thead>
-    <tr>
-      <th>Prop</th>
-      <th>Type</th>
-      <th>Default</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>alt *</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>The accessible label for the avatar.</td>
-    </tr>
-    <tr>
-      <td>className</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>Additional Tailwind classes to apply.</td>
-    </tr>
-    <tr>
-      <td>asChild</td>
-      <td>`boolean`</td>
-      <td>`false`</td>
-      <td>Optional flag to allow composing the component with custom elements.</td>
-    </tr>
-  </tbody>
-</table>
+| Prop | Type | Description |
+|------|------|-------------|
+| className | `string` | Additional classes for the avatar container. |
 
 ### AvatarImage
 
-Extends `AvatarPrimitive.Image` props.
+Extends `@rn-primitives/avatar` Image props.
 
-<table>
-  <thead>
-    <tr>
-      <th>Prop</th>
-      <th>Type</th>
-      <th>Default</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>source</td>
-      <td>`ImageSourcePropType`</td>
-      <td>-</td>
-      <td>The image source to be displayed.</td>
-    </tr>
-    <tr>
-      <td>className</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>Additional Tailwind classes to apply.</td>
-    </tr>
-    <tr>
-      <td>asChild</td>
-      <td>`boolean`</td>
-      <td>`false`</td>
-      <td>Optional flag to allow composing the component with custom elements.</td>
-    </tr>
-  </tbody>
-</table>
+| Prop | Type | Description |
+|------|------|-------------|
+| source | `ImageSourcePropType` | The image source. |
+| className | `string` | Additional classes for the image. |
 
 ### AvatarFallback
 
-Extends `AvatarPrimitive.Fallback` props.
+Extends `@rn-primitives/avatar` Fallback props.
 
-<table>
-  <thead>
-    <tr>
-      <th>Prop</th>
-      <th>Type</th>
-      <th>Default</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>className</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>Additional Tailwind classes to apply.</td>
-    </tr>
-    <tr>
-      <td>asChild</td>
-      <td>`boolean`</td>
-      <td>`false`</td>
-      <td>Optional flag to allow composing the component with custom elements.</td>
-    </tr>
-  </tbody>
-</table>
+| Prop | Type | Description |
+|------|------|-------------|
+| className | `string` | Additional classes for the fallback. |
 
 ## Examples
 
-### Default Avatar
+### Default
 
 ```tsx
-<Avatar alt="John Doe">
-  <AvatarImage source={{ uri: 'https://github.com/johndoe.png' }} />
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { Text } from '@/components/ui/text';
+
+<Avatar>
+  <AvatarImage source={{ uri: 'https://github.com/shadcn.png' }} />
+  <AvatarFallback>
+    <Text>CN</Text>
+  </AvatarFallback>
+</Avatar>
+```
+
+### Fallback Only
+
+```tsx
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Text } from '@/components/ui/text';
+
+<Avatar>
   <AvatarFallback>
     <Text>JD</Text>
   </AvatarFallback>
@@ -143,21 +135,10 @@ Extends `AvatarPrimitive.Fallback` props.
 ### Custom Size
 
 ```tsx
-<Avatar alt="Custom Size" className="h-16 w-16">
-  <AvatarImage source={{ uri: 'https://github.com/user.png' }} />
+<Avatar className="size-16">
+  <AvatarImage source={{ uri: 'https://github.com/shadcn.png' }} />
   <AvatarFallback>
-    <Text className="text-lg">CS</Text>
-  </AvatarFallback>
-</Avatar>
-```
-
-### Custom Background
-
-```tsx
-<Avatar alt="Custom Background">
-  <AvatarImage source={{ uri: 'https://github.com/user.png' }} />
-  <AvatarFallback className="bg-primary">
-    <Text className="text-primary-foreground">CB</Text>
+    <Text className="text-lg">CN</Text>
   </AvatarFallback>
 </Avatar>
 ```
@@ -165,40 +146,27 @@ Extends `AvatarPrimitive.Fallback` props.
 ### Multiple Avatars
 
 ```tsx
-<View className="flex-row gap-4">
-  <Avatar alt="User 1">
-    <AvatarImage source={{ uri: 'https://github.com/user1.png' }} />
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { Text } from '@/components/ui/text';
+import { View } from 'react-native';
+
+<View className="flex-row gap-2">
+  <Avatar>
+    <AvatarImage source={{ uri: 'https://github.com/shadcn.png' }} />
     <AvatarFallback>
-      <Text>U1</Text>
+      <Text>CN</Text>
     </AvatarFallback>
   </Avatar>
-  <Avatar alt="User 2">
-    <AvatarImage source={{ uri: 'https://github.com/user2.png' }} />
+  <Avatar>
+    <AvatarImage source={{ uri: 'https://github.com/vercel.png' }} />
     <AvatarFallback>
-      <Text>U2</Text>
+      <Text>VC</Text>
+    </AvatarFallback>
+  </Avatar>
+  <Avatar>
+    <AvatarFallback>
+      <Text>AB</Text>
     </AvatarFallback>
   </Avatar>
 </View>
 ```
-
-## Styling
-
-The Avatar component comes with default styling:
-
-- Root: `relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full`
-- Image: `aspect-square h-full w-full`
-- Fallback: `flex h-full w-full items-center justify-center rounded-full bg-muted`
-
-You can customize the appearance using:
-- `className` prop for additional Tailwind classes
-- Custom background colors for the fallback
-- Text styling for the fallback content
-- Custom sizes through width and height classes
-
-## Accessibility
-
-The Avatar component:
-- Requires an `alt` prop for screen reader accessibility
-- Provides fallback content when images fail to load
-- Maintains WCAG color contrast requirements
-- Uses semantic HTML elements

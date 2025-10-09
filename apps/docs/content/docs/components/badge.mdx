@@ -1,171 +1,198 @@
 ---
 title: Badge
-description: Badges are used to highlight an item's status or to emphasize specific information.
+description: Displays a badge or a component that looks like a badge.
 ---
-import {DemoButton} from '@/components/ui/DemoButton';
 
-<DemoButton href="https://usmds-showcase.expo.app/components/badge"/>
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { BadgePreview } from '@/components/examples';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard preview={<BadgePreview />} />
+  </Tab>
+  <Tab value="code">
+    ```tsx title="badge-example.tsx"
+    import { Badge } from '@/components/ui/badge';
+    import { Text } from '@/components/ui/text';
+
+    export default function BadgeExample() {
+      return (
+        <Badge variant="default">
+          <Text>Badge</Text>
+        </Badge>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
 
 ## Installation
 
-```package-install
-npx usmds add badge
-```
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    ```bash
+    npx usmds add badge
+    ```
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install the following dependencies:**
+
+        ```bash
+        npx expo install @rn-primitives/slot
+        ```
+      </Step>
+      <Step>
+        **Copy and paste the following code into your project.**
+
+        ```tsx title="@/components/ui/text.tsx"
+        // Copy from packages/registry/src/usa/components/ui/text.tsx
+        ```
+
+        ```tsx title="@/components/ui/badge.tsx"
+        // Copy from packages/registry/src/usa/components/ui/badge.tsx
+        ```
+      </Step>
+      <Step>
+        **Update the import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
 
 ## Usage
 
 ```tsx
-import { Badge } from '@components/Badge';
+import { Badge } from '@/components/ui/badge';
+import { Text } from '@/components/ui/text';
 
-<Badge label="New" />
+<Badge variant="default">
+  <Text>Badge</Text>
+</Badge>
 ```
 
 ## Props
 
 ### Badge
 
-<table>
-  <thead>
-    <tr>
-      <th>Prop</th>
-      <th>Type</th>
-      <th>Default</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>label</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>The text content of the badge.</td>
-    </tr>
-    <tr>
-      <td>variant</td>
-      <td>`'default' | 'success' | 'warning' | 'info' | 'destructive'`</td>
-      <td>`'default'`</td>
-      <td>The visual style variant of the badge.</td>
-    </tr>
-    <tr>
-      <td>className</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>Additional Tailwind classes to apply.</td>
-    </tr>
-  </tbody>
-</table>
+Extends `View` props.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| variant | `'default' \| 'secondary' \| 'destructive' \| 'outline'` | `'default'` | The visual style variant. |
+| asChild | `boolean` | `false` | Render as a child component (uses Slot). |
+| className | `string` | - | Additional classes for styling. |
 
 ## Variants
 
 ### Default
 
 ```tsx
-<Badge label="Default" variant="default" />
+<Badge variant="default">
+  <Text>Default</Text>
+</Badge>
 ```
 
-### Success
+### Secondary
 
 ```tsx
-<Badge label="Success" variant="success" />
-```
-
-### Warning
-
-```tsx
-<Badge label="Warning" variant="warning" />
-```
-
-### Info
-
-```tsx
-<Badge label="Info" variant="info" />
+<Badge variant="secondary">
+  <Text>Secondary</Text>
+</Badge>
 ```
 
 ### Destructive
 
 ```tsx
-<Badge label="Error" variant="destructive" />
+<Badge variant="destructive">
+  <Text>Destructive</Text>
+</Badge>
 ```
 
-## Styling
-
-The Badge component comes with predefined styles for each variant:
-
-### Default Style
-- Background: Primary lighter color
-- Border: Primary light color
-- Text: Primary foreground color
-
-### Success Style
-- Background: Success lighter color
-- Border: Success light color
-- Text: Success dark color
-
-### Warning Style
-- Background: Warning lighter color
-- Border: Warning light color
-- Text: Warning dark color
-
-### Info Style
-- Background: Info lighter color
-- Border: Info light color
-- Text: Info dark color
-
-### Destructive Style
-- Background: Destructive color
-- Border: Destructive color
-- Text: Destructive foreground color
-
-## Custom Styling
-
-The Badge component can be customized using className prop:
+### Outline
 
 ```tsx
-<Badge 
-  label="Custom" 
-  className="bg-blue-100 border-blue-200"
-/>
+<Badge variant="outline">
+  <Text>Outline</Text>
+</Badge>
 ```
 
-## Layout
+## Helper Functions
 
-Badges are designed to be inline elements with:
-- Rounded corners (rounded-full)
-- Consistent padding (px-2.5 py-1)
-- Centered content
-- Small text size (text-xs)
-- Medium font weight
+### badgeVariants
 
-## Examples
+Use `badgeVariants` to create badge-styled components:
 
-### Basic Usage
 ```tsx
-<Badge label="New" />
-```
+import { badgeVariants } from '@/components/ui/badge';
+import { View } from 'react-native';
 
-### With Different Variants
-```tsx
-<View className="flex-row gap-2">
-  <Badge label="Default" variant="default" />
-  <Badge label="Success" variant="success" />
-  <Badge label="Warning" variant="warning" />
-  <Badge label="Info" variant="info" />
-  <Badge label="Error" variant="destructive" />
+<View className={badgeVariants({ variant: 'outline' })}>
+  {/* content */}
 </View>
 ```
 
-### With Custom Styling
+### badgeTextVariants
+
+Use `badgeTextVariants` for text styling within badges:
+
 ```tsx
-<Badge 
-  label="Custom" 
-  className="bg-violet-100 border-violet-200"
-/>
+import { badgeTextVariants } from '@/components/ui/badge';
+import { Text } from '@/components/ui/text';
+
+<Text className={badgeTextVariants({ variant: 'destructive' })}>
+  Error
+</Text>
 ```
 
-## Accessibility
+## Examples
 
-The Badge component:
-- Uses semantic HTML elements
-- Maintains WCAG color contrast requirements for all variants
-- Provides clear visual distinction between different states
-- Uses appropriate text sizes for readability
+### With Icon
+
+```tsx
+import { Badge } from '@/components/ui/badge';
+import { Text } from '@/components/ui/text';
+import { Check } from 'lucide-react-native';
+
+<Badge variant="default">
+  <Check />
+  <Text>Verified</Text>
+</Badge>
+```
+
+### As Link
+
+```tsx
+import { badgeVariants, badgeTextVariants } from '@/components/ui/badge';
+import { Text } from '@/components/ui/text';
+import { Link } from 'expo-router';
+
+<Link href="/profile" className={badgeVariants({ variant: 'outline' })}>
+  <Text className={badgeTextVariants({ variant: 'outline' })}>
+    View Profile
+  </Text>
+</Link>
+```
+
+### Multiple Badges
+
+```tsx
+import { Badge } from '@/components/ui/badge';
+import { Text } from '@/components/ui/text';
+import { View } from 'react-native';
+
+<View className="flex-row gap-2">
+  <Badge variant="default">
+    <Text>New</Text>
+  </Badge>
+  <Badge variant="secondary">
+    <Text>Featured</Text>
+  </Badge>
+  <Badge variant="outline">
+    <Text>Sale</Text>
+  </Badge>
+</View>
+```
