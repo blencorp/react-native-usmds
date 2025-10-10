@@ -1,7 +1,7 @@
 'use client';
 
-import { Label } from '@/registry/components/ui/label';
-import { Switch } from '@/registry/components/ui/switch';
+import { Label } from '@/registry/usa/components/ui/label';
+import { Switch } from '@/registry/usa/components/ui/switch';
 import * as React from 'react';
 import { View } from 'react-native';
 

@@ -5,7 +5,7 @@ import {
   ToggleGroup,
   ToggleGroupIcon,
   ToggleGroupItem,
-} from '@/registry/components/ui/toggle-group';
+} from '@/registry/usa/components/ui/toggle-group';
 import * as React from 'react';
 
 export function ToggleGroupPreview() {

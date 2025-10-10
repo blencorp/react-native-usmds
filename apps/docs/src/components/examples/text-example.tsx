@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Text } from '@/registry/components/ui/text';
+import { Text } from '@/registry/usa/components/ui/text';
 
 export function TextPreview() {
   return (

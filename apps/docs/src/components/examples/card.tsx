@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Button } from '@/registry/components/ui/button';
+import { Button } from '@/registry/usa/components/ui/button';
 import {
   Card,
   CardContent,
@@ -9,8 +9,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/registry/components/ui/card';
-import { Text } from '@/registry/components/ui/text';
+} from '@/registry/usa/components/ui/card';
+import { Text } from '@/registry/usa/components/ui/text';
 import { View } from 'react-native';
 
 export function CardPreview() {

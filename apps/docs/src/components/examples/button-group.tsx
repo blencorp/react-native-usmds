@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import { ButtonGroup } from '@/registry/components/ui/buttongroup';
-import { Button } from '@/registry/components/ui/button';
-import { Text } from '@/registry/components/ui/text';
+import { ButtonGroup } from '@/registry/usa/components/ui/buttongroup';
+import { Button } from '@/registry/usa/components/ui/button';
+import { Text } from '@/registry/usa/components/ui/text';
 
 export function ButtonGroupPreview() {
   return (

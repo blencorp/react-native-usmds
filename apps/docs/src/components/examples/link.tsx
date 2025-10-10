@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Link } from '@/registry/components/ui/link';
+import { Link } from '@/registry/usa/components/ui/link';
 
 export function LinkPreview() {
   const [visited1, setVisited1] = React.useState(false);

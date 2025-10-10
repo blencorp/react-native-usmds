@@ -1,7 +1,7 @@
 'use client';
 
-import { Separator } from '@/registry/components/ui/separator';
-import { Text } from '@/registry/components/ui/text';
+import { Separator } from '@/registry/usa/components/ui/separator';
+import { Text } from '@/registry/usa/components/ui/text';
 import { View } from 'react-native';
 
 export function SeparatorPreview() {

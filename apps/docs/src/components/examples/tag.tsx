@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Tag } from '@/registry/components/ui/tag';
+import { Tag } from '@/registry/usa/components/ui/tag';
 
 export function TagPreview() {
   return (

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Pagination } from '@/registry/components/ui/pagination';
+import { Pagination } from '@/registry/usa/components/ui/pagination';
 
 export function PaginationPreview() {
   const [currentPage, setCurrentPage] = React.useState(3);

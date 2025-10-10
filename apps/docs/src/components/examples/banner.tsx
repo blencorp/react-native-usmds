@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Banner } from '@/registry/components/ui/banner';
+import { Banner } from '@/registry/usa/components/ui/banner';
 import { Bell } from 'lucide-react-native';
 
 export function BannerPreview() {

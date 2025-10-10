@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import { View, Text } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '@/lib/utils';
+import { cn } from '@/registry/usa/lib/utils';
 
 const tagVariants = cva('flex flex-row justify-center items-center bg-foreground rounded-[2px]', {
   variants: {

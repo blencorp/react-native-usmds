@@ -1,11 +1,11 @@
 'use client';
 
-import { Button } from '@/registry/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/registry/components/ui/card';
-import { Input } from '@/registry/components/ui/input';
-import { Label } from '@/registry/components/ui/label';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/registry/components/ui/tabs';
-import { Text } from '@/registry/components/ui/text';
+import { Button } from '@/registry/usa/components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/registry/usa/components/ui/card';
+import { Input } from '@/registry/usa/components/ui/input';
+import { Label } from '@/registry/usa/components/ui/label';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/registry/usa/components/ui/tabs';
+import { Text } from '@/registry/usa/components/ui/text';
 import * as React from 'react';
 import { View } from 'react-native';
 

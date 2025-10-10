@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Avatar, AvatarFallback, AvatarImage } from '@/registry/components/ui/avatar';
-import { Text } from '@/registry/components/ui/text';
+import { Avatar, AvatarFallback, AvatarImage } from '@/registry/usa/components/ui/avatar';
+import { Text } from '@/registry/usa/components/ui/text';
 
 export function AvatarPreview() {
   return (

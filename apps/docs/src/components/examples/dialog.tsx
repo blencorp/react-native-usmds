@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/registry/components/ui/button';
+import { Button } from '@/registry/usa/components/ui/button';
 import {
   Dialog,
   DialogClose,
@@ -10,11 +10,11 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger
-} from '@/registry/components/ui/dialog';
-import { Text } from '@/registry/components/ui/text';
-import { Label } from '@/registry/components/ui/label';
+} from '@/registry/usa/components/ui/dialog';
+import { Text } from '@/registry/usa/components/ui/text';
+import { Label } from '@/registry/usa/components/ui/label';
 import { View } from 'react-native';
-import { TextInput } from '@/registry/components/ui/textinput';
+import { TextInput } from '@/registry/usa/components/ui/textinput';
 
 export function DialogPreview() {
   return (

@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Toggle, ToggleIcon } from '@/registry/components/ui/toggle';
-import { Text } from '@/registry/components/ui/text';
+import { Toggle, ToggleIcon } from '@/registry/usa/components/ui/toggle';
+import { Text } from '@/registry/usa/components/ui/text';
 import { Bold, Italic, Underline } from 'lucide-react-native';
 
 export function TogglePreview() {
