@@ -88,14 +88,50 @@ feat(button): add loading state to Button component
 
 ## Release Process
 
-We use semantic-release for automated versioning and publishing. The release process is handled automatically through our CI/CD pipeline when changes are merged to the main branch.
+We use semantic-release for automated versioning and publishing. The release process works with a release branch workflow to respect branch protections on main.
 
-The process includes:
+### For Maintainers: Creating a Release
+
+1. **Create a release branch** from the latest main:
+   ```bash
+   git checkout main
+   git pull origin main
+   git checkout -b release/v<version>
+   ```
+   Replace `<version>` with the expected version (e.g., `release/v1.22.0`).
+
+2. **Push the release branch** to trigger the release workflow:
+   ```bash
+   git push origin release/v<version>
+   ```
+
+3. **The CI/CD pipeline will automatically**:
+   - Analyze commits since the last release
+   - Determine the new version based on conventional commits
+   - Generate/update CHANGELOG.md
+   - Update package.json files with the new version
+   - Build the packages
+   - Commit the changes back to the release branch
+
+4. **After the workflow completes**:
+   - Review the automated changes on the release branch
+   - Create a Pull Request from the release branch to `main`
+   - Once approved and merged, the package will be published
+
+5. **After merging to main**:
+   - Manually publish to npm by running:
+     ```bash
+     cd packages/cli/dist
+     npm publish
+     ```
+   - Create a GitHub release with the version tag
+
+The automated process includes:
 
 - Automatic version bumping based on commit messages
 - Generating CHANGELOG.md
-- Publishing to npm
-- Creating GitHub releases
+- Building packages
+- Preparing package.json updates
 
 ## Testing
 

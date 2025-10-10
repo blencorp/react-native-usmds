@@ -1,6 +1,9 @@
 {
   "branches": [
-    "main"
+    {
+      "name": "release/*",
+      "prerelease": false
+    }
   ],
   "ci": false,
   "plugins": [
@@ -27,7 +30,8 @@
       "@semantic-release/npm",
       {
         "pkgRoot": "packages/cli/dist",
-        "tarballDir": "dist"
+        "tarballDir": "dist",
+        "npmPublish": false
       }
     ],
     [
@@ -38,7 +42,7 @@
           "packages/cli/package.json",
           "CHANGELOG.md"
         ],
-        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        "message": "chore(release): ${nextRelease.version}\n\n${nextRelease.notes}"
       }
     ]
   ]
