@@ -36,7 +36,19 @@
       "ignoreMissing": [
         "@babel/*",
         "expo-modules-*",
-        "typescript"
+        "typescript",
+        "tailwindcss",
+        "react-native-reanimated"
+      ],
+      "allowedVersions": {
+        "storybook": "8",
+        "react-native-reanimated": "3",
+        "react": "18"
+      },
+      "allowAny": [
+        "@types/react",
+        "react",
+        "react-dom"
       ]
     },
     "overrides": {
