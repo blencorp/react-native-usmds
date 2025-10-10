@@ -20,7 +20,6 @@ export * from './snackbar';
 export * from './step-indicator';
 export * from './tag';
 export * from './text';
-export * from './text-example';
 export * from './text-input';
 export * from './textarea';
 export * from './toggle';

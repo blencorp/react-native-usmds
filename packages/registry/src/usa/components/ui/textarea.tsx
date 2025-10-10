@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@/registry/usa/lib/utils';
 import { Platform, TextInput, type TextInputProps } from 'react-native';
 
 function Textarea({

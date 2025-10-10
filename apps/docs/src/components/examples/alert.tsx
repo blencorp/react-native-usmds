@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Alert, AlertDescription, AlertTitle } from '@/registry/components/ui/alert';
+import { Alert, AlertDescription, AlertTitle } from '@/registry/usa/components/ui/alert';
 import { AlertCircle, CheckCircle2, Terminal } from 'lucide-react-native';
 
 export function AlertPreview() {

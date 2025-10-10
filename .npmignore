@@ -54,4 +54,4 @@ CONTRIBUTING.md
 docs/
 
 # Only publish the built CLI
-!apps/cli/dist/
+!packages/cli/dist/

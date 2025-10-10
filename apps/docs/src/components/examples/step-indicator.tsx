@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import { StepIndicator } from '@/registry/components/ui/stepindicator';
-import { Button } from '@/registry/components/ui/button';
-import { Text } from '@/registry/components/ui/text';
+import { StepIndicator } from '@/registry/usa/components/ui/stepindicator';
+import { Button } from '@/registry/usa/components/ui/button';
+import { Text } from '@/registry/usa/components/ui/text';
 
 export function StepIndicatorPreview() {
   const [currentStep, setCurrentStep] = React.useState(3);

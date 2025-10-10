@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import { View, Text, Pressable } from 'react-native';
-import { cn } from '@/lib/utils';
-import { Icon } from '@/components/ui/icon';
+import { cn } from '@/registry/usa/lib/utils';
+import { Icon } from '@/registry/usa/components/ui/icon';
 import { ChevronLeft, ChevronRight } from 'lucide-react-native';
 
 interface PaginationProps extends ComponentPropsWithoutRef<typeof View> {

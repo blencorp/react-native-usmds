@@ -1,7 +1,7 @@
 'use client';
 
-import { Checkbox } from '@/registry/components/ui/checkbox';
-import { Label } from '@/registry/components/ui/label';
+import { Checkbox } from '@/registry/usa/components/ui/checkbox';
+import { Label } from '@/registry/usa/components/ui/label';
 import * as React from 'react';
 import { View } from 'react-native';
 

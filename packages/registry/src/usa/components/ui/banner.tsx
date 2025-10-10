@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef, ReactNode } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '@/lib/utils';
+import { cn } from '@/registry/usa/lib/utils';
 import Svg, { Path, Defs, Pattern, Image, Use } from 'react-native-svg';
 
 const bannerVariants = cva('flex flex-row items-center', {

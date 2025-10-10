@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@/registry/usa/lib/utils';
 import * as AvatarPrimitive from '@rn-primitives/avatar';
 
 function Avatar({

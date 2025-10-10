@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@/registry/usa/lib/utils';
 import * as ProgressPrimitive from '@rn-primitives/progress';
 import { Platform, View } from 'react-native';
 import Animated, {

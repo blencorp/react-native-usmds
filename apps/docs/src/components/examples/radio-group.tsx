@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import { RadioGroup, RadioGroupItem } from '@/registry/components/ui/radiogroup';
-import { Label } from '@/registry/components/ui/label';
+import { RadioGroup, RadioGroupItem } from '@/registry/usa/components/ui/radiogroup';
+import { Label } from '@/registry/usa/components/ui/label';
 
 export function RadioGroupPreview() {
   const [value, setValue] = React.useState('comfortable');

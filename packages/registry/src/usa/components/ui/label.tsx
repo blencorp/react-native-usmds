@@ -1,6 +1,6 @@
 import * as LabelPrimitive from '@rn-primitives/label';
 import { Platform } from 'react-native';
-import { cn } from '@/lib/utils';
+import { cn } from '@/registry/usa/lib/utils';
 
 function Label({
   className,

@@ -2,8 +2,8 @@ import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import * as CheckboxPrimitive from '@rn-primitives/checkbox';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '@/lib/utils';
-import { Icon } from '@/components/ui/icon';
+import { cn } from '@/registry/usa/lib/utils';
+import { Icon } from '@/registry/usa/components/ui/icon';
 import { Check } from 'lucide-react-native';
 import { cssInterop } from 'nativewind';
 
