@@ -20,7 +20,7 @@
     [
       "@semantic-release/exec",
       {
-        "prepareCmd": "pnpm version ${nextRelease.version} --no-git-tag-version --allow-same-version && cd packages/cli && pnpm version ${nextRelease.version} --no-git-tag-version --allow-same-version && pnpm build"
+        "prepareCmd": "node -e \"const fs=require('fs');const pkg=JSON.parse(fs.readFileSync('package.json'));pkg.version='${nextRelease.version}';fs.writeFileSync('package.json',JSON.stringify(pkg,null,2)+'\\n')\" && node -e \"const fs=require('fs');const pkg=JSON.parse(fs.readFileSync('packages/cli/package.json'));pkg.version='${nextRelease.version}';fs.writeFileSync('packages/cli/package.json',JSON.stringify(pkg,null,2)+'\\n')\" && cd packages/cli && pnpm build"
       }
     ],
     [
