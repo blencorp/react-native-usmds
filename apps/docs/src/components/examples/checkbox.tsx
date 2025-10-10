@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { View } from 'react-native';
-import { Checkbox } from '@/registry/components/ui/checkbox';
-import { Text } from '@/registry/components/ui/text';
+import { Checkbox } from '@/registry/usa/components/ui/checkbox';
+import { Text } from '@/registry/usa/components/ui/text';
 
 export function CheckboxPreview() {
   const [checked, setChecked] = React.useState(true);

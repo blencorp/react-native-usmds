@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import { Snackbar } from '@/registry/components/ui/snackbar';
-import { Button } from '@/registry/components/ui/button';
-import { Text } from '@/registry/components/ui/text';
+import { Snackbar } from '@/registry/usa/components/ui/snackbar';
+import { Button } from '@/registry/usa/components/ui/button';
+import { Text } from '@/registry/usa/components/ui/text';
 
 export function SnackbarPreview() {
   const [successVisible, setSuccessVisible] = React.useState(false);

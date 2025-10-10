@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import { TextInput } from '@/registry/components/ui/textinput';
-import { Label } from '@/registry/components/ui/label';
-import { Text } from '@/registry/components/ui/text';
+import { TextInput } from '@/registry/usa/components/ui/textinput';
+import { Label } from '@/registry/usa/components/ui/label';
+import { Text } from '@/registry/usa/components/ui/text';
 
 export function TextInputPreview() {
   const [email, setEmail] = React.useState('');

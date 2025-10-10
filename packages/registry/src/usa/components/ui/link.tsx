@@ -1,8 +1,8 @@
 import { ComponentPropsWithoutRef, forwardRef, useState } from 'react';
 import { Text, Pressable, View, Platform } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '@/lib/utils';
-import { Icon } from '@/components/ui/icon';
+import { cn } from '@/registry/usa/lib/utils';
+import { Icon } from '@/registry/usa/components/ui/icon';
 import { ExternalLink } from 'lucide-react-native';
 
 const linkVariants = cva(cn('text-base leading-[162%] underline', Platform.select({ web: 'cursor-pointer' })), {

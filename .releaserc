@@ -20,7 +20,7 @@
     [
       "@semantic-release/npm",
       {
-        "pkgRoot": ".",
+        "pkgRoot": "packages/cli",
         "tarballDir": "dist"
       }
     ],

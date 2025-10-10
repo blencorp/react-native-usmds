@@ -1,6 +1,6 @@
 'use client';
 
-import { Text, TextClassContext } from '@/registry/components/ui/text';
+import { Text, TextClassContext } from '@/registry/usa/components/ui/text';
 import { View } from 'react-native';
 
 export function TextCascadePreview() {

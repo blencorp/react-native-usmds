@@ -1,5 +1,5 @@
 {
-  "name": "@blen/react-native-usmds-registry-internal",
+  "name": "@blen/react-native-usmds-registry",
   "version": "0.1.0",
   "main": "index.ts",
   "type": "module",
@@ -9,10 +9,11 @@
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
-    "@babel/core": "^7.26.7",
     "@rn-primitives/accordion": "~1.1.0",
     "@rn-primitives/avatar": "~1.1.0",
     "@rn-primitives/checkbox": "~1.1.0",
+    "@rn-primitives/collapsible": "~1.1.0",
+    "@rn-primitives/dialog": "~1.1.0",
     "@rn-primitives/dropdown-menu": "~1.1.0",
     "@rn-primitives/label": "^1.1.0",
     "@rn-primitives/portal": "^1.1.0",
@@ -24,15 +25,14 @@
     "@rn-primitives/tabs": "^1.1.0",
     "@rn-primitives/toggle": "^1.1.0",
     "@rn-primitives/types": "^1.1.0",
-    "@storybook/react-native": "^8.5.4",
-    "class-variance-authority": "^0.7.0",
-    "clsx": "^2.0.0",
-    "lucide-react-native": "^0.400.0",
-    "nativewind": "^4.0.36",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react-native": "^0.475.0",
+    "nativewind": "^4.1.23",
     "react-native-reanimated": "~3.10.1",
     "react-native-svg": "^15.3.0",
-    "tailwind-merge": "^2.1.0",
-    "tailwindcss": "^3.3.2"
+    "tailwind-merge": "^3.0.1",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.26.3",
@@ -42,7 +42,8 @@
     "@testing-library/react-native": "^12.3.2",
     "@tsconfig/recommended": "^1.0.1",
     "@types/jest": "^29.5.12",
-    "@types/react": "~18.2.79",
+    "@types/react": "~18.3.26",
+    "@types/react-dom": "~18.3.7",
     "@types/react-test-renderer": "^18.3.0",
     "babel-jest": "^29.7.0",
     "babel-plugin-module-resolver": "^5.0.2",
@@ -53,14 +54,15 @@
     "metro-react-native-babel-preset": "^0.77.0",
     "prettier": "^3.2.5",
     "react": "18.3.1",
-    "react-native": "0.76.7",
+    "react-dom": "18.3.1",
+    "react-native": "0.76.9",
     "react-test-renderer": "18.3.1",
     "shadcn": "^3.4.0",
     "typescript": "^5.7.3"
   },
   "peerDependencies": {
-    "react": "*",
-    "react-native": "*",
+    "react": ">=18.3.1",
+    "react-native": ">=0.76.0",
     "react-native-web": "*",
     "tailwindcss": "^3.3.2"
   },

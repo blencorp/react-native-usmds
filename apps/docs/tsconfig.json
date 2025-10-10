@@ -21,14 +21,14 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/.source": [
-        "./.source/index.js"
+      "@/registry/*": [
+        "../../packages/registry/src/*"
+      ],
+      "@docs/*": [
+        "./*"
       ],
       "@/*": [
         "./src/*"
-      ],
-      "@/registry/*": [
-        "../../packages/registry/src/usa/*"
       ]
     },
     "plugins": [
@@ -36,20 +36,19 @@
         "name": "next"
       }
     ],
-    "typeRoots": [
-      "./node_modules/@types"
+    "types": [
+      "nativewind/types"
     ]
   },
   "include": [
     "next-env.d.ts",
+    "nativewind-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    "**/*.mdx",
     ".next/types/**/*.ts"
-, "content/docs/gettingstarted.mdx"  ],
+  ],
   "exclude": [
-    "node_modules",
-    "../../scripts",
-    "src/components/examples/**/*",
-    "src/components/examples"
+    "node_modules"
   ]
 }

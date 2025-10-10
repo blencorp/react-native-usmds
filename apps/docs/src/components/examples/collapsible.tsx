@@ -2,11 +2,11 @@
 
 import React from 'react';
 import { View } from 'react-native';
-import { Button } from '@/registry/components/ui/button';
-import { Text } from '@/registry/components/ui/text';
+import { Button } from '@/registry/usa/components/ui/button';
+import { Text } from '@/registry/usa/components/ui/text';
 import { ChevronDown, ChevronsUpDown } from 'lucide-react-native';
-import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@/registry/components/ui/collapsible';
-import { Icon } from '@/registry/components/ui/icon';
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@/registry/usa/components/ui/collapsible';
+import { Icon } from '@/registry/usa/components/ui/icon';
 
 export function CollapsiblePreview() {
   const [isOpen, setIsOpen] = React.useState(false);

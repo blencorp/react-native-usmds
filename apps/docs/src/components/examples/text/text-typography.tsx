@@ -1,7 +1,7 @@
 'use client';
 
 import { ScrollView, View } from 'react-native';
-import { Text } from '@/registry/components/ui/text';
+import { Text } from '@/registry/usa/components/ui/text';
 
 export function TextTypographyPreview() {
   return (

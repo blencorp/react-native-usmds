@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@/registry/usa/lib/utils';
 import * as RadioGroupPrimitive from '@rn-primitives/radio-group';
 import { Platform } from 'react-native';
 
