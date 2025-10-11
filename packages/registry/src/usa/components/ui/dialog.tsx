@@ -1,11 +1,19 @@
 import { Icon } from '@/registry/usa/components/ui/icon';
+import { NativeOnlyAnimatedView } from '@/registry/usa/components/ui/native-only-animated-view';
 import { cn } from '@/registry/usa/lib/utils';
 import * as DialogPrimitive from '@rn-primitives/dialog';
 import { X } from 'lucide-react-native';
 import * as React from 'react';
 import { Platform, Text, View, type ViewProps } from 'react-native';
-import { FadeIn, FadeOut } from 'react-native-reanimated';
-import Animated from 'react-native-reanimated';
+import { FullWindowOverlay as RNFullWindowOverlay } from 'react-native-screens';
+
+type ReanimatedModule = typeof import('react-native-reanimated');
+
+let Reanimated: ReanimatedModule | null = null;
+
+if (Platform.OS !== 'web') {
+  Reanimated = require('react-native-reanimated');
+}
 
 const Dialog = DialogPrimitive.Root;
 
@@ -15,7 +23,7 @@ const DialogPortal = DialogPrimitive.Portal;
 
 const DialogClose = DialogPrimitive.Close;
 
-const AnimatedPressable = Animated.createAnimatedComponent(View);
+const FullWindowOverlay = Platform.OS === 'ios' ? RNFullWindowOverlay : React.Fragment;
 
 function DialogOverlay({
   className,
@@ -25,23 +33,37 @@ function DialogOverlay({
   React.RefAttributes<DialogPrimitive.OverlayRef> & {
     children?: React.ReactNode;
   }) {
+  const fadeIn = Reanimated?.FadeIn;
+  const fadeOut = Reanimated?.FadeOut;
+
+  const outerEntering = fadeIn ? fadeIn.duration(200) : undefined;
+  const outerExiting = fadeOut ? fadeOut.duration(150) : undefined;
+  const innerEntering = fadeIn ? fadeIn.delay(50) : undefined;
+  const innerExiting = fadeOut ? fadeOut.duration(150) : undefined;
+
   return (
-    <DialogPrimitive.Overlay
-      className={cn(
-        'absolute bottom-0 left-0 right-0 top-0 z-50 flex items-center justify-center bg-black/50 p-2',
-        Platform.select({
-          web: 'animate-in fade-in-0 fixed cursor-default [&>*]:cursor-auto',
-        }),
-        className
-      )}
-      {...props}
-      asChild={Platform.OS !== 'web'}>
-      <AnimatedPressable entering={FadeIn.duration(200)} exiting={FadeOut.duration(150)}>
-        <AnimatedPressable entering={FadeIn.delay(50)} exiting={FadeOut.duration(150)}>
-          <>{children}</>
-        </AnimatedPressable>
-      </AnimatedPressable>
-    </DialogPrimitive.Overlay>
+    <FullWindowOverlay>
+      <DialogPrimitive.Overlay
+        className={cn(
+          'absolute bottom-0 left-0 right-0 top-0 z-50 flex items-center justify-center bg-black/50 p-2',
+          Platform.select({
+            web: 'animate-in fade-in-0 fixed cursor-default [&>*]:cursor-auto',
+          }),
+          className
+        )}
+        {...props}
+        asChild={Platform.OS !== 'web'}>
+        <NativeOnlyAnimatedView
+          {...(outerEntering ? { entering: outerEntering } : {})}
+          {...(outerExiting ? { exiting: outerExiting } : {})}>
+          <NativeOnlyAnimatedView
+            {...(innerEntering ? { entering: innerEntering } : {})}
+            {...(innerExiting ? { exiting: innerExiting } : {})}>
+            <>{children}</>
+          </NativeOnlyAnimatedView>
+        </NativeOnlyAnimatedView>
+      </DialogPrimitive.Overlay>
+    </FullWindowOverlay>
   );
 }
 
