@@ -50,9 +50,8 @@
       "reactCompiler": true
     },
     "extra": {
-      "router": {},
       "eas": {
-        "projectId": "99a29593-78a5-48db-b4ca-2c834450e555"
+        "projectId": "9aea2bac-5c7e-42c4-aa0b-e62dab68b995"
       }
     },
     "owner": "blen-corp"
