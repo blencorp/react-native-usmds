@@ -1,3 +1,13 @@
+## [1.22.0](https://github.com/blencorp/react-native-usmds/compare/v1.21.1...v1.22.0) (2025-10-11)
+
+### Features
+
+* **showcase:** refreshed the showcase app ([#136](https://github.com/blencorp/react-native-usmds/issues/136)) ([2d06b85](https://github.com/blencorp/react-native-usmds/commit/2d06b8537da0ffdd5f3b158ec289c0b0bef19bb6))
+
+### Bug Fixes
+
+* storybook build ([24ebd77](https://github.com/blencorp/react-native-usmds/commit/24ebd771cb2ef952730dde6e7717c1350680ceee))
+
 ## [1.21.1](https://github.com/blencorp/react-native-usmds/compare/v1.21.0...v1.21.1) (2025-10-07)
 
 ### Bug Fixes
