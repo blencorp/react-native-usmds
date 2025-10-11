@@ -8,6 +8,8 @@
     "build:docs": "turbo run build --filter=docs",
     "build:examples": "turbo run build --filter=examples",
     "dev": "turbo dev",
+    "dev:docs": "turbo dev --filter=docs",
+    "dev:showcase": "turbo dev --filter=showcase",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "prepublishOnly": "turbo build"
@@ -43,8 +45,8 @@
       ],
       "allowedVersions": {
         "storybook": "8",
-        "react-native-reanimated": "3",
-        "react": "18"
+        "react-native-reanimated": "^4.0.0",
+        "react": "^19.0.0"
       },
       "allowAny": [
         "@types/react",
@@ -55,7 +57,12 @@
     "overrides": {
       "@swc/helpers": "0.5.15",
       "react-docgen-typescript": "2.2.2",
-      "lucide-react": "0.544.0"
+      "lucide-react": "0.544.0",
+      "react@^19.0.0": "19.1.0",
+      "react-dom@^19.0.0": "19.1.0",
+      "expo-dev-menu": "7.0.14",
+      "react-native-svg": "15.12.1",
+      "react-native-web": "0.21.1"
     },
     "onlyBuiltDependencies": [
       "@swc/core",

@@ -1,13 +1,14 @@
 import { cn } from '@/registry/usa/lib/utils';
 import * as ProgressPrimitive from '@rn-primitives/progress';
 import { Platform, View } from 'react-native';
-import Animated, {
-  Extrapolation,
-  interpolate,
-  useAnimatedStyle,
-  useDerivedValue,
-  withSpring,
-} from 'react-native-reanimated';
+
+type ReanimatedModule = typeof import('react-native-reanimated');
+
+let Reanimated: ReanimatedModule | null = null;
+
+if (Platform.OS !== 'web') {
+  Reanimated = require('react-native-reanimated');
+}
 
 function Progress({
   className,
@@ -55,6 +56,13 @@ function WebIndicator({ value, className }: IndicatorProps) {
 }
 
 function NativeIndicator({ value, className }: IndicatorProps) {
+  if (Platform.OS === 'web' || !Reanimated) {
+    return null;
+  }
+
+  const { useDerivedValue, useAnimatedStyle, withSpring, interpolate, Extrapolation, default: Animated } =
+    Reanimated;
+
   const progress = useDerivedValue(() => value ?? 0);
 
   const indicator = useAnimatedStyle(() => {
@@ -65,10 +73,6 @@ function NativeIndicator({ value, className }: IndicatorProps) {
       ),
     };
   }, [value]);
-
-  if (Platform.OS === 'web') {
-    return null;
-  }
 
   return (
     <ProgressPrimitive.Indicator asChild>
