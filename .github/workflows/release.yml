@@ -45,7 +45,7 @@ jobs:
       - name: Build packages
         run: |
           pnpm --filter usmds build
-          pnpm turbo run build --filter=!docs --filter=!storybook
+          pnpm turbo run build --filter=!docs --filter=!usmds-storybook
 
       - name: Build registry
         working-directory: packages/registry
