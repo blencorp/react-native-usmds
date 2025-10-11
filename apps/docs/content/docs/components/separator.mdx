@@ -1,0 +1,196 @@
+---
+title: Separator
+description: Visually or semantically separates content.
+---
+
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { SeparatorPreview } from '@/components/examples';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard preview={<SeparatorPreview />} />
+  </Tab>
+  <Tab value="code">
+    ```tsx title="separator-example.tsx"
+    import { Separator } from '@/components/ui/separator';
+    import { Text } from '@/components/ui/text';
+    import { View } from 'react-native';
+
+    export default function SeparatorExample() {
+      return (
+        <View className="gap-4 w-full max-w-md">
+          <View>
+            <Text className="font-semibold">React Native USMDS</Text>
+            <Text className="text-sm text-muted-foreground">
+              An accessible component library for React Native.
+            </Text>
+          </View>
+          <Separator />
+          <View className="flex flex-row items-center gap-2">
+            <Text className="text-sm">Components</Text>
+            <Separator orientation="vertical" className="h-4" />
+            <Text className="text-sm">Docs</Text>
+            <Separator orientation="vertical" className="h-4" />
+            <Text className="text-sm">Examples</Text>
+          </View>
+        </View>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Installation
+
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    <Steps>
+      <Step>
+        ```bash
+        npx usmds add separator
+        ```
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install dependencies:**
+
+        ```bash
+        npx expo install @rn-primitives/separator
+        ```
+      </Step>
+      <Step>
+        **Copy the component code:**
+
+        Copy from `packages/registry/src/usa/components/ui/separator.tsx`
+      </Step>
+      <Step>
+        **Update import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Separator } from '@/components/ui/separator';
+
+<Separator />
+```
+
+## Props
+
+Extends `@rn-primitives/separator` Root props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| orientation | `'horizontal' \| 'vertical'` | The orientation of the separator. Default is `'horizontal'`. |
+| decorative | `boolean` | When true, indicates separator is purely visual. Default is `true`. |
+| className | `string` | Additional classes for styling. |
+
+## Examples
+
+### Horizontal (Default)
+
+```tsx
+import { Separator } from '@/components/ui/separator';
+import { Text } from '@/components/ui/text';
+import { View } from 'react-native';
+
+<View className="gap-4">
+  <Text>Section 1</Text>
+  <Separator />
+  <Text>Section 2</Text>
+</View>
+```
+
+### Vertical
+
+```tsx
+<View className="flex flex-row items-center gap-2 h-10">
+  <Text>Item 1</Text>
+  <Separator orientation="vertical" className="h-4" />
+  <Text>Item 2</Text>
+  <Separator orientation="vertical" className="h-4" />
+  <Text>Item 3</Text>
+</View>
+```
+
+### In a Card
+
+```tsx
+import { Card } from '@/components/ui/card';
+import { Text } from '@/components/ui/text';
+import { View } from 'react-native';
+
+<Card className="p-4">
+  <View className="gap-3">
+    <View>
+      <Text className="text-lg font-semibold">React Native USMDS</Text>
+      <Text className="text-sm text-muted-foreground">
+        Design System Components
+      </Text>
+    </View>
+    <Separator />
+    <View className="gap-2">
+      <Text className="text-sm">Version: 1.0.0</Text>
+      <Text className="text-sm">License: MIT</Text>
+      <Text className="text-sm">Platform: React Native</Text>
+    </View>
+  </View>
+</Card>
+```
+
+### Navigation Menu
+
+```tsx
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+import { View } from 'react-native';
+
+<View className="flex flex-row items-center gap-2">
+  <Button variant="ghost" size="sm">
+    <Text>Home</Text>
+  </Button>
+  <Separator orientation="vertical" className="h-4" />
+  <Button variant="ghost" size="sm">
+    <Text>About</Text>
+  </Button>
+  <Separator orientation="vertical" className="h-4" />
+  <Button variant="ghost" size="sm">
+    <Text>Contact</Text>
+  </Button>
+</View>
+```
+
+### Section Divider
+
+```tsx
+<View className="gap-4">
+  <View>
+    <Text className="text-xl font-bold mb-2">Profile</Text>
+    <Text className="text-muted-foreground">
+      Manage your account settings and preferences.
+    </Text>
+  </View>
+  <Separator className="my-2" />
+  <View>
+    <Text className="text-xl font-bold mb-2">Security</Text>
+    <Text className="text-muted-foreground">
+      Update your password and security settings.
+    </Text>
+  </View>
+  <Separator className="my-2" />
+  <View>
+    <Text className="text-xl font-bold mb-2">Notifications</Text>
+    <Text className="text-muted-foreground">
+      Choose how you want to be notified.
+    </Text>
+  </View>
+</View>
+```

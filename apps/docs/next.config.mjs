@@ -15,8 +15,34 @@ const config = {
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
   transpilePackages: [
     '@blen/react-native-usmds-registry',
+    '@rn-primitives/accordion',
+    '@rn-primitives/alert-dialog',
+    '@rn-primitives/aspect-ratio',
+    '@rn-primitives/avatar',
+    '@rn-primitives/checkbox',
+    '@rn-primitives/collapsible',
+    '@rn-primitives/context-menu',
+    '@rn-primitives/dialog',
+    '@rn-primitives/dropdown-menu',
+    '@rn-primitives/hover-card',
+    '@rn-primitives/label',
+    '@rn-primitives/menubar',
+    '@rn-primitives/popover',
+    '@rn-primitives/portal',
+    '@rn-primitives/progress',
+    '@rn-primitives/radio-group',
+    '@rn-primitives/select',
+    '@rn-primitives/separator',
+    '@rn-primitives/slot',
+    '@rn-primitives/switch',
+    '@rn-primitives/tabs',
+    '@rn-primitives/toggle',
+    '@rn-primitives/toggle-group',
+    '@rn-primitives/tooltip',
+    '@rn-primitives/types',
     'react-native',
     'react-native-web',
+    'react-native-svg',
     'expo',
     'nativewind',
     'react-native-css-interop',
@@ -91,6 +117,21 @@ function withExpo(nextConfig) {
           __DEV__: JSON.stringify(process.env.NODE_ENV !== 'production'),
         })
       );
+
+      // Exclude React Native internal packages that use Flow types
+      config.module.rules.push({
+        test: /\.js$/,
+        include: /@react-native\/assets-registry/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              ['@babel/preset-flow', { allowDeclareFields: true }],
+              '@babel/preset-react',
+            ],
+          },
+        },
+      });
 
       if (typeof nextConfig.webpack === 'function') {
         return nextConfig.webpack(config, options);

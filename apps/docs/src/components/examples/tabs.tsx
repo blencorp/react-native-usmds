@@ -1,76 +1,50 @@
 'use client';
 
-import { Button } from '@/registry/usa/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/registry/usa/components/ui/card';
-import { Input } from '@/registry/usa/components/ui/input';
-import { Label } from '@/registry/usa/components/ui/label';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/registry/usa/components/ui/tabs';
-import { Text } from '@/registry/usa/components/ui/text';
-import * as React from 'react';
-import { View } from 'react-native';
+import React from 'react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/registry/usa/components/ui/card';
 
 export function TabsPreview() {
-  const [value, setValue] = React.useState('feedback');
   return (
-    <View className='flex w-full max-w-sm flex-col gap-6'>
-      <Tabs value={value} onValueChange={setValue}>
-        <TabsList>
-          <TabsTrigger value='feedback'>
-            <Text>Feedback</Text>
-          </TabsTrigger>
-          <TabsTrigger value='survey'>
-            <Text>Survey</Text>
-          </TabsTrigger>
-        </TabsList>
-
-        <TabsContent value='feedback'>
-          <Card>
-            <CardHeader>
-              <CardTitle>Feedback</CardTitle>
-              <CardDescription>Share your thoughts with us. Click submit when you're ready.</CardDescription>
-            </CardHeader>
-            <CardContent className='gap-6'>
-              <View className='gap-3'>
-                <Label htmlFor='tabs-demo-name'>Name</Label>
-                <Input id='tabs-demo-name' defaultValue='Michael Scott' />
-              </View>
-              <View className='gap-3'>
-                <Label htmlFor='tabs-demo-message'>Message</Label>
-                <Input id='tabs-demo-message' defaultValue='Where are the turtles?!' />
-              </View>
-            </CardContent>
-            <CardFooter>
-              <Button>
-                <Text>Submit feedback</Text>
-              </Button>
-            </CardFooter>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value='survey'>
-          <Card>
-            <CardHeader>
-              <CardTitle>Quick Survey</CardTitle>
-              <CardDescription>Answer a few quick questions to help improve the demo.</CardDescription>
-            </CardHeader>
-            <CardContent className='gap-6'>
-              <View className='gap-3'>
-                <Label htmlFor='tabs-demo-job-title'>Job Title</Label>
-                <Input id='tabs-demo-job-title' defaultValue='Regional Manager' />
-              </View>
-              <View className='gap-3'>
-                <Label htmlFor='tabs-demo-favorite'>Favorite feature</Label>
-                <Input id='tabs-demo-favorite' defaultValue='CLI' />
-              </View>
-            </CardContent>
-            <CardFooter>
-              <Button>
-                <Text>Submit survey</Text>
-              </Button>
-            </CardFooter>
-          </Card>
-        </TabsContent>
-      </Tabs>
-    </View>
+    <Tabs defaultValue="account" className="w-full max-w-md">
+      <TabsList className="w-full">
+        <TabsTrigger value="account" className="flex-1">
+          Account
+        </TabsTrigger>
+        <TabsTrigger value="password" className="flex-1">
+          Password
+        </TabsTrigger>
+      </TabsList>
+      <TabsContent value="account">
+        <Card>
+          <CardHeader>
+            <CardTitle>Account</CardTitle>
+            <CardDescription>
+              Make changes to your account here.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="gap-4">
+            <p className="text-sm">
+              Update your account settings and preferences.
+            </p>
+          </CardContent>
+        </Card>
+      </TabsContent>
+      <TabsContent value="password">
+        <Card>
+          <CardHeader>
+            <CardTitle>Password</CardTitle>
+            <CardDescription>
+              Change your password here.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="gap-4">
+            <p className="text-sm">
+              After saving, you'll be logged out.
+            </p>
+          </CardContent>
+        </Card>
+      </TabsContent>
+    </Tabs>
   );
 }

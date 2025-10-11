@@ -1,0 +1,236 @@
+---
+title: Toggle Group
+description: A set of two-state buttons that can be toggled on or off.
+---
+
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { ToggleGroupPreview } from '@/components/examples';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard preview={<ToggleGroupPreview />} />
+  </Tab>
+  <Tab value="code">
+    See the example code in the preview above.
+  </Tab>
+</Tabs>
+
+## Installation
+
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    <Steps>
+      <Step>
+        ```bash
+        npx usmds add toggle-group
+        ```
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install dependencies:**
+
+        ```bash
+        npx expo install @rn-primitives/toggle-group @rn-primitives/toggle lucide-react-native
+        ```
+      </Step>
+      <Step>
+        **Copy the component code:**
+
+        Copy from `packages/registry/src/usa/components/ui/toggle-group.tsx`
+      </Step>
+      <Step>
+        **Update import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Bold, Italic, Underline } from 'lucide-react-native';
+import { ToggleGroup, ToggleGroupIcon, ToggleGroupItem } from '@/components/ui/toggle-group';
+import { useState } from 'react';
+
+const [value, setValue] = useState<string[]>([]);
+
+<ToggleGroup value={value} onValueChange={setValue} type="multiple">
+  <ToggleGroupItem value="bold">
+    <ToggleGroupIcon as={Bold} />
+  </ToggleGroupItem>
+  <ToggleGroupItem value="italic">
+    <ToggleGroupIcon as={Italic} />
+  </ToggleGroupItem>
+  <ToggleGroupItem value="underline">
+    <ToggleGroupIcon as={Underline} />
+  </ToggleGroupItem>
+</ToggleGroup>
+```
+
+## Props
+
+### ToggleGroup
+
+Extends `@rn-primitives/toggle-group` Root props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| type | `'single' \| 'multiple'` | **Required.** Determines whether one or multiple items can be pressed at once. |
+| value | `string \| string[]` | The controlled value. `string` for single, `string[]` for multiple. |
+| onValueChange | `(value: string \| string[]) => void` | Event handler called when the value changes. |
+| disabled | `boolean` | When true, prevents user interaction. |
+| variant | `'default' \| 'outline'` | The visual style variant. |
+| size | `'default' \| 'sm' \| 'lg'` | The size of the toggle items. |
+
+### ToggleGroupItem
+
+Extends `@rn-primitives/toggle-group` Item props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| value | `string` | **Required.** A unique value for the item. |
+| disabled | `boolean` | When true, prevents the user from activating this item. |
+| className | `string` | Additional classes for styling. |
+
+### ToggleGroupIcon
+
+| Prop | Type | Description |
+|------|------|-------------|
+| as | `LucideIcon` | **Required.** The Lucide icon component to render. |
+| className | `string` | Additional classes for styling. |
+
+## Examples
+
+### Text Formatting (Multiple)
+
+```tsx
+import { Bold, Italic, Underline } from 'lucide-react-native';
+import { useState } from 'react';
+
+function TextFormatting() {
+  const [formats, setFormats] = useState<string[]>([]);
+
+  return (
+    <ToggleGroup type="multiple" value={formats} onValueChange={setFormats}>
+      <ToggleGroupItem value="bold">
+        <ToggleGroupIcon as={Bold} />
+      </ToggleGroupItem>
+      <ToggleGroupItem value="italic">
+        <ToggleGroupIcon as={Italic} />
+      </ToggleGroupItem>
+      <ToggleGroupItem value="underline">
+        <ToggleGroupIcon as={Underline} />
+      </ToggleGroupItem>
+    </ToggleGroup>
+  );
+}
+```
+
+### Text Alignment (Single)
+
+```tsx
+import { AlignLeft, AlignCenter, AlignRight } from 'lucide-react-native';
+import { useState } from 'react';
+
+function TextAlignment() {
+  const [alignment, setAlignment] = useState('left');
+
+  return (
+    <ToggleGroup type="single" value={alignment} onValueChange={setAlignment}>
+      <ToggleGroupItem value="left">
+        <ToggleGroupIcon as={AlignLeft} />
+      </ToggleGroupItem>
+      <ToggleGroupItem value="center">
+        <ToggleGroupIcon as={AlignCenter} />
+      </ToggleGroupItem>
+      <ToggleGroupItem value="right">
+        <ToggleGroupIcon as={AlignRight} />
+      </ToggleGroupItem>
+    </ToggleGroup>
+  );
+}
+```
+
+### Outline Variant
+
+```tsx
+import { Bold, Italic, Underline } from 'lucide-react-native';
+
+<ToggleGroup type="multiple" variant="outline">
+  <ToggleGroupItem value="bold">
+    <ToggleGroupIcon as={Bold} />
+  </ToggleGroupItem>
+  <ToggleGroupItem value="italic">
+    <ToggleGroupIcon as={Italic} />
+  </ToggleGroupItem>
+  <ToggleGroupItem value="underline">
+    <ToggleGroupIcon as={Underline} />
+  </ToggleGroupItem>
+</ToggleGroup>
+```
+
+### Small Size
+
+```tsx
+import { Bold, Italic, Underline } from 'lucide-react-native';
+
+<ToggleGroup type="multiple" size="sm">
+  <ToggleGroupItem value="bold">
+    <ToggleGroupIcon as={Bold} className="size-3" />
+  </ToggleGroupItem>
+  <ToggleGroupItem value="italic">
+    <ToggleGroupIcon as={Italic} className="size-3" />
+  </ToggleGroupItem>
+  <ToggleGroupItem value="underline">
+    <ToggleGroupIcon as={Underline} className="size-3" />
+  </ToggleGroupItem>
+</ToggleGroup>
+```
+
+### Disabled
+
+```tsx
+import { Bold, Italic, Underline } from 'lucide-react-native';
+
+<ToggleGroup type="multiple" disabled>
+  <ToggleGroupItem value="bold">
+    <ToggleGroupIcon as={Bold} />
+  </ToggleGroupItem>
+  <ToggleGroupItem value="italic">
+    <ToggleGroupIcon as={Italic} />
+  </ToggleGroupItem>
+  <ToggleGroupItem value="underline">
+    <ToggleGroupIcon as={Underline} />
+  </ToggleGroupItem>
+</ToggleGroup>
+```
+
+### View Mode Switcher
+
+```tsx
+import { LayoutGrid, List, Table } from 'lucide-react-native';
+import { useState } from 'react';
+
+function ViewModeSwitcher() {
+  const [viewMode, setViewMode] = useState('grid');
+
+  return (
+    <ToggleGroup type="single" value={viewMode} onValueChange={setViewMode}>
+      <ToggleGroupItem value="grid">
+        <ToggleGroupIcon as={LayoutGrid} />
+      </ToggleGroupItem>
+      <ToggleGroupItem value="list">
+        <ToggleGroupIcon as={List} />
+      </ToggleGroupItem>
+      <ToggleGroupItem value="table">
+        <ToggleGroupIcon as={Table} />
+      </ToggleGroupItem>
+    </ToggleGroup>
+  );
+}
+```

@@ -25,7 +25,7 @@
     --secondary-foreground: 0 0% 100%; /* White */
 
     /* Muted */
-    --muted: 0 0% 94%; /* #F0F0F0 - gray-5 */
+    --muted: 0 0% 91%; /* #E8E8E8 - gray-10 */
     --muted-foreground: 0 0% 45%; /* #757575 - gray-50 */
 
     /* Accent - Subtle Gray */
