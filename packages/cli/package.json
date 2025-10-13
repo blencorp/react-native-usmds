@@ -1,6 +1,6 @@
 {
   "name": "usmds",
-  "version": "1.22.0",
+  "version": "1.23.0",
   "description": "CLI for adding USMDS components to React Native apps",
   "type": "module",
   "license": "MIT",
