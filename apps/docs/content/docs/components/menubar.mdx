@@ -1,0 +1,335 @@
+---
+title: Menubar
+description: A visually persistent menu common in desktop applications that provides quick access to a consistent set of commands.
+---
+
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { MenubarPreview } from '@/components/examples';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard preview={<MenubarPreview />} />
+  </Tab>
+  <Tab value="code">
+    See the example code in the preview above.
+  </Tab>
+</Tabs>
+
+## Installation
+
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    <Steps>
+      <Step>
+        ```bash
+        npx usmds add menubar
+        ```
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install dependencies:**
+
+        ```bash
+        npx expo install @rn-primitives/menubar react-native-reanimated react-native-screens lucide-react-native
+        ```
+      </Step>
+      <Step>
+        **Copy the component code:**
+
+        Copy from `packages/registry/src/usa/components/ui/menubar.tsx`
+      </Step>
+      <Step>
+        **Update import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarTrigger,
+} from '@/components/ui/menubar';
+import { Text } from '@/components/ui/text';
+
+<Menubar>
+  <MenubarMenu>
+    <MenubarTrigger>
+      <Text>File</Text>
+    </MenubarTrigger>
+    <MenubarContent>
+      <MenubarItem>
+        <Text>New File</Text>
+      </MenubarItem>
+      <MenubarItem>
+        <Text>Open</Text>
+      </MenubarItem>
+      <MenubarSeparator />
+      <MenubarItem>
+        <Text>Save</Text>
+      </MenubarItem>
+    </MenubarContent>
+  </MenubarMenu>
+</Menubar>
+```
+
+## Props
+
+### Menubar
+
+Extends `@rn-primitives/menubar` Root props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| value | `string` | The controlled value of the menu that is currently open. |
+| onValueChange | `(value: string) => void` | Event handler called when the value changes. |
+| className | `string` | Additional classes for styling. |
+
+### MenubarMenu
+
+Extends `@rn-primitives/menubar` Menu props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| value | `string` | A unique value for this menu. |
+
+### MenubarTrigger
+
+Extends `@rn-primitives/menubar` Trigger props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| disabled | `boolean` | When true, prevents the user from opening the menu. |
+| className | `string` | Additional classes for styling. |
+
+### MenubarContent
+
+Extends `@rn-primitives/menubar` Content props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| side | `'top' \| 'right' \| 'bottom' \| 'left'` | The preferred side to render against. |
+| align | `'start' \| 'center' \| 'end'` | The preferred alignment against the trigger. |
+| portalHost | `string` | The host where the menu content will be rendered. |
+| className | `string` | Additional classes for styling. |
+
+### MenubarItem
+
+Extends `@rn-primitives/menubar` Item props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| disabled | `boolean` | When true, prevents the user from interacting with the item. |
+| textValue | `string` | Optional text used for typeahead purposes. |
+| className | `string` | Additional classes for styling. |
+
+## Examples
+
+### Default
+
+```tsx
+<Menubar>
+  <MenubarMenu>
+    <MenubarTrigger>
+      <Text>File</Text>
+    </MenubarTrigger>
+    <MenubarContent>
+      <MenubarItem>
+        <Text>New File</Text>
+      </MenubarItem>
+      <MenubarItem>
+        <Text>New Window</Text>
+      </MenubarItem>
+      <MenubarSeparator />
+      <MenubarItem>
+        <Text>Open...</Text>
+      </MenubarItem>
+      <MenubarItem>
+        <Text>Save</Text>
+      </MenubarItem>
+    </MenubarContent>
+  </MenubarMenu>
+
+  <MenubarMenu>
+    <MenubarTrigger>
+      <Text>Edit</Text>
+    </MenubarTrigger>
+    <MenubarContent>
+      <MenubarItem>
+        <Text>Undo</Text>
+      </MenubarItem>
+      <MenubarItem>
+        <Text>Redo</Text>
+      </MenubarItem>
+      <MenubarSeparator />
+      <MenubarItem>
+        <Text>Cut</Text>
+      </MenubarItem>
+      <MenubarItem>
+        <Text>Copy</Text>
+      </MenubarItem>
+      <MenubarItem>
+        <Text>Paste</Text>
+      </MenubarItem>
+    </MenubarContent>
+  </MenubarMenu>
+</Menubar>
+```
+
+### With Icons
+
+```tsx
+import { File, Edit, Save, Copy } from 'lucide-react-native';
+import { Icon } from '@/components/ui/icon';
+
+<Menubar>
+  <MenubarMenu>
+    <MenubarTrigger>
+      <Text>File</Text>
+    </MenubarTrigger>
+    <MenubarContent>
+      <MenubarItem>
+        <View className="flex-row items-center gap-2">
+          <Icon as={File} className="size-4" />
+          <Text>New File</Text>
+        </View>
+      </MenubarItem>
+      <MenubarItem>
+        <View className="flex-row items-center gap-2">
+          <Icon as={Save} className="size-4" />
+          <Text>Save</Text>
+        </View>
+      </MenubarItem>
+    </MenubarContent>
+  </MenubarMenu>
+
+  <MenubarMenu>
+    <MenubarTrigger>
+      <Text>Edit</Text>
+    </MenubarTrigger>
+    <MenubarContent>
+      <MenubarItem>
+        <View className="flex-row items-center gap-2">
+          <Icon as={Copy} className="size-4" />
+          <Text>Copy</Text>
+        </View>
+      </MenubarItem>
+      <MenubarItem>
+        <View className="flex-row items-center gap-2">
+          <Icon as={Edit} className="size-4" />
+          <Text>Paste</Text>
+        </View>
+      </MenubarItem>
+    </MenubarContent>
+  </MenubarMenu>
+</Menubar>
+```
+
+### With Submenu
+
+```tsx
+import {
+  MenubarSub,
+  MenubarSubContent,
+  MenubarSubTrigger,
+} from '@/components/ui/menubar';
+
+<Menubar>
+  <MenubarMenu>
+    <MenubarTrigger>
+      <Text>File</Text>
+    </MenubarTrigger>
+    <MenubarContent>
+      <MenubarItem>
+        <Text>New File</Text>
+      </MenubarItem>
+      <MenubarSub>
+        <MenubarSubTrigger>
+          <Text>Open Recent</Text>
+        </MenubarSubTrigger>
+        <MenubarSubContent>
+          <MenubarItem>
+            <Text>document-1.txt</Text>
+          </MenubarItem>
+          <MenubarItem>
+            <Text>document-2.txt</Text>
+          </MenubarItem>
+          <MenubarItem>
+            <Text>document-3.txt</Text>
+          </MenubarItem>
+        </MenubarSubContent>
+      </MenubarSub>
+      <MenubarSeparator />
+      <MenubarItem>
+        <Text>Save</Text>
+      </MenubarItem>
+    </MenubarContent>
+  </MenubarMenu>
+</Menubar>
+```
+
+### Complete Application Menu
+
+```tsx
+<Menubar>
+  <MenubarMenu>
+    <MenubarTrigger>
+      <Text>File</Text>
+    </MenubarTrigger>
+    <MenubarContent>
+      <MenubarItem>New Tab</MenubarItem>
+      <MenubarItem>New Window</MenubarItem>
+      <MenubarSeparator />
+      <MenubarItem>Share</MenubarItem>
+      <MenubarSeparator />
+      <MenubarItem>Print</MenubarItem>
+    </MenubarContent>
+  </MenubarMenu>
+
+  <MenubarMenu>
+    <MenubarTrigger>
+      <Text>Edit</Text>
+    </MenubarTrigger>
+    <MenubarContent>
+      <MenubarItem>Undo</MenubarItem>
+      <MenubarItem>Redo</MenubarItem>
+      <MenubarSeparator />
+      <MenubarSub>
+        <MenubarSubTrigger>Find</MenubarSubTrigger>
+        <MenubarSubContent>
+          <MenubarItem>Search the web</MenubarItem>
+          <MenubarSeparator />
+          <MenubarItem>Find...</MenubarItem>
+          <MenubarItem>Find Next</MenubarItem>
+          <MenubarItem>Find Previous</MenubarItem>
+        </MenubarSubContent>
+      </MenubarSub>
+    </MenubarContent>
+  </MenubarMenu>
+
+  <MenubarMenu>
+    <MenubarTrigger>
+      <Text>View</Text>
+    </MenubarTrigger>
+    <MenubarContent>
+      <MenubarCheckboxItem checked>
+        Always Show Toolbar
+      </MenubarCheckboxItem>
+      <MenubarCheckboxItem>
+        Always Show Full URLs
+      </MenubarCheckboxItem>
+    </MenubarContent>
+  </MenubarMenu>
+</Menubar>
+```

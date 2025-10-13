@@ -1,0 +1,250 @@
+---
+title: Context Menu
+description: Displays a menu to the user — triggered by a right-click or long-press.
+---
+
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { ContextMenuPreview } from '@/components/examples';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard preview={<ContextMenuPreview />} />
+  </Tab>
+  <Tab value="code">
+    See the example code in the preview above.
+  </Tab>
+</Tabs>
+
+## Installation
+
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    <Steps>
+      <Step>
+        ```bash
+        npx usmds add context-menu
+        ```
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install dependencies:**
+
+        ```bash
+        npx expo install @rn-primitives/context-menu react-native-reanimated react-native-screens lucide-react-native
+        ```
+      </Step>
+      <Step>
+        **Copy the component code:**
+
+        Copy from `packages/registry/src/usa/components/ui/context-menu.tsx`
+      </Step>
+      <Step>
+        **Update import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from '@/components/ui/context-menu';
+import { Text } from '@/components/ui/text';
+
+<ContextMenu>
+  <ContextMenuTrigger>
+    <Text>Right click or long press</Text>
+  </ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuItem>
+      <Text>Edit</Text>
+    </ContextMenuItem>
+    <ContextMenuItem>
+      <Text>Delete</Text>
+    </ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>
+```
+
+## Props
+
+### ContextMenu
+
+Extends `@rn-primitives/context-menu` Root props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| open | `boolean` | The controlled open state of the context menu. |
+| onOpenChange | `(open: boolean) => void` | Event handler called when the open state changes. |
+
+### ContextMenuTrigger
+
+Extends `@rn-primitives/context-menu` Trigger props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| asChild | `boolean` | Change the default rendered element for the one passed as a child. |
+| disabled | `boolean` | When true, prevents context menu from opening. |
+
+### ContextMenuContent
+
+Extends `@rn-primitives/context-menu` Content props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| className | `string` | Additional classes for styling. |
+| portalHost | `string` | The host where the context menu content will be rendered. |
+
+### ContextMenuItem
+
+Extends `@rn-primitives/context-menu` Item props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| disabled | `boolean` | When true, prevents the user from interacting with the item. |
+| textValue | `string` | Optional text used for typeahead purposes. |
+| className | `string` | Additional classes for styling. |
+
+## Examples
+
+### Default
+
+```tsx
+import { Card } from '@/components/ui/card';
+
+<ContextMenu>
+  <ContextMenuTrigger asChild>
+    <Card className="p-4">
+      <Text>Right click or long press me</Text>
+    </Card>
+  </ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuItem>
+      <Text>Edit</Text>
+    </ContextMenuItem>
+    <ContextMenuItem>
+      <Text>Duplicate</Text>
+    </ContextMenuItem>
+    <ContextMenuSeparator />
+    <ContextMenuItem>
+      <Text>Delete</Text>
+    </ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>
+```
+
+### With Icons
+
+```tsx
+import { Copy, Edit, Trash } from 'lucide-react-native';
+import { Icon } from '@/components/ui/icon';
+
+<ContextMenu>
+  <ContextMenuTrigger asChild>
+    <Card className="w-64 p-4">
+      <Text>Right click for options</Text>
+    </Card>
+  </ContextMenuTrigger>
+  <ContextMenuContent className="w-64">
+    <ContextMenuItem>
+      <View className="flex-row items-center gap-2">
+        <Icon as={Edit} className="size-4" />
+        <Text>Edit</Text>
+      </View>
+    </ContextMenuItem>
+    <ContextMenuItem>
+      <View className="flex-row items-center gap-2">
+        <Icon as={Copy} className="size-4" />
+        <Text>Duplicate</Text>
+      </View>
+    </ContextMenuItem>
+    <ContextMenuSeparator />
+    <ContextMenuItem>
+      <View className="flex-row items-center gap-2">
+        <Icon as={Trash} className="size-4 text-destructive" />
+        <Text className="text-destructive">Delete</Text>
+      </View>
+    </ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>
+```
+
+### With Submenu
+
+```tsx
+import {
+  ContextMenuSub,
+  ContextMenuSubContent,
+  ContextMenuSubTrigger,
+} from '@/components/ui/context-menu';
+
+<ContextMenu>
+  <ContextMenuTrigger>
+    <Card className="p-4">
+      <Text>Right click me</Text>
+    </Card>
+  </ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuItem>
+      <Text>Edit</Text>
+    </ContextMenuItem>
+    <ContextMenuSub>
+      <ContextMenuSubTrigger>
+        <Text>More Tools</Text>
+      </ContextMenuSubTrigger>
+      <ContextMenuSubContent>
+        <ContextMenuItem>
+          <Text>Save As...</Text>
+        </ContextMenuItem>
+        <ContextMenuItem>
+          <Text>Export</Text>
+        </ContextMenuItem>
+        <ContextMenuItem>
+          <Text>Share</Text>
+        </ContextMenuItem>
+      </ContextMenuSubContent>
+    </ContextMenuSub>
+    <ContextMenuSeparator />
+    <ContextMenuItem>
+      <Text>Delete</Text>
+    </ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>
+```
+
+### With Disabled Items
+
+```tsx
+<ContextMenu>
+  <ContextMenuTrigger>
+    <Card className="p-4">
+      <Text>Right click me</Text>
+    </Card>
+  </ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuItem>
+      <Text>Cut</Text>
+    </ContextMenuItem>
+    <ContextMenuItem>
+      <Text>Copy</Text>
+    </ContextMenuItem>
+    <ContextMenuItem disabled>
+      <Text>Paste (Disabled)</Text>
+    </ContextMenuItem>
+    <ContextMenuSeparator />
+    <ContextMenuItem>
+      <Text>Select All</Text>
+    </ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>
+```

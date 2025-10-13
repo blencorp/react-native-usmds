@@ -1,26 +1,22 @@
 'use client';
 
+import React from 'react';
+import { ToggleGroup, ToggleGroupItem } from '@/registry/usa/components/ui/toggle-group';
+import { Text } from '@/registry/usa/components/ui/text';
 import { Bold, Italic, Underline } from 'lucide-react-native';
-import {
-  ToggleGroup,
-  ToggleGroupIcon,
-  ToggleGroupItem,
-} from '@/registry/usa/components/ui/toggle-group';
-import * as React from 'react';
+import { Icon } from '@/registry/usa/components/ui/icon';
 
 export function ToggleGroupPreview() {
-  const [value, setValue] = React.useState<string[]>([]);
-
   return (
-    <ToggleGroup value={value} onValueChange={setValue} variant="outline" type="multiple">
-      <ToggleGroupItem isFirst value="bold" aria-label="Toggle bold">
-        <ToggleGroupIcon as={Bold} />
+    <ToggleGroup type="multiple">
+      <ToggleGroupItem value="bold" aria-label="Toggle bold">
+        <Icon as={Bold} size={16} />
       </ToggleGroupItem>
       <ToggleGroupItem value="italic" aria-label="Toggle italic">
-        <ToggleGroupIcon as={Italic} />
+        <Icon as={Italic} size={16} />
       </ToggleGroupItem>
-      <ToggleGroupItem isLast value="strikethrough" aria-label="Toggle strikethrough">
-        <ToggleGroupIcon as={Underline} />
+      <ToggleGroupItem value="underline" aria-label="Toggle underline">
+        <Icon as={Underline} size={16} />
       </ToggleGroupItem>
     </ToggleGroup>
   );

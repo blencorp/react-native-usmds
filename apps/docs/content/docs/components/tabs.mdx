@@ -1,0 +1,295 @@
+---
+title: Tabs
+description: A set of layered sections of content—known as tab panels—that are displayed one at a time.
+---
+
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { TabsPreview } from '@/components/examples';
+import { Tabs as DocTabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<DocTabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard preview={<TabsPreview />} />
+  </Tab>
+  <Tab value="code">
+    ```tsx title="tabs-example.tsx"
+    import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+    import { Text } from '@/components/ui/text';
+    import { useState } from 'react';
+
+    export default function TabsExample() {
+      const [value, setValue] = useState('account');
+
+      return (
+        <Tabs value={value} onValueChange={setValue} className="w-full max-w-md">
+          <TabsList className="w-full">
+            <TabsTrigger value="account" className="flex-1">
+              <Text>Account</Text>
+            </TabsTrigger>
+            <TabsTrigger value="password" className="flex-1">
+              <Text>Password</Text>
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="account" className="mt-4">
+            <Text>Make changes to your account here. Click save when you're done.</Text>
+          </TabsContent>
+          <TabsContent value="password" className="mt-4">
+            <Text>Change your password here. After saving, you'll be logged out.</Text>
+          </TabsContent>
+        </Tabs>
+      );
+    }
+    ```
+  </Tab>
+</DocTabs>
+
+## Installation
+
+<DocTabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    <Steps>
+      <Step>
+        ```bash
+        npx usmds add tabs
+        ```
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install dependencies:**
+
+        ```bash
+        npx expo install @rn-primitives/tabs
+        ```
+      </Step>
+      <Step>
+        **Copy the component code:**
+
+        Copy from `packages/registry/src/usa/components/ui/tabs.tsx`
+      </Step>
+      <Step>
+        **Update import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</DocTabs>
+
+## Usage
+
+```tsx
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Text } from '@/components/ui/text';
+
+<Tabs defaultValue="tab1">
+  <TabsList>
+    <TabsTrigger value="tab1">
+      <Text>Tab 1</Text>
+    </TabsTrigger>
+    <TabsTrigger value="tab2">
+      <Text>Tab 2</Text>
+    </TabsTrigger>
+  </TabsList>
+  <TabsContent value="tab1">
+    <Text>Content 1</Text>
+  </TabsContent>
+  <TabsContent value="tab2">
+    <Text>Content 2</Text>
+  </TabsContent>
+</Tabs>
+```
+
+## Props
+
+### Tabs
+
+Extends `@rn-primitives/tabs` Root props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| value | `string` | The controlled value of the tab to activate. |
+| onValueChange | `(value: string) => void` | Event handler called when the value changes. |
+| defaultValue | `string` | The value of the tab that should be active when initially rendered. |
+| orientation | `'horizontal' \| 'vertical'` | The orientation of the tabs. Default is `'horizontal'`. |
+| disabled | `boolean` | When true, prevents user interaction. |
+| className | `string` | Additional classes for styling. |
+
+### TabsList
+
+| Prop | Type | Description |
+|------|------|-------------|
+| children | `React.ReactNode` | The tab triggers. |
+| className | `string` | Additional classes for styling. |
+
+### TabsTrigger
+
+Extends `@rn-primitives/tabs` Trigger props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| value | `string` | **Required.** A unique value that associates the trigger with a content. |
+| disabled | `boolean` | When true, prevents the user from activating the tab. |
+| className | `string` | Additional classes for styling. |
+
+### TabsContent
+
+Extends `@rn-primitives/tabs` Content props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| value | `string` | **Required.** A unique value that associates the content with a trigger. |
+| forceMount | `boolean` | Force mounting content even when not active. |
+| className | `string` | Additional classes for styling. |
+
+## Examples
+
+### Default
+
+```tsx
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Text } from '@/components/ui/text';
+
+function TabsExample() {
+  return (
+    <Tabs defaultValue="overview" className="w-full">
+      <TabsList>
+        <TabsTrigger value="overview">
+          <Text>Overview</Text>
+        </TabsTrigger>
+        <TabsTrigger value="details">
+          <Text>Details</Text>
+        </TabsTrigger>
+        <TabsTrigger value="settings">
+          <Text>Settings</Text>
+        </TabsTrigger>
+      </TabsList>
+      <TabsContent value="overview">
+        <Text>Overview content goes here.</Text>
+      </TabsContent>
+      <TabsContent value="details">
+        <Text>Details content goes here.</Text>
+      </TabsContent>
+      <TabsContent value="settings">
+        <Text>Settings content goes here.</Text>
+      </TabsContent>
+    </Tabs>
+  );
+}
+```
+
+### Full Width Tabs
+
+```tsx
+<Tabs defaultValue="tab1" className="w-full">
+  <TabsList className="w-full">
+    <TabsTrigger value="tab1" className="flex-1">
+      <Text>Tab 1</Text>
+    </TabsTrigger>
+    <TabsTrigger value="tab2" className="flex-1">
+      <Text>Tab 2</Text>
+    </TabsTrigger>
+  </TabsList>
+  <TabsContent value="tab1">
+    <Text>Content 1</Text>
+  </TabsContent>
+  <TabsContent value="tab2">
+    <Text>Content 2</Text>
+  </TabsContent>
+</Tabs>
+```
+
+### Controlled Tabs
+
+```tsx
+import { useState } from 'react';
+
+function ControlledTabsExample() {
+  const [activeTab, setActiveTab] = useState('account');
+
+  return (
+    <Tabs value={activeTab} onValueChange={setActiveTab}>
+      <TabsList>
+        <TabsTrigger value="account">
+          <Text>Account</Text>
+        </TabsTrigger>
+        <TabsTrigger value="password">
+          <Text>Password</Text>
+        </TabsTrigger>
+      </TabsList>
+      <TabsContent value="account">
+        <Text>Account settings</Text>
+      </TabsContent>
+      <TabsContent value="password">
+        <Text>Password settings</Text>
+      </TabsContent>
+    </Tabs>
+  );
+}
+```
+
+### Disabled Tab
+
+```tsx
+<Tabs defaultValue="tab1">
+  <TabsList>
+    <TabsTrigger value="tab1">
+      <Text>Tab 1</Text>
+    </TabsTrigger>
+    <TabsTrigger value="tab2" disabled>
+      <Text>Tab 2 (Disabled)</Text>
+    </TabsTrigger>
+    <TabsTrigger value="tab3">
+      <Text>Tab 3</Text>
+    </TabsTrigger>
+  </TabsList>
+  <TabsContent value="tab1">
+    <Text>Content 1</Text>
+  </TabsContent>
+  <TabsContent value="tab2">
+    <Text>Content 2</Text>
+  </TabsContent>
+  <TabsContent value="tab3">
+    <Text>Content 3</Text>
+  </TabsContent>
+</Tabs>
+```
+
+### With Rich Content
+
+```tsx
+import { View } from 'react-native';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+
+<Tabs defaultValue="profile" className="w-full">
+  <TabsList className="w-full">
+    <TabsTrigger value="profile" className="flex-1">
+      <Text>Profile</Text>
+    </TabsTrigger>
+    <TabsTrigger value="notifications" className="flex-1">
+      <Text>Notifications</Text>
+    </TabsTrigger>
+  </TabsList>
+  <TabsContent value="profile" className="mt-4">
+    <Card className="p-4">
+      <Text className="font-semibold mb-2">Profile Information</Text>
+      <Text className="text-sm text-muted-foreground mb-4">
+        Update your profile details here.
+      </Text>
+      <Button>
+        <Text>Save Changes</Text>
+      </Button>
+    </Card>
+  </TabsContent>
+  <TabsContent value="notifications" className="mt-4">
+    <Card className="p-4">
+      <Text className="font-semibold mb-2">Notification Settings</Text>
+      <Text className="text-sm text-muted-foreground">
+        Manage your notification preferences.
+      </Text>
+    </Card>
+  </TabsContent>
+</Tabs>
+```

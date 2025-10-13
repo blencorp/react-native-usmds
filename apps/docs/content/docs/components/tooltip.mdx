@@ -1,0 +1,274 @@
+---
+title: Tooltip
+description: A popup that displays information related to an element when the element receives keyboard focus, the mouse hovers over it, or when it is pressed.
+---
+
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { TooltipPreview } from '@/components/examples';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard preview={<TooltipPreview />} />
+  </Tab>
+  <Tab value="code">
+    ```tsx title="tooltip-example.tsx"
+    import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+    import { Button } from '@/components/ui/button';
+    import { Text } from '@/components/ui/text';
+
+    export default function TooltipExample() {
+      return (
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline">
+              <Text>Hover me</Text>
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <Text>Add to library</Text>
+          </TooltipContent>
+        </Tooltip>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Installation
+
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    <Steps>
+      <Step>
+        ```bash
+        npx usmds add tooltip
+        ```
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install dependencies:**
+
+        ```bash
+        npx expo install @rn-primitives/tooltip react-native-reanimated react-native-screens
+        ```
+      </Step>
+      <Step>
+        **Copy the component code:**
+
+        Copy from `packages/registry/src/usa/components/ui/tooltip.tsx`
+      </Step>
+      <Step>
+        **Update import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { Text } from '@/components/ui/text';
+
+<Tooltip>
+  <TooltipTrigger>
+    <Text>Hover</Text>
+  </TooltipTrigger>
+  <TooltipContent>
+    <Text>Tooltip content</Text>
+  </TooltipContent>
+</Tooltip>
+```
+
+## Props
+
+### Tooltip
+
+Extends `@rn-primitives/tooltip` Root props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| open | `boolean` | The controlled open state of the tooltip. |
+| onOpenChange | `(open: boolean) => void` | Event handler called when the open state changes. |
+| defaultOpen | `boolean` | The open state when initially rendered. |
+| delayDuration | `number` | Time in milliseconds before tooltip opens on hover. Default is `700`. |
+| skipDelayDuration | `number` | Duration user can hover off and back on before delay resets. |
+| disableHoverableContent | `boolean` | Prevents tooltip from remaining open when hovering content. |
+
+### TooltipTrigger
+
+Extends `@rn-primitives/tooltip` Trigger props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| asChild | `boolean` | Change the default rendered element for the one passed as a child. |
+
+### TooltipContent
+
+Extends `@rn-primitives/tooltip` Content props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| side | `'top' \| 'right' \| 'bottom' \| 'left'` | The preferred side of the trigger to render against. Default is `'top'`. |
+| sideOffset | `number` | The distance in pixels from the trigger. Default is `4`. |
+| align | `'start' \| 'center' \| 'end'` | The preferred alignment against the trigger. |
+| alignOffset | `number` | Offset in pixels from the alignment axis. |
+| portalHost | `string` | The host where the tooltip content will be rendered. |
+| className | `string` | Additional classes for styling. |
+
+## Examples
+
+### Default
+
+```tsx
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+
+<Tooltip>
+  <TooltipTrigger asChild>
+    <Button variant="outline">
+      <Text>Hover me</Text>
+    </Button>
+  </TooltipTrigger>
+  <TooltipContent>
+    <Text>Add to library</Text>
+  </TooltipContent>
+</Tooltip>
+```
+
+### Different Sides
+
+```tsx
+import { View } from 'react-native';
+
+<View className="flex flex-row gap-4">
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button variant="outline">
+        <Text>Top</Text>
+      </Button>
+    </TooltipTrigger>
+    <TooltipContent side="top">
+      <Text>Top tooltip</Text>
+    </TooltipContent>
+  </Tooltip>
+
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button variant="outline">
+        <Text>Right</Text>
+      </Button>
+    </TooltipTrigger>
+    <TooltipContent side="right">
+      <Text>Right tooltip</Text>
+    </TooltipContent>
+  </Tooltip>
+
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button variant="outline">
+        <Text>Bottom</Text>
+      </Button>
+    </TooltipTrigger>
+    <TooltipContent side="bottom">
+      <Text>Bottom tooltip</Text>
+    </TooltipContent>
+  </Tooltip>
+
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button variant="outline">
+        <Text>Left</Text>
+      </Button>
+    </TooltipTrigger>
+    <TooltipContent side="left">
+      <Text>Left tooltip</Text>
+    </TooltipContent>
+  </Tooltip>
+</View>
+```
+
+### With Icon
+
+```tsx
+import { Info } from 'lucide-react-native';
+import { Icon } from '@/components/ui/icon';
+
+<Tooltip>
+  <TooltipTrigger asChild>
+    <Button variant="ghost" size="icon">
+      <Icon as={Info} className="size-4" />
+    </Button>
+  </TooltipTrigger>
+  <TooltipContent>
+    <Text>Additional information about this feature</Text>
+  </TooltipContent>
+</Tooltip>
+```
+
+### Instant Open
+
+```tsx
+<Tooltip delayDuration={0}>
+  <TooltipTrigger asChild>
+    <Button variant="outline">
+      <Text>Instant tooltip</Text>
+    </Button>
+  </TooltipTrigger>
+  <TooltipContent>
+    <Text>Opens immediately!</Text>
+  </TooltipContent>
+</Tooltip>
+```
+
+### Form Help
+
+```tsx
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { HelpCircle } from 'lucide-react-native';
+import { View } from 'react-native';
+
+<View className="gap-2">
+  <View className="flex flex-row items-center gap-2">
+    <Label>Password</Label>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button variant="ghost" size="icon" className="h-4 w-4">
+          <Icon as={HelpCircle} className="size-4" />
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent>
+        <Text>Must be at least 8 characters long</Text>
+      </TooltipContent>
+    </Tooltip>
+  </View>
+  <Input type="password" />
+</View>
+```
+
+### With Rich Content
+
+```tsx
+<Tooltip>
+  <TooltipTrigger asChild>
+    <Button variant="outline">
+      <Text>View details</Text>
+    </Button>
+  </TooltipTrigger>
+  <TooltipContent className="max-w-xs">
+    <View className="gap-2">
+      <Text className="font-semibold">Feature Details</Text>
+      <Text className="text-xs">
+        This feature allows you to customize your profile with various options and settings.
+      </Text>
+    </View>
+  </TooltipContent>
+</Tooltip>
+```

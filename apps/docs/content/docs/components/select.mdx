@@ -1,0 +1,392 @@
+---
+title: Select
+description: Displays a list of options for the user to pick from—triggered by a button.
+---
+
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { SelectPreview } from '@/components/examples';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard preview={<SelectPreview />} />
+  </Tab>
+  <Tab value="code">
+    ```tsx title="select-example.tsx"
+    import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
+    import { Label } from '@/components/ui/label';
+    import { useState } from 'react';
+
+    export default function SelectExample() {
+      const [value, setValue] = useState<string>();
+
+      return (
+        <div className="flex flex-col gap-2">
+          <Label nativeID="select-label">Select a fruit</Label>
+          <Select value={value} onValueChange={setValue}>
+            <SelectTrigger className="w-full" aria-labelledby="select-label">
+              <SelectValue placeholder="Select a fruit" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Fruits</SelectLabel>
+                <SelectItem label="Apple" value="apple">
+                  Apple
+                </SelectItem>
+                <SelectItem label="Banana" value="banana">
+                  Banana
+                </SelectItem>
+                <SelectItem label="Orange" value="orange">
+                  Orange
+                </SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Installation
+
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    ```bash
+    npx usmds add select
+    ```
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install the following dependencies:**
+
+        ```bash
+        npx expo install @rn-primitives/select lucide-react-native react-native-reanimated react-native-screens
+        ```
+      </Step>
+      <Step>
+        **Copy and paste the following code into your project.**
+
+        ```tsx title="@/components/ui/select.tsx"
+        // Copy from packages/registry/src/usa/components/ui/select.tsx
+        ```
+      </Step>
+      <Step>
+        **Update the import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Label } from '@/components/ui/label';
+import { useState } from 'react';
+
+const [value, setValue] = useState<string>();
+
+<Select value={value} onValueChange={setValue}>
+  <SelectTrigger>
+    <SelectValue placeholder="Select an option" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectGroup>
+      <SelectLabel>Options</SelectLabel>
+      <SelectItem label="Option 1" value="option-1">
+        Option 1
+      </SelectItem>
+      <SelectItem label="Option 2" value="option-2">
+        Option 2
+      </SelectItem>
+    </SelectGroup>
+  </SelectContent>
+</Select>
+```
+
+## Props
+
+### Select
+
+Extends `@rn-primitives/select` Root props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| value | `string \| undefined` | The controlled value of the select. |
+| onValueChange | `(value: string \| undefined) => void` | Event handler called when the value changes. |
+| open | `boolean` | The controlled open state of the select. |
+| onOpenChange | `(open: boolean) => void` | Event handler called when the open state changes. |
+| defaultValue | `string` | The value of the select when initially rendered. |
+| disabled | `boolean` | When true, prevents the user from interacting with select. |
+
+### SelectTrigger
+
+Extends `@rn-primitives/select` Trigger props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| size | `'default' \| 'sm'` | The size of the trigger. Default is `'default'`. |
+| disabled | `boolean` | When true, prevents the user from opening the select. |
+| className | `string` | Additional classes for styling. |
+
+### SelectValue
+
+Extends `@rn-primitives/select` Value props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| placeholder | `string` | The content that will be rendered when no value is selected. |
+| className | `string` | Additional classes for styling. |
+
+### SelectContent
+
+Extends `@rn-primitives/select` Content props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| position | `'popper' \| 'item-aligned'` | The positioning mode to use. Default is `'popper'`. |
+| side | `'top' \| 'bottom' \| 'left' \| 'right'` | The preferred side of the trigger to render against. |
+| portalHost | `string` | The host where the select content will be rendered. |
+| className | `string` | Additional classes for styling. |
+
+### SelectItem
+
+Extends `@rn-primitives/select` Item props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| value | `string` | **Required.** The value of the item. |
+| label | `string` | **Required.** The label of the item. |
+| disabled | `boolean` | When true, prevents the user from selecting the item. |
+| className | `string` | Additional classes for styling. |
+
+## Examples
+
+### Default
+
+```tsx
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
+
+function SelectExample() {
+  const [value, setValue] = useState<string>();
+
+  return (
+    <Select value={value} onValueChange={setValue}>
+      <SelectTrigger className="w-full">
+        <SelectValue placeholder="Select an option" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          <SelectLabel>Options</SelectLabel>
+          <SelectItem label="Option 1" value="option-1">
+            Option 1
+          </SelectItem>
+          <SelectItem label="Option 2" value="option-2">
+            Option 2
+          </SelectItem>
+          <SelectItem label="Option 3" value="option-3">
+            Option 3
+          </SelectItem>
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+  );
+}
+```
+
+### With Multiple Groups
+
+```tsx
+<Select value={value} onValueChange={setValue}>
+  <SelectTrigger className="w-full">
+    <SelectValue placeholder="Select a food" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectGroup>
+      <SelectLabel>Fruits</SelectLabel>
+      <SelectItem label="Apple" value="apple">
+        Apple
+      </SelectItem>
+      <SelectItem label="Banana" value="banana">
+        Banana
+      </SelectItem>
+      <SelectItem label="Orange" value="orange">
+        Orange
+      </SelectItem>
+    </SelectGroup>
+    <SelectGroup>
+      <SelectLabel>Vegetables</SelectLabel>
+      <SelectItem label="Carrot" value="carrot">
+        Carrot
+      </SelectItem>
+      <SelectItem label="Broccoli" value="broccoli">
+        Broccoli
+      </SelectItem>
+      <SelectItem label="Spinach" value="spinach">
+        Spinach
+      </SelectItem>
+    </SelectGroup>
+  </SelectContent>
+</Select>
+```
+
+### Small Size
+
+```tsx
+<Select value={value} onValueChange={setValue}>
+  <SelectTrigger size="sm" className="w-full">
+    <SelectValue placeholder="Select" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectGroup>
+      <SelectItem label="Option 1" value="option-1">
+        Option 1
+      </SelectItem>
+      <SelectItem label="Option 2" value="option-2">
+        Option 2
+      </SelectItem>
+    </SelectGroup>
+  </SelectContent>
+</Select>
+```
+
+### Disabled State
+
+```tsx
+<Select value={value} onValueChange={setValue} disabled>
+  <SelectTrigger className="w-full">
+    <SelectValue placeholder="Select an option" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectGroup>
+      <SelectItem label="Option 1" value="option-1">
+        Option 1
+      </SelectItem>
+      <SelectItem label="Option 2" value="option-2">
+        Option 2
+      </SelectItem>
+    </SelectGroup>
+  </SelectContent>
+</Select>
+```
+
+### Disabled Items
+
+```tsx
+<Select value={value} onValueChange={setValue}>
+  <SelectTrigger className="w-full">
+    <SelectValue placeholder="Select an option" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectGroup>
+      <SelectItem label="Option 1" value="option-1">
+        Option 1
+      </SelectItem>
+      <SelectItem label="Option 2" value="option-2" disabled>
+        Option 2 (Disabled)
+      </SelectItem>
+      <SelectItem label="Option 3" value="option-3">
+        Option 3
+      </SelectItem>
+    </SelectGroup>
+  </SelectContent>
+</Select>
+```
+
+### With Label
+
+```tsx
+import { Label } from '@/components/ui/label';
+
+<div className="flex flex-col gap-2">
+  <Label nativeID="country-select">Country</Label>
+  <Select value={value} onValueChange={setValue}>
+    <SelectTrigger aria-labelledby="country-select">
+      <SelectValue placeholder="Select a country" />
+    </SelectTrigger>
+    <SelectContent>
+      <SelectGroup>
+        <SelectItem label="United States" value="us">
+          United States
+        </SelectItem>
+        <SelectItem label="Canada" value="ca">
+          Canada
+        </SelectItem>
+        <SelectItem label="Mexico" value="mx">
+          Mexico
+        </SelectItem>
+      </SelectGroup>
+    </SelectContent>
+  </Select>
+</div>
+```
+
+### Form Example
+
+```tsx
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+import { View } from 'react-native';
+
+function FormExample() {
+  const [country, setCountry] = useState<string>();
+  const [state, setState] = useState<string>();
+
+  const handleSubmit = () => {
+    console.log({ country, state });
+  };
+
+  return (
+    <View className="gap-4">
+      <div className="flex flex-col gap-2">
+        <Label nativeID="country">Country</Label>
+        <Select value={country} onValueChange={setCountry}>
+          <SelectTrigger aria-labelledby="country">
+            <SelectValue placeholder="Select country" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem label="United States" value="us">
+                United States
+              </SelectItem>
+              <SelectItem label="Canada" value="ca">
+                Canada
+              </SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <Label nativeID="state">State</Label>
+        <Select value={state} onValueChange={setState}>
+          <SelectTrigger aria-labelledby="state">
+            <SelectValue placeholder="Select state" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem label="California" value="ca">
+                California
+              </SelectItem>
+              <SelectItem label="New York" value="ny">
+                New York
+              </SelectItem>
+              <SelectItem label="Texas" value="tx">
+                Texas
+              </SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
+
+      <Button onPress={handleSubmit}>
+        <Text>Submit</Text>
+      </Button>
+    </View>
+  );
+}
+```
