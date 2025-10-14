@@ -101,4 +101,44 @@
     --chart-4: 44 100% 69%; /* #FFCB54 - gold-10v */
     --chart-5: 3 77% 74%; /* #F2938C - red-30 */
   }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-publicSans;
+  }
+
+  h1 {
+    @apply text-6xl;
+    @apply tracking-tight;
+    @apply font-bold;
+  }
+  h2 {
+    @apply text-4xl;
+    @apply tracking-tight;
+    @apply font-bold;
+  }
+
+  h3 {
+    @apply text-2xl;
+    @apply tracking-tight;
+    @apply font-medium;
+  }
+
+  h4 {
+    @apply text-xl;
+    @apply tracking-tight;
+    @apply font-medium;
+  }
+
+  h5 {
+    @apply text-uswds-heading-md;
+  }
+
+  h6 {
+    @apply text-uswds-heading-sm;
+  }
 }
