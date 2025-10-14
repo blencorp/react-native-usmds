@@ -191,6 +191,20 @@
       ]
     },
     {
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "description": "Renders an accessible label associated with controls.",
+      "author": "@blencorp",
+      "files": [
+        {
+          "path": "./src/usa/components/ui/label.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@rn-primitives/label"]
+    },
+    {
       "name": "link",
       "type": "registry:ui",
       "title": "Link",
@@ -203,6 +217,20 @@
         }
       ],
       "registryDependencies": ["https://storage.googleapis.com/usmds-registry/r/usa/icon.json"]
+    },
+    {
+      "name": "native-only-animated-view",
+      "type": "registry:ui",
+      "title": "Native Only Animated View",
+      "description": "An animated view wrapper that only enables animations on native platforms.",
+      "author": "@blencorp",
+      "files": [
+        {
+          "path": "./src/usa/components/ui/native-only-animated-view.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["react-native-reanimated"]
     },
     {
       "name": "pagination",
@@ -241,6 +269,20 @@
       "files": [
         {
           "path": "./src/usa/components/ui/radiobutton.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@rn-primitives/radio-group"]
+    },
+    {
+      "name": "radiogroup",
+      "type": "registry:ui",
+      "title": "Radio Group",
+      "description": "A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time.",
+      "author": "@blencorp",
+      "files": [
+        {
+          "path": "./src/usa/components/ui/radiogroup.tsx",
           "type": "registry:ui"
         }
       ],
@@ -357,6 +399,247 @@
         "https://storage.googleapis.com/usmds-registry/r/usa/text.json"
       ],
       "dependencies": ["@rn-primitives/toggle"]
+    },
+    {
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "Accordion",
+      "description": "A vertically stacked set of interactive headings that each reveal a section of content.",
+      "author": "@blencorp",
+      "files": [
+        {
+          "path": "./src/usa/components/ui/accordion.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://storage.googleapis.com/usmds-registry/r/usa/icon.json",
+        "https://storage.googleapis.com/usmds-registry/r/usa/text.json"
+      ],
+      "dependencies": ["@rn-primitives/accordion", "react-native-reanimated"]
+    },
+    {
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "title": "Alert Dialog",
+      "description": "A modal dialog that interrupts the user with important content and expects a response.",
+      "author": "@blencorp",
+      "files": [
+        {
+          "path": "./src/usa/components/ui/alert-dialog.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://storage.googleapis.com/usmds-registry/r/usa/text.json",
+        "https://storage.googleapis.com/usmds-registry/r/usa/button.json"
+      ],
+      "dependencies": ["@rn-primitives/alert-dialog", "react-native-reanimated", "react-native-screens"]
+    },
+    {
+      "name": "aspect-ratio",
+      "type": "registry:ui",
+      "title": "Aspect Ratio",
+      "description": "Displays content within a desired ratio.",
+      "author": "@blencorp",
+      "files": [
+        {
+          "path": "./src/usa/components/ui/aspect-ratio.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@rn-primitives/aspect-ratio"]
+    },
+    {
+      "name": "context-menu",
+      "type": "registry:ui",
+      "title": "Context Menu",
+      "description": "Displays a menu to the user — triggered by a right-click or long-press.",
+      "author": "@blencorp",
+      "files": [
+        {
+          "path": "./src/usa/components/ui/context-menu.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://storage.googleapis.com/usmds-registry/r/usa/icon.json",
+        "https://storage.googleapis.com/usmds-registry/r/usa/text.json"
+      ],
+      "dependencies": ["@rn-primitives/context-menu", "react-native-reanimated", "react-native-screens"]
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "title": "Dropdown Menu",
+      "description": "Displays a menu to the user — such as a set of actions or functions — triggered by a button.",
+      "author": "@blencorp",
+      "files": [
+        {
+          "path": "./src/usa/components/ui/dropdown-menu.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://storage.googleapis.com/usmds-registry/r/usa/icon.json",
+        "https://storage.googleapis.com/usmds-registry/r/usa/text.json"
+      ],
+      "dependencies": ["@rn-primitives/dropdown-menu", "react-native-reanimated", "react-native-screens"]
+    },
+    {
+      "name": "hover-card",
+      "type": "registry:ui",
+      "title": "Hover Card",
+      "description": "For sighted users to preview content available behind a link.",
+      "author": "@blencorp",
+      "files": [
+        {
+          "path": "./src/usa/components/ui/hover-card.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": ["https://storage.googleapis.com/usmds-registry/r/usa/text.json"],
+      "dependencies": ["@rn-primitives/hover-card", "react-native-reanimated", "react-native-screens"]
+    },
+    {
+      "name": "menubar",
+      "type": "registry:ui",
+      "title": "Menubar",
+      "description": "A visually persistent menu common in desktop applications that provides quick access to a consistent set of commands.",
+      "author": "@blencorp",
+      "files": [
+        {
+          "path": "./src/usa/components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://storage.googleapis.com/usmds-registry/r/usa/icon.json",
+        "https://storage.googleapis.com/usmds-registry/r/usa/text.json"
+      ],
+      "dependencies": ["@rn-primitives/menubar", "react-native-reanimated", "react-native-screens"]
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "Displays rich content in a portal, triggered by a button.",
+      "author": "@blencorp",
+      "files": [
+        {
+          "path": "./src/usa/components/ui/popover.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": ["https://storage.googleapis.com/usmds-registry/r/usa/text.json"],
+      "dependencies": ["@rn-primitives/popover", "react-native-reanimated", "react-native-screens"]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Displays a list of options for the user to pick from—triggered by a button.",
+      "author": "@blencorp",
+      "files": [
+        {
+          "path": "./src/usa/components/ui/select.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://storage.googleapis.com/usmds-registry/r/usa/icon.json",
+        "https://storage.googleapis.com/usmds-registry/r/usa/text.json"
+      ],
+      "dependencies": ["@rn-primitives/select", "react-native-reanimated", "react-native-screens"]
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "Separator",
+      "description": "Visually or semantically separates content.",
+      "author": "@blencorp",
+      "files": [
+        {
+          "path": "./src/usa/components/ui/separator.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@rn-primitives/separator"]
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "Use to show a placeholder while content is loading.",
+      "author": "@blencorp",
+      "files": [
+        {
+          "path": "./src/usa/components/ui/skeleton.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "A control that allows the user to toggle between checked and not checked.",
+      "author": "@blencorp",
+      "files": [
+        {
+          "path": "./src/usa/components/ui/switch.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@rn-primitives/switch"]
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+      "author": "@blencorp",
+      "files": [
+        {
+          "path": "./src/usa/components/ui/tabs.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": ["https://storage.googleapis.com/usmds-registry/r/usa/text.json"],
+      "dependencies": ["@rn-primitives/tabs"]
+    },
+    {
+      "name": "toggle-group",
+      "type": "registry:ui",
+      "title": "Toggle Group",
+      "description": "A set of two-state buttons that can be toggled on or off.",
+      "author": "@blencorp",
+      "files": [
+        {
+          "path": "./src/usa/components/ui/toggle-group.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://storage.googleapis.com/usmds-registry/r/usa/icon.json",
+        "https://storage.googleapis.com/usmds-registry/r/usa/toggle.json"
+      ],
+      "dependencies": ["@rn-primitives/toggle-group", "@rn-primitives/toggle"]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "A popup that displays information related to an element when the element receives keyboard focus, the mouse hovers over it, or when it is pressed.",
+      "author": "@blencorp",
+      "files": [
+        {
+          "path": "./src/usa/components/ui/tooltip.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": ["https://storage.googleapis.com/usmds-registry/r/usa/text.json"],
+      "dependencies": ["@rn-primitives/tooltip", "react-native-reanimated", "react-native-screens"]
     }
   ]
 }
