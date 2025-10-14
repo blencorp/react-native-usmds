@@ -1,3 +1,9 @@
+## [1.23.1](https://github.com/blencorp/react-native-usmds/compare/v1.23.0...v1.23.1) (2025-10-14)
+
+### Bug Fixes
+
+* update usa.json ([#143](https://github.com/blencorp/react-native-usmds/issues/143)) ([26a41fb](https://github.com/blencorp/react-native-usmds/commit/26a41fb0a0b89f610be4d7be3c2f33e1d7bff94a))
+
 ## [1.23.0](https://github.com/blencorp/react-native-usmds/compare/v1.22.0...v1.23.0) (2025-10-13)
 
 ### Features
