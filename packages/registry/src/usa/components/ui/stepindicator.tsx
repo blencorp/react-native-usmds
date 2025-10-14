@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import { View, Text } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '@/lib/utils';
+import { cn } from '@/registry/usa/lib/utils';
 
 const stepIndicatorVariants = cva('flex flex-col items-center justify-center mx-auto', {
   variants: {

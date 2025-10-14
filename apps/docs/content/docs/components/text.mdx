@@ -1,21 +1,63 @@
 ---
 title: Text
-description: Text is a foundational component for displaying text content with consistent styling.
+description: A foundational component for displaying text content with consistent styling.
 ---
-import {DemoButton} from '@/components/ui/DemoButton';
 
-<DemoButton href="https://usmds-showcase.expo.app/components/text"/>
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { TextPreview } from '@/components/examples';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard preview={<TextPreview />} />
+  </Tab>
+  <Tab value="code">
+    ```tsx title="text-example.tsx"
+    import { Text } from '@/components/ui/text';
+
+    export default function TextExample() {
+      return <Text>Sample Text</Text>;
+    }
+    ```
+  </Tab>
+</Tabs>
 
 ## Installation
 
-```package-install
-npx usmds add text
-```
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    ```bash
+    npx usmds add text
+    ```
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install the following dependencies:**
+
+        ```bash
+        npx expo install @rn-primitives/slot
+        ```
+      </Step>
+      <Step>
+        **Copy and paste the following code into your project.**
+
+        ```tsx title="@/components/ui/text.tsx"
+        // Copy from packages/registry/src/usa/components/ui/text.tsx
+        ```
+      </Step>
+      <Step>
+        **Update the import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
 
 ## Usage
 
 ```tsx
-import { Text } from '@components/Text';
+import { Text } from '@/components/ui/text';
 
 <Text>Sample Text</Text>
 ```
@@ -24,101 +66,260 @@ import { Text } from '@components/Text';
 
 ### Text
 
-Extends React Native's Text props.
+Extends React Native's `Text` props.
 
-<table>
-  <thead>
-    <tr>
-      <th>Prop</th>
-      <th>Type</th>
-      <th>Default</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>className</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>Additional Tailwind classes to apply.</td>
-    </tr>
-    <tr>
-      <td>asChild</td>
-      <td>`boolean`</td>
-      <td>`false`</td>
-      <td>Use Slot component instead of RNText.</td>
-    </tr>
-  </tbody>
-</table>
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| variant | `'default' \| 'h1' \| 'h2' \| 'h3' \| 'h4' \| 'p' \| 'blockquote' \| 'code' \| 'lead' \| 'large' \| 'small' \| 'muted'` | `'default'` | The text variant style. |
+| asChild | `boolean` | `false` | Use Slot component instead of Text. |
+| className | `string` | - | Additional classes for styling. |
 
-## Examples
+## Variants
 
-### Default Text
+### Default
 
 ```tsx
 <Text>Default Text</Text>
 ```
 
-### Custom Styling
+### Headings
 
 ```tsx
-<Text className="text-2xl font-bold text-blue-500">
-  Styled Text
+import { Text } from '@/components/ui/text';
+import { View } from 'react-native';
+
+<View className="gap-4">
+  <Text variant="h1">Heading 1</Text>
+  <Text variant="h2">Heading 2</Text>
+  <Text variant="h3">Heading 3</Text>
+  <Text variant="h4">Heading 4</Text>
+</View>
+```
+
+### Paragraph
+
+```tsx
+<Text variant="p">
+  This is a paragraph with proper spacing and line height for improved readability.
 </Text>
 ```
 
-### Text Variants
+### Blockquote
 
 ```tsx
-<View className="space-y-4">
-  <Text className="text-sm">Small Text</Text>
-  <Text className="text-base">Base Text</Text>
-  <Text className="text-lg">Large Text</Text>
-  <Text className="text-xl font-bold">Bold Text</Text>
-  <Text className="italic">Italic Text</Text>
-  <Text className="underline">Underlined Text</Text>
-  <Text className="text-primary">Primary Color Text</Text>
-  <Text className="text-secondary">Secondary Color Text</Text>
+<Text variant="blockquote">
+  "This is a blockquote with italic styling and a left border."
+</Text>
+```
+
+### Code
+
+```tsx
+<Text variant="code">const hello = "world";</Text>
+```
+
+### Lead
+
+```tsx
+<Text variant="lead">
+  This is lead text, typically used for introductory paragraphs.
+</Text>
+```
+
+### Large
+
+```tsx
+<Text variant="large">Large Text</Text>
+```
+
+### Small
+
+```tsx
+<Text variant="small">Small Text</Text>
+```
+
+### Muted
+
+```tsx
+<Text variant="muted">Muted text with reduced emphasis.</Text>
+```
+
+## Examples
+
+### Typography Showcase
+
+```tsx
+import { Text } from '@/components/ui/text';
+import { View } from 'react-native';
+
+function TypographyShowcase() {
+  return (
+    <View className="gap-6 p-4">
+      <Text variant="h1">Typography System</Text>
+
+      <Text variant="lead">
+        A comprehensive text component with multiple variants for different use cases.
+      </Text>
+
+      <View className="gap-4">
+        <Text variant="h2">Section Title</Text>
+        <Text variant="p">
+          This is a regular paragraph with default styling. It maintains good readability
+          with proper line height and spacing.
+        </Text>
+
+        <Text variant="h3">Subsection</Text>
+        <Text variant="muted">
+          This is muted text, often used for secondary information or descriptions.
+        </Text>
+      </View>
+    </View>
+  );
+}
+```
+
+### Article Layout
+
+```tsx
+function Article() {
+  return (
+    <View className="gap-4 p-4">
+      <Text variant="h1">Article Title</Text>
+
+      <Text variant="lead">
+        An engaging introduction to capture the reader's attention.
+      </Text>
+
+      <Text variant="p">
+        The main content of the article goes here with proper paragraph spacing
+        and formatting for optimal readability.
+      </Text>
+
+      <Text variant="blockquote">
+        "Important quotes or callouts can be highlighted using the blockquote variant."
+      </Text>
+
+      <Text variant="p">
+        More content continues here with consistent styling throughout the article.
+      </Text>
+
+      <Text variant="small">
+        Published on January 1, 2024
+      </Text>
+    </View>
+  );
+}
+```
+
+### Card with Mixed Text
+
+```tsx
+import { Text } from '@/components/ui/text';
+import { View } from 'react-native';
+
+function ProductCard() {
+  return (
+    <View className="p-4 border rounded-lg gap-2">
+      <Text variant="large">Product Name</Text>
+      <Text variant="muted">Category: Electronics</Text>
+      <Text variant="p">
+        A detailed description of the product with all its features and benefits.
+      </Text>
+      <Text variant="h3">$99.99</Text>
+      <Text variant="small">In stock</Text>
+    </View>
+  );
+}
+```
+
+### Code Documentation
+
+```tsx
+<View className="gap-2">
+  <Text variant="h4">Installation</Text>
+  <Text variant="p">Install the package using npm:</Text>
+  <Text variant="code">npm install package-name</Text>
+  <Text variant="muted">Make sure you have Node.js installed first.</Text>
 </View>
 ```
 
-### With Background Context
+### Custom Styling
 
 ```tsx
-<View className="bg-gray-100 p-4 rounded-md">
-  <Text>Text with Context</Text>
+<Text variant="default" className="text-blue-500 font-bold text-2xl">
+  Custom Styled Text
+</Text>
+```
+
+### With TextClassContext
+
+```tsx
+import { Text, TextClassContext } from '@/components/ui/text';
+import { View } from 'react-native';
+
+function StyledSection() {
+  return (
+    <TextClassContext.Provider value="text-primary">
+      <View className="gap-2">
+        <Text>This text inherits primary color</Text>
+        <Text>So does this one</Text>
+        <Text className="text-secondary">But this overrides it</Text>
+      </View>
+    </TextClassContext.Provider>
+  );
+}
+```
+
+### Responsive Text
+
+```tsx
+<View className="gap-2">
+  <Text className="text-lg sm:text-xl md:text-2xl">
+    Responsive heading that grows with screen size
+  </Text>
+  <Text className="text-sm sm:text-base">
+    Responsive body text
+  </Text>
 </View>
 ```
 
-## Styling
+### List with Text Variants
 
-The Text component uses Tailwind CSS classes for styling. Default styling includes:
+```tsx
+function FeatureList() {
+  const features = [
+    'Fast performance',
+    'Easy to use',
+    'Fully customizable',
+    'Open source'
+  ];
 
-- Base text size (`text-base`)
-- Default foreground color (`text-foreground`)
-- Selectable text on web (`web:select-text`)
-- Inherits font family from theme
-- Supports all Tailwind typography classes
+  return (
+    <View className="gap-4">
+      <Text variant="h3">Features</Text>
+      <View className="gap-2">
+        {features.map((feature, index) => (
+          <Text key={index} variant="p">
+            {index + 1}. {feature}
+          </Text>
+        ))}
+      </View>
+    </View>
+  );
+}
+```
 
-Common modifiers include:
-- Font sizes: `text-sm`, `text-base`, `text-lg`, `text-xl`
-- Font weights: `font-normal`, `font-bold`
-- Font styles: `italic`, `underline`
-- Colors: `text-primary`, `text-secondary`, etc.
-- Line height adjustments
-- Text alignment
-- Text decoration
+## Helper Functions
 
-## Context
+### textVariants
 
-The Text component uses a `TextClassContext` that allows parent components to provide default text styling to all child Text components. This is useful for maintaining consistent typography within specific sections of your app.
+Use `textVariants` to create custom text-styled components:
 
-## Accessibility
+```tsx
+import { textVariants } from '@/components/ui/text';
+import { Text as RNText } from 'react-native';
 
-The Text component:
-- Uses semantic text structure
-- Supports screen readers
-- Maintains proper text contrast
-- Ensures readable text sizes
-- Allows text selection on web platforms
-- Inherits accessibility properties from React Native's Text component
+<RNText className={textVariants({ variant: 'h1' })}>
+  Custom Text Component
+</RNText>
+```

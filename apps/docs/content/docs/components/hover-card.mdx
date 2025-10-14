@@ -1,0 +1,203 @@
+---
+title: Hover Card
+description: For sighted users to preview content available behind a link.
+---
+
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { HoverCardPreview } from '@/components/examples';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard preview={<HoverCardPreview />} />
+  </Tab>
+  <Tab value="code">
+    See the example code in the preview above.
+  </Tab>
+</Tabs>
+
+## Installation
+
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    <Steps>
+      <Step>
+        ```bash
+        npx usmds add hover-card
+        ```
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install dependencies:**
+
+        ```bash
+        npx expo install @rn-primitives/hover-card react-native-reanimated react-native-screens
+        ```
+      </Step>
+      <Step>
+        **Copy the component code:**
+
+        Copy from `packages/registry/src/usa/components/ui/hover-card.tsx`
+      </Step>
+      <Step>
+        **Update import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
+import { Text } from '@/components/ui/text';
+
+<HoverCard>
+  <HoverCardTrigger>
+    <Text>Hover</Text>
+  </HoverCardTrigger>
+  <HoverCardContent>
+    <Text>Content</Text>
+  </HoverCardContent>
+</HoverCard>
+```
+
+## Props
+
+### HoverCard
+
+Extends `@rn-primitives/hover-card` Root props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| open | `boolean` | The controlled open state of the hover card. |
+| onOpenChange | `(open: boolean) => void` | Event handler called when the open state changes. |
+| defaultOpen | `boolean` | The open state when initially rendered. |
+| openDelay | `number` | Time in milliseconds before opening. Default is `700`. |
+| closeDelay | `number` | Time in milliseconds before closing. Default is `300`. |
+
+### HoverCardTrigger
+
+Extends `@rn-primitives/hover-card` Trigger props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| asChild | `boolean` | Change the default rendered element for the one passed as a child. |
+
+### HoverCardContent
+
+Extends `@rn-primitives/hover-card` Content props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| side | `'top' \| 'right' \| 'bottom' \| 'left'` | The preferred side of the trigger to render against. |
+| sideOffset | `number` | The distance in pixels from the trigger. Default is `4`. |
+| align | `'start' \| 'center' \| 'end'` | The preferred alignment against the trigger. Default is `'center'`. |
+| alignOffset | `number` | Offset in pixels from the alignment axis. |
+| portalHost | `string` | The host where the hover card content will be rendered. |
+| className | `string` | Additional classes for styling. |
+
+## Examples
+
+### Default
+
+```tsx
+<HoverCard>
+  <HoverCardTrigger asChild>
+    <Button variant="link">
+      <Text>@username</Text>
+    </Button>
+  </HoverCardTrigger>
+  <HoverCardContent className="w-80">
+    <View className="flex flex-row gap-4">
+      <Avatar className="h-12 w-12">
+        <AvatarImage source={{ uri: 'https://github.com/shadcn.png' }} />
+        <AvatarFallback>
+          <Text>JD</Text>
+        </AvatarFallback>
+      </Avatar>
+      <View className="flex-1 gap-1">
+        <Text className="font-semibold">@username</Text>
+        <Text className="text-sm text-muted-foreground">
+          The React Framework – created and maintained by @vercel.
+        </Text>
+        <View className="flex flex-row items-center gap-2 pt-2">
+          <Calendar className="size-4 opacity-70" />
+          <Text className="text-xs text-muted-foreground">
+            Joined December 2021
+          </Text>
+        </View>
+      </View>
+    </View>
+  </HoverCardContent>
+</HoverCard>
+```
+
+### User Profile Card
+
+```tsx
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { CalendarDays } from 'lucide-react-native';
+
+<HoverCard>
+  <HoverCardTrigger asChild>
+    <Button variant="link">
+      <Text>@johndoe</Text>
+    </Button>
+  </HoverCardTrigger>
+  <HoverCardContent className="w-80">
+    <View className="flex flex-row justify-between gap-4">
+      <Avatar>
+        <AvatarImage source={{ uri: 'https://github.com/shadcn.png' }} />
+        <AvatarFallback>
+          <Text>JD</Text>
+        </AvatarFallback>
+      </Avatar>
+      <View className="flex-1 gap-1">
+        <Text className="text-sm font-semibold">@johndoe</Text>
+        <Text className="text-sm">
+          Full-stack developer passionate about React Native and TypeScript.
+        </Text>
+        <View className="flex flex-row items-center pt-2">
+          <Icon as={CalendarDays} className="mr-2 size-4 opacity-70" />
+          <Text className="text-xs text-muted-foreground">
+            Joined January 2024
+          </Text>
+        </View>
+      </View>
+    </View>
+  </HoverCardContent>
+</HoverCard>
+```
+
+### Simple Hover Card
+
+```tsx
+<HoverCard>
+  <HoverCardTrigger asChild>
+    <Text className="underline cursor-pointer">Hover over me</Text>
+  </HoverCardTrigger>
+  <HoverCardContent>
+    <Text>This is additional information that appears on hover.</Text>
+  </HoverCardContent>
+</HoverCard>
+```
+
+### With Delays
+
+```tsx
+<HoverCard openDelay={500} closeDelay={100}>
+  <HoverCardTrigger asChild>
+    <Button variant="outline">
+      <Text>Quick hover</Text>
+    </Button>
+  </HoverCardTrigger>
+  <HoverCardContent>
+    <Text>Opens quickly (500ms) and closes fast (100ms).</Text>
+  </HoverCardContent>
+</HoverCard>
+```

@@ -1,162 +1,361 @@
 ---
-title: TextArea
-description: TextArea allows users to enter and edit multiline text content.
+title: Textarea
+description: Textarea allows users to enter and edit multiline text content.
 ---
-import { DemoButton } from '@/components/ui/DemoButton';
 
-<DemoButton href="https://usmds-showcase.expo.app/components/textarea"/>
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { TextareaPreview } from '@/components/examples';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard preview={<TextareaPreview />} />
+  </Tab>
+  <Tab value="code">
+    ```tsx title="textarea-example.tsx"
+    import { Textarea } from '@/components/ui/textarea';
+    import { useState } from 'react';
+
+    export default function TextareaExample() {
+      const [text, setText] = useState('');
+
+      return (
+        <Textarea
+          placeholder="Enter your text here..."
+          value={text}
+          onChangeText={setText}
+        />
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
 
 ## Installation
 
-```package-install
-npx usmds add textarea
-```
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    ```bash
+    npx usmds add textarea
+    ```
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Copy and paste the following code into your project.**
+
+        ```tsx title="@/components/ui/textarea.tsx"
+        // Copy from packages/registry/src/usa/components/ui/textarea.tsx
+        ```
+      </Step>
+      <Step>
+        **Update the import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
 
 ## Usage
 
 ```tsx
-import { TextArea } from '@components/TextArea';
+import { Textarea } from '@/components/ui/textarea';
+import { useState } from 'react';
 
-<TextArea 
-  label="Text input label"
-  placeholder="Enter your text here"
+const [text, setText] = useState('');
+
+<Textarea
+  placeholder="Enter your text here..."
+  value={text}
+  onChangeText={setText}
 />
 ```
 
 ## Props
 
-### TextArea
+### Textarea
 
-Extends React Native's TextInput props.
+Extends React Native's `TextInput` props.
 
-<table>
-  <thead>
-    <tr>
-      <th>Prop</th>
-      <th>Type</th>
-      <th>Default</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>label</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>Label text displayed above the textarea.</td>
-    </tr>
-    <tr>
-      <td>helperText</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>Helper text displayed below the label.</td>
-    </tr>
-    <tr>
-      <td>error</td>
-      <td>`boolean`</td>
-      <td>`false`</td>
-      <td>When true, displays error styling.</td>
-    </tr>
-    <tr>
-      <td>maxLength</td>
-      <td>`number`</td>
-      <td>-</td>
-      <td>Maximum number of characters allowed.</td>
-    </tr>
-    <tr>
-      <td>value</td>
-      <td>`string`</td>
-      <td>`''`</td>
-      <td>The current value of the textarea.</td>
-    </tr>
-    <tr>
-      <td>disabled</td>
-      <td>`boolean`</td>
-      <td>`false`</td>
-      <td>When true, prevents user interaction.</td>
-    </tr>
-    <tr>
-      <td>className</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>Additional Tailwind classes to apply.</td>
-    </tr>
-  </tbody>
-</table>
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| className | `string` | - | Additional classes for styling. |
+| placeholderClassName | `string` | - | Additional classes for placeholder text. |
+| multiline | `boolean` | `true` | Enables multiline input. |
+| numberOfLines | `number` | `8` (native), `2` (web) | Number of lines to display. |
+| editable | `boolean` | `true` | When false, textarea is disabled. |
+| value | `string` | - | The textarea value. |
+| onChangeText | `(text: string) => void` | - | Callback when text changes. |
+
+All standard React Native TextInput props are supported.
 
 ## Examples
 
-### Default TextArea
+### Default
 
 ```tsx
-<TextArea 
-  label="Text input label"
-  placeholder="Enter your text here"
+import { Textarea } from '@/components/ui/textarea';
+import { useState } from 'react';
+
+function DefaultTextarea() {
+  const [text, setText] = useState('');
+
+  return (
+    <Textarea
+      placeholder="Enter your text here..."
+      value={text}
+      onChangeText={setText}
+    />
+  );
+}
+```
+
+### With Label
+
+```tsx
+import { Textarea } from '@/components/ui/textarea';
+import { Text } from '@/components/ui/text';
+import { View } from 'react-native';
+import { useState } from 'react';
+
+function TextareaWithLabel() {
+  const [text, setText] = useState('');
+
+  return (
+    <View className="gap-2">
+      <Text className="font-medium">Description</Text>
+      <Textarea
+        placeholder="Enter a detailed description..."
+        value={text}
+        onChangeText={setText}
+      />
+    </View>
+  );
+}
+```
+
+### Disabled State
+
+```tsx
+<Textarea
+  placeholder="Disabled textarea"
+  value="This content cannot be edited"
+  editable={false}
+/>
+```
+
+### With Character Counter
+
+```tsx
+import { Textarea } from '@/components/ui/textarea';
+import { Text } from '@/components/ui/text';
+import { View } from 'react-native';
+import { useState } from 'react';
+
+function TextareaWithCounter() {
+  const [text, setText] = useState('');
+  const maxLength = 500;
+
+  return (
+    <View className="gap-2">
+      <Textarea
+        placeholder="Enter your message..."
+        value={text}
+        onChangeText={setText}
+        maxLength={maxLength}
+      />
+      <Text className="text-sm text-muted-foreground text-right">
+        {text.length}/{maxLength}
+      </Text>
+    </View>
+  );
+}
+```
+
+### With Error State
+
+```tsx
+import { Textarea } from '@/components/ui/textarea';
+import { Text } from '@/components/ui/text';
+import { View } from 'react-native';
+import { useState } from 'react';
+
+function TextareaWithError() {
+  const [text, setText] = useState('');
+  const [error, setError] = useState('');
+
+  const validateText = (value: string) => {
+    setText(value);
+    if (value.length < 10) {
+      setError('Please enter at least 10 characters');
+    } else {
+      setError('');
+    }
+  };
+
+  return (
+    <View className="gap-2">
+      <Textarea
+        placeholder="Enter your feedback..."
+        value={text}
+        onChangeText={validateText}
+        aria-invalid={!!error}
+        className={error ? 'border-destructive' : ''}
+      />
+      {error && <Text className="text-sm text-destructive">{error}</Text>}
+    </View>
+  );
+}
+```
+
+### Form Example
+
+```tsx
+import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+import { View } from 'react-native';
+import { useState } from 'react';
+
+function FeedbackForm() {
+  const [feedback, setFeedback] = useState('');
+
+  const handleSubmit = () => {
+    console.log('Feedback:', feedback);
+    setFeedback('');
+  };
+
+  return (
+    <View className="gap-4">
+      <View className="gap-2">
+        <Text className="font-semibold">Send us your feedback</Text>
+        <Textarea
+          placeholder="Tell us what you think..."
+          value={feedback}
+          onChangeText={setFeedback}
+        />
+      </View>
+
+      <Button onPress={handleSubmit} disabled={!feedback}>
+        <Text>Submit Feedback</Text>
+      </Button>
+    </View>
+  );
+}
+```
+
+### Custom Height
+
+```tsx
+<Textarea
+  placeholder="Taller textarea..."
+  className="min-h-32"
+  numberOfLines={10}
 />
 ```
 
 ### With Helper Text
 
 ```tsx
-<TextArea 
-  label="Text input label"
-  helperText="Helper text"
-  placeholder="Enter your text here"
-/>
+import { Textarea } from '@/components/ui/textarea';
+import { Text } from '@/components/ui/text';
+import { View } from 'react-native';
+
+<View className="gap-2">
+  <Text className="font-medium">Bio</Text>
+  <Textarea placeholder="Tell us about yourself..." />
+  <Text className="text-sm text-muted-foreground">
+    This will be displayed on your public profile.
+  </Text>
+</View>
 ```
 
-### With Error State
+### Comment Box
 
 ```tsx
-<TextArea 
-  label="Text input label"
-  helperText="Error message"
-  error={true}
-  placeholder="Enter your text here"
-/>
+import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+import { View } from 'react-native';
+import { useState } from 'react';
+
+function CommentBox() {
+  const [comment, setComment] = useState('');
+
+  const handlePost = () => {
+    if (comment.trim()) {
+      console.log('Posting comment:', comment);
+      setComment('');
+    }
+  };
+
+  return (
+    <View className="gap-3 p-4 border rounded-lg">
+      <Text className="font-semibold">Add a comment</Text>
+      <Textarea
+        placeholder="Write your comment here..."
+        value={comment}
+        onChangeText={setComment}
+        className="min-h-24"
+      />
+      <View className="flex-row justify-end gap-2">
+        <Button variant="ghost" onPress={() => setComment('')}>
+          <Text>Cancel</Text>
+        </Button>
+        <Button onPress={handlePost} disabled={!comment.trim()}>
+          <Text>Post Comment</Text>
+        </Button>
+      </View>
+    </View>
+  );
+}
 ```
 
-### Disabled State
+### Custom Styling
 
 ```tsx
-<TextArea 
-  label="Text input label"
-  placeholder="This field is disabled"
-  disabled={true}
+<Textarea
+  placeholder="Custom styled textarea"
+  className="bg-gray-100 border-2 border-blue-500 rounded-lg min-h-40"
+  placeholderClassName="text-blue-400"
 />
 ```
 
-## Styling
+### Required Field
 
-The TextArea component uses Tailwind CSS classes for styling. Default styling includes:
+```tsx
+import { Textarea } from '@/components/ui/textarea';
+import { Text } from '@/components/ui/text';
+import { View } from 'react-native';
 
-- Container width: 329px
-- Minimum height: 160px
-- Base text size with 24px line height
-- Rounded corners (6px)
-- 2px border width
-- Consistent padding (8px 12px)
-- White background
-- Base ink text color
-- Gray placeholder color
-- Error state styling
-- Disabled state styling with lighter background
+<View className="gap-2">
+  <View className="flex-row gap-1">
+    <Text className="font-medium">Message</Text>
+    <Text className="text-destructive">*</Text>
+  </View>
+  <Textarea
+    placeholder="This field is required"
+    required
+  />
+</View>
+```
 
-## States
+### Auto-Growing Textarea
 
-The textarea has several visual states:
-- Default: White background with base ink border
-- Focused: Primary color border
-- Error: Error color border
-- Disabled: Light gray background with reduced opacity
+```tsx
+import { Textarea } from '@/components/ui/textarea';
+import { useState } from 'react';
 
-## Accessibility
+function AutoGrowTextarea() {
+  const [text, setText] = useState('');
 
-The TextArea component:
-- Uses semantic text input structure
-- Provides clear labeling
-- Supports screen readers
-- Maintains proper text contrast
-- Includes helper text for additional context
-- Shows error states clearly
-- Supports keyboard navigation
+  return (
+    <Textarea
+      placeholder="This textarea grows as you type..."
+      value={text}
+      onChangeText={setText}
+      className="max-h-96"
+    />
+  );
+}
+```

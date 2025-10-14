@@ -1,0 +1,170 @@
+---
+title: Aspect Ratio
+description: Displays content within a desired ratio.
+---
+
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { AspectRatioPreview } from '@/components/examples';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard preview={<AspectRatioPreview />} />
+  </Tab>
+  <Tab value="code">
+    See the example code in the preview above.
+  </Tab>
+</Tabs>
+
+## Installation
+
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    <Steps>
+      <Step>
+        ```bash
+        npx usmds add aspect-ratio
+        ```
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install dependencies:**
+
+        ```bash
+        npx expo install @rn-primitives/aspect-ratio
+        ```
+      </Step>
+      <Step>
+        **Copy the component code:**
+
+        Copy from `packages/registry/src/usa/components/ui/aspect-ratio.tsx`
+      </Step>
+      <Step>
+        **Update import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import { AspectRatio } from '@/components/ui/aspect-ratio';
+import { Image } from 'react-native';
+
+<AspectRatio ratio={16 / 9}>
+  <Image
+    source={{ uri: 'https://example.com/image.jpg' }}
+    className="h-full w-full rounded-md"
+    resizeMode="cover"
+  />
+</AspectRatio>
+```
+
+## Props
+
+### AspectRatio
+
+Extends `@rn-primitives/aspect-ratio` Root props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| ratio | `number` | **Required.** The desired width/height ratio. For example, `16 / 9` for a 16:9 ratio. |
+| className | `string` | Additional classes for styling. |
+
+## Examples
+
+### Image 16:9
+
+```tsx
+import { Image } from 'react-native';
+
+<AspectRatio ratio={16 / 9} className="w-full">
+  <Image
+    source={{ uri: 'https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd' }}
+    className="h-full w-full rounded-md object-cover"
+  />
+</AspectRatio>
+```
+
+### Image 1:1 (Square)
+
+```tsx
+<AspectRatio ratio={1} className="w-full max-w-sm">
+  <Image
+    source={{ uri: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde' }}
+    className="h-full w-full rounded-md object-cover"
+  />
+</AspectRatio>
+```
+
+### Image 4:3
+
+```tsx
+<AspectRatio ratio={4 / 3} className="w-full">
+  <Image
+    source={{ uri: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e' }}
+    className="h-full w-full rounded-md object-cover"
+  />
+</AspectRatio>
+```
+
+### Video Player
+
+```tsx
+import { Video } from 'expo-av';
+
+<AspectRatio ratio={16 / 9} className="w-full">
+  <Video
+    source={{ uri: 'https://www.example.com/video.mp4' }}
+    className="h-full w-full rounded-md"
+    useNativeControls
+    resizeMode="contain"
+  />
+</AspectRatio>
+```
+
+### With Content Overlay
+
+```tsx
+import { View } from 'react-native';
+import { Text } from '@/components/ui/text';
+
+<AspectRatio ratio={16 / 9} className="w-full">
+  <Image
+    source={{ uri: 'https://images.unsplash.com/photo-1682687220742-aba13b6e50ba' }}
+    className="h-full w-full rounded-md object-cover"
+  />
+  <View className="absolute bottom-0 left-0 right-0 bg-black/50 p-4 rounded-b-md">
+    <Text className="text-white font-semibold">Image Title</Text>
+    <Text className="text-white/80 text-sm">Image description goes here</Text>
+  </View>
+</AspectRatio>
+```
+
+### In a Card
+
+```tsx
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
+<Card className="w-full max-w-md">
+  <CardHeader>
+    <CardTitle>Card with Image</CardTitle>
+  </CardHeader>
+  <CardContent>
+    <AspectRatio ratio={16 / 9}>
+      <Image
+        source={{ uri: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4' }}
+        className="h-full w-full rounded-md object-cover"
+      />
+    </AspectRatio>
+    <Text className="mt-2 text-sm text-muted-foreground">
+      Beautiful landscape photo with perfect aspect ratio.
+    </Text>
+  </CardContent>
+</Card>
+```

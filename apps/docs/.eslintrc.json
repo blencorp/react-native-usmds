@@ -1,3 +1,13 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": ["next/core-web-vitals", "next/typescript"],
+  "ignorePatterns": [
+    "src/components/examples/**/*",
+    ".next/**/*",
+    "node_modules/**/*",
+    ".source/**/*"
+  ],
+  "rules": {
+    "@typescript-eslint/ban-ts-comment": "off",
+    "react/no-unescaped-entities": "off"
+  }
 }

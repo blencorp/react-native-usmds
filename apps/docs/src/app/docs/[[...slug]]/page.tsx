@@ -4,7 +4,6 @@ import { notFound } from 'next/navigation';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import type { MDXComponents } from 'mdx/types';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
-import { createElement } from 'react';
 
 export default async function Page(props: { params: Promise<{ slug?: string[] }> }) {
   const params = await props.params;
@@ -18,9 +17,11 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
 
   return (
     <DocsPage toc={page.data.toc} full={page.data.full}>
-      {createElement(DocsTitle, undefined, page.data.title)}
-      {createElement(DocsDescription, undefined, page.data.description)}
-      {createElement(DocsBody, undefined, <MDX components={{ ...components, Tabs, Tab }} />)}
+      <DocsTitle>{page.data.title}</DocsTitle>
+      <DocsDescription>{page.data.description}</DocsDescription>
+      <DocsBody>
+        <MDX components={{ ...components, Tabs, Tab }} />
+      </DocsBody>
     </DocsPage>
   );
 }

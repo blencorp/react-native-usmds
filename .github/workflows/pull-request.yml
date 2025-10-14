@@ -26,5 +26,5 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run tests in UI package
-        run: pnpm --filter @blen/react-native-usmds-ui-internal test
+      - name: Run tests in Registry package
+        run: pnpm --filter @blen/react-native-usmds-registry test

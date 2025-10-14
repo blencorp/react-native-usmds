@@ -18,20 +18,16 @@
     ],
     "@semantic-release/changelog",
     [
-      "@semantic-release/npm",
+      "@semantic-release/exec",
       {
-        "pkgRoot": ".",
-        "tarballDir": "dist"
+        "prepareCmd": "node -e \"const fs=require('fs');const pkg=JSON.parse(fs.readFileSync('package.json'));pkg.version='${nextRelease.version}';fs.writeFileSync('package.json',JSON.stringify(pkg,null,2)+'\\n')\" && node -e \"const fs=require('fs');const pkg=JSON.parse(fs.readFileSync('packages/cli/package.json'));pkg.version='${nextRelease.version}';fs.writeFileSync('packages/cli/package.json',JSON.stringify(pkg,null,2)+'\\n')\" && cd packages/cli && pnpm build"
       }
     ],
     [
-      "@semantic-release/git",
+      "@semantic-release/npm",
       {
-        "assets": [
-          "package.json",
-          "CHANGELOG.md"
-        ],
-        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        "pkgRoot": "packages/cli/dist",
+        "tarballDir": "dist"
       }
     ]
   ]

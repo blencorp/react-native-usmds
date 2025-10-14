@@ -1,0 +1,318 @@
+---
+title: Dropdown Menu
+description: Displays a menu to the user — such as a set of actions or functions — triggered by a button.
+---
+
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { DropdownMenuPreview } from '@/components/examples';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard preview={<DropdownMenuPreview />} />
+  </Tab>
+  <Tab value="code">
+    See the example code in the preview above.
+  </Tab>
+</Tabs>
+
+## Installation
+
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    <Steps>
+      <Step>
+        ```bash
+        npx usmds add dropdown-menu
+        ```
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install dependencies:**
+
+        ```bash
+        npx expo install @rn-primitives/dropdown-menu react-native-reanimated react-native-screens lucide-react-native
+        ```
+      </Step>
+      <Step>
+        **Copy the component code:**
+
+        Copy from `packages/registry/src/usa/components/ui/dropdown-menu.tsx`
+      </Step>
+      <Step>
+        **Update import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Text } from '@/components/ui/text';
+
+<DropdownMenu>
+  <DropdownMenuTrigger>
+    <Text>Open</Text>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuLabel>
+      <Text>My Account</Text>
+    </DropdownMenuLabel>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem>
+      <Text>Profile</Text>
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+      <Text>Settings</Text>
+    </DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+## Props
+
+### DropdownMenu
+
+Extends `@rn-primitives/dropdown-menu` Root props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| open | `boolean` | The controlled open state of the dropdown menu. |
+| onOpenChange | `(open: boolean) => void` | Event handler called when the open state changes. |
+| defaultOpen | `boolean` | The open state when initially rendered. |
+
+### DropdownMenuTrigger
+
+Extends `@rn-primitives/dropdown-menu` Trigger props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| asChild | `boolean` | Change the default rendered element for the one passed as a child. |
+
+### DropdownMenuContent
+
+Extends `@rn-primitives/dropdown-menu` Content props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| side | `'top' \| 'right' \| 'bottom' \| 'left'` | The preferred side of the trigger to render against. |
+| sideOffset | `number` | The distance in pixels from the trigger. |
+| align | `'start' \| 'center' \| 'end'` | The preferred alignment against the trigger. |
+| portalHost | `string` | The host where the dropdown menu content will be rendered. |
+| className | `string` | Additional classes for styling. |
+
+### DropdownMenuItem
+
+Extends `@rn-primitives/dropdown-menu` Item props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| disabled | `boolean` | When true, prevents the user from interacting with the item. |
+| textValue | `string` | Optional text used for typeahead purposes. |
+| className | `string` | Additional classes for styling. |
+
+### DropdownMenuLabel
+
+| Prop | Type | Description |
+|------|------|-------------|
+| children | `React.ReactNode` | The label content. |
+| className | `string` | Additional classes for styling. |
+
+### DropdownMenuSeparator
+
+| Prop | Type | Description |
+|------|------|-------------|
+| className | `string` | Additional classes for styling. |
+
+## Examples
+
+### Default
+
+```tsx
+import { Button } from '@/components/ui/button';
+
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="outline">
+      <Text>Open Menu</Text>
+    </Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuLabel>
+      <Text>My Account</Text>
+    </DropdownMenuLabel>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem>
+      <Text>Profile</Text>
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+      <Text>Billing</Text>
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+      <Text>Settings</Text>
+    </DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem>
+      <Text>Logout</Text>
+    </DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### With Icons
+
+```tsx
+import { User, CreditCard, Settings, LogOut } from 'lucide-react-native';
+import { Icon } from '@/components/ui/icon';
+import { View } from 'react-native';
+
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="outline">
+      <Text>Account</Text>
+    </Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent className="w-56">
+    <DropdownMenuLabel>
+      <Text>My Account</Text>
+    </DropdownMenuLabel>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem>
+      <View className="flex-row items-center gap-2">
+        <Icon as={User} className="size-4" />
+        <Text>Profile</Text>
+      </View>
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+      <View className="flex-row items-center gap-2">
+        <Icon as={CreditCard} className="size-4" />
+        <Text>Billing</Text>
+      </View>
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+      <View className="flex-row items-center gap-2">
+        <Icon as={Settings} className="size-4" />
+        <Text>Settings</Text>
+      </View>
+    </DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem>
+      <View className="flex-row items-center gap-2">
+        <Icon as={LogOut} className="size-4" />
+        <Text>Logout</Text>
+      </View>
+    </DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### With Groups
+
+```tsx
+import {
+  DropdownMenuGroup,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+} from '@/components/ui/dropdown-menu';
+
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="outline">
+      <Text>Options</Text>
+    </Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent className="w-56">
+    <DropdownMenuLabel>
+      <Text>Actions</Text>
+    </DropdownMenuLabel>
+    <DropdownMenuGroup>
+      <DropdownMenuItem>
+        <Text>New Tab</Text>
+      </DropdownMenuItem>
+      <DropdownMenuItem>
+        <Text>New Window</Text>
+      </DropdownMenuItem>
+    </DropdownMenuGroup>
+    <DropdownMenuSeparator />
+    <DropdownMenuGroup>
+      <DropdownMenuItem>
+        <Text>Share</Text>
+      </DropdownMenuItem>
+      <DropdownMenuItem>
+        <Text>Print</Text>
+      </DropdownMenuItem>
+    </DropdownMenuGroup>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### Disabled Items
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="outline">
+      <Text>Menu</Text>
+    </Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuItem>
+      <Text>New File</Text>
+    </DropdownMenuItem>
+    <DropdownMenuItem disabled>
+      <Text>New Window (Disabled)</Text>
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+      <Text>Open File</Text>
+    </DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### With Checkboxes
+
+```tsx
+import { DropdownMenuCheckboxItem } from '@/components/ui/dropdown-menu';
+import { useState } from 'react';
+
+function CheckboxMenu() {
+  const [showPanel, setShowPanel] = useState(true);
+  const [showToolbar, setShowToolbar] = useState(false);
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">
+          <Text>View</Text>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56">
+        <DropdownMenuLabel>
+          <Text>Appearance</Text>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuCheckboxItem checked={showPanel} onCheckedChange={setShowPanel}>
+          <Text>Side Panel</Text>
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem checked={showToolbar} onCheckedChange={setShowToolbar}>
+          <Text>Toolbar</Text>
+        </DropdownMenuCheckboxItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+```

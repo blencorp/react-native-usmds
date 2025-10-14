@@ -1,8 +1,8 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '@/lib/utils';
-import { Icon } from '@/components/ui/icon';
+import { cn } from '@/registry/usa/lib/utils';
+import { Icon } from '@/registry/usa/components/ui/icon';
 import { Check, AlertCircle } from 'lucide-react-native';
 
 const snackbarVariants = cva('flex w-[329px] bg-foreground rounded-[4px] p-3', {

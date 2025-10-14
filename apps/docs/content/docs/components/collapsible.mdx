@@ -1,129 +1,99 @@
 ---
 title: Collapsible
-description: An interactive component that expands/collapses content with smooth animations.
+description: An interactive component which can be expanded/collapsed to show and hide content.
 ---
-import {DemoButton} from '@/components/ui/DemoButton';
 
-<DemoButton href="https://usmds-showcase.expo.app/components/collapsible"/>
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { CollapsiblePreview } from '@/components/examples';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard preview={<CollapsiblePreview />} />
+  </Tab>
+  <Tab value="code">
+    ```tsx title="collapsible-example.tsx"
+    import {
+      Collapsible,
+      CollapsibleTrigger,
+      CollapsibleContent,
+    } from '@/components/ui/collapsible';
+    import { Button } from '@/components/ui/button';
+    import { Text } from '@/components/ui/text';
+    import { useState } from 'react';
+
+    export default function CollapsibleExample() {
+      const [isOpen, setIsOpen] = useState(false);
+
+      return (
+        <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+          <CollapsibleTrigger asChild>
+            <Button variant="outline">
+              <Text>Toggle</Text>
+            </Button>
+          </CollapsibleTrigger>
+          <CollapsibleContent>
+            <Text>This content can be expanded and collapsed.</Text>
+          </CollapsibleContent>
+        </Collapsible>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
 
 ## Installation
 
-A component that allows content to be expanded or collapsed with smooth animations.
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    ```bash
+    npx usmds add collapsible
+    ```
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install the following dependencies:**
 
-## Installation
+        ```bash
+        npx expo install @rn-primitives/collapsible
+        ```
+      </Step>
+      <Step>
+        **Copy and paste the following code into your project.**
 
-The Collapsible component is built on top of `@rn-primitives/collapsible`. No additional installation is required as it comes pre-installed.
-
-## Anatomy
-
-```tsx
-import {
-  Collapsible,
-  CollapsibleTrigger,
-  CollapsibleContent,
-} from '@/components/ui/collapsible'
-```
+        ```tsx title="@/components/ui/collapsible.tsx"
+        // Copy from packages/registry/src/usa/components/ui/collapsible.tsx
+        ```
+      </Step>
+      <Step>
+        **Update the import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
 
 ## Usage
 
-### Basic Collapsible
-
 ```tsx
-import { useState } from 'react';
-import { Text, View } from 'react-native';
-import { Button } from '@/components/ui/button';
-import { ChevronDown, ChevronUp } from 'lucide-react-native';
 import {
   Collapsible,
   CollapsibleTrigger,
   CollapsibleContent,
 } from '@/components/ui/collapsible';
+import { useState } from 'react';
 
-function CollapsibleDemo() {
-  const [isOpen, setIsOpen] = useState(false);
+const [isOpen, setIsOpen] = useState(false);
 
-  return (
-    <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-      <CollapsibleTrigger asChild>
-        <Button variant="outline" className="w-full justify-between">
-          <Text>Toggle Content</Text>
-          {isOpen ? (
-            <ChevronUp size={16} className="text-foreground" />
-          ) : (
-            <ChevronDown size={16} className="text-foreground" />
-          )}
-        </Button>
-      </CollapsibleTrigger>
-      <CollapsibleContent>
-        <View className="space-y-2 px-4 py-3">
-          <Text className="text-sm text-foreground">
-            This content can be expanded and collapsed.
-          </Text>
-        </View>
-      </CollapsibleContent>
-    </Collapsible>
-  );
-}
-```
-
-### With Card Layout
-
-```tsx
-<View className="rounded-lg border border-border p-4">
-  <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-    <View className="flex-row items-center justify-between">
-      <View>
-        <Text className="text-lg font-semibold text-foreground">
-          Account Settings
-        </Text>
-        <Text className="text-sm text-muted-foreground">
-          Manage your account preferences
-        </Text>
-      </View>
-      <CollapsibleTrigger asChild>
-        <Button variant="ghost" className="p-0 h-9 w-9">
-          {isOpen ? (
-            <ChevronUp size={16} className="text-foreground" />
-          ) : (
-            <ChevronDown size={16} className="text-foreground" />
-          )}
-        </Button>
-      </CollapsibleTrigger>
-    </View>
-    <CollapsibleContent>
-      <View className="space-y-3 pt-4">
-        <View className="space-y-1">
-          <Text className="text-sm font-medium text-foreground">Email</Text>
-          <Text className="text-sm text-muted-foreground">
-            Updates and notifications settings
-          </Text>
-        </View>
-      </View>
-    </CollapsibleContent>
-  </Collapsible>
-</View>
-```
-
-### With Animation
-
-```tsx
 <Collapsible open={isOpen} onOpenChange={setIsOpen}>
   <CollapsibleTrigger asChild>
-    <Button variant="outline" className="w-full justify-between">
-      <Text>Animated Collapsible</Text>
-      {isOpen ? (
-        <ChevronUp size={16} className="text-foreground" />
-      ) : (
-        <ChevronDown size={16} className="text-foreground" />
-      )}
+    <Button variant="outline">
+      <Text>Toggle</Text>
     </Button>
   </CollapsibleTrigger>
-  <CollapsibleContent className="animate-collapsible-down">
-    <View className="space-y-2 px-4 py-3">
-      <Text className="text-sm text-foreground">
-        This content smoothly animates when expanding and collapsing.
-      </Text>
-    </View>
+  <CollapsibleContent>
+    <Text>Content here</Text>
   </CollapsibleContent>
 </Collapsible>
 ```
@@ -132,62 +102,109 @@ function CollapsibleDemo() {
 
 ### Collapsible
 
-The root component that manages the collapsible state.
+Extends `@rn-primitives/collapsible` Root props.
 
 | Prop | Type | Description |
 |------|------|-------------|
-| `open` | `boolean` | The controlled open state of the collapsible |
-| `defaultOpen` | `boolean` | The default open state when initially rendered |
-| `onOpenChange` | `(open: boolean) => void` | Event handler called when the open state changes |
-| `disabled` | `boolean` | When true, prevents the user from interacting with the collapsible |
+| open | `boolean` | The controlled open state. |
+| onOpenChange | `(open: boolean) => void` | Callback when open state changes. |
+| defaultOpen | `boolean` | The default open state when initially rendered. |
+| disabled | `boolean` | Whether the collapsible is disabled. |
 
 ### CollapsibleTrigger
 
-The button that toggles the collapsible.
+Extends `@rn-primitives/collapsible` Trigger props.
 
 | Prop | Type | Description |
 |------|------|-------------|
-| `asChild` | `boolean` | Change the component to the HTML tag or custom component of the only child |
-| `disabled` | `boolean` | When true, prevents the user from interacting with the trigger |
+| asChild | `boolean` | Render as child component (uses Slot). |
 
 ### CollapsibleContent
 
-The component that contains the collapsible content.
+Extends `@rn-primitives/collapsible` Content props.
 
 | Prop | Type | Description |
 |------|------|-------------|
-| `forceMount` | `boolean` | Used to force mounting when more control is needed |
-| `className` | `string` | Optional className for styling |
+| forceMount | `boolean` | Force mount when more control is needed. |
 
 ## Examples
 
-### As a Menu
+### Default
 
 ```tsx
-<Collapsible>
+import {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+} from '@/components/ui/collapsible';
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+import { useState } from 'react';
+
+const [isOpen, setIsOpen] = useState(false);
+
+<Collapsible open={isOpen} onOpenChange={setIsOpen}>
   <CollapsibleTrigger asChild>
-    <Button variant="outline" className="w-full justify-between">
-      <Text>Show Menu Items</Text>
-      <ChevronDown size={16} className="text-foreground" />
+    <Button variant="outline">
+      <Text>Toggle Content</Text>
     </Button>
   </CollapsibleTrigger>
   <CollapsibleContent>
-    <View className="space-y-2 px-4 py-3">
-      <Text className="text-sm text-foreground">• Home</Text>
-      <Text className="text-sm text-foreground">• About</Text>
-      <Text className="text-sm text-foreground">• Services</Text>
-      <Text className="text-sm text-foreground">• Contact</Text>
+    <View className="p-4">
+      <Text>This content can be expanded and collapsed.</Text>
     </View>
   </CollapsibleContent>
 </Collapsible>
 ```
 
-## Accessibility
+### With Icon
 
-The Collapsible component adheres to the WAI-ARIA design pattern for [Disclosure (Show/Hide)](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/).
+```tsx
+import { ChevronDown } from 'lucide-react-native';
 
-- The trigger has role `button`
-- The trigger has `aria-expanded` set automatically
-- The trigger has `aria-controls` set automatically
-- The content has role `region`
-- The content has `aria-labelledby` set automatically
+<Collapsible open={isOpen} onOpenChange={setIsOpen}>
+  <CollapsibleTrigger asChild>
+    <Button variant="outline">
+      <Text>Details</Text>
+      <ChevronDown className={isOpen ? 'rotate-180' : ''} />
+    </Button>
+  </CollapsibleTrigger>
+  <CollapsibleContent>
+    <View className="p-4">
+      <Text>Additional details here</Text>
+    </View>
+  </CollapsibleContent>
+</Collapsible>
+```
+
+### FAQ Style
+
+```tsx
+<View className="gap-4">
+  <Collapsible>
+    <CollapsibleTrigger asChild>
+      <Button variant="ghost" className="w-full justify-start">
+        <Text>What is React Native?</Text>
+      </Button>
+    </CollapsibleTrigger>
+    <CollapsibleContent>
+      <View className="px-4 pb-4">
+        <Text>React Native is a framework for building native apps.</Text>
+      </View>
+    </CollapsibleContent>
+  </Collapsible>
+
+  <Collapsible>
+    <CollapsibleTrigger asChild>
+      <Button variant="ghost" className="w-full justify-start">
+        <Text>How does it work?</Text>
+      </Button>
+    </CollapsibleTrigger>
+    <CollapsibleContent>
+      <View className="px-4 pb-4">
+        <Text>It uses JavaScript to build native mobile applications.</Text>
+      </View>
+    </CollapsibleContent>
+  </Collapsible>
+</View>
+```

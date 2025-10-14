@@ -7,219 +7,514 @@ description: Common patterns and best practices when using React Native USMDS
 
 This guide covers common patterns and best practices when using React Native USMDS components.
 
-## Component Styling
+## Component Composition
 
-### Using NativeWind Classes
+USMDS components are designed with composition in mind. Many components use a container + children pattern rather than props-based configuration.
 
-USMDS components use NativeWind for styling. You can customize components using className props:
+### Alert Composition
 
-Basic usage with default styles:
-```js
-import { Alert } from '@blen/react-native-usmds';
+Alerts use a composition pattern with `Alert`, `AlertTitle`, and `AlertDescription`:
 
-<Alert 
-    variant="info"
-    description={{ body: "Basic alert message" }}
-/>
+```tsx
+import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
+import { InfoIcon } from 'lucide-react-native';
+
+function Example() {
+  return (
+    <Alert icon={InfoIcon} variant="default">
+      <AlertTitle>Heads up!</AlertTitle>
+      <AlertDescription>
+        You can add components to your app using the CLI.
+      </AlertDescription>
+    </Alert>
+  );
+}
 ```
 
-Custom styling with additional classes:
+Destructive alert:
 
-```js
-<Alert 
-    variant="info"
-    className="my-4 shadow-lg"
-    description={{ body: "Customized alert" }}
-/>
+```tsx
+<Alert icon={AlertCircle} variant="destructive">
+  <AlertTitle>Error</AlertTitle>
+  <AlertDescription>
+    Your session has expired. Please log in again.
+  </AlertDescription>
+</Alert>
 ```
 
-### Variant Patterns
+### Badge Composition
 
-Components often support variants through a consistent API:
+Badges use a container pattern - they wrap `Text` components instead of accepting a `label` prop:
 
-Alert variants:
+```tsx
+import { Badge } from '@/components/ui/badge';
+import { Text } from '@/components/ui/text';
 
-```js
-<Alert variant="info" />
-<Alert variant="warning" />
-<Alert variant="error" />
-<Alert variant="success" />
-<Alert variant="emergency" />
+function Example() {
+  return (
+    <Badge variant="default">
+      <Text>New</Text>
+    </Badge>
+  );
+}
 ```
 
-Different alert styles:
+Available badge variants:
 
-```js
-<Alert alertStyle="default" />
-<Alert alertStyle="no-header" />
-<Alert alertStyle="list" />
-<Alert alertStyle="slim" />
-<Alert alertStyle="no-icon" />
+```tsx
+<Badge variant="default">
+  <Text>Default</Text>
+</Badge>
+
+<Badge variant="secondary">
+  <Text>Secondary</Text>
+</Badge>
+
+<Badge variant="destructive">
+  <Text>Destructive</Text>
+</Badge>
+
+<Badge variant="outline">
+  <Text>Outline</Text>
+</Badge>
+```
+
+### Button Composition
+
+Buttons also use composition for their content:
+
+```tsx
+import { Button } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
+import { Mail } from 'lucide-react-native';
+
+function Example() {
+  return (
+    <Button variant="default">
+      <Text>Click me</Text>
+    </Button>
+  );
+}
+```
+
+Button with icon:
+
+```tsx
+<Button variant="default">
+  <Mail className="mr-2" />
+  <Text>Send Email</Text>
+</Button>
+```
+
+Icon-only button:
+
+```tsx
+<Button variant="outline" size="icon">
+  <Mail />
+</Button>
+```
+
+Available button variants:
+
+```tsx
+<Button variant="default"><Text>Default</Text></Button>
+<Button variant="destructive"><Text>Destructive</Text></Button>
+<Button variant="outline"><Text>Outline</Text></Button>
+<Button variant="secondary"><Text>Secondary</Text></Button>
+<Button variant="ghost"><Text>Ghost</Text></Button>
+<Button variant="link"><Text>Link</Text></Button>
+```
+
+Available button sizes:
+
+```tsx
+<Button size="default"><Text>Default</Text></Button>
+<Button size="sm"><Text>Small</Text></Button>
+<Button size="lg"><Text>Large</Text></Button>
+<Button size="icon"><Mail /></Button>
+```
+
+## Using Variant Helpers
+
+USMDS components export variant helper functions that you can use for custom styling or extending components.
+
+### Badge Variants
+
+```tsx
+import { badgeVariants, badgeTextVariants } from '@/components/ui/badge';
+
+// Use variant classes directly
+const className = badgeVariants({ variant: 'destructive' });
+const textClassName = badgeTextVariants({ variant: 'destructive' });
+```
+
+### Button Variants
+
+```tsx
+import { buttonVariants, buttonTextVariants } from '@/components/ui/button';
+
+// Create custom button-styled components
+const linkClassName = buttonVariants({ variant: 'link', size: 'sm' });
+const linkTextClassName = buttonTextVariants({ variant: 'link', size: 'sm' });
 ```
 
 ## Form Components
 
 ### Checkbox Patterns
 
-USMDS provides two checkbox variants: standard and tile-based:
+USMDS provides checkbox primitives that you can use directly:
 
 Basic checkbox:
 
-```js   
-<Checkbox 
-    label="Accept terms"
-    checked={checked}
-    onCheckedChange={setChecked}
+```tsx
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
+import { View } from 'react-native';
+
+function Example() {
+  const [checked, setChecked] = React.useState(false);
+
+  return (
+    <View className="flex-row items-center gap-2">
+      <Checkbox
+        checked={checked}
+        onCheckedChange={setChecked}
+      />
+      <Label>Accept terms and conditions</Label>
+    </View>
+  );
+}
+```
+
+Checkbox with custom styling:
+
+```tsx
+<Checkbox
+  checked={checked}
+  onCheckedChange={setChecked}
+  className="border-blue-500"
+  checkedClassName="bg-blue-500 border-blue-500"
 />
 ```
 
-Checkbox tile with description:
+Disabled checkbox:
 
-```js
-<CheckboxTile
-    label="Premium Plan"
-    description="Access to all features"
-    checked={checked}
-    onCheckedChange={setChecked}
+```tsx
+<Checkbox
+  checked={checked}
+  onCheckedChange={setChecked}
+  disabled
 />
 ```
 
 ### Radio Button Patterns
 
-Similar to checkboxes, radio buttons come in standard and tile variants:
+Radio buttons work with a `RadioGroup` container:
 
-Standard radio buttons:
+```tsx
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Label } from '@/components/ui/label';
+import { View } from 'react-native';
 
-```js
-<RadioGroup value={value} onValueChange={setValue}>
-    <RadioButton label="Option 1" value="1" />
-    <RadioButton label="Option 2" value="2" />
-</RadioGroup>
+function Example() {
+  const [value, setValue] = React.useState('option-1');
+
+  return (
+    <RadioGroup value={value} onValueChange={setValue}>
+      <View className="flex-row items-center gap-2">
+        <RadioGroupItem value="option-1" />
+        <Label>Option 1</Label>
+      </View>
+      <View className="flex-row items-center gap-2">
+        <RadioGroupItem value="option-2" />
+        <Label>Option 2</Label>
+      </View>
+    </RadioGroup>
+  );
+}
 ```
 
-Radio tiles:
+### Input Patterns
 
-```js
-<RadioGroup value={value} onValueChange={setValue}>
-    <RadioTile 
-    label="Premium Plan"
-    description="Access all features"
-    value="premium"
-    />
-    <RadioTile 
-    label="Basic Plan"
-    description="Essential features"
-    value="basic"
-    />
-</RadioGroup>
+Text inputs with labels and error states:
+
+```tsx
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Text } from '@/components/ui/text';
+import { View } from 'react-native';
+
+function Example() {
+  const [value, setValue] = React.useState('');
+  const [error, setError] = React.useState('');
+
+  return (
+    <View className="gap-2">
+      <Label>Email</Label>
+      <Input
+        placeholder="Enter your email"
+        value={value}
+        onChangeText={setValue}
+        keyboardType="email-address"
+        autoCapitalize="none"
+      />
+      {error && <Text className="text-destructive text-sm">{error}</Text>}
+    </View>
+  );
+}
 ```
 
-## Alert and Messaging Patterns
+## Styling Patterns
 
-### Alert Variations
+### Using NativeWind Classes
 
-Alerts can be configured in multiple ways:
+All USMDS components support NativeWind's `className` prop:
 
-Basic alert:
+```tsx
+<Button className="w-full mt-4">
+  <Text>Full Width Button</Text>
+</Button>
 
-```js
-<Alert
-    variant="info"
-    description={{ body: "Simple alert message" }}
-/>
+<Alert icon={InfoIcon} className="mb-4">
+  <AlertTitle>Custom Spacing</AlertTitle>
+  <AlertDescription>This alert has custom bottom margin</AlertDescription>
+</Alert>
+
+<Badge variant="default" className="rounded-full">
+  <Text>Pill Badge</Text>
+</Badge>
 ```
 
-Alert with title:
+### Responsive Design
 
-```js
-<Alert
-    variant="warning"
-    title="Important Notice"
-    description={{ body: "Alert with title" }}
-/>
+Use NativeWind's responsive prefixes:
+
+```tsx
+<Button className="w-full md:w-auto">
+  <Text>Responsive Button</Text>
+</Button>
+
+<View className="flex-col md:flex-row gap-4">
+  <Button className="flex-1"><Text>Button 1</Text></Button>
+  <Button className="flex-1"><Text>Button 2</Text></Button>
+</View>
 ```
 
-List-style alert:
+### Dark Mode
 
-```js
-<Alert
-    variant="info"
-    alertStyle="list"
-    description={{
-    messages: [
-        { text: "First item" },
-        { text: "Second item", link: "Learn more" }
-    ]
-    }}
-/>
+Components automatically support dark mode through CSS variables:
+
+```tsx
+import { useColorScheme } from 'nativewind';
+
+function Example() {
+  const { colorScheme, setColorScheme } = useColorScheme();
+
+  return (
+    <Button
+      variant="outline"
+      onPress={() => setColorScheme(colorScheme === 'dark' ? 'light' : 'dark')}
+    >
+      <Text>Toggle {colorScheme === 'dark' ? 'Light' : 'Dark'} Mode</Text>
+    </Button>
+  );
+}
+```
+
+Custom dark mode styling:
+
+```tsx
+<View className="bg-white dark:bg-gray-900">
+  <Text className="text-gray-900 dark:text-gray-100">
+    Adapts to color scheme
+  </Text>
+</View>
+```
+
+## Platform-Specific Patterns
+
+### Platform-Specific Styling
+
+Components can have platform-specific behavior:
+
+```tsx
+import { Platform } from 'react-native';
+import { cn } from '@/lib/utils';
+
+<Button
+  className={cn(
+    'w-full',
+    Platform.OS === 'ios' && 'rounded-xl',
+    Platform.OS === 'android' && 'rounded-lg'
+  )}
+>
+  <Text>Platform Specific</Text>
+</Button>
+```
+
+### Web-Specific Features
+
+Some features like hover states only apply on web:
+
+```tsx
+<Button
+  variant="outline"
+  className="hover:bg-accent" // Only works on web
+>
+  <Text>Hover Me</Text>
+</Button>
 ```
 
 ## Accessibility Patterns
 
-USMDS components are built with accessibility in mind:
+### Screen Reader Support
 
-Screen reader friendly alerts:
+Use accessibility props to enhance screen reader support:
 
-```js
-<Alert
-    variant="info"
-    description={{ body: "Important message" }}
-    accessibilityRole="alert"
-/>
-```
+```tsx
+<Button
+  accessibilityLabel="Submit form"
+  accessibilityHint="Double tap to submit the form"
+>
+  <Text>Submit</Text>
+</Button>
 
-Accessible form controls:
-
-```js
 <Checkbox
-    label="Accept terms"
-    accessibilityLabel="Accept terms and conditions"
-    accessibilityHint="Double tap to toggle checkbox"
+  checked={checked}
+  onCheckedChange={setChecked}
+  accessibilityLabel="Accept terms and conditions"
 />
 ```
 
-## Responsive Design
+### Alert Roles
 
-Components are designed to work across different screen sizes:
+Alerts automatically have the `alert` role for screen readers:
 
-```js
-<Alert
-    className="w-full md:w-[329px]"
-    variant="info"
-    description={{ body: "Responsive alert" }}
-/>
+```tsx
+<Alert icon={AlertCircle} variant="destructive">
+  <AlertTitle>Error</AlertTitle>
+  <AlertDescription>
+    This message will be announced by screen readers
+  </AlertDescription>
+</Alert>
 ```
 
-## Theme Customization
+## Advanced Patterns
 
-### Using Theme Variables
+### Custom Variants
 
-USMDS uses CSS variables for theming that can be customized:
+Extend component variants by modifying the variant definitions:
 
-```js
-:root {
-    --background: 0 0% 100%;
-    --primary: 201 100% 32%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 217 47% 30%;
-    --secondary-foreground: 0 0% 100%;
-    --border: 220 13% 46%;
+```tsx title="components/ui/button.tsx"
+import { cva } from 'class-variance-authority';
+
+const buttonVariants = cva(
+  'group shrink-0 flex-row items-center justify-center gap-2 rounded-md',
+  {
+    variants: {
+      variant: {
+        default: 'bg-primary',
+        // Add custom variant
+        custom: 'bg-gradient-to-r from-purple-500 to-pink-500',
+      },
+    },
+  }
+);
+```
+
+### Compound Components
+
+Create complex UIs by combining components:
+
+```tsx
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Text } from '@/components/ui/text';
+import { View } from 'react-native';
+
+function ProductCard() {
+  return (
+    <Card className="p-4">
+      <View className="flex-row items-start justify-between mb-2">
+        <Text className="text-lg font-semibold">Product Name</Text>
+        <Badge variant="secondary">
+          <Text>Sale</Text>
+        </Badge>
+      </View>
+      <Text className="text-muted-foreground mb-4">
+        Product description goes here
+      </Text>
+      <Button className="w-full">
+        <Text>Add to Cart</Text>
+      </Button>
+    </Card>
+  );
 }
+```
 
-.dark {
-    --background: 224 71% 4%;
-    --primary: 201 100% 32%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 217 47% 30%;
-    --secondary-foreground: 0 0% 100%;
-    --border: 215 20% 65%;
-}
+### Using the cn Helper
+
+The `cn` utility combines class names intelligently:
+
+```tsx
+import { cn } from '@/lib/utils';
+
+<Button
+  className={cn(
+    'w-full',
+    isLoading && 'opacity-50',
+    isError && 'border-destructive'
+  )}
+>
+  <Text>Submit</Text>
+</Button>
 ```
 
 ## Best Practices
 
-1. **Consistent Variants**: Use consistent variant names across components for better maintainability
-2. **Accessibility First**: Always include proper accessibility props
-3. **Responsive Design**: Use responsive classes for different screen sizes
-4. **Theme Variables**: Utilize theme variables instead of hard-coded colors
-5. **Component Composition**: Combine components to create complex interfaces while maintaining consistency
+1. **Use Composition**: Prefer composition over configuration for flexible, reusable components
+2. **Leverage Variants**: Use built-in variants before creating custom styles
+3. **Type Safety**: TypeScript provides excellent autocomplete and type checking
+4. **Accessibility First**: Always include proper accessibility labels and hints
+5. **Responsive Design**: Use responsive classes for different screen sizes
+6. **Platform Awareness**: Consider platform-specific behaviors and styling
+7. **Theme Variables**: Use CSS variables for colors to support dark mode automatically
+8. **Helper Functions**: Use variant helper functions for consistent styling across custom components
+
+## Performance Tips
+
+1. **Memoization**: Use `React.memo` for expensive components
+2. **Callback Optimization**: Use `useCallback` for event handlers
+3. **Avoid Inline Styles**: Prefer `className` over inline style objects
+4. **Lazy Loading**: Dynamically import heavy components when needed
+
+```tsx
+import { memo, useCallback } from 'react';
+
+const MemoizedButton = memo(function MemoizedButton({ onPress, children }) {
+  return (
+    <Button onPress={onPress}>
+      {children}
+    </Button>
+  );
+});
+
+function Parent() {
+  const handlePress = useCallback(() => {
+    console.log('Pressed');
+  }, []);
+
+  return (
+    <MemoizedButton onPress={handlePress}>
+      <Text>Optimized Button</Text>
+    </MemoizedButton>
+  );
+}
+```
+
+## Next Steps
+
+- Explore individual [Component Documentation](/docs/components)
+- Learn about [Theme Customization](/docs/customization)
+- Check out [Example Projects](/docs/examples)

@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import { cn } from '@/lib/utils';
+import { cn } from '@/registry/usa/lib/utils';
 import { ComponentPropsWithoutRef, forwardRef } from 'react';
 
 interface ButtonGroupProps extends ComponentPropsWithoutRef<typeof View> {

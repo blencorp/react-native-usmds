@@ -1,0 +1,238 @@
+---
+title: Accordion
+description: A vertically stacked set of interactive headings that each reveal a section of content.
+---
+
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { AccordionPreview } from '@/components/examples';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard preview={<AccordionPreview />} />
+  </Tab>
+  <Tab value="code">
+    ```tsx title="accordion-example.tsx"
+    import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+    import { Text } from '@/components/ui/text';
+
+    export default function AccordionExample() {
+      return (
+        <Accordion type="multiple" className="w-full max-w-md">
+          <AccordionItem value="item-1">
+            <AccordionTrigger>
+              <Text>Is it accessible?</Text>
+            </AccordionTrigger>
+            <AccordionContent>
+              <Text>Yes. It adheres to the WAI-ARIA design pattern.</Text>
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-2">
+            <AccordionTrigger>
+              <Text>Is it styled?</Text>
+            </AccordionTrigger>
+            <AccordionContent>
+              <Text>Yes. It comes with default styles that match the USWDS design system.</Text>
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-3">
+            <AccordionTrigger>
+              <Text>Is it animated?</Text>
+            </AccordionTrigger>
+            <AccordionContent>
+              <Text>Yes. It's animated by default using React Native Reanimated.</Text>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Installation
+
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    <Steps>
+      <Step>
+        ```bash
+        npx usmds add accordion
+        ```
+      </Step>
+      <Step>
+        **Update `tailwind.config.js`**
+
+        Add the following animations to your `tailwind.config.js`:
+
+        ```js title="tailwind.config.js"
+        /** @type {import('tailwindcss').Config} */
+        module.exports = {
+          theme: {
+            extend: {
+              keyframes: {
+                'accordion-down': {
+                  from: { height: '0' },
+                  to: { height: 'var(--radix-accordion-content-height)' },
+                },
+                'accordion-up': {
+                  from: { height: 'var(--radix-accordion-content-height)' },
+                  to: { height: '0' },
+                },
+              },
+              animation: {
+                'accordion-down': 'accordion-down 0.2s ease-out',
+                'accordion-up': 'accordion-up 0.2s ease-out',
+              },
+            },
+          },
+        }
+        ```
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install dependencies:**
+
+        ```bash
+        npx expo install @rn-primitives/accordion react-native-reanimated
+        ```
+      </Step>
+      <Step>
+        **Copy the component code:**
+
+        Copy from `packages/registry/src/usa/components/ui/accordion.tsx`
+      </Step>
+      <Step>
+        **Update import paths to match your project setup.**
+      </Step>
+      <Step>
+        **Add animations to `tailwind.config.js`** (see CLI tab)
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
+import { Text } from '@/components/ui/text';
+
+<Accordion type="single" collapsible>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>
+      <Text>Is it accessible?</Text>
+    </AccordionTrigger>
+    <AccordionContent>
+      <Text>Yes. It adheres to the WAI-ARIA design pattern.</Text>
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+## Props
+
+### Accordion
+
+Extends `@rn-primitives/accordion` Root props.
+
+| Prop | Type | Description |
+|------|------|-------------|
+| type | `'single' \| 'multiple'` | Determines whether one or multiple items can be opened at the same time. |
+| collapsible | `boolean` | When type is "single", allows closing the open item. |
+| value | `string \| string[]` | Controlled value of the item(s) to expand. |
+| onValueChange | `(value: string \| string[]) => void` | Event handler called when value changes. |
+| disabled | `boolean` | When true, prevents user interaction. |
+
+### AccordionItem
+
+| Prop | Type | Description |
+|------|------|-------------|
+| value | `string` | **Required.** A unique value for the item. |
+| disabled | `boolean` | When true, prevents the item from being activated. |
+
+### AccordionTrigger
+
+| Prop | Type | Description |
+|------|------|-------------|
+| children | `React.ReactNode` | The content of the trigger. |
+| className | `string` | Additional classes for styling. |
+
+### AccordionContent
+
+| Prop | Type | Description |
+|------|------|-------------|
+| children | `React.ReactNode` | The content to display when expanded. |
+| className | `string` | Additional classes for styling. |
+
+## Examples
+
+### Single Collapsible
+
+```tsx
+<Accordion type="single" collapsible>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>
+      <Text>Question 1</Text>
+    </AccordionTrigger>
+    <AccordionContent>
+      <Text>Answer 1</Text>
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+### Multiple Open Items
+
+```tsx
+<Accordion type="multiple">
+  <AccordionItem value="item-1">
+    <AccordionTrigger>
+      <Text>Question 1</Text>
+    </AccordionTrigger>
+    <AccordionContent>
+      <Text>Answer 1</Text>
+    </AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-2">
+    <AccordionTrigger>
+      <Text>Question 2</Text>
+    </AccordionTrigger>
+    <AccordionContent>
+      <Text>Answer 2</Text>
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+### With Rich Content
+
+```tsx
+import { View } from 'react-native';
+import { Button } from '@/components/ui/button';
+
+<Accordion type="single" collapsible>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>
+      <Text>Can I include custom content?</Text>
+    </AccordionTrigger>
+    <AccordionContent>
+      <View className="gap-4">
+        <Text>Yes! You can include any React Native components.</Text>
+        <Button>
+          <Text>Click me</Text>
+        </Button>
+      </View>
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+```

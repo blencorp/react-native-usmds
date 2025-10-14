@@ -1,98 +1,114 @@
 ---
-title: CheckboxTile
-description: CheckboxTile provides a larger, more prominent checkbox option with optional description text.
+title: Checkbox Tile
+description: A larger checkbox option with label and optional description text.
 ---
-import {DemoButton} from '@/components/ui/DemoButton';
 
-<DemoButton href="https://usmds-showcase.expo.app/components/checkboxtile"/>
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { CheckboxTilePreview } from '@/components/examples';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard preview={<CheckboxTilePreview />} />
+  </Tab>
+  <Tab value="code">
+    ```tsx title="checkbox-tile-example.tsx"
+    import { CheckboxTile } from '@/components/ui/checkbox-tile';
+    import { useState } from 'react';
+
+    export default function CheckboxTileExample() {
+      const [checked, setChecked] = useState(false);
+
+      return (
+        <CheckboxTile
+          label="Checkbox tile"
+          description="Optional description text"
+          checked={checked}
+          onCheckedChange={setChecked}
+        />
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
 
 ## Installation
 
-```package-install
-npx usmds add checkboxtile
-```
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    ```bash
+    npx usmds add checkbox-tile
+    ```
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install the following dependencies:**
+
+        ```bash
+        npx expo install @rn-primitives/checkbox lucide-react-native
+        ```
+      </Step>
+      <Step>
+        **Copy and paste the following code into your project.**
+
+        ```tsx title="@/components/ui/icon.tsx"
+        // Copy from packages/registry/src/usa/components/ui/icon.tsx
+        ```
+
+        ```tsx title="@/components/ui/checkbox-tile.tsx"
+        // Copy from packages/registry/src/usa/components/ui/checkboxtile.tsx
+        ```
+      </Step>
+      <Step>
+        **Update the import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
 
 ## Usage
 
 ```tsx
-import { CheckboxTile } from '@components/CheckboxTile';
+import { CheckboxTile } from '@/components/ui/checkbox-tile';
 import { useState } from 'react';
 
-function App() {
-  const [checked, setChecked] = useState(false);
+const [checked, setChecked] = useState(false);
 
-  return (
-    <CheckboxTile 
-      label="Checkbox tile"
-      description="Optional description text"
-      checked={checked}
-      onCheckedChange={setChecked}
-    />
-  );
-}
+<CheckboxTile
+  label="Checkbox tile"
+  checked={checked}
+  onCheckedChange={setChecked}
+/>
 ```
 
 ## Props
 
 ### CheckboxTile
 
-Extends `CheckboxPrimitive.Root` props.
+Extends `@rn-primitives/checkbox` Root props.
 
-<table>
-  <thead>
-    <tr>
-      <th>Prop</th>
-      <th>Type</th>
-      <th>Default</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>label</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>The text label for the checkbox tile.</td>
-    </tr>
-    <tr>
-      <td>description</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>Optional description text displayed below the label.</td>
-    </tr>
-    <tr>
-      <td>checked</td>
-      <td>`boolean`</td>
-      <td>`false`</td>
-      <td>The controlled checked state of the checkbox.</td>
-    </tr>
-    <tr>
-      <td>onCheckedChange</td>
-      <td>`(checked: boolean) => void`</td>
-      <td>-</td>
-      <td>Callback that fires when the checked state changes.</td>
-    </tr>
-    <tr>
-      <td>disabled</td>
-      <td>`boolean`</td>
-      <td>`false`</td>
-      <td>When true, prevents the user from interacting with the checkbox.</td>
-    </tr>
-    <tr>
-      <td>className</td>
-      <td>`string`</td>
-      <td>-</td>
-      <td>Additional Tailwind classes to apply.</td>
-    </tr>
-  </tbody>
-</table>
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| label | `string` | - | **Required.** The text label for the checkbox tile. |
+| description | `string` | - | Optional description text below the label. |
+| checked | `boolean` | - | The controlled checked state. |
+| onCheckedChange | `(checked: boolean) => void` | - | Callback when checked state changes. |
+| disabled | `boolean` | `false` | Whether the checkbox is disabled. |
+| className | `string` | - | Additional classes for styling. |
 
 ## Examples
 
-### Basic Usage
+### Default
 
 ```tsx
-<CheckboxTile 
+import { CheckboxTile } from '@/components/ui/checkbox-tile';
+import { useState } from 'react';
+
+const [checked, setChecked] = useState(false);
+
+<CheckboxTile
   label="Basic checkbox tile"
   checked={checked}
   onCheckedChange={setChecked}
@@ -110,54 +126,78 @@ Extends `CheckboxPrimitive.Root` props.
 />
 ```
 
-### Disabled States
+### Disabled
 
 ```tsx
-// Disabled unchecked
 <CheckboxTile
-  label="Disabled unchecked"
-  description="Optional description text"
+  label="Disabled checkbox"
+  description="This checkbox is disabled"
   checked={false}
   disabled
   onCheckedChange={() => {}}
 />
+```
 
-// Disabled checked
+### Disabled Checked
+
+```tsx
 <CheckboxTile
   label="Disabled checked"
-  description="Optional description text"
+  description="This checkbox is disabled and checked"
   checked={true}
   disabled
   onCheckedChange={() => {}}
 />
 ```
 
-## Styling
+### Multiple Tiles
 
-The CheckboxTile component uses Tailwind CSS classes for styling. Default styling includes:
+```tsx
+import { CheckboxTile } from '@/components/ui/checkbox-tile';
+import { View } from 'react-native';
+import { useState } from 'react';
 
-- Container width: 329px
-- Rounded corners (2px)
-- 2px border width
-- Consistent padding (13px 16px 13px 9px)
-- Primary colors when checked
-- Light background when checked
-- Disabled state styling
-- Gap spacing between elements
+function MultipleCheckboxTiles() {
+  const [option1, setOption1] = useState(false);
+  const [option2, setOption2] = useState(false);
+  const [option3, setOption3] = useState(false);
 
-## States
+  return (
+    <View className="gap-4">
+      <CheckboxTile
+        label="Option 1"
+        description="Description for option 1"
+        checked={option1}
+        onCheckedChange={setOption1}
+      />
+      <CheckboxTile
+        label="Option 2"
+        description="Description for option 2"
+        checked={option2}
+        onCheckedChange={setOption2}
+      />
+      <CheckboxTile
+        label="Option 3"
+        description="Description for option 3"
+        checked={option3}
+        onCheckedChange={setOption3}
+      />
+    </View>
+  );
+}
+```
 
-The component has three visual states:
-- Unchecked: White background with light border
-- Checked: Light primary background with primary border
-- Disabled: White background with gray border and text
+## Helper Functions
 
-## Accessibility
+### checkboxTileVariants
 
-The CheckboxTile component:
-- Uses `accessibilityRole="checkbox"` for proper semantic structure
-- Supports keyboard navigation
-- Maintains WCAG color contrast requirements
-- Provides appropriate `accessibilityState` for checked and disabled states
-- Includes clear, descriptive text labels
-- Ensures the entire tile area is clickable
+Use `checkboxTileVariants` to create custom checkbox tile styled components:
+
+```tsx
+import { checkboxTileVariants } from '@/components/ui/checkbox-tile';
+import { View } from 'react-native';
+
+<View className={checkboxTileVariants({ variant: 'withDescription', state: 'checked' })}>
+  {/* content */}
+</View>
+```

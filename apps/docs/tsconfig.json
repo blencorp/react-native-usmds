@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "jsxImportSource": "nativewind",
     "baseUrl": ".",
     "target": "ESNext",
     "lib": [
@@ -20,8 +21,11 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/.source": [
-        "./.source/index.ts"
+      "@/registry/*": [
+        "../../packages/registry/src/*"
+      ],
+      "@docs/*": [
+        "./*"
       ],
       "@/*": [
         "./src/*"
@@ -32,18 +36,19 @@
         "name": "next"
       }
     ],
-    "typeRoots": [
-      "./node_modules/@types"
+    "types": [
+      "nativewind/types"
     ]
   },
   "include": [
     "next-env.d.ts",
+    "nativewind-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    "**/*.mdx",
     ".next/types/**/*.ts"
-, "content/docs/gettingstarted.mdx"  ],
+  ],
   "exclude": [
-    "node_modules",
-    "../../scripts"
+    "node_modules"
   ]
 }
