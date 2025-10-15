@@ -342,6 +342,20 @@
       ]
     },
     {
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "description": "Renders an accessible label associated with controls.",
+      "author": "@blencorp",
+      "files": [
+        {
+          "path": "./src/usa/components/ui/label.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@rn-primitives/label"]
+    },
+    {
       "name": "link",
       "type": "registry:ui",
       "title": "Link",
@@ -388,6 +402,20 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "native-only-animated-view",
+      "type": "registry:ui",
+      "title": "Native Only Animated View",
+      "description": "An animated view wrapper that only enables animations on native platforms.",
+      "author": "@blencorp",
+      "files": [
+        {
+          "path": "./src/usa/components/ui/native-only-animated-view.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["react-native-reanimated"]
     },
     {
       "name": "pagination",
@@ -468,6 +496,20 @@
       "dependencies": [
         "@rn-primitives/radio-group"
       ]
+    },
+    {
+      "name": "radiogroup",
+      "type": "registry:ui",
+      "title": "Radio Group",
+      "description": "A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time.",
+      "author": "@blencorp",
+      "files": [
+        {
+          "path": "./src/usa/components/ui/radiogroup.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@rn-primitives/radio-group"]
     },
     {
       "name": "radiotile",
