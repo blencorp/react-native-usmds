@@ -5,7 +5,6 @@ import { cn } from '@/registry/usa/lib/utils';
 import Svg from 'react-native-svg';
 import * as CollapsiblePrimitive from '@rn-primitives/collapsible';
 import { ChevronDown, ChevronUp } from 'lucide-react-native';
-import { useColorScheme } from 'nativewind';
 
 const bannerVariants = cva('flex flex-row items-center w-full', {
   variants: {
@@ -124,7 +123,6 @@ const getBannerContent = (domain: 'gov' | 'mil' = 'gov', language: 'en' | 'es' =
 const Banner = forwardRef<ElementRef<typeof View>, BannerProps>(({ className, variant, title, link, trailingIcon, domain = 'gov', language = 'en', ...props }, ref) => {
   const isStandardApp = variant === 'standard-app';
   const [isExpanded, setIsExpanded] = useState(false);
-  const { colorScheme } = useColorScheme();
 
   // USWDS primary color - same in light and dark mode per design system
   const primaryColor = '#005EA2';
