@@ -43,8 +43,14 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       <Step>
         **Copy and paste the following code into your project.**
 
-        ```tsx title="@/components/ui/progress.tsx"
-        // Copy from packages/registry/src/usa/components/ui/progress.tsx
+        ```json doc-gen:file
+{
+  "file": "../../packages/registry/src/usa/components/ui/progress.tsx",
+  "codeblock": {
+    "lang": "tsx",
+    "meta": "title=\"@/components/ui/progress.tsx\""
+  }
+}
         ```
       </Step>
       <Step>
@@ -74,116 +80,3 @@ Extends `ProgressPrimitive.Root` props.
 | className | `string` | - | Additional classes for the root element. |
 | indicatorClassName | `string` | - | Additional classes for the indicator element. |
 
-## Examples
-
-### Default
-
-```tsx
-<Progress value={40} />
-```
-
-### Different Values
-
-```tsx
-import { View } from 'react-native';
-
-<View className="gap-4">
-  <Progress value={0} />
-  <Progress value={25} />
-  <Progress value={50} />
-  <Progress value={75} />
-  <Progress value={100} />
-</View>
-```
-
-### Custom Styling
-
-```tsx
-<Progress
-  value={60}
-  className="h-4 bg-gray-200"
-  indicatorClassName="bg-blue-500"
-/>
-```
-
-### Custom Width
-
-```tsx
-<Progress value={40} className="w-[400px]" />
-```
-
-### Animated Progress
-
-```tsx
-import { Progress } from '@/components/ui/progress';
-import { Button } from '@/components/ui/button';
-import { Text } from '@/components/ui/text';
-import { useState, useCallback } from 'react';
-import { View } from 'react-native';
-
-function AnimatedProgress() {
-  const [progress, setProgress] = useState(40);
-
-  const randomize = useCallback(() => {
-    setProgress(Math.floor(Math.random() * 100));
-  }, []);
-
-  const increment = useCallback(() => {
-    setProgress((prev) => Math.min(prev + 10, 100));
-  }, []);
-
-  return (
-    <View className="gap-4">
-      <Progress value={progress} />
-      <Text>Progress: {progress}%</Text>
-      <View className="flex-row gap-2">
-        <Button onPress={increment}>
-          <Text>Increment</Text>
-        </Button>
-        <Button onPress={randomize}>
-          <Text>Randomize</Text>
-        </Button>
-      </View>
-    </View>
-  );
-}
-```
-
-### With Label
-
-```tsx
-import { View } from 'react-native';
-import { Text } from '@/components/ui/text';
-
-<View className="gap-2">
-  <View className="flex-row justify-between">
-    <Text className="text-sm font-medium">Uploading...</Text>
-    <Text className="text-sm text-muted-foreground">45%</Text>
-  </View>
-  <Progress value={45} />
-</View>
-```
-
-### Loading State
-
-```tsx
-function LoadingProgress() {
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(timer);
-          return 100;
-        }
-        return prev + 10;
-      });
-    }, 500);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  return <Progress value={progress} />;
-}
-```

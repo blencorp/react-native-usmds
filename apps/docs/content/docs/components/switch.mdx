@@ -56,8 +56,14 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       <Step>
         **Copy and paste the following code into your project.**
 
-        ```tsx title="@/components/ui/switch.tsx"
-        // Copy from packages/registry/src/usa/components/ui/switch.tsx
+        ```json doc-gen:file
+{
+  "file": "../../packages/registry/src/usa/components/ui/switch.tsx",
+  "codeblock": {
+    "lang": "tsx",
+    "meta": "title=\"@/components/ui/switch.tsx\""
+  }
+}
         ```
       </Step>
       <Step>
@@ -100,154 +106,3 @@ Extends `@rn-primitives/switch` Root props.
 | disabled | `boolean` | When true, prevents the user from interacting with the switch. |
 | className | `string` | Additional classes for styling. |
 
-## Examples
-
-### Default
-
-```tsx
-import { Switch } from '@/components/ui/switch';
-import { useState } from 'react';
-
-function SwitchExample() {
-  const [checked, setChecked] = useState(false);
-
-  return (
-    <Switch
-      checked={checked}
-      onCheckedChange={setChecked}
-    />
-  );
-}
-```
-
-### With Label
-
-```tsx
-import { Switch } from '@/components/ui/switch';
-import { Label } from '@/components/ui/label';
-
-<div className="flex items-center gap-2">
-  <Switch id="airplane-mode" />
-  <Label htmlFor="airplane-mode">Airplane Mode</Label>
-</div>
-```
-
-### Disabled
-
-```tsx
-<Switch disabled checked />
-```
-
-### Settings Example
-
-```tsx
-import { Switch } from '@/components/ui/switch';
-import { Label } from '@/components/ui/label';
-import { Text } from '@/components/ui/text';
-import { View } from 'react-native';
-import { useState } from 'react';
-
-function SettingsExample() {
-  const [notifications, setNotifications] = useState(true);
-  const [marketing, setMarketing] = useState(false);
-
-  return (
-    <View className="gap-4">
-      <div className="flex items-center justify-between">
-        <div className="flex-1">
-          <Label htmlFor="notifications">Notifications</Label>
-          <Text className="text-sm text-muted-foreground">
-            Receive notifications about your activity
-          </Text>
-        </div>
-        <Switch
-          id="notifications"
-          checked={notifications}
-          onCheckedChange={setNotifications}
-        />
-      </div>
-
-      <div className="flex items-center justify-between">
-        <div className="flex-1">
-          <Label htmlFor="marketing">Marketing emails</Label>
-          <Text className="text-sm text-muted-foreground">
-            Receive emails about new products and features
-          </Text>
-        </div>
-        <Switch
-          id="marketing"
-          checked={marketing}
-          onCheckedChange={setMarketing}
-        />
-      </div>
-    </View>
-  );
-}
-```
-
-### Form Example
-
-```tsx
-import { Switch } from '@/components/ui/switch';
-import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import { Text } from '@/components/ui/text';
-import { View } from 'react-native';
-import { useState } from 'react';
-
-function FormExample() {
-  const [settings, setSettings] = useState({
-    marketingEmails: false,
-    socialEmails: true,
-    securityEmails: true,
-  });
-
-  const handleSubmit = () => {
-    console.log('Settings:', settings);
-  };
-
-  return (
-    <View className="gap-4">
-      <Text className="font-semibold">Email Notifications</Text>
-
-      <div className="flex items-center justify-between">
-        <Label htmlFor="marketing">Marketing emails</Label>
-        <Switch
-          id="marketing"
-          checked={settings.marketingEmails}
-          onCheckedChange={(checked) =>
-            setSettings((prev) => ({ ...prev, marketingEmails: checked }))
-          }
-        />
-      </div>
-
-      <div className="flex items-center justify-between">
-        <Label htmlFor="social">Social emails</Label>
-        <Switch
-          id="social"
-          checked={settings.socialEmails}
-          onCheckedChange={(checked) =>
-            setSettings((prev) => ({ ...prev, socialEmails: checked }))
-          }
-        />
-      </div>
-
-      <div className="flex items-center justify-between">
-        <Label htmlFor="security">Security emails</Label>
-        <Switch
-          id="security"
-          checked={settings.securityEmails}
-          onCheckedChange={(checked) =>
-            setSettings((prev) => ({ ...prev, securityEmails: checked }))
-          }
-          disabled
-        />
-      </div>
-
-      <Button onPress={handleSubmit}>
-        <Text>Save preferences</Text>
-      </Button>
-    </View>
-  );
-}
-```

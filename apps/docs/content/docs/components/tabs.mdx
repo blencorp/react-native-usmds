@@ -66,9 +66,17 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
         ```
       </Step>
       <Step>
-        **Copy the component code:**
+        **Copy and paste the following code into your project.**
 
-        Copy from `packages/registry/src/usa/components/ui/tabs.tsx`
+        ```json doc-gen:file
+{
+  "file": "../../packages/registry/src/usa/components/ui/tabs.tsx",
+  "codeblock": {
+    "lang": "tsx",
+    "meta": "title=\"@/components/ui/tabs.tsx\""
+  }
+}
+        ```
       </Step>
       <Step>
         **Update import paths to match your project setup.**
@@ -143,153 +151,3 @@ Extends `@rn-primitives/tabs` Content props.
 | forceMount | `boolean` | Force mounting content even when not active. |
 | className | `string` | Additional classes for styling. |
 
-## Examples
-
-### Default
-
-```tsx
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Text } from '@/components/ui/text';
-
-function TabsExample() {
-  return (
-    <Tabs defaultValue="overview" className="w-full">
-      <TabsList>
-        <TabsTrigger value="overview">
-          <Text>Overview</Text>
-        </TabsTrigger>
-        <TabsTrigger value="details">
-          <Text>Details</Text>
-        </TabsTrigger>
-        <TabsTrigger value="settings">
-          <Text>Settings</Text>
-        </TabsTrigger>
-      </TabsList>
-      <TabsContent value="overview">
-        <Text>Overview content goes here.</Text>
-      </TabsContent>
-      <TabsContent value="details">
-        <Text>Details content goes here.</Text>
-      </TabsContent>
-      <TabsContent value="settings">
-        <Text>Settings content goes here.</Text>
-      </TabsContent>
-    </Tabs>
-  );
-}
-```
-
-### Full Width Tabs
-
-```tsx
-<Tabs defaultValue="tab1" className="w-full">
-  <TabsList className="w-full">
-    <TabsTrigger value="tab1" className="flex-1">
-      <Text>Tab 1</Text>
-    </TabsTrigger>
-    <TabsTrigger value="tab2" className="flex-1">
-      <Text>Tab 2</Text>
-    </TabsTrigger>
-  </TabsList>
-  <TabsContent value="tab1">
-    <Text>Content 1</Text>
-  </TabsContent>
-  <TabsContent value="tab2">
-    <Text>Content 2</Text>
-  </TabsContent>
-</Tabs>
-```
-
-### Controlled Tabs
-
-```tsx
-import { useState } from 'react';
-
-function ControlledTabsExample() {
-  const [activeTab, setActiveTab] = useState('account');
-
-  return (
-    <Tabs value={activeTab} onValueChange={setActiveTab}>
-      <TabsList>
-        <TabsTrigger value="account">
-          <Text>Account</Text>
-        </TabsTrigger>
-        <TabsTrigger value="password">
-          <Text>Password</Text>
-        </TabsTrigger>
-      </TabsList>
-      <TabsContent value="account">
-        <Text>Account settings</Text>
-      </TabsContent>
-      <TabsContent value="password">
-        <Text>Password settings</Text>
-      </TabsContent>
-    </Tabs>
-  );
-}
-```
-
-### Disabled Tab
-
-```tsx
-<Tabs defaultValue="tab1">
-  <TabsList>
-    <TabsTrigger value="tab1">
-      <Text>Tab 1</Text>
-    </TabsTrigger>
-    <TabsTrigger value="tab2" disabled>
-      <Text>Tab 2 (Disabled)</Text>
-    </TabsTrigger>
-    <TabsTrigger value="tab3">
-      <Text>Tab 3</Text>
-    </TabsTrigger>
-  </TabsList>
-  <TabsContent value="tab1">
-    <Text>Content 1</Text>
-  </TabsContent>
-  <TabsContent value="tab2">
-    <Text>Content 2</Text>
-  </TabsContent>
-  <TabsContent value="tab3">
-    <Text>Content 3</Text>
-  </TabsContent>
-</Tabs>
-```
-
-### With Rich Content
-
-```tsx
-import { View } from 'react-native';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-
-<Tabs defaultValue="profile" className="w-full">
-  <TabsList className="w-full">
-    <TabsTrigger value="profile" className="flex-1">
-      <Text>Profile</Text>
-    </TabsTrigger>
-    <TabsTrigger value="notifications" className="flex-1">
-      <Text>Notifications</Text>
-    </TabsTrigger>
-  </TabsList>
-  <TabsContent value="profile" className="mt-4">
-    <Card className="p-4">
-      <Text className="font-semibold mb-2">Profile Information</Text>
-      <Text className="text-sm text-muted-foreground mb-4">
-        Update your profile details here.
-      </Text>
-      <Button>
-        <Text>Save Changes</Text>
-      </Button>
-    </Card>
-  </TabsContent>
-  <TabsContent value="notifications" className="mt-4">
-    <Card className="p-4">
-      <Text className="font-semibold mb-2">Notification Settings</Text>
-      <Text className="text-sm text-muted-foreground">
-        Manage your notification preferences.
-      </Text>
-    </Card>
-  </TabsContent>
-</Tabs>
-```

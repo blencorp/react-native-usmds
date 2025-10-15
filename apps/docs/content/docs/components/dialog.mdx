@@ -68,12 +68,14 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       <Step>
         **Copy and paste the following code into your project.**
 
-        ```tsx title="@/components/ui/icon.tsx"
-        // Copy from packages/registry/src/usa/components/ui/icon.tsx
-        ```
-
-        ```tsx title="@/components/ui/dialog.tsx"
-        // Copy from packages/registry/src/usa/components/ui/dialog.tsx
+        ```json doc-gen:file
+{
+  "file": "../../packages/registry/src/usa/components/ui/dialog.tsx",
+  "codeblock": {
+    "lang": "tsx",
+    "meta": "title=\"@/components/ui/dialog.tsx\""
+  }
+}
         ```
       </Step>
       <Step>
@@ -179,62 +181,3 @@ Extends `@rn-primitives/dialog` Description props.
 |------|------|-------------|
 | className | `string` | Additional classes for styling. |
 
-## Examples
-
-### Default
-
-```tsx
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Text } from '@/components/ui/text';
-
-<Dialog>
-  <DialogTrigger asChild>
-    <Button variant="outline">
-      <Text>Open Dialog</Text>
-    </Button>
-  </DialogTrigger>
-  <DialogContent>
-    <DialogHeader>
-      <DialogTitle>Are you sure?</DialogTitle>
-      <DialogDescription>
-        This action cannot be undone.
-      </DialogDescription>
-    </DialogHeader>
-  </DialogContent>
-</Dialog>
-```
-
-### With Footer
-
-```tsx
-import { DialogFooter, DialogClose } from '@/components/ui/dialog';
-
-<DialogContent>
-  <DialogHeader>
-    <DialogTitle>Confirm Action</DialogTitle>
-    <DialogDescription>
-      Please confirm you want to proceed.
-    </DialogDescription>
-  </DialogHeader>
-  <DialogFooter>
-    <DialogClose asChild>
-      <Button variant="outline">
-        <Text>Cancel</Text>
-      </Button>
-    </DialogClose>
-    <DialogClose asChild>
-      <Button variant="default">
-        <Text>Confirm</Text>
-      </Button>
-    </DialogClose>
-  </DialogFooter>
-</DialogContent>
-```

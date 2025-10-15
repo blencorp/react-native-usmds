@@ -59,12 +59,14 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       <Step>
         **Copy and paste the following code into your project:**
 
-        ```tsx title="@/components/ui/text.tsx"
-        // Copy from packages/registry/src/usa/components/ui/text.tsx
-        ```
-
-        ```tsx title="@/components/ui/button.tsx"
-        // Copy from packages/registry/src/usa/components/ui/button.tsx
+        ```json doc-gen:file
+{
+  "file": "../../packages/registry/src/usa/components/ui/button.tsx",
+  "codeblock": {
+    "lang": "tsx",
+    "meta": "title=\"@/components/ui/button.tsx\""
+  }
+}
         ```
       </Step>
       <Step>
@@ -94,82 +96,6 @@ import { Text } from '@/components/ui/text';
 | disabled | `boolean` | `false` | Whether the button is disabled |
 | onPress | `() => void` | - | Handler called when button is pressed |
 | className | `string` | - | Additional styles |
-
-## Examples
-
-### Variants
-
-<Tabs items={['preview', 'code']}>
-  <Tab value="preview">
-    <div className="flex flex-row flex-wrap gap-2">
-      <ButtonPreview />
-      <ButtonSecondaryPreview />
-      <ButtonDestructivePreview />
-      <ButtonOutlinePreview />
-      <ButtonGhostPreview />
-      <ButtonLinkPreview />
-    </div>
-  </Tab>
-  <Tab value="code">
-    ```tsx
-    <View className="flex-row flex-wrap gap-2">
-      <Button variant="default">
-        <Text>Default</Text>
-      </Button>
-      <Button variant="secondary">
-        <Text>Secondary</Text>
-      </Button>
-      <Button variant="destructive">
-        <Text>Destructive</Text>
-      </Button>
-      <Button variant="outline">
-        <Text>Outline</Text>
-      </Button>
-      <Button variant="ghost">
-        <Text>Ghost</Text>
-      </Button>
-      <Button variant="link">
-        <Text>Link</Text>
-      </Button>
-    </View>
-    ```
-  </Tab>
-</Tabs>
-
-### With Icons
-
-<Tabs items={['preview', 'code']}>
-  <Tab value="preview">
-    <PreviewCard preview={<ButtonWithIconPreview />} />
-  </Tab>
-  <Tab value="code">
-    ```tsx
-    import { Mail } from 'lucide-react-native';
-
-    <Button>
-      <Mail className="mr-2 h-4 w-4" color="white" />
-      <Text>Login with Email</Text>
-    </Button>
-    ```
-  </Tab>
-</Tabs>
-
-### Icon Only
-
-<Tabs items={['preview', 'code']}>
-  <Tab value="preview">
-    <PreviewCard preview={<ButtonIconPreview />} />
-  </Tab>
-  <Tab value="code">
-    ```tsx
-    import { ChevronRight } from 'lucide-react-native';
-
-    <Button variant="outline" size="icon">
-      <ChevronRight className="h-4 w-4" />
-    </Button>
-    ```
-  </Tab>
-</Tabs>
 
 
 ## Styling Tips

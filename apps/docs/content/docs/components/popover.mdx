@@ -61,9 +61,17 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
         ```
       </Step>
       <Step>
-        **Copy the component code:**
+        **Copy and paste the following code into your project.**
 
-        Copy from `packages/registry/src/usa/components/ui/popover.tsx`
+        ```json doc-gen:file
+{
+  "file": "../../packages/registry/src/usa/components/ui/popover.tsx",
+  "codeblock": {
+    "lang": "tsx",
+    "meta": "title=\"@/components/ui/popover.tsx\""
+  }
+}
+        ```
       </Step>
       <Step>
         **Update import paths to match your project setup.**
@@ -121,160 +129,3 @@ Extends `@rn-primitives/popover` Content props.
 | portalHost | `string` | The host where the popover content will be rendered. |
 | className | `string` | Additional classes for styling. |
 
-## Examples
-
-### Default
-
-```tsx
-<Popover>
-  <PopoverTrigger asChild>
-    <Button variant="outline">
-      <Text>Open</Text>
-    </Button>
-  </PopoverTrigger>
-  <PopoverContent>
-    <View className="gap-2">
-      <Text className="font-semibold">Dimensions</Text>
-      <Text className="text-sm text-muted-foreground">
-        Set the dimensions for the layer.
-      </Text>
-    </View>
-  </PopoverContent>
-</Popover>
-```
-
-### With Form
-
-```tsx
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { View } from 'react-native';
-
-<Popover>
-  <PopoverTrigger asChild>
-    <Button variant="outline">
-      <Text>Open Settings</Text>
-    </Button>
-  </PopoverTrigger>
-  <PopoverContent className="w-80">
-    <View className="gap-4">
-      <View className="gap-2">
-        <Text className="font-semibold">Dimensions</Text>
-        <Text className="text-sm text-muted-foreground">
-          Set the dimensions for the layer.
-        </Text>
-      </View>
-      <View className="gap-2">
-        <View className="gap-1.5">
-          <Label nativeID="width">Width</Label>
-          <Input id="width" defaultValue="100%" />
-        </View>
-        <View className="gap-1.5">
-          <Label nativeID="height">Height</Label>
-          <Input id="height" defaultValue="25px" />
-        </View>
-      </View>
-    </View>
-  </PopoverContent>
-</Popover>
-```
-
-### Controlled
-
-```tsx
-import { useState } from 'react';
-
-function ControlledPopover() {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button variant="outline">
-          <Text>{open ? 'Close' : 'Open'}</Text>
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent>
-        <View className="gap-4">
-          <Text className="font-semibold">Popover Content</Text>
-          <Button onPress={() => setOpen(false)}>
-            <Text>Close</Text>
-          </Button>
-        </View>
-      </PopoverContent>
-    </Popover>
-  );
-}
-```
-
-### Different Sides
-
-```tsx
-<View className="flex flex-row gap-2">
-  <Popover>
-    <PopoverTrigger asChild>
-      <Button variant="outline" size="sm">
-        <Text>Top</Text>
-      </Button>
-    </PopoverTrigger>
-    <PopoverContent side="top">
-      <Text>This popover opens on top</Text>
-    </PopoverContent>
-  </Popover>
-
-  <Popover>
-    <PopoverTrigger asChild>
-      <Button variant="outline" size="sm">
-        <Text>Bottom</Text>
-      </Button>
-    </PopoverTrigger>
-    <PopoverContent side="bottom">
-      <Text>This popover opens on bottom</Text>
-    </PopoverContent>
-  </Popover>
-</View>
-```
-
-### User Profile
-
-```tsx
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-
-<Popover>
-  <PopoverTrigger asChild>
-    <Button variant="ghost" className="h-8 w-8 rounded-full">
-      <Avatar className="h-8 w-8">
-        <AvatarImage source={{ uri: 'https://github.com/shadcn.png' }} />
-        <AvatarFallback>
-          <Text>JD</Text>
-        </AvatarFallback>
-      </Avatar>
-    </Button>
-  </PopoverTrigger>
-  <PopoverContent className="w-80">
-    <View className="gap-4">
-      <View className="flex flex-row items-center gap-4">
-        <Avatar className="h-16 w-16">
-          <AvatarImage source={{ uri: 'https://github.com/shadcn.png' }} />
-          <AvatarFallback>
-            <Text>JD</Text>
-          </AvatarFallback>
-        </Avatar>
-        <View className="gap-1">
-          <Text className="font-semibold">John Doe</Text>
-          <Text className="text-sm text-muted-foreground">john@example.com</Text>
-        </View>
-      </View>
-      <Separator />
-      <View className="gap-2">
-        <Button variant="outline" size="sm">
-          <Text>View Profile</Text>
-        </Button>
-        <Button variant="ghost" size="sm">
-          <Text>Sign Out</Text>
-        </Button>
-      </View>
-    </View>
-  </PopoverContent>
-</Popover>
-```

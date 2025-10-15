@@ -39,9 +39,17 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
         ```
       </Step>
       <Step>
-        **Copy the component code:**
+        **Copy and paste the following code into your project.**
 
-        Copy from `packages/registry/src/usa/components/ui/hover-card.tsx`
+        ```json doc-gen:file
+{
+  "file": "../../packages/registry/src/usa/components/ui/hover-card.tsx",
+  "codeblock": {
+    "lang": "tsx",
+    "meta": "title=\"@/components/ui/hover-card.tsx\""
+  }
+}
+        ```
       </Step>
       <Step>
         **Update import paths to match your project setup.**
@@ -101,103 +109,3 @@ Extends `@rn-primitives/hover-card` Content props.
 | portalHost | `string` | The host where the hover card content will be rendered. |
 | className | `string` | Additional classes for styling. |
 
-## Examples
-
-### Default
-
-```tsx
-<HoverCard>
-  <HoverCardTrigger asChild>
-    <Button variant="link">
-      <Text>@username</Text>
-    </Button>
-  </HoverCardTrigger>
-  <HoverCardContent className="w-80">
-    <View className="flex flex-row gap-4">
-      <Avatar className="h-12 w-12">
-        <AvatarImage source={{ uri: 'https://github.com/shadcn.png' }} />
-        <AvatarFallback>
-          <Text>JD</Text>
-        </AvatarFallback>
-      </Avatar>
-      <View className="flex-1 gap-1">
-        <Text className="font-semibold">@username</Text>
-        <Text className="text-sm text-muted-foreground">
-          The React Framework – created and maintained by @vercel.
-        </Text>
-        <View className="flex flex-row items-center gap-2 pt-2">
-          <Calendar className="size-4 opacity-70" />
-          <Text className="text-xs text-muted-foreground">
-            Joined December 2021
-          </Text>
-        </View>
-      </View>
-    </View>
-  </HoverCardContent>
-</HoverCard>
-```
-
-### User Profile Card
-
-```tsx
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { CalendarDays } from 'lucide-react-native';
-
-<HoverCard>
-  <HoverCardTrigger asChild>
-    <Button variant="link">
-      <Text>@johndoe</Text>
-    </Button>
-  </HoverCardTrigger>
-  <HoverCardContent className="w-80">
-    <View className="flex flex-row justify-between gap-4">
-      <Avatar>
-        <AvatarImage source={{ uri: 'https://github.com/shadcn.png' }} />
-        <AvatarFallback>
-          <Text>JD</Text>
-        </AvatarFallback>
-      </Avatar>
-      <View className="flex-1 gap-1">
-        <Text className="text-sm font-semibold">@johndoe</Text>
-        <Text className="text-sm">
-          Full-stack developer passionate about React Native and TypeScript.
-        </Text>
-        <View className="flex flex-row items-center pt-2">
-          <Icon as={CalendarDays} className="mr-2 size-4 opacity-70" />
-          <Text className="text-xs text-muted-foreground">
-            Joined January 2024
-          </Text>
-        </View>
-      </View>
-    </View>
-  </HoverCardContent>
-</HoverCard>
-```
-
-### Simple Hover Card
-
-```tsx
-<HoverCard>
-  <HoverCardTrigger asChild>
-    <Text className="underline cursor-pointer">Hover over me</Text>
-  </HoverCardTrigger>
-  <HoverCardContent>
-    <Text>This is additional information that appears on hover.</Text>
-  </HoverCardContent>
-</HoverCard>
-```
-
-### With Delays
-
-```tsx
-<HoverCard openDelay={500} closeDelay={100}>
-  <HoverCardTrigger asChild>
-    <Button variant="outline">
-      <Text>Quick hover</Text>
-    </Button>
-  </HoverCardTrigger>
-  <HoverCardContent>
-    <Text>Opens quickly (500ms) and closes fast (100ms).</Text>
-  </HoverCardContent>
-</HoverCard>
-```
