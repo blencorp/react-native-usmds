@@ -37,14 +37,14 @@ export default function KeyFeatures() {
 
   return (
     <section className="bg-[#eaf3ff]">
-      <div className="mx-auto max-w-6xl px-4 py-14">
+      <div className="mx-auto max-w-6xl px-4 py-20">
         <h2>Key Features</h2>
         <p className="mt-1 max-w-2xl text-neutral-700">
           Everything you need to ship mobile apps that meet Federal standards.
         </p>
         <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
           {data.map(({ title, desc, Icon }, i) => (
-            <div key={i} className="flex gap-3 p-4">
+            <div key={i} className="flex gap-3">
               <div className="mt-1 flex h-8 w-8 items-center justify-center rounded-md bg-blue-50 text-blue-700">
                 <Icon className="h-8 w-8" />
               </div>

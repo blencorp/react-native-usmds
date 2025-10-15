@@ -1,7 +1,7 @@
 export default function KitchensinkSection() {
   return (
     <section className="bg-white">
-      <div className="mx-auto max-w-6xl px-4 py-14">
+      <div className="mx-auto max-w-6xl px-4 py-20">
         <h2>Kitchensink App</h2>
         <p className="mt-1 max-w-3xl text-neutral-600">
           KitchenSink is a comprehensive demo React and React Native mobile app showcasing all the

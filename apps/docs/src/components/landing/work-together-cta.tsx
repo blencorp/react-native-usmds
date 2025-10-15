@@ -3,7 +3,7 @@ import Link from "next/link"
 export default function WorkTogetherCta() {
   return (
     <section className="bg-neutral-950">
-      <div className="mx-auto max-w-6xl px-4 py-14">
+      <div className="mx-auto max-w-6xl px-4 py-20">
         <h2 className="text-white">Let's work together</h2>
         <p className="mt-2 max-w-3xl text-white/80">
           We partner with federal agencies and businesses to deliver innovative solutions that drive
