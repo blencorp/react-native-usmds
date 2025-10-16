@@ -1,3 +1,9 @@
+## [1.24.0](https://github.com/blencorp/react-native-usmds/compare/v1.23.3...v1.24.0) (2025-10-16)
+
+### Features
+
+* built showcase app ([#154](https://github.com/blencorp/react-native-usmds/issues/154)) ([d7be309](https://github.com/blencorp/react-native-usmds/commit/d7be3097351b5f78f119ad02e066e76f10ad6361))
+
 ## [1.23.3](https://github.com/blencorp/react-native-usmds/compare/v1.23.2...v1.23.3) (2025-10-16)
 
 ### Bug Fixes
