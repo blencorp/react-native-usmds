@@ -1,8 +1,8 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef, ReactNode, useState } from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, Image } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/registry/usa/lib/utils';
-import Svg from 'react-native-svg';
+import { SvgUri } from 'react-native-svg';
 import * as CollapsiblePrimitive from '@rn-primitives/collapsible';
 import { ChevronDown, ChevronUp } from 'lucide-react-native';
 
@@ -45,36 +45,27 @@ const FlagIcon = ({ size = 31 }) => {
   const height = size / aspectRatio;
 
   return (
-    <View style={{ width: size, height }}>
-      <Svg width={size} height={height} viewBox='0 0 16 11' fill='none'>
-        <image
-          width={16}
-          height={11}
-          href='https://storage.googleapis.com/usmds-registry/assets/banner/us_flag_small.png'
-        />
-      </Svg>
-    </View>
+    <Image
+      source={{ uri: 'https://storage.googleapis.com/usmds-registry/assets/banner/us_flag_small.png' }}
+      style={{ width: size, height, resizeMode: 'contain' }}
+    />
   );
 };
 
 const LockIcon = ({ size = 24 }) => (
-  <Svg width={size} height={size} viewBox='0 0 24 24' fill='none'>
-    <image
-      width={24}
-      height={24}
-      href='https://storage.googleapis.com/usmds-registry/assets/banner/lock.svg'
-    />
-  </Svg>
+  <SvgUri
+    uri='https://storage.googleapis.com/usmds-registry/assets/banner/lock.svg'
+    width={size}
+    height={size}
+  />
 );
 
 const BuildingIcon = ({ size = 24 }) => (
-  <Svg width={size} height={size} viewBox='0 0 24 24' fill='none'>
-    <image
-      width={24}
-      height={24}
-      href='https://storage.googleapis.com/usmds-registry/assets/banner/white_house.svg'
-    />
-  </Svg>
+  <SvgUri
+    uri='https://storage.googleapis.com/usmds-registry/assets/banner/white_house.svg'
+    width={size}
+    height={size}
+  />
 );
 
 const getBannerContent = (domain: 'gov' | 'mil' = 'gov', language: 'en' | 'es' = 'en') => {
