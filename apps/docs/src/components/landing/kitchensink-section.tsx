@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import kitchensinkMobile from "../../../images/hero-mobile.png";
+import showcaseApps from "../../../images/showcase-apps.png";
 
 function qrCode() {
   return (
@@ -20,7 +20,7 @@ export default function KitchensinkSection() {
     <section className="bg-white">
       <div className="mx-auto max-w-6xl px-4 py-20">
         <div className="text-center">
-          <h2 className="text-black pb-4">Kitchensink app</h2>
+          <h2 className="text-black pb-4">Showcase app</h2>
           <p className="mt-1 max-w-4xl mx-auto text-lg text-neutral-600">
             See every USMDS component in action. Buttons, forms, navigation,
             data display — all tested and ready to ship in your next mobile app.
@@ -28,7 +28,7 @@ export default function KitchensinkSection() {
         </div>
 
         <div className="mt-8 mx-auto">
-          <div className="rounded-xl border border-neutral-200 bg-white shadow-sm p-8">
+          <div className="rounded-xl border border-neutral-200 bg-white shadow-sm pt-8">
             <div className="grid items-center gap-8 md:grid-cols-2">
               <div className="flex flex-col items-center">
                 <div className="h-[240px] w-[240px] rounded-lg bg-neutral-100 flex items-center justify-center">
@@ -61,7 +61,7 @@ export default function KitchensinkSection() {
                 </div>
               </div>
               <div className="flex justify-center">
-                <Image src={kitchensinkMobile} alt="USMDS" className="w-3/4 max-w-sm" />
+                <Image src={showcaseApps} alt="USMDS" className="max-w-full" />
               </div>
             </div>
           </div>

@@ -27,7 +27,8 @@ const config = {
       fontFamily: {
         sans: ['var(--font-sans)', ...fontFamily.sans],
         mono: ['var(--font-mono)', ...fontFamily.mono],
-        publicSans: ['var(--font-public-sans)', ...fontFamily.sans]
+        publicSans: ['var(--font-public-sans)', ...fontFamily.sans],
+        instrumentSerif: ['var(--font-instrument-serif)', ...fontFamily.serif]
       },
       colors: {
         border: 'hsl(var(--border))',
@@ -74,7 +75,8 @@ const config = {
       fontFamily: {
         sans: ['var(--font-sans)', ...fontFamily.sans],
         mono: ['var(--font-mono)', ...fontFamily.mono],
-        publicSans: ['var(--font-public-sans)', ...fontFamily.sans]
+        publicSans: ['var(--font-public-sans)', ...fontFamily.sans],
+        instrumentSerif: ['var(--font-instrument-serif)', ...fontFamily.serif]
       },
       fontSize: {
         'uswds-heading-3xl': ['3.194rem', { lineHeight: '1.1', fontWeight: '700' }],

@@ -118,6 +118,15 @@
     @apply tracking-tight;
     @apply font-bold;
   }
+
+  .hero h1 {
+    @apply font-instrumentSerif;
+    @apply text-4xl lg:text-6xl !important;
+    @apply text-white;
+    @apply font-normal;
+    @apply tracking-wide;
+  }
+
   h2 {
     @apply text-4xl;
     @apply tracking-tight;

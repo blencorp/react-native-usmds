@@ -3,7 +3,7 @@ import SiteFooter from "@/components/landing/site-footer"
 import OpenSourceStrip from "@/components/landing/open-source-strip"
 import KeyFeatures from "@/components/landing/key-features"
 import KitchensinkSection from "@/components/landing/kitchensink-section"
-import HowItWorks from "@/components/landing/how-it-works"
+import GetStarted from "@/components/landing/get-started"
 import BuiltBy from "@/components/landing/built-by"
 import WorkTogetherCta from "@/components/landing/work-together-cta"
 
@@ -14,7 +14,7 @@ export default function HomePage() {
       <KeyFeatures />
       <OpenSourceStrip />
       <KitchensinkSection />
-      <HowItWorks />
+      <GetStarted />
       <BuiltBy />
       <WorkTogetherCta />
       <SiteFooter />
