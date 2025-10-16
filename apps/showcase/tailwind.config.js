@@ -5,6 +5,8 @@ export const darkMode = "class";
 export const content = [
   "./app/**/*.{js,ts,tsx}",
   "./components/**/*.{js,ts,tsx}",
+  "./registry/**/*.{js,ts,tsx}",
+  "../../packages/registry/src/**/*.{js,ts,tsx}",
 ];
 export const presets = [require("nativewind/preset")];
 export const theme = {

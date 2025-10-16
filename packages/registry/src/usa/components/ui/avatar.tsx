@@ -1,4 +1,5 @@
 import { cn } from '@/registry/usa/lib/utils';
+import { Text } from '@/registry/usa/components/ui/text';
 import * as AvatarPrimitive from '@rn-primitives/avatar';
 
 function Avatar({
@@ -31,7 +32,9 @@ function AvatarFallback({
         className
       )}
       {...props}
-    />
+    >
+      <Text className="text-xs font-semibold uppercase tracking-wider text-foreground">US</Text>
+    </AvatarPrimitive.Fallback>
   );
 }
 
