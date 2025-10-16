@@ -1,3 +1,9 @@
+## [1.23.2](https://github.com/blencorp/react-native-usmds/compare/v1.23.1...v1.23.2) (2025-10-16)
+
+### Bug Fixes
+
+* update docs, fix banner, automate usa.json ([#146](https://github.com/blencorp/react-native-usmds/issues/146)) ([5364cd4](https://github.com/blencorp/react-native-usmds/commit/5364cd47ff49424e2681b3c932a53337261119e1))
+
 ## [1.23.1](https://github.com/blencorp/react-native-usmds/compare/v1.23.0...v1.23.1) (2025-10-14)
 
 ### Bug Fixes
