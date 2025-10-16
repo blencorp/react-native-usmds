@@ -5,21 +5,25 @@
  * 1. Scans all .tsx files in src/usa/components/ui/
  * 2. Analyzes imports to detect dependencies
  * 3. Generates registry entries with proper metadata
- * 4. Updates registry/usa.json
+ * 4. Updates generated/usa.json
  */
 
 import * as fs from 'fs';
 import * as path from 'path';
 
 const COMPONENTS_DIR = path.join(process.cwd(), 'src/usa/components/ui');
-const REGISTRY_PATH = path.join(process.cwd(), 'registry/usa.json');
+const REGISTRY_PATH = path.join(process.cwd(), 'generated/usa.json');
 const REGISTRY_BASE_URL = 'https://storage.googleapis.com/usmds-registry/r/usa';
+const REGISTRY_NAME = 'USMDS - U.S. Web Design System for React Native';
+const REGISTRY_HOMEPAGE = 'https://usmds.blencorp.com/';
+const REGISTRY_AUTHOR = '@blencorp';
 
 interface RegistryItem {
   name: string;
   type: string;
   title: string;
   description?: string;
+  author?: string;
   files: Array<{
     path: string;
     type: string;
@@ -31,6 +35,7 @@ interface RegistryItem {
 interface Registry {
   $schema?: string;
   name: string;
+  homepage?: string;
   items: RegistryItem[];
 }
 
@@ -182,7 +187,8 @@ async function generateRegistry() {
           path: `./src/usa/components/ui/${file}`,
           type: 'registry:ui'
         }
-      ]
+      ],
+      author: REGISTRY_AUTHOR
     };
 
     // Add registry dependencies
@@ -202,11 +208,13 @@ async function generateRegistry() {
   // Build final registry
   const registry: Registry = {
     $schema: 'https://ui.shadcn.com/schema/registry.json',
-    name: 'usa',
+    name: REGISTRY_NAME,
+    homepage: REGISTRY_HOMEPAGE,
     items
   };
 
   // Write to file
+  fs.mkdirSync(path.dirname(REGISTRY_PATH), { recursive: true });
   fs.writeFileSync(
     REGISTRY_PATH,
     JSON.stringify(registry, null, 2) + '\n',

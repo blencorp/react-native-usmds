@@ -7,7 +7,9 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "build:registry": "tsx scripts/build-registry.ts"
+    "registry:generate": "tsx scripts/build-registry.ts",
+    "registry:package": "shadcn build ./generated/usa.json --output ./public/r/usa",
+    "registry:validate": "pnpm run registry:generate && pnpm run registry:package && rm -rf ./public/r/usa"
   },
   "dependencies": {
     "@rn-primitives/accordion": "~1.1.0",
