@@ -28,3 +28,9 @@ jobs:
 
       - name: Run tests in Registry package
         run: pnpm --filter @blen/react-native-usmds-registry test
+
+      - name: Generate registry artifacts
+        run: pnpm registry:generate
+
+      - name: Validate registry artifacts
+        run: pnpm registry:validate

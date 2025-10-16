@@ -12,7 +12,10 @@
     "dev:showcase": "turbo dev --filter=showcase",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "prepublishOnly": "turbo build"
+    "prepublishOnly": "turbo build",
+    "registry:generate": "turbo run registry:generate --filter=@blen/react-native-usmds-registry",
+    "registry:package": "turbo run registry:package --filter=@blen/react-native-usmds-registry",
+    "registry:validate": "turbo run registry:validate --filter=@blen/react-native-usmds-registry"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",

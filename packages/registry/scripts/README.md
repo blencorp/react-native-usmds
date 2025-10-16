@@ -2,13 +2,15 @@
 
 ## Overview
 
-This script automatically generates `registry/usa.json` by scanning all component files in `src/usa/components/ui/` and analyzing their dependencies.
+This script automatically generates `generated/usa.json` by scanning all component files in `src/usa/components/ui/` and analyzing their dependencies.
 
 ## Usage
 
 ```bash
-pnpm build:registry
+pnpm registry:generate
 ```
+
+> Note: the generated `generated/usa.json` is ignored by git. CI workflows rebuild it when needed.
 
 ## What It Does
 
@@ -26,9 +28,8 @@ pnpm build:registry
 
 ## When to Run
 
-Run this script whenever you:
-- ✅ Add a new component
-- ✅ Remove a component
+CI regenerates the registry automatically, but run the script locally whenever you:
+- ✅ Add or remove a component
 - ✅ Change component dependencies (add/remove imports)
 - ✅ Update component descriptions
 
@@ -63,7 +64,7 @@ Dependencies in the `ESSENTIAL_DEPS` array are automatically installed by the `i
 
 ## Output
 
-The script generates `registry/usa.json` with this structure:
+The script generates `generated/usa.json` with this structure:
 
 ```json
 {
@@ -92,28 +93,11 @@ The script generates `registry/usa.json` with this structure:
 
 ## CI/CD Integration
 
-Add this to your CI/CD pipeline to automatically validate the registry:
+Add these steps to CI to rebuild and validate the registry:
 
 ```yaml
-# .github/workflows/validate-registry.yml
-name: Validate Registry
-
-on: [push, pull_request]
-
-jobs:
-  validate:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-      - run: pnpm install
-      - run: pnpm build:registry
-      - name: Check for changes
-        run: |
-          if [[ -n $(git status --porcelain registry/usa.json) ]]; then
-            echo "❌ registry/usa.json is out of date. Run 'pnpm build:registry'"
-            exit 1
-          fi
+      - run: pnpm registry:generate
+      - run: pnpm registry:validate
 ```
 
 ## Troubleshooting

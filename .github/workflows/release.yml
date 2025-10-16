@@ -47,9 +47,11 @@ jobs:
           pnpm --filter usmds build
           pnpm turbo run build --filter=!docs --filter=!usmds-storybook
 
-      - name: Build registry
-        working-directory: packages/registry
-        run: npx shadcn build ./registry/usa.json --output ./public/r/usa
+      - name: Generate registry artifacts
+        run: pnpm registry:generate
+
+      - name: Validate registry artifacts
+        run: pnpm registry:validate
 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2

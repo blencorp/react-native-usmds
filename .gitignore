@@ -2,6 +2,7 @@
 apps/*/credentials.json
 apps/*/build
 packages/*/build
+packages/registry/generated/*.json
 
 # Turborepo
 .turbo
