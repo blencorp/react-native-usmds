@@ -22,7 +22,7 @@ export function HeaderRightView() {
   if (isUpdateAvailable) {
     return (
       <Button
-        size="sm"        
+        size="sm"
         variant="outline"
         onPress={onReload}
         disabled={isDownloading}>

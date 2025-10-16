@@ -23,6 +23,7 @@ function AvatarImage({
 
 function AvatarFallback({
   className,
+  children,
   ...props
 }: AvatarPrimitive.FallbackProps & React.RefAttributes<AvatarPrimitive.FallbackRef>) {
   return (
@@ -33,7 +34,11 @@ function AvatarFallback({
       )}
       {...props}
     >
-      <Text className="text-xs font-semibold uppercase tracking-wider text-foreground">US</Text>
+      {children ?? (
+        <Text className="text-xs font-semibold uppercase tracking-wider text-foreground">
+          US
+        </Text>
+      )}
     </AvatarPrimitive.Fallback>
   );
 }

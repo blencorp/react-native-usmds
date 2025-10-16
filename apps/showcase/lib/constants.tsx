@@ -98,8 +98,9 @@ export const COMPONENT_MAP: Record<string, ShowcaseComponent> = data.items
   .reduce<Record<string, ShowcaseComponent>>((acc, item) => {
     const slug = item.name;
     const title = item.title ?? toTitleCase(slug);
-    const previews = PREVIEW_REGISTRY[slug] && PREVIEW_REGISTRY[slug].length
-      ? PREVIEW_REGISTRY[slug]
+    const registryPreviews = PREVIEW_REGISTRY[slug];
+    const previews = registryPreviews?.length
+      ? registryPreviews
       : [{ name: title, component: createPlaceholder(title) }];
 
     acc[slug] = {
