@@ -39,9 +39,17 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
         ```
       </Step>
       <Step>
-        **Copy the component code:**
+        **Copy and paste the following code into your project.**
 
-        Copy from `packages/registry/src/usa/components/ui/dropdown-menu.tsx`
+        ```json doc-gen:file
+{
+  "file": "../../packages/registry/src/usa/components/ui/dropdown-menu.tsx",
+  "codeblock": {
+    "lang": "tsx",
+    "meta": "title=\"@/components/ui/dropdown-menu.tsx\""
+  }
+}
+        ```
       </Step>
       <Step>
         **Update import paths to match your project setup.**
@@ -137,182 +145,3 @@ Extends `@rn-primitives/dropdown-menu` Item props.
 |------|------|-------------|
 | className | `string` | Additional classes for styling. |
 
-## Examples
-
-### Default
-
-```tsx
-import { Button } from '@/components/ui/button';
-
-<DropdownMenu>
-  <DropdownMenuTrigger asChild>
-    <Button variant="outline">
-      <Text>Open Menu</Text>
-    </Button>
-  </DropdownMenuTrigger>
-  <DropdownMenuContent>
-    <DropdownMenuLabel>
-      <Text>My Account</Text>
-    </DropdownMenuLabel>
-    <DropdownMenuSeparator />
-    <DropdownMenuItem>
-      <Text>Profile</Text>
-    </DropdownMenuItem>
-    <DropdownMenuItem>
-      <Text>Billing</Text>
-    </DropdownMenuItem>
-    <DropdownMenuItem>
-      <Text>Settings</Text>
-    </DropdownMenuItem>
-    <DropdownMenuSeparator />
-    <DropdownMenuItem>
-      <Text>Logout</Text>
-    </DropdownMenuItem>
-  </DropdownMenuContent>
-</DropdownMenu>
-```
-
-### With Icons
-
-```tsx
-import { User, CreditCard, Settings, LogOut } from 'lucide-react-native';
-import { Icon } from '@/components/ui/icon';
-import { View } from 'react-native';
-
-<DropdownMenu>
-  <DropdownMenuTrigger asChild>
-    <Button variant="outline">
-      <Text>Account</Text>
-    </Button>
-  </DropdownMenuTrigger>
-  <DropdownMenuContent className="w-56">
-    <DropdownMenuLabel>
-      <Text>My Account</Text>
-    </DropdownMenuLabel>
-    <DropdownMenuSeparator />
-    <DropdownMenuItem>
-      <View className="flex-row items-center gap-2">
-        <Icon as={User} className="size-4" />
-        <Text>Profile</Text>
-      </View>
-    </DropdownMenuItem>
-    <DropdownMenuItem>
-      <View className="flex-row items-center gap-2">
-        <Icon as={CreditCard} className="size-4" />
-        <Text>Billing</Text>
-      </View>
-    </DropdownMenuItem>
-    <DropdownMenuItem>
-      <View className="flex-row items-center gap-2">
-        <Icon as={Settings} className="size-4" />
-        <Text>Settings</Text>
-      </View>
-    </DropdownMenuItem>
-    <DropdownMenuSeparator />
-    <DropdownMenuItem>
-      <View className="flex-row items-center gap-2">
-        <Icon as={LogOut} className="size-4" />
-        <Text>Logout</Text>
-      </View>
-    </DropdownMenuItem>
-  </DropdownMenuContent>
-</DropdownMenu>
-```
-
-### With Groups
-
-```tsx
-import {
-  DropdownMenuGroup,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-} from '@/components/ui/dropdown-menu';
-
-<DropdownMenu>
-  <DropdownMenuTrigger asChild>
-    <Button variant="outline">
-      <Text>Options</Text>
-    </Button>
-  </DropdownMenuTrigger>
-  <DropdownMenuContent className="w-56">
-    <DropdownMenuLabel>
-      <Text>Actions</Text>
-    </DropdownMenuLabel>
-    <DropdownMenuGroup>
-      <DropdownMenuItem>
-        <Text>New Tab</Text>
-      </DropdownMenuItem>
-      <DropdownMenuItem>
-        <Text>New Window</Text>
-      </DropdownMenuItem>
-    </DropdownMenuGroup>
-    <DropdownMenuSeparator />
-    <DropdownMenuGroup>
-      <DropdownMenuItem>
-        <Text>Share</Text>
-      </DropdownMenuItem>
-      <DropdownMenuItem>
-        <Text>Print</Text>
-      </DropdownMenuItem>
-    </DropdownMenuGroup>
-  </DropdownMenuContent>
-</DropdownMenu>
-```
-
-### Disabled Items
-
-```tsx
-<DropdownMenu>
-  <DropdownMenuTrigger asChild>
-    <Button variant="outline">
-      <Text>Menu</Text>
-    </Button>
-  </DropdownMenuTrigger>
-  <DropdownMenuContent>
-    <DropdownMenuItem>
-      <Text>New File</Text>
-    </DropdownMenuItem>
-    <DropdownMenuItem disabled>
-      <Text>New Window (Disabled)</Text>
-    </DropdownMenuItem>
-    <DropdownMenuItem>
-      <Text>Open File</Text>
-    </DropdownMenuItem>
-  </DropdownMenuContent>
-</DropdownMenu>
-```
-
-### With Checkboxes
-
-```tsx
-import { DropdownMenuCheckboxItem } from '@/components/ui/dropdown-menu';
-import { useState } from 'react';
-
-function CheckboxMenu() {
-  const [showPanel, setShowPanel] = useState(true);
-  const [showToolbar, setShowToolbar] = useState(false);
-
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline">
-          <Text>View</Text>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>
-          <Text>Appearance</Text>
-        </DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuCheckboxItem checked={showPanel} onCheckedChange={setShowPanel}>
-          <Text>Side Panel</Text>
-        </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem checked={showToolbar} onCheckedChange={setShowToolbar}>
-          <Text>Toolbar</Text>
-        </DropdownMenuCheckboxItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
-}
-```

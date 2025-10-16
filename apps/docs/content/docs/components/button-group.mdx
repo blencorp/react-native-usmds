@@ -47,8 +47,14 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       <Step>
         **Copy and paste the following code into your project.**
 
-        ```tsx title="@/components/ui/button-group.tsx"
-        // Copy from packages/registry/src/usa/components/ui/buttongroup.tsx
+        ```json doc-gen:file
+{
+  "file": "../../packages/registry/src/usa/components/ui/buttongroup.tsx",
+  "codeblock": {
+    "lang": "tsx",
+    "meta": "title=\"@/components/ui/button-group.tsx\""
+  }
+}
         ```
       </Step>
       <Step>
@@ -87,100 +93,3 @@ Extends `View` props.
 | gap | `number` | `8` | The space between buttons in pixels. |
 | className | `string` | - | Additional classes for styling. |
 
-## Examples
-
-### Vertical Layout
-
-```tsx
-import { ButtonGroup } from '@/components/ui/button-group';
-import { Button } from '@/components/ui/button';
-import { Text } from '@/components/ui/text';
-
-<ButtonGroup orientation="vertical" gap={8}>
-  <Button variant="default">
-    <Text>Primary</Text>
-  </Button>
-  <Button variant="outline">
-    <Text>Secondary</Text>
-  </Button>
-</ButtonGroup>
-```
-
-### Horizontal Layout
-
-```tsx
-<ButtonGroup orientation="horizontal" gap={8}>
-  <Button variant="default">
-    <Text>Primary</Text>
-  </Button>
-  <Button variant="outline">
-    <Text>Secondary</Text>
-  </Button>
-</ButtonGroup>
-```
-
-### Custom Gap
-
-```tsx
-<ButtonGroup orientation="vertical" gap={16}>
-  <Button variant="default">
-    <Text>Primary</Text>
-  </Button>
-  <Button variant="outline">
-    <Text>Secondary</Text>
-  </Button>
-</ButtonGroup>
-```
-
-### Mixed Variants
-
-```tsx
-<ButtonGroup orientation="vertical">
-  <Button variant="default">
-    <Text>Default</Text>
-  </Button>
-  <Button variant="destructive">
-    <Text>Destructive</Text>
-  </Button>
-  <Button variant="outline">
-    <Text>Outline</Text>
-  </Button>
-  <Button variant="ghost">
-    <Text>Ghost</Text>
-  </Button>
-</ButtonGroup>
-```
-
-### With Icons
-
-```tsx
-import { Mail, Share, Download } from 'lucide-react-native';
-
-<ButtonGroup orientation="vertical">
-  <Button variant="default">
-    <Mail />
-    <Text>Email</Text>
-  </Button>
-  <Button variant="outline">
-    <Share />
-    <Text>Share</Text>
-  </Button>
-  <Button variant="outline">
-    <Download />
-    <Text>Download</Text>
-  </Button>
-</ButtonGroup>
-```
-
-### Full Width Buttons
-
-```tsx
-<ButtonGroup orientation="vertical" className="w-full">
-  <Button variant="default" className="w-full">
-    <Text>Continue</Text>
-  </Button>
-  <Button variant="outline" className="w-full">
-    <Text>Cancel</Text>
-  </Button>
-</ButtonGroup>
-```

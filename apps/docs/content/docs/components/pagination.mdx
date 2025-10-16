@@ -53,12 +53,14 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       <Step>
         **Copy and paste the following code into your project.**
 
-        ```tsx title="@/components/ui/icon.tsx"
-        // Copy from packages/registry/src/usa/components/ui/icon.tsx
-        ```
-
-        ```tsx title="@/components/ui/pagination.tsx"
-        // Copy from packages/registry/src/usa/components/ui/pagination.tsx
+        ```json doc-gen:file
+{
+  "file": "../../packages/registry/src/usa/components/ui/pagination.tsx",
+  "codeblock": {
+    "lang": "tsx",
+    "meta": "title=\"@/components/ui/pagination.tsx\""
+  }
+}
         ```
       </Step>
       <Step>
@@ -98,81 +100,3 @@ Extends `View` props.
 | onPageChange | `(page: number) => void` | - | **Required.** Callback fired when the page changes. |
 | className | `string` | - | Additional classes for the container. |
 
-## Examples
-
-### Basic Usage
-
-```tsx
-import { Pagination } from '@/components/ui/pagination';
-import { useState } from 'react';
-
-function PaginationExample() {
-  const [currentPage, setCurrentPage] = useState(1);
-
-  return (
-    <Pagination
-      currentPage={currentPage}
-      totalPages={10}
-      totalItems={100}
-      onPageChange={setCurrentPage}
-    />
-  );
-}
-```
-
-### With Custom Width
-
-```tsx
-<Pagination
-  currentPage={1}
-  totalPages={10}
-  totalItems={100}
-  onPageChange={(page) => console.log(page)}
-  className="w-full"
-/>
-```
-
-### Large Dataset
-
-```tsx
-function LargeDatasetExample() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = 100;
-  const totalItems = 1000;
-
-  return (
-    <Pagination
-      currentPage={currentPage}
-      totalPages={totalPages}
-      totalItems={totalItems}
-      onPageChange={setCurrentPage}
-    />
-  );
-}
-```
-
-### Controlled Pagination
-
-```tsx
-function ControlledPagination() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
-  const totalItems = 95;
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    // Fetch new data for this page
-    fetchData(page, itemsPerPage);
-  };
-
-  return (
-    <Pagination
-      currentPage={currentPage}
-      totalPages={totalPages}
-      totalItems={totalItems}
-      onPageChange={handlePageChange}
-    />
-  );
-}
-```

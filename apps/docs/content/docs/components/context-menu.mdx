@@ -39,9 +39,17 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
         ```
       </Step>
       <Step>
-        **Copy the component code:**
+        **Copy and paste the following code into your project.**
 
-        Copy from `packages/registry/src/usa/components/ui/context-menu.tsx`
+        ```json doc-gen:file
+{
+  "file": "../../packages/registry/src/usa/components/ui/context-menu.tsx",
+  "codeblock": {
+    "lang": "tsx",
+    "meta": "title=\"@/components/ui/context-menu.tsx\""
+  }
+}
+        ```
       </Step>
       <Step>
         **Update import paths to match your project setup.**
@@ -115,136 +123,3 @@ Extends `@rn-primitives/context-menu` Item props.
 | textValue | `string` | Optional text used for typeahead purposes. |
 | className | `string` | Additional classes for styling. |
 
-## Examples
-
-### Default
-
-```tsx
-import { Card } from '@/components/ui/card';
-
-<ContextMenu>
-  <ContextMenuTrigger asChild>
-    <Card className="p-4">
-      <Text>Right click or long press me</Text>
-    </Card>
-  </ContextMenuTrigger>
-  <ContextMenuContent>
-    <ContextMenuItem>
-      <Text>Edit</Text>
-    </ContextMenuItem>
-    <ContextMenuItem>
-      <Text>Duplicate</Text>
-    </ContextMenuItem>
-    <ContextMenuSeparator />
-    <ContextMenuItem>
-      <Text>Delete</Text>
-    </ContextMenuItem>
-  </ContextMenuContent>
-</ContextMenu>
-```
-
-### With Icons
-
-```tsx
-import { Copy, Edit, Trash } from 'lucide-react-native';
-import { Icon } from '@/components/ui/icon';
-
-<ContextMenu>
-  <ContextMenuTrigger asChild>
-    <Card className="w-64 p-4">
-      <Text>Right click for options</Text>
-    </Card>
-  </ContextMenuTrigger>
-  <ContextMenuContent className="w-64">
-    <ContextMenuItem>
-      <View className="flex-row items-center gap-2">
-        <Icon as={Edit} className="size-4" />
-        <Text>Edit</Text>
-      </View>
-    </ContextMenuItem>
-    <ContextMenuItem>
-      <View className="flex-row items-center gap-2">
-        <Icon as={Copy} className="size-4" />
-        <Text>Duplicate</Text>
-      </View>
-    </ContextMenuItem>
-    <ContextMenuSeparator />
-    <ContextMenuItem>
-      <View className="flex-row items-center gap-2">
-        <Icon as={Trash} className="size-4 text-destructive" />
-        <Text className="text-destructive">Delete</Text>
-      </View>
-    </ContextMenuItem>
-  </ContextMenuContent>
-</ContextMenu>
-```
-
-### With Submenu
-
-```tsx
-import {
-  ContextMenuSub,
-  ContextMenuSubContent,
-  ContextMenuSubTrigger,
-} from '@/components/ui/context-menu';
-
-<ContextMenu>
-  <ContextMenuTrigger>
-    <Card className="p-4">
-      <Text>Right click me</Text>
-    </Card>
-  </ContextMenuTrigger>
-  <ContextMenuContent>
-    <ContextMenuItem>
-      <Text>Edit</Text>
-    </ContextMenuItem>
-    <ContextMenuSub>
-      <ContextMenuSubTrigger>
-        <Text>More Tools</Text>
-      </ContextMenuSubTrigger>
-      <ContextMenuSubContent>
-        <ContextMenuItem>
-          <Text>Save As...</Text>
-        </ContextMenuItem>
-        <ContextMenuItem>
-          <Text>Export</Text>
-        </ContextMenuItem>
-        <ContextMenuItem>
-          <Text>Share</Text>
-        </ContextMenuItem>
-      </ContextMenuSubContent>
-    </ContextMenuSub>
-    <ContextMenuSeparator />
-    <ContextMenuItem>
-      <Text>Delete</Text>
-    </ContextMenuItem>
-  </ContextMenuContent>
-</ContextMenu>
-```
-
-### With Disabled Items
-
-```tsx
-<ContextMenu>
-  <ContextMenuTrigger>
-    <Card className="p-4">
-      <Text>Right click me</Text>
-    </Card>
-  </ContextMenuTrigger>
-  <ContextMenuContent>
-    <ContextMenuItem>
-      <Text>Cut</Text>
-    </ContextMenuItem>
-    <ContextMenuItem>
-      <Text>Copy</Text>
-    </ContextMenuItem>
-    <ContextMenuItem disabled>
-      <Text>Paste (Disabled)</Text>
-    </ContextMenuItem>
-    <ContextMenuSeparator />
-    <ContextMenuItem>
-      <Text>Select All</Text>
-    </ContextMenuItem>
-  </ContextMenuContent>
-</ContextMenu>
-```

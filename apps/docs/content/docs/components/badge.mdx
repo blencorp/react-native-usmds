@@ -48,12 +48,14 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       <Step>
         **Copy and paste the following code into your project.**
 
-        ```tsx title="@/components/ui/text.tsx"
-        // Copy from packages/registry/src/usa/components/ui/text.tsx
-        ```
-
-        ```tsx title="@/components/ui/badge.tsx"
-        // Copy from packages/registry/src/usa/components/ui/badge.tsx
+        ```json doc-gen:file
+{
+  "file": "../../packages/registry/src/usa/components/ui/badge.tsx",
+  "codeblock": {
+    "lang": "tsx",
+    "meta": "title=\"@/components/ui/badge.tsx\""
+  }
+}
         ```
       </Step>
       <Step>
@@ -148,51 +150,3 @@ import { Text } from '@/components/ui/text';
 </Text>
 ```
 
-## Examples
-
-### With Icon
-
-```tsx
-import { Badge } from '@/components/ui/badge';
-import { Text } from '@/components/ui/text';
-import { Check } from 'lucide-react-native';
-
-<Badge variant="default">
-  <Check />
-  <Text>Verified</Text>
-</Badge>
-```
-
-### As Link
-
-```tsx
-import { badgeVariants, badgeTextVariants } from '@/components/ui/badge';
-import { Text } from '@/components/ui/text';
-import { Link } from 'expo-router';
-
-<Link href="/profile" className={badgeVariants({ variant: 'outline' })}>
-  <Text className={badgeTextVariants({ variant: 'outline' })}>
-    View Profile
-  </Text>
-</Link>
-```
-
-### Multiple Badges
-
-```tsx
-import { Badge } from '@/components/ui/badge';
-import { Text } from '@/components/ui/text';
-import { View } from 'react-native';
-
-<View className="flex-row gap-2">
-  <Badge variant="default">
-    <Text>New</Text>
-  </Badge>
-  <Badge variant="secondary">
-    <Text>Featured</Text>
-  </Badge>
-  <Badge variant="outline">
-    <Text>Sale</Text>
-  </Badge>
-</View>
-```

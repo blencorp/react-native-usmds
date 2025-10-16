@@ -43,12 +43,14 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       <Step>
         **Copy and paste the following code into your project.**
 
-        ```tsx title="@/components/ui/icon.tsx"
-        // Copy from packages/registry/src/usa/components/ui/icon.tsx
-        ```
-
-        ```tsx title="@/components/ui/link.tsx"
-        // Copy from packages/registry/src/usa/components/ui/link.tsx
+        ```json doc-gen:file
+{
+  "file": "../../packages/registry/src/usa/components/ui/link.tsx",
+  "codeblock": {
+    "lang": "tsx",
+    "meta": "title=\"@/components/ui/link.tsx\""
+  }
+}
         ```
       </Step>
       <Step>
@@ -102,57 +104,6 @@ Extends `Pressable` props.
 <Link href="#" label="Dark Background Link" variant="dark-background" />
 ```
 
-## Examples
-
-### Default
-
-```tsx
-import { Link } from '@/components/ui/link';
-
-<Link href="#" label="Click here" />
-```
-
-### External Link
-
-```tsx
-<Link
-  href="https://example.com"
-  label="External link"
-  external
-/>
-```
-
-### With Router
-
-```tsx
-import { Link } from '@/components/ui/link';
-import { useRouter } from 'expo-router';
-
-function NavigationLink() {
-  const router = useRouter();
-
-  return (
-    <Link
-      href="/profile"
-      label="Go to Profile"
-      onPress={() => router.push('/profile')}
-    />
-  );
-}
-```
-
-### Multiple Links
-
-```tsx
-import { Link } from '@/components/ui/link';
-import { View } from 'react-native';
-
-<View className="gap-2">
-  <Link href="#" label="Home" />
-  <Link href="#" label="About" />
-  <Link href="https://example.com" label="External Site" external />
-</View>
-```
 
 ## Helper Functions
 

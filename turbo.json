@@ -26,6 +26,19 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "registry:generate": {
+      "outputs": [
+        "generated/usa.json"
+      ]
+    },
+    "registry:package": {
+      "outputs": [
+        "public/r/usa/**"
+      ]
+    },
+    "registry:validate": {
+      "cache": false
     }
   }
 }

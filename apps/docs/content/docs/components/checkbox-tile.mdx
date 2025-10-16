@@ -53,12 +53,14 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       <Step>
         **Copy and paste the following code into your project.**
 
-        ```tsx title="@/components/ui/icon.tsx"
-        // Copy from packages/registry/src/usa/components/ui/icon.tsx
-        ```
-
-        ```tsx title="@/components/ui/checkbox-tile.tsx"
-        // Copy from packages/registry/src/usa/components/ui/checkboxtile.tsx
+        ```json doc-gen:file
+{
+  "file": "../../packages/registry/src/usa/components/ui/checkboxtile.tsx",
+  "codeblock": {
+    "lang": "tsx",
+    "meta": "title=\"@/components/ui/checkbox-tile.tsx\""
+  }
+}
         ```
       </Step>
       <Step>
@@ -98,94 +100,6 @@ Extends `@rn-primitives/checkbox` Root props.
 | disabled | `boolean` | `false` | Whether the checkbox is disabled. |
 | className | `string` | - | Additional classes for styling. |
 
-## Examples
-
-### Default
-
-```tsx
-import { CheckboxTile } from '@/components/ui/checkbox-tile';
-import { useState } from 'react';
-
-const [checked, setChecked] = useState(false);
-
-<CheckboxTile
-  label="Basic checkbox tile"
-  checked={checked}
-  onCheckedChange={setChecked}
-/>
-```
-
-### With Description
-
-```tsx
-<CheckboxTile
-  label="Checkbox with description"
-  description="This is optional text that can be used to describe the label in more detail."
-  checked={checked}
-  onCheckedChange={setChecked}
-/>
-```
-
-### Disabled
-
-```tsx
-<CheckboxTile
-  label="Disabled checkbox"
-  description="This checkbox is disabled"
-  checked={false}
-  disabled
-  onCheckedChange={() => {}}
-/>
-```
-
-### Disabled Checked
-
-```tsx
-<CheckboxTile
-  label="Disabled checked"
-  description="This checkbox is disabled and checked"
-  checked={true}
-  disabled
-  onCheckedChange={() => {}}
-/>
-```
-
-### Multiple Tiles
-
-```tsx
-import { CheckboxTile } from '@/components/ui/checkbox-tile';
-import { View } from 'react-native';
-import { useState } from 'react';
-
-function MultipleCheckboxTiles() {
-  const [option1, setOption1] = useState(false);
-  const [option2, setOption2] = useState(false);
-  const [option3, setOption3] = useState(false);
-
-  return (
-    <View className="gap-4">
-      <CheckboxTile
-        label="Option 1"
-        description="Description for option 1"
-        checked={option1}
-        onCheckedChange={setOption1}
-      />
-      <CheckboxTile
-        label="Option 2"
-        description="Description for option 2"
-        checked={option2}
-        onCheckedChange={setOption2}
-      />
-      <CheckboxTile
-        label="Option 3"
-        description="Description for option 3"
-        checked={option3}
-        onCheckedChange={setOption3}
-      />
-    </View>
-  );
-}
-```
 
 ## Helper Functions
 

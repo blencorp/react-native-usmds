@@ -6,7 +6,10 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "registry:generate": "tsx scripts/build-registry.ts",
+    "registry:package": "shadcn build ./generated/usa.json --output ./public/r/usa",
+    "registry:validate": "pnpm run registry:generate && pnpm run registry:package && rm -rf ./public/r/usa"
   },
   "dependencies": {
     "@rn-primitives/accordion": "~1.1.0",
@@ -67,6 +70,7 @@
     "react-native-svg": "~15.12.1",
     "react-test-renderer": "19.1.0",
     "shadcn": "^3.4.0",
+    "tsx": "^4.20.6",
     "typescript": "^5.7.3"
   },
   "peerDependencies": {

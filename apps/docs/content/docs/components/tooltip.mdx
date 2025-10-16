@@ -58,9 +58,17 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
         ```
       </Step>
       <Step>
-        **Copy the component code:**
+        **Copy and paste the following code into your project.**
 
-        Copy from `packages/registry/src/usa/components/ui/tooltip.tsx`
+        ```json doc-gen:file
+{
+  "file": "../../packages/registry/src/usa/components/ui/tooltip.tsx",
+  "codeblock": {
+    "lang": "tsx",
+    "meta": "title=\"@/components/ui/tooltip.tsx\""
+  }
+}
+        ```
       </Step>
       <Step>
         **Update import paths to match your project setup.**
@@ -121,154 +129,3 @@ Extends `@rn-primitives/tooltip` Content props.
 | portalHost | `string` | The host where the tooltip content will be rendered. |
 | className | `string` | Additional classes for styling. |
 
-## Examples
-
-### Default
-
-```tsx
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { Button } from '@/components/ui/button';
-import { Text } from '@/components/ui/text';
-
-<Tooltip>
-  <TooltipTrigger asChild>
-    <Button variant="outline">
-      <Text>Hover me</Text>
-    </Button>
-  </TooltipTrigger>
-  <TooltipContent>
-    <Text>Add to library</Text>
-  </TooltipContent>
-</Tooltip>
-```
-
-### Different Sides
-
-```tsx
-import { View } from 'react-native';
-
-<View className="flex flex-row gap-4">
-  <Tooltip>
-    <TooltipTrigger asChild>
-      <Button variant="outline">
-        <Text>Top</Text>
-      </Button>
-    </TooltipTrigger>
-    <TooltipContent side="top">
-      <Text>Top tooltip</Text>
-    </TooltipContent>
-  </Tooltip>
-
-  <Tooltip>
-    <TooltipTrigger asChild>
-      <Button variant="outline">
-        <Text>Right</Text>
-      </Button>
-    </TooltipTrigger>
-    <TooltipContent side="right">
-      <Text>Right tooltip</Text>
-    </TooltipContent>
-  </Tooltip>
-
-  <Tooltip>
-    <TooltipTrigger asChild>
-      <Button variant="outline">
-        <Text>Bottom</Text>
-      </Button>
-    </TooltipTrigger>
-    <TooltipContent side="bottom">
-      <Text>Bottom tooltip</Text>
-    </TooltipContent>
-  </Tooltip>
-
-  <Tooltip>
-    <TooltipTrigger asChild>
-      <Button variant="outline">
-        <Text>Left</Text>
-      </Button>
-    </TooltipTrigger>
-    <TooltipContent side="left">
-      <Text>Left tooltip</Text>
-    </TooltipContent>
-  </Tooltip>
-</View>
-```
-
-### With Icon
-
-```tsx
-import { Info } from 'lucide-react-native';
-import { Icon } from '@/components/ui/icon';
-
-<Tooltip>
-  <TooltipTrigger asChild>
-    <Button variant="ghost" size="icon">
-      <Icon as={Info} className="size-4" />
-    </Button>
-  </TooltipTrigger>
-  <TooltipContent>
-    <Text>Additional information about this feature</Text>
-  </TooltipContent>
-</Tooltip>
-```
-
-### Instant Open
-
-```tsx
-<Tooltip delayDuration={0}>
-  <TooltipTrigger asChild>
-    <Button variant="outline">
-      <Text>Instant tooltip</Text>
-    </Button>
-  </TooltipTrigger>
-  <TooltipContent>
-    <Text>Opens immediately!</Text>
-  </TooltipContent>
-</Tooltip>
-```
-
-### Form Help
-
-```tsx
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { HelpCircle } from 'lucide-react-native';
-import { View } from 'react-native';
-
-<View className="gap-2">
-  <View className="flex flex-row items-center gap-2">
-    <Label>Password</Label>
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <Button variant="ghost" size="icon" className="h-4 w-4">
-          <Icon as={HelpCircle} className="size-4" />
-        </Button>
-      </TooltipTrigger>
-      <TooltipContent>
-        <Text>Must be at least 8 characters long</Text>
-      </TooltipContent>
-    </Tooltip>
-  </View>
-  <Input type="password" />
-</View>
-```
-
-### With Rich Content
-
-```tsx
-<Tooltip>
-  <TooltipTrigger asChild>
-    <Button variant="outline">
-      <Text>View details</Text>
-    </Button>
-  </TooltipTrigger>
-  <TooltipContent className="max-w-xs">
-    <View className="gap-2">
-      <Text className="font-semibold">Feature Details</Text>
-      <Text className="text-xs">
-        This feature allows you to customize your profile with various options and settings.
-      </Text>
-    </View>
-  </TooltipContent>
-</Tooltip>
-```

@@ -44,8 +44,14 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       <Step>
         **Copy and paste the following code into your project.**
 
-        ```tsx title="@/components/ui/skeleton.tsx"
-        // Copy from packages/registry/src/usa/components/ui/skeleton.tsx
+        ```json doc-gen:file
+{
+  "file": "../../packages/registry/src/usa/components/ui/skeleton.tsx",
+  "codeblock": {
+    "lang": "tsx",
+    "meta": "title=\"@/components/ui/skeleton.tsx\""
+  }
+}
         ```
       </Step>
       <Step>
@@ -71,26 +77,3 @@ Extends React Native `View` props.
 |------|------|-------------|
 | className | `string` | Additional classes for styling. |
 
-## Examples
-
-### Card Skeleton
-
-```tsx
-<div className="flex flex-col gap-3">
-  <Skeleton className="h-32 w-full rounded-lg" />
-  <Skeleton className="h-4 w-2/3" />
-  <Skeleton className="h-4 w-1/2" />
-</div>
-```
-
-### Avatar with Text
-
-```tsx
-<div className="flex items-center gap-4">
-  <Skeleton className="size-12 rounded-full" />
-  <div className="flex-1 gap-2">
-    <Skeleton className="h-4 w-full" />
-    <Skeleton className="h-4 w-2/3" />
-  </div>
-</div>
-```

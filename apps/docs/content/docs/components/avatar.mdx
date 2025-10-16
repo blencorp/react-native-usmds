@@ -51,8 +51,14 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       <Step>
         **Copy and paste the following code into your project.**
 
-        ```tsx title="@/components/ui/avatar.tsx"
-        // Copy from packages/registry/src/usa/components/ui/avatar.tsx
+        ```json doc-gen:file
+{
+  "file": "../../packages/registry/src/usa/components/ui/avatar.tsx",
+  "codeblock": {
+    "lang": "tsx",
+    "meta": "title=\"@/components/ui/avatar.tsx\""
+  }
+}
         ```
       </Step>
       <Step>
@@ -103,70 +109,3 @@ Extends `@rn-primitives/avatar` Fallback props.
 |------|------|-------------|
 | className | `string` | Additional classes for the fallback. |
 
-## Examples
-
-### Default
-
-```tsx
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { Text } from '@/components/ui/text';
-
-<Avatar>
-  <AvatarImage source={{ uri: 'https://github.com/shadcn.png' }} />
-  <AvatarFallback>
-    <Text>CN</Text>
-  </AvatarFallback>
-</Avatar>
-```
-
-### Fallback Only
-
-```tsx
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Text } from '@/components/ui/text';
-
-<Avatar>
-  <AvatarFallback>
-    <Text>JD</Text>
-  </AvatarFallback>
-</Avatar>
-```
-
-### Custom Size
-
-```tsx
-<Avatar className="size-16">
-  <AvatarImage source={{ uri: 'https://github.com/shadcn.png' }} />
-  <AvatarFallback>
-    <Text className="text-lg">CN</Text>
-  </AvatarFallback>
-</Avatar>
-```
-
-### Multiple Avatars
-
-```tsx
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { Text } from '@/components/ui/text';
-import { View } from 'react-native';
-
-<View className="flex-row gap-2">
-  <Avatar>
-    <AvatarImage source={{ uri: 'https://github.com/shadcn.png' }} />
-    <AvatarFallback>
-      <Text>CN</Text>
-    </AvatarFallback>
-  </Avatar>
-  <Avatar>
-    <AvatarImage source={{ uri: 'https://github.com/vercel.png' }} />
-    <AvatarFallback>
-      <Text>VC</Text>
-    </AvatarFallback>
-  </Avatar>
-  <Avatar>
-    <AvatarFallback>
-      <Text>AB</Text>
-    </AvatarFallback>
-  </Avatar>
-</View>
-```

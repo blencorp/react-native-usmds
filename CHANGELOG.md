@@ -1,3 +1,23 @@
+## [1.23.2](https://github.com/blencorp/react-native-usmds/compare/v1.23.1...v1.23.2) (2025-10-16)
+
+### Bug Fixes
+
+* update docs, fix banner, automate usa.json ([#146](https://github.com/blencorp/react-native-usmds/issues/146)) ([5364cd4](https://github.com/blencorp/react-native-usmds/commit/5364cd47ff49424e2681b3c932a53337261119e1))
+
+## [1.23.1](https://github.com/blencorp/react-native-usmds/compare/v1.23.0...v1.23.1) (2025-10-14)
+
+### Bug Fixes
+
+* update usa.json ([#143](https://github.com/blencorp/react-native-usmds/issues/143)) ([26a41fb](https://github.com/blencorp/react-native-usmds/commit/26a41fb0a0b89f610be4d7be3c2f33e1d7bff94a))
+
+## [1.23.0](https://github.com/blencorp/react-native-usmds/compare/v1.22.0...v1.23.0) (2025-10-13)
+
+### Features
+
+* add remaining components and update docs ([#140](https://github.com/blencorp/react-native-usmds/issues/140)) ([31eb0d1](https://github.com/blencorp/react-native-usmds/commit/31eb0d11f9acf10583f254a61f49df4167ded48e))
+* eas project version ([#138](https://github.com/blencorp/react-native-usmds/issues/138)) ([ae78b8e](https://github.com/blencorp/react-native-usmds/commit/ae78b8ec1af68cb09c95b777d0a583e46350d573))
+* **eas:** added eas workflow ([#139](https://github.com/blencorp/react-native-usmds/issues/139)) ([d60a898](https://github.com/blencorp/react-native-usmds/commit/d60a8980179e8d6c66f7b038d14a78da2a6f426b))
+
 ## [1.22.0](https://github.com/blencorp/react-native-usmds/compare/v1.21.1...v1.22.0) (2025-10-11)
 
 ### Features

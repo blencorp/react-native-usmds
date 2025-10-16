@@ -82,9 +82,17 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
         ```
       </Step>
       <Step>
-        **Copy the component code:**
+        **Copy and paste the following code into your project.**
 
-        Copy from `packages/registry/src/usa/components/ui/alert-dialog.tsx`
+        ```json doc-gen:file
+{
+  "file": "../../packages/registry/src/usa/components/ui/alert-dialog.tsx",
+  "codeblock": {
+    "lang": "tsx",
+    "meta": "title=\"@/components/ui/alert-dialog.tsx\""
+  }
+}
+        ```
       </Step>
       <Step>
         **Update import paths to match your project setup.**
@@ -211,192 +219,3 @@ Extends `@rn-primitives/alert-dialog` Cancel props.
 | children | `React.ReactNode` | The cancel button content. |
 | className | `string` | Additional classes for styling. |
 
-## Examples
-
-### Delete Confirmation
-
-```tsx
-import { useState } from 'react';
-
-function DeleteConfirmation() {
-  const [open, setOpen] = useState(false);
-
-  const handleDelete = () => {
-    // Perform delete action
-    console.log('Deleted!');
-    setOpen(false);
-  };
-
-  return (
-    <AlertDialog open={open} onOpenChange={setOpen}>
-      <AlertDialogTrigger asChild>
-        <Button variant="destructive">
-          <Text>Delete Account</Text>
-        </Button>
-      </AlertDialogTrigger>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-          <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your account
-            and remove your data from our servers.
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>
-            <Text>Cancel</Text>
-          </AlertDialogCancel>
-          <AlertDialogAction onPress={handleDelete}>
-            <Text>Delete</Text>
-          </AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
-  );
-}
-```
-
-### Logout Confirmation
-
-```tsx
-<AlertDialog>
-  <AlertDialogTrigger asChild>
-    <Button variant="outline">
-      <Text>Logout</Text>
-    </Button>
-  </AlertDialogTrigger>
-  <AlertDialogContent>
-    <AlertDialogHeader>
-      <AlertDialogTitle>Logout</AlertDialogTitle>
-      <AlertDialogDescription>
-        Are you sure you want to logout? You'll need to sign in again to access your account.
-      </AlertDialogDescription>
-    </AlertDialogHeader>
-    <AlertDialogFooter>
-      <AlertDialogCancel>
-        <Text>Cancel</Text>
-      </AlertDialogCancel>
-      <AlertDialogAction>
-        <Text>Logout</Text>
-      </AlertDialogAction>
-    </AlertDialogFooter>
-  </AlertDialogContent>
-</AlertDialog>
-```
-
-### Confirm Action
-
-```tsx
-<AlertDialog>
-  <AlertDialogTrigger asChild>
-    <Button>
-      <Text>Submit Form</Text>
-    </Button>
-  </AlertDialogTrigger>
-  <AlertDialogContent>
-    <AlertDialogHeader>
-      <AlertDialogTitle>Confirm Submission</AlertDialogTitle>
-      <AlertDialogDescription>
-        Once submitted, you will not be able to edit this form. Do you want to proceed?
-      </AlertDialogDescription>
-    </AlertDialogHeader>
-    <AlertDialogFooter>
-      <AlertDialogCancel>
-        <Text>Review</Text>
-      </AlertDialogCancel>
-      <AlertDialogAction>
-        <Text>Submit</Text>
-      </AlertDialogAction>
-    </AlertDialogFooter>
-  </AlertDialogContent>
-</AlertDialog>
-```
-
-### Controlled State
-
-```tsx
-import { useState } from 'react';
-import { View } from 'react-native';
-
-function ControlledDialog() {
-  const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  const handleConfirm = async () => {
-    setLoading(true);
-    // Simulate async operation
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    setLoading(false);
-    setOpen(false);
-  };
-
-  return (
-    <View>
-      <Button onPress={() => setOpen(true)}>
-        <Text>Open Controlled Dialog</Text>
-      </Button>
-
-      <AlertDialog open={open} onOpenChange={setOpen}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Processing...</AlertDialogTitle>
-            <AlertDialogDescription>
-              Please wait while we process your request.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel disabled={loading}>
-              <Text>Cancel</Text>
-            </AlertDialogCancel>
-            <AlertDialogAction onPress={handleConfirm} disabled={loading}>
-              <Text>{loading ? 'Processing...' : 'Confirm'}</Text>
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    </View>
-  );
-}
-```
-
-### With Rich Content
-
-```tsx
-import { View } from 'react-native';
-
-<AlertDialog>
-  <AlertDialogTrigger asChild>
-    <Button variant="destructive">
-      <Text>Delete Items</Text>
-    </Button>
-  </AlertDialogTrigger>
-  <AlertDialogContent>
-    <AlertDialogHeader>
-      <AlertDialogTitle>Delete Multiple Items</AlertDialogTitle>
-      <AlertDialogDescription>
-        <View className="gap-2">
-          <Text className="text-sm text-muted-foreground">
-            You are about to delete the following items:
-          </Text>
-          <View className="pl-4">
-            <Text className="text-sm">• Document 1.pdf</Text>
-            <Text className="text-sm">• Document 2.pdf</Text>
-            <Text className="text-sm">• Document 3.pdf</Text>
-          </View>
-          <Text className="text-sm font-semibold text-destructive">
-            This action cannot be undone.
-          </Text>
-        </View>
-      </AlertDialogDescription>
-    </AlertDialogHeader>
-    <AlertDialogFooter>
-      <AlertDialogCancel>
-        <Text>Cancel</Text>
-      </AlertDialogCancel>
-      <AlertDialogAction>
-        <Text>Delete All</Text>
-      </AlertDialogAction>
-    </AlertDialogFooter>
-  </AlertDialogContent>
-</AlertDialog>
-```

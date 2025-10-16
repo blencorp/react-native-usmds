@@ -43,8 +43,14 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       <Step>
         **Copy and paste the following code into your project.**
 
-        ```tsx title="@/components/ui/text.tsx"
-        // Copy from packages/registry/src/usa/components/ui/text.tsx
+        ```json doc-gen:file
+{
+  "file": "../../packages/registry/src/usa/components/ui/text.tsx",
+  "codeblock": {
+    "lang": "tsx",
+    "meta": "title=\"@/components/ui/text.tsx\""
+  }
+}
         ```
       </Step>
       <Step>
@@ -144,170 +150,6 @@ import { View } from 'react-native';
 <Text variant="muted">Muted text with reduced emphasis.</Text>
 ```
 
-## Examples
-
-### Typography Showcase
-
-```tsx
-import { Text } from '@/components/ui/text';
-import { View } from 'react-native';
-
-function TypographyShowcase() {
-  return (
-    <View className="gap-6 p-4">
-      <Text variant="h1">Typography System</Text>
-
-      <Text variant="lead">
-        A comprehensive text component with multiple variants for different use cases.
-      </Text>
-
-      <View className="gap-4">
-        <Text variant="h2">Section Title</Text>
-        <Text variant="p">
-          This is a regular paragraph with default styling. It maintains good readability
-          with proper line height and spacing.
-        </Text>
-
-        <Text variant="h3">Subsection</Text>
-        <Text variant="muted">
-          This is muted text, often used for secondary information or descriptions.
-        </Text>
-      </View>
-    </View>
-  );
-}
-```
-
-### Article Layout
-
-```tsx
-function Article() {
-  return (
-    <View className="gap-4 p-4">
-      <Text variant="h1">Article Title</Text>
-
-      <Text variant="lead">
-        An engaging introduction to capture the reader's attention.
-      </Text>
-
-      <Text variant="p">
-        The main content of the article goes here with proper paragraph spacing
-        and formatting for optimal readability.
-      </Text>
-
-      <Text variant="blockquote">
-        "Important quotes or callouts can be highlighted using the blockquote variant."
-      </Text>
-
-      <Text variant="p">
-        More content continues here with consistent styling throughout the article.
-      </Text>
-
-      <Text variant="small">
-        Published on January 1, 2024
-      </Text>
-    </View>
-  );
-}
-```
-
-### Card with Mixed Text
-
-```tsx
-import { Text } from '@/components/ui/text';
-import { View } from 'react-native';
-
-function ProductCard() {
-  return (
-    <View className="p-4 border rounded-lg gap-2">
-      <Text variant="large">Product Name</Text>
-      <Text variant="muted">Category: Electronics</Text>
-      <Text variant="p">
-        A detailed description of the product with all its features and benefits.
-      </Text>
-      <Text variant="h3">$99.99</Text>
-      <Text variant="small">In stock</Text>
-    </View>
-  );
-}
-```
-
-### Code Documentation
-
-```tsx
-<View className="gap-2">
-  <Text variant="h4">Installation</Text>
-  <Text variant="p">Install the package using npm:</Text>
-  <Text variant="code">npm install package-name</Text>
-  <Text variant="muted">Make sure you have Node.js installed first.</Text>
-</View>
-```
-
-### Custom Styling
-
-```tsx
-<Text variant="default" className="text-blue-500 font-bold text-2xl">
-  Custom Styled Text
-</Text>
-```
-
-### With TextClassContext
-
-```tsx
-import { Text, TextClassContext } from '@/components/ui/text';
-import { View } from 'react-native';
-
-function StyledSection() {
-  return (
-    <TextClassContext.Provider value="text-primary">
-      <View className="gap-2">
-        <Text>This text inherits primary color</Text>
-        <Text>So does this one</Text>
-        <Text className="text-secondary">But this overrides it</Text>
-      </View>
-    </TextClassContext.Provider>
-  );
-}
-```
-
-### Responsive Text
-
-```tsx
-<View className="gap-2">
-  <Text className="text-lg sm:text-xl md:text-2xl">
-    Responsive heading that grows with screen size
-  </Text>
-  <Text className="text-sm sm:text-base">
-    Responsive body text
-  </Text>
-</View>
-```
-
-### List with Text Variants
-
-```tsx
-function FeatureList() {
-  const features = [
-    'Fast performance',
-    'Easy to use',
-    'Fully customizable',
-    'Open source'
-  ];
-
-  return (
-    <View className="gap-4">
-      <Text variant="h3">Features</Text>
-      <View className="gap-2">
-        {features.map((feature, index) => (
-          <Text key={index} variant="p">
-            {index + 1}. {feature}
-          </Text>
-        ))}
-      </View>
-    </View>
-  );
-}
-```
 
 ## Helper Functions
 

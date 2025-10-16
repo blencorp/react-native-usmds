@@ -1,12 +1,14 @@
 ---
 title: Banner
-description: Displays a banner for official app identification or welcome messages.
+description: Identifies official U.S. government websites and apps, helping visitors understand whether a site is official and secure.
 ---
 
 import { PreviewCard } from '@/components/ui/PreviewCard';
 import { BannerPreview } from '@/components/examples';
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+The Banner component is a USWDS core component recommended for most government sites. It identifies official U.S. government websites and helps visitors understand whether a site is official and secure by providing expandable information about .gov/.mil domains and HTTPS security.
 
 <Tabs items={['preview', 'code']}>
   <Tab value="preview">
@@ -18,10 +20,16 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 
     export default function BannerExample() {
       return (
-        <Banner
-          variant="standard-app"
-          link="Here's how you know"
-        />
+        <>
+          {/* Default .gov English */}
+          <Banner variant="standard-app" />
+
+          {/* Spanish */}
+          <Banner variant="standard-app" language="es" />
+
+          {/* .mil Domain */}
+          <Banner variant="standard-app" domain="mil" />
+        </>
       );
     }
     ```
@@ -42,14 +50,28 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
         **Install the following dependencies:**
 
         ```bash
-        npx expo install react-native-svg
+        npx expo install react-native-svg react-native-reanimated
+        npm install lucide-react-native
+        ```
+      </Step>
+      <Step>
+        **Install the required primitives:**
+
+        ```bash
+        npm install @rn-primitives/collapsible
         ```
       </Step>
       <Step>
         **Copy and paste the following code into your project.**
 
-        ```tsx title="@/components/ui/banner.tsx"
-        // Copy from packages/registry/src/usa/components/ui/banner.tsx
+        ```json doc-gen:file
+{
+  "file": "../../packages/registry/src/usa/components/ui/banner.tsx",
+  "codeblock": {
+    "lang": "tsx",
+    "meta": "title=\"@/components/ui/banner.tsx\""
+  }
+}
         ```
       </Step>
       <Step>
@@ -61,10 +83,40 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 ## Usage
 
+The Banner component should be placed at the top of every page on government websites. It provides a consistent way to identify official government sites and educate users about .gov/.mil domains and HTTPS security.
+
+### Basic Usage
+
 ```tsx
 import { Banner } from '@/components/ui/banner';
 
-<Banner variant="standard-app" link="agency.gov" />
+<Banner variant="standard-app" />
+```
+
+The standard-app banner includes an interactive "Here's how you know" button that expands to show information about .gov/.mil domains and HTTPS security.
+
+### Language Support
+
+The banner supports both English and Spanish:
+
+```tsx
+// English (default)
+<Banner variant="standard-app" language="en" />
+
+// Spanish
+<Banner variant="standard-app" language="es" />
+```
+
+### Domain Types
+
+Choose between .gov (default) and .mil domains:
+
+```tsx
+// .gov domain (default)
+<Banner variant="standard-app" domain="gov" />
+
+// .mil domain (Department of Defense)
+<Banner variant="standard-app" domain="mil" />
 ```
 
 ## Props
@@ -76,100 +128,72 @@ Extends `View` props.
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | variant | `'standard-app' \| 'welcome'` | `'standard-app'` | The visual style variant. |
+| domain | `'gov' \| 'mil'` | `'gov'` | The domain type for official government websites. |
+| language | `'en' \| 'es'` | `'en'` | The language for banner content (English or Spanish). |
 | title | `string` | - | Custom title text (used with 'welcome' variant). |
-| link | `string` | - | Domain link to display (used with 'standard-app' variant). |
 | trailingIcon | `ReactNode` | - | Optional trailing icon element. |
 | className | `string` | - | Additional classes for styling. |
 
-## Variants
+## Features
 
-### Standard App
+### Interactive Accordion
 
-Shows the official US government app banner with flag icon and agency link.
+The standard-app banner includes an interactive "Here's how you know" button that expands to reveal:
 
-```tsx
-<Banner variant="standard-app" link="agency.gov" />
-```
+- **Domain Information**: Explains what .gov or .mil domains represent and which organizations can use them
+- **Security Information**: Shows lock icon and explains HTTPS security
+- **User Guidance**: Advises when it's safe to share sensitive information
 
-### Welcome
+### Multilingual Support
 
-Displays a welcome banner with custom title text.
+- **English (en)**: Default language for most U.S. government sites
+- **Spanish (es)**: Full Spanish translations following USWDS guidelines
 
-```tsx
-<Banner variant="welcome" title="Welcome to our application" />
-```
+### Domain-Specific Content
 
-## Examples
+- **.gov**: For general U.S. government organizations
+- **.mil**: For U.S. Department of Defense organizations
 
-### Standard App Banner
+### Accessibility
 
-```tsx
-import { Banner } from '@/components/ui/banner';
+- Proper ARIA labels for screen readers
+- Keyboard navigable accordion
+- Theme-aware colors (light/dark mode support)
+- High contrast colors meeting WCAG AA standards
 
-<Banner
-  variant="standard-app"
-  link="usa.gov"
-/>
-```
+## Best Practices
 
-### Welcome Banner
+### When to Use
 
-```tsx
-import { Banner } from '@/components/ui/banner';
+- **Government Websites**: Use on every page of official U.S. government websites
+- **Top Placement**: Always place at the very top of the page, above the main navigation
+- **Consistent Usage**: Keep the banner consistent across all pages of your site
+- **Language Selection**: Match the banner language to your site's primary language
+- **Domain Matching**: Use `.mil` variant only for Department of Defense sites
 
-<Banner
-  variant="welcome"
-  title="Welcome back, User!"
-/>
-```
+### Accessibility Considerations
 
-### With Trailing Icon
+- The banner uses semantic HTML and proper ARIA labels
+- Interactive elements are keyboard accessible
+- Color contrast meets WCAG AA standards
+- Screen reader friendly with descriptive labels
 
-```tsx
-import { Banner } from '@/components/ui/banner';
-import { Settings } from 'lucide-react-native';
+### Content Guidelines
 
-<Banner
-  variant="welcome"
-  title="Welcome to Settings"
-  trailingIcon={<Settings size={24} />}
-/>
-```
+According to USWDS guidelines:
+- Do not modify the official text content
+- Keep the banner visible (do not allow users to dismiss it)
+- Avoid adding excessive visual styling that may distract from the message
+- Ensure the flag icon and other visual elements remain visible
 
-### Custom Styling
+## API Reference
 
-```tsx
-<Banner
-  variant="standard-app"
-  link="agency.gov"
-  className="border-b border-border"
-/>
-```
+### Content Localization
 
-## Helper Functions
+The banner uses the `getBannerContent()` helper function internally to provide localized content. All text is automatically updated based on the `domain` and `language` props.
 
-### bannerVariants
-
-Use `bannerVariants` to create custom banner-styled components:
-
-```tsx
-import { bannerVariants } from '@/components/ui/banner';
-import { View } from 'react-native';
-
-<View className={bannerVariants({ variant: 'welcome' })}>
-  {/* content */}
-</View>
-```
-
-### bannerTextVariants
-
-Use `bannerTextVariants` for text styling within banners:
-
-```tsx
-import { bannerTextVariants } from '@/components/ui/banner';
-import { Text } from 'react-native';
-
-<Text className={bannerTextVariants({ variant: 'standard-app' })}>
-  Custom text
-</Text>
-```
+**Supported Combinations:**
+- `gov` + `en` - U.S. Government (.gov) in English
+- `gov` + `es` - U.S. Government (.gov) in Spanish
+- `mil` + `en` - Department of Defense (.mil) in English
+- `mil` + `es` - Department of Defense (.mil) in Spanish
