@@ -5,6 +5,7 @@ import { ThemeProvider } from '@react-navigation/native';
 import { PortalHost } from '@rn-primitives/portal';
 import { HeaderRightView } from '@showcase/components/header-right-view';
 import { useGeistFont } from '@showcase/hooks/use-geist-font';
+import { ComponentRegistryProvider } from '@showcase/lib/registry-context';
 import { NAV_THEME } from '@showcase/lib/theme';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -46,10 +47,11 @@ export default function RootLayout() {
       <GestureHandlerRootView
         style={{ flex: 1, backgroundColor: NAV_THEME[colorScheme].colors.background }}>
         <KeyboardProvider>
-          <Stack
-            screenOptions={{
-              headerBackTitle: 'Back',
-              headerTitle(props) {
+          <ComponentRegistryProvider>
+            <Stack
+              screenOptions={{
+                headerBackTitle: 'Back',
+                headerTitle(props) {
                 return (
                   <Text className="android:mt-1.5 text-xl font-medium">
                     {toOptions(
@@ -70,7 +72,8 @@ export default function RootLayout() {
                 headerTransparent: false,
               }}
             />
-          </Stack>
+            </Stack>
+          </ComponentRegistryProvider>
           <PortalHost />
         </KeyboardProvider>
       </GestureHandlerRootView>

@@ -1,5 +1,5 @@
 import { PreviewCarousel } from '@showcase/components/preview-carousel';
-import { COMPONENT_MAP } from '@showcase/lib/constants';
+import { useComponentRegistry } from '@showcase/lib/registry-context';
 import { Redirect, Stack, useLocalSearchParams } from 'expo-router';
 import * as React from 'react';
 import { View } from 'react-native';
@@ -7,8 +7,9 @@ import { Text } from '@registry/usa/components/ui/text';
 
 export default function ComponentDetailScreen() {
   const params = useLocalSearchParams<{ slug?: string | string[] }>();
+  const { componentMap } = useComponentRegistry();
   const slug = Array.isArray(params.slug) ? params.slug[0] : params.slug;
-  const entry = slug ? COMPONENT_MAP[slug] : undefined;
+  const entry = slug ? componentMap[slug] : undefined;
 
   if (!entry) {
     return <Redirect href="/" />;

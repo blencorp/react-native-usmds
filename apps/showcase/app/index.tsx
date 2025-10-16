@@ -4,7 +4,8 @@ import { TextInput } from '@registry/usa/components/ui/textinput';
 import { cn } from '@registry/usa/lib/utils';
 import { useScrollToTop } from '@react-navigation/native';
 import { FlashList, type ListRenderItemInfo } from '@shopify/flash-list';
-import { COMPONENTS, type ShowcaseListItem } from '@showcase/lib/constants';
+import { type ShowcaseListItem } from '@showcase/lib/constants';
+import { useComponentRegistry } from '@showcase/lib/registry-context';
 import { NAV_THEME } from '@showcase/lib/theme';
 import { Link } from 'expo-router';
 import { ChevronRight } from 'lucide-react-native';
@@ -17,6 +18,7 @@ cssInterop(FlashList, { className: 'style', contentContainerClassName: 'contentC
 
 export default function ComponentsScreen() {
   const { colorScheme } = useColorScheme();
+  const { components } = useComponentRegistry();
   const [search, setSearch] = React.useState('');
   const [isAtTop, setIsAtTop] = React.useState(true);
   const isAtTopRef = React.useRef(true);
@@ -25,14 +27,14 @@ export default function ComponentsScreen() {
 
   const data = React.useMemo<ShowcaseListItem[]>(() => {
     if (!search.trim()) {
-      return COMPONENTS;
+      return components;
     }
 
     const needle = search.toLowerCase();
-    return COMPONENTS.filter((item) =>
+    return components.filter((item) =>
       `${item.title} ${item.tags?.join(' ') ?? ''}`.toLowerCase().includes(needle)
     );
-  }, [search]);
+  }, [components, search]);
 
   const handleScrollState = React.useCallback((event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const isScrollAtTop = event.nativeEvent.contentOffset.y <= 0;

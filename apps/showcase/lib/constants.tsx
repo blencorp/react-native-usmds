@@ -2,7 +2,6 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from '@registry/usa/components/ui/text';
 import * as Examples from '@showcase/registry/examples';
-import registry from '../../../packages/registry/generated/usa.json';
 
 export type ShowcasePreview = {
   name: string;
@@ -17,6 +16,13 @@ export type ShowcaseComponent = {
   previews: ShowcasePreview[];
 };
 
+export type ShowcaseListItem = {
+  slug: string;
+  title: string;
+  description?: string;
+  tags?: string[];
+};
+
 type RegistryItem = {
   name: string;
   title?: string;
@@ -29,6 +35,20 @@ type RegistryItem = {
 type RegistryJson = {
   items: RegistryItem[];
 };
+
+export async function fetchRegistryJson(signal?: AbortSignal): Promise<RegistryJson | null> {
+  try {
+    const response = await fetch(REGISTRY_ENDPOINT, { signal });
+    if (!response.ok) {
+      return null;
+    }
+    const json = (await response.json()) as RegistryJson;
+    return json;
+  } catch (error) {
+    console.warn('Failed to load registry metadata', error);
+    return null;
+  }
+}
 
 const PREVIEW_REGISTRY: Record<string, ShowcasePreview[]> = {
   accordion: [{ name: 'Default', component: Examples.AccordionPreview }],
@@ -91,32 +111,50 @@ const PREVIEW_REGISTRY: Record<string, ShowcasePreview[]> = {
   tooltip: [{ name: 'Tooltip', component: Examples.TooltipPreview }],
 };
 
-const data = registry as RegistryJson;
+const EMPTY_REGISTRY: RegistryJson = {
+  items: Object.keys(PREVIEW_REGISTRY).map((slug) => ({
+    name: slug,
+    type: 'registry:ui',
+    title: toTitleCase(slug),
+    description: undefined,
+    registryDependencies: [],
+    dependencies: [],
+  })),
+};
 
-export const COMPONENT_MAP: Record<string, ShowcaseComponent> = data.items
-  .filter((item) => item.type === 'registry:ui')
-  .reduce<Record<string, ShowcaseComponent>>((acc, item) => {
-    const slug = item.name;
-    const title = item.title ?? toTitleCase(slug);
-    const registryPreviews = PREVIEW_REGISTRY[slug];
-    const previews = registryPreviews?.length
-      ? registryPreviews
-      : [{ name: title, component: createPlaceholder(title) }];
+export const REGISTRY_ENDPOINT = 'https://storage.googleapis.com/usmds-registry/r/usa.json';
 
-    acc[slug] = {
-      slug,
-      title,
-      description: item.description,
-      tags: createTags(item),
-      previews,
-    };
+export function buildComponentMap(items: RegistryItem[]): Record<string, ShowcaseComponent> {
+  return items
+    .filter((item) => item.type === 'registry:ui')
+    .reduce<Record<string, ShowcaseComponent>>((acc, item) => {
+      const slug = item.name;
+      const title = item.title ?? toTitleCase(slug);
+      const registryPreviews = PREVIEW_REGISTRY[slug];
+      const previews = registryPreviews?.length
+        ? registryPreviews
+        : [{ name: title, component: createPlaceholder(title) }];
 
-    return acc;
-  }, {});
+      acc[slug] = {
+        slug,
+        title,
+        description: item.description,
+        tags: createTags(item),
+        previews,
+      };
 
-export const COMPONENTS = Object.values(COMPONENT_MAP)
-  .map(({ slug, title, description, tags }) => ({ slug, title, description, tags }))
-  .sort((a, b) => a.title.localeCompare(b.title));
+      return acc;
+    }, {});
+}
+
+export function buildComponentList(map: Record<string, ShowcaseComponent>): ShowcaseListItem[] {
+  return Object.values(map)
+    .map(({ slug, title, description, tags }) => ({ slug, title, description, tags }))
+    .sort((a, b) => a.title.localeCompare(b.title));
+}
+
+export const FALLBACK_COMPONENT_MAP = buildComponentMap(EMPTY_REGISTRY.items);
+export const FALLBACK_COMPONENTS = buildComponentList(FALLBACK_COMPONENT_MAP);
 
 function createTags(item: RegistryItem) {
   const base = item.name.split('-');
@@ -148,5 +186,3 @@ function createPlaceholder(title: string): React.ComponentType {
     );
   };
 }
-
-export type ShowcaseListItem = (typeof COMPONENTS)[number];
