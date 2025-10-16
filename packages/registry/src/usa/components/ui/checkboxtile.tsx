@@ -16,9 +16,9 @@ const checkboxTileVariants = cva('flex flex-col w-[329px] rounded-[2px] border-2
       withDescription: 'gap-1.5'
     },
     state: {
-      checked: 'bg-primary-lighter border-primary-light',
-      unchecked: 'bg-background border-disabled-lighter',
-      disabled: 'bg-background border-disabled-light'
+      checked: 'bg-primary/10 border-primary',
+      unchecked: 'bg-background border-muted',
+      disabled: 'bg-muted/50 border-muted'
     }
   },
   defaultVariants: {
@@ -57,7 +57,7 @@ const CheckboxTile = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Check
                 {...props}
                 className={cn(
                   'w-5 h-5 border-2 rounded items-center justify-center flex-shrink-0',
-                  checked ? (disabled ? 'bg-disabled border-disabled' : 'bg-primary border-primary') : 'bg-transparent border-base-ink'
+                  checked ? (disabled ? 'bg-muted border-muted' : 'bg-primary border-primary') : 'bg-transparent border-input'
                 )}
               >
                 <CheckboxPrimitive.Indicator>
@@ -67,9 +67,9 @@ const CheckboxTile = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Check
             </View>
 
             <View className='flex-1 flex-col gap-1.5'>
-              <Text className={cn('text-base leading-5', disabled ? 'text-disabled' : 'text-base-ink')}>{label}</Text>
+              <Text className={cn('text-base leading-5', disabled ? 'text-muted-foreground' : 'text-foreground')}>{label}</Text>
 
-              {description && <Text className={cn('text-base leading-5', disabled ? 'text-disabled' : 'text-base-ink')}>{description}</Text>}
+              {description && <Text className={cn('text-base leading-5', disabled ? 'text-muted-foreground' : 'text-muted-foreground')}>{description}</Text>}
             </View>
           </View>
         </View>

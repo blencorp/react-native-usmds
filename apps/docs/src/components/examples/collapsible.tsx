@@ -23,7 +23,7 @@ export function CollapsiblePreview() {
         </CollapsibleTrigger>
       </div>
       <div className='border-border rounded-md border px-4 py-2'>
-        <Text className='text-foreground text-sm"'>@radix-ui/primitives</Text>
+        <Text className='text-foreground text-sm'>@radix-ui/rn-primitives</Text>
       </div>
       <CollapsibleContent className='gap-2'>
         <div className='border-border rounded-md border px-4 py-2'>

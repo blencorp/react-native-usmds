@@ -1,3 +1,9 @@
+## [1.23.3](https://github.com/blencorp/react-native-usmds/compare/v1.23.2...v1.23.3) (2025-10-16)
+
+### Bug Fixes
+
+* checkboxtile dark/light mode ([#152](https://github.com/blencorp/react-native-usmds/issues/152)) ([417631c](https://github.com/blencorp/react-native-usmds/commit/417631c8497e754cdcc5abb14791cb1cf159c4e9))
+
 ## [1.23.2](https://github.com/blencorp/react-native-usmds/compare/v1.23.1...v1.23.2) (2025-10-16)
 
 ### Bug Fixes
