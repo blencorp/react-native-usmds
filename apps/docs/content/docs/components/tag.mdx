@@ -36,8 +36,14 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       <Step>
         **Copy and paste the following code into your project.**
 
-        ```tsx title="@/components/ui/tag.tsx"
-        // Copy from packages/registry/src/usa/components/ui/tag.tsx
+        ```json doc-gen:file
+{
+  "file": "../../packages/registry/src/usa/components/ui/tag.tsx",
+  "codeblock": {
+    "lang": "tsx",
+    "meta": "title=\"@/components/ui/tag.tsx\""
+  }
+}
         ```
       </Step>
       <Step>
@@ -67,152 +73,3 @@ Extends `View` props.
 | size | `'default' \| 'big'` | `'default'` | The size variant of the tag. |
 | className | `string` | - | Additional classes for styling. |
 
-## Examples
-
-### Default Size
-
-```tsx
-import { Tag } from '@/components/ui/tag';
-
-<Tag label="TAG" />
-```
-
-### Big Size
-
-```tsx
-<Tag label="TAG" size="big" />
-```
-
-### Common Use Cases
-
-```tsx
-import { Tag } from '@/components/ui/tag';
-import { View } from 'react-native';
-
-<View className="flex-row gap-2 flex-wrap">
-  <Tag label="new" />
-  <Tag label="beta" />
-  <Tag label="pro" />
-  <Tag label="sale" />
-</View>
-```
-
-### Status Tags
-
-```tsx
-<View className="flex-row gap-2">
-  <Tag label="active" size="default" />
-  <Tag label="pending" size="default" />
-  <Tag label="completed" size="default" />
-</View>
-```
-
-### Feature Tags
-
-```tsx
-<View className="flex-row gap-2 flex-wrap">
-  <Tag label="premium" size="big" />
-  <Tag label="verified" size="big" />
-  <Tag label="trending" size="big" />
-</View>
-```
-
-### Category Labels
-
-```tsx
-import { Tag } from '@/components/ui/tag';
-import { View } from 'react-native';
-
-function CategoryTags() {
-  const categories = ['technology', 'design', 'business', 'health'];
-
-  return (
-    <View className="flex-row gap-2 flex-wrap">
-      {categories.map((category) => (
-        <Tag key={category} label={category} />
-      ))}
-    </View>
-  );
-}
-```
-
-### Product Badges
-
-```tsx
-import { Tag } from '@/components/ui/tag';
-import { Text } from '@/components/ui/text';
-import { View } from 'react-native';
-
-function ProductCard() {
-  return (
-    <View className="gap-2 p-4 border rounded-lg">
-      <View className="flex-row gap-2">
-        <Tag label="new" size="default" />
-        <Tag label="20% off" size="default" />
-      </View>
-      <Text className="font-semibold">Product Name</Text>
-      <Text className="text-muted-foreground">$99.99</Text>
-    </View>
-  );
-}
-```
-
-### Mixed Sizes
-
-```tsx
-<View className="flex-col gap-4">
-  <View className="flex-row gap-2">
-    <Tag label="small" size="default" />
-    <Tag label="default" size="default" />
-    <Tag label="tag" size="default" />
-  </View>
-
-  <View className="flex-row gap-2">
-    <Tag label="large" size="big" />
-    <Tag label="bigger" size="big" />
-    <Tag label="tag" size="big" />
-  </View>
-</View>
-```
-
-### With Custom Styling
-
-```tsx
-<Tag
-  label="custom"
-  size="default"
-  className="bg-blue-500"
-/>
-```
-
-### Article Tags
-
-```tsx
-function ArticleTags() {
-  const tags = ['React Native', 'TypeScript', 'Mobile'];
-
-  return (
-    <View className="gap-2">
-      <Text className="text-sm font-semibold">Topics:</Text>
-      <View className="flex-row gap-2 flex-wrap">
-        {tags.map((tag) => (
-          <Tag key={tag} label={tag} size="default" />
-        ))}
-      </View>
-    </View>
-  );
-}
-```
-
-### Notification Badge
-
-```tsx
-import { Tag } from '@/components/ui/tag';
-import { Text } from '@/components/ui/text';
-import { View } from 'react-native';
-
-<View className="flex-row items-center gap-2">
-  <Text>Messages</Text>
-  <Tag label="3" size="default" />
-</View>
-```

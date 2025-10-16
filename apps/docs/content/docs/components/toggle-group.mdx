@@ -39,9 +39,17 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
         ```
       </Step>
       <Step>
-        **Copy the component code:**
+        **Copy and paste the following code into your project.**
 
-        Copy from `packages/registry/src/usa/components/ui/toggle-group.tsx`
+        ```json doc-gen:file
+{
+  "file": "../../packages/registry/src/usa/components/ui/toggle-group.tsx",
+  "codeblock": {
+    "lang": "tsx",
+    "meta": "title=\"@/components/ui/toggle-group.tsx\""
+  }
+}
+        ```
       </Step>
       <Step>
         **Update import paths to match your project setup.**
@@ -104,133 +112,3 @@ Extends `@rn-primitives/toggle-group` Item props.
 | as | `LucideIcon` | **Required.** The Lucide icon component to render. |
 | className | `string` | Additional classes for styling. |
 
-## Examples
-
-### Text Formatting (Multiple)
-
-```tsx
-import { Bold, Italic, Underline } from 'lucide-react-native';
-import { useState } from 'react';
-
-function TextFormatting() {
-  const [formats, setFormats] = useState<string[]>([]);
-
-  return (
-    <ToggleGroup type="multiple" value={formats} onValueChange={setFormats}>
-      <ToggleGroupItem value="bold">
-        <ToggleGroupIcon as={Bold} />
-      </ToggleGroupItem>
-      <ToggleGroupItem value="italic">
-        <ToggleGroupIcon as={Italic} />
-      </ToggleGroupItem>
-      <ToggleGroupItem value="underline">
-        <ToggleGroupIcon as={Underline} />
-      </ToggleGroupItem>
-    </ToggleGroup>
-  );
-}
-```
-
-### Text Alignment (Single)
-
-```tsx
-import { AlignLeft, AlignCenter, AlignRight } from 'lucide-react-native';
-import { useState } from 'react';
-
-function TextAlignment() {
-  const [alignment, setAlignment] = useState('left');
-
-  return (
-    <ToggleGroup type="single" value={alignment} onValueChange={setAlignment}>
-      <ToggleGroupItem value="left">
-        <ToggleGroupIcon as={AlignLeft} />
-      </ToggleGroupItem>
-      <ToggleGroupItem value="center">
-        <ToggleGroupIcon as={AlignCenter} />
-      </ToggleGroupItem>
-      <ToggleGroupItem value="right">
-        <ToggleGroupIcon as={AlignRight} />
-      </ToggleGroupItem>
-    </ToggleGroup>
-  );
-}
-```
-
-### Outline Variant
-
-```tsx
-import { Bold, Italic, Underline } from 'lucide-react-native';
-
-<ToggleGroup type="multiple" variant="outline">
-  <ToggleGroupItem value="bold">
-    <ToggleGroupIcon as={Bold} />
-  </ToggleGroupItem>
-  <ToggleGroupItem value="italic">
-    <ToggleGroupIcon as={Italic} />
-  </ToggleGroupItem>
-  <ToggleGroupItem value="underline">
-    <ToggleGroupIcon as={Underline} />
-  </ToggleGroupItem>
-</ToggleGroup>
-```
-
-### Small Size
-
-```tsx
-import { Bold, Italic, Underline } from 'lucide-react-native';
-
-<ToggleGroup type="multiple" size="sm">
-  <ToggleGroupItem value="bold">
-    <ToggleGroupIcon as={Bold} className="size-3" />
-  </ToggleGroupItem>
-  <ToggleGroupItem value="italic">
-    <ToggleGroupIcon as={Italic} className="size-3" />
-  </ToggleGroupItem>
-  <ToggleGroupItem value="underline">
-    <ToggleGroupIcon as={Underline} className="size-3" />
-  </ToggleGroupItem>
-</ToggleGroup>
-```
-
-### Disabled
-
-```tsx
-import { Bold, Italic, Underline } from 'lucide-react-native';
-
-<ToggleGroup type="multiple" disabled>
-  <ToggleGroupItem value="bold">
-    <ToggleGroupIcon as={Bold} />
-  </ToggleGroupItem>
-  <ToggleGroupItem value="italic">
-    <ToggleGroupIcon as={Italic} />
-  </ToggleGroupItem>
-  <ToggleGroupItem value="underline">
-    <ToggleGroupIcon as={Underline} />
-  </ToggleGroupItem>
-</ToggleGroup>
-```
-
-### View Mode Switcher
-
-```tsx
-import { LayoutGrid, List, Table } from 'lucide-react-native';
-import { useState } from 'react';
-
-function ViewModeSwitcher() {
-  const [viewMode, setViewMode] = useState('grid');
-
-  return (
-    <ToggleGroup type="single" value={viewMode} onValueChange={setViewMode}>
-      <ToggleGroupItem value="grid">
-        <ToggleGroupIcon as={LayoutGrid} />
-      </ToggleGroupItem>
-      <ToggleGroupItem value="list">
-        <ToggleGroupIcon as={List} />
-      </ToggleGroupItem>
-      <ToggleGroupItem value="table">
-        <ToggleGroupIcon as={Table} />
-      </ToggleGroupItem>
-    </ToggleGroup>
-  );
-}
-```

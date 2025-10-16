@@ -63,8 +63,14 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
       <Step>
         **Copy and paste the following code into your project:**
 
-        ```tsx title="@/components/ui/alert.tsx"
-        // Copy from packages/registry/src/usa/components/ui/alert.tsx
+        ```json doc-gen:file
+{
+  "file": "../../packages/registry/src/usa/components/ui/alert.tsx",
+  "codeblock": {
+    "lang": "tsx",
+    "meta": "title=\"@/components/ui/alert.tsx\""
+  }
+}
         ```
       </Step>
       <Step>
@@ -96,50 +102,6 @@ import { AlertCircle } from 'lucide-react-native';
 | icon | `React.ComponentType` | - | Icon component to display |
 | className | `string` | - | Additional styles |
 
-## Examples
-
-### Default Alert
-
-```tsx
-<Alert>
-  <AlertTitle>Notification</AlertTitle>
-  <AlertDescription>This is a default alert message.</AlertDescription>
-</Alert>
-```
-
-### With Icon
-
-```tsx
-import { Info } from 'lucide-react-native';
-
-<Alert icon={Info}>
-  <AlertTitle>Information</AlertTitle>
-  <AlertDescription>
-    Here's some important information for you.
-  </AlertDescription>
-</Alert>
-```
-
-### Destructive Alert
-
-```tsx
-import { AlertCircle } from 'lucide-react-native';
-
-<Alert variant="destructive" icon={AlertCircle}>
-  <AlertTitle>Error</AlertTitle>
-  <AlertDescription>
-    Something went wrong. Please try again.
-  </AlertDescription>
-</Alert>
-```
-
-### Without Description
-
-```tsx
-<Alert icon={Terminal}>
-  <AlertTitle>Command executed successfully</AlertTitle>
-</Alert>
-```
 
 ## Accessibility
 
