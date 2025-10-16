@@ -8,6 +8,8 @@
     --background: 0 0% 100%; /* White */
     --foreground: 0 0% 11%; /* #1B1B1B - gray-90 */
 
+    --section-background-color-alt: rgb(245, 245, 247);
+
     /* Card */
     --card: 0 0% 100%; /* White */
     --card-foreground: 0 0% 11%; /* #1B1B1B - gray-90 */
@@ -125,7 +127,7 @@
   h3 {
     @apply text-2xl;
     @apply tracking-tight;
-    @apply font-medium;
+    @apply font-bold;
   }
 
   h4 {

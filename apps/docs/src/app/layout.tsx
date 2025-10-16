@@ -1,14 +1,19 @@
 import "./global.css";
 import { RootProvider } from "fumadocs-ui/provider";
-import { Geist, Geist_Mono, Public_Sans } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Public_Sans,
+  Instrument_Serif,
+} from "next/font/google";
 import { NativeWindStyleSheet } from "@/components/native-wind-provider";
 import { SafeAreaProvider } from "@/components/safe-area-provider";
 import { CookiesProvider } from "@/components/cookies-provider";
 import { cn } from "@/lib/utils";
 
 export const metadata = {
-  title: "USMDS Docs",
-  description: "USWDS + ShadCN + Tailwind 4",
+  title: "United States Mobile Design System (USMDS)",
+  description: "The United States Mobile Design System (USMDS) is a design system for building mobile applications that follow the U.S. Web Design System (USWDS).",
 };
 
 const fontSans = Geist({
@@ -28,6 +33,12 @@ const fontPublicSans = Public_Sans({
   weight: ["400", "700"],
 });
 
+const fontInstrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  variable: "--font-instrument-serif",
+  weight: ["400"]
+});
+
 export default function Layout({ children }: LayoutProps<"/">) {
   return (
     <html
@@ -35,7 +46,8 @@ export default function Layout({ children }: LayoutProps<"/">) {
       className={cn(
         fontPublicSans.variable,
         fontSans.variable,
-        fontMono.variable
+        fontMono.variable,
+        fontInstrumentSerif.variable
       )}
       suppressHydrationWarning
     >

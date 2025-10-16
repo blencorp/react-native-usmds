@@ -11,8 +11,8 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       <HeroSection />
-      <OpenSourceStrip />
       <KeyFeatures />
+      <OpenSourceStrip />
       <KitchensinkSection />
       <HowItWorks />
       <BuiltBy />

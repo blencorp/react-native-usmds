@@ -38,7 +38,7 @@ export function SiteNav({
     <header
       id="nd-subnav"
       className={cn(
-        "sticky top-[var(--fd-banner-height)] z-50 w-full bg-secondary text-secondary-foreground shadow-sm",
+        "top-[var(--fd-banner-height)] z-50 w-full text-white bg-[#162e51]",
         className,
       )}
     >
