@@ -1,19 +1,13 @@
 import { Command } from 'commander';
-import { readFileSync } from 'fs';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
+import { createRequire } from 'module';
 import { add } from './commands/add.js';
 import { init } from './commands/init.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// Use createRequire to load package.json in ESM
+const require = createRequire(import.meta.url);
+const packageJson = require('../package.json');
 
 function main() {
-  // Read version from package.json
-  const packageJson = JSON.parse(
-    readFileSync(join(__dirname, '../package.json'), 'utf-8')
-  );
-
   const program = new Command()
     .name('usmds')
     .description('CLI for adding USMDS components to React Native apps')
