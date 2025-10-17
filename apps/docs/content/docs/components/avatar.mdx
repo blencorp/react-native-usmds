@@ -19,10 +19,10 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 
     export default function AvatarExample() {
       return (
-        <Avatar>
-          <AvatarImage source={{ uri: 'https://github.com/shadcn.png' }} />
+        <Avatar alt='@blencorp'>
+          <AvatarImage source={{ uri: 'https://avatars.githubusercontent.com/u/240379?s=400&v=4' }} />
           <AvatarFallback>
-            <Text>CN</Text>
+            <Text>BN</Text>
           </AvatarFallback>
         </Avatar>
       );
@@ -108,4 +108,3 @@ Extends `@rn-primitives/avatar` Fallback props.
 | Prop | Type | Description |
 |------|------|-------------|
 | className | `string` | Additional classes for the fallback. |
-

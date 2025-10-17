@@ -1,12 +1,39 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
+    "baseUrl": ".",
     "strict": true,
+    "jsx": "react-native",
+    "target": "ES2022",
+    "module": "esnext",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "types": [
+      "nativewind/types"
+    ],
     "paths": {
-      "@/*": ["./*"]
+      "@showcase/*": [
+        "./*"
+      ],
+      "@registry/*": [
+        "../../packages/registry/src/*"
+      ],
+      "@/registry/*": [
+        "../../packages/registry/src/*"
+      ],
+      "@registry": [
+        "../../packages/registry/src"
+      ],
+      "@/registry": [
+        "../../packages/registry/src"
+      ]
     }
   },
   "include": [
+    "index.js",
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",

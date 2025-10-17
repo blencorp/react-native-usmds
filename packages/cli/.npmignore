@@ -1,0 +1,18 @@
+# Source files
+src/
+tsconfig.json
+tsup.config.ts
+
+# Scripts
+scripts/
+
+# Development files
+*.log
+.DS_Store
+node_modules/
+
+# Build artifacts (dist/ is published)
+*.tsbuildinfo
+
+# Config files
+.gitignore
