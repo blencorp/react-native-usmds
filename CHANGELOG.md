@@ -1,3 +1,28 @@
+## [1.24.2](https://github.com/blencorp/react-native-usmds/compare/v1.24.1...v1.24.2) (2025-10-17)
+
+### Bug Fixes
+
+* cli cmd ([#162](https://github.com/blencorp/react-native-usmds/issues/162)) ([11d1755](https://github.com/blencorp/react-native-usmds/commit/11d1755f205b946b178b0d30288e74317867cc60))
+
+## [1.24.1](https://github.com/blencorp/react-native-usmds/compare/v1.24.0...v1.24.1) (2025-10-17)
+
+### Bug Fixes
+
+* eas build registry issue ([65e21e4](https://github.com/blencorp/react-native-usmds/commit/65e21e4d3259414a6a35d160fb88fb7e008ca209))
+* remove biometrics component and dead code in cli ([#158](https://github.com/blencorp/react-native-usmds/issues/158)) ([ac29f88](https://github.com/blencorp/react-native-usmds/commit/ac29f88f5fe03721d6162cb46adb86cf31cacecf))
+
+## [1.24.0](https://github.com/blencorp/react-native-usmds/compare/v1.23.3...v1.24.0) (2025-10-16)
+
+### Features
+
+* built showcase app ([#154](https://github.com/blencorp/react-native-usmds/issues/154)) ([d7be309](https://github.com/blencorp/react-native-usmds/commit/d7be3097351b5f78f119ad02e066e76f10ad6361))
+
+## [1.23.3](https://github.com/blencorp/react-native-usmds/compare/v1.23.2...v1.23.3) (2025-10-16)
+
+### Bug Fixes
+
+* checkboxtile dark/light mode ([#152](https://github.com/blencorp/react-native-usmds/issues/152)) ([417631c](https://github.com/blencorp/react-native-usmds/commit/417631c8497e754cdcc5abb14791cb1cf159c4e9))
+
 ## [1.23.2](https://github.com/blencorp/react-native-usmds/compare/v1.23.1...v1.23.2) (2025-10-16)
 
 ### Bug Fixes

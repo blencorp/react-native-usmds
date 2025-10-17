@@ -1,29 +1,29 @@
-import { Link, Stack } from "expo-router";
-import { Text, View } from "react-native";
-import { Container } from "@/components/container";
+import { Button } from '@registry/usa/components/ui/button';
+import { Text } from '@registry/usa/components/ui/text';
+import { Link, Stack } from 'expo-router';
+import * as React from 'react';
+import { View } from 'react-native';
 
 export default function NotFoundScreen() {
   return (
     <>
-      <Stack.Screen options={{ title: "Oops!" }} />
-      <Container>
-        <View className="flex-1 items-center justify-center p-6">
-          <View className="items-center">
-            <Text className="mb-4 text-6xl">🤔</Text>
-            <Text className="mb-2 text-center font-bold text-2xl text-foreground">
-              Page Not Found
-            </Text>
-            <Text className="mb-8 max-w-sm text-center text-muted-foreground">
-              Sorry, the page you're looking for doesn't exist.
-            </Text>
-            <Link asChild href="/">
-              <Text className="rounded-lg bg-primary/10 px-6 py-3 font-medium text-primary">
-                Go to Home
-              </Text>
-            </Link>
-          </View>
+      <Stack.Screen options={{ title: 'Not found' }} />
+      <View className="flex-1 items-center justify-center gap-6 px-6">
+        <View className="items-center gap-3">
+          <Text className="text-6xl">🤔</Text>
+          <Text className="text-center text-2xl font-semibold text-foreground">
+            Page not found
+          </Text>
+          <Text className="text-center text-base text-muted-foreground max-w-sm">
+            Sorry, the page you were looking for doesn’t exist or has been moved.
+          </Text>
         </View>
-      </Container>
+        <Link href="/" asChild>
+          <Button>
+            <Text>Go home</Text>
+          </Button>
+        </Link>
+      </View>
     </>
   );
 }

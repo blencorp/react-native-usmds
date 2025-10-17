@@ -1,9 +1,17 @@
 import { Command } from 'commander';
+import { createRequire } from 'module';
 import { add } from './commands/add.js';
 import { init } from './commands/init.js';
 
+// Use createRequire to load package.json in ESM
+const require = createRequire(import.meta.url);
+const packageJson = require('../package.json');
+
 function main() {
-  const program = new Command().name('usmds').description('CLI for adding USMDS components to React Native apps').version('0.1.8');
+  const program = new Command()
+    .name('usmds')
+    .description('CLI for adding USMDS components to React Native apps')
+    .version(packageJson.version);
 
   program.addCommand(add);
   program.addCommand(init);
