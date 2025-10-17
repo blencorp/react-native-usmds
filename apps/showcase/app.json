@@ -51,8 +51,9 @@
     },
     "extra": {
       "eas": {
-        "projectId": "9aea2bac-5c7e-42c4-aa0b-e62dab68b995"
-      }
+        "projectId": "0e88c5ff-0082-4757-b0fc-5f63ba337b72"
+      },
+      "router": {}
     },
     "owner": "blen-corp"
   }
