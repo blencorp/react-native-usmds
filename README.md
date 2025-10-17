@@ -10,7 +10,7 @@ This monorepo contains the following packages:
 - `packages/ui` - Core UI components library
 - `packages/cli` - CLI tool for easy project setup and component management
 
-[Documentation](https://usmds.blencorp.com//)
+[Documentation](https://usmds.blencorp.com)
 
 ## Prerequisites
 
