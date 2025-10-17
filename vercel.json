@@ -1,4 +1,5 @@
 {
   "installCommand": "pnpm install --frozen-lockfile",
-  "buildCommand": "pnpm --filter docs run build"
+  "buildCommand": "pnpm --filter docs run build",
+  "ignoreCommand": "git diff HEAD^ HEAD --quiet -- apps/docs packages/registry README.md"
 }

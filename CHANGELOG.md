@@ -1,3 +1,9 @@
+## [1.24.4](https://github.com/blencorp/react-native-usmds/compare/v1.24.3...v1.24.4) (2025-10-17)
+
+### Bug Fixes
+
+* test semantic-release automation ([#165](https://github.com/blencorp/react-native-usmds/issues/165)) ([2cdd2f6](https://github.com/blencorp/react-native-usmds/commit/2cdd2f6b007b26a582e8c625a418c2613be97204))
+
 ## [1.24.3](https://github.com/blencorp/react-native-usmds/compare/v1.24.2...v1.24.3) (2025-10-17)
 
 ### Bug Fixes

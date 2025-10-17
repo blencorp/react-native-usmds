@@ -1,6 +1,7 @@
 {
   "name": "@blen/react-native-usmds-registry",
   "version": "0.1.0",
+  "description": "Component registry for React Native USMDS - U.S. Web Design System components",
   "main": "index.ts",
   "type": "module",
   "scripts": {
