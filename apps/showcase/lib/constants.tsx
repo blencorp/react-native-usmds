@@ -27,7 +27,7 @@ type RegistryItem = {
   name: string;
   title?: string;
   description?: string;
-  type: string;
+  type: "registry:ui" | "registry:lib" | "registry:hook";
   registryDependencies?: string[];
   dependencies?: string[];
 };
