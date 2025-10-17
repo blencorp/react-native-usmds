@@ -4,8 +4,9 @@ import { add } from './commands/add.js';
 import { init } from './commands/init.js';
 
 // Use createRequire to load package.json in ESM
+// In published package, package.json is in the same directory as index.js
 const require = createRequire(import.meta.url);
-const packageJson = require('../package.json');
+const packageJson = require('./package.json');
 
 function main() {
   const program = new Command()
