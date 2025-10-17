@@ -18,13 +18,20 @@ jobs:
       issues: write
       pull-requests: write
     steps:
+      - name: Generate GitHub App Token
+        id: generate_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           fetch-tags: true
           persist-credentials: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ steps.generate_token.outputs.token }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -103,6 +110,6 @@ jobs:
 
       - name: Release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: pnpm exec semantic-release --debug
