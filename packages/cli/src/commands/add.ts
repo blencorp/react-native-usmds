@@ -28,7 +28,7 @@ async function fetchAvailableComponents(): Promise<string[]> {
       return data.items.map((item: any) => item.name).sort();
     }
 
-    throw new Error('Invalid registry format');
+    throw new Error('Invalid registry format!');
   } catch (error) {
     // Fallback to hardcoded list if fetch fails
     logger.warn('Unable to fetch component list from registry, using fallback list');
