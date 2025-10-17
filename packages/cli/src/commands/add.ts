@@ -39,7 +39,7 @@ async function fetchAvailableComponents(): Promise<string[]> {
       'dropdown-menu', 'hover-card', 'icon', 'link', 'menubar',
       'pagination', 'popover', 'progress', 'radiobutton', 'radiotile',
       'select', 'separator', 'skeleton', 'snackbar', 'stepindicator',
-      'switch', 'tabs', 'tag', 'text', 'textarea', 'textinput',
+      'switch', 'tabs', 'text', 'textarea', 'textinput',
       'toggle', 'toggle-group', 'tooltip'
     ];
   }

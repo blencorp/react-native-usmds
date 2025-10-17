@@ -97,7 +97,6 @@ const PREVIEW_REGISTRY: Record<string, ShowcasePreview[]> = {
   stepindicator: [{ name: 'Step Indicator', component: Examples.StepIndicatorPreview }],
   switch: [{ name: 'Switch', component: Examples.SwitchPreview }],
   tabs: [{ name: 'Tabs', component: Examples.TabsPreview }],
-  tag: [{ name: 'Tag', component: Examples.TagPreview }],
   text: [
     { name: 'Text', component: Examples.TextPreview },
     { name: 'Cascade', component: Examples.TextCascadePreview },
