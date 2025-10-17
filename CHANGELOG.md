@@ -1,3 +1,9 @@
+## [1.24.2](https://github.com/blencorp/react-native-usmds/compare/v1.24.1...v1.24.2) (2025-10-17)
+
+### Bug Fixes
+
+* cli cmd ([#162](https://github.com/blencorp/react-native-usmds/issues/162)) ([11d1755](https://github.com/blencorp/react-native-usmds/commit/11d1755f205b946b178b0d30288e74317867cc60))
+
 ## [1.24.1](https://github.com/blencorp/react-native-usmds/compare/v1.24.0...v1.24.1) (2025-10-17)
 
 ### Bug Fixes
