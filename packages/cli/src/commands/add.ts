@@ -10,15 +10,40 @@ import { spawn } from 'child_process';
 
 // Registry configuration
 const REGISTRY_BASE_URL = 'https://storage.googleapis.com/usmds-registry/r/usa';
+const REGISTRY_INDEX_URL = `${REGISTRY_BASE_URL}/registry.json`;
 
-// Available components
-const AVAILABLE_COMPONENTS = [
-  'alert', 'avatar', 'badge', 'banner', 'biometricsignin',
-  'button', 'buttongroup', 'card', 'checkbox', 'checkboxtile',
-  'collapsible', 'dialog', 'icon', 'link', 'pagination',
-  'progress', 'radiobutton', 'radiotile', 'snackbar',
-  'stepindicator', 'tag', 'text', 'textarea', 'textinput', 'toggle'
-];
+/**
+ * Fetch available components from the registry
+ */
+async function fetchAvailableComponents(): Promise<string[]> {
+  try {
+    const response = await fetch(REGISTRY_INDEX_URL);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch registry: ${response.statusText}`);
+    }
+    const data = await response.json();
+
+    // Extract component names from registry items
+    if (data.items && Array.isArray(data.items)) {
+      return data.items.map((item: any) => item.name).sort();
+    }
+
+    throw new Error('Invalid registry format');
+  } catch (error) {
+    // Fallback to hardcoded list if fetch fails
+    logger.warn('Unable to fetch component list from registry, using fallback list');
+    return [
+      'accordion', 'alert', 'alert-dialog', 'aspect-ratio', 'avatar',
+      'badge', 'banner', 'button', 'buttongroup', 'card', 'checkbox',
+      'checkboxtile', 'collapsible', 'context-menu', 'dialog',
+      'dropdown-menu', 'hover-card', 'icon', 'link', 'menubar',
+      'pagination', 'popover', 'progress', 'radiobutton', 'radiotile',
+      'select', 'separator', 'skeleton', 'snackbar', 'stepindicator',
+      'switch', 'tabs', 'tag', 'text', 'textarea', 'textinput',
+      'toggle', 'toggle-group', 'tooltip'
+    ];
+  }
+}
 
 const addOptionsSchema = z.object({
   components: z.array(z.string()).optional(),
@@ -64,8 +89,11 @@ export const add = new Command()
     }
 
     try {
+      // Fetch available components from registry
+      const availableComponents = await fetchAvailableComponents();
+
       // Determine which components to install
-      let selectedComponents = options.all ? AVAILABLE_COMPONENTS : options.components;
+      let selectedComponents = options.all ? availableComponents : options.components;
 
       // If no components specified, show selection prompt
       if (!selectedComponents?.length && !options.all) {
@@ -73,7 +101,7 @@ export const add = new Command()
           type: 'multiselect',
           name: 'components',
           message: 'Select components to add:',
-          choices: AVAILABLE_COMPONENTS.map((component) => ({
+          choices: availableComponents.map((component) => ({
             title: component,
             value: component
           }))
@@ -85,6 +113,17 @@ export const add = new Command()
       if (!selectedComponents?.length) {
         logger.warn('No components selected');
         process.exit(0);
+      }
+
+      // Validate component names
+      const invalidComponents = selectedComponents.filter(
+        (c) => !availableComponents.includes(c.toLowerCase())
+      );
+
+      if (invalidComponents.length > 0) {
+        logger.error(`Invalid component(s): ${invalidComponents.join(', ')}`);
+        logger.info(`\nAvailable components:\n  ${availableComponents.join('\n  ')}`);
+        process.exit(1);
       }
 
       // Build component URLs

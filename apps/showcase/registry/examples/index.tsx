@@ -39,7 +39,6 @@ export * from './textarea';
 export * from './toggle';
 export * from './toggle-group';
 export * from './tooltip';
-export * from './biometricsignin';
 export * from './icon';
 export * from './native-only-animated-view';
 export * from './radiobutton';

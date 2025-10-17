@@ -22,4 +22,3 @@ export * from './usa/components/ui/avatar';
 export * from './usa/components/ui/collapsible';
 export * from './usa/components/ui/dialog';
 export * from './usa/components/ui/progress';
-export * from './usa/components/ui/biometricsignin';
