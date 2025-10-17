@@ -1,9 +1,11 @@
 "use client"
 
 import type { ReactNode } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { NavbarSidebarTrigger } from "fumadocs-ui/layouts/docs.client"
 import { SearchToggle } from "fumadocs-ui/components/layout/search-toggle"
+import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 type SiteNavLink = {
@@ -22,7 +24,7 @@ type SiteNavProps = {
 
 export function SiteNav({
   className,
-  title = "USMDS",
+  title,
   url = "/",
   links = [
     { href: "/docs", label: "Docs" },
@@ -34,6 +36,12 @@ export function SiteNav({
   ],
   showDocsControls = false,
 }: SiteNavProps) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen)
+  }
+
   return (
     <header
       id="nd-subnav"
@@ -49,22 +57,24 @@ export function SiteNav({
         >
           {title}
         </Link>
-        <div className="flex items-center gap-3 sm:gap-6">
+        
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center gap-3 sm:gap-6">
           <nav className="flex flex-wrap items-center gap-3 text-sm font-medium sm:gap-6">
             {links.map(({ href, label, external }) =>
               external ? (
                 <a
-                  key={label}
+                  key={href}
                   href={href}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="transition hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary-foreground/80 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
                 >
                   {label}
                 </a>
               ) : (
                 <Link
-                  key={label}
+                  key={href}
                   href={href}
                   className="transition hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary-foreground/80 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
                 >
@@ -80,7 +90,55 @@ export function SiteNav({
             </div>
           ) : null}
         </div>
+
+        {/* Mobile Menu Button */}
+        <div className="flex items-center gap-2 md:hidden">
+          {showDocsControls ? (
+            <>
+              <SearchToggle className="text-secondary-foreground hover:bg-secondary/80 focus-visible:ring-secondary-foreground/80 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary" />
+              <NavbarSidebarTrigger className="-me-1.5 h-9 w-9 rounded-md text-secondary-foreground hover:bg-secondary/80 focus-visible:ring-2 focus-visible:ring-secondary-foreground/80 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary" />
+            </>
+          ) : null}
+          <button
+            onClick={toggleMobileMenu}
+            className="h-9 w-9 rounded-md text-white hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary-foreground/80 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
+            aria-label="Toggle mobile menu"
+          >
+            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden border-t border-[#1a4480] bg-[#162e51]">
+          <nav className="px-4 py-3 space-y-3">
+            {links.map(({ href, label, external }) =>
+              external ? (
+                <a
+                  key={href}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-sm font-medium transition hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary-foreground/80 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {label}
+                </a>
+              ) : (
+                <Link
+                  key={href}
+                  href={href}
+                  className="block text-sm font-medium transition hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary-foreground/80 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {label}
+                </Link>
+              ),
+            )}
+          </nav>
+        </div>
+      )}
     </header>
   )
 }

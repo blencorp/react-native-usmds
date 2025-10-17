@@ -8,7 +8,7 @@ import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
  * Docs Layout: app/docs/layout.tsx
  */
 export const siteNavConfig = {
-  title: 'United States Mobile Design System (USMDS)',
+  title: 'U.S. Mobile Design System (USMDS)',
   url: '/',
   links: [
     { href: '/docs', label: 'Docs' },
