@@ -96,7 +96,6 @@ const DESCRIPTIONS: Record<string, string> = {
   stepindicator: 'Displays the steps in a multi-step process.',
   switch: 'A control that allows the user to toggle between checked and not checked.',
   tabs: 'A set of layered sections of content—known as tab panels—that are displayed one at a time.',
-  tag: 'A keyword or label to categorize content.',
   text: 'A text component with theme variants.',
   textarea: 'Displays a form textarea or a component that looks like a textarea.',
   textinput: 'Displays a form input field or a component that looks like an input field.',

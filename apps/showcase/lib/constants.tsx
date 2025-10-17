@@ -58,7 +58,6 @@ const PREVIEW_REGISTRY: Record<string, ShowcasePreview[]> = {
   avatar: [{ name: 'Avatars', component: Examples.AvatarPreview }],
   badge: [{ name: 'Variants', component: Examples.BadgePreview }],
   banner: [{ name: 'Domain Variants', component: Examples.BannerPreview }],
-  biometricsignin: [{ name: 'Biometric Sign In', component: Examples.BiometricSignInPreview }],
   button: [
     { name: 'Default', component: Examples.ButtonPreview },
     { name: 'Secondary', component: Examples.ButtonSecondaryPreview },
@@ -98,7 +97,6 @@ const PREVIEW_REGISTRY: Record<string, ShowcasePreview[]> = {
   stepindicator: [{ name: 'Step Indicator', component: Examples.StepIndicatorPreview }],
   switch: [{ name: 'Switch', component: Examples.SwitchPreview }],
   tabs: [{ name: 'Tabs', component: Examples.TabsPreview }],
-  tag: [{ name: 'Tag', component: Examples.TagPreview }],
   text: [
     { name: 'Text', component: Examples.TextPreview },
     { name: 'Cascade', component: Examples.TextCascadePreview },
