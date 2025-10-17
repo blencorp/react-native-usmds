@@ -1,3 +1,10 @@
+## [1.24.1](https://github.com/blencorp/react-native-usmds/compare/v1.24.0...v1.24.1) (2025-10-17)
+
+### Bug Fixes
+
+* eas build registry issue ([65e21e4](https://github.com/blencorp/react-native-usmds/commit/65e21e4d3259414a6a35d160fb88fb7e008ca209))
+* remove biometrics component and dead code in cli ([#158](https://github.com/blencorp/react-native-usmds/issues/158)) ([ac29f88](https://github.com/blencorp/react-native-usmds/commit/ac29f88f5fe03721d6162cb46adb86cf31cacecf))
+
 ## [1.24.0](https://github.com/blencorp/react-native-usmds/compare/v1.23.3...v1.24.0) (2025-10-16)
 
 ### Features
