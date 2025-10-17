@@ -1,6 +1,4 @@
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { ArrowUpRightIcon } from "lucide-react";
 
 import SectionContent from "./section-content";
 
