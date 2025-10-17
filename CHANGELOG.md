@@ -1,3 +1,9 @@
+## [1.24.5](https://github.com/blencorp/react-native-usmds/compare/v1.24.4...v1.24.5) (2025-10-17)
+
+### Bug Fixes
+
+* improve documentation, types, and package metadata ([#166](https://github.com/blencorp/react-native-usmds/issues/166)) ([19178be](https://github.com/blencorp/react-native-usmds/commit/19178be68b949e5ff3f74e7885c01d4ee20fff9b))
+
 ## [1.24.4](https://github.com/blencorp/react-native-usmds/compare/v1.24.3...v1.24.4) (2025-10-17)
 
 ### Bug Fixes
