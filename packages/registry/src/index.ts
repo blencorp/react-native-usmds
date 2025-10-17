@@ -15,7 +15,6 @@ export * from './usa/components/ui/alert';
 export * from './usa/components/ui/snackbar';
 export * from './usa/components/ui/banner';
 export * from './usa/components/ui/card';
-export * from './usa/components/ui/tag';
 export * from './usa/components/ui/text';
 export * from './usa/components/ui/icon';
 export * from './usa/components/ui/avatar';

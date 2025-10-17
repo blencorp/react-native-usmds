@@ -32,7 +32,6 @@ export * from './snackbar';
 export * from './step-indicator';
 export * from './switch';
 export * from './tabs';
-export * from './tag';
 export * from './text';
 export * from './text-input';
 export * from './textarea';
