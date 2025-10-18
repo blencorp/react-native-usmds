@@ -19,9 +19,9 @@ const radioTileVariants = cva('flex w-[329px] flex-col rounded-[2px] border-2', 
       withDescription: 'gap-2',
     },
     state: {
-      checked: 'border-primary bg-primary-lighter',
-      unchecked: 'border-disabled-lighter bg-background',
-      disabled: 'border-muted bg-background',
+      checked: 'border-primary bg-primary/10',
+      unchecked: 'border-muted bg-background',
+      disabled: 'border-muted bg-muted/50',
     },
   },
   defaultVariants: {
@@ -34,8 +34,8 @@ const radioItemVariants = cva('aspect-square h-5 w-5 rounded-full border-2 bg-ba
   variants: {
     state: {
       checked: 'border-primary',
-      unchecked: 'border-foreground',
-      disabled: 'border-disabled',
+      unchecked: 'border-input',
+      disabled: 'border-muted',
     },
   },
   defaultVariants: {
@@ -47,7 +47,7 @@ const radioIndicatorVariants = cva('h-[10px] w-[10px] rounded-full', {
   variants: {
     state: {
       checked: 'bg-primary',
-      disabled: 'bg-disabled',
+      disabled: 'bg-muted-foreground',
     },
   },
   defaultVariants: {
@@ -113,7 +113,7 @@ const RadioTile = forwardRef<ElementRef<typeof RadioGroupPrimitive.Item>, RadioT
             </View>
             <Text
               nativeID={labelId}
-              className={cn('flex-1 text-base leading-5', props.disabled ? 'text-disabled' : 'text-base-ink')}
+              className={cn('flex-1 text-base leading-5', props.disabled ? 'text-muted-foreground' : 'text-foreground')}
             >
               {label}
             </Text>
@@ -123,7 +123,7 @@ const RadioTile = forwardRef<ElementRef<typeof RadioGroupPrimitive.Item>, RadioT
               nativeID={descriptionId}
               className={cn(
                 'pl-7 text-[15px] leading-[19px]',
-                props.disabled ? 'text-disabled' : 'text-base-ink'
+                props.disabled ? 'text-muted-foreground' : 'text-foreground'
               )}
             >
               {description}

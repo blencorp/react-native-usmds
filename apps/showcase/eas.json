@@ -6,16 +6,29 @@
   "build": {
     "development": {
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "channel": "development"
     },
     "preview": {
-      "distribution": "internal"
+      "distribution": "internal",
+      "channel": "preview"
     },
     "production": {
-      "autoIncrement": true
+      "autoIncrement": true,
+      "channel": "production"
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "android": {
+        "serviceAccountKeyPath": "./keys/service-account-key.json",
+        "track": "internal"
+      },
+      "ios": {
+        "appleId": "info@blencorp.com",
+        "ascAppId": "6754121467",
+        "appleTeamId": "9693EQ784F"
+      }
+    }
   }
 }
