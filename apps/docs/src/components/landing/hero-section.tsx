@@ -33,7 +33,7 @@ export default function HeroSection() {
             </div>
           </div>
           <div className="relative md:col-span-2">
-            <Image src={usmdsMobile} alt="USMDS" className="mx-auto" />
+            <Image src={usmdsMobile} alt="USMDS mobile component previews" className="mx-auto" />
           </div>
         </div>
       </div>

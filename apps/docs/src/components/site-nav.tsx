@@ -60,7 +60,7 @@ export function SiteNav({
         
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-3 sm:gap-6">
-          <nav className="flex flex-wrap items-center gap-3 text-sm font-medium sm:gap-6">
+          <nav className="flex flex-wrap items-center gap-3 text-sm font-medium sm:gap-6" aria-label="Primary">
             {links.map(({ href, label, external }) =>
               external ? (
                 <a
@@ -112,7 +112,7 @@ export function SiteNav({
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden border-t border-[#1a4480] bg-[#162e51]">
-          <nav className="px-4 py-3 space-y-3">
+          <nav className="px-4 py-3 space-y-3" aria-label="Primary">
             {links.map(({ href, label, external }) =>
               external ? (
                 <a

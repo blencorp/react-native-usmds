@@ -1,5 +1,3 @@
-import Link from "next/link"
-
 export default function WorkTogetherCta() {
   return (
     <section style={{ backgroundColor: "var(--section-background-color-alt)" }}>
@@ -10,14 +8,14 @@ export default function WorkTogetherCta() {
           real value.
         </p>
         <div className="mt-6">
-          <Link
+          <a
             href="https://www.blencorp.com/connect"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center rounded-md bg-black px-8 py-4 text-lg font-medium text-white shadow-sm transition hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-white/80 focus:ring-offset-2 focus:ring-offset-neutral-950"
           >
             Connect with us
-          </Link>
+          </a>
         </div>
       </div>
     </section>
