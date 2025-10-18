@@ -10,10 +10,10 @@ export default function HeroSection() {
       <div className="mx-auto max-w-6xl px-4 py-16 sm:py-20 md:py-24">
         <div className="grid items-center gap-10 md:grid-cols-5">
           <div className="md:col-span-3">
-            <h1 className="lg:text-5xl sm:text-sm">
+            <h1>
               Build beautiful & accessible government mobile apps
             </h1>
-            <p className="mt-4 leading-7 text-white/80 lg:text-xl md:text-base sm:text-sm">
+            <p className="mt-4 leading-7 text-white/80">
               USMDS is an open‑source United States Mobile Design System, providing accessible,
               compliant React Native components that accelerate development for public‑sector apps.
             </p>

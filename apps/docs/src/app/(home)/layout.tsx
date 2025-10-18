@@ -1,4 +1,4 @@
-import SiteNav from "@/components/site-nav"
+import { SiteNav } from "@/components/site-nav"
 import { siteNavConfig } from "@/app/layout.config"
 
 export default function Layout({ children }: LayoutProps<"/">) {

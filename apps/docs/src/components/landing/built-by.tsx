@@ -53,7 +53,7 @@ export default function BuiltBy() {
       ))}
 
       <div className="text-neutral-500">
-        <hr className="my-8 border-gray-200 text " />
+        <hr className="my-8 border-gray-200" />
         The project was inspired by Ad Hoc's{" "}
         <a
           href="https://adhoc.team/2024/08/13/us-mobile-design-system/"

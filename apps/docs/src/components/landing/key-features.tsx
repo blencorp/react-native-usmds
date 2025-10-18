@@ -51,8 +51,8 @@ export default function KeyFeatures() {
           </p>
         </div>
         <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
-          {data.map(({ title, desc, Icon }, i) => (
-            <div key={i} className="flex flex-col gap-3">
+          {data.map(({ title, desc, Icon }) => (
+            <div key={title} className="flex flex-col gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-md text-black">
                 <Icon className="h-8 w-8" />
               </div>

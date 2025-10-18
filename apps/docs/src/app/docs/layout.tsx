@@ -1,6 +1,5 @@
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
-import SiteNav from "@/components/site-nav";
-import { baseOptions, siteNavConfig } from "@/app/layout.config";
+import { baseOptions } from "@/app/layout.config";
 import { source } from "@/lib/source";
 
 export default function Layout({ children }: LayoutProps<"/docs">) {
