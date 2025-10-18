@@ -26,7 +26,9 @@ const config = {
     extend: {
       fontFamily: {
         sans: ['var(--font-sans)', ...fontFamily.sans],
-        mono: ['var(--font-mono)', ...fontFamily.mono]
+        mono: ['var(--font-mono)', ...fontFamily.mono],
+        publicSans: ['var(--font-public-sans)', ...fontFamily.sans],
+        instrumentSerif: ['var(--font-instrument-serif)', ...fontFamily.serif]
       },
       colors: {
         border: 'hsl(var(--border))',
@@ -73,7 +75,17 @@ const config = {
       fontFamily: {
         sans: ['var(--font-sans)', ...fontFamily.sans],
         mono: ['var(--font-mono)', ...fontFamily.mono],
-        uswds: ['Source Sans Pro', 'sans-serif']
+        publicSans: ['var(--font-public-sans)', ...fontFamily.sans],
+        instrumentSerif: ['var(--font-instrument-serif)', ...fontFamily.serif]
+      },
+      fontSize: {
+        'uswds-heading-3xl': ['3.194rem', { lineHeight: '1.1', fontWeight: '700' }],
+        'uswds-heading-2xl': ['2.663rem', { lineHeight: '1.1', fontWeight: '400' }],
+        'uswds-heading-xl': ['2.131rem', { lineHeight: '1.15', fontWeight: '200' }],
+        'uswds-heading-lg': ['1.463rem', { lineHeight: '1.2', fontWeight: '100' }],
+        'uswds-heading-md': ['1.131rem', { lineHeight: '1.3', fontWeight: '100' }],
+        'uswds-heading-sm': ['1.063rem', { lineHeight: '1.35', fontWeight: '100' }],
+        'uswds-heading-xs': ['1rem', { lineHeight: '1.4', fontWeight: '100' }]
       },
       lineHeight: {
         'heading-2': '1.2',

@@ -1,29 +1,23 @@
-"use client";
-
-import "prismjs/themes/prism.css";
-import { useEffect } from "react";
-import { HeroSection } from "@/components/landing/HeroSection";
-import { FeaturesSection } from "@/components/landing/FeaturesSection";
-import {GettingStartedSection} from "@/components/landing/GetStartedSection";
-import { Footer } from "@/components/landing/footer";
-
+import HeroSection from "@/components/landing/hero-section"
+import SiteFooter from "@/components/landing/site-footer"
+import OpenSourceStrip from "@/components/landing/open-source-strip"
+import KeyFeatures from "@/components/landing/key-features"
+import ShowcaseAppSection from "@/components/landing/showcase-app-section"
+import GetStarted from "@/components/landing/get-started"
+import BuiltBy from "@/components/landing/built-by"
+import WorkTogetherCta from "@/components/landing/work-together-cta"
 
 export default function HomePage() {
-  useEffect(() => {
-    (async () => {
-      const Prism = (await import("prismjs")).default;
-      // @ts-expect-error prism language plugin ships without types
-      await import("prismjs/components/prism-bash");
-      Prism.highlightAll();
-    })();
-  }, []);
-
   return (
     <div className="min-h-screen">
       <HeroSection />
-      <FeaturesSection />
-      <GettingStartedSection />
-      <Footer />
+      <KeyFeatures />
+      <OpenSourceStrip />
+      <ShowcaseAppSection />
+      <GetStarted />
+      <BuiltBy />
+      <WorkTogetherCta />
+      <SiteFooter />
     </div>
-  );
+  )
 }
