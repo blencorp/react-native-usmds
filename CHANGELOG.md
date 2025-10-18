@@ -1,3 +1,9 @@
+## [1.24.6](https://github.com/blencorp/react-native-usmds/compare/v1.24.5...v1.24.6) (2025-10-18)
+
+### Bug Fixes
+
+* radio components and global.css ([#169](https://github.com/blencorp/react-native-usmds/issues/169)) ([a4c139e](https://github.com/blencorp/react-native-usmds/commit/a4c139eb401236a91eb066beecd235d31c10ba9a))
+
 ## [1.24.5](https://github.com/blencorp/react-native-usmds/compare/v1.24.4...v1.24.5) (2025-10-17)
 
 ### Bug Fixes

@@ -55,6 +55,12 @@
       },
       "router": {}
     },
-    "owner": "blen-corp"
+    "owner": "blen-corp",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/0e88c5ff-0082-4757-b0fc-5f63ba337b72"
+    }
   }
 }

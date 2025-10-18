@@ -1,0 +1,142 @@
+---
+title: Radio Tile
+description: A radio button styled as a selectable tile with optional description text, based on USWDS design patterns.
+---
+
+import { PreviewCard } from '@/components/ui/PreviewCard';
+import { RadioTilePreview } from '@/components/examples';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Tabs items={['preview', 'code']}>
+  <Tab value="preview">
+    <PreviewCard preview={<RadioTilePreview />} />
+  </Tab>
+  <Tab value="code">
+    ```tsx title="radio-tile-example.tsx"
+    import { RadioTile, RadioTileGroup } from '@/components/ui/radiotile';
+    import { useState } from 'react';
+
+    export default function RadioTileExample() {
+      const [value, setValue] = useState('option1');
+
+      return (
+        <RadioTileGroup value={value} onValueChange={setValue}>
+          <RadioTile value="option1" label="Option 1" />
+          <RadioTile
+            value="option2"
+            label="Option 2"
+            description="With additional description text"
+          />
+          <RadioTile
+            value="option3"
+            label="Option 3"
+            description="Another option with description"
+          />
+          <RadioTile value="option4" label="Disabled Option" disabled />
+        </RadioTileGroup>
+      );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Installation
+
+<Tabs items={['cli', 'manual']}>
+  <Tab value="cli">
+    ```bash
+    npx usmds add radio-tile
+    ```
+  </Tab>
+  <Tab value="manual">
+    <Steps>
+      <Step>
+        **Install the following dependencies:**
+
+        ```bash
+        npx expo install @rn-primitives/radio-group class-variance-authority
+        ```
+      </Step>
+      <Step>
+        **Copy and paste the following code into your project.**
+
+        ```json doc-gen:file
+{
+  "file": "../../packages/registry/src/usa/components/ui/radiotile.tsx",
+  "codeblock": {
+    "lang": "tsx",
+    "meta": "title=\"@/components/ui/radiotile.tsx\""
+  }
+}
+        ```
+      </Step>
+      <Step>
+        **Update the import paths to match your project setup.**
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import { RadioTile, RadioTileGroup } from '@/components/ui/radiotile';
+
+export default function MyComponent() {
+  const [value, setValue] = React.useState('option1');
+
+  return (
+    <RadioTileGroup value={value} onValueChange={setValue}>
+      <RadioTile value="option1" label="Option 1" />
+      <RadioTile
+        value="option2"
+        label="Option 2"
+        description="With additional description"
+      />
+    </RadioTileGroup>
+  );
+}
+```
+
+## Features
+
+- **USWDS Design System** - Follows official US Web Design System patterns
+- **Tile Layout** - Large touch target with full-width selectable area
+- **Optional Descriptions** - Support for additional descriptive text
+- **Disabled State** - Proper disabled styling and behavior
+- **Accessible** - Proper ARIA attributes and semantic HTML
+- **Theme Support** - Adapts to light and dark mode
+
+## Props
+
+### RadioTileGroup
+
+Extends `RadioGroupPrimitive.Root` with the following props:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | - | The controlled value of the radio group |
+| `onValueChange` | `(value: string) => void` | - | Callback when the value changes |
+| `disabled` | `boolean` | `false` | Whether the entire group is disabled |
+
+### RadioTile
+
+Extends `RadioGroupPrimitive.Item` with the following props:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | - | **Required**. The value of this radio tile |
+| `label` | `string` | - | **Required**. The label text |
+| `description` | `string` | - | Optional description text shown below the label |
+| `disabled` | `boolean` | `false` | Whether this option is disabled |
+| `className` | `string` | - | Additional CSS classes |
+
+## Accessibility
+
+- Uses proper radio button semantics via `@rn-primitives/radio-group`
+- Labels are associated with inputs using `aria-labelledby`
+- Descriptions use `aria-describedby` when present
+- Keyboard navigation support on web
+- Proper disabled state handling
+- Large touch targets (44px minimum height) for mobile accessibility

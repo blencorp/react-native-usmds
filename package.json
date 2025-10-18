@@ -1,6 +1,6 @@
 {
   "name": "@blen/react-native-usmds",
-  "version": "1.24.5",
+  "version": "1.24.6",
   "private": true,
   "description": "React Native UI components based on US Mobile Design System",
   "scripts": {
