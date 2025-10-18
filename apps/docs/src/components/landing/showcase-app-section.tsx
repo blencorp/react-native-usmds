@@ -71,7 +71,7 @@ export default function ShowcaseAppSection() {
                 </div>
               </div>
               <div className="flex justify-center">
-                <Image src={showcaseApps} alt="USMDS" className="max-w-full" />
+                <Image src={showcaseApps} alt="USMDS showcase app screens" className="max-w-full" />
               </div>
             </div>
           </div>

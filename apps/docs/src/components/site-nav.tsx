@@ -86,7 +86,7 @@ export function SiteNav({
           {showDocsControls ? (
             <div className="flex flex-shrink-0 items-center gap-2">
               <SearchToggle className="text-secondary-foreground hover:bg-secondary/80 focus-visible:ring-secondary-foreground/80 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary" />
-              <NavbarSidebarTrigger className="-me-1.5 h-9 w-9 rounded-md text-secondary-foreground hover:bg-secondary/80 focus-visible:ring-2 focus-visible:ring-secondary-foreground/80 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary md:hidden" />
+              <NavbarSidebarTrigger className="-me-1.5 h-9 w-9 rounded-md text-secondary-foreground hover:bg-secondary/80 focus-visible:ring-2 focus-visible:ring-secondary-foreground/80 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary" />
             </div>
           ) : null}
         </div>

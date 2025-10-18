@@ -30,7 +30,7 @@ const fontMono = Geist_Mono({
 const fontPublicSans = Public_Sans({
   subsets: ["latin"],
   variable: "--font-public-sans",
-  weight: ["400", "700"],
+  weight: ["100", "200", "400", "700"],
 });
 
 const fontInstrumentSerif = Instrument_Serif({
