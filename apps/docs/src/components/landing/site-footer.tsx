@@ -9,12 +9,14 @@ export default function SiteFooter() {
           <Link href="/docs" className="text-neutral-600 hover:text-neutral-900">
             Docs
           </Link>
-          <Link
+          <a
             href="https://github.com/blencorp/react-native-usmds"
             className="text-neutral-600 hover:text-neutral-900"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             GitHub
-          </Link>
+          </a>
         </nav>
       </div>
     </footer>
