@@ -66,7 +66,7 @@ const config = {
         hostname: 'images.unsplash.com',
       },
     ],
-    formats: ['image/webp'],
+    formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60,
@@ -74,7 +74,6 @@ const config = {
   experimental: {
     forceSwcTransforms: true,
     webVitalsAttribution: ['CLS', 'LCP', 'FCP', 'TTFB', 'INP'],
-    optimizeCss: true,
   },
   swcMinify: true,
   eslint: {
@@ -168,10 +167,6 @@ function withExpo(nextConfig) {
             presets: [
               ['@babel/preset-flow', { allowDeclareFields: true }],
             ],
-            // Avoid unnecessary polyfills for modern browsers
-            targets: {
-              browsers: ['last 2 versions', 'not dead', 'not ie 11'],
-            },
             compact: true,
           },
         },
