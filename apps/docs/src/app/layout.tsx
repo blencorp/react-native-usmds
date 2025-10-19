@@ -15,6 +15,22 @@ import { cn } from "@/lib/utils";
 export const metadata = {
   title: "United States Mobile Design System (USMDS)",
   description: "The United States Mobile Design System (USMDS) is a design system for building mobile applications that follow the U.S. Web Design System (USWDS).",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  openGraph: {
+    title: "United States Mobile Design System (USMDS)",
+    description: "Build accessible government mobile apps with React Native components following USWDS guidelines",
+    type: "website",
+  },
 };
 
 export const viewport = {

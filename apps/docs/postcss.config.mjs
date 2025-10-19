@@ -16,6 +16,11 @@ export default {
           discardComments: {
             removeAll: true,
           },
+          discardEmpty: true,
+          discardUnused: false, // Let Tailwind handle this
+          minifyFontValues: true,
+          minifySelectors: true,
+          normalizeWhitespace: true,
         }],
       },
     } : {}),

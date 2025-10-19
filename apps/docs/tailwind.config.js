@@ -11,7 +11,11 @@ const config = {
     './mdx-components.{ts,tsx}',
     '../../node_modules/fumadocs-ui/dist/**/*.js',
     '../../packages/registry/src/**/*.{ts,tsx}',
-    './src/**/*.{js,ts,jsx,tsx,mdx}'
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
+    './public/**/*.html',
+  ],
+  safelist: [
+    // Add any dynamic classes that should never be purged
   ],
   presets: [require('nativewind/preset'), createPreset({ preset: 'neutral' })],
   important: 'html',
