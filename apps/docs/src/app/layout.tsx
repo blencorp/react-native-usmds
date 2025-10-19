@@ -9,6 +9,7 @@ import {
 import { NativeWindStyleSheet } from "@/components/native-wind-provider";
 import { SafeAreaProvider } from "@/components/safe-area-provider";
 import { CookiesProvider } from "@/components/cookies-provider";
+import { BfcacheProvider } from "@/components/bfcache-provider";
 import { cn } from "@/lib/utils";
 
 export const metadata = {
@@ -73,11 +74,13 @@ export default function Layout({ children }: LayoutProps<"/">) {
       </head>
       <body className="flex flex-col min-h-screen">
         <NativeWindStyleSheet />
-        <CookiesProvider>
-          <SafeAreaProvider>
-            <RootProvider>{children}</RootProvider>
-          </SafeAreaProvider>
-        </CookiesProvider>
+        <BfcacheProvider>
+          <CookiesProvider>
+            <SafeAreaProvider>
+              <RootProvider>{children}</RootProvider>
+            </SafeAreaProvider>
+          </CookiesProvider>
+        </BfcacheProvider>
       </body>
     </html>
   );

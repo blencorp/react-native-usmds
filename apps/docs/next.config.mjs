@@ -41,7 +41,12 @@ const config = {
   experimental: {
     forceSwcTransforms: true,
     webVitalsAttribution: ['CLS', 'LCP', 'FCP', 'TTFB', 'INP'],
-    optimizeCss: false, // Prevent CSS issues
+  },
+  // Optimize CSS output
+  cssModules: {
+    localIdentName: process.env.NODE_ENV === 'production'
+      ? '[hash:base64:5]'
+      : '[path][name]__[local]',
   },
   swcMinify: true,
   compiler: {
