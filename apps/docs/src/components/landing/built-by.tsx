@@ -47,7 +47,7 @@ export default function BuiltBy() {
           )}
 
           {company.description && (
-            <div className=" text-lg">{company.description}</div>
+            <div className="text-neutral-950 text-lg">{company.description}</div>
           )}
         </div>
       ))}
