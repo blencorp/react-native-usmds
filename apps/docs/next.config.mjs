@@ -16,21 +16,11 @@ const config = {
   poweredByHeader: false,
   compress: true,
   productionBrowserSourceMaps: false,
-  // Only transpile packages that actually need it for React Native Web compatibility
+  // Minimal transpilation - only what's absolutely necessary
   transpilePackages: [
-    '@blen/react-native-usmds-registry',
-    'react-native',
     'react-native-web',
     'react-native-svg',
-    'react-native-reanimated',
-    'react-native-gesture-handler',
-    'react-native-screens',
     'nativewind',
-    'react-native-css-interop',
-    // Only include @rn-primitives that actually need transpilation
-    '@rn-primitives/portal',
-    '@rn-primitives/slot',
-    '@rn-primitives/types',
   ],
   images: {
     remotePatterns: [
@@ -51,8 +41,12 @@ const config = {
   experimental: {
     forceSwcTransforms: true,
     webVitalsAttribution: ['CLS', 'LCP', 'FCP', 'TTFB', 'INP'],
+    optimizeCss: false, // Prevent CSS issues
   },
   swcMinify: true,
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error'] } : false,
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -74,28 +68,59 @@ function withExpo(nextConfig) {
         config.resolve = {};
       }
 
-      // Optimized bundle splitting to reduce network chains
+      // Modern browser target - no legacy support
+      config.target = ['web', 'es2020'];
+
+      // Aggressive tree shaking and dead code elimination
       config.optimization = {
         ...config.optimization,
+        usedExports: true,
+        sideEffects: false,
+        providedExports: true,
+        concatenateModules: true,
         splitChunks: {
           chunks: 'all',
           cacheGroups: {
             default: false,
             vendors: false,
-            // Single vendor chunk for all dependencies
-            vendor: {
-              name: 'vendor',
-              test: /[\\/]node_modules[\\/]/,
-              priority: 10,
+            // Framework core
+            framework: {
+              name: 'framework',
+              test: /[\\/]node_modules[\\/](react|react-dom|scheduler|next)[\\/]/,
+              chunks: 'all',
+              priority: 40,
+              enforce: true,
+            },
+            // All other vendor code
+            lib: {
+              test(module) {
+                return module.size() > 160000 &&
+                  /node_modules[/\\]/.test(module.nameForCondition || '');
+              },
+              name: false,
+              priority: 30,
+              minChunks: 1,
+              reuseExistingChunk: true,
+              maxSize: 244000,
+            },
+            commons: {
+              minChunks: 2,
+              priority: 20,
               reuseExistingChunk: true,
             },
           },
-          maxAsyncRequests: 3,
-          maxInitialRequests: 3,
+          maxAsyncRequests: 6,
+          maxInitialRequests: 6,
+          minSize: 20000,
         },
         runtimeChunk: false,
-        // Minimize unnecessary polyfills
-        minimizer: config.optimization.minimizer,
+      };
+
+      // Prevent polyfills from being injected
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        "core-js": false,
+        "core-js-pure": false,
       };
 
       config.resolve.alias = {
@@ -108,6 +133,9 @@ function withExpo(nextConfig) {
           'react-native-web/dist/vendor/react-native/emitter/EventEmitter',
         'react-native/Libraries/EventEmitter/NativeEventEmitter$':
           'react-native-web/dist/vendor/react-native/NativeEventEmitter',
+        // Exclude core-js polyfills
+        'core-js': false,
+        'core-js-pure': false,
       };
 
       config.resolve.extensions = [
@@ -125,26 +153,19 @@ function withExpo(nextConfig) {
       config.plugins.push(
         new options.webpack.DefinePlugin({
           __DEV__: JSON.stringify(process.env.NODE_ENV !== 'production'),
+          'process.env.__NEXT_POLYFILL_NOMODULE': JSON.stringify('false'),
         })
       );
 
-      // Only process Flow types in specific React Native packages
-      // No transpilation for modern JavaScript features
-      config.module.rules.push({
-        test: /\.js$/,
-        include: /@react-native\/assets-registry/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              ['@babel/preset-flow', { allowDeclareFields: true }],
-            ],
-            // Don't include any polyfills or transforms
-            compact: false,
-            cacheDirectory: true,
-          },
-        },
-      });
+      // Exclude polyfills from being bundled
+      config.plugins.push(
+        new options.webpack.IgnorePlugin({
+          resourceRegExp: /^core-js/,
+        })
+      );
+
+      // Skip babel-loader entirely for modern builds
+      // Most React Native packages are already transpiled
 
       if (typeof nextConfig.webpack === 'function') {
         return nextConfig.webpack(config, options);
