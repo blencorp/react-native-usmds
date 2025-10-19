@@ -16,44 +16,21 @@ const config = {
   poweredByHeader: false,
   compress: true,
   productionBrowserSourceMaps: false,
+  // Only transpile packages that actually need it for React Native Web compatibility
   transpilePackages: [
     '@blen/react-native-usmds-registry',
-    '@rn-primitives/accordion',
-    '@rn-primitives/alert-dialog',
-    '@rn-primitives/aspect-ratio',
-    '@rn-primitives/avatar',
-    '@rn-primitives/checkbox',
-    '@rn-primitives/collapsible',
-    '@rn-primitives/context-menu',
-    '@rn-primitives/dialog',
-    '@rn-primitives/dropdown-menu',
-    '@rn-primitives/hover-card',
-    '@rn-primitives/label',
-    '@rn-primitives/menubar',
-    '@rn-primitives/popover',
-    '@rn-primitives/portal',
-    '@rn-primitives/progress',
-    '@rn-primitives/radio-group',
-    '@rn-primitives/select',
-    '@rn-primitives/separator',
-    '@rn-primitives/slot',
-    '@rn-primitives/switch',
-    '@rn-primitives/tabs',
-    '@rn-primitives/toggle',
-    '@rn-primitives/toggle-group',
-    '@rn-primitives/tooltip',
-    '@rn-primitives/types',
     'react-native',
     'react-native-web',
     'react-native-svg',
-    'expo',
-    'nativewind',
-    'react-native-css-interop',
     'react-native-reanimated',
     'react-native-gesture-handler',
     'react-native-screens',
-    'expo-router',
-    'expo-modules-core',
+    'nativewind',
+    'react-native-css-interop',
+    // Only include @rn-primitives that actually need transpilation
+    '@rn-primitives/portal',
+    '@rn-primitives/slot',
+    '@rn-primitives/types',
   ],
   images: {
     remotePatterns: [
@@ -97,33 +74,28 @@ function withExpo(nextConfig) {
         config.resolve = {};
       }
 
-      // Simplified bundle splitting for better initial load performance
+      // Optimized bundle splitting to reduce network chains
       config.optimization = {
         ...config.optimization,
         splitChunks: {
           chunks: 'all',
           cacheGroups: {
-            default: {
-              minChunks: 2,
-              priority: -20,
-              reuseExistingChunk: true,
-            },
+            default: false,
+            vendors: false,
+            // Single vendor chunk for all dependencies
             vendor: {
-              test: /[\\/]node_modules[\\/]/,
               name: 'vendor',
-              priority: -10,
-            },
-            framework: {
-              name: 'framework',
-              test: /[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/,
+              test: /[\\/]node_modules[\\/]/,
               priority: 10,
               reuseExistingChunk: true,
             },
           },
-          maxAsyncRequests: 6,
-          maxInitialRequests: 4,
+          maxAsyncRequests: 3,
+          maxInitialRequests: 3,
         },
         runtimeChunk: false,
+        // Minimize unnecessary polyfills
+        minimizer: config.optimization.minimizer,
       };
 
       config.resolve.alias = {
@@ -156,8 +128,8 @@ function withExpo(nextConfig) {
         })
       );
 
-      // Handle React Native packages more efficiently
-      // Only transpile Flow types where absolutely necessary
+      // Only process Flow types in specific React Native packages
+      // No transpilation for modern JavaScript features
       config.module.rules.push({
         test: /\.js$/,
         include: /@react-native\/assets-registry/,
@@ -167,7 +139,9 @@ function withExpo(nextConfig) {
             presets: [
               ['@babel/preset-flow', { allowDeclareFields: true }],
             ],
-            compact: true,
+            // Don't include any polyfills or transforms
+            compact: false,
+            cacheDirectory: true,
           },
         },
       });

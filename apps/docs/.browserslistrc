@@ -1,0 +1,16 @@
+# Target only modern browsers to eliminate legacy JavaScript
+# This prevents unnecessary polyfills and transpilation
+
+# Modern Chrome, Edge, Safari, Firefox
+last 2 Chrome versions
+last 2 Firefox versions
+last 2 Safari versions
+last 2 Edge versions
+
+# No support for legacy browsers
+not dead
+not ie 11
+not op_mini all
+not and_qq > 0
+not and_uc > 0
+not baidu > 0
