@@ -66,7 +66,7 @@
     --disabled-foreground: 203 7% 67%; /* #A9AEB1 - disabled */
 
     /* Radius */
-    --radius: 0.25rem; /* USWDS default radius */
+    --radius: 0.625rem; /* USWDS default radius */
 
     /* Chart Colors (USWDS Data Viz palette) */
     --chart-1: 209 100% 32%; /* #005EA2 - blue-60v */
@@ -95,8 +95,8 @@
     --popover-foreground: 0 0% 94%; /* #F0F0F0 - base-lightest */
 
     /* Primary - lighter blue for better contrast on dark */
-    --primary: 208 74% 68%; /* #73B3E7 - primary-light (blue-30) */
-    --primary-foreground: 0 0% 11%; /* #1B1B1B - dark text on light primary */
+    --primary: 209 100% 32%; /* #005EA2 - primary (blue-60v) */
+    --primary-foreground: 0 0% 100%; /* #FFFFFF - white */
 
     /* Secondary - lighter red for better contrast */
     --secondary: 3 77% 74%; /* #F2938C - secondary-light (red-30) */

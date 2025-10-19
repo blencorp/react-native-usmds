@@ -1,6 +1,6 @@
 import Image from "next/image"
 
-import showcaseApps from "../../../images/showcase-apps.png"
+import showcaseApps from "../../../images/showcase-apps.webp"
 
 function qrCode() {
   return (

@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import usmdsMobile from "../../../images/usmds-mobile.png"
+import usmdsMobile from "../../../images/usmds-mobile.webp"
 
 export default function HeroSection() {
   return (
@@ -13,7 +13,7 @@ export default function HeroSection() {
             <h1>
               Build beautiful & accessible government mobile apps
             </h1>
-            <p className="mt-4 leading-7 text-white/80">
+            <p className="mt-4 text-lg leading-7 text-white/80">
               USMDS is an open‑source United States Mobile Design System, providing accessible,
               compliant React Native components that accelerate development for public‑sector apps.
             </p>
@@ -33,7 +33,7 @@ export default function HeroSection() {
             </div>
           </div>
           <div className="relative md:col-span-2">
-            <Image src={usmdsMobile} alt="USMDS mobile component previews" className="mx-auto" />
+            <Image src={usmdsMobile} alt="USMDS mobile component previews" priority={true} className="mx-auto" />
           </div>
         </div>
       </div>
