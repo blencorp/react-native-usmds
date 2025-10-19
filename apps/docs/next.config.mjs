@@ -1,7 +1,6 @@
 import { createMDX } from 'fumadocs-mdx/next';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { createHash } from 'crypto';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -75,7 +74,9 @@ const config = {
   experimental: {
     forceSwcTransforms: true,
     webVitalsAttribution: ['CLS', 'LCP', 'FCP', 'TTFB', 'INP'],
+    optimizeCss: true,
   },
+  swcMinify: true,
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -97,54 +98,33 @@ function withExpo(nextConfig) {
         config.resolve = {};
       }
 
-      // Optimize bundle splitting for better performance
+      // Simplified bundle splitting for better initial load performance
       config.optimization = {
         ...config.optimization,
         splitChunks: {
           chunks: 'all',
           cacheGroups: {
-            default: false,
-            vendors: false,
-            framework: {
-              name: 'framework',
-              chunks: 'all',
-              test: /(?<!node_modules.*)[\\/]node_modules[\\/](react|react-dom|scheduler|prop-types|use-subscription)[\\/]/,
-              priority: 40,
-              enforce: true,
-            },
-            lib: {
-              test(module) {
-                return module.size() > 160000 &&
-                  /node_modules[/\\]/.test(module.identifier());
-              },
-              name(module) {
-                const hash = createHash('sha1');
-                hash.update(module.identifier());
-                return hash.digest('hex').substring(0, 8);
-              },
-              priority: 30,
-              minChunks: 1,
+            default: {
+              minChunks: 2,
+              priority: -20,
               reuseExistingChunk: true,
             },
-            commons: {
-              name: 'commons',
-              chunks: 'all',
-              minChunks: 2,
-              priority: 20,
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: 'vendor',
+              priority: -10,
             },
-            shared: {
-              name: 'shared',
+            framework: {
+              name: 'framework',
+              test: /[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/,
               priority: 10,
-              minChunks: 2,
               reuseExistingChunk: true,
             },
           },
-          maxAsyncRequests: 25,
-          maxInitialRequests: 25,
+          maxAsyncRequests: 6,
+          maxInitialRequests: 4,
         },
-        runtimeChunk: {
-          name: 'webpack-runtime',
-        },
+        runtimeChunk: false,
       };
 
       config.resolve.alias = {

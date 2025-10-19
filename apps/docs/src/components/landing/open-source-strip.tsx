@@ -56,7 +56,14 @@ export default function OpenSourceStrip() {
             key={action.key}
             className="group relative flex items-center justify-center bg-white px-8 py-12 focus-within:-outline-offset-2 focus-within:outline-2 focus-within:outline-indigo-600"
           >
-            <Image src={action.src} alt={action.alt} className="h-16 w-full object-contain" />
+            <Image
+              src={action.src}
+              alt={action.alt}
+              className="h-16 w-full object-contain"
+              width={200}
+              height={64}
+              loading="lazy"
+            />
           </div>
         ))}
       </div>

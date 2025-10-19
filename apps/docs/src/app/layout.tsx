@@ -14,29 +14,39 @@ import { cn } from "@/lib/utils";
 export const metadata = {
   title: "United States Mobile Design System (USMDS)",
   description: "The United States Mobile Design System (USMDS) is a design system for building mobile applications that follow the U.S. Web Design System (USWDS).",
+  viewport: "width=device-width, initial-scale=1",
+  themeColor: "#005EA2",
 };
 
 const fontSans = Geist({
   subsets: ["latin"],
   variable: "--font-sans",
+  display: 'swap',
+  preload: false,
 });
 
 const fontMono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
   weight: ["400"],
+  display: 'swap',
+  preload: false,
 });
 
 const fontPublicSans = Public_Sans({
   subsets: ["latin"],
   variable: "--font-public-sans",
-  weight: ["100", "200", "400", "700"],
+  weight: ["400", "700"],
+  display: 'swap',
+  preload: true,
 });
 
 const fontInstrumentSerif = Instrument_Serif({
   subsets: ["latin"],
   variable: "--font-instrument-serif",
-  weight: ["400"]
+  weight: ["400"],
+  display: 'swap',
+  preload: false,
 });
 
 export default function Layout({ children }: LayoutProps<"/">) {
@@ -51,7 +61,12 @@ export default function Layout({ children }: LayoutProps<"/">) {
       )}
       suppressHydrationWarning
     >
-      <head />
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+      </head>
       <body className="flex flex-col min-h-screen">
         <NativeWindStyleSheet />
         <CookiesProvider>

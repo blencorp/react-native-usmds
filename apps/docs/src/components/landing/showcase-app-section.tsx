@@ -75,10 +75,11 @@ export default function ShowcaseAppSection() {
                   src={showcaseApps}
                   alt="USMDS showcase app screens"
                   className="max-w-full"
-                  width={760}
-                  height={947}
-                  priority={true}
+                  width={380}
+                  height={474}
+                  loading="lazy"
                   placeholder="blur"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
             </div>

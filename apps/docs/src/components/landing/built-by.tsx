@@ -41,7 +41,9 @@ export default function BuiltBy() {
             <Image
               src={company.image}
               alt={company.name}
+              width={120}
               height={40}
+              loading="lazy"
               className="mb-4"
             />
           )}
