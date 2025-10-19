@@ -1,6 +1,12 @@
 import Image from "next/image"
 
-import showcaseApps from "../../../images/showcase-apps.webp"
+const showcaseImage = {
+  src: "/images/showcase-apps.webp",
+  width: 960,
+  height: 595,
+  blurDataURL:
+    "data:image/webp;base64,UklGRr4AAABXRUJQVlA4WAoAAAAQAAAAEwAADAAAQUxQSFUAAAABcFzbttLUgRREHVTA1N1nLBpiRgXu0XEoIJ77Yg1ExAQI1f55lzN8eX65isUVytIVlhUKFTS3BJMwEWzCQHAIR5TG6DSjLEDrFiU+2tQoVND8DzIBAFZQOCBCAAAAUAMAnQEqFAANAD7tYqlNqaWjojAIATAdiWkAAFx3eHWvCAAA/tfyn7T2zj0+gCqMYZeffLPcDejWYwbIBpr4AAAA",
+}
 
 function qrCode() {
   return (
@@ -72,14 +78,15 @@ export default function ShowcaseAppSection() {
               </div>
               <div className="flex justify-center">
                 <Image
-                  src={showcaseApps}
+                  src={showcaseImage.src}
                   alt="USMDS showcase app screens"
-                  className="max-w-full"
-                  width={380}
-                  height={474}
+                  className="h-auto w-full max-w-[480px]"
+                  width={showcaseImage.width}
+                  height={showcaseImage.height}
                   loading="lazy"
                   placeholder="blur"
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  blurDataURL={showcaseImage.blurDataURL}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1440px) 50vw, 480px"
                 />
               </div>
             </div>

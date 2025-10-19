@@ -2,7 +2,14 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import usmdsMobile from "../../../images/usmds-mobile.webp"
+
+const heroImage = {
+  src: "/images/usmds-mobile.webp",
+  width: 380,
+  height: 474,
+  blurDataURL:
+    "data:image/webp;base64,UklGRgwBAABXRUJQVlA4WAoAAAAQAAAAEwAAGAAAQUxQSGoAAAABcFvbthLdTsgIyYhYZFRHA78DCmDc3X1Cd3cLXW80cURMAADI/nbnfUrDR/fty8aLakdj52+upWJEz96I+Tajw5lT+pQ9YzVh7NaMQYvR+cvaUUZQFpa1/+YihCkBgP+bDj4qmcXHuvECVlA4IHwAAACQBACdASoUABkAPu1uqlGppiOiqAqpMB2JaQAAIfkVx6eVlnpSMY1k+HaFYAAA/fxozRsAyr6ThYUuk//E/PDXSYnyn99MKyRPnEr9oBmCQ4QUH252BtD23In4pRg/AgD1+3feU5oesi21RsqgWu9GVbsefWNuFYUEAAAA",
+}
 
 export default function HeroSection() {
   return (
@@ -34,12 +41,15 @@ export default function HeroSection() {
           </div>
           <div className="relative md:col-span-2">
             <Image
-              src={usmdsMobile}
+              src={heroImage.src}
               alt="USMDS mobile component previews"
-              width={380}
-              height={760}
-              priority={true}
-              className="mx-auto"
+              width={heroImage.width}
+              height={heroImage.height}
+              priority
+              placeholder="blur"
+              blurDataURL={heroImage.blurDataURL}
+              sizes="(max-width: 640px) 80vw, (max-width: 1024px) 45vw, 380px"
+              className="mx-auto h-auto w-full max-w-[380px]"
             />
           </div>
         </div>

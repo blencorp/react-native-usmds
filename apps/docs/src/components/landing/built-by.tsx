@@ -1,13 +1,11 @@
-import Image from "next/image";
+import Image from "next/image"
 
-import SectionContent from "./section-content";
-
-import blen from "../../../images/logos/blen.webp";
+import SectionContent from "./section-content"
 
 const companies = [
   {
     name: "BLEN",
-    image: blen,
+    image: "/images/logos/blen.webp",
     description: (
       <>
         BLEN is a digital services company that provides Emerging Technology
@@ -26,7 +24,7 @@ const companies = [
       </>
     ),
   },
-];
+]
 
 export default function BuiltBy() {
   return (
@@ -84,5 +82,5 @@ export default function BuiltBy() {
         </p>
       </div>
     </SectionContent>
-  );
+  )
 }

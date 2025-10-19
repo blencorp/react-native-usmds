@@ -2,42 +2,35 @@ import Image from "next/image"
 
 import SectionContent from "./section-content"
 
-import uswds from "../../../images/logos/uswds.webp"
-import expo from "../../../images/logos/expo.webp"
-import reactNative from "../../../images/logos/react-native.webp"
-import tailwind from "../../../images/logos/tailwind.webp"
-import rnr from "../../../images/logos/react-native-reusables.webp"
-import shadcn from "../../../images/logos/shadcn-ui.webp"
-
 const actions = [
   {
     key: "uswds",
-    src: uswds,
+    src: "/images/logos/uswds.webp",
     alt: "United States Web Design System",
   },
   {
     key: "reactNative",
-    src: reactNative,
+    src: "/images/logos/react-native.webp",
     alt: "React Native",
   },
   {
     key: "tailwind",
-    src: tailwind,
+    src: "/images/logos/tailwind.webp",
     alt: "Tailwind CSS",
   },
   {
     key: "expo",
-    src: expo,
+    src: "/images/logos/expo.webp",
     alt: "Expo",
   },
   {
     key: "rnr",
-    src: rnr,
+    src: "/images/logos/react-native-reusables.webp",
     alt: "React Native Reusables",
   },
   {
     key: "shadcn/ui",
-    src: shadcn,
+    src: "/images/logos/shadcn-ui.webp",
     alt: "shadcn/ui",
   },
 ]
