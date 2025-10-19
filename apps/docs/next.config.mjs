@@ -1,6 +1,7 @@
 import { createMDX } from 'fumadocs-mdx/next';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { createHash } from 'crypto';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -13,6 +14,9 @@ const withMDX = createMDX({
 const config = {
   reactStrictMode: true,
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
+  poweredByHeader: false,
+  compress: true,
+  productionBrowserSourceMaps: false,
   transpilePackages: [
     '@blen/react-native-usmds-registry',
     '@rn-primitives/accordion',
@@ -63,9 +67,14 @@ const config = {
         hostname: 'images.unsplash.com',
       },
     ],
+    formats: ['image/webp'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 60,
   },
   experimental: {
     forceSwcTransforms: true,
+    webVitalsAttribution: ['CLS', 'LCP', 'FCP', 'TTFB', 'INP'],
   },
   eslint: {
     ignoreDuringBuilds: true,
@@ -87,6 +96,56 @@ function withExpo(nextConfig) {
       if (!config.resolve) {
         config.resolve = {};
       }
+
+      // Optimize bundle splitting for better performance
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          chunks: 'all',
+          cacheGroups: {
+            default: false,
+            vendors: false,
+            framework: {
+              name: 'framework',
+              chunks: 'all',
+              test: /(?<!node_modules.*)[\\/]node_modules[\\/](react|react-dom|scheduler|prop-types|use-subscription)[\\/]/,
+              priority: 40,
+              enforce: true,
+            },
+            lib: {
+              test(module) {
+                return module.size() > 160000 &&
+                  /node_modules[/\\]/.test(module.identifier());
+              },
+              name(module) {
+                const hash = createHash('sha1');
+                hash.update(module.identifier());
+                return hash.digest('hex').substring(0, 8);
+              },
+              priority: 30,
+              minChunks: 1,
+              reuseExistingChunk: true,
+            },
+            commons: {
+              name: 'commons',
+              chunks: 'all',
+              minChunks: 2,
+              priority: 20,
+            },
+            shared: {
+              name: 'shared',
+              priority: 10,
+              minChunks: 2,
+              reuseExistingChunk: true,
+            },
+          },
+          maxAsyncRequests: 25,
+          maxInitialRequests: 25,
+        },
+        runtimeChunk: {
+          name: 'webpack-runtime',
+        },
+      };
 
       config.resolve.alias = {
         ...(config.resolve.alias || {}),
@@ -118,7 +177,8 @@ function withExpo(nextConfig) {
         })
       );
 
-      // Exclude React Native internal packages that use Flow types
+      // Handle React Native packages more efficiently
+      // Only transpile Flow types where absolutely necessary
       config.module.rules.push({
         test: /\.js$/,
         include: /@react-native\/assets-registry/,
@@ -127,8 +187,12 @@ function withExpo(nextConfig) {
           options: {
             presets: [
               ['@babel/preset-flow', { allowDeclareFields: true }],
-              '@babel/preset-react',
             ],
+            // Avoid unnecessary polyfills for modern browsers
+            targets: {
+              browsers: ['last 2 versions', 'not dead', 'not ie 11'],
+            },
+            compact: true,
           },
         },
       });

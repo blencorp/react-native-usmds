@@ -4,145 +4,55 @@
 
 @layer base {
   :root {
-    /* ========================================
-       USWDS OFFICIAL THEME TOKENS - LIGHT MODE
-       ======================================== */
+    /* Core shadcn/ui variables - USWDS theme */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 11%;
+    --primary: 209 100% 32%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 3 61% 52%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 94%;
+    --muted-foreground: 204 7% 46%;
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 11%;
+    --destructive: 17 94% 43%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 204 15% 88%;
+    --input: 204 15% 88%;
+    --ring: 211 100% 57%;
+    --radius: 0.625rem;
 
-    /* Base colors (ink and backgrounds) */
-    --background: 0 0% 100%; /* #FFFFFF - white */
-    --foreground: 0 0% 11%; /* #1B1B1B - base-ink (gray-90) */
-
+    /* Additional utility variables */
     --section-background-color-alt: rgb(245, 245, 247);
-
-    /* Card */
-    --card: 0 0% 100%; /* #FFFFFF - white */
-    --card-foreground: 0 0% 11%; /* #1B1B1B - base-ink */
-
-    /* Popover */
-    --popover: 0 0% 100%; /* #FFFFFF - white */
-    --popover-foreground: 0 0% 11%; /* #1B1B1B - base-ink */
-
-    /* Primary - USWDS primary blue */
-    --primary: 209 100% 32%; /* #005EA2 - primary (blue-60v) */
-    --primary-foreground: 0 0% 100%; /* #FFFFFF - white */
-
-    /* Secondary - USWDS secondary red */
-    --secondary: 3 61% 52%; /* #D83933 - secondary (red-50) */
-    --secondary-foreground: 0 0% 100%; /* #FFFFFF - white */
-
-    /* Muted - subtle backgrounds and secondary text */
-    --muted: 0 0% 94%; /* #F0F0F0 - base-lightest (gray-5) */
-    --muted-foreground: 204 7% 46%; /* #71767A - base (gray-cool-50) */
-
-    /* Accent - accent backgrounds */
-    --accent: 0 0% 96%; /* #F5F5F5 - lighter for better hover distinction */
-    --accent-foreground: 0 0% 11%; /* #1B1B1B - base-ink */
-
-    /* Destructive - error states */
-    --destructive: 17 94% 43%; /* #D54309 - error (red-warm-50v) */
-    --destructive-foreground: 0 0% 100%; /* #FFFFFF - white */
-
-    /* Success - success states */
-    --success: 152 69% 31%; /* #00A91C - success (green-cool-50v) */
-    --success-foreground: 0 0% 100%; /* #FFFFFF - white */
-
-    /* Warning - warning states */
-    --warning: 44 100% 59%; /* #FFBE2E - warning (gold-20v) */
-    --warning-foreground: 0 0% 11%; /* #1B1B1B - base-ink */
-
-    /* Info - informational states */
-    --info: 190 100% 44%; /* #00BDE3 - info (cyan-30v) */
-    --info-foreground: 0 0% 100%; /* #FFFFFF - white */
-
-    /* Border and Input */
-    --border: 204 15% 88%; /* #DFE1E2 - base-lighter (gray-cool-10) */
-    --input: 204 15% 88%; /* #DFE1E2 - base-lighter */
-
-    /* Focus Ring */
-    --ring: 211 100% 57%; /* #2491FF - focus color */
-
-    /* Disabled */
-    --disabled: 203 7% 67%; /* #A9AEB1 - disabled (gray-cool-30) */
-    --disabled-foreground: 203 7% 67%; /* #A9AEB1 - disabled */
-
-    /* Radius */
-    --radius: 0.625rem; /* USWDS default radius */
-
-    /* Chart Colors (USWDS Data Viz palette) */
-    --chart-1: 209 100% 32%; /* #005EA2 - blue-60v */
-    --chart-2: 190 100% 44%; /* #00BDE3 - cyan-30v */
-    --chart-3: 152 69% 31%; /* #00A91C - green-cool-50v */
-    --chart-4: 44 100% 59%; /* #FFBE2E - gold-20v */
-    --chart-5: 3 61% 52%; /* #D83933 - red-50 */
   }
 
-  .dark {
-    /* ========================================
-       DARK MODE THEME
-       Using USWDS-compatible colors with proper contrast
-       ======================================== */
-
-    /* Base colors - inverted from light mode */
-    --background: 0 0% 11%; /* #1B1B1B - base-darkest (gray-90) */
-    --foreground: 0 0% 94%; /* #F0F0F0 - base-lightest (gray-5) */
-
-    /* Card */
-    --card: 204 10% 16%; /* #262626 - slightly lighter than background */
-    --card-foreground: 0 0% 94%; /* #F0F0F0 - base-lightest */
-
-    /* Popover */
-    --popover: 204 10% 16%; /* #262626 - same as card */
-    --popover-foreground: 0 0% 94%; /* #F0F0F0 - base-lightest */
-
-    /* Primary - lighter blue for better contrast on dark */
-    --primary: 209 100% 32%; /* #005EA2 - primary (blue-60v) */
-    --primary-foreground: 0 0% 100%; /* #FFFFFF - white */
-
-    /* Secondary - lighter red for better contrast */
-    --secondary: 3 77% 74%; /* #F2938C - secondary-light (red-30) */
-    --secondary-foreground: 0 0% 11%; /* #1B1B1B - dark text on light secondary */
-
-    /* Muted - darker than background for subtle areas */
-    --muted: 204 9% 24%; /* #3D4551 - base-darker (gray-cool-70) */
-    --muted-foreground: 203 7% 67%; /* #A9AEB1 - base-light (gray-cool-30) */
-
-    /* Accent */
-    --accent: 204 8% 35%; /* #565C65 - base-dark (gray-cool-60) */
-    --accent-foreground: 0 0% 94%; /* #F0F0F0 - base-lightest */
-
-    /* Destructive - brighter for visibility on dark */
-    --destructive: 17 100% 56%; /* #FF5E1F - brighter red-warm */
-    --destructive-foreground: 0 0% 94%; /* #F0F0F0 - light text */
-
-    /* Success - brighter green for dark mode */
-    --success: 152 100% 41%; /* #00D127 - brighter green */
-    --success-foreground: 0 0% 11%; /* #1B1B1B - dark text */
-
-    /* Warning - brighter gold for dark mode */
-    --warning: 44 100% 69%; /* #FFCB54 - gold-10v */
-    --warning-foreground: 0 0% 11%; /* #1B1B1B - dark text */
-
-    /* Info - brighter cyan for dark mode */
-    --info: 190 100% 54%; /* #00E7FF - brighter cyan */
-    --info-foreground: 0 0% 11%; /* #1B1B1B - dark text */
-
-    /* Border and Input */
-    --border: 204 8% 35%; /* #565C65 - base-dark (gray-cool-60) */
-    --input: 204 8% 35%; /* #565C65 - base-dark */
-
-    /* Focus Ring - brighter for visibility */
-    --ring: 211 100% 67%; /* #57A9FF - brighter blue */
-
-    /* Disabled */
-    --disabled: 204 9% 24%; /* #3D4551 - base-darker */
-    --disabled-foreground: 204 7% 46%; /* #71767A - base */
-
-    /* Chart Colors - adjusted for dark mode visibility */
-    --chart-1: 208 74% 68%; /* #73B3E7 - blue-30 */
-    --chart-2: 190 100% 54%; /* #00E7FF - brighter cyan */
-    --chart-3: 152 100% 41%; /* #00D127 - brighter green */
-    --chart-4: 44 100% 69%; /* #FFCB54 - gold-10v */
-    --chart-5: 3 77% 74%; /* #F2938C - red-30 */
+  /* Only include dark mode if needed */
+  @media (prefers-color-scheme: dark) {
+    .dark {
+      --background: 0 0% 11%;
+      --foreground: 0 0% 94%;
+      --card: 204 10% 16%;
+      --card-foreground: 0 0% 94%;
+      --popover: 204 10% 16%;
+      --popover-foreground: 0 0% 94%;
+      --primary: 209 100% 32%;
+      --primary-foreground: 0 0% 100%;
+      --secondary: 3 77% 74%;
+      --secondary-foreground: 0 0% 11%;
+      --muted: 204 9% 24%;
+      --muted-foreground: 203 7% 67%;
+      --accent: 204 8% 35%;
+      --accent-foreground: 0 0% 94%;
+      --destructive: 17 100% 56%;
+      --destructive-foreground: 0 0% 94%;
+      --border: 204 8% 35%;
+      --input: 204 8% 35%;
+      --ring: 211 100% 67%;
+    }
   }
 
   h1,
