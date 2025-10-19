@@ -73,25 +73,14 @@ const config = {
   experimental: {
     forceSwcTransforms: true,
     webVitalsAttribution: ['CLS', 'LCP', 'FCP', 'TTFB', 'INP'],
-  },
-  // Optimize CSS output
-  cssModules: {
-    localIdentName: process.env.NODE_ENV === 'production'
-      ? '[hash:base64:5]'
-      : '[path][name]__[local]',
+    optimizeCss: false, // Explicitly disable to prevent critters requirement
   },
   swcMinify: true,
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error'] } : false,
-  },
   eslint: {
     ignoreDuringBuilds: true,
   },
   typescript: {
     ignoreBuildErrors: true,
-  },
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error'] } : false,
   },
 };
 
@@ -105,59 +94,24 @@ function withExpo(nextConfig) {
         config.resolve = {};
       }
 
-      // Modern browser target - no legacy support
-      config.target = ['web', 'es2020'];
-
-      // Aggressive tree shaking and dead code elimination
+      // Simple optimization without breaking changes
       config.optimization = {
         ...config.optimization,
-        usedExports: true,
-        sideEffects: false,
-        providedExports: true,
-        concatenateModules: true,
         splitChunks: {
           chunks: 'all',
           cacheGroups: {
-            default: false,
-            vendors: false,
-            // Framework core
-            framework: {
-              name: 'framework',
-              test: /[\\/]node_modules[\\/](react|react-dom|scheduler|next)[\\/]/,
-              chunks: 'all',
-              priority: 40,
-              enforce: true,
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: 'vendor',
+              priority: 10,
             },
-            // All other vendor code
-            lib: {
-              test(module) {
-                return module.size() > 160000 &&
-                  /node_modules[/\\]/.test(module.nameForCondition || '');
-              },
-              name: false,
-              priority: 30,
-              minChunks: 1,
-              reuseExistingChunk: true,
-              maxSize: 244000,
-            },
-            commons: {
+            common: {
               minChunks: 2,
-              priority: 20,
+              priority: -10,
               reuseExistingChunk: true,
             },
           },
-          maxAsyncRequests: 6,
-          maxInitialRequests: 6,
-          minSize: 20000,
         },
-        runtimeChunk: false,
-      };
-
-      // Prevent polyfills from being injected
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        "core-js": false,
-        "core-js-pure": false,
       };
 
       config.resolve.alias = {
@@ -170,9 +124,6 @@ function withExpo(nextConfig) {
           'react-native-web/dist/vendor/react-native/emitter/EventEmitter',
         'react-native/Libraries/EventEmitter/NativeEventEmitter$':
           'react-native-web/dist/vendor/react-native/NativeEventEmitter',
-        // Exclude core-js polyfills
-        'core-js': false,
-        'core-js-pure': false,
       };
 
       config.resolve.extensions = [
@@ -190,19 +141,8 @@ function withExpo(nextConfig) {
       config.plugins.push(
         new options.webpack.DefinePlugin({
           __DEV__: JSON.stringify(process.env.NODE_ENV !== 'production'),
-          'process.env.__NEXT_POLYFILL_NOMODULE': JSON.stringify('false'),
         })
       );
-
-      // Exclude polyfills from being bundled
-      config.plugins.push(
-        new options.webpack.IgnorePlugin({
-          resourceRegExp: /^core-js/,
-        })
-      );
-
-      // Skip babel-loader entirely for modern builds
-      // Most React Native packages are already transpiled
 
       if (typeof nextConfig.webpack === 'function') {
         return nextConfig.webpack(config, options);
