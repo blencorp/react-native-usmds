@@ -14,8 +14,12 @@ import { cn } from "@/lib/utils";
 export const metadata = {
   title: "United States Mobile Design System (USMDS)",
   description: "The United States Mobile Design System (USMDS) is a design system for building mobile applications that follow the U.S. Web Design System (USWDS).",
-  viewport: "width=device-width, initial-scale=1",
-  themeColor: "#005EA2",
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#005EA2',
 };
 
 const fontSans = Geist({
