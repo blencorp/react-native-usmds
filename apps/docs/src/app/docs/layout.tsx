@@ -1,4 +1,4 @@
-import { DocsLayout } from "fumadocs-ui/layouts/docs";
+import { DocsLayout } from "fumadocs-ui/layouts/notebook";
 import { baseOptions } from "@/app/layout.config";
 import { source } from "@/lib/source";
 
@@ -7,9 +7,7 @@ export default function Layout({ children }: LayoutProps<"/docs">) {
     <DocsLayout
       tree={source.pageTree}
       {...baseOptions}
-      nav={{
-        ...baseOptions.nav,
-      }}
+      githubUrl="https://github.com/blencorp/react-native-usmds"
     >
       {children}
     </DocsLayout>

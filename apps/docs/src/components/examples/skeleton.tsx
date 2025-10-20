@@ -8,12 +8,12 @@ export function SkeletonPreview() {
     <div className="flex flex-col gap-4 w-full max-w-md">
       <div className="flex items-center gap-4">
         <Skeleton className="size-12 rounded-full" />
-        <div className="flex-1 gap-2">
+        <div className="flex flex-col flex-1 gap-2">
           <Skeleton className="h-4 w-full" />
           <Skeleton className="h-4 w-2/3" />
         </div>
       </div>
-      <div className="gap-2">
+      <div className="flex flex-col gap-2">
         <Skeleton className="h-32 w-full rounded-lg" />
         <Skeleton className="h-4 w-full" />
         <Skeleton className="h-4 w-5/6" />

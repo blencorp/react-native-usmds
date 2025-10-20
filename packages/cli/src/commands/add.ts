@@ -36,7 +36,7 @@ async function fetchAvailableComponents(): Promise<string[]> {
       'accordion', 'alert', 'alert-dialog', 'aspect-ratio', 'avatar',
       'badge', 'banner', 'button', 'buttongroup', 'card', 'checkbox',
       'checkboxtile', 'collapsible', 'context-menu', 'dialog',
-      'dropdown-menu', 'hover-card', 'icon', 'link', 'menubar',
+      'dropdown-menu', 'hover-card', 'icon', 'menubar',
       'pagination', 'popover', 'progress', 'radiobutton', 'radiotile',
       'select', 'separator', 'skeleton', 'snackbar', 'stepindicator',
       'switch', 'tabs', 'text', 'textarea', 'textinput',
