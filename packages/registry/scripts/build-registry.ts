@@ -83,7 +83,6 @@ const DESCRIPTIONS: Record<string, string> = {
   'dropdown-menu': 'Displays a menu to the user — such as a set of actions or functions — triggered by a button.',
   'hover-card': 'For sighted users to preview content available behind a link.',
   icon: 'Displays an icon from lucide-react-native.',
-  link: 'A styled hyperlink component.',
   menubar: 'A visually persistent menu common in desktop applications.',
   pagination: 'Pagination with page navigation, next and previous links.',
   popover: 'Displays rich content in a portal, triggered by a button.',

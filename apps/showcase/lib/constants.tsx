@@ -64,7 +64,6 @@ const PREVIEW_REGISTRY: Record<string, ShowcasePreview[]> = {
     { name: 'Destructive', component: Examples.ButtonDestructivePreview },
     { name: 'Outline', component: Examples.ButtonOutlinePreview },
     { name: 'Ghost', component: Examples.ButtonGhostPreview },
-    { name: 'Link', component: Examples.ButtonLinkPreview },
     { name: 'With Icon', component: Examples.ButtonWithIconPreview },
     { name: 'Icon', component: Examples.ButtonIconPreview },
   ],
@@ -79,7 +78,6 @@ const PREVIEW_REGISTRY: Record<string, ShowcasePreview[]> = {
   'hover-card': [{ name: 'Hover', component: Examples.HoverCardPreview }],
   icon: [{ name: 'Icons', component: Examples.IconPreview }],
   label: [{ name: 'Form Label', component: Examples.LabelPreview }],
-  link: [{ name: 'Link Styles', component: Examples.LinkPreview }],
   menubar: [{ name: 'Navigation', component: Examples.MenubarPreview }],
   'native-only-animated-view': [
     { name: 'Animated Panel', component: Examples.NativeOnlyAnimatedViewPreview },

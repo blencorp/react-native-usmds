@@ -1,7 +1,10 @@
+import { Icon } from '@/registry/usa/components/ui/icon';
 import { TextClassContext } from '@/registry/usa/components/ui/text';
 import { cn } from '@/registry/usa/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { Platform, Pressable } from 'react-native';
+import { ExternalLink } from 'lucide-react-native';
+import * as React from 'react';
+import { Platform, Pressable, View } from 'react-native';
 
 const buttonVariants = cva(
   cn(
@@ -28,7 +31,8 @@ const buttonVariants = cva(
         ),
         secondary: cn('bg-secondary active:bg-secondary/80 shadow-sm shadow-black/5', Platform.select({ web: 'hover:bg-secondary/80' })),
         ghost: cn('active:bg-accent dark:active:bg-accent/50', Platform.select({ web: 'hover:bg-accent dark:hover:bg-accent/50' })),
-        link: ''
+        link: cn('shadow-none', Platform.select({ web: 'cursor-pointer' })),
+        'link-visited': cn('shadow-none', Platform.select({ web: 'cursor-pointer' })),
       },
       size: {
         default: cn('h-10 px-4 py-2 sm:h-9', Platform.select({ web: 'has-[>svg]:px-3' })),
@@ -52,7 +56,8 @@ const buttonTextVariants = cva(cn('text-foreground text-sm font-medium', Platfor
       outline: cn('group-active:text-accent-foreground', Platform.select({ web: 'group-hover:text-accent-foreground' })),
       secondary: 'text-secondary-foreground',
       ghost: 'group-active:text-accent-foreground',
-      link: cn('text-primary group-active:underline', Platform.select({ web: 'underline-offset-4 hover:underline group-hover:underline' }))
+      link: cn('text-primary underline leading-[162%]', Platform.select({ web: 'underline-offset-4' })),
+      'link-visited': cn('text-secondary underline leading-[162%]', Platform.select({ web: 'underline-offset-4' }))
     },
     size: {
       default: '',
@@ -67,12 +72,39 @@ const buttonTextVariants = cva(cn('text-foreground text-sm font-medium', Platfor
   }
 });
 
-type ButtonProps = React.ComponentProps<typeof Pressable> & React.RefAttributes<typeof Pressable> & VariantProps<typeof buttonVariants>;
+type ButtonProps = React.ComponentProps<typeof Pressable> &
+  React.RefAttributes<typeof Pressable> &
+  VariantProps<typeof buttonVariants> & {
+    /**
+     * If true, shows an external link icon after the text (for link variants only)
+     */
+    external?: boolean;
+  };
 
-function Button({ className, variant, size, ...props }: ButtonProps) {
+function Button({ className, variant, size, external, children, ...props }: ButtonProps) {
+  const isLinkVariant = variant === 'link' || variant === 'link-visited';
+  const showExternalIcon = isLinkVariant && external;
+
   return (
     <TextClassContext.Provider value={buttonTextVariants({ variant, size })}>
-      <Pressable className={cn(props.disabled && 'opacity-50', buttonVariants({ variant, size }), className)} role='button' {...props} />
+      <Pressable
+        className={cn(props.disabled && 'opacity-50', buttonVariants({ variant, size }), className)}
+        role={isLinkVariant ? 'link' : 'button'}
+        accessibilityRole={isLinkVariant ? 'link' : 'button'}
+        {...props}>
+        {showExternalIcon ? (
+          <View className="flex-row items-center gap-0.5">
+            {children}
+            <Icon
+              as={ExternalLink}
+              size={14}
+              className={cn(variant === 'link-visited' ? 'text-secondary' : 'text-primary')}
+            />
+          </View>
+        ) : (
+          children
+        )}
+      </Pressable>
     </TextClassContext.Provider>
   );
 }

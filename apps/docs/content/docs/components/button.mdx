@@ -11,6 +11,8 @@ import {
   ButtonOutlinePreview,
   ButtonGhostPreview,
   ButtonLinkPreview,
+  ButtonLinkVisitedPreview,
+  ButtonLinkExternalPreview,
   ButtonIconPreview,
   ButtonWithIconPreview
 } from '@/components/examples';
@@ -87,12 +89,46 @@ import { Text } from '@/components/ui/text';
 </Button>
 ```
 
+## Variants
+
+### Link Variants
+
+The button component now includes link styling variants that replace the standalone Link component:
+
+<Tabs items={['link', 'link-visited', 'external']}>
+  <Tab value="link">
+    <PreviewCard preview={<ButtonLinkPreview />} />
+    ```tsx
+    <Button variant="link">
+      <Text>Link</Text>
+    </Button>
+    ```
+  </Tab>
+  <Tab value="link-visited">
+    <PreviewCard preview={<ButtonLinkVisitedPreview />} />
+    ```tsx
+    <Button variant="link-visited">
+      <Text>Visited Link</Text>
+    </Button>
+    ```
+  </Tab>
+  <Tab value="external">
+    <PreviewCard preview={<ButtonLinkExternalPreview />} />
+    ```tsx
+    <Button variant="link" external>
+      <Text>External Link</Text>
+    </Button>
+    ```
+  </Tab>
+</Tabs>
+
 ## Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| variant | `'default' \| 'secondary' \| 'destructive' \| 'outline' \| 'ghost' \| 'link'` | `'default'` | The visual style variant |
+| variant | `'default' \| 'secondary' \| 'destructive' \| 'outline' \| 'ghost' \| 'link' \| 'link-visited'` | `'default'` | The visual style variant |
 | size | `'default' \| 'sm' \| 'lg' \| 'icon'` | `'default'` | The size of the button |
+| external | `boolean` | `false` | Show external link icon (link variants only) |
 | disabled | `boolean` | `false` | Whether the button is disabled |
 | onPress | `() => void` | - | Handler called when button is pressed |
 | className | `string` | - | Additional styles |

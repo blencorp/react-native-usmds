@@ -18,7 +18,6 @@ export * from './context-menu';
 export * from './dialog';
 export * from './dropdown-menu';
 export * from './hover-card';
-export * from './link';
 export * from './menubar';
 export * from './pagination';
 export * from './popover';
