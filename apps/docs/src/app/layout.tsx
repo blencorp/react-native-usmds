@@ -123,7 +123,15 @@ export default function Layout({ children }: LayoutProps<"/">) {
         <NativeWindStyleSheet />
         <CookiesProvider>
           <SafeAreaProvider>
-            <RootProvider>{children}</RootProvider>
+            <RootProvider
+              theme={{
+                attribute: "class",
+                defaultTheme: "light",
+                enableSystem: false,
+              }}
+            >
+              {children}
+            </RootProvider>
           </SafeAreaProvider>
         </CookiesProvider>
       </body>
