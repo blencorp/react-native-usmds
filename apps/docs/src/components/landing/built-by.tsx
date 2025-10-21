@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import SectionContent from "./section-content";
 
-import blen from "../../../images/logos/blen.png";
+import blen from "../../../images/logos/blen.webp";
 
 const companies = [
   {

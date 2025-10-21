@@ -2,12 +2,25 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import usmdsMobile from "../../../images/usmds-mobile.png"
+import siteLogo from "../../../public/assets/images/logo.webp"
+import usmdsMobile from "../../../images/usmds-mobile.webp"
 
 export default function HeroSection() {
   return (
     <section className="relative overflow-hidden bg-[#162e51] hero">
-      <div className="mx-auto max-w-6xl px-4 py-16 sm:py-20 md:py-24">
+      <div className="pointer-events-none absolute inset-0">
+        <Image
+          src={siteLogo}
+          alt=""
+          aria-hidden="true"
+          fill
+          priority
+          sizes="(min-width: 1024px) 50vw, 80vw"
+          className="origin-top-right scale-[1.35] object-contain object-right -translate-y-[0%] translate-x-[20%] opacity-5 blur-[0.1px]"
+        />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:py-20 md:py-24">
         <div className="grid items-center gap-10 md:grid-cols-5">
           <div className="md:col-span-3">
             <h1>
