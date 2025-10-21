@@ -3,7 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import siteLogo from "../../../public/assets/images/logo.webp"
-import usmdsMobile from "../../../images/usmds-mobile.png"
+import usmdsMobile from "../../../images/usmds-mobile.webp"
 
 export default function HeroSection() {
   return (

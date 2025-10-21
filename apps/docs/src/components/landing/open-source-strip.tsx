@@ -2,12 +2,12 @@ import Image from "next/image"
 
 import SectionContent from "./section-content"
 
-import uswds from "../../../images/logos/uswds.png"
-import expo from "../../../images/logos/expo.png"
-import reactNative from "../../../images/logos/react-native.png"
-import tailwind from "../../../images/logos/tailwind.png"
-import rnr from "../../../images/logos/react-native-reusables.png"
-import shadcn from "../../../images/logos/shadcn-ui.png"
+import uswds from "../../../images/logos/uswds.webp"
+import expo from "../../../images/logos/expo.webp"
+import reactNative from "../../../images/logos/react-native.webp"
+import tailwind from "../../../images/logos/tailwind.webp"
+import rnr from "../../../images/logos/react-native-reusables.webp"
+import shadcn from "../../../images/logos/shadcn-ui.webp"
 
 const actions = [
   {
