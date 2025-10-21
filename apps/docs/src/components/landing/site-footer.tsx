@@ -9,6 +9,9 @@ export default function SiteFooter() {
           <Link href="/docs" className="text-neutral-600 hover:text-neutral-900">
             Docs
           </Link>
+          <Link href="/privacy" className="text-neutral-600 hover:text-neutral-900">
+            Privacy
+          </Link>
           <a
             href="https://github.com/blencorp/react-native-usmds"
             className="text-neutral-600 hover:text-neutral-900"
@@ -22,5 +25,3 @@ export default function SiteFooter() {
     </footer>
   )
 }
-
-
