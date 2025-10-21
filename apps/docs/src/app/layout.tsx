@@ -13,8 +13,11 @@ import { CookiesProvider } from "@/components/cookies-provider";
 import { cn } from "@/lib/utils";
 
 const faviconPath = "/assets/images/favicons";
+const appBaseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://usmds.blencorp.com";
+const metadataBase = new URL(appBaseUrl);
 
 export const metadata: Metadata = {
+  metadataBase,
   title: "United States Mobile Design System (USMDS)",
   description:
     "The United States Mobile Design System (USMDS) is a design system for building mobile applications that follow the U.S. Web Design System (USWDS).",
@@ -40,11 +43,36 @@ export const metadata: Metadata = {
       { url: `${faviconPath}/apple-touch-icon-167x167.png`, sizes: "167x167" },
       { url: `${faviconPath}/apple-touch-icon-180x180.png`, sizes: "180x180" },
     ],
-    shortcut: [
-      { url: `${faviconPath}/favicon-32x32.png` },
-    ],
+    shortcut: [{ url: `${faviconPath}/favicon-32x32.png` }],
   },
   themeColor: "#162e51",
+  openGraph: {
+    title: "United States Mobile Design System (USMDS)",
+    description:
+      "An accessible React Native component library bringing U.S. Web Design System standards to mobile apps.",
+    url: metadataBase,
+    siteName: "USMDS",
+    locale: "en_US",
+    type: "website",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "USMDS – United States Mobile Design System",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "United States Mobile Design System (USMDS)",
+    description:
+      "An accessible React Native component library bringing U.S. Web Design System standards to mobile apps.",
+    images: ["/opengraph-image"],
+  },
+  alternates: {
+    canonical: "/",
+  },
   other: {
     "msapplication-TileColor": "#162e51",
     "msapplication-TileImage": `${faviconPath}/mstile-144x144.png`,
