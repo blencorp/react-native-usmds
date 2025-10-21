@@ -13,7 +13,7 @@ export default function PrivacyPage() {
           Privacy Policy
         </h1>
         <p className="text-neutral-600 mb-8">
-          Last Updated: {new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+          Last Updated: October 21, 2025
         </p>
 
         <div className="prose prose-neutral max-w-none">
