@@ -2,10 +2,12 @@
 
 import type { ReactNode } from "react"
 import { useState } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { NavbarSidebarTrigger } from "fumadocs-ui/layouts/docs.client"
 import { SearchToggle } from "fumadocs-ui/components/layout/search-toggle"
 import { Menu, X } from "lucide-react"
+import siteLogo from "../../public/assets/images/logo.webp"
 import { cn } from "@/lib/utils"
 
 type SiteNavLink = {
@@ -24,7 +26,7 @@ type SiteNavProps = {
 
 export function SiteNav({
   className,
-  title,
+  title = "U.S. Mobile Design System",
   url = "/",
   links = [
     { href: "/docs", label: "Docs" },
@@ -53,9 +55,17 @@ export function SiteNav({
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:py-4">
         <Link
           href={url}
-          className="text-lg font-semibold tracking-tight transition hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary focus-visible:ring-secondary-foreground/80"
+          className="flex items-center gap-3 text-lg font-semibold tracking-tight transition hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary focus-visible:ring-secondary-foreground/80"
         >
-          {title}
+          <Image
+            src={siteLogo}
+            alt="USMDS logo"
+            priority
+            className="h-8 w-auto drop-shadow-[0_6px_12px_rgba(0,0,0,0.25)]"
+          />
+          <span className="max-w-[12rem] text-left leading-tight sm:max-w-none">
+            {title}
+          </span>
         </Link>
         
         {/* Desktop Navigation */}
@@ -142,4 +152,3 @@ export function SiteNav({
     </header>
   )
 }
-
