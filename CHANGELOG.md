@@ -1,3 +1,17 @@
+## [1.25.0](https://github.com/blencorp/react-native-usmds/compare/v1.24.6...v1.25.0) (2025-10-22)
+
+### Features
+
+* add-assets ([#181](https://github.com/blencorp/react-native-usmds/issues/181)) ([b5ed10b](https://github.com/blencorp/react-native-usmds/commit/b5ed10b73f78b4029f096fbb309c6383df8d3704))
+* Bet on Expo Go and namespace cli ([#185](https://github.com/blencorp/react-native-usmds/issues/185)) ([7b6424e](https://github.com/blencorp/react-native-usmds/commit/7b6424e32d9e485288bab832bc6e4d5269beeaa5))
+* **docs:** add metadata configuration ([#183](https://github.com/blencorp/react-native-usmds/issues/183)) ([8290abb](https://github.com/blencorp/react-native-usmds/commit/8290abbbc4ca88c76fc91789474a3c7cca9042d4))
+* **docs:** add privacy policy page and link in footer ([#182](https://github.com/blencorp/react-native-usmds/issues/182)) ([dcf4ebe](https://github.com/blencorp/react-native-usmds/commit/dcf4ebe209fc2261ae823ab515edaf624a8cea79))
+
+### Bug Fixes
+
+* github icon on docs, remove link component, update skeleton exmaple ([#180](https://github.com/blencorp/react-native-usmds/issues/180)) ([491afd6](https://github.com/blencorp/react-native-usmds/commit/491afd66da9b52aa99abce5109e1c792158ded43))
+* release ([#186](https://github.com/blencorp/react-native-usmds/issues/186)) ([bf96bcd](https://github.com/blencorp/react-native-usmds/commit/bf96bcdceaf7a862148a3002ebb6b3914b082bab))
+
 ## [1.24.6](https://github.com/blencorp/react-native-usmds/compare/v1.24.5...v1.24.6) (2025-10-18)
 
 ### Bug Fixes
