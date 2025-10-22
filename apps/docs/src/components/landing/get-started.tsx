@@ -11,7 +11,7 @@ const steps: Step[] = [
     title: "1. Initialize USMDS",
     description: (
       <>
-        Run <code className="font-mono text-sm text-white/90">npx usmds init</code> to scaffold React Native
+        Run <code className="font-mono text-sm text-white/90">npx @blen/usmds init</code> to scaffold React Native
         USMDS. The CLI sets up configuration, installs dependencies, and applies the default USWDS theme.
       </>
     ),
@@ -49,7 +49,7 @@ const steps: Step[] = [
     description: (
       <>
         Generate UI with the CLI, for example,{" "}
-        <code className="font-mono text-sm text-white/90">npx usmds add button alert card</code>&mdash;then tune colors, typography, and variants in{" "}
+        <code className="font-mono text-sm text-white/90">npx @blen/usmds add button alert card</code>&mdash;then tune colors, typography, and variants in{" "}
         <code className="font-mono text-sm text-white/90">global.css</code> to match your brand.
       </>
     ),

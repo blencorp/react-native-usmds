@@ -10,7 +10,7 @@ const packageJson = require('./package.json');
 
 function main() {
   const program = new Command()
-    .name('usmds')
+    .name('@blen/usmds')
     .description('CLI for adding USMDS components to React Native apps')
     .version(packageJson.version);
 

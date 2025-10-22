@@ -23,19 +23,19 @@ This monorepo contains the following packages:
 Install the USMDS CLI:
 
 ```sh
-npx usmds init
+npx @blen/usmds init
 ```
 
 Add components to your project:
 
 ```sh
-npx usmds add
+npx @blen/usmds add
 ```
 
 Or add specific components:
 
 ```sh
-npx usmds add button alert card
+npx @blen/usmds add button alert card
 ```
 
 ## Features
