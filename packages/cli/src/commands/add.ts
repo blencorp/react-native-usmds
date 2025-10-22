@@ -77,7 +77,7 @@ export const add = new Command()
     // Single initialization check
     const initialized = await checkDependenciesExist(cwd);
     if (!initialized) {
-      logger.info(`Project not initialized. Running 'usmds init' first...`);
+      logger.info(`Project not initialized. Running '@blen/usmds init' first...`);
       try {
         await runInit(cwd);
         logger.success('Successfully initialized project');

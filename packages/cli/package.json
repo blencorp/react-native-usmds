@@ -1,5 +1,5 @@
 {
-  "name": "usmds",
+  "name": "@blen/usmds",
   "version": "1.24.6",
   "description": "CLI for adding USMDS components to React Native apps",
   "type": "module",

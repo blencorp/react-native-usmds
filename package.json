@@ -13,6 +13,7 @@
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "prepublishOnly": "turbo build",
+    "publish:expo-go": "pnpm --filter showcase run publish:expo-go",
     "registry:generate": "turbo run registry:generate --filter=@blen/react-native-usmds-registry",
     "registry:package": "turbo run registry:package --filter=@blen/react-native-usmds-registry",
     "registry:validate": "turbo run registry:validate --filter=@blen/react-native-usmds-registry"
