@@ -1,4 +1,3 @@
 packages:
   - "apps/*"
-  - "!apps/old_showcase"
   - "packages/*"
