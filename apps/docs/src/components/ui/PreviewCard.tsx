@@ -1,9 +1,12 @@
 'use client';
 
+import Image from 'next/image';
 import { useParams } from 'next/navigation';
-import { QRCodeSVG } from 'qrcode.react';
 import * as React from 'react';
 import { PlatformSelect, usePlatform } from './PlatformSelect';
+
+const SHOWCASE_QR_IMAGE = '/images/showcase-qr.svg';
+const SHOWCASE_URL = 'exp://u.expo.dev/0e88c5ff-0082-4757-b0fc-5f63ba337b72?runtime-version=1.0.0&channel-name=showcase';
 
 type PreviewCardProps = {
   preview?: React.ReactNode;
@@ -34,7 +37,7 @@ export function PreviewCard({ preview }: PreviewCardProps) {
           </div>
         </div>
         <a
-          href={`https://placeholder.usmds.com/showcase/links/${component}`}
+          href={SHOWCASE_URL}
           target="_blank"
           rel="noopener noreferrer"
           className="not-prose bg-primary text-primary-foreground focus-visible:border-ring focus-visible:ring-ring/50 mt-4 inline-flex w-full shrink-0 items-center gap-2.5 rounded-lg p-2.5 text-sm font-medium shadow-sm outline-none transition-all focus-visible:ring-[3px] sm:hidden dark:p-2 [&_svg]:shrink-0">
@@ -85,14 +88,14 @@ export function PreviewCard({ preview }: PreviewCardProps) {
         <div className="flex flex-1 flex-col items-center justify-center p-4">
           {platform === 'native' && width >= 640 ? (
             <div className="flex max-w-sm flex-col items-center gap-6 p-4">
-              <QRCodeSVG
-                value={`https://placeholder.usmds.com/showcase/links/${component}`}
-                bgColor={isDark ? 'black' : 'white'}
-                fgColor={isDark ? 'white' : 'black'}
-                size={230}
-                level="H"
+              <Image
+                src={SHOWCASE_QR_IMAGE}
+                alt="Scan to open USMDS showcase app in Expo Go"
+                width={230}
+                height={230}
+                className="h-[230px] w-[230px]"
               />
-              <p className="text-center font-mono text-sm">Scan to preview.</p>
+              <p className="text-center font-mono text-sm">Scan to preview in Expo Go.</p>
             </div>
           ) : (
             preview
@@ -100,7 +103,7 @@ export function PreviewCard({ preview }: PreviewCardProps) {
         </div>
       </div>
       <a
-        href={`https://placeholder.usmds.com/showcase/links/${component}`}
+        href={SHOWCASE_URL}
         target="_blank"
         rel="noopener noreferrer"
         className="not-prose bg-primary text-primary-foreground focus-visible:border-ring focus-visible:ring-ring/50 mt-4 inline-flex w-full shrink-0 items-center gap-2.5 rounded-lg p-2.5 text-sm font-medium shadow-sm outline-none transition-all focus-visible:ring-[3px] sm:hidden dark:p-2 [&_svg]:shrink-0">

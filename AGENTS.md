@@ -17,7 +17,7 @@ Common entry points: `packages/registry/src/index.ts`, components in `packages/r
 - Storybook (Expo): from `apps/storybook` run `pnpm storybook` (web: `pnpm storybook:web`).
 - Registry tests: `pnpm --filter @blen/react-native-usmds-registry-internal test` (watch: `test:watch`, coverage: `test:coverage`).
 
-Node 18+ and pnpm 10+ are required.
+Node 22+ and pnpm 10+ are required.
 
 ## Coding Style & Naming Conventions
 - TypeScript across packages; React Native components export PascalCase (e.g., `Button`) from lowercase files (e.g., `button.tsx`).
