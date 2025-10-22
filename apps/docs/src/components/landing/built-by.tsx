@@ -69,7 +69,7 @@ export default function BuiltBy() {
             blog post about the need for a US Mobile Design System{" "}
             <span>&#8599;</span>
           </a>
-          . and and its{" "}
+          . and its{" "}
           <a
             href="https://adhoc.team/2024/08/13/us-mobile-design-system/"
             target="_blank"
