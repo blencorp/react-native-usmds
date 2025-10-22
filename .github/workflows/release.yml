@@ -65,7 +65,7 @@ jobs:
       - name: Build packages
         run: |
           pnpm --filter @blen/usmds build
-          pnpm turbo run build --filter=!docs --filter=!usmds-storybook
+          pnpm turbo run build --filter=!docs
 
       - name: Generate registry artifacts
         run: pnpm registry:generate
