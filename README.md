@@ -14,7 +14,7 @@ This monorepo contains the following packages:
 
 ## Prerequisites
 
-- Node.js 18 or higher
+- Node.js 22 or higher
 - npm, yarn, or pnpm
 - React Native project (Expo or bare React Native)
 
