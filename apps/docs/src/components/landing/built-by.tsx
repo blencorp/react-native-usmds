@@ -68,15 +68,15 @@ export default function BuiltBy() {
           >
             blog post about the need for a US Mobile Design System{" "}
             <span>&#8599;</span>
-          </a>
-          . and its{" "}
+          </a>{" "}
+          and its associated{" "}
           <a
-            href="https://adhoc.team/2024/08/13/us-mobile-design-system/"
+            href="https://www.figma.com/community/file/1403074855914670787"
             target="_blank"
             rel="noopener noreferrer"
             className="text-primary underline hover:no-underline"
           >
-            associated Figma Community Library <span>&#8599;</span>
+            Figma Community Library <span>&#8599;</span>
           </a>
           .
         </div>
