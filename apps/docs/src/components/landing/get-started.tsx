@@ -11,8 +11,12 @@ const steps: Step[] = [
     title: "1. Initialize USMDS",
     description: (
       <>
-        Run <code className="font-mono text-sm text-white/90">npx @blen/usmds init</code> to scaffold React Native
-        USMDS. The CLI sets up configuration, installs dependencies, and applies the default USWDS theme.
+        Run{" "}
+        <code className="font-mono text-sm text-white/90">
+          npx @blen/usmds init
+        </code>{" "}
+        to scaffold React Native USMDS. The CLI sets up configuration, installs
+        dependencies, and applies the default USWDS theme.
       </>
     ),
   },
@@ -20,9 +24,14 @@ const steps: Step[] = [
     title: "2. Import Global Styles",
     description: (
       <>
-        Add <code className="font-mono text-sm text-white/90">import &quot;./global.css&quot;</code> to your app entry file (e.g.{" "}
-        <code className="font-mono text-sm text-white/90">App.tsx</code> or <code className="font-mono text-sm text-white/90">_layout.tsx</code>) so design tokens
-        and base styles are loaded everywhere.
+        Add{" "}
+        <code className="font-mono text-sm text-white/90">
+          import &quot;./global.css&quot;
+        </code>{" "}
+        to your app entry file (e.g.{" "}
+        <code className="font-mono text-sm text-white/90">App.tsx</code> or{" "}
+        <code className="font-mono text-sm text-white/90">_layout.tsx</code>) so
+        design tokens and base styles are loaded everywhere.
       </>
     ),
   },
@@ -30,8 +39,12 @@ const steps: Step[] = [
     title: "3. Add the Portal Host",
     description: (
       <>
-        Include <code className="font-mono text-sm text-white/90">&lt;PortalHost /&gt;</code> at the root of your layout to enable overlays like dialogs,{" "}
-        popovers, tooltips, and dropdowns.
+        Include{" "}
+        <code className="font-mono text-sm text-white/90">
+          &lt;PortalHost /&gt;
+        </code>{" "}
+        at the root of your layout to enable overlays like dialogs, popovers,
+        tooltips, and dropdowns.
       </>
     ),
   },
@@ -39,8 +52,13 @@ const steps: Step[] = [
     title: "4. Configure Tailwind & Utilities",
     description: (
       <>
-        Update <code className="font-mono text-sm text-white/90">tailwind.config.js</code> with the NativeWind presets and helper utilities (such as{" "}
-        <code className="font-mono text-sm text-white/90">lib/utils.ts</code>) for consistent styling and class merging.
+        Update{" "}
+        <code className="font-mono text-sm text-white/90">
+          tailwind.config.js
+        </code>{" "}
+        with the NativeWind presets and helper utilities (such as{" "}
+        <code className="font-mono text-sm text-white/90">lib/utils.ts</code>)
+        for consistent styling and class merging.
       </>
     ),
   },
@@ -49,8 +67,12 @@ const steps: Step[] = [
     description: (
       <>
         Generate UI with the CLI, for example,{" "}
-        <code className="font-mono text-sm text-white/90">npx @blen/usmds add button alert card</code>&mdash;then tune colors, typography, and variants in{" "}
-        <code className="font-mono text-sm text-white/90">global.css</code> to match your brand.
+        <code className="font-mono text-sm text-white/90">
+          npx @blen/usmds add button alert card
+        </code>
+        &mdash;then tune colors, typography, and variants in{" "}
+        <code className="font-mono text-sm text-white/90">global.css</code> to
+        match your brand.
       </>
     ),
   },
@@ -68,7 +90,9 @@ export default function GetStarted() {
       {steps.map((step, index) => (
         <div key={index} className="mb-8 last:mb-0">
           <h3 className="text-white font-bold">{step.title}</h3>
-          <p className="text-white/80 mt-3 leading-relaxed">{step.description}</p>
+          <p className="text-white/80 mt-3 leading-relaxed">
+            {step.description}
+          </p>
         </div>
       ))}
     </SectionContent>

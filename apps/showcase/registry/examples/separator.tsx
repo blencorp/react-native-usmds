@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { View } from 'react-native';
-import { Separator } from '@registry/usa/components/ui/separator';
-import { Text } from '@registry/usa/components/ui/text';
+import React from "react";
+import { View } from "react-native";
+import { Separator } from "@registry/usa/components/ui/separator";
+import { Text } from "@registry/usa/components/ui/text";
 
 export function SeparatorPreview() {
   return (

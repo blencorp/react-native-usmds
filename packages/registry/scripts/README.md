@@ -29,6 +29,7 @@ pnpm registry:generate
 ## When to Run
 
 CI regenerates the registry automatically, but run the script locally whenever you:
+
 - ✅ Add or remove a component
 - ✅ Change component dependencies (add/remove imports)
 - ✅ Update component descriptions
@@ -41,7 +42,7 @@ Edit the `DESCRIPTIONS` object in `build-registry.ts`:
 
 ```typescript
 const DESCRIPTIONS: Record<string, string> = {
-  'my-component': 'My component description here.',
+  "my-component": "My component description here.",
   // ...
 };
 ```
@@ -96,22 +97,25 @@ The script generates `generated/usa.json` with this structure:
 Add these steps to CI to rebuild and validate the registry:
 
 ```yaml
-      - run: pnpm registry:generate
-      - run: pnpm registry:validate
+- run: pnpm registry:generate
+- run: pnpm registry:validate
 ```
 
 ## Troubleshooting
 
 ### Component not showing up
+
 - Make sure the file is in `src/usa/components/ui/`
 - Make sure it has a `.tsx` extension
 - Run `pnpm build:registry` again
 
 ### Wrong dependencies detected
+
 - Check the import statements in your component
 - Update `ESSENTIAL_DEPS` if needed
 - Manually edit the generated `usa.json` if automatic detection fails
 
 ### Missing description
+
 - Add the component to the `DESCRIPTIONS` object
 - Use a clear, concise description following the pattern of existing components

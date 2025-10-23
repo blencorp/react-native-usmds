@@ -1,8 +1,13 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@registry/usa/components/ui/accordion';
-import { Text } from '@registry/usa/components/ui/text';
+import React from "react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@registry/usa/components/ui/accordion";
+import { Text } from "@registry/usa/components/ui/text";
 
 export function AccordionPreview() {
   return (
@@ -20,7 +25,10 @@ export function AccordionPreview() {
           <Text>Is it styled?</Text>
         </AccordionTrigger>
         <AccordionContent>
-          <Text>Yes. It comes with default styles that match the USWDS design system.</Text>
+          <Text>
+            Yes. It comes with default styles that match the USWDS design
+            system.
+          </Text>
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-3">
@@ -28,7 +36,9 @@ export function AccordionPreview() {
           <Text>Is it animated?</Text>
         </AccordionTrigger>
         <AccordionContent>
-          <Text>Yes. It's animated by default using React Native Reanimated.</Text>
+          <Text>
+            Yes. It's animated by default using React Native Reanimated.
+          </Text>
         </AccordionContent>
       </AccordionItem>
     </Accordion>

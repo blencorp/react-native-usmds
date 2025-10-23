@@ -1,12 +1,13 @@
-import { Button } from '@registry/usa/components/ui/button';
-import { Text } from '@registry/usa/components/ui/text';
-import { ThemeToggle } from '@showcase/components/theme-toggle';
-import * as Updates from 'expo-updates';
-import * as React from 'react';
-import { ActivityIndicator } from 'react-native';
+import { Button } from "@registry/usa/components/ui/button";
+import { Text } from "@registry/usa/components/ui/text";
+import { ThemeToggle } from "@showcase/components/theme-toggle";
+import * as Updates from "expo-updates";
+import * as React from "react";
+import { ActivityIndicator } from "react-native";
 
 export function HeaderRightView() {
-  const { isUpdateAvailable, isUpdatePending, isDownloading } = Updates.useUpdates();
+  const { isUpdateAvailable, isUpdatePending, isDownloading } =
+    Updates.useUpdates();
 
   async function onReload() {
     try {
@@ -25,7 +26,8 @@ export function HeaderRightView() {
         size="sm"
         variant="outline"
         onPress={onReload}
-        disabled={isDownloading}>
+        disabled={isDownloading}
+      >
         {isDownloading ? (
           <ActivityIndicator color="white" size="small" className="scale-75" />
         ) : (

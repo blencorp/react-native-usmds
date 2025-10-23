@@ -1,4 +1,4 @@
-import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
+import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
 
 /**
  * Shared layout configurations
@@ -8,13 +8,13 @@ import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
  * Docs Layout: app/docs/layout.tsx
  */
 export const siteNavConfig = {
-  title: 'U.S. Mobile Design System (USMDS)',
-  url: '/',
+  title: "U.S. Mobile Design System (USMDS)",
+  url: "/",
   links: [
-    { href: '/docs', label: 'Docs' },
+    { href: "/docs", label: "Docs" },
     {
-      href: 'https://github.com/blencorp/react-native-usmds',
-      label: 'GitHub',
+      href: "https://github.com/blencorp/react-native-usmds",
+      label: "GitHub",
       external: true,
     },
   ],
@@ -23,16 +23,16 @@ export const siteNavConfig = {
 export const baseOptions: BaseLayoutProps = {
   nav: {
     enabled: true,
-    transparentMode: 'top',
+    transparentMode: "top",
     title: siteNavConfig.title,
     url: siteNavConfig.url,
   },
   links: [
     {
-      text: 'Documentation',
-      url: '/docs',
-      active: 'nested-url'
-    }
+      text: "Documentation",
+      url: "/docs",
+      active: "nested-url",
+    },
   ],
-  githubUrl: 'https://github.com/blencorp/react-native-usmds',
+  githubUrl: "https://github.com/blencorp/react-native-usmds",
 };

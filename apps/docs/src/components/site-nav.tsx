@@ -1,28 +1,28 @@
-"use client"
+"use client";
 
-import type { ReactNode } from "react"
-import { useState } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { NavbarSidebarTrigger } from "fumadocs-ui/layouts/docs.client"
-import { SearchToggle } from "fumadocs-ui/components/layout/search-toggle"
-import { Menu, X } from "lucide-react"
-import siteLogo from "../../public/assets/images/logo.webp"
-import { cn } from "@/lib/utils"
+import type { ReactNode } from "react";
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { NavbarSidebarTrigger } from "fumadocs-ui/layouts/docs.client";
+import { SearchToggle } from "fumadocs-ui/components/layout/search-toggle";
+import { Menu, X } from "lucide-react";
+import siteLogo from "../../public/assets/images/logo.webp";
+import { cn } from "@/lib/utils";
 
 type SiteNavLink = {
-  href: string
-  label: string
-  external?: boolean
-}
+  href: string;
+  label: string;
+  external?: boolean;
+};
 
 type SiteNavProps = {
-  className?: string
-  title?: ReactNode
-  url?: string
-  links?: SiteNavLink[]
-  showDocsControls?: boolean
-}
+  className?: string;
+  title?: ReactNode;
+  url?: string;
+  links?: SiteNavLink[];
+  showDocsControls?: boolean;
+};
 
 export function SiteNav({
   className,
@@ -38,11 +38,11 @@ export function SiteNav({
   ],
   showDocsControls = false,
 }: SiteNavProps) {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen)
-  }
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
 
   return (
     <header
@@ -67,10 +67,13 @@ export function SiteNav({
             {title}
           </span>
         </Link>
-        
+
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-3 sm:gap-6">
-          <nav className="flex flex-wrap items-center gap-3 text-sm font-medium sm:gap-6" aria-label="Primary">
+          <nav
+            className="flex flex-wrap items-center gap-3 text-sm font-medium sm:gap-6"
+            aria-label="Primary"
+          >
             {links.map(({ href, label, external }) =>
               external ? (
                 <a
@@ -150,5 +153,5 @@ export function SiteNav({
         </div>
       )}
     </header>
-  )
+  );
 }

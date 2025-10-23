@@ -1,8 +1,14 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/registry/usa/components/ui/card';
+import React from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/registry/usa/components/ui/card";
 
 export function TabsPreview() {
   return (
@@ -34,14 +40,10 @@ export function TabsPreview() {
         <Card>
           <CardHeader>
             <CardTitle>Password</CardTitle>
-            <CardDescription>
-              Change your password here.
-            </CardDescription>
+            <CardDescription>Change your password here.</CardDescription>
           </CardHeader>
           <CardContent className="gap-4">
-            <p className="text-sm">
-              After saving, you'll be logged out.
-            </p>
+            <p className="text-sm">After saving, you'll be logged out.</p>
           </CardContent>
         </Card>
       </TabsContent>

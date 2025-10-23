@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Select,
@@ -8,18 +8,18 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from '@/registry/usa/components/ui/select';
-import type { TriggerRef } from '@rn-primitives/select';
-import * as React from 'react';
-import { Platform } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+} from "@/registry/usa/components/ui/select";
+import type { TriggerRef } from "@rn-primitives/select";
+import * as React from "react";
+import { Platform } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const fruits = [
-  { label: 'Apple', value: 'apple' },
-  { label: 'Banana', value: 'banana' },
-  { label: 'Blueberry', value: 'blueberry' },
-  { label: 'Grapes', value: 'grapes' },
-  { label: 'Pineapple', value: 'pineapple' },
+  { label: "Apple", value: "apple" },
+  { label: "Banana", value: "banana" },
+  { label: "Blueberry", value: "blueberry" },
+  { label: "Grapes", value: "grapes" },
+  { label: "Pineapple", value: "pineapple" },
 ];
 
 export function SelectPreview() {
@@ -27,7 +27,10 @@ export function SelectPreview() {
   const insets = useSafeAreaInsets();
   const contentInsets = {
     top: insets.top,
-    bottom: Platform.select({ ios: insets.bottom, android: insets.bottom + 24 }),
+    bottom: Platform.select({
+      ios: insets.bottom,
+      android: insets.bottom + 24,
+    }),
     left: 12,
     right: 12,
   };
@@ -39,14 +42,22 @@ export function SelectPreview() {
 
   return (
     <Select>
-      <SelectTrigger ref={ref} className="w-[180px]" onTouchStart={onTouchStart}>
+      <SelectTrigger
+        ref={ref}
+        className="w-[180px]"
+        onTouchStart={onTouchStart}
+      >
         <SelectValue placeholder="Select a fruit" />
       </SelectTrigger>
       <SelectContent insets={contentInsets} className="w-[180px]">
         <SelectGroup>
           <SelectLabel>Fruits</SelectLabel>
           {fruits.map((fruit) => (
-            <SelectItem key={fruit.value} label={fruit.label} value={fruit.value}>
+            <SelectItem
+              key={fruit.value}
+              label={fruit.label}
+              value={fruit.value}
+            >
               {fruit.label}
             </SelectItem>
           ))}

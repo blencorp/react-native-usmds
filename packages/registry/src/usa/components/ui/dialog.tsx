@@ -1,18 +1,18 @@
-import { Icon } from '@/registry/usa/components/ui/icon';
-import { NativeOnlyAnimatedView } from '@/registry/usa/components/ui/native-only-animated-view';
-import { cn } from '@/registry/usa/lib/utils';
-import * as DialogPrimitive from '@rn-primitives/dialog';
-import { X } from 'lucide-react-native';
-import * as React from 'react';
-import { Platform, Text, View, type ViewProps } from 'react-native';
-import { FullWindowOverlay as RNFullWindowOverlay } from 'react-native-screens';
+import { Icon } from "@/registry/usa/components/ui/icon";
+import { NativeOnlyAnimatedView } from "@/registry/usa/components/ui/native-only-animated-view";
+import { cn } from "@/registry/usa/lib/utils";
+import * as DialogPrimitive from "@rn-primitives/dialog";
+import { X } from "lucide-react-native";
+import * as React from "react";
+import { Platform, Text, View, type ViewProps } from "react-native";
+import { FullWindowOverlay as RNFullWindowOverlay } from "react-native-screens";
 
-type ReanimatedModule = typeof import('react-native-reanimated');
+type ReanimatedModule = typeof import("react-native-reanimated");
 
 let Reanimated: ReanimatedModule | null = null;
 
-if (Platform.OS !== 'web') {
-  Reanimated = require('react-native-reanimated');
+if (Platform.OS !== "web") {
+  Reanimated = require("react-native-reanimated");
 }
 
 const Dialog = DialogPrimitive.Root;
@@ -23,13 +23,14 @@ const DialogPortal = DialogPrimitive.Portal;
 
 const DialogClose = DialogPrimitive.Close;
 
-const FullWindowOverlay = Platform.OS === 'ios' ? RNFullWindowOverlay : React.Fragment;
+const FullWindowOverlay =
+  Platform.OS === "ios" ? RNFullWindowOverlay : React.Fragment;
 
 function DialogOverlay({
   className,
   children,
   ...props
-}: Omit<DialogPrimitive.OverlayProps, 'asChild'> &
+}: Omit<DialogPrimitive.OverlayProps, "asChild"> &
   React.RefAttributes<DialogPrimitive.OverlayRef> & {
     children?: React.ReactNode;
   }) {
@@ -45,20 +46,23 @@ function DialogOverlay({
     <FullWindowOverlay>
       <DialogPrimitive.Overlay
         className={cn(
-          'absolute bottom-0 left-0 right-0 top-0 z-50 flex items-center justify-center bg-black/50 p-2',
+          "absolute bottom-0 left-0 right-0 top-0 z-50 flex items-center justify-center bg-black/50 p-2",
           Platform.select({
-            web: 'animate-in fade-in-0 fixed cursor-default [&>*]:cursor-auto',
+            web: "animate-in fade-in-0 fixed cursor-default [&>*]:cursor-auto",
           }),
-          className
+          className,
         )}
         {...props}
-        asChild={Platform.OS !== 'web'}>
+        asChild={Platform.OS !== "web"}
+      >
         <NativeOnlyAnimatedView
           {...(outerEntering ? { entering: outerEntering } : {})}
-          {...(outerExiting ? { exiting: outerExiting } : {})}>
+          {...(outerExiting ? { exiting: outerExiting } : {})}
+        >
           <NativeOnlyAnimatedView
             {...(innerEntering ? { entering: innerEntering } : {})}
-            {...(innerExiting ? { exiting: innerExiting } : {})}>
+            {...(innerExiting ? { exiting: innerExiting } : {})}
+          >
             <>{children}</>
           </NativeOnlyAnimatedView>
         </NativeOnlyAnimatedView>
@@ -81,25 +85,29 @@ function DialogContent({
       <DialogOverlay>
         <DialogPrimitive.Content
           className={cn(
-            'bg-background border-border z-50 mx-auto flex w-full max-w-[calc(100%-2rem)] flex-col gap-4 rounded-lg border p-6 shadow-lg shadow-black/5 sm:max-w-lg',
+            "bg-background border-border z-50 mx-auto flex w-full max-w-[calc(100%-2rem)] flex-col gap-4 rounded-lg border p-6 shadow-lg shadow-black/5 sm:max-w-lg",
             Platform.select({
-              web: 'animate-in fade-in-0 zoom-in-95 duration-200',
+              web: "animate-in fade-in-0 zoom-in-95 duration-200",
             }),
-            className
+            className,
           )}
-          {...props}>
+          {...props}
+        >
           <>{children}</>
           <DialogPrimitive.Close
             className={cn(
-              'absolute right-4 top-4 rounded opacity-70 active:opacity-100',
+              "absolute right-4 top-4 rounded opacity-70 active:opacity-100",
               Platform.select({
-                web: 'ring-offset-background focus:ring-ring data-[state=open]:bg-accent transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2',
-              })
+                web: "ring-offset-background focus:ring-ring data-[state=open]:bg-accent transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2",
+              }),
             )}
-            hitSlop={12}>
+            hitSlop={12}
+          >
             <Icon
               as={X}
-              className={cn('text-accent-foreground web:pointer-events-none size-4 shrink-0')}
+              className={cn(
+                "text-accent-foreground web:pointer-events-none size-4 shrink-0",
+              )}
             />
             <Text className="sr-only">Close</Text>
           </DialogPrimitive.Close>
@@ -111,14 +119,20 @@ function DialogContent({
 
 function DialogHeader({ className, ...props }: ViewProps) {
   return (
-    <View className={cn('flex flex-col gap-2 text-center sm:text-left', className)} {...props} />
+    <View
+      className={cn("flex flex-col gap-2 text-center sm:text-left", className)}
+      {...props}
+    />
   );
 }
 
 function DialogFooter({ className, ...props }: ViewProps) {
   return (
     <View
-      className={cn('flex flex-col-reverse gap-2 sm:flex-row sm:justify-end', className)}
+      className={cn(
+        "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
+        className,
+      )}
       {...props}
     />
   );
@@ -130,7 +144,10 @@ function DialogTitle({
 }: DialogPrimitive.TitleProps & React.RefAttributes<DialogPrimitive.TitleRef>) {
   return (
     <DialogPrimitive.Title
-      className={cn('text-foreground text-lg font-semibold leading-none', className)}
+      className={cn(
+        "text-foreground text-lg font-semibold leading-none",
+        className,
+      )}
       {...props}
     />
   );
@@ -139,10 +156,11 @@ function DialogTitle({
 function DialogDescription({
   className,
   ...props
-}: DialogPrimitive.DescriptionProps & React.RefAttributes<DialogPrimitive.DescriptionRef>) {
+}: DialogPrimitive.DescriptionProps &
+  React.RefAttributes<DialogPrimitive.DescriptionRef>) {
   return (
     <DialogPrimitive.Description
-      className={cn('text-muted-foreground text-sm', className)}
+      className={cn("text-muted-foreground text-sm", className)}
       {...props}
     />
   );

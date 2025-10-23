@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   FALLBACK_COMPONENT_MAP,
   FALLBACK_COMPONENTS,
@@ -7,7 +7,7 @@ import {
   buildComponentList,
   buildComponentMap,
   fetchRegistryJson,
-} from '@showcase/lib/constants';
+} from "@showcase/lib/constants";
 
 type RegistryState = {
   components: ShowcaseListItem[];
@@ -21,7 +21,11 @@ const RegistryContext = React.createContext<RegistryState>({
   loading: false,
 });
 
-export function ComponentRegistryProvider({ children }: { children: React.ReactNode }) {
+export function ComponentRegistryProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [state, setState] = React.useState<RegistryState>({
     components: FALLBACK_COMPONENTS,
     componentMap: FALLBACK_COMPONENT_MAP,
@@ -57,7 +61,11 @@ export function ComponentRegistryProvider({ children }: { children: React.ReactN
     };
   }, []);
 
-  return <RegistryContext.Provider value={state}>{children}</RegistryContext.Provider>;
+  return (
+    <RegistryContext.Provider value={state}>
+      {children}
+    </RegistryContext.Provider>
+  );
 }
 
 export function useComponentRegistry() {

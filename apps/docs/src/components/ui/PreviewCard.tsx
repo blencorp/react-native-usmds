@@ -1,12 +1,13 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { useParams } from 'next/navigation';
-import * as React from 'react';
-import { PlatformSelect, usePlatform } from './PlatformSelect';
+import Image from "next/image";
+import { useParams } from "next/navigation";
+import * as React from "react";
+import { PlatformSelect, usePlatform } from "./PlatformSelect";
 
-const SHOWCASE_QR_IMAGE = '/images/showcase-qr.svg';
-const SHOWCASE_URL = 'exp://u.expo.dev/0e88c5ff-0082-4757-b0fc-5f63ba337b72?runtime-version=1.0.0&channel-name=showcase';
+const SHOWCASE_QR_IMAGE = "/images/showcase-qr.svg";
+const SHOWCASE_URL =
+  "exp://u.expo.dev/0e88c5ff-0082-4757-b0fc-5f63ba337b72?runtime-version=1.0.0&channel-name=showcase";
 
 type PreviewCardProps = {
   preview?: React.ReactNode;
@@ -40,13 +41,15 @@ export function PreviewCard({ preview }: PreviewCardProps) {
           href={SHOWCASE_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="not-prose bg-primary text-primary-foreground focus-visible:border-ring focus-visible:ring-ring/50 mt-4 inline-flex w-full shrink-0 items-center gap-2.5 rounded-lg p-2.5 text-sm font-medium shadow-sm outline-none transition-all focus-visible:ring-[3px] sm:hidden dark:p-2 [&_svg]:shrink-0">
+          className="not-prose bg-primary text-primary-foreground focus-visible:border-ring focus-visible:ring-ring/50 mt-4 inline-flex w-full shrink-0 items-center gap-2.5 rounded-lg p-2.5 text-sm font-medium shadow-sm outline-none transition-all focus-visible:ring-[3px] sm:hidden dark:p-2 [&_svg]:shrink-0"
+        >
           <div className="bg-primary flex items-center justify-center rounded-lg p-1 shadow-md dark:bg-black dark:p-2">
             <svg
               className="size-11 text-white dark:size-10"
               viewBox="0 0 24 24"
               fill="none"
-              xmlns="http://www.w3.org/2000/svg">
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path
                 d="M12 2L2 7L12 12L22 7L12 2Z"
                 stroke="currentColor"
@@ -86,7 +89,7 @@ export function PreviewCard({ preview }: PreviewCardProps) {
           <PlatformSelect value={platform} onValueChange={setPlatform} />
         </div>
         <div className="flex flex-1 flex-col items-center justify-center p-4">
-          {platform === 'native' && width >= 640 ? (
+          {platform === "native" && width >= 640 ? (
             <div className="flex max-w-sm flex-col items-center gap-6 p-4">
               <Image
                 src={SHOWCASE_QR_IMAGE}
@@ -95,7 +98,9 @@ export function PreviewCard({ preview }: PreviewCardProps) {
                 height={230}
                 className="h-[230px] w-[230px]"
               />
-              <p className="text-center font-mono text-sm">Scan to preview in Expo Go.</p>
+              <p className="text-center font-mono text-sm">
+                Scan to preview in Expo Go.
+              </p>
             </div>
           ) : (
             preview
@@ -106,13 +111,15 @@ export function PreviewCard({ preview }: PreviewCardProps) {
         href={SHOWCASE_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className="not-prose bg-primary text-primary-foreground focus-visible:border-ring focus-visible:ring-ring/50 mt-4 inline-flex w-full shrink-0 items-center gap-2.5 rounded-lg p-2.5 text-sm font-medium shadow-sm outline-none transition-all focus-visible:ring-[3px] sm:hidden dark:p-2 [&_svg]:shrink-0">
+        className="not-prose bg-primary text-primary-foreground focus-visible:border-ring focus-visible:ring-ring/50 mt-4 inline-flex w-full shrink-0 items-center gap-2.5 rounded-lg p-2.5 text-sm font-medium shadow-sm outline-none transition-all focus-visible:ring-[3px] sm:hidden dark:p-2 [&_svg]:shrink-0"
+      >
         <div className="bg-primary flex items-center justify-center rounded-lg p-1 shadow-md dark:bg-black dark:p-2">
           <svg
             className="size-11 text-white dark:size-10"
             viewBox="0 0 24 24"
             fill="none"
-            xmlns="http://www.w3.org/2000/svg">
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path
               d="M12 2L2 7L12 12L22 7L12 2Z"
               stroke="currentColor"
@@ -152,8 +159,8 @@ type WindowSize = {
 
 function useWindowSize(): WindowSize {
   const [size, setSize] = React.useState<WindowSize>({
-    width: typeof window !== 'undefined' ? window.innerWidth : 0,
-    height: typeof window !== 'undefined' ? window.innerHeight : 0,
+    width: typeof window !== "undefined" ? window.innerWidth : 0,
+    height: typeof window !== "undefined" ? window.innerHeight : 0,
   });
 
   React.useEffect(() => {
@@ -164,9 +171,9 @@ function useWindowSize(): WindowSize {
       });
     }
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -175,28 +182,31 @@ function useWindowSize(): WindowSize {
 
 export function useIsDarkMode(): boolean {
   const [isDark, setIsDark] = React.useState(() => {
-    if (typeof document === 'undefined') return false;
-    return document.documentElement.classList.contains('dark');
+    if (typeof document === "undefined") return false;
+    return document.documentElement.classList.contains("dark");
   });
 
   React.useEffect(() => {
     const htmlEl = document.documentElement;
 
     const updateDarkMode = () => {
-      setIsDark(htmlEl.classList.contains('dark'));
+      setIsDark(htmlEl.classList.contains("dark"));
     };
 
     updateDarkMode();
 
     const observer = new MutationObserver((mutations) => {
       for (const mutation of mutations) {
-        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+        if (
+          mutation.type === "attributes" &&
+          mutation.attributeName === "class"
+        ) {
           updateDarkMode();
         }
       }
     });
 
-    observer.observe(htmlEl, { attributes: true, attributeFilter: ['class'] });
+    observer.observe(htmlEl, { attributes: true, attributeFilter: ["class"] });
 
     return () => {
       observer.disconnect();

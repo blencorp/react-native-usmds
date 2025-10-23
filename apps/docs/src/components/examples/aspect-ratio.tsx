@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { AspectRatio } from '@/registry/usa/components/ui/aspect-ratio';
-import { View } from 'react-native';
+import React from "react";
+import { AspectRatio } from "@/registry/usa/components/ui/aspect-ratio";
+import { View } from "react-native";
 
 export function AspectRatioPreview() {
   return (

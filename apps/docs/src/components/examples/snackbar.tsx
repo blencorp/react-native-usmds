@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Snackbar } from '@/registry/usa/components/ui/snackbar';
-import { Button } from '@/registry/usa/components/ui/button';
-import { Text } from '@/registry/usa/components/ui/text';
+import React from "react";
+import { Snackbar } from "@/registry/usa/components/ui/snackbar";
+import { Button } from "@/registry/usa/components/ui/button";
+import { Text } from "@/registry/usa/components/ui/text";
 
 export function SnackbarPreview() {
   const [successVisible, setSuccessVisible] = React.useState(false);
@@ -26,7 +26,7 @@ export function SnackbarPreview() {
           layout="one-line"
           variant="success"
           message="Message sent successfully"
-          onAction={() => console.log('Action')}
+          onAction={() => console.log("Action")}
           onDismiss={() => setSuccessVisible(false)}
           actionLabel="Undo"
         />
@@ -36,7 +36,7 @@ export function SnackbarPreview() {
           layout="one-line"
           variant="error"
           message="Failed to send message"
-          onAction={() => console.log('Retry')}
+          onAction={() => console.log("Retry")}
           onDismiss={() => setErrorVisible(false)}
           actionLabel="Retry"
         />

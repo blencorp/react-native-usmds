@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Text, TextClassContext } from '@registry/usa/components/ui/text';
-import { View } from 'react-native';
+import React from "react";
+import { Text, TextClassContext } from "@registry/usa/components/ui/text";
+import { View } from "react-native";
 
 export function TextCascadePreview() {
   return (
@@ -18,7 +18,7 @@ export function TextCascadePreview() {
         </Text>
         <Text>
           {/* This `className` will override the `TextClassContext.Provider` value */}
-          <Text className="text-purple-500">Overridden:</Text>{' '}
+          <Text className="text-purple-500">Overridden:</Text>{" "}
           <Text variant="code" className="text-purple-500">
             text-purple-500
           </Text>
@@ -26,7 +26,8 @@ export function TextCascadePreview() {
         <NestedParent>
           {/* Inherits the `TextClassContext.Provider` value from the `OtherParent` component overrides the `TextClassContext.Provider` value from the `Parent` */}
           <Text>
-            Inherited from NestedParent: <Text variant="code">text-sky-500</Text>
+            Inherited from NestedParent:{" "}
+            <Text variant="code">text-sky-500</Text>
           </Text>
         </NestedParent>
       </Parent>
