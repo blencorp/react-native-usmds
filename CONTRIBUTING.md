@@ -79,11 +79,10 @@ Before contributing, ensure you have:
 
 6. **Start Development Environment**
 
-   For Storybook (interactive component development):
+   For showcase app (interactive component demonstration):
 
    ```bash
-   cd apps/storybook
-   pnpm storybook
+   pnpm dev:showcase
    ```
 
    For documentation site:
@@ -97,9 +96,8 @@ Before contributing, ensure you have:
 ```text
 .
 ├── apps/
-│   ├── storybook/         # Expo Storybook for interactive UI review
-│   ├── docs/              # Next.js documentation site and API reference
-│   └── cli/               # Internal CLI tool (built with tsup)
+│   ├── showcase/          # Expo showcase app for interactive component demonstration
+│   └── docs/              # Next.js documentation site and API reference
 ├── packages/
 │   └── registry/          # React Native UI components (USMDS) and tests
 ├── .github/
@@ -597,7 +595,7 @@ Any other context, mockups, or examples.
    - [ ] Feature/Fix description
    - [ ] Tests added/updated
    - [ ] Documentation updated
-   - [ ] Storybook stories added/updated (for UI changes)
+   - [ ] Showcase examples added/updated (for UI changes)
 
    ## Testing
 
