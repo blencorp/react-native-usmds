@@ -2,32 +2,45 @@
 
 import React from 'react';
 import { View } from 'react-native';
+import * as Haptics from 'expo-haptics';
 import { RadioGroup, RadioGroupItem } from '@registry/usa/components/ui/radiogroup';
 import { Label } from '@registry/usa/components/ui/label';
 
 export function RadioGroupPreview() {
   const [value, setValue] = React.useState('comfortable');
 
+  function onLabelPress(label: string) {
+    return () => {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+      setValue(label);
+    };
+  }
+
+  function onValueChange(value: string) {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    setValue(value);
+  }
+
   return (
-    <View className="flex flex-col gap-4 w-full max-w-md">
-      <RadioGroup value={value} onValueChange={setValue}>
-        <View className="flex flex-row items-center gap-2">
-          <RadioGroupItem value="default" id="r1" />
-          <Label htmlFor="r1">Default</Label>
-        </View>
-        <View className="flex flex-row items-center gap-2">
-          <RadioGroupItem value="comfortable" id="r2" />
-          <Label htmlFor="r2">Comfortable</Label>
-        </View>
-        <View className="flex flex-row items-center gap-2">
-          <RadioGroupItem value="compact" id="r3" />
-          <Label htmlFor="r3">Compact</Label>
-        </View>
-        <View className="flex flex-row items-center gap-2">
-          <RadioGroupItem value="disabled" id="r4" disabled />
-          <Label htmlFor="r4" className="opacity-50">Disabled</Label>
-        </View>
-      </RadioGroup>
-    </View>
+    <RadioGroup value={value} onValueChange={onValueChange}>
+      <View className='flex flex-row items-center gap-3'>
+        <RadioGroupItem value='default' id='r1' />
+        <Label htmlFor='r1' onPress={onLabelPress('default')}>
+          Default
+        </Label>
+      </View>
+      <View className='flex flex-row items-center gap-3'>
+        <RadioGroupItem value='comfortable' id='r2' />
+        <Label htmlFor='r2' onPress={onLabelPress('comfortable')}>
+          Comfortable
+        </Label>
+      </View>
+      <View className='flex flex-row items-center gap-3'>
+        <RadioGroupItem value='compact' id='r3' />
+        <Label htmlFor='r3' onPress={onLabelPress('compact')}>
+          Compact
+        </Label>
+      </View>
+    </RadioGroup>
   );
 }

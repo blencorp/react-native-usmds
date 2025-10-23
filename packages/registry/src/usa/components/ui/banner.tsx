@@ -165,7 +165,7 @@ const Banner = forwardRef<ElementRef<typeof View>, BannerProps>(({ className, va
 
       {isStandardApp && (
         <CollapsiblePrimitive.Root open={isExpanded}>
-          <CollapsiblePrimitive.Content className='bg-muted/50 border-t border-border w-full'>
+          <CollapsiblePrimitive.Content className='bg-muted border-t border-border w-full'>
             <View className='p-4 flex-row gap-6'>
               {/* Official government website section */}
               <View className='flex-1 flex-row gap-3'>

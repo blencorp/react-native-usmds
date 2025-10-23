@@ -12,10 +12,10 @@ export function TabsPreview() {
     <Tabs value={value} onValueChange={setValue} className="w-full max-w-md">
       <TabsList className="w-full">
         <TabsTrigger value="account" className="flex-1">
-          Account
+          <Text>Account</Text>
         </TabsTrigger>
         <TabsTrigger value="password" className="flex-1">
-          Password
+          <Text>Password</Text>
         </TabsTrigger>
       </TabsList>
       <TabsContent value="account">
