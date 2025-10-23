@@ -22,7 +22,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# others
+# environment variables
+.env
 .env*.local
+
+# others
 .vercel
 next-env.d.ts

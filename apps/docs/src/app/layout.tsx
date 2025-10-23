@@ -7,6 +7,7 @@ import {
   Public_Sans,
   Instrument_Serif,
 } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { NativeWindStyleSheet } from "@/components/native-wind-provider";
 import { SafeAreaProvider } from "@/components/safe-area-provider";
 import { CookiesProvider } from "@/components/cookies-provider";
@@ -134,6 +135,9 @@ export default function Layout({ children }: LayoutProps<"/">) {
             </RootProvider>
           </SafeAreaProvider>
         </CookiesProvider>
+        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+        )}
       </body>
     </html>
   );
