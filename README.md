@@ -59,7 +59,11 @@ Troubleshooting
 
 ## Contributing
 
-We welcome contributions! Please see our contributing guidelines for more details.
+We welcome contributions! Whether you want to report a bug, request a feature, or submit a pull request, we'd love to have your help.
+
+- 🐛 [Report a bug](https://github.com/blencorp/react-native-usmds/issues/new?template=bug_report.yml)
+- ✨ [Request a feature](https://github.com/blencorp/react-native-usmds/issues/new?template=feature_request.yml)
+- 📖 Read our [Contributing Guidelines](CONTRIBUTING.md) for detailed information on the development process
 
 ## License
 
