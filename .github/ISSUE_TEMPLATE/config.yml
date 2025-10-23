@@ -4,7 +4,7 @@ contact_links:
     url: https://github.com/blencorp/react-native-usmds/discussions
     about: Ask questions and discuss ideas with the community
   - name: 📚 Documentation
-    url: https://usmds.blencorp.com
+    url: https://usmds.blencorp.com/docs
     about: Check our documentation for guides and API references
   - name: 🔒 Security Vulnerability
     url: https://github.com/blencorp/react-native-usmds/security/advisories/new
