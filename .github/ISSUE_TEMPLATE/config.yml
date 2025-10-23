@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 GitHub Discussions
+    url: https://github.com/blencorp/react-native-usmds/discussions
+    about: Ask questions and discuss ideas with the community
+  - name: 📚 Documentation
+    url: https://usmds.blencorp.com
+    about: Check our documentation for guides and API references
+  - name: 🔒 Security Vulnerability
+    url: https://github.com/blencorp/react-native-usmds/security/advisories/new
+    about: Report a security vulnerability privately through GitHub Security Advisories
