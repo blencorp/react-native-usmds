@@ -16,7 +16,7 @@
     "@rn-primitives/accordion": "~1.1.0",
     "@rn-primitives/alert-dialog": "^1.2.0",
     "@rn-primitives/aspect-ratio": "^1.2.0",
-    "@rn-primitives/avatar": "~1.1.0",
+    "@rn-primitives/avatar": "~1.2.0",
     "@rn-primitives/checkbox": "~1.1.0",
     "@rn-primitives/collapsible": "~1.1.0",
     "@rn-primitives/context-menu": "^1.2.0",
