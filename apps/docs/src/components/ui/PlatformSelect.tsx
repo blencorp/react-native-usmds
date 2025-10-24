@@ -1,23 +1,23 @@
-'use client';
+"use client";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { type SelectProps } from '@radix-ui/react-select';
-import { getCookie, setCookie } from 'cookies-next/client';
-import * as React from 'react';
+} from "@/components/ui/select";
+import { type SelectProps } from "@radix-ui/react-select";
+import { getCookie, setCookie } from "cookies-next/client";
+import * as React from "react";
 
 const PLATFORMS = [
-  { name: 'web', label: 'Web' },
-  { name: 'native', label: 'Native' },
+  { name: "web", label: "Web" },
+  { name: "native", label: "Native" },
 ] as const;
 
-type Platform = (typeof PLATFORMS)[number]['name'];
+type Platform = (typeof PLATFORMS)[number]["name"];
 
 export function PlatformSelect(props: SelectProps) {
   const [isClient, setIsClient] = React.useState(false);
@@ -27,26 +27,38 @@ export function PlatformSelect(props: SelectProps) {
   }, []);
 
   // Use props directly or fall back to internal hook
-  const value = props.value || 'web';
+  const value = props.value || "web";
   const onValueChange = props.onValueChange || (() => {});
 
   return (
-    <Select {...props} defaultValue="web" value={value} onValueChange={onValueChange}>
+    <Select
+      {...props}
+      defaultValue="web"
+      value={value}
+      onValueChange={onValueChange}
+    >
       <Button asChild variant="outline" size="sm">
         <SelectTrigger className="dark:bg-muted dark:hover:bg-muted/80 border-0 w-fit">
           <span className="text-muted-foreground flex-1 pr-1">Platform:</span>
           {!isClient ? (
             <span className="opacity-50">
-              {PLATFORMS.find((p) => p.name === value)?.label || 'Web'}
+              {PLATFORMS.find((p) => p.name === value)?.label || "Web"}
             </span>
           ) : (
             <SelectValue placeholder="Select platform" />
           )}
         </SelectTrigger>
       </Button>
-      <SelectContent onCloseAutoFocus={preventDefault} className="dark:bg-neutral-900">
+      <SelectContent
+        onCloseAutoFocus={preventDefault}
+        className="dark:bg-neutral-900"
+      >
         {PLATFORMS.map((platform) => (
-          <SelectItem key={platform.name} value={platform.name} className="text-xs">
+          <SelectItem
+            key={platform.name}
+            value={platform.name}
+            className="text-xs"
+          >
             {platform.label}
           </SelectItem>
         ))}
@@ -56,10 +68,10 @@ export function PlatformSelect(props: SelectProps) {
 }
 
 export function usePlatform() {
-  const [platform, setPlatform] = React.useState<Platform>('web');
+  const [platform, setPlatform] = React.useState<Platform>("web");
 
   React.useEffect(() => {
-    const stored = getCookie('user.platform') as Platform | undefined;
+    const stored = getCookie("user.platform") as Platform | undefined;
     if (stored) {
       setPlatform(stored);
     }
@@ -67,7 +79,7 @@ export function usePlatform() {
 
   function onPlatformChange(value: Platform) {
     setPlatform(value);
-    setCookie('user.platform', value);
+    setCookie("user.platform", value);
   }
 
   return [platform, onPlatformChange] as const;

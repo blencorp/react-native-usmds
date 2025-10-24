@@ -24,7 +24,6 @@ This workspace is configured for the current Expo application services (EAS) too
    This runs `eas update --branch showcase`, creating (or reusing) the `showcase` update branch and automatically mapping it to the `showcase` release channel.
 
 2. After the upload completes, the CLI prints a QR code and an `exp+updates://` link. Share either with stakeholders.
-
    - Users install **Expo Go** from the App Store or Play Store.
    - They scan the QR code (or paste the link) to open the showcase experience inside Expo Go.
 

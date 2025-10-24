@@ -1,3 +1,3 @@
-'use client';
+"use client";
 
-export { SafeAreaProvider } from 'react-native-safe-area-context';
+export { SafeAreaProvider } from "react-native-safe-area-context";

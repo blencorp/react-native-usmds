@@ -1,9 +1,13 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { View } from 'react-native';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@registry/usa/components/ui/hover-card';
-import { Text } from '@registry/usa/components/ui/text';
+import React from "react";
+import { View } from "react-native";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@registry/usa/components/ui/hover-card";
+import { Text } from "@registry/usa/components/ui/text";
 
 export function HoverCardPreview() {
   return (

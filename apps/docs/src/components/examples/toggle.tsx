@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Toggle, ToggleIcon } from '@/registry/usa/components/ui/toggle';
-import { Text } from '@/registry/usa/components/ui/text';
-import { Bold, Italic, Underline } from 'lucide-react-native';
+import React from "react";
+import { Toggle, ToggleIcon } from "@/registry/usa/components/ui/toggle";
+import { Text } from "@/registry/usa/components/ui/text";
+import { Bold, Italic, Underline } from "lucide-react-native";
 
 export function TogglePreview() {
   const [bold, setBold] = React.useState(false);
@@ -19,7 +19,11 @@ export function TogglePreview() {
         <Toggle pressed={italic} onPressedChange={setItalic} variant="outline">
           <ToggleIcon as={Italic} />
         </Toggle>
-        <Toggle pressed={underline} onPressedChange={setUnderline} variant="outline">
+        <Toggle
+          pressed={underline}
+          onPressedChange={setUnderline}
+          variant="outline"
+        >
           <ToggleIcon as={Underline} />
         </Toggle>
       </div>

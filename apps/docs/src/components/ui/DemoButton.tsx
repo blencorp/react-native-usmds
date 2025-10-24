@@ -7,9 +7,9 @@ import { FC } from "react";
 interface DemoButtonProps {
   href: string;
   children?: string;
-  marginTop?: string;    // e.g. "-mt-4" or "mt-2"
+  marginTop?: string; // e.g. "-mt-4" or "mt-2"
   marginBottom?: string; // e.g. "-mb-6" or "mb-0"
-  className?: string;    // optional extra classes for the wrapper
+  className?: string; // optional extra classes for the wrapper
 }
 
 const DemoButton: FC<DemoButtonProps> = ({
@@ -51,4 +51,4 @@ const DemoButton: FC<DemoButtonProps> = ({
   );
 };
 
-export  {DemoButton};
+export { DemoButton };

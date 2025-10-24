@@ -1,6 +1,11 @@
-import { useComponentRegistry } from '@showcase/lib/registry-context';
-import { Stack, useFocusEffect, useLocalSearchParams, useRouter } from 'expo-router';
-import * as React from 'react';
+import { useComponentRegistry } from "@showcase/lib/registry-context";
+import {
+  Stack,
+  useFocusEffect,
+  useLocalSearchParams,
+  useRouter,
+} from "expo-router";
+import * as React from "react";
 
 export default function ShowcaseLinkScreen() {
   const { slug } = useLocalSearchParams<{ slug?: string | string[] }>();
@@ -11,11 +16,14 @@ export default function ShowcaseLinkScreen() {
     React.useCallback(() => {
       const value = Array.isArray(slug) ? slug[0] : slug;
       if (value && componentMap[value]) {
-        router.replace({ pathname: '/components/[slug]', params: { slug: value } });
+        router.replace({
+          pathname: "/components/[slug]",
+          params: { slug: value },
+        });
       } else {
-        router.replace('/');
+        router.replace("/");
       }
-    }, [componentMap, router, slug])
+    }, [componentMap, router, slug]),
   );
 
   return <Stack.Screen options={{ headerShown: false }} />;

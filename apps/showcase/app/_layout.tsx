@@ -1,35 +1,35 @@
-import '../global.css';
+import "../global.css";
 
-import { Text } from '@registry/usa/components/ui/text';
-import { ThemeProvider } from '@react-navigation/native';
-import { PortalHost } from '@rn-primitives/portal';
-import { HeaderRightView } from '@showcase/components/header-right-view';
-import { useGeistFont } from '@showcase/hooks/use-geist-font';
-import { ComponentRegistryProvider } from '@showcase/lib/registry-context';
-import { NAV_THEME } from '@showcase/lib/theme';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
-import { useColorScheme } from 'nativewind';
-import * as React from 'react';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { KeyboardProvider } from 'react-native-keyboard-controller';
+import { Text } from "@registry/usa/components/ui/text";
+import { ThemeProvider } from "@react-navigation/native";
+import { PortalHost } from "@rn-primitives/portal";
+import { HeaderRightView } from "@showcase/components/header-right-view";
+import { useGeistFont } from "@showcase/hooks/use-geist-font";
+import { ComponentRegistryProvider } from "@showcase/lib/registry-context";
+import { NAV_THEME } from "@showcase/lib/theme";
+import { Stack } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
+import { StatusBar } from "expo-status-bar";
+import { useColorScheme } from "nativewind";
+import * as React from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { KeyboardProvider } from "react-native-keyboard-controller";
 
 SplashScreen.preventAutoHideAsync();
 
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
-} from 'expo-router';
+} from "expo-router";
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: 'index',
+  initialRouteName: "index",
 };
 
 export default function RootLayout() {
   const [loaded, error] = useGeistFont();
-  const { colorScheme = 'light' } = useColorScheme();
+  const { colorScheme = "light" } = useColorScheme();
 
   React.useEffect(() => {
     if (loaded || error) {
@@ -43,35 +43,40 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={NAV_THEME[colorScheme]}>
-      <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+      <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
       <GestureHandlerRootView
-        style={{ flex: 1, backgroundColor: NAV_THEME[colorScheme].colors.background }}>
+        style={{
+          flex: 1,
+          backgroundColor: NAV_THEME[colorScheme].colors.background,
+        }}
+      >
         <KeyboardProvider>
           <ComponentRegistryProvider>
             <Stack
               screenOptions={{
-                headerBackTitle: 'Back',
+                headerBackTitle: "Back",
                 headerTitle(props) {
-                return (
-                  <Text className="android:mt-1.5 text-xl font-medium">
-                    {toOptions(
-                      typeof props.children === 'string'
-                        ? props.children.split('/').pop() ?? ''
-                        : ''
-                    )}
-                  </Text>
-                );
-              },
-              headerRight: () => <HeaderRightView />,
-            }}>
-            <Stack.Screen
-              name="index"
-              options={{
-                headerTitle: 'Showcase',
-                headerShadowVisible: false,
-                headerTransparent: false,
+                  return (
+                    <Text className="android:mt-1.5 text-xl font-medium">
+                      {toOptions(
+                        typeof props.children === "string"
+                          ? (props.children.split("/").pop() ?? "")
+                          : "",
+                      )}
+                    </Text>
+                  );
+                },
+                headerRight: () => <HeaderRightView />,
               }}
-            />
+            >
+              <Stack.Screen
+                name="index"
+                options={{
+                  headerTitle: "Showcase",
+                  headerShadowVisible: false,
+                  headerTransparent: false,
+                }}
+              />
             </Stack>
           </ComponentRegistryProvider>
           <PortalHost />
@@ -83,8 +88,8 @@ export default function RootLayout() {
 
 function toOptions(name: string) {
   const title = name
-    .split('-')
+    .split("-")
     .map((str) => str.replace(/\b\w/g, (char) => char.toUpperCase()))
-    .join(' ');
-  return title || 'Showcase';
+    .join(" ");
+  return title || "Showcase";
 }

@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Button } from '@/registry/usa/components/ui/button';
+import React from "react";
+import { Button } from "@/registry/usa/components/ui/button";
 import {
   Card,
   CardContent,
@@ -9,9 +9,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/registry/usa/components/ui/card';
-import { Text } from '@/registry/usa/components/ui/text';
-import { View } from 'react-native';
+} from "@/registry/usa/components/ui/card";
+import { Text } from "@/registry/usa/components/ui/text";
+import { View } from "react-native";
 
 export function CardPreview() {
   return (
@@ -19,7 +19,9 @@ export function CardPreview() {
       <CardHeader className="flex-row">
         <View className="flex-1 gap-1.5">
           <CardTitle>Subscribe to our newsletter</CardTitle>
-          <CardDescription>Enter your details to receive updates and tips</CardDescription>
+          <CardDescription>
+            Enter your details to receive updates and tips
+          </CardDescription>
         </View>
       </CardHeader>
       <CardContent>

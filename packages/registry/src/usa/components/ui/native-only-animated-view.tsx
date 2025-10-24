@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { Platform, View } from 'react-native';
+import * as React from "react";
+import { Platform, View } from "react-native";
 
-type ReanimatedModule = typeof import('react-native-reanimated');
+type ReanimatedModule = typeof import("react-native-reanimated");
 
 let Reanimated: ReanimatedModule | null = null;
 
-if (Platform.OS !== 'web') {
-  Reanimated = require('react-native-reanimated');
+if (Platform.OS !== "web") {
+  Reanimated = require("react-native-reanimated");
 }
 
 /**
@@ -22,9 +22,10 @@ if (Platform.OS !== 'web') {
  * ```
  */
 function NativeOnlyAnimatedView(
-  props: (React.ComponentProps<typeof View> & Record<string, unknown>) & React.RefAttributes<View>
+  props: (React.ComponentProps<typeof View> & Record<string, unknown>) &
+    React.RefAttributes<View>,
 ) {
-  if (Platform.OS === 'web' || !Reanimated) {
+  if (Platform.OS === "web" || !Reanimated) {
     return <>{props.children as React.ReactNode}</>;
   }
 

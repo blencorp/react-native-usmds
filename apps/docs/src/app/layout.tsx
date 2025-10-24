@@ -14,7 +14,8 @@ import { CookiesProvider } from "@/components/cookies-provider";
 import { cn } from "@/lib/utils";
 
 const faviconPath = "/assets/images/favicons";
-const appBaseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://usmds.blencorp.com";
+const appBaseUrl =
+  process.env.NEXT_PUBLIC_APP_URL ?? "https://usmds.blencorp.com";
 const metadataBase = new URL(appBaseUrl);
 
 export const metadata: Metadata = {
@@ -24,13 +25,41 @@ export const metadata: Metadata = {
     "The United States Mobile Design System (USMDS) is a design system for building mobile applications that follow the U.S. Web Design System (USWDS).",
   icons: {
     icon: [
-      { url: `${faviconPath}/favicon-16x16.png`, sizes: "16x16", type: "image/png" },
-      { url: `${faviconPath}/favicon-32x32.png`, sizes: "32x32", type: "image/png" },
-      { url: `${faviconPath}/favicon-96x96.png`, sizes: "96x96", type: "image/png" },
-      { url: `${faviconPath}/favicon-128x128.png`, sizes: "128x128", type: "image/png" },
-      { url: `${faviconPath}/favicon-196x196.png`, sizes: "196x196", type: "image/png" },
-      { url: `${faviconPath}/android-chrome-192x192.png`, sizes: "192x192", type: "image/png" },
-      { url: `${faviconPath}/android-chrome-512x512.png`, sizes: "512x512", type: "image/png" },
+      {
+        url: `${faviconPath}/favicon-16x16.png`,
+        sizes: "16x16",
+        type: "image/png",
+      },
+      {
+        url: `${faviconPath}/favicon-32x32.png`,
+        sizes: "32x32",
+        type: "image/png",
+      },
+      {
+        url: `${faviconPath}/favicon-96x96.png`,
+        sizes: "96x96",
+        type: "image/png",
+      },
+      {
+        url: `${faviconPath}/favicon-128x128.png`,
+        sizes: "128x128",
+        type: "image/png",
+      },
+      {
+        url: `${faviconPath}/favicon-196x196.png`,
+        sizes: "196x196",
+        type: "image/png",
+      },
+      {
+        url: `${faviconPath}/android-chrome-192x192.png`,
+        sizes: "192x192",
+        type: "image/png",
+      },
+      {
+        url: `${faviconPath}/android-chrome-512x512.png`,
+        sizes: "512x512",
+        type: "image/png",
+      },
     ],
     apple: [
       { url: `${faviconPath}/apple-touch-icon-57x57.png`, sizes: "57x57" },
@@ -104,7 +133,7 @@ const fontPublicSans = Public_Sans({
 const fontInstrumentSerif = Instrument_Serif({
   subsets: ["latin"],
   variable: "--font-instrument-serif",
-  weight: ["400"]
+  weight: ["400"],
 });
 
 export default function Layout({ children }: LayoutProps<"/">) {
@@ -115,7 +144,7 @@ export default function Layout({ children }: LayoutProps<"/">) {
         fontPublicSans.variable,
         fontSans.variable,
         fontMono.variable,
-        fontInstrumentSerif.variable
+        fontInstrumentSerif.variable,
       )}
       suppressHydrationWarning
     >

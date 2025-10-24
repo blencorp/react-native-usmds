@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useServerInsertedHTML } from 'next/navigation';
-import { StyleSheet } from 'react-native';
+import { useServerInsertedHTML } from "next/navigation";
+import { StyleSheet } from "react-native";
 
 export function NativeWindStyleSheet() {
   useServerInsertedHTML(() => {

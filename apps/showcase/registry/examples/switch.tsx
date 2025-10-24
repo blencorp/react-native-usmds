@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { Label } from '@registry/usa/components/ui/label';
-import { Switch } from '@registry/usa/components/ui/switch';
-import * as React from 'react';
-import { View } from 'react-native';
+import { Label } from "@registry/usa/components/ui/label";
+import { Switch } from "@registry/usa/components/ui/switch";
+import * as React from "react";
+import { View } from "react-native";
 
 export function SwitchPreview() {
   const [checked, setChecked] = React.useState(false);
@@ -16,7 +16,11 @@ export function SwitchPreview() {
         id="airplane-mode"
         nativeID="airplane-mode"
       />
-      <Label nativeID="airplane-mode" htmlFor="airplane-mode" onPress={() => setChecked((prev) => !prev)}>
+      <Label
+        nativeID="airplane-mode"
+        htmlFor="airplane-mode"
+        onPress={() => setChecked((prev) => !prev)}
+      >
         Airplane Mode
       </Label>
     </View>

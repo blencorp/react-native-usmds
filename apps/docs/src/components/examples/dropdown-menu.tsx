@@ -1,9 +1,16 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/registry/usa/components/ui/dropdown-menu';
-import { Button } from '@/registry/usa/components/ui/button';
-import { Text } from '@/registry/usa/components/ui/text';
+import React from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/registry/usa/components/ui/dropdown-menu";
+import { Button } from "@/registry/usa/components/ui/button";
+import { Text } from "@/registry/usa/components/ui/text";
 
 export function DropdownMenuPreview() {
   return (

@@ -1,22 +1,26 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { View } from 'react-native';
-import { Button } from '@registry/usa/components/ui/button';
-import { Text } from '@registry/usa/components/ui/text';
-import { ChevronsUpDown } from 'lucide-react-native';
+import React from "react";
+import { View } from "react-native";
+import { Button } from "@registry/usa/components/ui/button";
+import { Text } from "@registry/usa/components/ui/text";
+import { ChevronsUpDown } from "lucide-react-native";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from '@registry/usa/components/ui/collapsible';
-import { Icon } from '@registry/usa/components/ui/icon';
+} from "@registry/usa/components/ui/collapsible";
+import { Icon } from "@registry/usa/components/ui/icon";
 
 export function CollapsiblePreview() {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <Collapsible open={isOpen} onOpenChange={setIsOpen} className="w-[350px] gap-2">
+    <Collapsible
+      open={isOpen}
+      onOpenChange={setIsOpen}
+      className="w-[350px] gap-2"
+    >
       <View className="flex flex-row items-center justify-between gap-4 rounded-md border border-border px-4 py-2">
         <Text className="text-sm font-semibold text-foreground">
           @peduarte starred 3 repositories

@@ -1,41 +1,48 @@
-import chalk from 'chalk';
-import { Command } from 'commander';
-import { existsSync, promises as fs } from 'fs';
-import ora from 'ora';
-import path from 'path';
-import * as z from 'zod';
-import { getPackageManager, getInstallCommand } from '../utils/get-package-manager';
-import { handleError } from '../utils/handle-error';
-import { logger } from '../utils/logger';
-import * as templates from '../utils/templates';
-import { spawn } from 'child_process';
+import chalk from "chalk";
+import { Command } from "commander";
+import { existsSync, promises as fs } from "fs";
+import ora from "ora";
+import path from "path";
+import * as z from "zod";
+import {
+  getPackageManager,
+  getInstallCommand,
+} from "../utils/get-package-manager";
+import { handleError } from "../utils/handle-error";
+import { logger } from "../utils/logger";
+import * as templates from "../utils/templates";
+import { spawn } from "child_process";
 
 const ESSENTIAL_DEPENDENCIES = [
-  'class-variance-authority',
-  'clsx',
-  'nativewind@^4.1.23',
-  'tailwindcss-animate',
-  'tailwind-merge',
-  'react-native-reanimated',
-  'react-native-svg',
-  'lucide-react-native',
-  '@rn-primitives/types',
-  '@rn-primitives/slot',
-  '@rn-primitives/portal'
+  "class-variance-authority",
+  "clsx",
+  "nativewind@^4.1.23",
+  "tailwindcss-animate",
+  "tailwind-merge",
+  "react-native-reanimated",
+  "react-native-svg",
+  "lucide-react-native",
+  "@rn-primitives/types",
+  "@rn-primitives/slot",
+  "@rn-primitives/portal",
 ];
 
-const DEV_DEPENDENCIES = ['tailwindcss@^3.3.2'];
+const DEV_DEPENDENCIES = ["tailwindcss@^3.3.2"];
 
 const initOptionsSchema = z.object({
   cwd: z.string(),
-  yes: z.boolean()
+  yes: z.boolean(),
 });
 
 export const init = new Command()
-  .name('init')
-  .description('initialize your project and install dependencies')
-  .option('-y, --yes', 'skip confirmation prompt.', false)
-  .option('-c, --cwd <cwd>', 'the working directory. defaults to the current directory.', process.cwd())
+  .name("init")
+  .description("initialize your project and install dependencies")
+  .option("-y, --yes", "skip confirmation prompt.", false)
+  .option(
+    "-c, --cwd <cwd>",
+    "the working directory. defaults to the current directory.",
+    process.cwd(),
+  )
   .action(async (opts) => {
     try {
       const options = initOptionsSchema.parse(opts);
@@ -43,7 +50,7 @@ export const init = new Command()
 
       await runInit(cwd);
 
-      logger.info(`${chalk.green('Success!')}`);
+      logger.info(`${chalk.green("Success!")}`);
     } catch (error) {
       handleError(error);
     }
@@ -51,42 +58,46 @@ export const init = new Command()
 
 async function writeFileGracefully(filePath: string, content: string) {
   if (existsSync(filePath)) {
-    const existingContent = await fs.readFile(filePath, 'utf8');
+    const existingContent = await fs.readFile(filePath, "utf8");
 
-    if (filePath.endsWith('tailwind.config.js')) {
-      await fs.writeFile(filePath, content, 'utf8');
+    if (filePath.endsWith("tailwind.config.js")) {
+      await fs.writeFile(filePath, content, "utf8");
       return;
     }
     // For other files, continue with the existing append logic
-    const normalizedExisting = existingContent.replace(/\s+/g, '').replace(/\r\n/g, '\n');
-    const normalizedContent = content.replace(/\s+/g, '').replace(/\r\n/g, '\n');
+    const normalizedExisting = existingContent
+      .replace(/\s+/g, "")
+      .replace(/\r\n/g, "\n");
+    const normalizedContent = content
+      .replace(/\s+/g, "")
+      .replace(/\r\n/g, "\n");
 
     if (!normalizedExisting.includes(normalizedContent)) {
-      await fs.writeFile(filePath, `${existingContent}\n${content}`, 'utf8');
+      await fs.writeFile(filePath, `${existingContent}\n${content}`, "utf8");
     }
   } else {
-    await fs.writeFile(filePath, content, 'utf8');
+    await fs.writeFile(filePath, content, "utf8");
   }
 }
 
 async function hasExistingCnFunction(filePath: string): Promise<boolean> {
   try {
-    const content = await fs.readFile(filePath, 'utf8');
+    const content = await fs.readFile(filePath, "utf8");
 
     // Remove comments and strings to avoid false positives
     const cleanContent = content
-      .replace(/\/\*[\s\S]*?\*\//g, '') // Remove multi-line comments
-      .replace(/\/\/.*/g, '') // Remove single-line comments
-      .replace(/'.*?'/g, '') // Remove single-quote strings
-      .replace(/".*?"/g, '') // Remove double-quote strings
-      .replace(/`.*?`/g, ''); // Remove template literals
+      .replace(/\/\*[\s\S]*?\*\//g, "") // Remove multi-line comments
+      .replace(/\/\/.*/g, "") // Remove single-line comments
+      .replace(/'.*?'/g, "") // Remove single-quote strings
+      .replace(/".*?"/g, "") // Remove double-quote strings
+      .replace(/`.*?`/g, ""); // Remove template literals
 
     // Look for function declaration or arrow function assignment
     const cnPatterns = [
       /function\s+cn\s*\(/, // function cn(
       /const\s+cn\s*=\s*function\s*\(/, // const cn = function(
       /const\s+cn\s*=\s*\([^)]*\)\s*=>/, // const cn = (...) =>
-      /export\s+(?:const|function)\s+cn\s*[=\(]/ // export const/function cn
+      /export\s+(?:const|function)\s+cn\s*[=\(]/, // export const/function cn
     ];
 
     return cnPatterns.some((pattern) => pattern.test(cleanContent));
@@ -97,20 +108,20 @@ async function hasExistingCnFunction(filePath: string): Promise<boolean> {
 
 export async function checkDependenciesExist(cwd: string): Promise<boolean> {
   try {
-    const packageJsonPath = path.join(cwd, 'package.json');
+    const packageJsonPath = path.join(cwd, "package.json");
     if (!existsSync(packageJsonPath)) {
-      logger.warn('No package.json found');
+      logger.warn("No package.json found");
       return false;
     }
 
-    const packageJson = JSON.parse(await fs.readFile(packageJsonPath, 'utf8'));
+    const packageJson = JSON.parse(await fs.readFile(packageJsonPath, "utf8"));
     const allDependencies = {
       ...(packageJson.dependencies || {}),
-      ...(packageJson.devDependencies || {})
+      ...(packageJson.devDependencies || {}),
     };
 
     const missingDeps = ESSENTIAL_DEPENDENCIES.filter((pkg) => {
-      const pkgName = pkg.split('@')[0] || pkg;
+      const pkgName = pkg.split("@")[0] || pkg;
       const exists = allDependencies.hasOwnProperty(pkgName);
       return !exists;
     });
@@ -129,43 +140,67 @@ export async function runInit(cwd: string) {
     // Check if already initialized
     const isInitialized = await checkDependenciesExist(cwd);
 
-    spinner.text = 'Initializing project...';
+    spinner.text = "Initializing project...";
 
     // Create configuration files (always create these, even if already initialized)
-    await writeFileGracefully(path.join(cwd, 'tailwind.config.js'), templates.TAILWIND_CONFIG);
-    await writeFileGracefully(path.join(cwd, 'metro.config.js'), templates.METRO_CONFIG);
-    await writeFileGracefully(path.join(cwd, 'babel.config.js'), templates.BABEL_CONFIG);
-    await writeFileGracefully(path.join(cwd, 'global.css'), templates.GLOBAL_STYLES);
-    await writeFileGracefully(path.join(cwd, 'nativewind-env.d.ts'), templates.NATIVEWIND_ENV);
-    await writeFileGracefully(path.join(cwd, 'components.json'), templates.COMPONENTS_JSON);
+    await writeFileGracefully(
+      path.join(cwd, "tailwind.config.js"),
+      templates.TAILWIND_CONFIG,
+    );
+    await writeFileGracefully(
+      path.join(cwd, "metro.config.js"),
+      templates.METRO_CONFIG,
+    );
+    await writeFileGracefully(
+      path.join(cwd, "babel.config.js"),
+      templates.BABEL_CONFIG,
+    );
+    await writeFileGracefully(
+      path.join(cwd, "global.css"),
+      templates.GLOBAL_STYLES,
+    );
+    await writeFileGracefully(
+      path.join(cwd, "nativewind-env.d.ts"),
+      templates.NATIVEWIND_ENV,
+    );
+    await writeFileGracefully(
+      path.join(cwd, "components.json"),
+      templates.COMPONENTS_JSON,
+    );
 
     if (isInitialized) {
       spinner?.succeed();
-      logger.info('Configuration files updated. Dependencies already installed.');
+      logger.info(
+        "Configuration files updated. Dependencies already installed.",
+      );
       return;
     }
 
     // Check if lib directory exists
-    const libDir = path.join(cwd, 'lib');
-    const utilsPath = path.join(libDir, 'utils.ts');
+    const libDir = path.join(cwd, "lib");
+    const utilsPath = path.join(libDir, "utils.ts");
 
     if (!existsSync(libDir)) {
       await fs.mkdir(libDir, { recursive: true });
-      await fs.writeFile(utilsPath, templates.UTILS, 'utf8');
+      await fs.writeFile(utilsPath, templates.UTILS, "utf8");
     } else {
       // If utils.ts exists, check if it already has cn function
       if (existsSync(utilsPath)) {
         const hasCn = await hasExistingCnFunction(utilsPath);
         if (!hasCn) {
-          await fs.writeFile(utilsPath, `${await fs.readFile(utilsPath, 'utf8')}\n${templates.UTILS}`, 'utf8');
+          await fs.writeFile(
+            utilsPath,
+            `${await fs.readFile(utilsPath, "utf8")}\n${templates.UTILS}`,
+            "utf8",
+          );
         }
       } else {
-        await fs.writeFile(utilsPath, templates.UTILS, 'utf8');
+        await fs.writeFile(utilsPath, templates.UTILS, "utf8");
       }
     }
 
     // Create components directory
-    const componentsDir = path.join(cwd, 'components');
+    const componentsDir = path.join(cwd, "components");
     await fs.mkdir(componentsDir, { recursive: true });
 
     spinner.succeed();
@@ -178,36 +213,50 @@ export async function runInit(cwd: string) {
     try {
       if (isBun) {
         // Use Bun.spawn for Bun
-        const installProc = Bun.spawn([packageManager, ...install, ...ESSENTIAL_DEPENDENCIES], {
-          cwd,
-          stdio: ['inherit', 'inherit', 'inherit']
-        });
+        const installProc = Bun.spawn(
+          [packageManager, ...install, ...ESSENTIAL_DEPENDENCIES],
+          {
+            cwd,
+            stdio: ["inherit", "inherit", "inherit"],
+          },
+        );
         await installProc.exited;
 
-        const installDevProc = Bun.spawn([packageManager, ...installDev, ...DEV_DEPENDENCIES], {
-          cwd,
-          stdio: ['inherit', 'inherit', 'inherit']
-        });
+        const installDevProc = Bun.spawn(
+          [packageManager, ...installDev, ...DEV_DEPENDENCIES],
+          {
+            cwd,
+            stdio: ["inherit", "inherit", "inherit"],
+          },
+        );
         await installDevProc.exited;
       } else {
         // Use Node's spawn for other package managers
         await new Promise<void>((resolve, reject) => {
-          const proc = spawn(packageManager, [...install, ...ESSENTIAL_DEPENDENCIES], {
-            cwd,
-            stdio: 'inherit'
-          });
-          proc.on('exit', (code) => {
+          const proc = spawn(
+            packageManager,
+            [...install, ...ESSENTIAL_DEPENDENCIES],
+            {
+              cwd,
+              stdio: "inherit",
+            },
+          );
+          proc.on("exit", (code) => {
             if (code === 0) resolve();
             else reject(new Error(`Process exited with code ${code}`));
           });
         });
 
         await new Promise<void>((resolve, reject) => {
-          const proc = spawn(packageManager, [...installDev, ...DEV_DEPENDENCIES], {
-            cwd,
-            stdio: 'inherit'
-          });
-          proc.on('exit', (code) => {
+          const proc = spawn(
+            packageManager,
+            [...installDev, ...DEV_DEPENDENCIES],
+            {
+              cwd,
+              stdio: "inherit",
+            },
+          );
+          proc.on("exit", (code) => {
             if (code === 0) resolve();
             else reject(new Error(`Process exited with code ${code}`));
           });

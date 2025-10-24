@@ -1,8 +1,8 @@
-import Image from "next/image"
+import Image from "next/image";
 
-import showcaseApps from "../../../images/showcase-apps.webp"
+import showcaseApps from "../../../images/showcase-apps.webp";
 
-const SHOWCASE_QR_IMAGE = "/images/showcase-qr.svg"
+const SHOWCASE_QR_IMAGE = "/images/showcase-qr.svg";
 
 function qrCode() {
   return (
@@ -14,7 +14,7 @@ function qrCode() {
       priority
       className="h-[230px] w-[230px]"
     />
-  )
+  );
 }
 
 export default function ShowcaseAppSection() {
@@ -78,5 +78,5 @@ export default function ShowcaseAppSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

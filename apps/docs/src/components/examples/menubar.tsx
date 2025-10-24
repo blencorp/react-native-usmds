@@ -1,8 +1,14 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger } from '@/registry/usa/components/ui/menubar';
-import { Text } from '@/registry/usa/components/ui/text';
+import React from "react";
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarTrigger,
+} from "@/registry/usa/components/ui/menubar";
+import { Text } from "@/registry/usa/components/ui/text";
 
 export function MenubarPreview() {
   return (

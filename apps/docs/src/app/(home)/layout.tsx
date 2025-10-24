@@ -1,5 +1,5 @@
-import { SiteNav } from "@/components/site-nav"
-import { siteNavConfig } from "@/app/layout.config"
+import { SiteNav } from "@/components/site-nav";
+import { siteNavConfig } from "@/app/layout.config";
 
 export default function Layout({ children }: LayoutProps<"/">) {
   return (
@@ -7,5 +7,5 @@ export default function Layout({ children }: LayoutProps<"/">) {
       <SiteNav {...siteNavConfig} />
       <main className="flex-1">{children}</main>
     </div>
-  )
+  );
 }

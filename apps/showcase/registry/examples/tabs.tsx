@@ -1,12 +1,23 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Text } from '@registry/usa/components/ui/text';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@registry/usa/components/ui/tabs';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@registry/usa/components/ui/card';
+import React from "react";
+import { Text } from "@registry/usa/components/ui/text";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@registry/usa/components/ui/tabs";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@registry/usa/components/ui/card";
 
 export function TabsPreview() {
-  const [value, setValue] = React.useState('account');
+  const [value, setValue] = React.useState("account");
 
   return (
     <Tabs value={value} onValueChange={setValue} className="w-full max-w-md">
@@ -22,10 +33,14 @@ export function TabsPreview() {
         <Card>
           <CardHeader>
             <CardTitle>Account</CardTitle>
-            <CardDescription>Make changes to your account here.</CardDescription>
+            <CardDescription>
+              Make changes to your account here.
+            </CardDescription>
           </CardHeader>
           <CardContent className="gap-4">
-            <Text className="text-sm">Update your account settings and preferences.</Text>
+            <Text className="text-sm">
+              Update your account settings and preferences.
+            </Text>
           </CardContent>
         </Card>
       </TabsContent>

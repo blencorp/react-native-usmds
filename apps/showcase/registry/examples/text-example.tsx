@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { View } from 'react-native';
-import { Text } from '@registry/usa/components/ui/text';
+import React from "react";
+import { View } from "react-native";
+import { Text } from "@registry/usa/components/ui/text";
 
 export function TextPreview() {
   return (
@@ -12,7 +12,8 @@ export function TextPreview() {
       <Text variant="h3">Heading 3</Text>
       <Text variant="h4">Heading 4</Text>
       <Text variant="p">
-        This is a paragraph with proper spacing and line height for improved readability.
+        This is a paragraph with proper spacing and line height for improved
+        readability.
       </Text>
       <Text variant="lead">
         This is lead text, typically used for introductory paragraphs.

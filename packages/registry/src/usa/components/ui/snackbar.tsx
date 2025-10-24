@@ -1,57 +1,86 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
-import { View, Text, Pressable } from 'react-native';
-import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '@/registry/usa/lib/utils';
-import { Icon } from '@/registry/usa/components/ui/icon';
-import { Check, AlertCircle } from 'lucide-react-native';
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from "react";
+import { View, Text, Pressable } from "react-native";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/registry/usa/lib/utils";
+import { Icon } from "@/registry/usa/components/ui/icon";
+import { Check, AlertCircle } from "lucide-react-native";
 
-const snackbarVariants = cva('flex w-[329px] bg-foreground rounded-[4px] p-3', {
+const snackbarVariants = cva("flex w-[329px] bg-foreground rounded-[4px] p-3", {
   variants: {
     layout: {
-      'one-line': 'flex-row items-center h-[48px] justify-between',
-      'two-lines': 'min-h-[70px]'
-    }
+      "one-line": "flex-row items-center h-[48px] justify-between",
+      "two-lines": "min-h-[70px]",
+    },
   },
   defaultVariants: {
-    layout: 'one-line'
-  }
+    layout: "one-line",
+  },
 });
 
 type SnackbarProps = ComponentPropsWithoutRef<typeof View> &
   VariantProps<typeof snackbarVariants> & {
     className?: string;
     message: string;
-    variant?: 'success' | 'error';
+    variant?: "success" | "error";
     onAction?: () => void;
     onDismiss?: () => void;
     actionLabel?: string;
   };
 
-const Snackbar = forwardRef<ElementRef<typeof View>, SnackbarProps & { isVisible: boolean }>(
-  ({ className, layout, message, variant = 'success', onAction, onDismiss, actionLabel = 'Action', isVisible }, ref) => {
+const Snackbar = forwardRef<
+  ElementRef<typeof View>,
+  SnackbarProps & { isVisible: boolean }
+>(
+  (
+    {
+      className,
+      layout,
+      message,
+      variant = "success",
+      onAction,
+      onDismiss,
+      actionLabel = "Action",
+      isVisible,
+    },
+    ref,
+  ) => {
     if (!isVisible) return null;
 
-    const IconComponent = variant === 'success' ? Check : AlertCircle;
+    const IconComponent = variant === "success" ? Check : AlertCircle;
 
-    if (layout === 'two-lines') {
+    if (layout === "two-lines") {
       return (
-        <View ref={ref} testID='snackbar-container' className={cn(snackbarVariants({ layout }), className)}>
-          <View className='flex flex-row gap-2 mb-3'>
-            <View className='flex items-center justify-center h-6'>
-              <Icon as={IconComponent} size={24} className='bg-background text-foreground rounded-full' />
+        <View
+          ref={ref}
+          testID="snackbar-container"
+          className={cn(snackbarVariants({ layout }), className)}
+        >
+          <View className="flex flex-row gap-2 mb-3">
+            <View className="flex items-center justify-center h-6">
+              <Icon
+                as={IconComponent}
+                size={24}
+                className="bg-background text-foreground rounded-full"
+              />
             </View>
-            <Text className='text-background text-base leading-6 flex-1 flex-wrap'>{message}</Text>
+            <Text className="text-background text-base leading-6 flex-1 flex-wrap">
+              {message}
+            </Text>
           </View>
 
-          <View className='flex flex-row justify-end items-center gap-6'>
+          <View className="flex flex-row justify-end items-center gap-6">
             {onAction && (
               <Pressable onPress={onAction}>
-                <Text className='text-background text-[15px] leading-[19px] font-bold'>{actionLabel}</Text>
+                <Text className="text-background text-[15px] leading-[19px] font-bold">
+                  {actionLabel}
+                </Text>
               </Pressable>
             )}
             {onDismiss && (
               <Pressable onPress={onDismiss}>
-                <Text className='text-background text-[15px] leading-[19px] font-bold'>Dismiss</Text>
+                <Text className="text-background text-[15px] leading-[19px] font-bold">
+                  Dismiss
+                </Text>
               </Pressable>
             )}
           </View>
@@ -60,33 +89,48 @@ const Snackbar = forwardRef<ElementRef<typeof View>, SnackbarProps & { isVisible
     }
 
     return (
-      <View ref={ref} testID='snackbar-container' className={cn(snackbarVariants({ layout }), className)}>
-        <View className='flex flex-row items-center gap-2 flex-shrink min-w-0 max-w-[171px]'>
-          <View className='flex items-center justify-center h-6 flex-shrink-0'>
-            <Icon as={IconComponent} size={24} className='bg-background text-foreground rounded-full' />
+      <View
+        ref={ref}
+        testID="snackbar-container"
+        className={cn(snackbarVariants({ layout }), className)}
+      >
+        <View className="flex flex-row items-center gap-2 flex-shrink min-w-0 max-w-[171px]">
+          <View className="flex items-center justify-center h-6 flex-shrink-0">
+            <Icon
+              as={IconComponent}
+              size={24}
+              className="bg-background text-foreground rounded-full"
+            />
           </View>
-          <Text numberOfLines={1} className='text-background text-base leading-6 flex-shrink'>
+          <Text
+            numberOfLines={1}
+            className="text-background text-base leading-6 flex-shrink"
+          >
             {message}
           </Text>
         </View>
 
-        <View className='flex flex-row items-center gap-6 flex-shrink-0'>
+        <View className="flex flex-row items-center gap-6 flex-shrink-0">
           {onAction && (
             <Pressable onPress={onAction}>
-              <Text className='text-background text-[15px] leading-[19px] font-bold'>{actionLabel}</Text>
+              <Text className="text-background text-[15px] leading-[19px] font-bold">
+                {actionLabel}
+              </Text>
             </Pressable>
           )}
           {onDismiss && (
             <Pressable onPress={onDismiss}>
-              <Text className='text-background text-[15px] leading-[19px] font-bold'>Dismiss</Text>
+              <Text className="text-background text-[15px] leading-[19px] font-bold">
+                Dismiss
+              </Text>
             </Pressable>
           )}
         </View>
       </View>
     );
-  }
+  },
 );
 
-Snackbar.displayName = 'Snackbar';
+Snackbar.displayName = "Snackbar";
 
 export { Snackbar, type SnackbarProps };

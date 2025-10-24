@@ -1,54 +1,79 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
-import { View, Text, Pressable } from 'react-native';
-import * as CheckboxPrimitive from '@rn-primitives/checkbox';
-import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '@/registry/usa/lib/utils';
-import { Icon } from '@/registry/usa/components/ui/icon';
-import { Check } from 'lucide-react-native';
-import { cssInterop } from 'nativewind';
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from "react";
+import { View, Text, Pressable } from "react-native";
+import * as CheckboxPrimitive from "@rn-primitives/checkbox";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/registry/usa/lib/utils";
+import { Icon } from "@/registry/usa/components/ui/icon";
+import { Check } from "lucide-react-native";
+import { cssInterop } from "nativewind";
 
-cssInterop(CheckboxPrimitive.Root, { className: 'style' });
+cssInterop(CheckboxPrimitive.Root, { className: "style" });
 
-const checkboxTileVariants = cva('flex flex-col w-[329px] rounded-[2px] border-2', {
-  variants: {
-    variant: {
-      default: 'gap-2.5',
-      withDescription: 'gap-1.5'
+const checkboxTileVariants = cva(
+  "flex flex-col w-[329px] rounded-[2px] border-2",
+  {
+    variants: {
+      variant: {
+        default: "gap-2.5",
+        withDescription: "gap-1.5",
+      },
+      state: {
+        checked: "bg-primary/10 border-primary",
+        unchecked: "bg-background border-muted",
+        disabled: "bg-muted/50 border-muted",
+      },
     },
-    state: {
-      checked: 'bg-primary/10 border-primary',
-      unchecked: 'bg-background border-muted',
-      disabled: 'bg-muted/50 border-muted'
-    }
+    defaultVariants: {
+      variant: "default",
+      state: "unchecked",
+    },
   },
-  defaultVariants: {
-    variant: 'default',
-    state: 'unchecked'
-  }
-});
+);
 
-interface CheckboxTileProps extends ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>, VariantProps<typeof checkboxTileVariants> {
+interface CheckboxTileProps
+  extends ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>,
+    VariantProps<typeof checkboxTileVariants> {
   label: string;
   description?: string;
   className?: string;
 }
 
-const CheckboxTile = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, CheckboxTileProps>(
-  ({ label, description, className, disabled, checked, onCheckedChange, ...props }, ref) => {
+const CheckboxTile = forwardRef<
+  ElementRef<typeof CheckboxPrimitive.Root>,
+  CheckboxTileProps
+>(
+  (
+    {
+      label,
+      description,
+      className,
+      disabled,
+      checked,
+      onCheckedChange,
+      ...props
+    },
+    ref,
+  ) => {
     const handlePress = () => {
       if (!disabled && onCheckedChange) {
         onCheckedChange(!checked);
       }
     };
 
-    const state = disabled ? 'disabled' : checked ? 'checked' : 'unchecked';
-    const variant = description ? 'withDescription' : 'default';
+    const state = disabled ? "disabled" : checked ? "checked" : "unchecked";
+    const variant = description ? "withDescription" : "default";
 
     return (
       <Pressable onPress={handlePress} disabled={disabled}>
-        <View className={cn(checkboxTileVariants({ variant, state }), 'p-[13px_16px_13px_9px]', className)}>
-          <View className='flex flex-row gap-2'>
-            <View className='w-5'>
+        <View
+          className={cn(
+            checkboxTileVariants({ variant, state }),
+            "p-[13px_16px_13px_9px]",
+            className,
+          )}
+        >
+          <View className="flex flex-row gap-2">
+            <View className="w-5">
               <CheckboxPrimitive.Root
                 ref={ref}
                 disabled={disabled}
@@ -56,28 +81,50 @@ const CheckboxTile = forwardRef<ElementRef<typeof CheckboxPrimitive.Root>, Check
                 onCheckedChange={onCheckedChange}
                 {...props}
                 className={cn(
-                  'w-5 h-5 border-2 rounded items-center justify-center flex-shrink-0',
-                  checked ? (disabled ? 'bg-muted border-muted' : 'bg-primary border-primary') : 'bg-transparent border-input'
+                  "w-5 h-5 border-2 rounded items-center justify-center flex-shrink-0",
+                  checked
+                    ? disabled
+                      ? "bg-muted border-muted"
+                      : "bg-primary border-primary"
+                    : "bg-transparent border-input",
                 )}
               >
                 <CheckboxPrimitive.Indicator>
-                  <Icon as={Check} size={14} className='text-white' />
+                  <Icon as={Check} size={14} className="text-white" />
                 </CheckboxPrimitive.Indicator>
               </CheckboxPrimitive.Root>
             </View>
 
-            <View className='flex-1 flex-col gap-1.5'>
-              <Text className={cn('text-base leading-5', disabled ? 'text-muted-foreground' : 'text-foreground')}>{label}</Text>
+            <View className="flex-1 flex-col gap-1.5">
+              <Text
+                className={cn(
+                  "text-base leading-5",
+                  disabled ? "text-muted-foreground" : "text-foreground",
+                )}
+              >
+                {label}
+              </Text>
 
-              {description && <Text className={cn('text-base leading-5', disabled ? 'text-muted-foreground' : 'text-muted-foreground')}>{description}</Text>}
+              {description && (
+                <Text
+                  className={cn(
+                    "text-base leading-5",
+                    disabled
+                      ? "text-muted-foreground"
+                      : "text-muted-foreground",
+                  )}
+                >
+                  {description}
+                </Text>
+              )}
             </View>
           </View>
         </View>
       </Pressable>
     );
-  }
+  },
 );
 
-CheckboxTile.displayName = 'CheckboxTile';
+CheckboxTile.displayName = "CheckboxTile";
 
 export { CheckboxTile, type CheckboxTileProps };

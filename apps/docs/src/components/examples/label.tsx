@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { Checkbox } from '@/registry/usa/components/ui/checkbox';
-import { Label } from '@/registry/usa/components/ui/label';
-import * as React from 'react';
-import { View } from 'react-native';
+import { Checkbox } from "@/registry/usa/components/ui/checkbox";
+import { Label } from "@/registry/usa/components/ui/label";
+import * as React from "react";
+import { View } from "react-native";
 
 export function LabelPreview() {
   const [checked, setChecked] = React.useState(false);
@@ -19,7 +19,8 @@ export function LabelPreview() {
       <Label
         nativeID="terms-checkbox"
         htmlFor="terms-checkbox"
-        onPress={() => setChecked((prev) => !prev)}>
+        onPress={() => setChecked((prev) => !prev)}
+      >
         Accept terms and conditions
       </Label>
     </View>

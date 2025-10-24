@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Button } from '@registry/usa/components/ui/button';
-import { Text } from '@registry/usa/components/ui/text';
-import { Mail } from 'lucide-react-native';
+import React from "react";
+import { Button } from "@registry/usa/components/ui/button";
+import { Text } from "@registry/usa/components/ui/text";
+import { Mail } from "lucide-react-native";
 
 export function ButtonWithIconPreview() {
   return (

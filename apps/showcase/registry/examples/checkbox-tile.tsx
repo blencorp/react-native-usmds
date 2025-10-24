@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { View } from 'react-native';
-import { CheckboxTile } from '@registry/usa/components/ui/checkboxtile';
+import React from "react";
+import { View } from "react-native";
+import { CheckboxTile } from "@registry/usa/components/ui/checkboxtile";
 
 export function CheckboxTilePreview() {
   const [option1, setOption1] = React.useState(false);

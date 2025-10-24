@@ -1,4 +1,4 @@
-import Link from "next/link"
+import Link from "next/link";
 
 export default function SiteFooter() {
   return (
@@ -6,10 +6,16 @@ export default function SiteFooter() {
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-8 sm:flex-row">
         <p className="text-neutral-600">© {new Date().getFullYear()} USMDS</p>
         <nav className="flex items-center gap-4 text-sm">
-          <Link href="/docs" className="text-neutral-600 hover:text-neutral-900">
+          <Link
+            href="/docs"
+            className="text-neutral-600 hover:text-neutral-900"
+          >
             Docs
           </Link>
-          <Link href="/privacy" className="text-neutral-600 hover:text-neutral-900">
+          <Link
+            href="/privacy"
+            className="text-neutral-600 hover:text-neutral-900"
+          >
             Privacy
           </Link>
           <a
@@ -23,5 +29,5 @@ export default function SiteFooter() {
         </nav>
       </div>
     </footer>
-  )
+  );
 }

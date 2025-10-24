@@ -1,9 +1,13 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@registry/usa/components/ui/tooltip';
-import { Button } from '@registry/usa/components/ui/button';
-import { Text } from '@registry/usa/components/ui/text';
+import React from "react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@registry/usa/components/ui/tooltip";
+import { Button } from "@registry/usa/components/ui/button";
+import { Text } from "@registry/usa/components/ui/text";
 
 export function TooltipPreview() {
   return (

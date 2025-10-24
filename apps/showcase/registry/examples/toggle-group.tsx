@@ -1,15 +1,23 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Icon } from '@registry/usa/components/ui/icon';
-import { ToggleGroup, ToggleGroupItem } from '@registry/usa/components/ui/toggle-group';
-import { Bold, Italic, Underline } from 'lucide-react-native';
+import React from "react";
+import { Icon } from "@registry/usa/components/ui/icon";
+import {
+  ToggleGroup,
+  ToggleGroupItem,
+} from "@registry/usa/components/ui/toggle-group";
+import { Bold, Italic, Underline } from "lucide-react-native";
 
 export function ToggleGroupPreview() {
-  const [values, setValues] = React.useState<string[]>(['bold']);
+  const [values, setValues] = React.useState<string[]>(["bold"]);
 
   return (
-    <ToggleGroup type="multiple" value={values} onValueChange={setValues} className="gap-2">
+    <ToggleGroup
+      type="multiple"
+      value={values}
+      onValueChange={setValues}
+      className="gap-2"
+    >
       <ToggleGroupItem value="bold" aria-label="Toggle bold">
         <Icon as={Bold} size={16} />
       </ToggleGroupItem>

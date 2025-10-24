@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Badge } from '@/registry/usa/components/ui/badge';
-import { Text } from '@/registry/usa/components/ui/text';
-import { BadgeCheck } from 'lucide-react-native';
+import React from "react";
+import { Badge } from "@/registry/usa/components/ui/badge";
+import { Text } from "@/registry/usa/components/ui/text";
+import { BadgeCheck } from "lucide-react-native";
 
 export function BadgePreview() {
   return (

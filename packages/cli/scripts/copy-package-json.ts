@@ -30,7 +30,7 @@ const distPackageJson = {
 
 writeFileSync(
   join("dist", "package.json"),
-  JSON.stringify(distPackageJson, null, 2) + "\n"
+  JSON.stringify(distPackageJson, null, 2) + "\n",
 );
 
 console.log("✅ Copied package.json to dist/");

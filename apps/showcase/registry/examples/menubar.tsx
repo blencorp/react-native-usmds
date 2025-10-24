@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 import {
   Menubar,
   MenubarContent,
   MenubarItem,
   MenubarMenu,
   MenubarTrigger,
-} from '@registry/usa/components/ui/menubar';
-import { Text } from '@registry/usa/components/ui/text';
+} from "@registry/usa/components/ui/menubar";
+import { Text } from "@registry/usa/components/ui/text";
 
 export function MenubarPreview() {
-  const [value, setValue] = React.useState<string | undefined>('file');
+  const [value, setValue] = React.useState<string | undefined>("file");
 
   return (
     <Menubar value={value} onValueChange={setValue}>

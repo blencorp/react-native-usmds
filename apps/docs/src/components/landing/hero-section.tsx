@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import Image from "next/image"
-import siteLogo from "../../../public/assets/images/logo.webp"
-import usmdsMobile from "../../../images/usmds-mobile.webp"
+import Link from "next/link";
+import Image from "next/image";
+import siteLogo from "../../../public/assets/images/logo.webp";
+import usmdsMobile from "../../../images/usmds-mobile.webp";
 
 export default function HeroSection() {
   return (
@@ -23,12 +23,11 @@ export default function HeroSection() {
       <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:py-20 md:py-24">
         <div className="grid items-center gap-10 md:grid-cols-5">
           <div className="md:col-span-3">
-            <h1>
-              Build beautiful & accessible government mobile apps
-            </h1>
+            <h1>Build beautiful & accessible government mobile apps</h1>
             <p className="mt-4 leading-7 text-white/80">
-              USMDS is an open‑source United States Mobile Design System, providing accessible,
-              compliant React Native components that accelerate development for public‑sector apps.
+              USMDS is an open‑source United States Mobile Design System,
+              providing accessible, compliant React Native components that
+              accelerate development for public‑sector apps.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link
@@ -46,10 +45,14 @@ export default function HeroSection() {
             </div>
           </div>
           <div className="relative md:col-span-2">
-            <Image src={usmdsMobile} alt="USMDS mobile component previews" className="mx-auto" />
+            <Image
+              src={usmdsMobile}
+              alt="USMDS mobile component previews"
+              className="mx-auto"
+            />
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

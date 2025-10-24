@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Banner } from '@/registry/usa/components/ui/banner';
+import React from "react";
+import { Banner } from "@/registry/usa/components/ui/banner";
 
 export function BannerPreview() {
   return (
