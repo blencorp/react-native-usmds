@@ -57,6 +57,16 @@ Customization Options
 Best Practices
 Troubleshooting
 
+## Security
+
+Security is a top priority for this project. We use automated code scanning and security analysis to protect against vulnerabilities.
+
+- **Code Scanning**: Automated CodeQL analysis runs on every PR and push
+- **Dependency Security**: Dependabot monitors and updates vulnerable dependencies
+- **Security Policy**: See [SECURITY.md](.github/SECURITY.md) for vulnerability reporting
+
+For details on our security setup and organization-level recommendations, see [CODE_SCANNING.md](.github/CODE_SCANNING.md).
+
 ## Contributing
 
 We welcome contributions! Whether you want to report a bug, request a feature, or submit a pull request, we'd love to have your help.
