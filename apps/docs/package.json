@@ -14,7 +14,7 @@
     "@radix-ui/react-select": "^2.2.6",
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tabs": "^1.1.13",
-    "@swc/core": "^1.11.7",
+    "@swc/core": "^1.13.21",
     "@swc/helpers": "^0.5.15",
     "cookies-next": "^6.1.0",
     "expo-haptics": "~15.0.7",
