@@ -16,7 +16,7 @@
     "@radix-ui/react-tabs": "^1.1.13",
     "@swc/core": "^1.11.7",
     "@swc/helpers": "^0.5.15",
-    "cookies-next": "^6.1.0",
+    "cookies-next": "^6.1.1",
     "expo-haptics": "~15.0.7",
     "fumadocs-core": "14.7.2",
     "fumadocs-docgen": "^2.0.0",
