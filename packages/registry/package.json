@@ -41,7 +41,7 @@
     "@rn-primitives/types": "^1.1.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "lucide-react-native": "^0.475.0",
+    "lucide-react-native": "^0.547.0",
     "nativewind": "^4.2.1",
     "react-native-reanimated": "~4.1.2",
     "tailwind-merge": "^3.0.1",
