@@ -1,0 +1,123 @@
+name: ✨ Feature Request
+description: Suggest a new feature or enhancement for React Native USMDS
+title: "[Feature]: "
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to suggest a new feature! Please fill out the form below to help us understand your idea.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: Is your feature request related to a problem? Please describe the problem you're trying to solve.
+      placeholder: I'm frustrated when... / It would be helpful if...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: Describe the solution you'd like to see implemented.
+      placeholder: I would like to have...
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Describe any alternative solutions or features you've considered.
+      placeholder: An alternative approach could be...
+    validations:
+      required: false
+
+  - type: dropdown
+    id: feature-type
+    attributes:
+      label: Feature Type
+      description: What type of feature is this?
+      options:
+        - New Component
+        - Component Enhancement
+        - Documentation Improvement
+        - Developer Experience (DX)
+        - Performance Improvement
+        - Accessibility Enhancement
+        - Testing/Quality
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority/Impact
+      description: How would you rate the priority or impact of this feature?
+      options:
+        - Critical - Blocking work
+        - High - Important but not blocking
+        - Medium - Would be nice to have
+        - Low - Minor improvement
+    validations:
+      required: true
+
+  - type: textarea
+    id: use-cases
+    attributes:
+      label: Use Cases
+      description: Describe specific use cases or scenarios where this feature would be helpful.
+      placeholder: |
+        1. When building a form, users need to...
+        2. In a dashboard layout, developers want to...
+    validations:
+      required: true
+
+  - type: textarea
+    id: design-mockup
+    attributes:
+      label: Design Mockups/Examples
+      description: If applicable, provide design mockups, sketches, or examples from other libraries.
+      placeholder: Drag and drop images or paste URLs here
+
+  - type: input
+    id: component-name
+    attributes:
+      label: Component Name (if applicable)
+      description: If this is a new component or affects an existing one, what is its name?
+      placeholder: "e.g., Button, DataTable, FileUpload"
+
+  - type: textarea
+    id: usmds-reference
+    attributes:
+      label: USMDS Reference
+      description: If this feature is based on the U.S. Web Design System, provide a link or reference.
+      placeholder: https://designsystem.digital.gov/components/...
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Add any other context, screenshots, or examples about the feature request here.
+      placeholder: This feature would be similar to...
+
+  - type: checkboxes
+    id: implementation
+    attributes:
+      label: Implementation Willingness
+      description: Are you willing to help implement this feature?
+      options:
+        - label: I am willing to submit a pull request to implement this feature
+          required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Contributing Guidelines](https://github.com/blencorp/react-native-usmds/blob/main/CONTRIBUTING.md)
+      options:
+        - label: I have read and agree to follow the Contributing Guidelines
+          required: true
