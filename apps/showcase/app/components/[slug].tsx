@@ -1,9 +1,9 @@
-import { PreviewCarousel } from '@showcase/components/preview-carousel';
-import { useComponentRegistry } from '@showcase/lib/registry-context';
-import { Redirect, Stack, useLocalSearchParams } from 'expo-router';
-import * as React from 'react';
-import { View } from 'react-native';
-import { Text } from '@registry/usa/components/ui/text';
+import { PreviewCarousel } from "@showcase/components/preview-carousel";
+import { useComponentRegistry } from "@showcase/lib/registry-context";
+import { Redirect, Stack, useLocalSearchParams } from "expo-router";
+import * as React from "react";
+import { View } from "react-native";
+import { Text } from "@registry/usa/components/ui/text";
 
 export default function ComponentDetailScreen() {
   const params = useLocalSearchParams<{ slug?: string | string[] }>();

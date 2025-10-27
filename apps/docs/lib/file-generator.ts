@@ -1,8 +1,8 @@
-import * as fs from 'node:fs/promises';
-import * as path from 'node:path';
-import type { Code, Paragraph } from 'mdast';
-import { z } from 'zod';
-import { DocGenerator } from 'fumadocs-docgen';
+import * as fs from "node:fs/promises";
+import * as path from "node:path";
+import type { Code, Paragraph } from "mdast";
+import { z } from "zod";
+import { DocGenerator } from "fumadocs-docgen";
 
 // This project uses code from fumadocs.
 // The code is licensed under the MIT License.
@@ -29,24 +29,26 @@ const fileGeneratorSchema = z.object({
 
 export function fileGenerator(): DocGenerator {
   return {
-    name: 'file',
+    name: "file",
     async run(input, ctx) {
       const { file, codeblock = false } = fileGeneratorSchema.parse(input);
 
       const dest = path.resolve(ctx.cwd, file);
-      const value = fixImports(await fs.readFile(dest).then((res) => res.toString()));
+      const value = fixImports(
+        await fs.readFile(dest).then((res) => res.toString()),
+      );
 
       if (codeblock === false) {
         return {
-          type: 'paragraph',
-          children: [{ type: 'text', value }],
+          type: "paragraph",
+          children: [{ type: "text", value }],
         } as Paragraph;
       }
 
       const codeOptions = codeblock === true ? {} : codeblock;
 
       return {
-        type: 'code',
+        type: "code",
         lang: codeOptions.lang ?? path.extname(dest).slice(1),
         meta: codeOptions.meta,
         value,
@@ -57,6 +59,6 @@ export function fileGenerator(): DocGenerator {
 
 function fixImports(value: string) {
   return value
-    .replaceAll('@/registry/usa/', '@/')
-    .replaceAll('@/registry/blocks/', '@/components/');
+    .replaceAll("@/registry/usa/", "@/")
+    .replaceAll("@/registry/blocks/", "@/components/");
 }

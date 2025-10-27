@@ -1,9 +1,16 @@
-import { render } from '@testing-library/react-native';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '../components/ui/card';
-import { Text } from 'react-native';
+import { render } from "@testing-library/react-native";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "../components/ui/card";
+import { Text } from "react-native";
 
-describe('Card', () => {
-  it('renders correctly with all compositional parts', () => {
+describe("Card", () => {
+  it("renders correctly with all compositional parts", () => {
     const { getByText, getByRole } = render(
       <Card>
         <CardHeader>
@@ -16,51 +23,51 @@ describe('Card', () => {
         <CardFooter>
           <Text>Footer content</Text>
         </CardFooter>
-      </Card>
+      </Card>,
     );
 
-    expect(getByText('Test Card')).toBeTruthy();
-    expect(getByText('Test description')).toBeTruthy();
-    expect(getByText('Card content')).toBeTruthy();
-    expect(getByText('Footer content')).toBeTruthy();
+    expect(getByText("Test Card")).toBeTruthy();
+    expect(getByText("Test description")).toBeTruthy();
+    expect(getByText("Card content")).toBeTruthy();
+    expect(getByText("Footer content")).toBeTruthy();
   });
 
-  it('renders CardTitle with heading role', () => {
+  it("renders CardTitle with heading role", () => {
     const { getByRole } = render(
       <Card>
         <CardHeader>
           <CardTitle>Heading Title</CardTitle>
         </CardHeader>
-      </Card>
+      </Card>,
     );
 
-    const heading = getByRole('heading');
+    const heading = getByRole("heading");
     expect(heading).toBeTruthy();
-    expect(heading.props.children).toBe('Heading Title');
+    expect(heading.props.children).toBe("Heading Title");
   });
 
-  it('renders with custom className', () => {
+  it("renders with custom className", () => {
     const { getByText } = render(
-      <Card className='custom-class'>
+      <Card className="custom-class">
         <CardHeader>
-          <CardTitle className='custom-title'>Custom Title</CardTitle>
+          <CardTitle className="custom-title">Custom Title</CardTitle>
         </CardHeader>
-      </Card>
+      </Card>,
     );
 
-    const title = getByText('Custom Title');
-    expect(title.props.className).toContain('custom-title');
+    const title = getByText("Custom Title");
+    expect(title.props.className).toContain("custom-title");
   });
 
-  it('renders minimal card with just content', () => {
+  it("renders minimal card with just content", () => {
     const { getByText } = render(
       <Card>
         <CardContent>
           <Text>Simple content</Text>
         </CardContent>
-      </Card>
+      </Card>,
     );
 
-    expect(getByText('Simple content')).toBeTruthy();
+    expect(getByText("Simple content")).toBeTruthy();
   });
 });

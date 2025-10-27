@@ -13,4 +13,4 @@ export function handleError(error: unknown) {
 
   logger.error("Something went wrong. Please try again.");
   process.exit(1);
-} 
+}

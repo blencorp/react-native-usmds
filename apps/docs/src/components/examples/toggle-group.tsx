@@ -1,10 +1,13 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { ToggleGroup, ToggleGroupItem } from '@/registry/usa/components/ui/toggle-group';
-import { Text } from '@/registry/usa/components/ui/text';
-import { Bold, Italic, Underline } from 'lucide-react-native';
-import { Icon } from '@/registry/usa/components/ui/icon';
+import React from "react";
+import {
+  ToggleGroup,
+  ToggleGroupItem,
+} from "@/registry/usa/components/ui/toggle-group";
+import { Text } from "@/registry/usa/components/ui/text";
+import { Bold, Italic, Underline } from "lucide-react-native";
+import { Icon } from "@/registry/usa/components/ui/icon";
 
 export function ToggleGroupPreview() {
   return (

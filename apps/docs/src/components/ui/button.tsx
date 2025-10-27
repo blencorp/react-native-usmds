@@ -1,15 +1,15 @@
-import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
-import { cva, type VariantProps } from "class-variance-authority"
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { cva, type VariantProps } from "class-variance-authority";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
   {
     variants: {
-  variant: {
-  default: `
+      variant: {
+        default: `
     bg-[var(--usa-color-primary)]
     text-[var(--usa-color-base-lightest)]
     hover:bg-[color-mix(in srgb, var(--usa-color-primary) 90%, white)]
@@ -22,7 +22,7 @@ const buttonVariants = cva(
     rounded-sm
   `,
 
-  secondary: `
+        secondary: `
     bg-[var(--usa-color-secondary)]
     text-[var(--usa-color-base-darkest)]
     hover:bg-usa-color-error
@@ -35,7 +35,7 @@ const buttonVariants = cva(
     rounded-sm
   `,
 
-  destructive: `
+        destructive: `
     bg-[var(--usa-color-error)]
     text-[var(--usa-color-base-lightest)]
     focus:ring-4
@@ -47,7 +47,7 @@ const buttonVariants = cva(
     rounded-sm
   `,
 
-  outline: `
+        outline: `
     bg-transparent
     text-[var(--usa-color-primary)]
     hover:bg-[color-mix(in srgb, var(--usa-color-primary) 5%, black)]
@@ -60,7 +60,7 @@ const buttonVariants = cva(
     rounded-sm
   `,
 
-  ghost: `
+        ghost: `
     bg-transparent
     text-[var(--usa-color-primary)]
     hover:bg-[color-mix(in srgb, var(--usa-color-base-lightest) 90%, black)]
@@ -72,7 +72,7 @@ const buttonVariants = cva(
     rounded-sm
   `,
 
-  link: `
+        link: `
       bg-transparent
   text-[var(--usa-color-primary)]
   hover:text-[color-mix(in srgb, var(--usa-color-primary) 85%, black)]
@@ -89,7 +89,7 @@ const buttonVariants = cva(
   rounded-none
   border-none
   `,
-},
+      },
       size: {
         default: "h-10 px-[var(--usa-space-3)] py-[var(--usa-space-2)]",
         sm: "h-8 px-[var(--usa-space-2)] py-[var(--usa-space-1)] text-sm",
@@ -101,8 +101,8 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  }
-)
+  },
+);
 
 function Button({
   className,
@@ -112,9 +112,9 @@ function Button({
   ...props
 }: React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
-    asChild?: boolean
+    asChild?: boolean;
   }) {
-  const Comp = asChild ? Slot : "button"
+  const Comp = asChild ? Slot : "button";
 
   return (
     <Comp
@@ -122,7 +122,7 @@ function Button({
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
     />
-  )
+  );
 }
 
-export { Button, buttonVariants }
+export { Button, buttonVariants };

@@ -1,9 +1,13 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Popover, PopoverContent, PopoverTrigger } from '@/registry/usa/components/ui/popover';
-import { Button } from '@/registry/usa/components/ui/button';
-import { Text } from '@/registry/usa/components/ui/text';
+import React from "react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/registry/usa/components/ui/popover";
+import { Button } from "@/registry/usa/components/ui/button";
+import { Text } from "@/registry/usa/components/ui/text";
 
 export function PopoverPreview() {
   return (

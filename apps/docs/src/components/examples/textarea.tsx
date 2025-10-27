@@ -1,7 +1,9 @@
-'use client';
+"use client";
 
-import { Textarea } from '@/registry/usa/components/ui/textarea';
+import { Textarea } from "@/registry/usa/components/ui/textarea";
 
 export function TextareaPreview() {
-  return <Textarea placeholder="Type your message here." className="max-w-md" />;
+  return (
+    <Textarea placeholder="Type your message here." className="max-w-md" />
+  );
 }

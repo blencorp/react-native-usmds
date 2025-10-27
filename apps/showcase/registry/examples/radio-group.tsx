@@ -1,13 +1,16 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { View } from 'react-native';
-import * as Haptics from 'expo-haptics';
-import { RadioGroup, RadioGroupItem } from '@registry/usa/components/ui/radiogroup';
-import { Label } from '@registry/usa/components/ui/label';
+import React from "react";
+import { View } from "react-native";
+import * as Haptics from "expo-haptics";
+import {
+  RadioGroup,
+  RadioGroupItem,
+} from "@registry/usa/components/ui/radiogroup";
+import { Label } from "@registry/usa/components/ui/label";
 
 export function RadioGroupPreview() {
-  const [value, setValue] = React.useState('comfortable');
+  const [value, setValue] = React.useState("comfortable");
 
   function onLabelPress(label: string) {
     return () => {
@@ -23,21 +26,21 @@ export function RadioGroupPreview() {
 
   return (
     <RadioGroup value={value} onValueChange={onValueChange}>
-      <View className='flex flex-row items-center gap-3'>
-        <RadioGroupItem value='default' id='r1' />
-        <Label htmlFor='r1' onPress={onLabelPress('default')}>
+      <View className="flex flex-row items-center gap-3">
+        <RadioGroupItem value="default" id="r1" />
+        <Label htmlFor="r1" onPress={onLabelPress("default")}>
           Default
         </Label>
       </View>
-      <View className='flex flex-row items-center gap-3'>
-        <RadioGroupItem value='comfortable' id='r2' />
-        <Label htmlFor='r2' onPress={onLabelPress('comfortable')}>
+      <View className="flex flex-row items-center gap-3">
+        <RadioGroupItem value="comfortable" id="r2" />
+        <Label htmlFor="r2" onPress={onLabelPress("comfortable")}>
           Comfortable
         </Label>
       </View>
-      <View className='flex flex-row items-center gap-3'>
-        <RadioGroupItem value='compact' id='r3' />
-        <Label htmlFor='r3' onPress={onLabelPress('compact')}>
+      <View className="flex flex-row items-center gap-3">
+        <RadioGroupItem value="compact" id="r3" />
+        <Label htmlFor="r3" onPress={onLabelPress("compact")}>
           Compact
         </Label>
       </View>

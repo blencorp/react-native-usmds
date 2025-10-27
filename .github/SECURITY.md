@@ -19,7 +19,6 @@ The security of this project is taken seriously. If you discover a security vuln
 2. Report the vulnerability privately using one of these methods:
    - Use GitHub's [private security advisory feature](https://github.com/blencorp/react-native-usmds/security/advisories/new)
    - Email the security team (if available)
-   
 3. Include the following information in your report:
    - Description of the vulnerability
    - Steps to reproduce the issue
@@ -46,6 +45,7 @@ This repository uses GitHub's native security features:
 ### Security Alerts
 
 Security alerts are automatically created for:
+
 - Known vulnerabilities in dependencies
 - Code scanning findings from CodeQL
 - Exposed secrets or tokens
@@ -78,6 +78,7 @@ We use Dependabot to monitor and update dependencies:
 ## Code Scanning Results
 
 View current security status:
+
 - Go to the [Security tab](https://github.com/blencorp/react-native-usmds/security)
 - Check [Code scanning alerts](https://github.com/blencorp/react-native-usmds/security/code-scanning)
 - Review [Dependabot alerts](https://github.com/blencorp/react-native-usmds/security/dependabot)
@@ -85,12 +86,14 @@ View current security status:
 ## Security Contacts
 
 For urgent security issues, contact:
+
 - GitHub Security Advisory: [Create Advisory](https://github.com/blencorp/react-native-usmds/security/advisories/new)
 - Maintainers: Review the [CODEOWNERS](CODEOWNERS) file
 
 ## Disclosure Policy
 
 We follow coordinated disclosure:
+
 1. Security researchers report vulnerabilities privately
 2. We work with researchers to validate and fix the issue
 3. A fix is prepared and tested

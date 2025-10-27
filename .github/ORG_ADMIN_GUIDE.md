@@ -108,7 +108,7 @@ Monitor security across all repositories:
 1. Navigate to **Organization** → **Security** → **Overview**
 2. Configure the view to show:
    - Code scanning alerts
-   - Dependabot alerts  
+   - Dependabot alerts
    - Secret scanning alerts
 3. Set up filters for different severities
 4. Review regularly (recommended: weekly)
@@ -135,16 +135,19 @@ For each repository:
 ## Step 8: Monitor and Maintain
 
 ### Weekly Tasks:
+
 - Review Security Overview dashboard
 - Triage new security alerts
 - Merge Dependabot PRs
 
 ### Monthly Tasks:
+
 - Review security metrics (MTTR, open alerts, etc.)
 - Update security documentation
 - Review and update security policies
 
 ### Quarterly Tasks:
+
 - Security team review meeting
 - Update CodeQL query suites if needed
 - Review and update repository rulesets
@@ -163,7 +166,8 @@ Monitor these KPIs across your organization:
 
 ### Issue: Too Many False Positives
 
-**Solution:** 
+**Solution:**
+
 - Adjust CodeQL query suite (use `security-extended` instead of `security-and-quality`)
 - Add path exclusions in workflow config
 - Dismiss false positives with justification
@@ -171,6 +175,7 @@ Monitor these KPIs across your organization:
 ### Issue: Developers Ignoring Alerts
 
 **Solution:**
+
 - Make CodeQL checks required in branch protection
 - Set up notifications for security team
 - Provide training on security best practices
@@ -179,6 +184,7 @@ Monitor these KPIs across your organization:
 ### Issue: High Volume of Dependabot PRs
 
 **Solution:**
+
 - Group updates by type (development/production)
 - Adjust update frequency (weekly → bi-weekly)
 - Set open PR limits

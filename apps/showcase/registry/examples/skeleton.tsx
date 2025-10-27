@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { View } from 'react-native';
-import { Skeleton } from '@registry/usa/components/ui/skeleton';
+import React from "react";
+import { View } from "react-native";
+import { Skeleton } from "@registry/usa/components/ui/skeleton";
 
 export function SkeletonPreview() {
   return (

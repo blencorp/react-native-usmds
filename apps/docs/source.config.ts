@@ -1,9 +1,9 @@
-import { defineDocs, defineConfig } from 'fumadocs-mdx/config';
-import { remarkInstall, remarkDocGen } from 'fumadocs-docgen';
-import { fileGenerator } from './lib/file-generator';
+import { defineDocs, defineConfig } from "fumadocs-mdx/config";
+import { remarkInstall, remarkDocGen } from "fumadocs-docgen";
+import { fileGenerator } from "./lib/file-generator";
 
 export const { docs, meta } = defineDocs({
-  dir: 'content/docs'
+  dir: "content/docs",
 });
 
 export default defineConfig({
@@ -11,7 +11,7 @@ export default defineConfig({
     // MDX options
     remarkPlugins: [
       remarkInstall,
-      [remarkDocGen, { generators: [fileGenerator()] }]
-    ]
-  }
+      [remarkDocGen, { generators: [fileGenerator()] }],
+    ],
+  },
 });

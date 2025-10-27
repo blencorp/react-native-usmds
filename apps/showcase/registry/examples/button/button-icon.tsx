@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Button } from '@registry/usa/components/ui/button';
-import { ChevronRight } from 'lucide-react-native';
+import React from "react";
+import { Button } from "@registry/usa/components/ui/button";
+import { ChevronRight } from "lucide-react-native";
 
 export function ButtonIconPreview() {
   return (

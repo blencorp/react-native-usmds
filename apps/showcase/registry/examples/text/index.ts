@@ -1,3 +1,3 @@
-export * from './text';
-export * from './text-cascade';
-export * from './text-typography';
+export * from "./text";
+export * from "./text-cascade";
+export * from "./text-typography";

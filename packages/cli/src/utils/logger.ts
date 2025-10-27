@@ -7,5 +7,5 @@ export const logger = {
   error: (message: string | Error) => {
     const errorMessage = message instanceof Error ? message.message : message;
     console.error(chalk.red(errorMessage));
-  }
+  },
 };

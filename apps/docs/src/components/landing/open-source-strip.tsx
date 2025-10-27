@@ -1,13 +1,13 @@
-import Image from "next/image"
+import Image from "next/image";
 
-import SectionContent from "./section-content"
+import SectionContent from "./section-content";
 
-import uswds from "../../../images/logos/uswds.webp"
-import expo from "../../../images/logos/expo.webp"
-import reactNative from "../../../images/logos/react-native.webp"
-import tailwind from "../../../images/logos/tailwind.webp"
-import rnr from "../../../images/logos/react-native-reusables.webp"
-import shadcn from "../../../images/logos/shadcn-ui.webp"
+import uswds from "../../../images/logos/uswds.webp";
+import expo from "../../../images/logos/expo.webp";
+import reactNative from "../../../images/logos/react-native.webp";
+import tailwind from "../../../images/logos/tailwind.webp";
+import rnr from "../../../images/logos/react-native-reusables.webp";
+import shadcn from "../../../images/logos/shadcn-ui.webp";
 
 const actions = [
   {
@@ -40,7 +40,7 @@ const actions = [
     src: shadcn,
     alt: "shadcn/ui",
   },
-]
+];
 
 export default function OpenSourceStrip() {
   return (
@@ -56,10 +56,14 @@ export default function OpenSourceStrip() {
             key={action.key}
             className="group relative flex items-center justify-center bg-white px-8 py-12 focus-within:-outline-offset-2 focus-within:outline-2 focus-within:outline-indigo-600"
           >
-            <Image src={action.src} alt={action.alt} className="h-16 w-full object-contain" />
+            <Image
+              src={action.src}
+              alt={action.alt}
+              className="h-16 w-full object-contain"
+            />
           </div>
         ))}
       </div>
     </SectionContent>
-  )
+  );
 }

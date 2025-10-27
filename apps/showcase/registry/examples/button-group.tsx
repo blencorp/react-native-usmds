@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { View } from 'react-native';
-import { ButtonGroup } from '@registry/usa/components/ui/buttongroup';
-import { Button } from '@registry/usa/components/ui/button';
-import { Text } from '@registry/usa/components/ui/text';
+import React from "react";
+import { View } from "react-native";
+import { ButtonGroup } from "@registry/usa/components/ui/buttongroup";
+import { Button } from "@registry/usa/components/ui/button";
+import { Text } from "@registry/usa/components/ui/text";
 
 export function ButtonGroupPreview() {
   return (

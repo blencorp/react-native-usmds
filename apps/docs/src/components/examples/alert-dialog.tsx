@@ -1,9 +1,19 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/registry/usa/components/ui/alert-dialog';
-import { Button } from '@/registry/usa/components/ui/button';
-import { Text } from '@/registry/usa/components/ui/text';
+import React from "react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/registry/usa/components/ui/alert-dialog";
+import { Button } from "@/registry/usa/components/ui/button";
+import { Text } from "@/registry/usa/components/ui/text";
 
 export function AlertDialogPreview() {
   return (
@@ -17,7 +27,8 @@ export function AlertDialogPreview() {
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your account and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your
+            account and remove your data from our servers.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

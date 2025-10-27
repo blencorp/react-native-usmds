@@ -1,22 +1,22 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { View } from 'react-native';
-import { StepIndicator } from '@registry/usa/components/ui/stepindicator';
-import { Button } from '@registry/usa/components/ui/button';
-import { Text } from '@registry/usa/components/ui/text';
+import React from "react";
+import { View } from "react-native";
+import { StepIndicator } from "@registry/usa/components/ui/stepindicator";
+import { Button } from "@registry/usa/components/ui/button";
+import { Text } from "@registry/usa/components/ui/text";
 
 export function StepIndicatorPreview() {
   const [currentStep, setCurrentStep] = React.useState(3);
   const totalSteps = 6;
 
   const stepTitles = [
-    'Personal Info',
-    'Contact',
-    'Address',
-    'Payment',
-    'Review',
-    'Complete'
+    "Personal Info",
+    "Contact",
+    "Address",
+    "Payment",
+    "Review",
+    "Complete",
   ];
 
   const handleNext = () => {

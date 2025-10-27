@@ -1,15 +1,15 @@
-import { Command } from 'commander';
-import { existsSync } from 'fs';
-import path from 'path';
-import prompts from 'prompts';
-import * as z from 'zod';
-import { logger } from '../utils/logger';
-import { getPackageManager } from '../utils/get-package-manager';
-import { checkDependenciesExist, runInit } from './init';
-import { spawn } from 'child_process';
+import { Command } from "commander";
+import { existsSync } from "fs";
+import path from "path";
+import prompts from "prompts";
+import * as z from "zod";
+import { logger } from "../utils/logger";
+import { getPackageManager } from "../utils/get-package-manager";
+import { checkDependenciesExist, runInit } from "./init";
+import { spawn } from "child_process";
 
 // Registry configuration
-const REGISTRY_BASE_URL = 'https://storage.googleapis.com/usmds-registry/r/usa';
+const REGISTRY_BASE_URL = "https://storage.googleapis.com/usmds-registry/r/usa";
 const REGISTRY_INDEX_URL = `${REGISTRY_BASE_URL}/registry.json`;
 
 /**
@@ -28,19 +28,50 @@ async function fetchAvailableComponents(): Promise<string[]> {
       return data.items.map((item: any) => item.name).sort();
     }
 
-    throw new Error('Invalid registry format!');
+    throw new Error("Invalid registry format!");
   } catch (error) {
     // Fallback to hardcoded list if fetch fails
-    logger.warn('Unable to fetch component list from registry, using fallback list');
+    logger.warn(
+      "Unable to fetch component list from registry, using fallback list",
+    );
     return [
-      'accordion', 'alert', 'alert-dialog', 'aspect-ratio', 'avatar',
-      'badge', 'banner', 'button', 'buttongroup', 'card', 'checkbox',
-      'checkboxtile', 'collapsible', 'context-menu', 'dialog',
-      'dropdown-menu', 'hover-card', 'icon', 'menubar',
-      'pagination', 'popover', 'progress', 'radiobutton', 'radiotile',
-      'select', 'separator', 'skeleton', 'snackbar', 'stepindicator',
-      'switch', 'tabs', 'text', 'textarea', 'textinput',
-      'toggle', 'toggle-group', 'tooltip'
+      "accordion",
+      "alert",
+      "alert-dialog",
+      "aspect-ratio",
+      "avatar",
+      "badge",
+      "banner",
+      "button",
+      "buttongroup",
+      "card",
+      "checkbox",
+      "checkboxtile",
+      "collapsible",
+      "context-menu",
+      "dialog",
+      "dropdown-menu",
+      "hover-card",
+      "icon",
+      "menubar",
+      "pagination",
+      "popover",
+      "progress",
+      "radiobutton",
+      "radiotile",
+      "select",
+      "separator",
+      "skeleton",
+      "snackbar",
+      "stepindicator",
+      "switch",
+      "tabs",
+      "text",
+      "textarea",
+      "textinput",
+      "toggle",
+      "toggle-group",
+      "tooltip",
     ];
   }
 }
@@ -50,21 +81,25 @@ const addOptionsSchema = z.object({
   yes: z.boolean(),
   overwrite: z.boolean(),
   cwd: z.string(),
-  all: z.boolean()
+  all: z.boolean(),
 });
 
 export const add = new Command()
-  .name('add')
-  .description('Add USMDS components to your project')
-  .argument('[components...]', 'Components to add')
-  .option('-y, --yes', 'Skip confirmation prompt', false)
-  .option('-o, --overwrite', 'Overwrite existing files', false)
-  .option('-a, --all', 'Add all available components', false)
-  .option('-c, --cwd <cwd>', 'Working directory (defaults to current)', process.cwd())
+  .name("add")
+  .description("Add USMDS components to your project")
+  .argument("[components...]", "Components to add")
+  .option("-y, --yes", "Skip confirmation prompt", false)
+  .option("-o, --overwrite", "Overwrite existing files", false)
+  .option("-a, --all", "Add all available components", false)
+  .option(
+    "-c, --cwd <cwd>",
+    "Working directory (defaults to current)",
+    process.cwd(),
+  )
   .action(async (components, opts) => {
     const options = addOptionsSchema.parse({
       components,
-      ...opts
+      ...opts,
     });
 
     const cwd = path.resolve(options.cwd);
@@ -77,12 +112,14 @@ export const add = new Command()
     // Single initialization check
     const initialized = await checkDependenciesExist(cwd);
     if (!initialized) {
-      logger.info(`Project not initialized. Running '@blen/usmds init' first...`);
+      logger.info(
+        `Project not initialized. Running '@blen/usmds init' first...`,
+      );
       try {
         await runInit(cwd);
-        logger.success('Successfully initialized project');
+        logger.success("Successfully initialized project");
       } catch (error) {
-        logger.error('Failed to initialize project');
+        logger.error("Failed to initialize project");
         logger.error(error as Error);
         process.exit(1);
       }
@@ -93,43 +130,47 @@ export const add = new Command()
       const availableComponents = await fetchAvailableComponents();
 
       // Determine which components to install
-      let selectedComponents = options.all ? availableComponents : options.components;
+      let selectedComponents = options.all
+        ? availableComponents
+        : options.components;
 
       // If no components specified, show selection prompt
       if (!selectedComponents?.length && !options.all) {
         const response = await prompts({
-          type: 'multiselect',
-          name: 'components',
-          message: 'Select components to add:',
+          type: "multiselect",
+          name: "components",
+          message: "Select components to add:",
           choices: availableComponents.map((component) => ({
             title: component,
-            value: component
-          }))
+            value: component,
+          })),
         });
 
         selectedComponents = response.components;
       }
 
       if (!selectedComponents?.length) {
-        logger.warn('No components selected');
+        logger.warn("No components selected");
         process.exit(0);
       }
 
       // Validate component names
       const invalidComponents = selectedComponents.filter(
-        (c) => !availableComponents.includes(c.toLowerCase())
+        (c) => !availableComponents.includes(c.toLowerCase()),
       );
 
       if (invalidComponents.length > 0) {
-        logger.error(`Invalid component(s): ${invalidComponents.join(', ')}`);
-        logger.info(`\nAvailable components:\n  ${availableComponents.join('\n  ')}`);
+        logger.error(`Invalid component(s): ${invalidComponents.join(", ")}`);
+        logger.info(
+          `\nAvailable components:\n  ${availableComponents.join("\n  ")}`,
+        );
         process.exit(1);
       }
 
       // Build component URLs
       const componentUrls = selectedComponents.map((component) => {
         const lowerCaseComponent = component.toLowerCase();
-        return lowerCaseComponent.startsWith('http')
+        return lowerCaseComponent.startsWith("http")
           ? lowerCaseComponent
           : `${REGISTRY_BASE_URL}/${lowerCaseComponent}.json`;
       });
@@ -137,56 +178,57 @@ export const add = new Command()
       // Build shadcn command options
       const shadcnOptions: string[] = [];
       if (options.overwrite) {
-        shadcnOptions.push('--overwrite');
+        shadcnOptions.push("--overwrite");
       }
       if (options.yes) {
-        shadcnOptions.push('--yes');
+        shadcnOptions.push("--yes");
       }
 
       // Get package manager and build command
       const packageManager = await getPackageManager(cwd);
 
       // Determine the binary runner (npx, pnpm dlx, yarn dlx, or bunx)
-      const binaryRunner = packageManager === 'npm'
-        ? ['npx']
-        : packageManager === 'pnpm'
-        ? ['pnpm', 'dlx']
-        : packageManager === 'yarn'
-        ? ['yarn', 'dlx']
-        : ['bunx'];
+      const binaryRunner =
+        packageManager === "npm"
+          ? ["npx"]
+          : packageManager === "pnpm"
+            ? ["pnpm", "dlx"]
+            : packageManager === "yarn"
+              ? ["yarn", "dlx"]
+              : ["bunx"];
 
       const commandArgs = [
         ...binaryRunner.slice(1),
-        'shadcn@latest',
-        'add',
+        "shadcn@latest",
+        "add",
         ...shadcnOptions,
-        ...componentUrls
-      ].filter((option) => option !== undefined && option !== '');
+        ...componentUrls,
+      ].filter((option) => option !== undefined && option !== "");
 
-      logger.info('Installing components...');
+      logger.info("Installing components...");
 
       // Run shadcn add command
       await new Promise<void>((resolve, reject) => {
         const proc = spawn(binaryRunner[0], commandArgs, {
           cwd,
-          stdio: 'inherit'
+          stdio: "inherit",
         });
 
-        proc.on('exit', (code) => {
+        proc.on("exit", (code) => {
           if (code === 0) {
-            logger.success('All components installed successfully!');
+            logger.success("All components installed successfully!");
             resolve();
           } else {
             reject(new Error(`shadcn add exited with code ${code}`));
           }
         });
 
-        proc.on('error', (error) => {
+        proc.on("error", (error) => {
           reject(error);
         });
       });
     } catch (error) {
-      logger.error('Failed to add components');
+      logger.error("Failed to add components");
       logger.error(error as Error);
       process.exit(1);
     }

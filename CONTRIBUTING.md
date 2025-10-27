@@ -1,16 +1,17 @@
 # Contributing to USMDS
 
-
 ### Repository Structure
+
+This is a pnpm + Turborepo monorepo with the following structure:
 
 ```text
 .
 ├── apps/
-│   └── docs/          # Documentation site
+│   ├── docs/          # Documentation site (Next.js)
+│   └── showcase/      # Showcase app (Expo)
 ├── packages/
-│   ├── cli/          # USMDS CLI tool
-│   └── ui/           # Core UI components
-```
+│   ├── cli/           # USMDS CLI tool (@blen/usmds)
+│   └── registry/      # Core UI components and tests
 ```
 
 ## Development Setup
@@ -24,26 +25,65 @@
 
 2. **Install Dependencies**
 
-   ```bash
-   npm install
-   ```
-3. **Run Storybook**
+   This project uses pnpm as its package manager. Make sure you have Node.js 22+ and pnpm 10+ installed.
 
    ```bash
-   cd apps/storybook
-   npm storybook --reset-cache
+   pnpm install
+   ```
+
+3. **Start Development**
+
+   ```bash
+   # Run all dev scripts (docs, showcase, etc.)
+   pnpm dev
+
+   # Or run specific apps
+   pnpm dev:docs      # Documentation site
+   pnpm dev:showcase  # Showcase app
    ```
 
 ## Working with the Monorepo
 
-We use Turborepo for managing our monorepo. Here are some common commands:
+We use pnpm workspaces and Turborepo for managing our monorepo. Here are some common commands:
 
-- Build all packages: `npm build`
-- Build documentation: `npm build:docs`
-- Build examples: `npm build:examples`
-- Run development server: `npm dev`
-- Lint code: `npm lint`
-- Format code: `npm format`
+### Root-level Commands
+
+These commands run across all workspaces:
+
+- **Build all packages**: `pnpm build`
+- **Run development mode**: `pnpm dev`
+- **Lint code**: `pnpm lint`
+- **Format code**: `pnpm format`
+
+### App-specific Commands
+
+- **Build documentation**: `pnpm build:docs`
+- **Build examples**: `pnpm build:examples`
+- **Dev documentation**: `pnpm dev:docs`
+- **Dev showcase**: `pnpm dev:showcase`
+
+### Workspace-specific Commands
+
+To run commands in a specific workspace, use the `--filter` flag:
+
+```bash
+# Run tests in the registry package
+pnpm --filter @blen/react-native-usmds-registry test
+
+# Build the CLI package
+pnpm --filter @blen/usmds build
+
+# Add a dependency to a specific workspace
+pnpm --filter @blen/usmds add <package-name>
+```
+
+### Global Flag
+
+To run a script at the workspace root, use the `-w` flag:
+
+```bash
+pnpm -w run <script-name>
+```
 
 ## Commit Convention
 
@@ -106,7 +146,6 @@ Before submitting your PR, please ensure:
 - Documentation is updated
 - The code follows our style guide (enforced by ESLint and Prettier)
 
-
 ## Need Help?
 
 If you need help or have questions:
@@ -118,4 +157,3 @@ If you need help or have questions:
 ## License
 
 By contributing to USMDS, you agree that your contributions will be licensed under its license.
-

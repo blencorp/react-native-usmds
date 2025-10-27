@@ -4,8 +4,8 @@ export default function WorkTogetherCta() {
       <div className="mx-auto max-w-6xl px-4 py-20">
         <h2 className="text-black">Let's work together</h2>
         <p className="mt-2 max-w-3xl text-neutral-600">
-          We partner with federal agencies and businesses to deliver innovative solutions that drive
-          real value.
+          We partner with federal agencies and businesses to deliver innovative
+          solutions that drive real value.
         </p>
         <div className="mt-6">
           <a
@@ -19,5 +19,5 @@ export default function WorkTogetherCta() {
         </div>
       </div>
     </section>
-  )
+  );
 }

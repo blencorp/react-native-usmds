@@ -1,6 +1,6 @@
-import type { MetadataRoute } from "next"
+import type { MetadataRoute } from "next";
 
-const faviconPath = "/assets/images/favicons"
+const faviconPath = "/assets/images/favicons";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
@@ -34,5 +34,5 @@ export default function manifest(): MetadataRoute.Manifest {
         type: "image/png",
       },
     ],
-  }
+  };
 }

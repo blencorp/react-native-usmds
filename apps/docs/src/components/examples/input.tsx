@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { Input } from '@/registry/usa/components/ui/input';
+import { Input } from "@/registry/usa/components/ui/input";
 
 export function InputPreview() {
   return (
