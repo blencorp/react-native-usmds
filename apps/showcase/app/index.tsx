@@ -1,117 +1,104 @@
-import { Icon } from '@registry/usa/components/ui/icon';
 import { Text } from '@registry/usa/components/ui/text';
-import { TextInput } from '@registry/usa/components/ui/textinput';
+import { Icon } from '@registry/usa/components/ui/icon';
 import { cn } from '@registry/usa/lib/utils';
-import { useScrollToTop } from '@react-navigation/native';
-import { FlashList, type ListRenderItemInfo } from '@shopify/flash-list';
-import { type ShowcaseListItem } from '@showcase/lib/constants';
-import { useComponentRegistry } from '@showcase/lib/registry-context';
-import { NAV_THEME } from '@showcase/lib/theme';
 import { Link } from 'expo-router';
 import { ChevronRight } from 'lucide-react-native';
-import { cssInterop, useColorScheme } from 'nativewind';
+import { useColorScheme } from 'nativewind';
 import * as React from 'react';
-import { Platform, Pressable, View } from 'react-native';
-import type { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
+import { Image, Platform, Pressable, View, ScrollView } from 'react-native';
+import { useComponentRegistry } from '@showcase/lib/registry-context';
+import { usePackageVersion } from '@showcase/hooks/use-package-version';
+import { LinearGradient } from 'expo-linear-gradient';
 
-cssInterop(FlashList, { className: 'style', contentContainerClassName: 'contentContainerStyle' });
+const GRADIENT_COLORS = {
+  blue: {
+    light: ['#d9e8f6', '#aacdec'] as const, // USWDS blue-10 to blue-20
+    dark: ['#005ea2', '#0b4778'] as const // USWDS blue-60v to blue-70v
+  },
+  red: {
+    light: ['#f8eff1', '#f4d5d8'] as const, // USWDS red-5 to red-10
+    dark: ['#b51d09', '#8b1303'] as const // USWDS red-60 to red-70
+  },
+  indigo: {
+    light: ['#e7e9f5', '#c5cae9'] as const, // USWDS indigo-5 to indigo-10
+    dark: ['#3d4076', '#2e2e5f'] as const // USWDS indigo-70 to indigo-80
+  }
+} as const;
 
-export default function ComponentsScreen() {
+type CardProps = {
+  title: string;
+  subtitle: string;
+  count: number;
+  href: '/components' | '/themes';
+  gradient: 'blue' | 'red' | 'indigo';
+};
+
+function LandingCard({ title, subtitle, count, href, gradient }: CardProps) {
   const { colorScheme } = useColorScheme();
-  const { components } = useComponentRegistry();
-  const [search, setSearch] = React.useState('');
-  const [isAtTop, setIsAtTop] = React.useState(true);
-  const isAtTopRef = React.useRef(true);
-  const flashListRef = React.useRef<React.ComponentRef<typeof FlashList<ShowcaseListItem>>>(null);
-  useScrollToTop(flashListRef);
 
-  const data = React.useMemo<ShowcaseListItem[]>(() => {
-    if (!search.trim()) {
-      return components;
-    }
-
-    const needle = search.toLowerCase();
-    return components.filter((item) =>
-      `${item.title} ${item.tags?.join(' ') ?? ''}`.toLowerCase().includes(needle)
-    );
-  }, [components, search]);
-
-  const handleScrollState = React.useCallback((event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const isScrollAtTop = event.nativeEvent.contentOffset.y <= 0;
-    if (isScrollAtTop !== isAtTopRef.current) {
-      isAtTopRef.current = isScrollAtTop;
-      setIsAtTop(isScrollAtTop);
-    }
-  }, []);
-
-  const onListScroll = React.useCallback(
-    (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-      handleScrollState(event);
-    },
-    [handleScrollState]
-  );
-
-  const renderItem = React.useCallback(
-    ({ item }: ListRenderItemInfo<ShowcaseListItem>) => (
-      <Link href={{ pathname: '/components/[slug]', params: { slug: item.slug } }} asChild>
-        <Link.Trigger>
-          <Pressable
-            role="button"
-            className={cn(
-              'bg-card border-border/80 active:bg-accent/25 flex-row items-start justify-between gap-3 rounded-2xl border px-4 py-4 shadow-sm shadow-black/5',
-              Platform.select({
-                web: 'transition-colors hover:border-border hover:bg-accent/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
-              })
-            )}>
-            <View className="flex-1 gap-1">
-              <Text className="text-lg font-semibold text-foreground">{item.title}</Text>
-              {!!item.description && (
-                <Text className="text-sm leading-5 text-muted-foreground">{item.description}</Text>
-              )}
-            </View>
-            <Icon as={ChevronRight} className="mt-1 size-4 stroke-[1.5px] text-muted-foreground" />
-          </Pressable>
-        </Link.Trigger>
-        <Link.Preview
-          style={{ backgroundColor: NAV_THEME[colorScheme ?? 'light'].colors.background }}
-        />
-      </Link>
-    ),
-    [colorScheme]
-  );
+  const colors = GRADIENT_COLORS[gradient][colorScheme === 'dark' ? 'dark' : 'light'];
 
   return (
-    <View
-      className={cn(
-        'web:p-4 mx-auto w-full max-w-3xl flex-1 bg-background',
-        Platform.select({ android: cn('border-border/0 border-t', !isAtTop && 'border-border') })
-      )}>
-      <FlashList
-        ref={flashListRef}
-        data={data}
-        contentInsetAdjustmentBehavior="automatic"
-        contentContainerClassName="px-4 pb-8 pt-4"
-        keyboardShouldPersistTaps="handled"
-        keyboardDismissMode="on-drag"
-        showsVerticalScrollIndicator={false}
-        onScroll={onListScroll}
-        ListHeaderComponent={
-          <View className="gap-4 pb-4 pt-2">
-            <Text className="text-4xl font-semibold text-foreground">Showcase</Text>
-            <TextInput
-              placeholder="Search components"
-              clearButtonMode="always"
-              onChangeText={setSearch}
-              autoCorrect={false}
-              value={search}
-              className="min-h-[48px] rounded-2xl border border-border/70 bg-background/80 px-4"
-            />
+    <Link href={href} asChild>
+      <Pressable
+        role='button'
+        className={cn(
+          Platform.select({
+            web: 'transition-all hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+          })
+        )}
+      >
+        <LinearGradient
+          colors={colors}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          className='min-h-[200px] overflow-hidden rounded-lg p-6 shadow-sm shadow-black/10'
+        >
+          {/* Count Badge */}
+          <View className='mb-8 self-start rounded-full px-2 py-2'>
+            <Text className='text-2xl font-bold text-foreground'>{count}</Text>
           </View>
-        }
-        renderItem={renderItem}
-        ItemSeparatorComponent={() => <View className="h-3" />}
-        ListFooterComponent={<View className="android:pb-safe h-4" />}
-      />
-    </View>
+
+          {/* Content */}
+          <View className='flex-1 justify-end gap-1 px-2 py-2'>
+            <View className='flex-row items-center justify-between'>
+              <View className='flex-1'>
+                <Text className='text-3xl font-bold text-foreground'>{title}</Text>
+                <Text className='mt-1 text-base text-muted-foreground'>{subtitle}</Text>
+              </View>
+              <Icon as={ChevronRight} className='size-6 stroke-[2px] text-foreground/70' />
+            </View>
+          </View>
+        </LinearGradient>
+      </Pressable>
+    </Link>
+  );
+}
+
+export default function LandingScreen() {
+  const { components } = useComponentRegistry();
+  const { version } = usePackageVersion();
+
+  const componentsCount = components.length;
+  // 5 federal agencies + 3 state governments = 8 themes total
+  const themesCount = 8;
+
+  return (
+    <ScrollView className='flex-1 bg-background' contentContainerClassName='px-4 pb-8' showsVerticalScrollIndicator={false}>
+      <View className='web:p-4 mx-auto w-full max-w-3xl gap-6 pt-6'>
+        {/* Logo and Version */}
+        <View className='items-center gap-2'>
+          <Image source={require('@showcase/assets/images/b_logo.png')} style={{ width: 120, height: 120 }} resizeMode='contain' />
+          <Text className='text-lg text-muted-foreground'>v{version}</Text>
+        </View>
+
+        {/* Cards */}
+        <View className='gap-4'>
+          <LandingCard title='Components' subtitle='Explore all components' count={componentsCount} href='/components' gradient='blue' />
+
+          <LandingCard title='Themes' subtitle='Try different themes' count={themesCount} href='/themes' gradient='red' />
+        </View>
+      </View>
+    </ScrollView>
   );
 }
