@@ -1,5 +1,6 @@
 import { Text } from '@registry/usa/components/ui/text';
 import { cn } from '@registry/usa/lib/utils';
+import { AgencyLogo } from '@showcase/components/agency-logo';
 import { AVAILABLE_THEMES, useTheme, type ThemeId } from '@showcase/lib/theme-context';
 import { Check } from 'lucide-react-native';
 import * as React from 'react';
@@ -24,20 +25,23 @@ function ThemeCard({ themeId, isSelected, onSelect }: ThemeCardProps) {
           web: 'transition-all hover:border-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
         })
       )}>
-      <View className="gap-3">
-        {/* Header with name and checkmark */}
-        <View className="flex-row items-start justify-between">
-          <View className="flex-1 gap-1">
-            <Text className="text-xl font-bold text-foreground">{theme.name}</Text>
-            <Text className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
-              {theme.type === 'federal' ? 'Federal Agency' : 'State Government'}
-            </Text>
-          </View>
+      <View className="gap-4">
+        {/* Agency Logo */}
+        <View className="flex-row items-center justify-between">
+          <AgencyLogo themeId={themeId} size="md" />
           {isSelected && (
             <View className="rounded-full bg-primary p-1.5">
               <Check size={16} color="white" strokeWidth={3} />
             </View>
           )}
+        </View>
+
+        {/* Header with name */}
+        <View className="gap-1">
+          <Text className="text-xl font-bold text-foreground">{theme.name}</Text>
+          <Text className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
+            {theme.type === 'federal' ? 'Federal Agency' : 'State Government'}
+          </Text>
         </View>
 
         {/* Description */}
