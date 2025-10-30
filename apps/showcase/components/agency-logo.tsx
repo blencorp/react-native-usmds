@@ -62,16 +62,19 @@ export function AgencyLogo({ themeId, size = 'md' }: AgencyLogoProps) {
 
   // If logo URL exists, show image
   if (logoUrl) {
-    // VA logo needs special handling - scale it up since the image is very small
-    const imageScale = themeId === 'va' ? 1.5 : 0.85;
+    // Special handling for different logos
+    // VA logo is wider and needs more horizontal space
+    const isVA = themeId === 'va';
+    const containerWidth = isVA ? sizeValues[size] * 1.8 : sizeValues[size];
+    const imageScale = isVA ? 1.2 : 0.85;
 
     return (
       <View
-        className="items-center justify-center rounded-lg bg-muted/20"
-        style={{ width: sizeValues[size], height: sizeValues[size] }}>
+        className="items-center justify-center"
+        style={{ width: containerWidth, height: sizeValues[size] }}>
         <Image
           source={{ uri: logoUrl }}
-          style={{ width: sizeValues[size] * imageScale, height: sizeValues[size] * imageScale }}
+          style={{ width: containerWidth * imageScale, height: sizeValues[size] * imageScale }}
           contentFit='contain'
           placeholder={{ blurhash: 'L5H2EC=PM+yV+^jYRrxuwPj[R%M|' }}
           transition={200}

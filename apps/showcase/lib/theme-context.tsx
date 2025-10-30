@@ -1,7 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useColorScheme, vars } from 'nativewind';
 import * as React from 'react';
+import { View } from 'react-native';
+import { AGENCY_THEMES, getAgencyTheme, type ThemeColors } from './agency-themes';
+import { AGENCY_FONT_FAMILIES } from '../hooks/use-agency-fonts';
 
-// Theme definitions will be implemented in issue #200
 export type ThemeId = 'usa' | 'va' | 'usda' | 'cms' | 'cdc' | 'maryland' | 'california' | 'utah';
 
 export type ThemeInfo = {
@@ -116,15 +119,48 @@ type ThemeContextType = {
   currentTheme: ThemeId;
   setTheme: (themeId: ThemeId) => Promise<void>;
   themeInfo: ThemeInfo;
+  colors: ThemeColors;
+  colorScheme: 'light' | 'dark';
+  fonts: {
+    body: string;
+    heading: string;
+  };
 };
 
 const ThemeContext = React.createContext<ThemeContextType | null>(null);
 
 const THEME_STORAGE_KEY = '@showcase/selected-theme';
 
+/**
+ * Convert ThemeColors to CSS variables format for NativeWind
+ * Strips 'hsl()' wrapper since Tailwind config adds it back
+ */
+function colorsToCSSVars(colors: ThemeColors): Record<string, string> {
+  const cssVars: Record<string, string> = {};
+
+  for (const [key, value] of Object.entries(colors)) {
+    if (key === 'radius') {
+      cssVars['--radius'] = value;
+      continue;
+    }
+
+    // Convert camelCase to kebab-case for CSS variables
+    const cssKey = '--' + key.replace(/([A-Z])/g, '-$1').toLowerCase();
+
+    // Strip 'hsl()' wrapper: 'hsl(209 100% 32%)' → '209 100% 32%'
+    const cssValue = value.replace(/^hsl\((.*)\)$/, '$1');
+
+    cssVars[cssKey] = cssValue;
+  }
+
+  return cssVars;
+}
+
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [currentTheme, setCurrentTheme] = React.useState<ThemeId>('usa');
+  const { colorScheme = 'light' } = useColorScheme();
 
+  // Load saved theme on mount
   React.useEffect(() => {
     async function loadTheme() {
       try {
@@ -139,32 +175,47 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     loadTheme();
   }, []);
 
+  // Get current theme colors based on agency and light/dark mode
+  const colors = React.useMemo(() => {
+    return getAgencyTheme(currentTheme, colorScheme);
+  }, [currentTheme, colorScheme]);
+
+  // Convert colors to CSS variables wrapped with vars() for NativeWind
+  const themeVars = React.useMemo(() => {
+    const cssVars = colorsToCSSVars(colors);
+    return vars(cssVars);
+  }, [colors, currentTheme, colorScheme]);
+
   const setTheme = React.useCallback(async (themeId: ThemeId) => {
     try {
       await AsyncStorage.setItem(THEME_STORAGE_KEY, themeId);
       setCurrentTheme(themeId);
 
-      // TODO: Apply theme colors and fonts (will be implemented in issue #200)
-      // This is where we would:
-      // 1. Update CSS custom properties
-      // 2. Load custom fonts if needed
-      // 3. Trigger app re-render with new theme
-      console.log(`Theme switched to: ${themeId}`);
+      console.log(`Theme switched to: ${themeId} (${colorScheme} mode)`);
     } catch (error) {
       console.error('Failed to save theme:', error);
     }
-  }, []);
+  }, [colorScheme]);
 
   const value = React.useMemo(
     () => ({
       currentTheme,
       setTheme,
       themeInfo: AVAILABLE_THEMES[currentTheme],
+      colors,
+      colorScheme,
+      fonts: AGENCY_FONT_FAMILIES[currentTheme],
     }),
-    [currentTheme, setTheme]
+    [currentTheme, setTheme, colors, colorScheme]
   );
 
-  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeContext.Provider value={value}>
+      <View style={themeVars} className="flex-1 bg-background">
+        {children}
+      </View>
+    </ThemeContext.Provider>
+  );
 }
 
 export function useTheme() {
