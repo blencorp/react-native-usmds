@@ -92,6 +92,7 @@ function withExpo(nextConfig) {
         ...(config.resolve.alias || {}),
         '@/registry': path.resolve(__dirname, '../../packages/registry/src'),
         'react-native$': 'react-native-web',
+        'react-native-reanimated$': path.resolve(__dirname, './src/lib/reanimated-mock.js'),
         'react-native/Libraries/EventEmitter/RCTDeviceEventEmitter$':
           'react-native-web/dist/vendor/react-native/NativeEventEmitter/RCTDeviceEventEmitter',
         'react-native/Libraries/vendor/emitter/EventEmitter$':
