@@ -4,10 +4,9 @@ import { Card, CardContent, CardHeader } from '@registry/usa/components/ui/card'
 import { cn } from '@registry/usa/lib/utils';
 import { AgencyLogo } from '@showcase/components/agency-logo';
 import { AVAILABLE_THEMES, useTheme, type ThemeId } from '@showcase/lib/theme-context';
-import { AGENCY_FONT_FAMILIES } from '@showcase/hooks/use-agency-fonts';
 import { Check } from 'lucide-react-native';
 import * as React from 'react';
-import { View, ScrollView, Pressable, Platform, Text as RNText } from 'react-native';
+import { View, ScrollView, Pressable, Platform } from 'react-native';
 
 type ThemeCardProps = {
   themeId: ThemeId;

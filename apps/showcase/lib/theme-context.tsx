@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useColorScheme, vars } from 'nativewind';
 import * as React from 'react';
 import { View } from 'react-native';
-import { AGENCY_THEMES, getAgencyTheme, type ThemeColors } from './agency-themes';
+import { getAgencyTheme, type ThemeColors } from './agency-themes';
 import { AGENCY_FONT_FAMILIES } from '../hooks/use-agency-fonts';
 
 export type ThemeId = 'usa' | 'va' | 'usda' | 'cms' | 'cdc' | 'maryland' | 'california' | 'utah';
