@@ -1,11 +1,12 @@
 import '../global.css';
 
 import { Text } from '@registry/usa/components/ui/text';
-import { ThemeProvider } from '@react-navigation/native';
+import { ThemeProvider as NavigationThemeProvider } from '@react-navigation/native';
 import { PortalHost } from '@rn-primitives/portal';
 import { HeaderRightView } from '@showcase/components/header-right-view';
 import { useGeistFont } from '@showcase/hooks/use-geist-font';
 import { ComponentRegistryProvider } from '@showcase/lib/registry-context';
+import { ThemeProvider } from '@showcase/lib/theme-context';
 import { NAV_THEME } from '@showcase/lib/theme';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -42,41 +43,57 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={NAV_THEME[colorScheme]}>
-      <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
-      <GestureHandlerRootView
-        style={{ flex: 1, backgroundColor: NAV_THEME[colorScheme].colors.background }}>
-        <KeyboardProvider>
-          <ComponentRegistryProvider>
-            <Stack
-              screenOptions={{
-                headerBackTitle: 'Back',
-                headerTitle(props) {
-                return (
-                  <Text className="android:mt-1.5 text-xl font-medium">
-                    {toOptions(
-                      typeof props.children === 'string'
-                        ? props.children.split('/').pop() ?? ''
-                        : ''
-                    )}
-                  </Text>
-                );
-              },
-              headerRight: () => <HeaderRightView />,
-            }}>
-            <Stack.Screen
-              name="index"
-              options={{
-                headerTitle: 'Showcase',
-                headerShadowVisible: false,
-                headerTransparent: false,
-              }}
-            />
-            </Stack>
-          </ComponentRegistryProvider>
-          <PortalHost />
-        </KeyboardProvider>
-      </GestureHandlerRootView>
+    <ThemeProvider>
+      <NavigationThemeProvider value={NAV_THEME[colorScheme]}>
+        <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+        <GestureHandlerRootView
+          style={{ flex: 1, backgroundColor: NAV_THEME[colorScheme].colors.background }}>
+          <KeyboardProvider>
+            <ComponentRegistryProvider>
+              <Stack
+                screenOptions={{
+                  headerBackTitle: 'Back',
+                  headerTitle(props) {
+                  return (
+                    <Text className="android:mt-1.5 text-xl font-medium">
+                      {toOptions(
+                        typeof props.children === 'string'
+                          ? props.children.split('/').pop() ?? ''
+                          : ''
+                      )}
+                    </Text>
+                  );
+                },
+                headerRight: () => <HeaderRightView />,
+              }}>
+              <Stack.Screen
+                name="index"
+                options={{
+                  headerTitle: 'USMDS Showcase',
+                  headerShadowVisible: false,
+                  headerTransparent: false,
+                }}
+              />
+              <Stack.Screen
+                name="components/index"
+                options={{
+                  headerTitle: 'Components',
+                  headerShadowVisible: false,
+                }}
+              />
+              <Stack.Screen
+                name="themes/index"
+                options={{
+                  headerTitle: 'Themes',
+                  headerShadowVisible: false,
+                }}
+              />
+              </Stack>
+            </ComponentRegistryProvider>
+            <PortalHost />
+          </KeyboardProvider>
+        </GestureHandlerRootView>
+      </NavigationThemeProvider>
     </ThemeProvider>
   );
 }
