@@ -5,7 +5,6 @@ import { DarkTheme, DefaultTheme, ThemeProvider as NavigationThemeProvider } fro
 import { PortalHost } from '@rn-primitives/portal';
 import { HeaderRightView } from '@showcase/components/header-right-view';
 import { useGeistFont } from '@showcase/hooks/use-geist-font';
-import { useAgencyFonts } from '@showcase/hooks/use-agency-fonts';
 import { ComponentRegistryProvider } from '@showcase/lib/registry-context';
 import { ThemeProvider, useTheme } from '@showcase/lib/theme-context';
 import { Stack } from 'expo-router';
@@ -105,11 +104,7 @@ function AppLayout() {
 }
 
 export default function RootLayout() {
-  const [geistLoaded, geistError] = useGeistFont();
-  const [agencyFontsLoaded, agencyFontsError] = useAgencyFonts();
-
-  const loaded = geistLoaded && agencyFontsLoaded;
-  const error = geistError || agencyFontsError;
+  const [loaded, error] = useGeistFont();
 
   React.useEffect(() => {
     if (loaded || error) {

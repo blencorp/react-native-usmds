@@ -172,24 +172,9 @@ importers:
 
   apps/showcase:
     dependencies:
-      '@expo-google-fonts/bitter':
-        specifier: ^0.4.1
-        version: 0.4.1
       '@expo-google-fonts/geist':
         specifier: ^0.4.0
         version: 0.4.1
-      '@expo-google-fonts/lato':
-        specifier: ^0.4.1
-        version: 0.4.1
-      '@expo-google-fonts/open-sans':
-        specifier: ^0.4.2
-        version: 0.4.2
-      '@expo-google-fonts/public-sans':
-        specifier: ^0.4.2
-        version: 0.4.2
-      '@expo-google-fonts/source-sans-pro':
-        specifier: ^0.2.3
-        version: 0.2.3
       '@expo/vector-icons':
         specifier: ^15.0.2
         version: 15.0.2(expo-font@14.0.9(expo@54.0.15)(react-native@0.81.4(@babel/core@7.28.4)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0))(react-native@0.81.4(@babel/core@7.28.4)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0)
@@ -238,9 +223,6 @@ importers:
       expo-crypto:
         specifier: ~15.0.6
         version: 15.0.7(expo@54.0.15)
-      expo-font:
-        specifier: ~14.0.8
-        version: 14.0.9(expo@54.0.15)(react-native@0.81.4(@babel/core@7.28.4)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0)
       expo-haptics:
         specifier: ~15.0.7
         version: 15.0.7(expo@54.0.15)
@@ -1681,24 +1663,8 @@ packages:
     resolution: {integrity: sha512-sB5uyeq+dwCWyPi31B2gQlVlo+j5brPlWx4yZBrEaRo/nhdDE8Xke1gsGgtiBdaBTxuTkceLVuVt/pclrasb0A==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@expo-google-fonts/bitter@0.4.1':
-    resolution: {integrity: sha512-zm5ExPdg8ag3sa0nLtI9JNmlBxRSy7yuWOKkBNMYAOEsM62atGHAzp3gKAK3lQX5po4tTt+GpbZQ1P11GVcJpQ==}
-
   '@expo-google-fonts/geist@0.4.1':
     resolution: {integrity: sha512-UOBwoTJkKC0ViMOS8gjlQyUcT/5PX0phCroz/8z0DP1+7FcoD1RGGeG//nVQYWbT3y/ze4XoE63gSunml9Wdbw==}
-
-  '@expo-google-fonts/lato@0.4.1':
-    resolution: {integrity: sha512-U2g1sOBFSNgmxhh/Ywgyi7Hx6T3UielX2nmZuP55wqndrIEyNX3HeUQIhhQDe2vZ+nvZI0Z2vTcVjmOn/BM9ow==}
-
-  '@expo-google-fonts/open-sans@0.4.2':
-    resolution: {integrity: sha512-gvhPqLXYnltWgll3iBwRGUwf5yN2HCh4mgQmFoQ8oU66LTs23oX4N7T3t0BDsKfP/1Z8F8+4c7wSkA11Nnk4kA==}
-
-  '@expo-google-fonts/public-sans@0.4.2':
-    resolution: {integrity: sha512-sIUyE7yXUHw6asSN6lXfcxNHl/EIyKl3EMKTgwDaY/1lTTP/9ZHYMYGwGS5XfEGQ/zgMUOjnzA7qlN9DJkctAw==}
-
-  '@expo-google-fonts/source-sans-pro@0.2.3':
-    resolution: {integrity: sha512-/vDE5/vECqJT4Xdi1QiKG6rL8+mdrvqu3OlSe2dMPB7B9BR+cWsu0fSHTqRa1cQY03bXSPSIwOiHG4fy/CHBJg==}
-    deprecated: This font has been removed from Google Fonts and will no longer receive updates.
 
   '@expo/cli@54.0.12':
     resolution: {integrity: sha512-aBwpzG8z5U4b51S3T5MRIRe+NOOW2KdJ7cvJD8quL2Ba9gZRw8UVb+pmL28tS9yL3r1r3n8b1COSaJ8Y0eRTFA==}
@@ -11269,17 +11235,7 @@ snapshots:
       '@eslint/core': 0.16.0
       levn: 0.4.1
 
-  '@expo-google-fonts/bitter@0.4.1': {}
-
   '@expo-google-fonts/geist@0.4.1': {}
-
-  '@expo-google-fonts/lato@0.4.1': {}
-
-  '@expo-google-fonts/open-sans@0.4.2': {}
-
-  '@expo-google-fonts/public-sans@0.4.2': {}
-
-  '@expo-google-fonts/source-sans-pro@0.2.3': {}
 
   '@expo/cli@54.0.12(@modelcontextprotocol/sdk@1.20.0)(expo-router@6.0.13)(expo@54.0.15)(graphql@16.11.0)(react-native@0.81.4(@babel/core@7.28.4)(@types/react@19.1.17)(react@19.1.0))':
     dependencies:

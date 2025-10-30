@@ -3,7 +3,6 @@ import { useColorScheme, vars } from 'nativewind';
 import * as React from 'react';
 import { View } from 'react-native';
 import { getAgencyTheme, type ThemeColors } from './agency-themes';
-import { AGENCY_FONT_FAMILIES } from '../hooks/use-agency-fonts';
 
 export type ThemeId = 'usa' | 'va' | 'usda' | 'cms' | 'cdc' | 'maryland' | 'california' | 'utah';
 
@@ -121,10 +120,6 @@ type ThemeContextType = {
   themeInfo: ThemeInfo;
   colors: ThemeColors;
   colorScheme: 'light' | 'dark';
-  fonts: {
-    body: string;
-    heading: string;
-  };
 };
 
 const ThemeContext = React.createContext<ThemeContextType | null>(null);
@@ -204,7 +199,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       themeInfo: AVAILABLE_THEMES[currentTheme],
       colors,
       colorScheme,
-      fonts: AGENCY_FONT_FAMILIES[currentTheme],
     }),
     [currentTheme, setTheme, colors, colorScheme]
   );

@@ -47,13 +47,6 @@ export const theme = {
       ring: "hsl(var(--ring))",
       radius: "var(--radius)",
     },
-    fontFamily: {
-      // Agency-specific fonts - can't use CSS variables in RN
-      // These are just for Tailwind class utilities like font-sans, font-serif
-      sans: ["SourceSansPro_400Regular", "system-ui", "sans-serif"],
-      serif: ["Bitter_400Regular", "Georgia", "serif"],
-      heading: ["SourceSansPro_700Bold", "system-ui", "sans-serif"],
-    },
     borderRadius: {
       xl: "calc(var(--radius) + 4px)",
       lg: "var(--radius)",
