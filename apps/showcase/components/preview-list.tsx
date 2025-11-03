@@ -8,10 +8,6 @@ type PreviewListProps = {
   removeBottomSafeArea?: boolean;
 };
 
-/**
- * PreviewList - Shows all component variants/examples in a vertical scrollable list
- * Alternative to PreviewCarousel which shows one at a time with pagination
- */
 function PreviewList({ previews, removeBottomSafeArea = false }: PreviewListProps) {
   return (
     <ScrollView
