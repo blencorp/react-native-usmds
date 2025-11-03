@@ -50,9 +50,10 @@ module.exports = {
         },
       },
       borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
+        xl: "0.75rem",  
+        lg: "0.5rem",   
+        md: "0.5rem",   
+        sm: "0.25rem",  
       },
       borderWidth: {
         hairline: hairlineWidth(),
@@ -160,7 +161,7 @@ export const GLOBAL_STYLES = `@tailwind base;
     --disabled-foreground: 203 7% 67%; /* #A9AEB1 - disabled */
 
     /* Radius */
-    --radius: 0.625rem; /* USWDS default radius */
+    --radius: 0.5rem; /* USWDS default radius */
 
     /* Chart Colors (USWDS Data Viz palette) */
     --chart-1: 209 100% 32%; /* #005EA2 - blue-60v */

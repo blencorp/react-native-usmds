@@ -64,7 +64,7 @@
     --disabled-foreground: 203 7% 67%; /* #A9AEB1 - disabled */
 
     /* Radius */
-    --radius: 0.625rem; /* USWDS default radius */
+    --radius: 0.5rem; /* USWDS md radius (8px) */
 
     /* Chart Colors (USWDS Data Viz palette) */
     --chart-1: 209 100% 32%; /* #005EA2 - blue-60v */

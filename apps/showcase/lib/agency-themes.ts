@@ -78,7 +78,7 @@ export const usaTheme: AgencyThemeDefinition = {
     border: 'hsl(204 3% 88%)',
     input: 'hsl(204 3% 88%)',
     ring: 'hsl(211 100% 57%)',
-    radius: '0.625rem',
+    radius: '0.5rem', // USWDS md (8px)
     chart1: 'hsl(209 100% 32%)',
     chart2: 'hsl(190 100% 44%)',
     chart3: 'hsl(128 100% 33%)',
@@ -105,7 +105,7 @@ export const usaTheme: AgencyThemeDefinition = {
     border: 'hsl(0 0% 27%)',
     input: 'hsl(0 0% 27%)',
     ring: 'hsl(211 100% 67%)',
-    radius: '0.625rem',
+    radius: '0.5rem', // USWDS md (8px)
     chart1: 'hsl(208 74% 68%)',
     chart2: 'hsl(190 100% 54%)',
     chart3: 'hsl(125 69% 66%)',
