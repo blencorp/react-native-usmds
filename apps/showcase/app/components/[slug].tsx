@@ -1,4 +1,4 @@
-import { PreviewCarousel } from '@showcase/components/preview-carousel';
+import { PreviewList } from '@showcase/components/preview-list';
 import { useComponentRegistry } from '@showcase/lib/registry-context';
 import { Redirect, Stack, useLocalSearchParams } from 'expo-router';
 import * as React from 'react';
@@ -18,18 +18,16 @@ export default function ComponentDetailScreen() {
   return (
     <>
       <Stack.Screen options={{ title: entry.title }} />
-      <View className="flex-1">
-        <View className="px-4 pt-6 pb-4 gap-2">
-          <Text className="text-2xl font-semibold">{entry.title}</Text>
+      <View className="flex-1 bg-background">
+        <View className="border-b border-border bg-card px-4 py-6">
+          <Text className="text-2xl font-semibold text-foreground">{entry.title}</Text>
           {entry.description ? (
-            <Text className="text-muted-foreground text-base leading-5">
+            <Text className="mt-2 text-base leading-5 text-muted-foreground">
               {entry.description}
             </Text>
           ) : null}
         </View>
-        <View className="flex-1">
-          <PreviewCarousel previews={entry.previews} />
-        </View>
+        <PreviewList previews={entry.previews} />
       </View>
     </>
   );
