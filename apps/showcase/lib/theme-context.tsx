@@ -1,10 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useColorScheme, vars } from 'nativewind';
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { getAgencyTheme, type ThemeColors } from './agency-themes';
 
-export type ThemeId = 'usa' | 'va' | 'usda' | 'cms' | 'cdc' | 'maryland' | 'california' | 'utah';
+export type ThemeId = 'usa' | 'va' | 'usda' | 'cms' | 'cdc' | 'maryland' | 'california' | 'utah' | 'newyork';
 
 export type ThemeInfo = {
   id: ThemeId;
@@ -112,6 +112,17 @@ export const AVAILABLE_THEMES: Record<ThemeId, ThemeInfo> = {
       primary: 'Source Sans Pro',
     },
   },
+  newyork: {
+    id: 'newyork',
+    name: 'New York',
+    description: 'Design system for the State of New York',
+    type: 'state',
+    designSystemUrl: 'https://designsystem.ny.gov/',
+    colorPaletteUrl: 'https://designsystem.ny.gov/foundations/tokens/',
+    fonts: {
+      primary: 'Public Sans',
+    },
+  },
 };
 
 type ThemeContextType = {
@@ -181,6 +192,19 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     return vars(cssVars);
   }, [colors, currentTheme, colorScheme]);
 
+  // Apply CSS variables globally on web
+  React.useEffect(() => {
+    if (Platform.OS === 'web' && typeof document !== 'undefined') {
+      const cssVars = colorsToCSSVars(colors);
+      const root = document.documentElement;
+
+      // Set all CSS variables on :root
+      Object.entries(cssVars).forEach(([key, value]) => {
+        root.style.setProperty(key, value);
+      });
+    }
+  }, [colors]);
+
   const setTheme = React.useCallback(async (themeId: ThemeId) => {
     try {
       await AsyncStorage.setItem(THEME_STORAGE_KEY, themeId);
@@ -218,4 +242,29 @@ export function useTheme() {
     throw new Error('useTheme must be used within a ThemeProvider');
   }
   return context;
+}
+
+/**
+ * Hook to get the current theme's border radius value
+ * Useful for applying dynamic radius on native platforms where CSS vars don't work
+ */
+export function useRadius() {
+  const { colors } = useTheme();
+
+  // Parse the radius value (e.g., "0.625rem" -> 10)
+  const radiusRem = parseFloat(colors.radius);
+  const radiusPx = radiusRem * 16; // Convert rem to px (assuming 16px = 1rem)
+
+  return {
+    // Base radius
+    lg: radiusPx,
+    // Medium (radius - 2px)
+    md: Math.max(0, radiusPx - 2),
+    // Small (radius - 4px)
+    sm: Math.max(0, radiusPx - 4),
+    // Extra large (radius + 4px)
+    xl: radiusPx + 4,
+    // Raw value
+    raw: colors.radius,
+  };
 }

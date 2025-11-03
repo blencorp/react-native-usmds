@@ -16,6 +16,7 @@
  * - California: https://designsystem.webstandards.ca.gov/
  * - Utah: https://designsystem.utah.gov/
  * - Maryland: https://digital.maryland.gov/design-system/
+ * - New York: https://designsystem.ny.gov/
  */
 
 import type { ThemeId } from './theme-context';
@@ -544,6 +545,67 @@ export const utahTheme: AgencyThemeDefinition = {
 };
 
 // ============================================================================
+// New York State Theme
+// Source: https://designsystem.ny.gov/foundations/tokens/
+// ============================================================================
+export const newyorkTheme: AgencyThemeDefinition = {
+  light: {
+    background: 'hsl(0 0% 100%)', // Color Surface #ffffff
+    foreground: 'hsl(0 0% 11%)', // Color Text #1b1b1b
+    card: 'hsl(0 0% 96%)', // Color Surface Raised #f6f6f6
+    cardForeground: 'hsl(0 0% 11%)',
+    popover: 'hsl(0 0% 100%)',
+    popoverForeground: 'hsl(0 0% 11%)',
+    primary: 'hsl(208 69% 27%)', // Color Theme #154973
+    primaryForeground: 'hsl(0 0% 100%)',
+    secondary: 'hsl(49 100% 49%)', // Color Accent #face00
+    secondaryForeground: 'hsl(0 0% 0%)',
+    muted: 'hsl(60 2% 81%)', // Color Base #d0d0ce
+    mutedForeground: 'hsl(204 3% 30%)', // Color Text Weak #4a4d4f
+    accent: 'hsl(49 100% 49%)', // Color Accent #face00
+    accentForeground: 'hsl(0 0% 0%)',
+    destructive: 'hsl(0 61% 44%)', // Color Danger #b52c2c
+    destructiveForeground: 'hsl(0 0% 100%)',
+    border: 'hsl(180 2% 75%)', // Color Text Weakest #bec0c1
+    input: 'hsl(180 2% 75%)',
+    ring: 'hsl(218 100% 41%)', // Color Focus #004dd1
+    radius: '0.5rem',
+    chart1: 'hsl(208 69% 27%)', // Theme primary
+    chart2: 'hsl(218 100% 41%)', // Info blue
+    chart3: 'hsl(131 59% 29%)', // Success green #1e752e
+    chart4: 'hsl(49 100% 49%)', // Warning yellow
+    chart5: 'hsl(0 61% 44%)', // Danger red
+  },
+  dark: {
+    background: 'hsl(0 0% 11%)', // Color Surface Reverse #1b1b1b
+    foreground: 'hsl(60 2% 81%)', // Color Text Reverse #d0d0ce
+    card: 'hsl(0 0% 16%)',
+    cardForeground: 'hsl(60 2% 81%)',
+    popover: 'hsl(0 0% 16%)',
+    popoverForeground: 'hsl(60 2% 81%)',
+    primary: 'hsl(207 41% 46%)', // Color Theme Mid #457aa5
+    primaryForeground: 'hsl(0 0% 100%)',
+    secondary: 'hsl(49 100% 55%)', // Lighter accent for dark mode
+    secondaryForeground: 'hsl(0 0% 0%)',
+    muted: 'hsl(0 0% 20%)',
+    mutedForeground: 'hsl(180 2% 75%)', // Color Text Reverse Weak
+    accent: 'hsl(49 100% 55%)',
+    accentForeground: 'hsl(0 0% 0%)',
+    destructive: 'hsl(0 61% 58%)', // Lighter danger for dark mode
+    destructiveForeground: 'hsl(0 0% 100%)',
+    border: 'hsl(0 0% 30%)',
+    input: 'hsl(0 0% 30%)',
+    ring: 'hsl(218 85% 60%)', // Lighter focus blue
+    radius: '0.5rem',
+    chart1: 'hsl(207 41% 46%)',
+    chart2: 'hsl(218 85% 60%)',
+    chart3: 'hsl(131 55% 45%)',
+    chart4: 'hsl(49 100% 55%)',
+    chart5: 'hsl(0 61% 58%)',
+  },
+};
+
+// ============================================================================
 // Theme Registry
 // ============================================================================
 export const AGENCY_THEMES: Record<ThemeId, AgencyThemeDefinition> = {
@@ -555,6 +617,7 @@ export const AGENCY_THEMES: Record<ThemeId, AgencyThemeDefinition> = {
   maryland: marylandTheme,
   california: californiaTheme,
   utah: utahTheme,
+  newyork: newyorkTheme,
 };
 
 /**

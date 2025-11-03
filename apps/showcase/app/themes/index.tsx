@@ -6,7 +6,7 @@ import { AgencyLogo } from '@showcase/components/agency-logo';
 import { AVAILABLE_THEMES, useTheme, type ThemeId } from '@showcase/lib/theme-context';
 import { Check } from 'lucide-react-native';
 import * as React from 'react';
-import { View, ScrollView, Pressable, Platform } from 'react-native';
+import { View, ScrollView, Pressable, Platform, Linking } from 'react-native';
 
 type ThemeCardProps = {
   themeId: ThemeId;
@@ -16,6 +16,10 @@ type ThemeCardProps = {
 
 function ThemeCard({ themeId, isSelected, onSelect }: ThemeCardProps) {
   const theme = AVAILABLE_THEMES[themeId];
+
+  const handleOpenDesignSystem = () => {
+    Linking.openURL(theme.designSystemUrl);
+  };
 
   return (
     <Pressable onPress={onSelect}>
@@ -54,22 +58,10 @@ function ThemeCard({ themeId, isSelected, onSelect }: ThemeCardProps) {
           {/* Description */}
           <Text className='text-sm leading-5 text-muted-foreground'>{theme.description}</Text>
 
-          {/* Typography info with preview */}
-          <View className='gap-2 rounded-lg bg-muted/50 p-3'>
-            <Text className='text-xs font-semibold uppercase tracking-wider text-muted-foreground'>Typography</Text>
-            <Text className='text-sm text-foreground'>
-              {theme.fonts.primary}
-              {theme.fonts.secondary && ` / ${theme.fonts.secondary}`}
-            </Text>
-          </View>
-
-          {/* Links */}
-          <View className='flex-row flex-wrap gap-2'>
-            <Button size='sm'>
-              <Text>Design System</Text>
-            </Button>
-            <Button size='sm'>
-              <Text>Color Palette</Text>
+          {/* Design System Link */}
+          <View className='flex-row'>
+            <Button size='sm' onPress={handleOpenDesignSystem}>
+              <Text>View Design System</Text>
             </Button>
           </View>
         </CardContent>
@@ -82,13 +74,13 @@ export default function ThemesScreen() {
   const { currentTheme, setTheme } = useTheme();
 
   const federalThemes: ThemeId[] = ['usa', 'va', 'usda', 'cms', 'cdc'];
-  const stateThemes: ThemeId[] = ['maryland', 'california', 'utah'];
+  const stateThemes: ThemeId[] = ['maryland', 'california', 'utah', 'newyork'];
 
   return (
     <ScrollView className='flex-1 bg-background' contentContainerClassName='px-4 pb-8' showsVerticalScrollIndicator={false}>
       <View className='web:p-4 mx-auto w-full max-w-3xl gap-6 pt-6'>
         {/* Info Card */}
-        <View className='rounded-2xl border border-border bg-card/50 p-4'>
+        <View className='bg-card/50 p-4'>
           <Text className='text-sm leading-6 text-muted-foreground'>
             Select a theme to apply that agency's design system (colors and typography) to the showcase app.
           </Text>

@@ -160,7 +160,7 @@ export const GLOBAL_STYLES = `@tailwind base;
     --disabled-foreground: 203 7% 67%; /* #A9AEB1 - disabled */
 
     /* Radius */
-    --radius: 0.25rem; /* USWDS default radius */
+    --radius: 0.625rem; /* USWDS default radius */
 
     /* Chart Colors (USWDS Data Viz palette) */
     --chart-1: 209 100% 32%; /* #005EA2 - blue-60v */
