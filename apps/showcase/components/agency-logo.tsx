@@ -19,7 +19,7 @@ const LOGO_URLS: Record<ThemeId, string | null> = {
   cdc: 'https://www.cdc.gov/TemplatePackage/5.0/img/logo/logo2.svg',
   maryland: 'https://digital.maryland.gov/MD_Logo.svg',
   california: 'https://www.ca.gov/images/CAgov-logo.svg?v7F3A',
-  utah: 'http://www.utah.gov/img/logos/utahgov-udsagency.svg'
+  utah: 'https://www.utah.gov/img/logos/utahgov-udsagency.svg'
 };
 
 // Fallback for agencies without logos yet
