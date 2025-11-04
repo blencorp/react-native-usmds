@@ -5,6 +5,7 @@ import { DarkTheme, DefaultTheme, ThemeProvider as NavigationThemeProvider } fro
 import { PortalHost } from '@rn-primitives/portal';
 import { HeaderRightView } from '@showcase/components/header-right-view';
 import { useGeistFont } from '@showcase/hooks/use-geist-font';
+import { hslToHex } from '@showcase/lib/color-utils';
 import { ComponentRegistryProvider } from '@showcase/lib/registry-context';
 import { ThemeProvider, useTheme } from '@showcase/lib/theme-context';
 import { Stack } from 'expo-router';
@@ -34,18 +35,19 @@ function AppLayout() {
   const { colors, colorScheme } = useTheme();
 
   // Create navigation theme from current agency colors
+  // Convert HSL colors to hex format (React Navigation doesn't support HSL)
   const navigationTheme = React.useMemo(() => {
     const baseTheme = colorScheme === 'dark' ? DarkTheme : DefaultTheme;
     return {
       ...baseTheme,
       colors: {
         ...baseTheme.colors,
-        background: colors.background,
-        border: colors.border,
-        card: colors.card,
-        notification: colors.destructive,
-        primary: colors.primary,
-        text: colors.foreground,
+        background: hslToHex(colors.background),
+        border: hslToHex(colors.border),
+        card: hslToHex(colors.card),
+        notification: hslToHex(colors.destructive),
+        primary: hslToHex(colors.primary),
+        text: hslToHex(colors.foreground),
       },
     };
   }, [colors, colorScheme]);
