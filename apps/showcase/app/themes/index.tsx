@@ -77,7 +77,11 @@ export default function ThemesScreen() {
   const stateThemes: ThemeId[] = ['maryland', 'california', 'utah', 'newyork'];
 
   return (
-    <ScrollView className='flex-1 bg-background' contentContainerClassName='px-4 pb-8' showsVerticalScrollIndicator={false}>
+    <ScrollView
+      className='flex-1 bg-background'
+      contentContainerClassName='px-4 pb-8'
+      contentInsetAdjustmentBehavior="automatic"
+      showsVerticalScrollIndicator={false}>
       <View className='web:p-4 mx-auto w-full max-w-3xl gap-6 pt-6'>
         {/* Info Card */}
         <View className='bg-card/50 p-4'>

@@ -1,10 +1,11 @@
 import { Text } from '@registry/usa/components/ui/text';
 import { Icon } from '@registry/usa/components/ui/icon';
+import { Avatar, AvatarFallback, AvatarImage } from '@registry/usa/components/ui/avatar';
 import { cn } from '@registry/usa/lib/utils';
 import { Link } from 'expo-router';
 import { ChevronRight } from 'lucide-react-native';
 import * as React from 'react';
-import { Image, Platform, Pressable, View, ScrollView } from 'react-native';
+import { Image, Platform, Pressable, View } from 'react-native';
 import { useComponentRegistry } from '@showcase/lib/registry-context';
 import { usePackageVersion } from '@showcase/hooks/use-package-version';
 
@@ -53,33 +54,50 @@ function LandingCard({ title, subtitle, count, href }: CardProps) {
 
 export default function LandingScreen() {
   const { components } = useComponentRegistry();
-  const { version } = usePackageVersion();
+  const { packageVersion, appVersion } = usePackageVersion();
 
   const componentsCount = components.length;
-  // 5 federal agencies + 3 state governments = 8 themes total
-  const themesCount = 8;
+  // 5 federal agencies + 4 state governments = 9 themes total
+  const themesCount = 9;
 
   return (
-    <ScrollView className='flex-1 bg-background' contentContainerClassName='px-4 pb-8' showsVerticalScrollIndicator={false}>
-      <View className='web:p-4 mx-auto w-full max-w-3xl gap-6 pt-6'>
-        {/* Logo and Version */}
-        <View className='items-center gap-2'>
-          <Image source={require('@showcase/assets/images/adaptive-icon.png')} style={{ width: 120, height: 120 }} resizeMode='contain' />
-          <Text className='text-lg text-muted-foreground'>v{version}</Text>
-        </View>
+    <View className='flex-1 bg-background'>
+      <View className='web:p-4 mx-auto w-full max-w-3xl flex-1 justify-between px-4 pb-8 pt-6'>
+        {/* Top content */}
+        <View className='gap-6'>
+          {/* Logo and Versions */}
+          <View className='items-center gap-3'>
+            <Avatar className='size-[120px]'>
+              <AvatarImage source={require('@showcase/assets/images/adaptive-icon.png')} />
+              <AvatarFallback>
+                <Text className='text-2xl font-bold'>USMDS</Text>
+              </AvatarFallback>
+            </Avatar>
 
-        {/* Cards */}
-        <View className='gap-4'>
-          <LandingCard title='Components' subtitle='Explore all components' count={componentsCount} href='/components' />
+            {/* Version Info */}
+            <View className='items-center gap-1'>
+              <Text className='text-sm text-muted-foreground'>
+                USMDS version {packageVersion}
+              </Text>
+              <Text className='text-sm text-muted-foreground'>
+                Showcase app version {appVersion}
+              </Text>
+            </View>
+          </View>
 
-          <LandingCard title='Themes' subtitle='Try different themes' count={themesCount} href='/themes' />
+          {/* Cards */}
+          <View className='gap-4'>
+            <LandingCard title='Components' subtitle='Explore all components' count={componentsCount} href='/components' />
+
+            <LandingCard title='Themes' subtitle='Try different themes' count={themesCount} href='/themes' />
+          </View>
         </View>
 
         {/* Blen Logo at bottom */}
-        <View className='items-center mt-32 pt-16'>
+        <View className='items-center pb-4'>
           <Image source={require('@showcase/assets/images/b_logo.png')} style={{ width: 60, height: 60 }} resizeMode='contain' />
         </View>
       </View>
-    </ScrollView>
+    </View>
   );
 }
