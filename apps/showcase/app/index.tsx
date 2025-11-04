@@ -1,5 +1,6 @@
 import { Text } from '@registry/usa/components/ui/text';
 import { Icon } from '@registry/usa/components/ui/icon';
+import { Avatar, AvatarFallback, AvatarImage } from '@registry/usa/components/ui/avatar';
 import { cn } from '@registry/usa/lib/utils';
 import { Link } from 'expo-router';
 import { ChevronRight } from 'lucide-react-native';
@@ -66,7 +67,12 @@ export default function LandingScreen() {
         <View className='gap-6'>
           {/* Logo and Versions */}
           <View className='items-center gap-3'>
-            <Image source={require('@showcase/assets/images/adaptive-icon.png')} style={{ width: 120, height: 120 }} resizeMode='contain' />
+            <Avatar className='size-[120px]'>
+              <AvatarImage source={require('@showcase/assets/images/adaptive-icon.png')} />
+              <AvatarFallback>
+                <Text className='text-2xl font-bold'>USMDS</Text>
+              </AvatarFallback>
+            </Avatar>
 
             {/* Version Info */}
             <View className='items-center gap-1'>
