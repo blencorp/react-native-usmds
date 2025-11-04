@@ -50,10 +50,10 @@ module.exports = {
         },
       },
       borderRadius: {
-        xl: "0.75rem",  
-        lg: "0.5rem",   
-        md: "0.5rem",   
-        sm: "0.25rem",  
+        xl: "0.75rem",
+        lg: "0.5rem",
+        md: "0.5rem",
+        sm: "0.25rem",
       },
       borderWidth: {
         hairline: hairlineWidth(),
