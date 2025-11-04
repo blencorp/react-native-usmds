@@ -1,17 +1,16 @@
 import '../global.css';
 
 import { Text } from '@registry/usa/components/ui/text';
-import { ThemeProvider as NavigationThemeProvider } from '@react-navigation/native';
+import { DarkTheme, DefaultTheme, ThemeProvider as NavigationThemeProvider } from '@react-navigation/native';
 import { PortalHost } from '@rn-primitives/portal';
 import { HeaderRightView } from '@showcase/components/header-right-view';
 import { useGeistFont } from '@showcase/hooks/use-geist-font';
+import { hslToHex } from '@showcase/lib/color-utils';
 import { ComponentRegistryProvider } from '@showcase/lib/registry-context';
-import { ThemeProvider } from '@showcase/lib/theme-context';
-import { NAV_THEME } from '@showcase/lib/theme';
+import { ThemeProvider, useTheme } from '@showcase/lib/theme-context';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { useColorScheme } from 'nativewind';
 import * as React from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
@@ -28,32 +27,41 @@ export const unstable_settings = {
   initialRouteName: 'index',
 };
 
-export default function RootLayout() {
-  const [loaded, error] = useGeistFont();
-  const { colorScheme = 'light' } = useColorScheme();
+/**
+ * Inner Layout Component
+ * Uses theme context to apply agency colors to navigation
+ */
+function AppLayout() {
+  const { colors, colorScheme } = useTheme();
 
-  React.useEffect(() => {
-    if (loaded || error) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded, error]);
-
-  if (!loaded && !error) {
-    return null;
-  }
+  // Create navigation theme from current agency colors
+  // Convert HSL colors to hex format (React Navigation doesn't support HSL)
+  const navigationTheme = React.useMemo(() => {
+    const baseTheme = colorScheme === 'dark' ? DarkTheme : DefaultTheme;
+    return {
+      ...baseTheme,
+      colors: {
+        ...baseTheme.colors,
+        background: hslToHex(colors.background),
+        border: hslToHex(colors.border),
+        card: hslToHex(colors.card),
+        notification: hslToHex(colors.destructive),
+        primary: hslToHex(colors.primary),
+        text: hslToHex(colors.foreground),
+      },
+    };
+  }, [colors, colorScheme]);
 
   return (
-    <ThemeProvider>
-      <NavigationThemeProvider value={NAV_THEME[colorScheme]}>
-        <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
-        <GestureHandlerRootView
-          style={{ flex: 1, backgroundColor: NAV_THEME[colorScheme].colors.background }}>
-          <KeyboardProvider>
-            <ComponentRegistryProvider>
-              <Stack
-                screenOptions={{
-                  headerBackTitle: 'Back',
-                  headerTitle(props) {
+    <NavigationThemeProvider value={navigationTheme}>
+      <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <KeyboardProvider>
+          <ComponentRegistryProvider>
+            <Stack
+              screenOptions={{
+                headerBackTitle: 'Back',
+                headerTitle(props) {
                   return (
                     <Text className="android:mt-1.5 text-xl font-medium">
                       {toOptions(
@@ -88,12 +96,31 @@ export default function RootLayout() {
                   headerShadowVisible: false,
                 }}
               />
-              </Stack>
-            </ComponentRegistryProvider>
-            <PortalHost />
-          </KeyboardProvider>
-        </GestureHandlerRootView>
-      </NavigationThemeProvider>
+            </Stack>
+          </ComponentRegistryProvider>
+          <PortalHost />
+        </KeyboardProvider>
+      </GestureHandlerRootView>
+    </NavigationThemeProvider>
+  );
+}
+
+export default function RootLayout() {
+  const [loaded, error] = useGeistFont();
+
+  React.useEffect(() => {
+    if (loaded || error) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded, error]);
+
+  if (!loaded && !error) {
+    return null;
+  }
+
+  return (
+    <ThemeProvider>
+      <AppLayout />
     </ThemeProvider>
   );
 }

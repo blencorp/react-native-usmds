@@ -1,8 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useColorScheme, vars } from 'nativewind';
 import * as React from 'react';
+import { Platform, View } from 'react-native';
+import { getAgencyTheme, type ThemeColors } from './agency-themes';
 
-// Theme definitions will be implemented in issue #200
-export type ThemeId = 'usa' | 'va' | 'usda' | 'cms' | 'cdc' | 'maryland' | 'california' | 'utah';
+export type ThemeId = 'usa' | 'va' | 'usda' | 'cms' | 'cdc' | 'maryland' | 'california' | 'utah' | 'newyork';
 
 export type ThemeInfo = {
   id: ThemeId;
@@ -110,21 +112,61 @@ export const AVAILABLE_THEMES: Record<ThemeId, ThemeInfo> = {
       primary: 'Source Sans Pro',
     },
   },
+  newyork: {
+    id: 'newyork',
+    name: 'New York',
+    description: 'Design system for the State of New York',
+    type: 'state',
+    designSystemUrl: 'https://designsystem.ny.gov/',
+    colorPaletteUrl: 'https://designsystem.ny.gov/foundations/tokens/',
+    fonts: {
+      primary: 'Public Sans',
+    },
+  },
 };
 
 type ThemeContextType = {
   currentTheme: ThemeId;
   setTheme: (themeId: ThemeId) => Promise<void>;
   themeInfo: ThemeInfo;
+  colors: ThemeColors;
+  colorScheme: 'light' | 'dark';
 };
 
 const ThemeContext = React.createContext<ThemeContextType | null>(null);
 
 const THEME_STORAGE_KEY = '@showcase/selected-theme';
 
+/**
+ * Convert ThemeColors to CSS variables format for NativeWind
+ * Strips 'hsl()' wrapper since Tailwind config adds it back
+ */
+function colorsToCSSVars(colors: ThemeColors): Record<string, string> {
+  const cssVars: Record<string, string> = {};
+
+  for (const [key, value] of Object.entries(colors)) {
+    if (key === 'radius') {
+      cssVars['--radius'] = value;
+      continue;
+    }
+
+    // Convert camelCase to kebab-case for CSS variables
+    const cssKey = '--' + key.replace(/([A-Z])/g, '-$1').toLowerCase();
+
+    // Strip 'hsl()' wrapper: 'hsl(209 100% 32%)' → '209 100% 32%'
+    const cssValue = value.replace(/^hsl\((.*)\)$/, '$1');
+
+    cssVars[cssKey] = cssValue;
+  }
+
+  return cssVars;
+}
+
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [currentTheme, setCurrentTheme] = React.useState<ThemeId>('usa');
+  const { colorScheme = 'light' } = useColorScheme();
 
+  // Load saved theme on mount
   React.useEffect(() => {
     async function loadTheme() {
       try {
@@ -139,32 +181,59 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     loadTheme();
   }, []);
 
+  // Get current theme colors based on agency and light/dark mode
+  const colors = React.useMemo(() => {
+    return getAgencyTheme(currentTheme, colorScheme);
+  }, [currentTheme, colorScheme]);
+
+  // Convert colors to CSS variables wrapped with vars() for NativeWind
+  const themeVars = React.useMemo(() => {
+    const cssVars = colorsToCSSVars(colors);
+    return vars(cssVars);
+  }, [colors]);
+
+  // Apply CSS variables globally on web
+  React.useEffect(() => {
+    if (Platform.OS === 'web' && typeof document !== 'undefined') {
+      const cssVars = colorsToCSSVars(colors);
+      const root = document.documentElement;
+
+      // Set all CSS variables on :root
+      Object.entries(cssVars).forEach(([key, value]) => {
+        root.style.setProperty(key, value);
+      });
+    }
+  }, [colors]);
+
   const setTheme = React.useCallback(async (themeId: ThemeId) => {
     try {
       await AsyncStorage.setItem(THEME_STORAGE_KEY, themeId);
       setCurrentTheme(themeId);
 
-      // TODO: Apply theme colors and fonts (will be implemented in issue #200)
-      // This is where we would:
-      // 1. Update CSS custom properties
-      // 2. Load custom fonts if needed
-      // 3. Trigger app re-render with new theme
-      console.log(`Theme switched to: ${themeId}`);
+      console.log(`Theme switched to: ${themeId} (${colorScheme} mode)`);
     } catch (error) {
       console.error('Failed to save theme:', error);
     }
-  }, []);
+  }, [colorScheme]);
 
   const value = React.useMemo(
     () => ({
       currentTheme,
       setTheme,
       themeInfo: AVAILABLE_THEMES[currentTheme],
+      colors,
+      colorScheme,
     }),
-    [currentTheme, setTheme]
+    [currentTheme, setTheme, colors, colorScheme]
   );
 
-  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeContext.Provider value={value}>
+      <View style={themeVars} className="flex-1 bg-background">
+        {children}
+      </View>
+    </ThemeContext.Provider>
+  );
 }
 
 export function useTheme() {
@@ -173,4 +242,29 @@ export function useTheme() {
     throw new Error('useTheme must be used within a ThemeProvider');
   }
   return context;
+}
+
+/**
+ * Hook to get the current theme's border radius value
+ * Useful for applying dynamic radius on native platforms where CSS vars don't work
+ */
+export function useRadius() {
+  const { colors } = useTheme();
+
+  // Parse the radius value (e.g., "0.625rem" -> 10)
+  const radiusRem = parseFloat(colors.radius);
+  const radiusPx = radiusRem * 16; // Convert rem to px (assuming 16px = 1rem)
+
+  return {
+    // Base radius
+    lg: radiusPx,
+    // Medium (radius - 2px)
+    md: Math.max(0, radiusPx - 2),
+    // Small (radius - 4px)
+    sm: Math.max(0, radiusPx - 4),
+    // Extra large (radius + 4px)
+    xl: radiusPx + 4,
+    // Raw value
+    raw: colors.radius,
+  };
 }

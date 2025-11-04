@@ -48,10 +48,10 @@ export const theme = {
       radius: "var(--radius)",
     },
     borderRadius: {
-      xl: "calc(var(--radius) + 4px)",
-      lg: "var(--radius)",
-      md: "calc(var(--radius) - 2px)",
-      sm: "calc(var(--radius) - 4px)",
+      xl: "0.75rem",
+      lg: "0.5rem",
+      md: "0.5rem",
+      sm: "0.25rem",
     },
     borderWidth: {
       hairline: hairlineWidth(),
