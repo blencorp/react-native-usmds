@@ -190,7 +190,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const themeVars = React.useMemo(() => {
     const cssVars = colorsToCSSVars(colors);
     return vars(cssVars);
-  }, [colors, currentTheme, colorScheme]);
+  }, [colors]);
 
   // Apply CSS variables globally on web
   React.useEffect(() => {
